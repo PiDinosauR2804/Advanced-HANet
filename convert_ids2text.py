@@ -24,6 +24,10 @@ def ids2list(list_data:list)->list:
             # Tìm vị trí event trong tokens
             start = text.find(event)
             end = start + len(event) - 1
+            
+            if start == -1 or end == -1:
+                print(f"Error: {event} not found in {text}")
+                continue
             # Thêm offset vào danh sách
             offsets.append([start, end])
         
