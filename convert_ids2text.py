@@ -28,6 +28,8 @@ def ids2list(list_data:list)->list:
     
 
 def convert(input_path:str, output_path:str, datasets:list)->None:
+    os.makedirs(output_path, exist_ok=True)
+    # Duyệt qua từng dataset
     for dataset in datasets:
         # Tạo thư mục đầu ra nếu chưa tồn tại
         os.makedirs(os.path.join(output_path, dataset), exist_ok=True)
@@ -78,4 +80,8 @@ def convert(input_path:str, output_path:str, datasets:list)->None:
             print(f"Converted {input_file} to {output_file}")
         else:
             print(f"Error: No data found in {input_file}")
+            
+if __name__ == "__main__":
+    convert(input_path, output_path, datasets)
+    # convert(input_path, output_path, datasets)
         
