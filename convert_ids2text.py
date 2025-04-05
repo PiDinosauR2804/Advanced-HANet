@@ -17,13 +17,17 @@ def ids2list(list_data:list)->list:
     for item in list_data:
         # Chuyển đổi các ID thành văn bản
         text = tokenizer.decode(item['piece_ids'], skip_special_tokens=True)
+        # Tạo một danh sách rỗng để lưu trữ các offset
         offsets = []
         for sp in item['span']:
             event = tokenizer.decode(item['piece_ids'][sp[0]: sp[1]+1], skip_special_tokens=True)
-            offset = text.find(event)
-            offsets.append([offset, offset + len(event)])
+            # Tìm vị trí event trong tokens
+            start = text.find(event)
+            end = start + len(event) - 1
+            # Thêm offset vào danh sách
+            offsets.append([start, end])
         
-        res.append({"text": text, "offsets": offsets, "label": item['label']})
+        res.append({"text": text, "tokens": text.split(), "offsets": offsets, "label": item['label']})
     return res
     
 
