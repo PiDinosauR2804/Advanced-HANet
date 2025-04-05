@@ -50,16 +50,21 @@ def convert(input_path:str, output_path:str, datasets:list)->None:
                 if file_name.endswith(".jsonl"):
                     input_file = os.path.join(input_folder, file_name)
                     output_file = os.path.join(output_path, dataset, "perm"+str(i), file_name)
-                    new_data = None
+                    new_data = []
                     
                     with open(input_file, 'r') as f:
-                        data = [json.loads(line) for line in f]
-                        new_data = ids2list(data)
+                        for line in f:
+                            new_line = {}
+                            # Chuyển đổi từng dòng JSON thành dict
+                            json_line = json.loads(line)
+                            for key, value in json_line.items():
+                                new_line[key] = ids2list(value)
+                            new_data.append(new_line)
                     
                     if new_data:
                         with open(output_file, 'w') as f:
-                            for item in new_data:
-                                f.write(json.dumps(item) + '\n')
+                            for new_line in new_data:
+                                f.write(json.dumps(new_line) + '\n')
                         print(f"Converted {input_file} to {output_file}")
                     else:
                         print(f"Error: No data found in {input_file}")
