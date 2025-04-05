@@ -56,19 +56,30 @@ def train(local_rank, args):
     device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
     # get streams from json file and permute them in pre-defined order
     # PERM = PERM_5 if args.task_num == 5 else PERM_10
+    
+    # Đọc dữ liệu
     streams = collect_from_json(args.dataset, args.stream_root, 'stream')
     # streams = [streams[l] for l in PERM[int(args.perm_id)]] # permute the stream
     label2idx = {0:0}
+    
+    
     for st in streams:
         for lb in st:
             if lb not in label2idx:
                 label2idx[lb] = len(label2idx)
     streams_indexed = [[label2idx[l] for l in st] for st in streams]
+    
+    # streams_indexed có dạng [[4, 5, 9, 11], [2, 1, 8, 33], ...] thể hiện thứ tự label class được học
+    
+    
     model = BertED(args.class_num+1, args.input_map) # define model
     model.to(device)
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.decay, eps=args.adamw_eps, betas=(0.9, 0.999)) #TODO: Hyper parameters
     # if args.amp:
         # model, optimizer = amp.initialize(model, optimizer, opt_level="O1") 
+        
+        
+        
     if args.parallel == 'DDP':
         torch.cuda.set_device(local_rank)
         dist.init_process_group("nccl", rank=local_rank, world_size=args.world_size)
@@ -92,6 +103,8 @@ def train(local_rank, args):
     learned_types = [0]
     prev_learned_types = [0]
     dev_scores_ls = []
+    
+    # Tạo class dùng để lưu old sample từ task trước
     exemplars = Exemplars() # TODO: 
     if args.resume:
         logger.info(f"Resuming from {args.resume}")
@@ -103,8 +116,11 @@ def train(local_rank, args):
         labels = state_dict['labels']
         learned_types = state_dict['learned_types']
         prev_learned_types = state_dict['prev_learned_types']
+        
     if args.early_stop:
         e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
+        
+    # Xét từng task 
     for stage in task_idx:
         # if stage > 0:
         #     break
@@ -131,6 +147,9 @@ def train(local_rank, args):
                 batch_size=args.batch_size,
                 # batch_size=args.shot_num + int(args.class_num / args.shot_num),
                 collate_fn= lambda x:x)
+            
+        
+            
         stage_loader = org_loader
         if stage > 0:
             if args.early_stop and no_better == args.patience:
@@ -144,15 +163,20 @@ def train(local_rank, args):
             # prev_model = deepcopy(model) # TODO: How does optimizer distinguish deep copy parameters
             # exclude_none_labels = [t for t in streams_indexed[stage - 1] if t != 0]
             logger.info(f'Loading train instances without negative instances for stage {stage}')
+            
+            # Lấy ra các sample để học cho task hiện tại
             exemplar_dataset = collect_exemplar_dataset(args.dataset, args.data_root, 'train', label2idx, stage-1, streams[stage-1])
             exemplar_loader = DataLoader(
                 dataset=exemplar_dataset,
                 batch_size=64,
                 shuffle=True,
                 collate_fn=lambda x:x)
+            
             # exclude_none_loader = train_ecn_loaders[stage - 1]
             # TODO: test use
             # exemplars.set_exemplars(prev_model.to('cpu'), exclude_none_loader, len(learned_types), device)
+            
+            # Thực hiện lấy ra các sample từ class trước
             exemplars.set_exemplars(prev_model, exemplar_loader, len(learned_types), device)
             # if not args.replay:
             if not args.no_replay:
@@ -160,7 +184,6 @@ def train(local_rank, args):
             # else:
             #     e_loader = list(exemplars.build_stage_loader(MAVEN_Dataset([], [], [], [])))
             if args.rep_aug != "none":
-
                 e_loader = exemplars.build_stage_loader(MAVEN_Dataset([], [], [], []))
             # prev_model.to(args.device)   # TODO: test use
 
@@ -200,8 +223,8 @@ def train(local_rank, args):
                 train_x, train_y, train_masks, train_span = zip(*batch)
                 train_x = torch.LongTensor(train_x).to(device)
                 train_masks = torch.LongTensor(train_masks).to(device)
-                train_y = [torch.LongTensor(item).to(device) for item in train_y]
-                train_span = [torch.LongTensor(item).to(device) for item in train_span]
+                train_y = [torch.LongTensor(item).to(device) for item in train_y]           
+                train_span = [torch.LongTensor(item).to(device) for item in train_span]     # Sử dụng để lưu vị trí bắt đầu và kết thúc 1 từ của các ids
                 # if args.dataset == "ACE":
                 #     return_dict = model(train_x, train_masks)
                 # else:
@@ -241,6 +264,9 @@ def train(local_rank, args):
                     da_span = train_span * aug_repeat_times
                     tk_len = torch.count_nonzero(da_masks, dim=-1) - 2
                     perm = [torch.randperm(item).to(device) + 1 for item in tk_len]
+                    
+                    # Thực hiện augment cho câu
+                    
                     if args.cl_aug == "shuffle":
                         for i in range(len(tk_len)):
                             da_span[i] = torch.where(da_span[i].unsqueeze(2) == perm[i].unsqueeze(0).unsqueeze(0))[2].view(-1, 2) + 1
@@ -269,9 +295,12 @@ def train(local_rank, args):
                     # if args.dataset == "ACE":
                     #     da_return_dict = model(da_x, da_masks)
                     # else:
+                    
+                    # Hidden representaion của data augment
                     da_return_dict = model(da_x, da_masks, da_span)
                     da_outputs, da_reps, da_context_feat, da_trig_feat = da_return_dict['outputs'], da_return_dict['reps'], da_return_dict['context_feat'], da_return_dict['trig_feat']
                     
+                    # Contrastive loss cho sentence
                     if args.ucl:
                         if not ((args.skip_first_cl == "ucl" or args.skip_first_cl == "ucl+tlcl") and stage == 0):
                             ucl_reps = torch.cat([reps, da_reps])
@@ -281,6 +310,8 @@ def train(local_rank, args):
                                 Adj_mask_ucl += torch.eye(bs * (1 + aug_repeat_times)).to(device)
                                 Adj_mask_ucl = torch.roll(Adj_mask_ucl, bs, -1)                    
                             loss_ucl = compute_CLLoss(Adj_mask_ucl, ucl_reps, bs * (1 + aug_repeat_times))
+                            
+                    # Contrastive loss cho trigger
                     if args.tlcl:
                         if not ((args.skip_first_cl == "tlcl" or args.skip_first_cl == "ucl+tlcl") and stage == 0):
                             tlcl_feature = torch.cat([trig_feat, da_trig_feat])
@@ -304,10 +335,13 @@ def train(local_rank, args):
                     # outputs[i].masked_fill_(invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
                 # if args.dataset == "ACE":
                     
+                # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
                 loss_ce = criterion_ce(ce_outputs, ce_y)
                 loss = loss + loss_ce
                 w = len(prev_learned_types) / len(learned_types)
+
+                # Loss ce cho class ở task cũ
 
                 if args.rep_aug != "none" and stage > 0:
                     outputs_aug, aug_y = [], []
@@ -380,6 +414,8 @@ def train(local_rank, args):
                 #     loss_scl = -torch.sum(pos_log_prob) / len(pos_log_prob)
                 #     loss = 0.5 * loss + 0.5 * loss_scl
                     
+                    
+                # Loss distill của previous model cho current model nhằm giữ lại kiến thức cũ từ mô hình cũ. ( Không dùng đến trong bài )
                 if stage > 0 and args.distill != "none":
                     prev_model.eval()
                     with torch.no_grad():
