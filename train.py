@@ -220,6 +220,7 @@ def train(local_rank, args):
                 #     loss_ce = criterion_ce(logits, y.view(-1))
                 #     padded_train_span, span_len = None, None
                 # else:
+                
                 train_x, train_y, train_masks, train_span = zip(*batch)
                 train_x = torch.LongTensor(train_x).to(device)
                 train_masks = torch.LongTensor(train_masks).to(device)
@@ -232,6 +233,8 @@ def train(local_rank, args):
                 outputs, context_feat, trig_feat = return_dict['outputs'], return_dict['context_feat'], return_dict['trig_feat']
                 # invalid_mask_op = torch.BoolTensor([item not in learned_types for item in range(args.class_num)]).to(device)
                 # not from below's codes
+                
+                # Loại bỏ ra những sample có label không được học trong term này
                 for i in range(len(train_y)):
                     invalid_mask_label = torch.BoolTensor([item not in learned_types for item in train_y[i]]).to(device)
                     train_y[i].masked_fill_(invalid_mask_label, 0)
@@ -258,22 +261,28 @@ def train(local_rank, args):
                     reps = return_dict['reps']
                     bs, hdim = reps.shape
                     aug_repeat_times = args.aug_repeat_times
+                    # Tạo data augment
                     da_x = train_x.clone().repeat((aug_repeat_times, 1))
                     da_y = train_y * aug_repeat_times
                     da_masks = train_masks.repeat((aug_repeat_times, 1))
                     da_span = train_span * aug_repeat_times
                     tk_len = torch.count_nonzero(da_masks, dim=-1) - 2
+                    # Thực hiện hoán vị random các vị trí cho các câu được augment
                     perm = [torch.randperm(item).to(device) + 1 for item in tk_len]
                     
                     # Thực hiện augment cho câu
                     
+                    # Thực hiện hoán đổi vị trí của từ trong câu theo perm
                     if args.cl_aug == "shuffle":
                         for i in range(len(tk_len)):
                             da_span[i] = torch.where(da_span[i].unsqueeze(2) == perm[i].unsqueeze(0).unsqueeze(0))[2].view(-1, 2) + 1
                             da_x[i, 1: 1+tk_len[i]] = da_x[i, perm[i]]
+                    # Thực hiện như trên nhưng chỉ 25% số câu được augment
                     elif args.cl_aug =="RTR":
                         rand_ratio = 0.25
                         rand_num = (rand_ratio * tk_len).int()
+                        
+                        # Các token được chọn ra để không hoán đổi
                         special_ids = [103, 102, 101, 100, 0]
                         all_ids = torch.arange(model.backbone.config.vocab_size).to(device)
                         special_token_mask = torch.ones(model.backbone.config.vocab_size).to(device)
@@ -286,6 +295,7 @@ def train(local_rank, args):
                                 span_pos = da_span[i][da_y[i].nonzero()].view(-1).unique() - 1
                             else:
                                 span_pos = da_span[i].view(-1).unique() - 1
+                            # Các token được chọn ra để không hoán đổi 
                             trig_mask[span_pos] = 0
                             token_idx_ntrig = token_idx.index_select(0, trig_mask.nonzero().squeeze())
                             replace_perm = torch.randperm(token_idx_ntrig.shape.numel())
