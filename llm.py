@@ -48,7 +48,8 @@ def response_to_string(response, idx=0):
     return "\n".join(output)
 
 def extract_response(text:str):
-    match = re.search(r'The events are: (\[.*?\])', text, re.DOTALL)
+    match = re.search(r'The events are:\s*(\[.*\])', text, re.DOTALL)
+
     if match:
         events_str = match.group(1)
         try:
