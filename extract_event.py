@@ -20,6 +20,7 @@ def list2ids(list_data:list)->list:
         for i in range(NUM_TRY):
             try:
                 event_list = extract_event_gemini(item['text'], model="gemini-2.0-flash", candidate=1)[0]
+                print(f"Successfully extracted events for text:\n{item['text']}")
                 break
             except Exception as e:
                 print(f"Attempt {i}/{NUM_TRY} failed for text:\n{item['text']}\nError: {e}")
