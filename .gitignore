@@ -1,3 +1,5 @@
 /raw_text
 /ACE
 /MAVEN
+.env
+*.ipynb

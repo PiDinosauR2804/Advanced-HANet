@@ -16,25 +16,44 @@ def list2ids(list_data:list)->list:
     ids_data = []
     for item in list_data:
         event_list = extract_event_gemini(item['text'], model="gemini-2.0-flash", candidate=1)
-        item['events'] = event_list
+        # Nếu không tìm thấy event word, bỏ qua item này
+        if not event_list:
+            continue
+
         # Chuyển đổi các văn bản thành ID
         opt = tokenizer(item['text'], return_offsets_mapping=True, truncation=True, max_length=512, padding="max_length")
         # Lấy các ID của các token
         piece_ids = opt['input_ids']
         # Lấy các span của các token
-        offsets = opt['offset_mapping']
+        offsets_mp = opt['offset_mapping']
         # Lấy các span của các event word dựa vào offset mapping
         span = []
         for event in event_list:
             trigger_word = event['trigger_word']
-            # Tìm vị trí của trigger word trong offsets
+            # Tìm vị trí của trigger word trong offsets_mp
             start = -1
             end = -1
-            for i, (s, e) in enumerate(offsets):
+            for i, (s, e) in enumerate(offsets_mp):
                 if s <= item['text'].find(trigger_word) < e:
                     start = i
                     break
             if start != -1:
+                for i, (s, e) in enumerate(offsets_mp[start:], start):
+                    if s >= item['text'].find(trigger_word) + len(trigger_word):
+                        end = i
+                        break
+            if start != -1 and end != -1:
+                span.append((start, end))
+ 
+        ids_data.append({
+            'text': item['text'],
+            'events': event_list,
+            'span': span,
+            'piece_ids': piece_ids,
+            'offsets': item['offsets']
+        })
+        
+    return ids_data
     
 
 def convert(input_path:str, output_path:str, datasets:list)->None:
@@ -60,7 +79,6 @@ def convert(input_path:str, output_path:str, datasets:list)->None:
                 if file_name.endswith(".jsonl"):
                     input_file = os.path.join(input_folder, file_name)
                     output_file = os.path.join(output_path, dataset, "perm"+str(i), file_name)
-                    added_data = []
                     ids_data = []
                     
                     with open(input_file, 'r') as f:
@@ -70,18 +88,10 @@ def convert(input_path:str, output_path:str, datasets:list)->None:
                             # Chuyển đổi từng dòng JSON thành dict
                             json_line = json.loads(line)
                             for key, value in json_line.items():
-                                added_line[key], ids_line[key] = list2ids(value)
+                                ids_line[key] = list2ids(value)
                             
                             added_data.append(added_line)
                             ids_data.append(ids_line)
-                    
-                    if added_data:
-                        with open(input_file, 'w') as f:
-                            for item in added_data:
-                                f.write(json.dumps(item) + '\n')
-                        print(f"Added data converted and saved to {input_file}")
-                    else:
-                        print(f"Error: No data found in {input_file}")
                     
                     if ids_data:
                         with open(output_file, 'w') as f:
@@ -94,30 +104,22 @@ def convert(input_path:str, output_path:str, datasets:list)->None:
         # Convert for test data
         input_file = os.path.join(input_path, dataset, f"{dataset}.test.jsonl")
         output_file = os.path.join(output_path, dataset, f"{dataset}.test.jsonl")
-        added_data = None
         ids_data = None
         
         with open(input_file, 'r') as f:
             data = [json.loads(line) for line in f]
-            added_data, ids_data = list2ids(data)
+            ids_data = list2ids(data)
         
-        if added_data:
-            with open(input_file, 'w') as f:
-                for item in ids_data:
-                    f.write(json.dumps(item) + '\n')
-            print(f"Added data converted and saved to {input_file}")
-        else:
-            print(f"Error: No data found in {input_file}")
             
         if ids_data:
             with open(output_file, 'w') as f:
-                for item in added_data:
+                for item in ids_data:
+                    # Chuyển đổi từng dòng JSON thành dict
                     f.write(json.dumps(item) + '\n')
             print(f"IDs data converted and saved to {output_file}")
         else:
             print(f"Error: No data found in {input_file}")
         
-  
 if __name__ == "__main__":
     convert(input_path, output_path, datasets)
     # convert(input_path, output_path, datasets)
