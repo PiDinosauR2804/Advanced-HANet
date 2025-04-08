@@ -3,7 +3,7 @@ from google.genai import types
 import os
 from dotenv import load_dotenv
 import re
-import json
+import ast
 # Load environment variables from .env file
 load_dotenv()
 
@@ -53,11 +53,11 @@ def extract_response(text:str):
     if match:
         events_str = match.group(1)
         try:
-            events_list = json.loads(events_str)
+            events_list = ast.literal_eval(events_str)
             return events_list
         
-        except json.JSONDecodeError:
-            print("Failed to decode JSON:", events_str)
+        except ValueError as e:
+            print(f"Error parsing events: {e}")
             return None
     else:
         print("No events found in the response.")
