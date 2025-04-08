@@ -1,16 +1,8 @@
 from google import genai
 from google.genai import types
 import os
-from dotenv import load_dotenv
 import re
 import ast
-# Load environment variables from .env file
-load_dotenv()
-
-
-api_key = os.environ.get("GOOGLE_API_KEY")
-if api_key is None:
-    raise ValueError("API key not found. Please set the GOOGLE_API_KEY environment variable.")
 
 client = genai.Client(api_key=api_key)
 prompt = """You are an event extraction expert. Given a text, extract the event triggers. You should return a list of events in the last line with format:
