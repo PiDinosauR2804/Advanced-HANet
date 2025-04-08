@@ -4,6 +4,7 @@ import pandas as pd
 from tqdm.notebook import tqdm
 import os
 from transformers import BertTokenizerFast
+import time
 
 tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 
@@ -11,11 +12,22 @@ tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 input_path = "raw_text"
 output_path = "data_incremental_by_llm"
 datasets = ["MAVEN"]
+NUM_TRY = 3
 
 def list2ids(list_data:list)->list:
     ids_data = []
     for item in list_data:
-        event_list = extract_event_gemini(item['text'], model="gemini-2.0-flash", candidate=1)
+        for i in range(NUM_TRY):
+            try:
+                event_list = extract_event_gemini(item['text'], model="gemini-2.0-flash", candidate=1)[0]
+                break
+            except Exception as e:
+                print(f"Attempt {i}/{NUM_TRY} failed for text:\n{item['text']}\nError: {e}")
+                time.sleep(15)  # Thời gian chờ giữa các lần thử
+        else:
+            print(f"All attempts failed for text:\n{item['text']}")
+            continue
+        
         # Nếu không tìm thấy event word, bỏ qua item này
         if not event_list:
             continue
