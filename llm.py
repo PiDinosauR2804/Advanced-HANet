@@ -19,10 +19,10 @@ Each event should be a dictionary with the following keys: 'event_type', 'trigge
 The values for these keys should be extracted from the text. If any of the keys are not present in the text, return None for that key.
 For example:
 1. If the text is "John and Mary met at the park on Monday", the output should be:
-The events are: [{'event_type': 'meeting', 'trigger_word': 'met', 'event_time': 'Monday', 'event_location': 'park', 'event_participants': ['John', 'Mary']}]
+The events are: [{{'event_type': 'meeting', 'trigger_word': 'met', 'event_time': 'Monday', 'event_location': 'park', 'event_participants': ['John', 'Mary']}}]
 2. If the text is "The July 2006 earthquake was also centered in the Indian Ocean, from the coast of Java, and had a duration of more than three minutes.", the output should be:
-The events are: [{'event_type': 'catastrophe', 'trigger_word': 'earthquake', 'event_time': 'July 2006', 'event_location': 'Indian Ocean', 'event_participants': None}, 
-                {'event_type': 'placing', 'trigger_word': 'centered', 'event_time': 'July 2006', 'event_location': 'Indian Ocean', 'event_participants': None}]
+The events are: [{{'event_type': 'catastrophe', 'trigger_word': 'earthquake', 'event_time': 'July 2006', 'event_location': 'Indian Ocean', 'event_participants': None}}, 
+                {{'event_type': 'placing', 'trigger_word': 'centered', 'event_time': 'July 2006', 'event_location': 'Indian Ocean', 'event_participants': None}}]
 3. If the text does not contain any events, return an empty list.
 The events are: []
 
