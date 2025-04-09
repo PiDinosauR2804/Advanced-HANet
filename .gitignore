@@ -4,3 +4,4 @@
 .env
 *.ipynb
 /data_incremental_by_llm
+api_key.py

@@ -1,4 +1,5 @@
-from llm import extract_event_gemini
+from data_process.llm import Extractor_Gemini
+from api_key import GEMINI_KEY
 import json
 from tqdm.notebook import tqdm
 import os
@@ -13,12 +14,14 @@ output_path = "data_incremental_by_llm"
 datasets = ["MAVEN"]
 NUM_TRY = 4
 
+extractor = Extractor_Gemini(api_key=GEMINI_KEY[0])
+
 def list2ids(list_data:list)->list:
     ids_data = []
     for item in list_data:
         for i in range(NUM_TRY):
             try:
-                event_list = extract_event_gemini(item['text'], model="gemini-2.0-flash", candidate=1)[0]
+                event_list = extractor.extract_event(item['text'], model="gemini-2.0-flash", candidate=1)[0]
                 break
             except Exception as e:
                 print(f"Attempt {i}/{NUM_TRY} failed for text:\n{item['text']}\nError: {e}")
