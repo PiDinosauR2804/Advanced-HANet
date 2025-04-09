@@ -1,6 +1,5 @@
 from llm import extract_event_gemini
 import json
-import pandas as pd
 from tqdm.notebook import tqdm
 import os
 from transformers import BertTokenizerFast
@@ -12,7 +11,7 @@ tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 input_path = "raw_text"
 output_path = "data_incremental_by_llm"
 datasets = ["MAVEN"]
-NUM_TRY = 3
+NUM_TRY = 4
 
 def list2ids(list_data:list)->list:
     ids_data = []
@@ -20,7 +19,6 @@ def list2ids(list_data:list)->list:
         for i in range(NUM_TRY):
             try:
                 event_list = extract_event_gemini(item['text'], model="gemini-2.0-flash", candidate=1)[0]
-                print(f"Successfully extracted events for text:\n{item['text']}")
                 break
             except Exception as e:
                 print(f"Attempt {i}/{NUM_TRY} failed for text:\n{item['text']}\nError: {e}")
@@ -37,6 +35,8 @@ def list2ids(list_data:list)->list:
         opt = tokenizer(item['text'], return_offsets_mapping=True, truncation=True, max_length=512, padding="max_length")
         # Lấy các ID của các token
         piece_ids = opt['input_ids']
+        # Chỉ lấy các token không phải padding
+        piece_ids = [piece_id for piece_id in piece_ids if piece_id != tokenizer.pad_token_id]
         # Lấy các span của các token
         offsets_mp = opt['offset_mapping']
         # Lấy các span của các event word dựa vào offset mapping
@@ -56,7 +56,7 @@ def list2ids(list_data:list)->list:
                         end = i
                         break
             if start != -1 and end != -1:
-                span.append((start, end))
+                span.append((start, end-1))
  
         ids_data.append({
             'text': item['text'],
@@ -103,7 +103,6 @@ def convert(input_path:str, output_path:str, datasets:list)->None:
                             for key, value in json_line.items():
                                 ids_line[key] = list2ids(value)
                             
-                            added_data.append(added_line)
                             ids_data.append(ids_line)
                     
                     if ids_data:
