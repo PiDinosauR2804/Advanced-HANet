@@ -4,7 +4,7 @@ import os
 import re
 import ast
 
-client = genai.Client(api_key=api_key)
+client = genai.Client(api_key='AIzaSyAwHAkDEc2rMrMj_1Ga5dHFzBw1___5n3Y')
 prompt = """You are an event extraction expert. Given a text, extract the event triggers. You should return a list of events in the last line with format:
 The events are: [...]. 
 Each event should be a dictionary with the following keys: 'event_type', 'trigger_word', 'event_time', 'event_location', 'event_participants'. 
