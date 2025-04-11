@@ -46,7 +46,7 @@ Now, please extract the events from the following text:
 {content}
 """
 
-    def response_to_string(response, idx=0):
+    def response_to_string(self, response, idx=0):
         if idx > len(response.candidates):
             idx = 0
         output = []
@@ -63,7 +63,7 @@ Now, please extract the events from the following text:
 
         return "\n".join(output)
 
-    def extract_response(text:str):
+    def extract_response(self, text:str):
         match = re.search(r'The events are:\s*(\[.*\])', text, re.DOTALL)
 
         if match:
@@ -94,7 +94,7 @@ Now, please extract the events from the following text:
         )
 
         res = []
-        for idx in range(len(response.candidates)): 
+        for idx in range(len(response.candidates)):
             response_string = self.response_to_string(response, idx)
             event_list = self.extract_response(response_string)
             res.append(event_list)

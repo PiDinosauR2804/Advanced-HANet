@@ -15,14 +15,14 @@ def safe_print(*args, **kwargs):
 
 # Đưa 20 task vào hàng đợi
 for i in range(20):
-    task_queue.put(i)
+    task_queue.put((i, i))
 
 # Thread worker
 def worker(worker_id, stop_after=None):
     count = 0
     while not task_queue.empty() and not stop_event.is_set():
         try:
-            item = task_queue.get(timeout=1)
+            idx, item = task_queue.get(timeout=1)
         except queue.Empty:
             safe_print(f"Worker {worker_id} không còn task nào để xử lý.")
             break
@@ -31,7 +31,7 @@ def worker(worker_id, stop_after=None):
             safe_print(f"Worker {worker_id} xử lý task {item}")
             results.append((worker_id, item+100))
         else:
-            task_queue.put(item)
+            task_queue.put((idx, item))
             
         count += 1
         time.sleep(0.05)
@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     while not task_queue.empty():
         try:
-            item = task_queue.get_nowait()
+            idx, item = task_queue.get_nowait()
             results.append((-1, item))  # Thêm task chưa xử lý vào kết quả
         except queue.Empty:
             break
