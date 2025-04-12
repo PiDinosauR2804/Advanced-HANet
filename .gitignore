@@ -5,3 +5,4 @@
 *.ipynb
 **/api_key.py
 /logs
+/output

@@ -61,6 +61,7 @@ class Consumer:
             
     def stop_threads(self):
         self.stop_event.set()
+        self.resume_threads()
         for thread in self.threads:
             thread.join()
             
@@ -113,7 +114,7 @@ class Consumer:
                 line_idx, key, idx, item = self.task_queue.get(timeout=0.1)
                 self.pbar.update(1)
             except queue.Empty:
-                self.pause_threads()
+                time.sleep(1)
                 continue
             
             # Check if the item is already processed
@@ -171,13 +172,14 @@ class Consumer:
                 
                 time.sleep(1)
             self.pbar.close()
+            self.pause_threads()
             self.log(f"[CONSUMING] Finished consuming.", mode="INFO")
             return self.results, self.processed_item, self.remained_item
                 
         except KeyboardInterrupt:
             self.log(f"[ERROR] Consuming interrupted by user. Stopping safely...", mode="ERROR")
-            self.stop_threads()
             self.pbar.close()
+            self.stop_threads()
             self.consume_left_items()
             self.log(f"[CONSUMING] Finished consuming.", mode="INFO")
             return self.results, self.processed_item, self.remained_item

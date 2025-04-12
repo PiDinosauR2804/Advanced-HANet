@@ -79,8 +79,8 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
                 
                 end_time = time.time()
                 elapsed_time = end_time - start_time
-                logger.info(f"[SAVE FILE] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds in {input_file} and saved to {output_file} ")
-            
+                logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
+                logger.info(f"[SAVE FILE] All item saved to {output_file}")            
 
         # Convert test
         input_file = os.path.join(input_path, dataset, f"{dataset}.test.jsonl")
@@ -112,6 +112,9 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
         elapsed_time = end_time - start_time
         logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
         logger.info(f"[SAVE FILE] All item saved to {output_file}")
+        
+    consumer.stop_threads()
+    logger.info(f"[FINISHED] All items processed and saved to {output_path}")
 
 if __name__ == "__main__":
     args = parse_arguments()
@@ -142,5 +145,18 @@ if __name__ == "__main__":
         colorize=True,
         format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{file: >18}: {line: <4}</cyan> - <level>{message}</level>",
     )
+    
+    # Log arguments
+    logger.info(f"[INFO] Arguments:")
+    logger.info(f"Input root: {input_root}")
+    logger.info(f"Output root: {output_root}")
+    logger.info(f"Datasets: {datasets}")
+    logger.info(f"Model: {model}")
+    logger.info(f"Candidate: {candidate}")
+    logger.info(f"Num try: {num_try}")
+    logger.info(f"Max consecutive 429 error: {max_consecutive_429_error}")
+    logger.info(f"Max num threads: {max_num_threads}")
+    logger.info(f"Resume: {resume}")
+    logger.info(f"[INFO] Start processing...")
 
     run(input_root, output_root, datasets, model, candidate, num_try, max_consecutive_429_error, max_num_threads, resume)
