@@ -5,7 +5,7 @@ def parse_arguments():
     # Args for Extractor
     parser.add_argument('--input_root', default='./data/data_text', type=str)
     parser.add_argument('--output_root', default='./output', type=str)
-    parser.add_argument('--datasets', default=['MAVEN'], type=list, nargs='+')
+    parser.add_argument('--datasets', default=['MAVEN'], type=str, nargs='+')
     parser.add_argument('--model', default='gemini-2.0-flash', type=str)
     parser.add_argument('--candidate', default=1, type=int)
     parser.add_argument('--num_try', default=3, type=int)

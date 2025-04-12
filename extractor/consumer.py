@@ -4,7 +4,8 @@ from extractor.api_key import GEMINI_KEY
 import time
 import threading
 import queue
-import loguru
+from loguru import logger
+from tqdm import tqdm
 
 class Consumer:
     def __init__(self, task_queue:queue.Queue, num_try=3, max_consecutive_429_error=3, model='gemini-2.0-flash', candidate=1, max_num_threads=10)->None:
@@ -13,11 +14,12 @@ class Consumer:
         self.max_consecutive_429_error = max_consecutive_429_error
         self.model = model
         self.candidate = candidate
+        self.pbar = None
         self.results = []
         # Attribute for threading
         self.stop_event = threading.Event()
         self.pause_event = threading.Event()
-        self.print_lock = threading.Lock()
+        # self.print_lock = threading.Lock()
         self.processed_item = 0
         self.remained_item = 0
         self.extractors = []
@@ -45,17 +47,17 @@ class Consumer:
             
             
     def log(self, str:str, mode="INFO"):
-        with self.print_lock:
+        # with self.print_lock:
             if mode == "INFO":
-                loguru.logger.info(str)
+                logger.info(str)
             elif mode == "ERROR":
-                loguru.logger.error(str)
+                logger.error(str)
             elif mode == "WARNING":
-                loguru.logger.warning(str)
+                logger.warning(str)
             elif mode == "DEBUG":
-                loguru.logger.debug(str)
+                logger.debug(str)
             elif mode == "FATAL":
-                loguru.logger.critical(str)
+                logger.critical(str)
             
     def stop_threads(self):
         self.stop_event.set()
@@ -83,13 +85,18 @@ class Consumer:
         
     def consume_left_items(self):
         self.log(f"[ERROR] Task queue is not empty after consuming. Remaining items: {self.task_queue.qsize()}", mode="ERROR")
+        # Giả sử self.task_queue là một Queue (ví dụ queue.Queue hoặc multiprocessing.Queue)
+        queue_size = self.task_queue.qsize()
+        pbar = tqdm(total=queue_size, desc="Consuming remaining items", unit="item")
+
         while not self.task_queue.empty():
             line_idx, key, idx, item = self.task_queue.get_nowait()
 
-            # If the item is not processed, just add it to the results
-            self.log(f"[INFO] Consumed unprocessed item: {item['text'][:30]}", mode="INFO")
+            # self.log(f"[INFO] Consumed unprocessed item: {item['text'][:30]}", mode="INFO")
             self.results.append((line_idx, key, idx, item))
             self.remained_item += 1
+            pbar.update(1)
+            pbar.close()
 
     def worker(self, worker_id):
         extractor = self.extractors[worker_id]
@@ -104,13 +111,14 @@ class Consumer:
             
             try:
                 line_idx, key, idx, item = self.task_queue.get(timeout=0.1)
+                self.pbar.update(1)
             except queue.Empty:
                 self.pause_threads()
                 continue
             
             # Check if the item is already processed
             if 'events' in item:
-                self.log(f"[SKIP] Worker {worker_id} processed item: {item['text'][:30]}")
+                # self.log(f"[SKIP] Worker {worker_id} processed item: {item['text'][:30]}")
                 self.results.append((line_idx, key, idx, item))
                 continue
             
@@ -127,28 +135,29 @@ class Consumer:
                         new_item = sent2ids(new_item) # Add piece_ids, span and offsets
                         self.results.append((line_idx, key, idx, new_item))
                         self.processed_item += 1
-                        self.log(f"[SUCCESS] Worker {worker_id} processed item: {item['text'][:30]}", mode="INFO")
+                        # self.log(f"[SUCCESS] Worker {worker_id} processed item: {item['text'][:30]}", mode="INFO")
                         break
                     
                 except Exception as e:
                     if is_quota_exhausted_error(e):
-                        self.log(f"[429 ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got 429 error", mode="WARNING")
+                        # self.log(f"[429 ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got 429 error", mode="WARNING")
                         extractor['consecutive_429_error'] += 1
                         time.sleep(20)  # Wait for 15 seconds before retrying
                     else:
                         extractor['consecutive_429_error'] = 0
                         self.log(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got error: {e}", mode="ERROR")
             else:
-                self.log(f"[ERROR] Worker {worker_id} failed to process item: {item['text'][:30]}", mode="ERROR")
+                self.log(f"[ERROR] Worker {worker_id} failed to process item: {item['text']}", mode="ERROR")
                 self.results.append((line_idx, key, idx, item))
                 self.remained_item += 1
  
     def is_any_thread_running(self):
         return any(thread.is_alive() for thread in self.threads)
     
-    def consume(self, model='gemini-2.0-flash', candidate=1):
+    def consume(self, pbar_des:str='Consuming item', model='gemini-2.0-flash', candidate=1):
         self.candidate = candidate
         self.model = model
+        self.pbar = tqdm(total=self.task_queue.qsize(), desc=pbar_des, unit="item")
         self.clear_results()
         self.resume_threads()
         self.log(f"[CONSUMING] Start consuming.", mode="INFO")
@@ -161,12 +170,14 @@ class Consumer:
                     break
                 
                 time.sleep(1)
+            self.pbar.close()
             self.log(f"[CONSUMING] Finished consuming.", mode="INFO")
             return self.results, self.processed_item, self.remained_item
                 
         except KeyboardInterrupt:
             self.log(f"[ERROR] Consuming interrupted by user. Stopping safely...", mode="ERROR")
             self.stop_threads()
+            self.pbar.close()
             self.consume_left_items()
             self.log(f"[CONSUMING] Finished consuming.", mode="INFO")
             return self.results, self.processed_item, self.remained_item
