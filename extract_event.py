@@ -1,5 +1,5 @@
 from data_process.llm import Extractor_Gemini
-from api_key import GEMINI_KEY
+from extractor.api_key import GEMINI_KEY
 import json
 from tqdm.notebook import tqdm
 import os

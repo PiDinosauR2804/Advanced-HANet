@@ -3,5 +3,5 @@
 /test
 .env
 *.ipynb
-api_key.py
+**/api_key.py
 /logs
