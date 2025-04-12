@@ -57,7 +57,6 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
                 input_file = os.path.join(input_folder, file_name)
                 output_file = os.path.join(output_folder, file_name)
                 
-                
                 start_time = time.time()
                 # Start producing
                 producer.produce(input_file, is_train=True)
@@ -88,9 +87,6 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
         if not os.path.exists(input_file):
             loguru.logger.error(f"[ERROR] File {input_file} is not exist", mode="ERROR")
             continue
-        
-        with open(input_file, 'r') as f:
-            input_lines = [json.loads(line) for line in f]
         
         start_time = time.time()
         # Start producing

@@ -82,6 +82,16 @@ class Consumer:
         self.remained_item = 0
         
         self.log(f"[CLEAR] All results cleared", mode="INFO")
+        
+    def consume_left_items(self):
+        self.log(f"[ERROR] Task queue is not empty after consuming. Remaining items: {self.task_queue.qsize()}", mode="ERROR")
+        while not self.task_queue.empty():
+            line_idx, key, idx, item = self.task_queue.get_nowait()
+
+            # If the item is not processed, just add it to the results
+            self.log(f"[INFO] Consumed unprocessed item: {item['text'][:30]}", mode="INFO")
+            self.results.append((line_idx, key, idx, item))
+            self.remained_item += 1
 
     def worker(self, worker_id):
         extractor = self.extractors[worker_id]
@@ -144,20 +154,20 @@ class Consumer:
         self.resume_threads()
         self.log(f"[CONSUMING] Start consuming.", mode="INFO")
         
-        while not self.task_queue.empty():
-            if not self.is_any_thread_running():
-                self.log(f"[ERROR] No threads are running. Stopping ...", mode="ERROR")
-                self.log(f"[ERROR] Task queue is not empty after consuming. Remaining items: {self.task_queue.qsize()}", mode="ERROR")
-                while not self.task_queue.empty():
-                    line_idx, key, idx, item = self.task_queue.get_nowait()
-
-                    # If the item is not processed, just add it to the results
-                    self.log(f"[INFO] Consumed unprocessed item: {item['text'][:30]}", mode="INFO")
-                    self.results.append((line_idx, key, idx, item))
-                    self.remained_item += 1
-                    
-                break
-            time.sleep(1)
-            
-        self.log(f"[CONSUMING] Finished consuming.", mode="INFO")
-        return self.results, self.processed_item, self.remained_item
+        try:
+            while not self.task_queue.empty():
+                if not self.is_any_thread_running():
+                    self.log(f"[ERROR] No threads are running. Stopping ...", mode="ERROR")
+                    self.consume_left_items()
+                    break
+                
+                time.sleep(1)
+            self.log(f"[CONSUMING] Finished consuming.", mode="INFO")
+            return self.results, self.processed_item, self.remained_item
+                
+        except KeyboardInterrupt:
+            self.log(f"[ERROR] Consuming interrupted by user. Stopping safely...", mode="ERROR")
+            self.stop_threads()
+            self.consume_left_items()
+            self.log(f"[CONSUMING] Finished consuming.", mode="INFO")
+            return self.results, self.processed_item, self.remained_item
