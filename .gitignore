@@ -1,10 +1,7 @@
-/raw_text
-/ACE
-/MAVEN
+
+/origin_data
+/test
 .env
 *.ipynb
-/data_incremental_by_llm
 api_key.py
 /logs
-/test2
-/test3

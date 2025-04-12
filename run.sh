@@ -1,5 +1,5 @@
 python train.py \
-  --data-root ./data_incremental \
+  --data-root ./data_ids \
   --dataset MAVEN \
   --backbone bert-base-uncased \
   --lr 2e-5 \
