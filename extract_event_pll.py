@@ -12,7 +12,7 @@ import loguru
 # Global variables
 MAX_LEN = 30
 INPUT_PATH = "raw_text"
-OUT_PATH = "test3"
+OUTPUT_PATH = "test3"
 DATASETS = ["MAVEN"]
 NUM_TRY = 3
 MAX_CONSECUTIVE_429_ERROR = 3
@@ -25,9 +25,18 @@ os.makedirs(LOGGING_FOLDER, exist_ok=True)
 loguru.logger.add(os.path.join(LOGGING_FOLDER, "extractor.log"), rotation="1 MB", retention="10 days", level="INFO")
 loguru.logger.info("Start logging...")
 
-def log(str:str):
+def log(str:str, mode="INFO"):
     with print_lock:
-        loguru.logger.info(str)
+        if mode == "INFO":
+            loguru.logger.info(str)
+        elif mode == "ERROR":
+            loguru.logger.error(str)
+        elif mode == "WARNING":
+            loguru.logger.warning(str)
+        elif mode == "DEBUG":
+            loguru.logger.debug(str)
+        elif mode == "FATAL":
+            loguru.logger.critical(str)
 
 # Global variables for threading
 task_queue = queue.Queue()
@@ -49,47 +58,56 @@ def worker(worker_id):
     
     while not stop_event.is_set():
         if extractor['consecutive_429_error'] >= MAX_CONSECUTIVE_429_ERROR:
-            log(f"[FATAL] Worker {worker_id} got error 429 more than {MAX_CONSECUTIVE_429_ERROR} times. Stoping ...")
+            log(f"[FATAL] Worker {worker_id} got error 429 more than {MAX_CONSECUTIVE_429_ERROR} times. Stoping ...", mode="FATAL")
             # Stop the thread
             break
         
-        for i in range(NUM_TRY):
-            try:
-                idx, item = task_queue.get(timeout=1)
-                if hasattr(item, 'events'):
-                    log(f"[SKIP] Worker {worker_id} processed item: {item['text'][:MAX_LEN]}")
-                    results.append((idx, item))
-                    break
-                
-                event_list = extractor['extractor'].extract_event(item['text'], model="gemini-2.0-flash", candidate=1)[0]
-                if event_list:
-                    new_item = {
-                        'text': item['text'],
-                        'events': event_list,
-                    }
-                    new_item = sent2ids(new_item) # Add piece_ids, span and offsets
+        new_item = None
+        item = None
+        try:
+            idx, item = task_queue.get(timeout=0.1)
+            if 'events' in item:
+                log(f"[SKIP] Worker {worker_id} processed item: {item['text'][:MAX_LEN]}")
+                results.append((idx, item))
+                continue
+            
+            # Try to process the item
+            for i in range(NUM_TRY):
+                try:
+                    event_list = extractor['extractor'].extract_event(item['text'], model="gemini-2.0-flash", candidate=1)[0]
                     extractor['consecutive_429_error'] = 0
+                    if event_list:
+                        new_item = {
+                            'text': item['text'],
+                            'events': event_list,
+                        }
+                        new_item = sent2ids(new_item) # Add piece_ids, span and offsets
+                        break
                     
-                    log(f"[SUCCESS] Worker {worker_id} processed item: {item['text'][:MAX_LEN]}")
-                    results.append((idx, new_item))
-                    break
+                except Exception as e:
+                    if is_quota_exhausted_error(e):
+                        log(f"[429 ERROR at ATTEMPT {i+1}/{NUM_TRY}] Worker {worker_id} got 429 error", mode="WARNING")
+                        extractor['consecutive_429_error'] += 1
+                        time.sleep(20)  # Wait for 15 seconds before retrying
+                    else:
+                        extractor['consecutive_429_error'] = 0
+                        log(f"[ERROR at ATTEMPT {i+1}/{NUM_TRY}] Worker {worker_id} got error: {e}", mode="ERROR")
+                            
                 
-            except queue.Empty:
-                time.sleep(1)
-            
-            except Exception as e:
-                if is_quota_exhausted_error(e):
-                    log(f"[429 ERROR at ATTEMPT {i+1}/{NUM_TRY}] Worker {worker_id} got 429 error")
-                    extractor['consecutive_429_error'] += 1
-                    time.sleep(20)  # Wait for 15 seconds before retrying
-                else:
-                    log(f"[ERROR at ATTEMPT {i+1}/{NUM_TRY}] Worker {worker_id} got error: {e}")
-                    extractor['consecutive_429_error'] = 0
-        else:
+        except queue.Empty:
+            time.sleep(1)
+        except Exception as e:
+            log(f"[FATAL] Worker {worker_id} got error: {e}", mode="FATAL")
+            continue
+        
+        if new_item:
+            # If we successfully processed the item, add it to the results
+            log(f"[SUCCESS] Worker {worker_id} processed item: {new_item['text'][:MAX_LEN]}")
+            results.append((idx, new_item))
+        elif item:
             # If we exit the for loop without breaking, it means we have exhausted all attempts
-            log(f"[SKIP] Worker {worker_id} cannot process: {item['text'][:MAX_LEN]}")
-            task_queue.put((idx, item))
-            
+            log(f"[SKIP] Worker {worker_id} cannot process: {item['text'][:MAX_LEN]}", mode="WARNING")
+            results.append((idx, item))
             
 # Init threading
 threads = []
@@ -99,6 +117,11 @@ for i in range(len(GEMINI_KEY)):
  
 
 def convert(input_path: str, output_path: str, datasets: List[str], resume=False):
+    global results
+    global task_queue
+    global threads
+    global stop_event
+    
     # Resume from output_path if resume is True
     if resume:
         input_path = output_path
@@ -116,7 +139,7 @@ def convert(input_path: str, output_path: str, datasets: List[str], resume=False
         for i in range(1, 2):
             input_folder = os.path.join(input_path, dataset, "perm"+str(i))
             if not os.path.exists(input_folder):
-                log(f"[SKIP] Folder {input_folder} is not exist")
+                log(f"[ERROR] Folder {input_folder} is not exist", mode="ERROR")
                 continue
 
             output_folder = os.path.join(output_path, dataset, "perm"+str(i))
@@ -130,39 +153,58 @@ def convert(input_path: str, output_path: str, datasets: List[str], resume=False
                 output_file = os.path.join(output_folder, file_name)
 
                 with open(input_file, 'r') as f:
-                    for line in f:
-                        input_lines = [json.loads(line) for line in f]
+                    input_lines = [json.loads(line) for line in f]
+                    
+                start_time = time.time()
+                process_item = 0
+                all_item = 0
+                log(f"[START] Start processing {input_file}...", mode="INFO")
                 
                 output_lines = []
                 for line in input_lines:
                     new_line = {}
                     for key, value in line.items():
-                        # Make results empty
-                        global results           
-                        results = []
-                        
-                        for idx, item in enumerate(value):
-                            # Add to task queue
-                            task_queue.put((idx, item))
+                        try:
+                            # Make results empty
+                            results = []
                             
-                        # wait for task queue to be empty
-                        while not task_queue.empty() and _is_any_thread_runing():
-                            time.sleep(1)
-                            
+                            for idx, item in enumerate(value):
+                                # Add to task queue
+                                task_queue.put((idx, item))
+                                
+                            # wait for task queue to be empty
+                            while not task_queue.empty() and _is_any_thread_runing():
+                                time.sleep(1)
+                                
+                        except KeyboardInterrupt:
+                            log("[ERROR] KeyboardInterrupt. Stopping threads...", mode="ERROR")
+                            stop_event.set()
+                            for thread in threads:
+                                thread.join()
+                            log("[ERROR] All threads stopped.", mode="ERROR")
+                            log("[ERROR] Safety exit...", mode="ERROR")
+                
+                        process_item += len(results)
                         # Add all remain item in queue to results
                         while not task_queue.empty():
                             idx, item = task_queue.get()
                             results.append((idx, item))
-                        
+                        all_item += len(results)
                         # Sort results by index and add to output_lines
                         results.sort(key=lambda x: x[0])    
                         new_line[key] = [item[1] for item in results]
-                        output_lines.append(new_line)
+                    
+                    output_lines.append(new_line)
                 
                 with open(output_file, 'w') as f:
                     for line in output_lines:
                         if line is not None:                        
                             f.write(json.dumps(line) + '\n')
+                
+                end_time = time.time()
+                elapsed_time = end_time - start_time
+                log(f"[SAVE FILE] Finished processing {process_item}/{all_item} item in {elapsed_time:.2f} seconds in {input_file} and saved to {output_file} ")
+            
 
         # # Convert test
         # input_file = os.path.join(input_path, dataset, f"{dataset}.test.jsonl")
@@ -204,14 +246,6 @@ def convert(input_path: str, output_path: str, datasets: List[str], resume=False
         stop_event.set()
         for thread in threads:
             thread.join()
-        log("All threads stopped.")
 
 if __name__ == "__main__":
-    try:
-        convert(INPUT_PATH, OUT_PATH, DATASETS, resume=True)
-    except KeyboardInterrupt:
-        log("KeyboardInterrupt.")
-        stop_event.set()
-        for thread in threads:
-            thread.join()
-        log("All threads stopped.")
+    convert(INPUT_PATH, OUTPUT_PATH, DATASETS, resume=True)
