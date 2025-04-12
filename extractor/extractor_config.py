@@ -1,6 +1,6 @@
 import argparse
 
-def parse_arguments():
+def extractor_parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input_root', default='./data/data_text', type=str)
     parser.add_argument('--output_root', default='./output', type=str)
@@ -13,5 +13,6 @@ def parse_arguments():
     parser.add_argument('--logs_dir', default='./logs/extractor', type=str)
     parser.add_argument('--resume', default=False, action='store_true')
     
-    args = parser.parse_args()
+    args, _ = parser.parse_known_args()
+
     return args

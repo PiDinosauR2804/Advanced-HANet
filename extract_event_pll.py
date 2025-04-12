@@ -1,6 +1,7 @@
 from extractor.producer import Producer
 from extractor.consumer import Consumer
-from extractor.configs import parse_arguments
+from configs import parse_arguments
+# from extractor.extractor_config import extractor_parse_arguments as parse_arguments
 import json
 import os
 import time
@@ -109,7 +110,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
         end_time = time.time()
         elapsed_time = end_time - start_time
         loguru.logger.info(f"[SAVE FILE] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds in {input_file} and saved to {output_file} ")
-        
+
 if __name__ == "__main__":
     args = parse_arguments()
     input_root = args.input_root
@@ -120,7 +121,7 @@ if __name__ == "__main__":
     num_try = args.num_try
     max_consecutive_429_error = args.max_consecutive_429_error
     max_num_threads = args.max_num_threads
-    resume = args.resume
+    resume = args.extractor_resume
     logs_dir = args.logs_dir
     
     # Configure logging

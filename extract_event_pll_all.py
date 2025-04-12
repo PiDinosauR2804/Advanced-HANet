@@ -1,5 +1,5 @@
 from extractor.llm import Extractor, Extractor_Gemini, is_quota_exhausted_error
-from extractor.configs import parse_arguments
+from extractor.extractor_config import parse_arguments
 from utils.convert import sent2ids
 from extractor.api_key import GEMINI_KEY
 import json

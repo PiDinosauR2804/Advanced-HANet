@@ -1,8 +1,6 @@
 from extractor.llm import Extractor, Extractor_Gemini, is_quota_exhausted_error, is_valid_extractor
 from utils.convert import sent2ids
 from extractor.api_key import GEMINI_KEY
-import json
-import os
 import time
 import threading
 import queue
@@ -37,13 +35,13 @@ class Consumer:
             if len(self.extractors) >= max_num_threads:
                 break
             
-        self.log(f"[START] Start {len(self.threads)} threads", mode="INFO")
         self.pause_threads()
         self.threads = []
         for i in range(len(self.extractors)):
             # Create a thread for each extractor
             self.threads.append(threading.Thread(target=self.worker, args=(i,)))
             self.threads[i].start()
+        self.log(f"[START] Start {len(self.threads)} threads", mode="INFO")
             
             
     def log(self, str:str, mode="INFO"):
@@ -129,6 +127,7 @@ class Consumer:
                         new_item = sent2ids(new_item) # Add piece_ids, span and offsets
                         self.results.append((line_idx, key, idx, new_item))
                         self.processed_item += 1
+                        self.log(f"[SUCCESS] Worker {worker_id} processed item: {item['text'][:30]}", mode="INFO")
                         break
                     
                 except Exception as e:

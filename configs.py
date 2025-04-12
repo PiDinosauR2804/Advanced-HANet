@@ -2,6 +2,19 @@ import argparse
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
+    # Args for Extractor
+    parser.add_argument('--input_root', default='./data/data_text', type=str)
+    parser.add_argument('--output_root', default='./output', type=str)
+    parser.add_argument('--datasets', default=['MAVEN'], type=list, nargs='+')
+    parser.add_argument('--model', default='gemini-2.0-flash', type=str)
+    parser.add_argument('--candidate', default=1, type=int)
+    parser.add_argument('--num_try', default=3, type=int)
+    parser.add_argument('--max_consecutive_429_error', default=3, type=int)
+    parser.add_argument('--max_num_threads', default=10, type=int)
+    parser.add_argument('--logs_dir', default='./logs/extractor', type=str)
+    parser.add_argument('--extractor_resume', default=False, action='store_true')
+    
+    # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
     parser.add_argument('--skip-first', action='store_true')
     parser.add_argument('--log-dir', default='./outputs/log_terminal/02-10-nomap-clreps')
@@ -46,8 +59,8 @@ def parse_arguments():
     parser.add_argument('--dweight_loss', action='store_true')
     parser.add_argument('--alpha', type=float, default=2.0)
     parser.add_argument('--beta', type=float, default=3.0)
-    parser.add_argument('--distill', required=True, choices=["fd", "pd", "mul", "none"])
-    parser.add_argument('--rep-aug', required=True, choices=["none", "mean", "relative"])
+    parser.add_argument('--distill', default='mul', choices=["fd", "pd", "mul", "none"])
+    parser.add_argument('--rep-aug', default='mean', choices=["none", "mean", "relative"])
     parser.add_argument('--gamma', type=float, default=1)
     parser.add_argument('--theta',type=float, default=6)
     # parser.add_argument('--ecl', required=True, choices=["dropout", "shuffle", "RTR", "none"])
@@ -63,5 +76,7 @@ def parse_arguments():
     parser.add_argument('--skip-first-cl', choices=["ucl", "tlcl", "ucl+tlcl", "none"], default="none")
     parser.add_argument('--method', type=str)
     parser.add_argument('--my_test', default=False, type=bool)
-    args = parser.parse_args()
+    
+    args, _ = parser.parse_known_args()
+
     return args
