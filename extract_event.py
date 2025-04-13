@@ -13,58 +13,59 @@ output_path = "data_incremental_by_llm"
 datasets = ["MAVEN"]
 NUM_TRY = 4
 
-def list2ids(list_data:list)->list:
+def list2ids(list_data:list, found_trigger = False)->list:
     ids_data = []
-    for item in list_data:
-        for i in range(NUM_TRY):
-            try:
-                event_list = extract_event_gemini(item['text'], model="gemini-2.0-flash", candidate=1)[0]
-                break
-            except Exception as e:
-                print(f"Attempt {i}/{NUM_TRY} failed for text:\n{item['text']}\nError: {e}")
-                time.sleep(15)  # Thời gian chờ giữa các lần thử
-        else:
-            print(f"All attempts failed for text:\n{item['text']}")
-            continue
-        
-        # Nếu không tìm thấy event word, bỏ qua item này
-        if not event_list:
-            continue
+    if not found_trigger:
+        for item in list_data:
+            for i in range(NUM_TRY):
+                try:
+                    event_list = extract_event_gemini(item['text'], model="gemini-2.0-flash", candidate=1)[0]
+                    break
+                except Exception as e:
+                    print(f"Attempt {i}/{NUM_TRY} failed for text:\n{item['text']}\nError: {e}")
+                    time.sleep(15)  # Thời gian chờ giữa các lần thử
+            else:
+                print(f"All attempts failed for text:\n{item['text']}")
+                continue
+            
+            # Nếu không tìm thấy event word, bỏ qua item này
+            if not event_list:
+                continue
 
-        # Chuyển đổi các văn bản thành ID
-        opt = tokenizer(item['text'], return_offsets_mapping=True, truncation=True, max_length=512, padding="max_length")
-        # Lấy các ID của các token
-        piece_ids = opt['input_ids']
-        # Chỉ lấy các token không phải padding
-        piece_ids = [piece_id for piece_id in piece_ids if piece_id != tokenizer.pad_token_id]
-        # Lấy các span của các token
-        offsets_mp = opt['offset_mapping']
-        # Lấy các span của các event word dựa vào offset mapping
-        span = []
-        for event in event_list:
-            trigger_word = event['trigger_word']
-            # Tìm vị trí của trigger word trong offsets_mp
-            start = -1
-            end = -1
-            for i, (s, e) in enumerate(offsets_mp):
-                if s <= item['text'].find(trigger_word) < e:
+    # Chuyển đổi các văn bản thành ID
+    opt = tokenizer(item['text'], return_offsets_mapping=True, truncation=True, max_length=512, padding="max_length")
+    # Lấy các ID của các token
+    piece_ids = opt['input_ids']
+    # Chỉ lấy các token không phải padding
+    piece_ids = [piece_id for piece_id in piece_ids if piece_id != tokenizer.pad_token_id]
+    # Lấy các span của các token
+    offsets_mp = opt['offset_mapping']
+    # Lấy các span của các event word dựa vào offset mapping
+    span = []
+    for event in event_list:
+        trigger_word = event['trigger_word']
+        # Tìm vị trí của trigger word trong offsets_mp
+        start = -1
+        end = -1
+        for i, (s, e) in enumerate(offsets_mp):
+            if s <= item['text'].find(trigger_word) < e:
                     start = i
                     break
-            if start != -1:
-                for i, (s, e) in enumerate(offsets_mp[start:], start):
-                    if s >= item['text'].find(trigger_word) + len(trigger_word):
-                        end = i
-                        break
-            if start != -1 and end != -1:
-                span.append((start, end-1))
+        if start != -1:
+            for i, (s, e) in enumerate(offsets_mp[start:], start):
+                if s >= item['text'].find(trigger_word) + len(trigger_word):
+                    end = i
+                    break
+        if start != -1 and end != -1:
+            span.append((start, end-1))
  
-        ids_data.append({
-            'text': item['text'],
-            'events': event_list,
-            'span': span,
-            'piece_ids': piece_ids,
-            'offsets': item['offsets']
-        })
+    ids_data.append({
+        'text': item['text'],
+        'events': event_list,
+        'span': span,
+        'piece_ids': piece_ids,
+        'offsets': item['offsets']
+    })
         
     return ids_data
     

@@ -46,7 +46,7 @@ def extract_description(response_list:list) -> list:
         print("No description found.")
         return None        
 
-def gen_description(text:str, trigger_word:str, model="gemini-2.0-flash", candidate=1):
+def gen_description_llm(text:str, trigger_word:str, model="gemini-2.0-flash", candidate=1):
     description = client.models.generate_content(
         model=model,
         contents=prompt.format(content=text, trigger_word=trigger_word),
