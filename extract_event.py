@@ -10,8 +10,6 @@ from loguru import logger
 from tqdm import tqdm
 
 def get_lines_from_results(results:list)->list:
-    # Sort results by line_idx, key and idx
-    results.sort(key=lambda x: (x[0], x[1], x[2])) # results is a list of tuples (line_idx, key, idx, item)
     # Convert results to a list of lines
     output_lines = []
     for line_idx, key, idx, item in results:
@@ -43,7 +41,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
     for dataset in datasets:
         os.makedirs(os.path.join(output_path, dataset), exist_ok=True)
 
-        for i in [0, 2, 3, 4]:
+        for i in range(5):
             input_folder = os.path.join(input_path, dataset, "perm"+str(i))
             if not os.path.exists(input_folder):
                 logger.error(f"[ERROR] Folder {input_folder} is not exist", mode="ERROR")
@@ -61,6 +59,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
                 
                 start_time = time.time()
                 # Start producing
+                logger.info("="*100)
                 producer.produce(input_file, is_train=True)
                 # Start consuming
                 try:
@@ -71,6 +70,8 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
                     
                 
                 # Save results to output file
+                # Sort results by line_idx, key and idx
+                results.sort(key=lambda x: (x[0], x[1], x[2])) # results is a list of tuples (line_idx, key, idx, item) 
                 output_lines = get_lines_from_results(results) # output_lines is a list of lines
                 
                 with open(output_file, 'w') as f:   
@@ -92,6 +93,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
         
         start_time = time.time()
         # Start producing
+        logger.info("="*100)
         producer.produce(input_file, is_train=False)
         # Start consuming
         try:
@@ -101,6 +103,8 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
             consumer.stop_threads()
         
         # Save results to output file
+        # Sort results by line_idx, key and idx
+        results.sort(key=lambda x: (x[0])) # results is a list of tuples (line_idx, None, None, item)
         output_lines = get_lines_from_results(results) # output_lines is a list of lines
         
         with open(output_file, 'w') as f:

@@ -1,8 +1,8 @@
-/temp
-/origin_data
-/test
+tem/
+origin_data/
+test/
 .env
 *.ipynb
 **/api_key.py
 /logs
-/output
+outputs/

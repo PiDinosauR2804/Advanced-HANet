@@ -36,7 +36,7 @@ class Consumer:
                 
             if len(self.extractors) >= max_num_threads:
                 break
-            
+        self.log(f"[INFO] Found {len(self.extractors)} valid extractors", mode="INFO")   
         self.pause_threads()
         self.threads = []
         for i in range(len(self.extractors)):
@@ -121,6 +121,7 @@ class Consumer:
             if 'events' in item:
                 # self.log(f"[SKIP] Worker {worker_id} processed item: {item['text'][:30]}")
                 self.results.append((line_idx, key, idx, item))
+                self.processed_item += 1
                 continue
             
             # Try to process the item
