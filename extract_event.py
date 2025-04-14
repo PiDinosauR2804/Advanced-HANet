@@ -1,5 +1,6 @@
 from extractor.producer import Producer
 from extractor.consumer import Consumer
+from extractor.eval_extractor import eval
 from configs import parse_arguments
 # from extractor.extractor_config import extractor_parse_arguments as parse_arguments
 import json
@@ -41,7 +42,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
     for dataset in datasets:
         os.makedirs(os.path.join(output_path, dataset), exist_ok=True)
 
-        for i in range(5):
+        for i in range(1):
             input_folder = os.path.join(input_path, dataset, "perm"+str(i))
             if not os.path.exists(input_folder):
                 logger.error(f"[ERROR] Folder {input_folder} is not exist", mode="ERROR")
@@ -59,6 +60,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
                 
                 start_time = time.time()
                 # Start producing
+                logger.info("="*100)
                 logger.info("="*100)
                 producer.produce(input_file, is_train=True)
                 # Start consuming
@@ -83,39 +85,41 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
                 logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
                 logger.info(f"[SAVE FILE] All item saved to {output_file}")            
 
-        # Convert test
-        input_file = os.path.join(input_path, dataset, f"{dataset}.test.jsonl")
-        output_file = os.path.join(output_path, dataset, f"{dataset}.test.jsonl")
+        if False:
+            # Convert test
+            input_file = os.path.join(input_path, dataset, f"{dataset}.test.jsonl")
+            output_file = os.path.join(output_path, dataset, f"{dataset}.test.jsonl")
 
-        if not os.path.exists(input_file):
-            logger.error(f"[ERROR] File {input_file} is not exist", mode="ERROR")
-            continue
-        
-        start_time = time.time()
-        # Start producing
-        logger.info("="*100)
-        producer.produce(input_file, is_train=False)
-        # Start consuming
-        try:
-            results, processed_item, remained_item = consumer.consume(pbar_des=f'{dataset}/{dataset}/.test.jsonl', model=model, candidate=candidate) # results is a list of tuples (line_idx, key, idx, item)
-        except KeyboardInterrupt:
-            logger.error(f"[ERROR] KeyboardInterrupt, stop consuming safely...")
-            consumer.stop_threads()
-        
-        # Save results to output file
-        # Sort results by line_idx, key and idx
-        results.sort(key=lambda x: (x[0])) # results is a list of tuples (line_idx, None, None, item)
-        output_lines = get_lines_from_results(results) # output_lines is a list of lines
-        
-        with open(output_file, 'w') as f:
-            for line in output_lines:
-                if line is not None:                        
-                    f.write(json.dumps(line) + '\n')
-                    
-        end_time = time.time()
-        elapsed_time = end_time - start_time
-        logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
-        logger.info(f"[SAVE FILE] All item saved to {output_file}")
+            if not os.path.exists(input_file):
+                logger.error(f"[ERROR] File {input_file} is not exist", mode="ERROR")
+                continue
+            
+            start_time = time.time()
+            # Start producing
+            logger.info("="*100)
+            logger.info("="*100)
+            producer.produce(input_file, is_train=False)
+            # Start consuming
+            try:
+                results, processed_item, remained_item = consumer.consume(pbar_des=f'{dataset}/{dataset}/.test.jsonl', model=model, candidate=candidate) # results is a list of tuples (line_idx, key, idx, item)
+            except KeyboardInterrupt:
+                logger.error(f"[ERROR] KeyboardInterrupt, stop consuming safely...")
+                consumer.stop_threads()
+            
+            # Save results to output file
+            # Sort results by line_idx, key and idx
+            results.sort(key=lambda x: (x[0])) # results is a list of tuples (line_idx, None, None, item)
+            output_lines = get_lines_from_results(results) # output_lines is a list of lines
+            
+            with open(output_file, 'w') as f:
+                for line in output_lines:
+                    if line is not None:                        
+                        f.write(json.dumps(line) + '\n')
+                        
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
+            logger.info(f"[SAVE FILE] All item saved to {output_file}")
         
     consumer.stop_threads()
     logger.info(f"[FINISHED] All items processed and saved to {output_path}")
@@ -164,3 +168,5 @@ if __name__ == "__main__":
     logger.info(f"[INFO] Start processing...")
 
     run(input_root, output_root, datasets, model, candidate, num_try, max_consecutive_429_error, max_num_threads, resume)
+    
+    # eval()

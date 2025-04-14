@@ -1,8 +1,10 @@
-tem/
-origin_data/
+temp/
+original_data/
 test/
 .env
 *.ipynb
 **/api_key.py
 /logs
-outputs/
+output/
+data/
+/match.py

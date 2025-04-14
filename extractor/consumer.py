@@ -19,18 +19,19 @@ class Consumer:
         # Attribute for threading
         self.stop_event = threading.Event()
         self.pause_event = threading.Event()
-        # self.print_lock = threading.Lock()
+        self.print_lock = threading.Lock()
+        self.append_lock = threading.Lock()
         self.processed_item = 0
         self.remained_item = 0
         self.extractors = []
 
         # Init extractors
         for i in range(len(GEMINI_KEY)):
-            extractor = Extractor_Gemini(api_key=GEMINI_KEY[i])
+            extractor = Extractor(api_key=GEMINI_KEY[i])
             
             if is_valid_extractor(extractor):
                 self.extractors.append({
-                    'extractor': Extractor_Gemini(api_key=GEMINI_KEY[i]),
+                    'extractor': extractor,
                     'consecutive_429_error': 0,
                 })
                 
@@ -47,7 +48,7 @@ class Consumer:
             
             
     def log(self, str:str, mode="INFO"):
-        # with self.print_lock:
+        with self.print_lock:
             if mode == "INFO":
                 logger.info(str)
             elif mode == "ERROR":
@@ -84,6 +85,10 @@ class Consumer:
         
         self.log(f"[CLEAR] All results cleared", mode="INFO")
         
+    def append_results(self, line_idx, key, idx, item):
+        with self.append_lock:
+            self.results.append((line_idx, key, idx, item))
+        
     def consume_left_items(self):
         self.log(f"[ERROR] Task queue is not empty after consuming. Remaining items: {self.task_queue.qsize()}", mode="ERROR")
         # Giả sử self.task_queue là một Queue (ví dụ queue.Queue hoặc multiprocessing.Queue)
@@ -94,7 +99,7 @@ class Consumer:
             line_idx, key, idx, item = self.task_queue.get_nowait()
 
             # self.log(f"[INFO] Consumed unprocessed item: {item['text'][:30]}", mode="INFO")
-            self.results.append((line_idx, key, idx, item))
+            self.append_results(line_idx, key, idx, item)
             self.remained_item += 1
             pbar.update(1)
             pbar.close()
@@ -120,7 +125,7 @@ class Consumer:
             # Check if the item is already processed
             if 'events' in item:
                 # self.log(f"[SKIP] Worker {worker_id} processed item: {item['text'][:30]}")
-                self.results.append((line_idx, key, idx, item))
+                self.append_results(line_idx, key, idx, item)
                 self.processed_item += 1
                 continue
             
@@ -135,7 +140,7 @@ class Consumer:
                             'events': event_list,
                         }
                         new_item = sent2ids(new_item) # Add piece_ids, span and offsets
-                        self.results.append((line_idx, key, idx, new_item))
+                        self.append_results(line_idx, key, idx, new_item)
                         self.processed_item += 1
                         # self.log(f"[SUCCESS] Worker {worker_id} processed item: {item['text'][:30]}", mode="INFO")
                         break
@@ -150,7 +155,7 @@ class Consumer:
                         self.log(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got error: {e}", mode="ERROR")
             else:
                 self.log(f"[ERROR] Worker {worker_id} failed to process item: {item['text']}", mode="ERROR")
-                self.results.append((line_idx, key, idx, item))
+                self.append_results(line_idx, key, idx, item)
                 self.remained_item += 1
  
     def is_any_thread_running(self):

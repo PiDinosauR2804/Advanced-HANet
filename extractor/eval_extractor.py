@@ -1,8 +1,6 @@
 import os
 import json
-ground_truth = "data_incremental"
-llm = "test"
-datasets = ["MAVEN"]
+from loguru import logger
 
 def bleu_score(prediction:list[int], reference:list[int]):
     """
@@ -11,7 +9,7 @@ def bleu_score(prediction:list[int], reference:list[int]):
     # Initialize the BLEU score
     bleu = 0.0
     # Calculate the BLEU score for each n-gram (1-gram, 2-gram, etc.)
-    for n in range(1, 5):
+    for n in range(1,5):
         # Create n-grams for prediction and reference
         pred_ngrams = [tuple(prediction[i:i+n]) for i in range(len(prediction)-n+1)]
         ref_ngrams = [tuple(reference[i:i+n]) for i in range(len(reference)-n+1)]
@@ -23,7 +21,7 @@ def bleu_score(prediction:list[int], reference:list[int]):
         bleu += precision / 4.0
     return bleu
 
-def eval_span(gt_path:str, pr_path:str, datasets:list)->None:
+def eval(gt_path:str, pr_path:str, datasets:list)->None:
     for dataset in datasets:
         # Convert for train data
         for i in range(5):
@@ -89,7 +87,3 @@ def eval_span(gt_path:str, pr_path:str, datasets:list)->None:
                     # In bảng kết quả
                     print(f"Dataset: {dataset}, perm: {i}, file: {file_name}")
                     print(f"Precision: {precision/count:.4f}, Recall: {recall/count:.4f}, BLEU: {bleu/count:.4f}\n")
-                    
-        
-
-eval_span(ground_truth, llm, datasets)

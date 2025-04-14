@@ -114,5 +114,5 @@ def is_valid_extractor(extractor, text="australia won the tournament, beating pa
         except Exception as e:
             if is_quota_exhausted_error(e):
                 return False
-            time.sleep(15)
+            time.sleep(5)
     return True
