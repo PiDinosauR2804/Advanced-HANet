@@ -27,7 +27,7 @@ class Consumer:
 
         # Init extractors
         for i in range(len(GEMINI_KEY)):
-            extractor = Extractor(api_key=GEMINI_KEY[i])
+            extractor = Extractor_Gemini(api_key=GEMINI_KEY[i])
             
             if is_valid_extractor(extractor):
                 self.extractors.append({

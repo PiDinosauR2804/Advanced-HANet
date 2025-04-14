@@ -1,6 +1,6 @@
 python extract_event.py ^
     --input_root data/data_text ^
-    --output_root output ^
+    --output_root output/des ^
     --datasets MAVEN ^
     --model gemini-2.0-flash ^
     --candidate 1 ^

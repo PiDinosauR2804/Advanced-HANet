@@ -15,12 +15,12 @@ class Extractor():
         """
         Extract events from text using Google Gemini API.
         """
-        return [[{'text': text, 
-                  'event_type': 'meeting', 
-                  'trigger_word': text.split()[0], 
-                  'event_time': None, 
-                  'event_location': None, 
-                  'event_participants': []}]]  # Dummy response for the base class
+        return [[{"text": text, 
+                  "event_type": "meeting", 
+                  "trigger_word": text.split()[0], 
+                  "event_time": None, 
+                  "event_location": None, 
+                  "event_participants": []}]]  # Dummy response for the base class
         
 class Extractor_Gemini(Extractor):
     def __init__(self, api_key:str):
@@ -31,14 +31,14 @@ class Extractor_Gemini(Extractor):
         self.client = genai.Client(api_key=api_key)
         self.prompt = """You are an event extraction expert. Given a text, extract the event triggers. You should return a list of events in the last line with format:
 The events are: [...]. 
-Each event should be a dictionary with the following keys: 'event_type', 'trigger_word', 'event_time', 'event_location', 'event_participants'. 
+Each event should be a dictionary with the following keys: "event_type", "trigger_word", "event_time", "event_location", "event_participants" and "description". 
 The values for these keys should be extracted from the text. If any of the keys are not present in the text, return None for that key.
 For example:
 1. If the text is "John and Mary met at the park on Monday", the output should be:
-The events are: [{{'event_type': 'meeting', 'trigger_word': 'met', 'event_time': 'Monday', 'event_location': 'park', 'event_participants': ['John', 'Mary']}}]
+The events are: [{{"event_type": "meeting", "trigger_word": "met", "event_time": "Monday", "event_location": "park", "event_participants": ["John", "Mary"], "description": "The trigger word met refers to the event where two or more parties encountered each other, marking the occurrence of a meeting or interaction"}}]
 2. If the text is "The July 2006 earthquake was also centered in the Indian Ocean, from the coast of Java, and had a duration of more than three minutes.", the output should be:
-The events are: [{{'event_type': 'catastrophe', 'trigger_word': 'earthquake', 'event_time': 'July 2006', 'event_location': 'Indian Ocean', 'event_participants': None}}, 
-                {{'event_type': 'placing', 'trigger_word': 'centered', 'event_time': 'July 2006', 'event_location': 'Indian Ocean', 'event_participants': None}}]
+The events are: [{{"event_type": "catastrophe", "trigger_word": "earthquake", "event_time": "July 2006", "event_location": "Indian Ocean", "event_participants": None, "description": "The trigger word earthquake refers to the event of the earth shaking, often causing destruction and damage"}}, 
+                {{"event_type": "placing", "trigger_word": "centered", "event_time": "July 2006", "event_location": "Indian Ocean", "event_participants": None, "description": "The trigger word centered refers to the event of being located at a specific point or area"}}]
 3. If the text does not contain any events, return an empty list.
 The events are: []
 
@@ -64,7 +64,7 @@ Now, please extract the events from the following text:
         return "\n".join(output)
 
     def extract_response(self, text:str):
-        match = re.search(r'The events are:\s*(\[.*\])', text, re.DOTALL)
+        match = re.search(r"The events are:\s*(\[.*\])", text, re.DOTALL)
 
         if match:
             events_str = match.group(1)
