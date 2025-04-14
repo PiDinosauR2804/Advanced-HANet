@@ -6,9 +6,9 @@ from torch.nn.functional import normalize
 from torch.optim import AdamW
 from utils import *
 from configs import parse_arguments
-from model import BertED
+from classifier.model import BertED
 from tqdm import tqdm
-from exemplars import Exemplars
+from classifier.exemplars import Exemplars
 from copy import deepcopy
 from torch.utils.tensorboard import SummaryWriter   
 import os, time
