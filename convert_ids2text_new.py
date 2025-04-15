@@ -8,10 +8,10 @@ from transformers import BertTokenizerFast
 tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 
 # Đường dẫn đến các folder chứa dữ liệux
-input_path = "data_incremental"
+input_path = "data/data_ids"
 output_path = "raw_text"
-# datasets = ["ACE", "MAVEN"]
-datasets = ["ACE"]
+datasets = ["ACE", "MAVEN"]
+# datasets = ["ACE"]
 
 def ids2list(list_data: list) -> list:
     res = []
@@ -38,6 +38,10 @@ def ids2list(list_data: list) -> list:
                 reconstructed_text += tok
                 end = len(reconstructed_text) - 1
             token_offsets.append((start, end))
+
+        reconstructed_text = reconstructed_text.replace(" ' ", "'")
+        reconstructed_text = reconstructed_text.replace("[CLS] ", "")
+        reconstructed_text = reconstructed_text.replace(" [SEP]", "")
 
         # Tính offset dựa theo span trong item
         offsets = []
