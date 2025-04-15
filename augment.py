@@ -3,8 +3,8 @@ import json
 from loguru import logger
 import copy
 
-input_path = 'output\des'
-output_path = 'output\augmented'
+input_path = 'output'
+output_path = 'output/augmented'
 dataset = 'MAVEN'
 NUM_PERM = 1
 
@@ -20,7 +20,7 @@ def augment_data(line: dict):
     return new_line
 
 def augment_dataset(input_path, output_path, dataset):
-    os.path.exists(input_path)
+    os.path.exists(os.path.join(input_path, 'des'))
     os.makedirs(output_path, exist_ok=True)
     for i in range(NUM_PERM):
         input_folder = os.path.join(input_path, dataset, 'perm'+str(i))
@@ -50,9 +50,5 @@ def augment_dataset(input_path, output_path, dataset):
 
 if __name__ == "__main__":
     # Check if input path exists
-    if not os.path.exists(input_path):
-        logger.error(f"[ERROR] Input path {input_path} does not exist", mode="ERROR")
-    else:
-        # Check if output path exists, if not create it
-        os.makedirs(output_path, exist_ok=True)
-        augment_dataset(input_path, output_path, dataset)                       
+    os.makedirs(output_path, exist_ok=True)
+    augment_dataset(input_path, output_path, dataset)                       
