@@ -1,4 +1,4 @@
-python extract_event_pll.py \
+python extract_event.py \
     --input_root data/data_text \
     --output_root output \
     --datasets MAVEN \

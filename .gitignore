@@ -1,7 +1,10 @@
-
-/origin_data
-/test
+temp/
+original_data/
+test/
 .env
 *.ipynb
 **/api_key.py
 /logs
+output/MAVEN
+data/
+/match.py
