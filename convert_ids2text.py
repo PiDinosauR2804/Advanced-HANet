@@ -7,25 +7,64 @@ from transformers import BertTokenizerFast
 # Khởi tạo tokenizer
 tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 
-# Đường dẫn đến các folder chứa dữ liệu
+# Đường dẫn đến các folder chứa dữ liệux
 input_path = "data_incremental"
 output_path = "raw_text"
 datasets = ["ACE", "MAVEN"]
+# datasets = ["ACE"]
 
-def ids2list(list_data:list)->list:
+def ids2list(list_data: list) -> list:
     res = []
     for item in list_data:
-        # Chuyển đổi các ID thành văn bản
-        text = tokenizer.decode(item['piece_ids'], skip_special_tokens=True)
+        piece_ids = item['piece_ids']
+        # Lấy list token từ piece_ids
+        tokens = tokenizer.convert_ids_to_tokens(piece_ids)
+        reconstructed_text = ""
+        token_offsets = []  # lưu offset của từng token dưới dạng (start, end)
+
+        # Xây dựng văn bản và tính toán offset của từng token
+        for tok in tokens:
+            if tok.startswith("##"):
+                # Nếu token bắt đầu bằng "##", nối trực tiếp token không có khoảng trắng
+                token_clean = tok[2:]
+                start = len(reconstructed_text)
+                reconstructed_text += token_clean
+                end = len(reconstructed_text) - 1
+            else:
+                # Thêm khoảng trắng nếu không phải token đầu tiên
+                if reconstructed_text != "":
+                    reconstructed_text += " "
+                start = len(reconstructed_text)
+                reconstructed_text += tok
+                end = len(reconstructed_text) - 1
+            token_offsets.append((start, end))
+
+        reconstructed_text = reconstructed_text.replace(" ' ", "'")
+        reconstructed_text = reconstructed_text.replace("[CLS] ", "")
+        reconstructed_text = reconstructed_text.replace(" [SEP]", "")
+
+        # Tính offset dựa theo span trong item
         offsets = []
-        for sp in item['span']:
-            event = tokenizer.decode(item['piece_ids'][sp[0]: sp[1]+1], skip_special_tokens=True)
-            offset = text.find(event)
-            offsets.append([offset, offset + len(event)])
         
-        res.append({"text": text, "offsets": offsets, "label": item['label']})
+        for idx, sp in enumerate(item['span']):
+            event = tokenizer.decode(item['piece_ids'][sp[0]: sp[1]+1], skip_special_tokens=True)
+            # Tìm vị trí event trong tokens
+            
+            if event.startswith("##"):
+                event = event[2:]
+                
+            # Thêm offset vào danh sách
+            offsets.append(event)
+        
+        res.append({
+            "piece_ids": item["piece_ids"],
+            "span": item["span"],
+            "label": item["label"],
+            "text": reconstructed_text,
+            # "tokens": reconstructed_text.split(),  # hoặc có thể giữ danh sách tokens gốc
+            "event_words": offsets
+        })
     return res
-    
 
 def convert(input_path:str, output_path:str, datasets:list)->None:
     os.makedirs(output_path, exist_ok=True)
@@ -50,16 +89,21 @@ def convert(input_path:str, output_path:str, datasets:list)->None:
                 if file_name.endswith(".jsonl"):
                     input_file = os.path.join(input_folder, file_name)
                     output_file = os.path.join(output_path, dataset, "perm"+str(i), file_name)
-                    new_data = None
+                    new_data = []
                     
                     with open(input_file, 'r') as f:
-                        data = [json.loads(line) for line in f]
-                        new_data = ids2list(data)
+                        for line in f:
+                            new_line = {}
+                            # Chuyển đổi từng dòng JSON thành dict
+                            json_line = json.loads(line)
+                            for key, value in json_line.items():
+                                new_line[key] = ids2list(value)
+                            new_data.append(new_line)
                     
                     if new_data:
                         with open(output_file, 'w') as f:
-                            for item in new_data:
-                                f.write(json.dumps(item) + '\n')
+                            for new_line in new_data:
+                                f.write(json.dumps(new_line) + '\n')
                         print(f"Converted {input_file} to {output_file}")
                     else:
                         print(f"Error: No data found in {input_file}")
