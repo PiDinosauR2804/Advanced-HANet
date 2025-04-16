@@ -2,35 +2,24 @@ import os
 import json
 from loguru import logger
 import copy
-from utils.convert import sent2ids
 
 input_path = 'Advanced-HANet\\output\\des'
 output_path = 'Advanced-HANet\\output\\data_augment'
 dataset = 'MAVEN'
 NUM_PERM = 1
 
-for file_name in os.listdir(os.path.join(input_path,'MAVEN', 'perm0')):
-    print(file_name)
-
 def augment_data(line):
     augment_data_list = []
     for key, value in line.items():
-        new_augment_line = {}
-        new_augment_line[key] = []
         for data in value:
             if 'events' in data:
                 events = data['events']
-                for i, event in enumerate(events):
+                for event in events:
                     if 'description' in event:
                         description = event['description']
                         # Tạo dữ liệu mới bằng cách kết hợp text và description
-                        #new_data = copy.deepcopy(data)
-                        #new_data['text'] = new_data['text'] + ' ' + description
-                        new_data = {}
-                        new_data['text'] = data['text'] + description
-                        new_data['events'] = [copy.deepcopy(event)]
-                        new_data = sent2ids(new_data)
-                        new_augment_line[key].append(new_data)
+                        new_data = copy.deepcopy(data)
+                        new_data['text'] = new_data['text'] + ' ' + description
                         augment_data_list.append(new_data)
     return augment_data_list
 
@@ -50,18 +39,13 @@ def augment_dataset(input_path, output_path, dataset):
             new_data = []
             with open(input_file, 'r') as f:
                 for line in f:
+                    augment_data = {}
+                    #Đổi line thành dict
                     line = json.loads(line)
-                    #Gọi hàm augment_data để tạo ra dữ liệu mới
+                    print(type(line))
                     aug_data = augment_data(line)
-                    new_data.append(aug_data)
-            # Ghi dữ liệu mới vào file đầu ra
-            with open(output_file, 'w') as f:
-                for line in new_data:
-                    f.write(json.dumps(line) + '\n')
-            logger.info(f"Augmented {file_name} and saved to {output_file}")
-            logger.info(f"[FINISHED] Processing {file_name} in {output_file}")
+                    print(aug_data)
+            
+              
 
-if __name__ == "__main__":
-    # Check if input path exists
-    os.makedirs(output_path, exist_ok=True)
-    augment_dataset(input_path, output_path, dataset)                       
+            
