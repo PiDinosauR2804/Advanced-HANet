@@ -10,31 +10,61 @@ tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 # Đường dẫn đến các folder chứa dữ liệux
 input_path = "data_incremental"
 output_path = "raw_text"
-# datasets = ["ACE", "MAVEN"]
-datasets = ["ACE"]
+datasets = ["ACE", "MAVEN"]
+# datasets = ["ACE"]
 
-def ids2list(list_data:list)->list:
+def ids2list(list_data: list) -> list:
     res = []
     for item in list_data:
-        # Chuyển đổi các ID thành văn bản
-        text = tokenizer.decode(item['piece_ids'], skip_special_tokens=True)
-        # Tạo một danh sách rỗng để lưu trữ các offset
+        piece_ids = item['piece_ids']
+        # Lấy list token từ piece_ids
+        tokens = tokenizer.convert_ids_to_tokens(piece_ids)
+        reconstructed_text = ""
+        token_offsets = []  # lưu offset của từng token dưới dạng (start, end)
+
+        # Xây dựng văn bản và tính toán offset của từng token
+        for tok in tokens:
+            if tok.startswith("##"):
+                # Nếu token bắt đầu bằng "##", nối trực tiếp token không có khoảng trắng
+                token_clean = tok[2:]
+                start = len(reconstructed_text)
+                reconstructed_text += token_clean
+                end = len(reconstructed_text) - 1
+            else:
+                # Thêm khoảng trắng nếu không phải token đầu tiên
+                if reconstructed_text != "":
+                    reconstructed_text += " "
+                start = len(reconstructed_text)
+                reconstructed_text += tok
+                end = len(reconstructed_text) - 1
+            token_offsets.append((start, end))
+
+        reconstructed_text = reconstructed_text.replace(" ' ", "'")
+        reconstructed_text = reconstructed_text.replace("[CLS] ", "")
+        reconstructed_text = reconstructed_text.replace(" [SEP]", "")
+
+        # Tính offset dựa theo span trong item
         offsets = []
-        for sp in item['span']:
+        
+        for idx, sp in enumerate(item['span']):
             event = tokenizer.decode(item['piece_ids'][sp[0]: sp[1]+1], skip_special_tokens=True)
             # Tìm vị trí event trong tokens
-            start = text.find(event)
-            end = start + len(event) - 1
             
-            if start == -1 or end == -1:
-                print(f"Error: {event} not found in {text}")
-                continue
+            if event.startswith("##"):
+                event = event[2:]
+                
             # Thêm offset vào danh sách
-            offsets.append([start, end])
+            offsets.append(event)
         
-        res.append({"text": text, "tokens": text.split(), "offsets": offsets, "label": item['label']})
+        res.append({
+            "piece_ids": item["piece_ids"],
+            "span": item["span"],
+            "label": item["label"],
+            "text": reconstructed_text,
+            # "tokens": reconstructed_text.split(),  # hoặc có thể giữ danh sách tokens gốc
+            "event_words": offsets
+        })
     return res
-    
 
 def convert(input_path:str, output_path:str, datasets:list)->None:
     os.makedirs(output_path, exist_ok=True)
