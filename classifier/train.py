@@ -228,7 +228,7 @@ def train(local_rank, args):
                 train_span = [torch.LongTensor(item).to(device) for item in train_span]     # Sử dụng để lưu vị trí bắt đầu và kết thúc 1 từ của các ids
                 # if args.dataset == "ACE":
                 #     return_dict = model(train_x, train_masks)
-                # else:
+                # else: 
                 return_dict = model(train_x, train_masks, train_span)
                 outputs, context_feat, trig_feat = return_dict['outputs'], return_dict['context_feat'], return_dict['trig_feat']
                 # invalid_mask_op = torch.BoolTensor([item not in learned_types for item in range(args.class_num)]).to(device)
