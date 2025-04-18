@@ -20,6 +20,8 @@ class Exemplars():
 
     def __len__(self):
         return self.memory_size
+    
+    # 
     def get_exemplar_loader(self):
         x = [item for t in self.exemplars_x for item in t]
         y = [item for t in self.exemplars_y for item in t]
@@ -27,16 +29,21 @@ class Exemplars():
         span = [item for t in self.exemplars_span for item in t]    
         return (x, mask, y, span ,self.radius)
 
+    # Cắt bớt những old sample cũ đã vượt quá giới hạn của memory
+    # Cắt đều đi cho mỗi class
     def rm_exemplars(self, exemplar_num):
         if self.exemplars_x != [] and exemplar_num > len(self.exemplars_x[0]):
             self.exemplars_x = [i[:exemplar_num] for i in self.exemplars_x]
             self.exemplars_mask = [i[:exemplar_num] for i in self.exemplars_mask]
             self.exemplars_y = [i[:exemplar_num] for i in self.exemplars_y]
             self.exemplars_span = [i[:exemplar_num] for i in self.exemplars_span]
+            
+    # Add thêm sample vào tập cũ
+    # learned_nums: Số lượng class đã học
     def set_exemplars(self, model: nn.Module, exemplar_loader: DataLoader, learned_nums, device):
         self.learned_nums = learned_nums - 1 if learned_nums > 0 else 1
-        if args.fixed_enum:
-            exemplar_num = args.enum
+        if args.fixed_enum: # args.fixed_enum: có hay không cố định số lượng sample mỗi class.
+            exemplar_num = args.enum    # args.enum: số lượng sample cố định mỗi class.
             self.memory_size = exemplar_num * self.learned_nums
         else:
             exemplar_num = int(self.memory_size / self.learned_nums)
@@ -63,7 +70,7 @@ class Exemplars():
                                 rep_dict[label], data_dict[label] = [], []
                             # data_dict[label].append([data_x[i], data_y[i], data_masks[i], data_span[i]])
                             data_dict[label].append([data_x[i], [label], data_masks[i], [data_span[i][j]]])
-                            rep_dict[label].append(rep[i, 0, :].squeeze(0))
+                            rep_dict[label].append(rep[i, 0, :].squeeze(0)) # lưu token cls
                 # if len(rep_dict) > 20: # TODO: test use
                 #     break
             for l, reps in rep_dict.items():
@@ -84,6 +91,8 @@ class Exemplars():
                 prototype_rep = reps.mean(0)
                 dist = torch.sqrt(torch.sum(torch.square(prototype_rep - reps), dim=1))
                 reps_num = exemplar_num
+                
+                # Lấy ra top k sample gần mean nhất mỗi class
                 topk_dist_idx = torch.topk(dist, reps_num, largest=False).indices.to('cpu')
                 # self.exemplars[label] = torch.cat([self.exemplars[label], reps[topk_dist_idx, :]], 0)
                 # data_topk = dt[topk_dist_idx]
