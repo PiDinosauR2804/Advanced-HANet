@@ -13,6 +13,7 @@ def parse_arguments():
     parser.add_argument('--max_num_threads', default=10, type=int)
     parser.add_argument('--logs_dir', default='./logs/extractor', type=str)
     parser.add_argument('--extractor_resume', default=False, type=bool)
+    parser.add_argument('--convert_test', default=False, type=bool)
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)

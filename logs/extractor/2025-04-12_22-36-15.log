@@ -1,0 +1,171 @@
+2025-04-12 22:36:15.364 | INFO     | __main__:<module>:150 - [INFO] Arguments:
+2025-04-12 22:36:15.365 | INFO     | __main__:<module>:152 - input_root: data/data_text
+2025-04-12 22:36:15.365 | INFO     | __main__:<module>:152 - output_root: output
+2025-04-12 22:36:15.366 | INFO     | __main__:<module>:152 - datasets: ['MAVEN']
+2025-04-12 22:36:15.366 | INFO     | __main__:<module>:152 - model: gemini-2.0-flash-lite
+2025-04-12 22:36:15.366 | INFO     | __main__:<module>:152 - candidate: 1
+2025-04-12 22:36:15.367 | INFO     | __main__:<module>:152 - num_try: 3
+2025-04-12 22:36:15.367 | INFO     | __main__:<module>:152 - max_consecutive_429_error: 3
+2025-04-12 22:36:15.368 | INFO     | __main__:<module>:152 - max_num_threads: 10
+2025-04-12 22:36:15.368 | INFO     | __main__:<module>:152 - logs_dir: logs/extractor
+2025-04-12 22:36:15.369 | INFO     | __main__:<module>:152 - extractor_resume: False
+2025-04-12 22:36:15.370 | INFO     | __main__:<module>:152 - seed: 42
+2025-04-12 22:36:15.371 | INFO     | __main__:<module>:152 - skip_first: False
+2025-04-12 22:36:15.372 | INFO     | __main__:<module>:152 - log_dir: ./outputs/log_terminal/02-10-nomap-clreps
+2025-04-12 22:36:15.373 | INFO     | __main__:<module>:152 - tb_dir: ./outputs/log_tensorboard/02-10-nomap-clreps
+2025-04-12 22:36:15.380 | INFO     | __main__:<module>:152 - save_dir: 
+2025-04-12 22:36:15.382 | INFO     | __main__:<module>:152 - resume: 
+2025-04-12 22:36:15.384 | INFO     | __main__:<module>:152 - parallel: single
+2025-04-12 22:36:15.385 | INFO     | __main__:<module>:152 - device_ids: 0,1
+2025-04-12 22:36:15.387 | INFO     | __main__:<module>:152 - local_rank: 0
+2025-04-12 22:36:15.389 | INFO     | __main__:<module>:152 - world_size: 4
+2025-04-12 22:36:15.390 | INFO     | __main__:<module>:152 - amp: False
+2025-04-12 22:36:15.392 | INFO     | __main__:<module>:152 - perm_id: 0
+2025-04-12 22:36:15.393 | INFO     | __main__:<module>:152 - dataset: MAVEN
+2025-04-12 22:36:15.394 | INFO     | __main__:<module>:152 - stream_root: ./data_incremental
+2025-04-12 22:36:15.395 | INFO     | __main__:<module>:152 - max_seqlen: 120
+2025-04-12 22:36:15.396 | INFO     | __main__:<module>:152 - adamw_eps: 1e-07
+2025-04-12 22:36:15.396 | INFO     | __main__:<module>:152 - fixed_enum: True
+2025-04-12 22:36:15.397 | INFO     | __main__:<module>:152 - enum: 1
+2025-04-12 22:36:15.397 | INFO     | __main__:<module>:152 - temperature: 2
+2025-04-12 22:36:15.398 | INFO     | __main__:<module>:152 - task_num: 5
+2025-04-12 22:36:15.399 | INFO     | __main__:<module>:152 - early_stop: False
+2025-04-12 22:36:15.400 | INFO     | __main__:<module>:152 - patience: 5
+2025-04-12 22:36:15.401 | INFO     | __main__:<module>:152 - eval_freq: 1
+2025-04-12 22:36:15.402 | INFO     | __main__:<module>:152 - input_map: False
+2025-04-12 22:36:15.403 | INFO     | __main__:<module>:152 - class_num: 10
+2025-04-12 22:36:15.404 | INFO     | __main__:<module>:152 - shot_num: 5
+2025-04-12 22:36:15.405 | INFO     | __main__:<module>:152 - e_weight: 50
+2025-04-12 22:36:15.406 | INFO     | __main__:<module>:152 - no_replay: False
+2025-04-12 22:36:15.406 | INFO     | __main__:<module>:152 - period: 10
+2025-04-12 22:36:15.407 | INFO     | __main__:<module>:152 - epochs: 20
+2025-04-12 22:36:15.409 | INFO     | __main__:<module>:152 - batch_size: 4
+2025-04-12 22:36:15.409 | INFO     | __main__:<module>:152 - device: cuda:2
+2025-04-12 22:36:15.410 | INFO     | __main__:<module>:152 - log: False
+2025-04-12 22:36:15.410 | INFO     | __main__:<module>:152 - log_name: temp
+2025-04-12 22:36:15.411 | INFO     | __main__:<module>:152 - data_root: ./data_incremental
+2025-04-12 22:36:15.412 | INFO     | __main__:<module>:152 - backbone: bert-base-uncased
+2025-04-12 22:36:15.412 | INFO     | __main__:<module>:152 - lr: 2e-05
+2025-04-12 22:36:15.413 | INFO     | __main__:<module>:152 - decay: 0.0001
+2025-04-12 22:36:15.414 | INFO     | __main__:<module>:152 - no_freeze_bert: False
+2025-04-12 22:36:15.414 | INFO     | __main__:<module>:152 - dweight_loss: False
+2025-04-12 22:36:15.415 | INFO     | __main__:<module>:152 - alpha: 2.0
+2025-04-12 22:36:15.416 | INFO     | __main__:<module>:152 - beta: 3.0
+2025-04-12 22:36:15.416 | INFO     | __main__:<module>:152 - distill: mul
+2025-04-12 22:36:15.417 | INFO     | __main__:<module>:152 - rep_aug: mean
+2025-04-12 22:36:15.418 | INFO     | __main__:<module>:152 - gamma: 1
+2025-04-12 22:36:15.418 | INFO     | __main__:<module>:152 - theta: 6
+2025-04-12 22:36:15.420 | INFO     | __main__:<module>:152 - cl_temp: 0.5
+2025-04-12 22:36:15.421 | INFO     | __main__:<module>:152 - ucl: False
+2025-04-12 22:36:15.422 | INFO     | __main__:<module>:152 - cl_aug: None
+2025-04-12 22:36:15.423 | INFO     | __main__:<module>:152 - sub_max: False
+2025-04-12 22:36:15.423 | INFO     | __main__:<module>:152 - leave_zero: False
+2025-04-12 22:36:15.425 | INFO     | __main__:<module>:152 - single_label: False
+2025-04-12 22:36:15.427 | INFO     | __main__:<module>:152 - aug_repeat_times: 1
+2025-04-12 22:36:15.427 | INFO     | __main__:<module>:152 - joint_da_loss: none
+2025-04-12 22:36:15.428 | INFO     | __main__:<module>:152 - tlcl: False
+2025-04-12 22:36:15.428 | INFO     | __main__:<module>:152 - skip_first_cl: none
+2025-04-12 22:36:15.429 | INFO     | __main__:<module>:152 - method: None
+2025-04-12 22:36:15.430 | INFO     | __main__:<module>:152 - my_test: False
+2025-04-12 22:36:15.430 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:15.434 | INFO     | extractor.consumer:log:52 - [START] Start 5 threads
+2025-04-12 22:36:15.435 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-12 22:36:15.442 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-12 22:36:15.446 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:36:15.447 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:15.463 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:36:16.489 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:16.489 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:36:16.497 | INFO     | __main__:run:82 - [FINISHED] Processing 280/280 item, remaning 0/280 in 1.06 seconds
+2025-04-12 22:36:16.497 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-12 22:36:16.499 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-12 22:36:16.505 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-12 22:36:16.507 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:36:16.509 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:16.511 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:36:17.524 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:17.525 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:36:17.531 | INFO     | __main__:run:82 - [FINISHED] Processing 240/240 item, remaning 0/240 in 1.03 seconds
+2025-04-12 22:36:17.531 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-12 22:36:17.533 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-12 22:36:17.541 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-12 22:36:17.543 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:36:17.544 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:17.546 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:36:18.550 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:18.551 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:36:18.558 | INFO     | __main__:run:82 - [FINISHED] Processing 280/280 item, remaning 0/280 in 1.02 seconds
+2025-04-12 22:36:18.559 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-12 22:36:18.560 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-12 22:36:18.566 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-12 22:36:18.568 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:36:18.569 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:18.571 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:36:19.587 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:19.588 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:36:19.596 | INFO     | __main__:run:82 - [FINISHED] Processing 240/240 item, remaning 0/240 in 1.04 seconds
+2025-04-12 22:36:19.596 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-12 22:36:19.598 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-12 22:36:19.605 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-12 22:36:19.611 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:36:19.612 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:19.627 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:36:20.665 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:20.666 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:36:20.673 | INFO     | __main__:run:82 - [FINISHED] Processing 275/275 item, remaning 0/275 in 1.08 seconds
+2025-04-12 22:36:20.674 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-12 22:36:20.676 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-12 22:36:20.683 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-12 22:36:20.684 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:36:20.686 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:20.688 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:36:21.705 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:21.706 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:36:21.712 | INFO     | __main__:run:82 - [FINISHED] Processing 240/240 item, remaning 0/240 in 1.04 seconds
+2025-04-12 22:36:21.713 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-12 22:36:21.714 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-12 22:36:21.722 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-12 22:36:21.724 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:36:21.725 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:21.727 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:36:22.733 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:22.734 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:36:22.741 | INFO     | __main__:run:82 - [FINISHED] Processing 280/280 item, remaning 0/280 in 1.03 seconds
+2025-04-12 22:36:22.742 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-12 22:36:22.743 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-12 22:36:22.750 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-12 22:36:22.751 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:36:22.753 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:22.754 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:36:23.765 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:23.766 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:36:23.772 | INFO     | __main__:run:82 - [FINISHED] Processing 240/240 item, remaning 0/240 in 1.03 seconds
+2025-04-12 22:36:23.772 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-12 22:36:23.773 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\MAVEN.test.jsonl...
+2025-04-12 22:36:24.137 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\MAVEN.test.jsonl with 8038 lines
+2025-04-12 22:36:24.139 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:36:24.140 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:24.142 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:36:28.168 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Span for trigger word 'brands.' not found in offsets.
+2025-04-12 22:36:28.191 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 2/3] Worker 0 got error: Span for trigger word 'brands.' not found in offsets.
+2025-04-12 22:36:28.214 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 3/3] Worker 0 got error: Span for trigger word 'brands.' not found in offsets.
+2025-04-12 22:36:28.228 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 0 failed to process item: brands.
+2025-04-12 22:36:28.515 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 1/3] Worker 2 got error: Span for trigger word 'moon...' not found in offsets.
+2025-04-12 22:36:28.537 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 2/3] Worker 2 got error: Span for trigger word 'moon...' not found in offsets.
+2025-04-12 22:36:28.555 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 3/3] Worker 2 got error: Span for trigger word 'moon...' not found in offsets.
+2025-04-12 22:36:28.572 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 2 failed to process item: moon...
+2025-04-12 22:36:29.299 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 1/3] Worker 1 got error: Span for trigger word 'penn.' not found in offsets.
+2025-04-12 22:36:29.324 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 2/3] Worker 1 got error: Span for trigger word 'penn.' not found in offsets.
+2025-04-12 22:36:29.344 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 3/3] Worker 1 got error: Span for trigger word 'penn.' not found in offsets.
+2025-04-12 22:36:29.359 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 1 failed to process item: penn.
+2025-04-12 22:36:29.604 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 1/3] Worker 4 got error: Span for trigger word 'championships.' not found in offsets.
+2025-04-12 22:36:29.621 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 2/3] Worker 4 got error: Span for trigger word 'championships.' not found in offsets.
+2025-04-12 22:36:29.678 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 3/3] Worker 4 got error: Span for trigger word 'championships.' not found in offsets.
+2025-04-12 22:36:29.712 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 4 failed to process item: championships.
+2025-04-12 22:36:31.224 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:36:31.225 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:36:31.525 | INFO     | __main__:run:113 - [FINISHED] Processing 8034/8038 item, remaning 4/8038 in 7.75 seconds
+2025-04-12 22:36:31.526 | INFO     | __main__:run:114 - [SAVE FILE] All item saved to output\MAVEN\MAVEN.test.jsonl
+2025-04-12 22:36:31.527 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:36:32.177 | INFO     | extractor.consumer:log:52 - [STOP] All threads stopped
+2025-04-12 22:36:32.178 | INFO     | __main__:run:117 - [FINISHED] All items processed and saved to output

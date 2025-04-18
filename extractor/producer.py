@@ -26,6 +26,8 @@ class Producer:
                 for key, value in line.items():
                     for idx, item in enumerate(value):
                         # Add to task queue
+                        # loại bỏ token [CLS] và [SEP] trong item['text']
+                        item['text'] = item['text'].replace("[CLS]", "").replace("[SEP]", "").strip()
                         self.task_queue.put((line_idx, key, idx, item))
                         
             else:

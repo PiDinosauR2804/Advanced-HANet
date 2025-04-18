@@ -1,10 +1,11 @@
 python extract_event.py ^
     --input_root data/data_text ^
     --output_root output/des ^
-    --datasets MAVEN ^
+    --datasets MAVEN ACE ^
     --model gemini-2.0-flash ^
     --candidate 1 ^
     --num_try 3 ^
     --max_consecutive_429_error 3 ^
-    --max_num_threads 10 ^
+    --max_num_threads 12 ^
+    --extractor_resume true ^
     --logs_dir logs/extractor

@@ -1,0 +1,51 @@
+2025-04-14 10:27:21.649 | INFO     | __main__:<module>:156 - [INFO] Arguments:
+2025-04-14 10:27:21.649 | INFO     | __main__:<module>:157 - Input root: data/data_text
+2025-04-14 10:27:21.650 | INFO     | __main__:<module>:158 - Output root: output
+2025-04-14 10:27:21.651 | INFO     | __main__:<module>:159 - Datasets: ['MAVEN']
+2025-04-14 10:27:21.651 | INFO     | __main__:<module>:160 - Model: gemini-2.0-flash-lite
+2025-04-14 10:27:21.651 | INFO     | __main__:<module>:161 - Candidate: 1
+2025-04-14 10:27:21.652 | INFO     | __main__:<module>:162 - Num try: 3
+2025-04-14 10:27:21.652 | INFO     | __main__:<module>:163 - Max consecutive 429 error: 3
+2025-04-14 10:27:21.653 | INFO     | __main__:<module>:164 - Max num threads: 10
+2025-04-14 10:27:21.653 | INFO     | __main__:<module>:165 - Resume: False
+2025-04-14 10:27:21.654 | INFO     | __main__:<module>:166 - [INFO] Start processing...
+2025-04-14 10:27:36.725 | INFO     | extractor.consumer:log:52 - [INFO] Found 5 valid extractors
+2025-04-14 10:27:36.726 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-14 10:27:36.731 | INFO     | extractor.consumer:log:52 - [START] Start 5 threads
+2025-04-14 10:27:36.732 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-14 10:27:36.733 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-14 10:27:36.809 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-14 10:27:36.810 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-14 10:27:36.812 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-14 10:27:36.822 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-14 10:28:44.160 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 1 failed to process item: throughout the hurricane ' s path, 71 people are known to have been killed, 14 of whom were in saint lucia.
+2025-04-14 10:28:44.162 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 1 got error 429 more than 3 times. Stoping ...
+2025-04-14 10:28:44.392 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 3 failed to process item: the farmville murders occurred in farmville, virginia in september, 2009 – the quadruple bludgeoning homicide of mark niederbrock, debra s. kelley, their daughter emma niederbrock and friend melanie wells.
+2025-04-14 10:28:44.393 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 3 got error 429 more than 3 times. Stoping ...
+2025-04-14 10:29:06.673 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 0 failed to process item: azaria chantel loren chamberlain ( 11 june – 17 august 1980 ) was an australian two - month - old baby girl who was killed by a dingo on the night of 17 august 1980, on a family camping trip to uluru ( also known as ayers rock ) in the northern territory.
+2025-04-14 10:29:06.675 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 0 got error 429 more than 3 times. Stoping ...
+2025-04-14 10:29:50.773 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 4 failed to process item: crown prince dipendra was accused of the massacre according to the statements of the surviving eyewitnesses and reports of incident inquiry committee consisting of supreme court chief justice and the speaker of the house of representatives, but the nepalese authorities never officially revealed anyone ' s identity as the perpetrator of the massacre.
+2025-04-14 10:29:50.775 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 4 got error 429 more than 3 times. Stoping ...
+2025-04-14 10:29:52.150 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 2 failed to process item: they told passers - by that they had killed a soldier to avenge the killing of muslims by the british armed forces.
+2025-04-14 10:29:52.151 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 2 got error 429 more than 3 times. Stoping ...
+2025-04-14 10:29:52.894 | ERROR    | extractor.consumer:log:54 - [ERROR] No threads are running. Stopping ...
+2025-04-14 10:29:52.895 | ERROR    | extractor.consumer:log:54 - [ERROR] Task queue is not empty after consuming. Remaining items: 254
+2025-04-14 10:29:52.899 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-14 10:29:52.900 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-14 10:29:52.911 | INFO     | __main__:run:84 - [FINISHED] Processing 21/280 item, remaning 259/280 in 136.18 seconds
+2025-04-14 10:29:52.913 | INFO     | __main__:run:85 - [SAVE FILE] All item saved to output\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-14 10:29:52.913 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-14 10:29:52.914 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-14 10:29:52.919 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-14 10:29:52.921 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-14 10:29:52.922 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-14 10:29:52.924 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-14 10:29:52.927 | ERROR    | extractor.consumer:log:54 - [ERROR] No threads are running. Stopping ...
+2025-04-14 10:29:52.928 | ERROR    | extractor.consumer:log:54 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-14 10:29:52.933 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-14 10:29:52.934 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-14 10:29:52.943 | INFO     | __main__:run:84 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.03 seconds
+2025-04-14 10:29:52.945 | INFO     | __main__:run:85 - [SAVE FILE] All item saved to output\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-14 10:29:52.945 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-14 10:29:52.946 | INFO     | extractor.consumer:log:52 - [STOP] All threads stopped
+2025-04-14 10:29:52.949 | INFO     | __main__:run:123 - [FINISHED] All items processed and saved to output
