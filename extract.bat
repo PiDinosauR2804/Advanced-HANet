@@ -1,7 +1,7 @@
 python extract_event.py ^
     --input_root data/data_text ^
     --output_root output/des ^
-    --datasets MAVEN ACE ^
+    --datasets ACE ^
     --model gemini-2.0-flash ^
     --candidate 1 ^
     --num_try 3 ^
