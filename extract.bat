@@ -7,5 +7,5 @@ python extract_event.py ^
     --num_try 3 ^
     --max_consecutive_429_error 3 ^
     --max_num_threads 12 ^
-    --extractor_resume true ^
-    --logs_dir logs/extractor
+    --logs_dir logs/extractor ^
+    --extractor_resume true
