@@ -153,7 +153,7 @@ class Consumer:
                         time.sleep(20)  # Wait for 15 seconds before retrying
                     else:
                         extractor['consecutive_429_error'] = 0
-                        self.log(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got error: {e}", mode="ERROR")
+                        self.log(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} | text: {item['text']} | got error: {e}", mode="ERROR")
             else:
                 if not event_list:
                     self.log(f"[ERROR] Worker {worker_id} got none event list: {item['text']}", mode="ERROR")
