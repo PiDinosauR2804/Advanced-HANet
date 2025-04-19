@@ -4,13 +4,10 @@ from loguru import logger
 import copy
 from utils.convert import sent2ids
 
-input_path = 'Advanced-HANet\\output\\des'
-output_path = 'Advanced-HANet\\output\\data_augment'
-datasets = ['MAVEN']
-NUM_PERM = 1
-
-for file_name in os.listdir(os.path.join(input_path,'MAVEN', 'perm0')):
-    print(file_name)
+input_path = 'output\\des'
+output_path = 'output\\data_augment'
+datasets = ['MAVEN','ACE']
+NUM_PERM = 5
 
 def augment_data(line):
     augment_data_list = []
