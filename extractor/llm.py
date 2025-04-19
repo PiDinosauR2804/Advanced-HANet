@@ -3,6 +3,8 @@ from google.genai import types
 import time
 import re
 import ast
+from loguru import logger
+from tqdm import tqdm
 
 class Extractor():
     def __init__(self, api_key:str):
@@ -73,11 +75,45 @@ Now, please extract the events from the following text:
                 return events_list
             
             except ValueError as e:
-                print(f"Error parsing events: {e}")
+                logger.error(f"[EXTRACT EVENT] Error parsing events: {e}")
                 return None
         else:
-            print("No events found in the response.")
+            logger.error(f"[EXTRACT EVENT] No events found in the response.")
             return None
+        
+    def validate_event_list(self, event_list:list)->list:
+        """
+        Validate the event list to ensure it contains the required keys.
+        """
+        valid_events = []
+        for event in event_list:
+            if not isinstance(event, dict):
+                logger.error(f"[EXTRACT EVENT] Invalid event format: {event}")
+            else:
+                for key, value in event.items():
+                    if isinstance(value, str):
+                        if len(value) == 0:
+                            event[key] = None
+                        else:
+                            event[key] = value.lower().strip()
+                            
+                    elif isinstance(value, list):
+                        if len(value) == 0:
+                            event[key] = None
+                        else:
+                            event[key] = [v.lower().strip() for v in value if isinstance(v, str)]
+                    else:
+                        event[key] = None
+            if event.get("trigger_word") is not None:
+                valid_events.append(event)
+            else:
+                logger.error(f"[EXTRACT EVENT] Invalid event: {event}")
+        if len(valid_events) == 0:
+            logger.error(f"[EXTRACT EVENT] No valid events found in the response.")
+            return None
+        else: 
+            # logger.info(f"[EXTRACT EVENT] Found {valid_events}")
+            return valid_events
 
     def extract_event(self, text:str, model="gemini-2.0-flash", candidate=1):
         """
@@ -97,11 +133,15 @@ Now, please extract the events from the following text:
         for idx in range(len(response.candidates)):
             response_string = self.response_to_string(response, idx)
             event_list = self.extract_response(response_string)
-            res.append(event_list)
+            if event_list:
+                valid_event_list = self.validate_event_list(event_list)
+                if valid_event_list:
+                    res.append(valid_event_list)
+                else:
+                    logger.error(f"[EXTRACT EVENT] No valid events found in the response.")
+            else:
+                logger.error(f"[EXTRACT EVENT] No events found in the response.")
 
-        # Filter out None values and return the first non-None result
-        res = [item for item in res if item is not None]
-        
         return res
     
 def is_quota_exhausted_error(e: Exception):

@@ -1,0 +1,120 @@
+2025-04-16 22:07:43.098 | INFO     | __main__:<module>:158 - [INFO] Arguments:
+2025-04-16 22:07:43.130 | INFO     | __main__:<module>:159 - Input root: data/data_text
+2025-04-16 22:07:43.131 | INFO     | __main__:<module>:160 - Output root: output
+2025-04-16 22:07:43.131 | INFO     | __main__:<module>:161 - Datasets: ['ACE']
+2025-04-16 22:07:43.132 | INFO     | __main__:<module>:162 - Model: gemini-2.0-flash
+2025-04-16 22:07:43.132 | INFO     | __main__:<module>:163 - Candidate: 1
+2025-04-16 22:07:43.133 | INFO     | __main__:<module>:164 - Num try: 3
+2025-04-16 22:07:43.134 | INFO     | __main__:<module>:165 - Max consecutive 429 error: 3
+2025-04-16 22:07:43.134 | INFO     | __main__:<module>:166 - Max num threads: 10
+2025-04-16 22:07:43.135 | INFO     | __main__:<module>:167 - Resume: False
+2025-04-16 22:07:43.135 | INFO     | __main__:<module>:168 - [INFO] Start processing...
+2025-04-16 22:08:01.949 | INFO     | extractor.consumer:log:53 - [INFO] Found 5 valid extractors
+2025-04-16 22:08:01.949 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-16 22:08:01.953 | INFO     | extractor.consumer:log:53 - [START] Start 5 threads
+2025-04-16 22:08:01.975 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-16 22:08:01.977 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-16 22:08:01.978 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_2way_10shot.train.jsonl...
+2025-04-16 22:08:02.016 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-16 22:08:02.068 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-16 22:08:02.070 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-16 22:08:02.095 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-16 22:08:04.844 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no phones , no e - mail , letters are the only link to home .
+2025-04-16 22:08:05.081 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-16 22:08:26.576 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: it was said to be saddam hussein ' s response to a letter from his niece .
+2025-04-16 22:08:30.917 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no phones , no e - mail , letters are the only link to home .
+2025-04-16 22:08:31.673 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-16 22:08:31.909 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: reporter : along with the picture , the flight attendant wrote a letter saying she was prague for jack ' s safe return .
+2025-04-16 22:08:55.088 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: letter writing , you know , is sometimes called a lost art in this age of electronic communication .
+2025-04-16 22:08:56.173 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: reporter : along with the picture , the flight attendant wrote a letter saying she was prague for jack ' s safe return .
+2025-04-16 22:08:56.414 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: i think we may have talked before .
+2025-04-16 22:08:58.778 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-16 22:09:18.951 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: i think we may have talked before .
+2025-04-16 22:09:19.030 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: call carnival wedding dept .
+2025-04-16 22:09:19.339 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: everyone wanted to call .
+2025-04-16 22:09:20.935 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: you can bet they are figuring out who they should have call next time .
+2025-04-16 22:09:21.536 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-16 22:09:22.980 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-16 22:09:44.097 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: they ' ll also be taking your phone calls .
+2025-04-16 22:09:45.524 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-16 22:09:45.693 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-16 22:09:46.297 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: that ' s sort of unusual in these calls , in my experience so far .
+2025-04-16 22:09:47.279 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-16 22:09:47.891 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: those letters important at both ends .
+2025-04-16 22:09:53.232 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: call carnival wedding dept .
+2025-04-16 22:09:54.484 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: everyone wanted to call .
+2025-04-16 22:10:03.244 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-16 22:10:03.416 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-16 22:10:06.087 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: did you know that one of the largest media companies in the country was in the business of bringing you ` ` political public service messages ? ' '
+2025-04-16 22:10:08.739 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: you can e - mail us - - this done count , sorry .
+2025-04-16 22:10:09.017 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: i have n ' t received mail in two days .
+2025-04-16 22:10:10.524 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-16 22:10:11.672 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-16 22:10:13.579 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: i have n ' t received mail in two days .
+2025-04-16 22:10:14.112 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-16 22:10:39.324 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: no phones , no e - mail , letters are the only link to home .
+2025-04-16 22:10:41.072 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-16 22:10:41.448 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-16 22:10:43.403 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: is that - - is that the one where somebody called a news -
+2025-04-16 22:10:43.482 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: we love hearing from you .
+2025-04-16 22:10:54.684 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: we ' re going over there , we ' re saying , look , this is how we do it - - and , um , i - - - so we think everybody else should be that way .
+2025-04-16 22:11:26.591 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-16 22:11:26.638 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: you can bet they are figuring out who they should have call next time .
+2025-04-16 22:11:41.433 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: stinnett , who was eight months pregnant , had earlier been talking with her mother on the phone , and hung up saying a woman she had chatted with online had just arrived at her door , authorities said .
+2025-04-16 22:11:41.434 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 4 got error 429 more than 3 times. Stoping ...
+2025-04-16 22:12:04.311 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: powell is wrapping up a trip to southeast asia , he ' s due here in jerusalem tomorrow morning for talks with the israeli prime minister and the foreign minister .
+2025-04-16 22:12:04.313 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 0 got error 429 more than 3 times. Stoping ...
+2025-04-16 22:12:07.753 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: well , the homeless people - - i guess , they need their shopping cart , so they kind of went elsewhere , so - - um - - i mean it ' s a small thing , but it was , they just figured out , they were - - you know , uh - - learning from experience on what they need to do in the - - city and - - i think he would be a good - - candidate for the homeland security , running that .
+2025-04-16 22:12:07.755 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 2 got error 429 more than 3 times. Stoping ...
+2025-04-16 22:12:29.411 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: cops say he allegedly kidnapped her in his car and threatened her but eventually brought her back to her home .
+2025-04-16 22:12:29.413 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 3 got error 429 more than 3 times. Stoping ...
+2025-04-16 22:12:29.458 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: well , it is our turn to meet the kramers back in the u . s . after their journey to china to bring home the newest and cutest perhaps , member of their family , in los angeles , the proud parents of 11 mnth abigail kramer .
+2025-04-16 22:12:29.460 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 1 got error 429 more than 3 times. Stoping ...
+2025-04-16 22:12:30.212 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-16 22:12:30.213 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 163
+2025-04-16 22:12:30.219 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-16 22:12:30.220 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-16 22:12:30.231 | INFO     | __main__:run:85 - [FINISHED] Processing 71/280 item, remaning 209/280 in 268.26 seconds
+2025-04-16 22:12:30.232 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output\ACE\perm0\ACE_5task_2way_10shot.train.jsonl
+2025-04-16 22:12:30.232 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-16 22:12:30.233 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-16 22:12:30.234 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_2way_5shot.train.jsonl...
+2025-04-16 22:12:30.304 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-16 22:12:30.306 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-16 22:12:30.308 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-16 22:12:30.309 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-16 22:12:30.310 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-16 22:12:30.313 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-16 22:12:30.319 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-16 22:12:30.319 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-16 22:12:30.330 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.10 seconds
+2025-04-16 22:12:30.331 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output\ACE\perm0\ACE_5task_2way_5shot.train.jsonl
+2025-04-16 22:12:30.332 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-16 22:12:30.335 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-16 22:12:30.337 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_4way_10shot.train.jsonl...
+2025-04-16 22:12:30.493 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-16 22:12:30.494 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-16 22:12:30.495 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-16 22:12:30.496 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-16 22:12:30.497 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-16 22:12:30.497 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-16 22:12:30.503 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-16 22:12:30.503 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-16 22:12:30.542 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.21 seconds
+2025-04-16 22:12:30.543 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output\ACE\perm0\ACE_5task_4way_10shot.train.jsonl
+2025-04-16 22:12:30.544 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-16 22:12:30.545 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-16 22:12:30.546 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_4way_5shot.train.jsonl...
+2025-04-16 22:12:30.620 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-16 22:12:30.621 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-16 22:12:30.623 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-16 22:12:30.624 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-16 22:12:30.625 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-16 22:12:30.627 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-16 22:12:30.632 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-16 22:12:30.634 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-16 22:12:30.656 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.11 seconds
+2025-04-16 22:12:30.657 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output\ACE\perm0\ACE_5task_4way_5shot.train.jsonl
+2025-04-16 22:12:30.658 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-16 22:12:30.659 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-16 22:12:30.659 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to output

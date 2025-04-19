@@ -1,0 +1,149 @@
+2025-04-12 22:44:39.965 | INFO     | __main__:<module>:150 - [INFO] Arguments:
+2025-04-12 22:44:39.966 | INFO     | __main__:<module>:151 - Input root: data/data_text
+2025-04-12 22:44:39.966 | INFO     | __main__:<module>:152 - Output root: output
+2025-04-12 22:44:39.967 | INFO     | __main__:<module>:153 - Datasets: ['MAVEN']
+2025-04-12 22:44:39.967 | INFO     | __main__:<module>:154 - Model: gemini-2.0-flash-lite
+2025-04-12 22:44:39.968 | INFO     | __main__:<module>:155 - Candidate: 1
+2025-04-12 22:44:39.968 | INFO     | __main__:<module>:156 - Num try: 3
+2025-04-12 22:44:39.969 | INFO     | __main__:<module>:157 - Max consecutive 429 error: 3
+2025-04-12 22:44:39.969 | INFO     | __main__:<module>:158 - Max num threads: 10
+2025-04-12 22:44:39.969 | INFO     | __main__:<module>:159 - Resume: False
+2025-04-12 22:44:39.970 | INFO     | __main__:<module>:160 - [INFO] Start processing...
+2025-04-12 22:44:55.827 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:44:55.831 | INFO     | extractor.consumer:log:52 - [START] Start 5 threads
+2025-04-12 22:44:55.832 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-12 22:44:55.838 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-12 22:44:55.840 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:44:55.841 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:44:55.854 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:46:19.406 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 2/3] Worker 3 got error: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)
+2025-04-12 22:46:46.571 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 4 failed to process item: no definitive link between the attacks has yet been established.
+2025-04-12 22:46:48.639 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 3 failed to process item: important base installations such as the power station, dry dock, shipyard, maintenance, and fuel and torpedo storage facilities, as well as the submarine piers and headquarters building ( also home of the intelligence section ) were not attacked.
+2025-04-12 22:46:49.580 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 1/3] Worker 2 got error: unterminated string literal (detected at line 1) (<unknown>, line 1)
+2025-04-12 22:48:21.819 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 4 failed to process item: depending on the degree to which japanese civilians would have resisted the invasion, estimates ran up into the millions for allied casualties.
+2025-04-12 22:48:24.208 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 0 failed to process item: general ferdinand foch, commander of ` ` groupe des armees du nord ' ' ( northern army group ) and co - ordinator of the armies on the somme, was unable to continue the sequential attacks by the anglo - french armies achieved in september, because persistent rain, mist and fog grounded aircraft, turned the battlefield into a swamp and greatly increased the difficulty of transporting supplies to the front over the few roads in the area and the land that had been devastated since 1 july.
+2025-04-12 22:48:25.171 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 4 failed to process item: this afforded the festival more room for camping, and an increased space for entertainment.
+2025-04-12 22:48:51.693 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 1/3] Worker 4 got error: Trigger word 'blow up' not found in text.
+2025-04-12 22:48:52.802 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 2/3] Worker 4 got error: Trigger word 'blow up' not found in text.
+2025-04-12 22:49:13.157 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 4 failed to process item: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-12 22:49:41.827 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 2 failed to process item: the tournament was divided into three stages.
+2025-04-12 22:50:03.416 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 4 failed to process item: sam querrey from california, fellow american james blake, france ’ s nicolas mahut and belgium ’ s xavier malisse, the tournament ’ s reigning doubles champion, were participants of this year ' s tournaments.
+2025-04-12 22:50:04.847 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 0 failed to process item: the 1998 u. s. open cup final was the 85th final of the lamar hunt u. s. open cup, the united states ' s oldest soccer cup competition.
+2025-04-12 22:50:06.145 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:50:06.145 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:50:06.181 | INFO     | __main__:run:82 - [FINISHED] Processing 267/276 item, remaning 9/276 in 310.35 seconds
+2025-04-12 22:50:06.184 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-12 22:50:06.185 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-12 22:50:06.191 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-12 22:50:06.192 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:50:06.195 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:50:06.196 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:50:08.176 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 3 failed to process item: the americans saw the hostage - taking as an egregious violation of the principles of international law, such as the vienna convention, which granted diplomats immunity from arrest and made diplomatic compounds inviolable.
+2025-04-12 22:52:16.807 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 1 failed to process item: no definitive link between the attacks has yet been established.
+2025-04-12 22:52:18.851 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 0 failed to process item: important base installations such as the power station, dry dock, shipyard, maintenance, and fuel and torpedo storage facilities, as well as the submarine piers and headquarters building ( also home of the intelligence section ) were not attacked.
+2025-04-12 22:52:49.264 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 1/3] Worker 2 got error: Trigger word 'recaptured' not found in text.
+2025-04-12 22:52:51.396 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 2/3] Worker 2 got error: Trigger word 're-captured' not found in text.
+2025-04-12 22:52:53.584 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 3/3] Worker 2 got error: Trigger word 're-captured' not found in text.
+2025-04-12 22:52:53.586 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 2 failed to process item: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-12 22:54:19.692 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 2 failed to process item: depending on the degree to which japanese civilians would have resisted the invasion, estimates ran up into the millions for allied casualties.
+2025-04-12 22:54:23.091 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 0 failed to process item: general ferdinand foch, commander of ` ` groupe des armees du nord ' ' ( northern army group ) and co - ordinator of the armies on the somme, was unable to continue the sequential attacks by the anglo - french armies achieved in september, because persistent rain, mist and fog grounded aircraft, turned the battlefield into a swamp and greatly increased the difficulty of transporting supplies to the front over the few roads in the area and the land that had been devastated since 1 july.
+2025-04-12 22:54:45.014 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 1 failed to process item: this afforded the festival more room for camping, and an increased space for entertainment.
+2025-04-12 22:55:12.999 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 3 failed to process item: the tournament was divided into three stages.
+2025-04-12 22:55:13.595 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:55:13.595 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:55:18.723 | INFO     | __main__:run:82 - [FINISHED] Processing 232/242 item, remaning 8/242 in 312.54 seconds
+2025-04-12 22:55:18.724 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-12 22:55:18.725 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-12 22:55:18.732 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-12 22:55:18.735 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:55:18.739 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:55:18.750 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:55:23.231 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 0 failed to process item: according to one eyewitness, the killers had written shia slogans on their foreheads ( the alawi faith is a shia sect ).
+2025-04-12 22:55:55.357 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 3 failed to process item: the strength of the storm, coupled with the extreme arctic temperatures, created a light, fluffy snow which increased the snowfall totals.
+2025-04-12 22:57:50.061 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 2 failed to process item: the international community considers indiscriminate attacks on civilians and civilian structures that do not discriminate between civilians and military targets illegal under international law.
+2025-04-12 22:57:52.645 | ERROR    | extractor.consumer:log:54 - [ERROR at ATTEMPT 1/3] Worker 2 got error: Trigger word 'became' not found in text.
+2025-04-12 22:58:47.342 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 1 failed to process item: while the pan - democracy camp attacked the conservative proposals as a rehash of those already rejected in 2005, the government said its proposals were ` ` more democratic ' ', and could not exceed what was authorised by beijing.
+2025-04-12 22:58:47.343 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 1 got error 429 more than 3 times. Stoping ...
+2025-04-12 22:58:48.462 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 0 failed to process item: on 16 september, five viet minh infantry and one heavy weapons battalions attacked đong khe.
+2025-04-12 22:58:48.462 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 0 got error 429 more than 3 times. Stoping ...
+2025-04-12 22:58:49.745 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 3 failed to process item: the 3rd guard division was hurried forward from valenciennes, to hold the ground in front of the second position and british attacks began on shelter and bottom woods up the slope towards contalmaison.
+2025-04-12 22:58:49.747 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 3 got error 429 more than 3 times. Stoping ...
+2025-04-12 22:58:51.441 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 4 failed to process item: detonated on march 1, 1954, the device was the most powerful nuclear device detonated by the united states and its first lithium deuteride fueled thermonuclear weapon.
+2025-04-12 22:58:51.443 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 4 got error 429 more than 3 times. Stoping ...
+2025-04-12 22:59:08.829 | ERROR    | extractor.consumer:log:54 - [ERROR] Worker 2 failed to process item: the attack on mers - el - kebir ( 3 july 1940 ) also known as the battle of mers - el - kebir, was part of operation catapult, a british naval attack on french navy ships at the naval base at mers el kebir on the coast of french algeria.
+2025-04-12 22:59:08.831 | CRITICAL | extractor.consumer:log:60 - [FATAL] Worker 2 got error 429 more than 3 times. Stoping ...
+2025-04-12 22:59:09.664 | ERROR    | extractor.consumer:log:54 - [ERROR] No threads are running. Stopping ...
+2025-04-12 22:59:09.665 | ERROR    | extractor.consumer:log:54 - [ERROR] Task queue is not empty after consuming. Remaining items: 143
+2025-04-12 22:59:09.669 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:59:09.671 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:59:09.682 | INFO     | __main__:run:82 - [FINISHED] Processing 131/282 item, remaning 151/282 in 230.96 seconds
+2025-04-12 22:59:09.683 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-12 22:59:09.684 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-12 22:59:09.690 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-12 22:59:09.696 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:59:09.697 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:59:09.699 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:59:09.700 | ERROR    | extractor.consumer:log:54 - [ERROR] No threads are running. Stopping ...
+2025-04-12 22:59:09.702 | ERROR    | extractor.consumer:log:54 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-12 22:59:09.709 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:59:09.711 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:59:09.720 | INFO     | __main__:run:82 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.04 seconds
+2025-04-12 22:59:09.721 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-12 22:59:09.723 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-12 22:59:09.845 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-12 22:59:09.846 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:59:09.848 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:59:09.849 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:59:09.850 | ERROR    | extractor.consumer:log:54 - [ERROR] No threads are running. Stopping ...
+2025-04-12 22:59:09.851 | ERROR    | extractor.consumer:log:54 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-12 22:59:09.858 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:59:09.859 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:59:09.867 | INFO     | __main__:run:82 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.14 seconds
+2025-04-12 22:59:09.867 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-12 22:59:09.868 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-12 22:59:09.874 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-12 22:59:09.876 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:59:09.878 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:59:09.879 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:59:09.881 | ERROR    | extractor.consumer:log:54 - [ERROR] No threads are running. Stopping ...
+2025-04-12 22:59:09.882 | ERROR    | extractor.consumer:log:54 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-12 22:59:09.885 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:59:09.887 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:59:09.896 | INFO     | __main__:run:82 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.03 seconds
+2025-04-12 22:59:09.897 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-12 22:59:09.898 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-12 22:59:09.907 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-12 22:59:09.909 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:59:09.911 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:59:09.912 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:59:09.913 | ERROR    | extractor.consumer:log:54 - [ERROR] No threads are running. Stopping ...
+2025-04-12 22:59:09.914 | ERROR    | extractor.consumer:log:54 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-12 22:59:09.918 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:59:09.919 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:59:09.930 | INFO     | __main__:run:82 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.03 seconds
+2025-04-12 22:59:09.930 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-12 22:59:09.931 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-12 22:59:09.937 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-12 22:59:09.939 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:59:09.940 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:59:09.942 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:59:09.944 | ERROR    | extractor.consumer:log:54 - [ERROR] No threads are running. Stopping ...
+2025-04-12 22:59:09.946 | ERROR    | extractor.consumer:log:54 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-12 22:59:09.949 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:59:09.950 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:59:09.960 | INFO     | __main__:run:82 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.03 seconds
+2025-04-12 22:59:09.960 | INFO     | __main__:run:83 - [SAVE FILE] All item saved to output\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-12 22:59:09.962 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\MAVEN.test.jsonl...
+2025-04-12 22:59:10.209 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\MAVEN.test.jsonl with 8038 lines
+2025-04-12 22:59:10.211 | INFO     | extractor.consumer:log:52 - [CLEAR] All results cleared
+2025-04-12 22:59:10.212 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:59:10.214 | INFO     | extractor.consumer:log:52 - [CONSUMING] Start consuming.
+2025-04-12 22:59:10.215 | ERROR    | extractor.consumer:log:54 - [ERROR] No threads are running. Stopping ...
+2025-04-12 22:59:10.216 | ERROR    | extractor.consumer:log:54 - [ERROR] Task queue is not empty after consuming. Remaining items: 8038
+2025-04-12 22:59:10.251 | INFO     | extractor.consumer:log:52 - [PAUSE] All threads paused
+2025-04-12 22:59:10.252 | INFO     | extractor.consumer:log:52 - [CONSUMING] Finished consuming.
+2025-04-12 22:59:10.478 | INFO     | __main__:run:113 - [FINISHED] Processing 0/8038 item, remaning 8038/8038 in 0.52 seconds
+2025-04-12 22:59:10.479 | INFO     | __main__:run:114 - [SAVE FILE] All item saved to output\MAVEN\MAVEN.test.jsonl
+2025-04-12 22:59:10.479 | INFO     | extractor.consumer:log:52 - [RESUME] All threads resumed
+2025-04-12 22:59:10.480 | INFO     | extractor.consumer:log:52 - [STOP] All threads stopped
+2025-04-12 22:59:10.481 | INFO     | __main__:run:117 - [FINISHED] All items processed and saved to output

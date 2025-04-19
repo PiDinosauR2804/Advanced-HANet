@@ -130,6 +130,7 @@ class Consumer:
                 continue
             
             # Try to process the item
+            event_list = None
             for i in range(self.num_try):
                 try:
                     event_list = extractor['extractor'].extract_event(item['text'], model=self.model, candidate=self.candidate)[0]
@@ -152,9 +153,12 @@ class Consumer:
                         time.sleep(20)  # Wait for 15 seconds before retrying
                     else:
                         extractor['consecutive_429_error'] = 0
-                        self.log(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got error: {e}", mode="ERROR")
+                        self.log(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} | text: {item['text']} | got error: {e}", mode="ERROR")
             else:
-                self.log(f"[ERROR] Worker {worker_id} failed to process item: {item['text']}", mode="ERROR")
+                if not event_list:
+                    self.log(f"[ERROR] Worker {worker_id} got none event list: {item['text']}", mode="ERROR")
+                else:
+                    self.log(f"[ERROR] Worker {worker_id} failed to process item: {item['text']}", mode="ERROR")
                 self.append_results(line_idx, key, idx, item)
                 self.remained_item += 1
  

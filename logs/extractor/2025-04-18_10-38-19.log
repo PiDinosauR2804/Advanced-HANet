@@ -1,0 +1,1047 @@
+2025-04-18 10:38:19.156 | INFO     | __main__:<module>:159 - [INFO] Arguments:
+2025-04-18 10:38:19.157 | INFO     | __main__:<module>:160 - Input root: data/data_text
+2025-04-18 10:38:19.158 | INFO     | __main__:<module>:161 - Output root: output/des
+2025-04-18 10:38:19.159 | INFO     | __main__:<module>:162 - Datasets: ['MAVEN', 'ACE']
+2025-04-18 10:38:19.160 | INFO     | __main__:<module>:163 - Model: gemini-2.0-flash
+2025-04-18 10:38:19.160 | INFO     | __main__:<module>:164 - Candidate: 1
+2025-04-18 10:38:19.161 | INFO     | __main__:<module>:165 - Num try: 3
+2025-04-18 10:38:19.163 | INFO     | __main__:<module>:166 - Max consecutive 429 error: 3
+2025-04-18 10:38:19.163 | INFO     | __main__:<module>:167 - Max num threads: 12
+2025-04-18 10:38:19.167 | INFO     | __main__:<module>:168 - Resume: True
+2025-04-18 10:38:19.169 | INFO     | __main__:<module>:169 - Convert test: False
+2025-04-18 10:38:19.170 | INFO     | __main__:<module>:170 - [INFO] Start processing...
+2025-04-18 10:38:49.409 | INFO     | extractor.consumer:log:53 - [INFO] Found 11 valid extractors
+2025-04-18 10:38:49.410 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.416 | INFO     | extractor.consumer:log:53 - [START] Start 11 threads
+2025-04-18 10:38:49.418 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.419 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.419 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-18 10:38:49.442 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.446 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.448 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.452 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.454 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.455 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.463 | INFO     | __main__:run:85 - [FINISHED] Processing 264/264 item, remaning 0/264 in 0.05 seconds
+2025-04-18 10:38:49.465 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-18 10:38:49.466 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.466 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.467 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-18 10:38:49.485 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.487 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.489 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.492 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.495 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.496 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.503 | INFO     | __main__:run:85 - [FINISHED] Processing 175/175 item, remaning 0/175 in 0.04 seconds
+2025-04-18 10:38:49.503 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-18 10:38:49.505 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.505 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.506 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-18 10:38:49.528 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.531 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.533 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.536 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.538 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.539 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.549 | INFO     | __main__:run:85 - [FINISHED] Processing 245/245 item, remaning 0/245 in 0.04 seconds
+2025-04-18 10:38:49.550 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-18 10:38:49.551 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.552 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.552 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-18 10:38:49.572 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.574 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.575 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.580 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.582 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.583 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.589 | INFO     | __main__:run:85 - [FINISHED] Processing 195/195 item, remaning 0/195 in 0.04 seconds
+2025-04-18 10:38:49.590 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-18 10:38:49.592 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.593 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.595 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-18 10:38:49.614 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.616 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.617 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.620 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.622 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.622 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.632 | INFO     | __main__:run:85 - [FINISHED] Processing 245/245 item, remaning 0/245 in 0.04 seconds
+2025-04-18 10:38:49.634 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-18 10:38:49.635 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.636 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.636 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-18 10:38:49.653 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.654 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.655 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.658 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.659 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.661 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.668 | INFO     | __main__:run:85 - [FINISHED] Processing 205/205 item, remaning 0/205 in 0.03 seconds
+2025-04-18 10:38:49.669 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-18 10:38:49.670 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.670 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.671 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-18 10:38:49.689 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.690 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.692 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.696 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.698 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.699 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.706 | INFO     | __main__:run:85 - [FINISHED] Processing 245/245 item, remaning 0/245 in 0.04 seconds
+2025-04-18 10:38:49.706 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-18 10:38:49.707 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.708 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.709 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-18 10:38:49.729 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.730 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.732 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.734 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.736 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.737 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.745 | INFO     | __main__:run:85 - [FINISHED] Processing 210/210 item, remaning 0/210 in 0.04 seconds
+2025-04-18 10:38:49.746 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-18 10:38:49.748 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.748 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.749 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm1\ACE_5task_2way_10shot.train.jsonl...
+2025-04-18 10:38:49.767 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm1\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.768 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.769 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.772 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.773 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.774 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.783 | INFO     | __main__:run:85 - [FINISHED] Processing 237/237 item, remaning 0/237 in 0.03 seconds
+2025-04-18 10:38:49.784 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_2way_10shot.train.jsonl
+2025-04-18 10:38:49.785 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.785 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.786 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm1\ACE_5task_2way_5shot.train.jsonl...
+2025-04-18 10:38:49.804 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm1\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.806 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.807 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.810 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:49.812 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:38:49.813 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:38:49.820 | INFO     | __main__:run:85 - [FINISHED] Processing 203/203 item, remaning 0/203 in 0.03 seconds
+2025-04-18 10:38:49.820 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_2way_5shot.train.jsonl
+2025-04-18 10:38:49.821 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:38:49.822 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:38:49.822 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm1\ACE_5task_4way_10shot.train.jsonl...
+2025-04-18 10:38:49.848 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm1\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-18 10:38:49.850 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:38:49.851 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:38:49.874 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:38:50.483 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: list index out of range
+2025-04-18 10:38:50.503 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:38:50.515 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:38:50.528 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 9 got error: list index out of range
+2025-04-18 10:38:50.534 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:38:50.539 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:38:50.545 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:38:50.608 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:38:50.660 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: list index out of range
+2025-04-18 10:38:50.699 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:38:51.119 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:38:51.143 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:38:51.150 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: list index out of range
+2025-04-18 10:38:51.156 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:38:51.166 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: list index out of range
+2025-04-18 10:39:11.490 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: we had no part in it .
+2025-04-18 10:39:11.537 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: cnn ' s richard roth has more on this once prominent frontman for the iraqi regime .
+2025-04-18 10:39:11.542 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: and , uh , it would ' ve - - gone an - a little farther to encourage them to , you know , be willing to sit down at the table with us , at least , you know .
+2025-04-18 10:39:11.553 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: kostelka , 52 , was first deputy defense minister and an ex - general .
+2025-04-18 10:39:11.576 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:39:11.578 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: no , it was a joint effort by pakistan .
+2025-04-18 10:39:11.597 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:39:11.600 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: reporter : iraq ' s former information minister might need a job right now .
+2025-04-18 10:39:11.603 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:39:11.606 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: no , it was a joint effort by pakistan .
+2025-04-18 10:39:11.683 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:39:11.685 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: they are desperate to be rid of him but by the same token , they do n ' t like another country coming into their country to overturn the government and beyond that , i think it ' s probably most important for most iraqis is they ' re deeply suspicious of the united states .
+2025-04-18 10:39:11.691 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: list index out of range
+2025-04-18 10:39:11.693 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: military analyst and retired army general claudia kennedy joins me with a look at possibilitys .
+2025-04-18 10:39:11.824 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:39:12.140 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:39:12.145 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:39:12.149 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: list index out of range
+2025-04-18 10:39:12.163 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:39:12.193 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:39:12.248 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:39:12.252 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:39:12.300 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: list index out of range
+2025-04-18 10:39:12.404 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:39:12.456 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: reporter : iraq ' s former information minister might need a job right now .
+2025-04-18 10:39:12.764 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:39:12.798 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:39:12.808 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:39:12.833 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:39:12.837 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:39:12.862 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:39:12.866 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:39:12.887 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: list index out of range
+2025-04-18 10:39:12.993 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:39:13.091 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:39:13.093 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:39:13.106 | INFO     | __main__:run:85 - [FINISHED] Processing 514/524 item, remaning 10/524 in 23.29 seconds
+2025-04-18 10:39:13.107 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_4way_10shot.train.jsonl
+2025-04-18 10:39:13.108 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:39:13.109 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:39:13.110 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm1\ACE_5task_4way_5shot.train.jsonl...
+2025-04-18 10:39:13.238 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm1\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-18 10:39:13.240 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:39:13.241 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:39:13.243 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:39:13.360 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:39:13.362 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: they are desperate to be rid of him but by the same token , they do n ' t like another country coming into their country to overturn the government and beyond that , i think it ' s probably most important for most iraqis is they ' re deeply suspicious of the united states .
+2025-04-18 10:39:13.418 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:39:13.421 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: i ' m not leaving because of clashes with the administration , in fact , i have n ' t had any .
+2025-04-18 10:39:13.424 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:39:13.427 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: colonel patrick lang , retired , united states army , thanks for your insights .
+2025-04-18 10:39:13.444 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: list index out of range
+2025-04-18 10:39:13.446 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: i do n ' t think dennis hastert plans to step down soon anyway .
+2025-04-18 10:39:13.463 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: list index out of range
+2025-04-18 10:39:13.465 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: we go to my niece ' s house and
+2025-04-18 10:39:13.534 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:39:13.535 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: no injuries reported .
+2025-04-18 10:39:32.197 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: but i do n ' t think it ' s absolutely critical for the ultimate success of this mission that we apprehend him or find out what happened to him .
+2025-04-18 10:39:32.785 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:39:33.242 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: i used to work there .
+2025-04-18 10:39:33.274 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: i do n ' t think dennis hastert plans to step down soon anyway .
+2025-04-18 10:39:33.384 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: the 2014 israel – gaza conflict also known as operation protective edge (, ` ` miv ' tza tzuk eitan ' ', lit.
+2025-04-18 10:39:33.403 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:39:33.852 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:39:33.856 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:39:33.978 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:39:34.052 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:39:34.054 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: they are desperate to be rid of him but by the same token , they do n ' t like another country coming into their country to overturn the government and beyond that , i think it ' s probably most important for most iraqis is they ' re deeply suspicious of the united states .
+2025-04-18 10:39:34.328 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:39:34.378 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:39:34.436 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:39:34.442 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:39:34.450 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:39:34.454 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:39:34.458 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: list index out of range
+2025-04-18 10:39:34.521 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:39:34.572 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:39:54.687 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: but i do n ' t think it ' s absolutely critical for the ultimate success of this mission that we apprehend him or find out what happened to him .
+2025-04-18 10:39:54.779 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: reporter : iraq ' s former information minister might need a job right now .
+2025-04-18 10:39:54.783 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: no , it was a joint effort by pakistan .
+2025-04-18 10:39:54.795 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: kostelka , 52 , was first deputy defense minister and an ex - general .
+2025-04-18 10:39:54.810 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: i do n ' t think dennis hastert plans to step down soon anyway .
+2025-04-18 10:39:54.826 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: we had no part in it .
+2025-04-18 10:39:54.841 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: no , it was a joint effort by pakistan .
+2025-04-18 10:39:54.903 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: cnn ' s richard roth has more on this once prominent frontman for the iraqi regime .
+2025-04-18 10:39:54.948 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: they are desperate to be rid of him but by the same token , they do n ' t like another country coming into their country to overturn the government and beyond that , i think it ' s probably most important for most iraqis is they ' re deeply suspicious of the united states .
+2025-04-18 10:39:55.055 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: list index out of range
+2025-04-18 10:39:55.056 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: reporter : iraq ' s former information minister might need a job right now .
+2025-04-18 10:39:55.079 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:39:55.343 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:39:55.379 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: list index out of range
+2025-04-18 10:39:55.412 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:39:55.422 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: list index out of range
+2025-04-18 10:39:55.452 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:39:55.492 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:39:55.550 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:39:55.625 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:39:55.724 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 9 got error: list index out of range
+2025-04-18 10:39:55.750 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:39:55.751 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: is there high turnover among senior managers ?
+2025-04-18 10:39:55.957 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:39:55.971 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:39:56.142 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:40:16.302 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: i used to work there .
+2025-04-18 10:40:16.347 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: list index out of range
+2025-04-18 10:40:16.348 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: and how ' d they get them ?
+2025-04-18 10:40:16.366 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: i ' m not leaving because of clashes with the administration , in fact , i have n ' t had any .
+2025-04-18 10:40:16.393 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 7 got error: list index out of range
+2025-04-18 10:40:16.394 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: and how ' d they get them ?
+2025-04-18 10:40:16.524 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:40:16.526 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: as for how long it lasts , i would say that it lasts for the rest of your sentence , but i ' m not sure about that .
+2025-04-18 10:40:16.540 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:40:16.544 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-18 10:40:16.599 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:40:16.601 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: so do n ' t give up on the idea of a natural birth because last time was painful .
+2025-04-18 10:40:16.702 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:40:16.711 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: list index out of range
+2025-04-18 10:40:16.712 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-18 10:40:16.726 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:40:16.727 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:40:16.741 | INFO     | __main__:run:85 - [FINISHED] Processing 456/486 item, remaning 30/486 in 63.63 seconds
+2025-04-18 10:40:16.742 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_4way_5shot.train.jsonl
+2025-04-18 10:40:16.744 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:40:16.744 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:40:16.746 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm2\ACE_5task_2way_10shot.train.jsonl...
+2025-04-18 10:40:16.769 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm2\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 10:40:16.770 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:40:16.772 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:40:16.776 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:40:17.145 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:40:17.146 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: colonel patrick lang , retired , united states army , thanks for your insights .
+2025-04-18 10:40:17.332 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:40:17.334 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: we go to my niece ' s house and
+2025-04-18 10:40:17.336 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 9 got error: list index out of range
+2025-04-18 10:40:17.659 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:40:17.696 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:40:17.931 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: list index out of range
+2025-04-18 10:40:38.294 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: now , as you go from saddam international airport into town you see there are some big , wide divided highways there .
+2025-04-18 10:40:38.383 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:40:38.464 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:40:38.487 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:40:38.512 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: list index out of range
+2025-04-18 10:40:38.599 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:40:38.647 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:40:38.651 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:40:38.675 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:40:38.677 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-18 10:40:38.883 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 9 got error: list index out of range
+2025-04-18 10:40:38.895 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:40:38.897 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: in fact , we just got back from disney world , you know , about an hour ago and they ' re down there and they ' re but they ' re both , uh ,
+2025-04-18 10:40:38.964 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:40:38.966 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: i ' m ready to come home .
+2025-04-18 10:40:39.078 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: list index out of range
+2025-04-18 10:40:39.079 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: so what ' s the difficulty in being able to go to mars ?
+2025-04-18 10:40:39.115 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: list index out of range
+2025-04-18 10:40:39.118 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: also , i was looking at both citations , i did n ' t get to the hospital until 2 : 30 am , and the officer has the time of incident as being at 2 : 34 am .
+2025-04-18 10:40:39.119 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 7 got error: list index out of range
+2025-04-18 10:40:39.124 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: i do n ' t think dennis hastert plans to step down soon anyway .
+2025-04-18 10:40:39.174 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:40:39.176 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-18 10:40:59.031 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: i tell you all this not to worry you , but to give you comfort knowing what you hear and see is true and that , despite that , i am safe and will continue to be .
+2025-04-18 10:40:59.033 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: no phones , no e - mail , letters are the only link to home .
+2025-04-18 10:40:59.642 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:40:59.659 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:40:59.680 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:40:59.892 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:40:59.915 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:40:59.917 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:40:59.937 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: list index out of range
+2025-04-18 10:40:59.939 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: those letters important at both ends .
+2025-04-18 10:40:59.959 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:41:00.082 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:41:00.087 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:41:00.124 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: list index out of range
+2025-04-18 10:41:00.222 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:41:00.239 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:41:00.263 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:41:00.322 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:41:00.324 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-18 10:41:00.603 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:41:00.605 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: those letters important at both ends .
+2025-04-18 10:41:20.297 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: a political public service message brought to you by clear channel . ' '
+2025-04-18 10:41:20.470 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-18 10:41:20.472 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: there will be more letters on the way .
+2025-04-18 10:41:20.486 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-18 10:41:20.596 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-18 10:41:20.660 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: letter writing , you know , is sometimes called a lost art in this age of electronic communication .
+2025-04-18 10:41:20.663 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-18 10:41:20.923 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:41:20.972 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: list index out of range
+2025-04-18 10:41:21.016 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:41:21.107 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: list index out of range
+2025-04-18 10:41:21.114 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: list index out of range
+2025-04-18 10:41:21.119 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:41:21.201 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:41:21.276 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:41:21.303 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:41:21.334 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:41:21.557 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:41:21.558 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-18 10:41:21.564 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: list index out of range
+2025-04-18 10:41:21.565 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: is that - - is that the one where somebody called a news -
+2025-04-18 10:41:21.576 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:41:21.589 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:41:21.730 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:41:41.689 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: call carnival wedding dept .
+2025-04-18 10:41:41.940 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: letter writing , you know , is sometimes called a lost art in this age of electronic communication .
+2025-04-18 10:41:42.016 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-18 10:41:42.078 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-18 10:41:42.099 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 7 got error: list index out of range
+2025-04-18 10:41:42.100 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: you can e - mail us at am @ cnn . com .
+2025-04-18 10:41:42.109 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: list index out of range
+2025-04-18 10:41:42.110 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:41:42.205 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:41:42.207 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: you can bet they are figuring out who they should have call next time .
+2025-04-18 10:41:42.240 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:41:42.241 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: a political public service message brought to you by clear channel . ' '
+2025-04-18 10:41:42.275 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:41:42.334 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:41:42.335 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: it was said to be saddam hussein ' s response to a letter from his niece .
+2025-04-18 10:41:42.619 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: list index out of range
+2025-04-18 10:41:42.624 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:41:42.628 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:41:42.632 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:41:42.682 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: list index out of range
+2025-04-18 10:41:42.705 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:41:42.770 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: list index out of range
+2025-04-18 10:41:42.801 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:41:42.826 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:41:42.832 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:41:43.056 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:41:43.225 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: list index out of range
+2025-04-18 10:41:43.227 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: a political public service message brought to you by clear channel . ' '
+2025-04-18 10:41:43.242 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:41:43.244 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: those letters important at both ends .
+2025-04-18 10:41:43.261 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:41:43.269 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: list index out of range
+2025-04-18 10:41:43.306 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:41:43.330 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:41:43.358 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:41:43.362 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:41:43.364 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: and how ' d they get them ?
+2025-04-18 10:42:03.592 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: if the budget goes through as is , why do n ' t mr . begala and mr . carville just donate the extra tax money they do n ' t want ? ' '
+2025-04-18 10:42:03.606 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: i knew i could do it again .
+2025-04-18 10:42:03.682 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: they are n ' t paying lawyers , and they pay nothing into the system .
+2025-04-18 10:42:03.686 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: so do n ' t give up on the idea of a natural birth because last time was painful .
+2025-04-18 10:42:03.713 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: when i first - - heard the case , or about it , i - - told myself , if he did do it ,
+2025-04-18 10:42:03.788 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:42:03.790 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: the cost of class actions is factored into the cost of everything you buy .
+2025-04-18 10:42:03.804 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:42:03.806 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: as for how long it lasts , i would say that it lasts for the rest of your sentence , but i ' m not sure about that .
+2025-04-18 10:42:04.068 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:42:04.070 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: the cost of class actions is factored into the cost of everything you buy .
+2025-04-18 10:42:04.200 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:42:04.203 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:42:04.232 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:42:04.285 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: list index out of range
+2025-04-18 10:42:04.289 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: list index out of range
+2025-04-18 10:42:04.299 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: list index out of range
+2025-04-18 10:42:04.313 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:42:04.320 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:42:04.374 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:42:04.526 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:42:04.688 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:42:04.790 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: list index out of range
+2025-04-18 10:42:24.569 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: i c - but , now , i do n ' t know that i would vote for a death penalty because i ' m not sure that a - - a death cancels out a death .
+2025-04-18 10:42:24.647 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: the cost of class actions is factored into the cost of everything you buy .
+2025-04-18 10:42:24.708 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: i c - but , now , i do n ' t know that i would vote for a death penalty because i ' m not sure that a - - a death cancels out a death .
+2025-04-18 10:42:25.140 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: has somebody from your magazine spent time with him ?
+2025-04-18 10:42:25.151 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:42:25.153 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: has somebody from your magazine spent time with him ?
+2025-04-18 10:42:25.187 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:42:25.199 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: list index out of range
+2025-04-18 10:42:25.201 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:42:25.245 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: list index out of range
+2025-04-18 10:42:25.248 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: i used to work there .
+2025-04-18 10:42:25.249 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 9 got error: list index out of range
+2025-04-18 10:42:25.254 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:42:25.256 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: ` ` before going in - lrb - with a full assault - rrb - , you have to decide if it ' s worth the risks , and . . . you have to know who ' s there in the way of iraqi forces and the amount of potential damage to civilians , ' ' he said .
+2025-04-18 10:42:25.298 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:42:25.384 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:42:25.385 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-18 10:42:25.455 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:42:25.458 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:42:25.683 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:42:25.684 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:42:25.734 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:42:25.747 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:42:25.795 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:42:25.848 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:42:25.871 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: list index out of range
+2025-04-18 10:42:25.902 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:42:25.903 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:42:25.915 | INFO     | __main__:run:85 - [FINISHED] Processing 243/299 item, remaning 56/299 in 129.17 seconds
+2025-04-18 10:42:25.916 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_2way_10shot.train.jsonl
+2025-04-18 10:42:25.917 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:42:25.918 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:42:25.919 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm2\ACE_5task_2way_5shot.train.jsonl...
+2025-04-18 10:42:25.944 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm2\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 10:42:25.947 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:42:25.948 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:42:25.950 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:42:46.161 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:42:46.224 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-18 10:42:46.258 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: and now joining us by phone from liverpool with more on the harry potter heist is caroline forham , press officer with the mercy side police .
+2025-04-18 10:42:46.717 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:42:46.719 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: everyone wanted to call .
+2025-04-18 10:42:46.814 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:42:46.835 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 9 got error: list index out of range
+2025-04-18 10:42:46.922 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:42:47.308 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:42:47.314 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:42:47.340 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:42:47.345 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:42:47.377 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:42:47.435 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: list index out of range
+2025-04-18 10:42:47.475 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:42:47.496 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:42:47.543 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:42:47.608 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:43:07.655 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: now , as you go from saddam international airport into town you see there are some big , wide divided highways there .
+2025-04-18 10:43:07.658 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-18 10:43:07.672 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: in fact , we just got back from disney world , you know , about an hour ago and they ' re down there and they ' re but they ' re both , uh ,
+2025-04-18 10:43:07.735 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-18 10:43:07.814 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: i tell you all this not to worry you , but to give you comfort knowing what you hear and see is true and that , despite that , i am safe and will continue to be .
+2025-04-18 10:43:07.830 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: i ' m ready to come home .
+2025-04-18 10:43:07.877 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: so what ' s the difficulty in being able to go to mars ?
+2025-04-18 10:43:07.880 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-18 10:43:08.143 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:43:08.145 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: also , i was looking at both citations , i did n ' t get to the hospital until 2 : 30 am , and the officer has the time of incident as being at 2 : 34 am .
+2025-04-18 10:43:08.267 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: list index out of range
+2025-04-18 10:43:08.291 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: list index out of range
+2025-04-18 10:43:08.297 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:43:08.346 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:43:08.348 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: no phones , no e - mail , letters are the only link to home .
+2025-04-18 10:43:08.351 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:43:08.434 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:43:08.447 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 9 got error: list index out of range
+2025-04-18 10:43:08.462 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:43:08.543 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 7 got error: list index out of range
+2025-04-18 10:43:08.544 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:43:08.674 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:43:08.679 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:43:08.888 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:43:08.948 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:43:08.967 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:43:29.293 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-18 10:43:29.302 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:43:29.323 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: those letters important at both ends .
+2025-04-18 10:43:29.327 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: those letters important at both ends .
+2025-04-18 10:43:29.343 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:43:29.345 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: a political public service message brought to you by clear channel . ' '
+2025-04-18 10:43:29.361 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:43:29.362 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-18 10:43:29.381 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:43:29.383 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-18 10:43:29.394 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: list index out of range
+2025-04-18 10:43:29.396 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: there will be more letters on the way .
+2025-04-18 10:43:29.579 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: list index out of range
+2025-04-18 10:43:29.613 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:43:29.615 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-18 10:43:49.407 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: letter writing , you know , is sometimes called a lost art in this age of electronic communication .
+2025-04-18 10:43:49.637 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-18 10:43:49.916 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-18 10:43:50.042 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:43:50.215 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:43:50.219 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:43:50.242 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:43:50.263 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:43:50.307 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:43:50.423 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: list index out of range
+2025-04-18 10:43:50.479 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:43:50.635 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:43:50.811 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:43:50.813 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: letter writing , you know , is sometimes called a lost art in this age of electronic communication .
+2025-04-18 10:43:50.822 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: list index out of range
+2025-04-18 10:43:50.824 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: call carnival wedding dept .
+2025-04-18 10:43:50.875 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: list index out of range
+2025-04-18 10:43:50.876 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: and they got the letters pretty quickly over there .
+2025-04-18 10:44:10.643 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-18 10:44:10.771 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:44:10.975 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-18 10:44:11.643 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:44:11.645 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: is that - - is that the one where somebody called a news -
+2025-04-18 10:44:11.708 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:44:11.710 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: they ' ll also be taking your phone calls .
+2025-04-18 10:44:11.824 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:44:11.825 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:44:11.834 | INFO     | __main__:run:85 - [FINISHED] Processing 208/242 item, remaning 34/242 in 105.92 seconds
+2025-04-18 10:44:11.835 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_2way_5shot.train.jsonl
+2025-04-18 10:44:11.836 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:44:11.838 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:44:11.839 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm2\ACE_5task_4way_10shot.train.jsonl...
+2025-04-18 10:44:11.876 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm2\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-18 10:44:11.878 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:44:11.879 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:44:11.880 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:44:12.279 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:44:12.905 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:44:13.532 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:44:13.534 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: especially a nuclear september 11th .
+2025-04-18 10:44:31.819 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: you can e - mail us at am @ cnn . com .
+2025-04-18 10:44:32.126 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: a political public service message brought to you by clear channel . ' '
+2025-04-18 10:44:32.162 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:44:32.163 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: it was said to be saddam hussein ' s response to a letter from his niece .
+2025-04-18 10:44:32.241 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: list index out of range
+2025-04-18 10:44:32.243 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: a political public service message brought to you by clear channel . ' '
+2025-04-18 10:44:32.307 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: list index out of range
+2025-04-18 10:44:32.309 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: those letters important at both ends .
+2025-04-18 10:44:32.543 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: list index out of range
+2025-04-18 10:44:32.565 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:44:32.696 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: list index out of range
+2025-04-18 10:44:32.762 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:44:32.931 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: list index out of range
+2025-04-18 10:44:33.092 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: list index out of range
+2025-04-18 10:44:33.094 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: i knew i could do it again .
+2025-04-18 10:44:33.154 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:44:33.156 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: they are n ' t paying lawyers , and they pay nothing into the system .
+2025-04-18 10:44:33.328 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:44:33.330 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: especially a nuclear september 11th .
+2025-04-18 10:44:33.528 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:44:33.692 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: list index out of range
+2025-04-18 10:44:33.769 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:44:34.130 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: list index out of range
+2025-04-18 10:44:34.261 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: list index out of range
+2025-04-18 10:44:34.263 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: on highest alert as a carrier at war .
+2025-04-18 10:44:34.298 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:44:54.470 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: yes , i ' m not saying take the threat of force .
+2025-04-18 10:44:54.717 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: do you support the - - do you - do you support the war ?
+2025-04-18 10:44:54.784 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:44:54.785 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: i think - - i think rudy giuliani was a great mayor - - for nine eleven .
+2025-04-18 10:44:55.021 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:44:55.239 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:44:55.395 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: list index out of range
+2025-04-18 10:44:56.455 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:44:56.457 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: - lrb - on camera - rrb - : it is an elementary fact of life during wartime : a press pass provides no protection .
+2025-04-18 10:44:56.704 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: list index out of range
+2025-04-18 10:44:56.706 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: now , this is a rural setting , but this could be applied to urban combat , yes .
+2025-04-18 10:44:56.818 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:45:13.735 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:45:13.748 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: lieutenant colonel robert leonard , we appreciate your insights in urban combat , something that is not something that the u . s . military would prefer to engage in , but it might become inevitable .
+2025-04-18 10:45:18.055 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: certainly , our war plan was not modeled off of 1991 .
+2025-04-18 10:45:18.403 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:45:18.589 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:45:18.653 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: list index out of range
+2025-04-18 10:45:18.655 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: all one of the many young faces that bear the heavy mark of war .
+2025-04-18 10:45:39.811 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: lieutenant colonel robert leonard , we appreciate your insights in urban combat , something that is not something that the u . s . military would prefer to engage in , but it might become inevitable .
+2025-04-18 10:45:47.393 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:45:47.992 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:45:48.657 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:45:48.659 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: uh and just wipe it out ,
+2025-04-18 10:45:49.205 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:45:51.806 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:45:55.150 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:46:02.453 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:46:02.454 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: i ' d say my overall opinion is that - - this conflict is way past that time .
+2025-04-18 10:46:03.917 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:46:04.527 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:46:04.529 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: what ' s believed to be the terror cell responsible for 9 / 11 .
+2025-04-18 10:46:39.325 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:46:39.327 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: are they supposed to be neutral on the outcome of the war ?
+2025-04-18 10:46:48.397 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:46:50.157 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: Trigger word 'get away' not found in text the man came out and did the spread eagle like that , just as he did that , that ' s when you saw the child just walking just a few feet away from him but the officers were able to get the child away ..
+2025-04-18 10:47:10.536 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 failed to process item: the man came out and did the spread eagle like that , just as he did that , that ' s when you saw the child just walking just a few feet away from him but the officers were able to get the child away .
+2025-04-18 10:47:11.042 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: list index out of range
+2025-04-18 10:47:11.576 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: list index out of range
+2025-04-18 10:47:11.578 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: - i went to a place ca - - i want to say it was called stump town ,
+2025-04-18 10:47:12.652 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: Trigger word 'pushing out' not found in text by going into their territory and building these walls or building settlements - - pushing the palestinians out and - - palestinians - - fight - - with rocks and - - sticks and - - israelis have their machine guns and bulldozers and - - i just - - t - really unpalatable that the - - whole idea , the - - the way they ' re going about - - this thing and - - i do n ' t really feel qualified - - to say how it should be , but - - i - - see it - - being wrong to - - hurt children and - - innocent people ..
+2025-04-18 10:47:13.056 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:47:13.638 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:47:36.055 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:47:36.677 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:47:57.079 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: mostly small arms fire , but the sand storm has enabled the iraqis to come very close to the road , and if i sound a little nervous , it ' s because we ' re in the soft skin vehicle and everybody else is in armor .
+2025-04-18 10:47:58.154 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:47:58.761 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:47:58.762 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: are you coming here ?
+2025-04-18 10:48:20.009 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:48:20.315 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: ari fleischer expected to come into the west wing briefing room to brief reporters on a wide variety of subjekts .
+2025-04-18 10:48:20.317 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 8 got error 429 more than 3 times. Stoping ...
+2025-04-18 10:48:20.612 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:48:20.613 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: it is a garden - - it is a large garden - type area for people to take their children to go and play .
+2025-04-18 10:48:20.629 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:48:21.243 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:48:21.245 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: - i went to a place ca - - i want to say it was called stump town ,
+2025-04-18 10:48:21.432 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:48:21.485 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:48:21.747 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:48:25.653 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:48:26.393 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:48:26.933 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:48:26.935 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-18 10:48:41.821 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: the draft resolution would limit the u . n . role to helping with refugees and displaced people , reconstruction and humanitarian assistance , the official said .
+2025-04-18 10:48:42.735 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:48:42.737 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: i had relatives that lived outside of pittsburgh , once , and i went to florida from there , so i did go through west virginia .
+2025-04-18 10:48:48.059 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 10:48:48.686 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: list index out of range
+2025-04-18 10:48:48.688 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: um , yeah , i think - - you know i think they should have continued to go through with it , and you know um - - if - if there is - - if there ' s problems , you know , just - - still - - do n ' t , you know - - just ignore it , keep going , you know you ca n ' t - - stop , you know , if you already started something , you know , you should complete it , i think .
+2025-04-18 10:49:02.206 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: your journey , particularly to southern iraq , what is evoked there a sense of both that you evoke is a sense of history of this regime .
+2025-04-18 10:49:02.840 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: that said , the armored fighting vehicles that you see there they look to me as if they ' re moving a little bit faster as than we probably will .
+2025-04-18 10:49:02.842 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 7 got error 429 more than 3 times. Stoping ...
+2025-04-18 10:49:02.931 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:49:03.667 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:49:03.669 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: in 1999 , the mars polar lander was supposed to arrive alive by using
+2025-04-18 10:49:26.284 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:49:50.657 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: his warning comes as gun crime incidents are averaging about 29 a day in england and wales , more than twice the level of when the labour government came to power in 1997 .
+2025-04-18 10:49:50.660 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 3 got error 429 more than 3 times. Stoping ...
+2025-04-18 10:49:51.497 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: douglas wilder did , but they ' re bankrolling candidates for office - - white candidates for office .
+2025-04-18 10:49:51.499 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 9 got error 429 more than 3 times. Stoping ...
+2025-04-18 10:50:36.431 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:50:37.119 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:50:37.120 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-18 10:50:37.943 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:50:38.040 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:50:58.925 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:50:58.927 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: reporter : along with the picture , the flight attendant wrote a letter saying she was prague for jack ' s safe return .
+2025-04-18 10:50:59.991 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:50:59.993 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-18 10:51:00.392 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:51:00.650 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:51:00.855 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:51:01.033 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:51:01.035 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: i tell you all this not to worry you , but to give you comfort knowing what you hear and see is true and that , despite that , i am safe and will continue to be .
+2025-04-18 10:51:01.227 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:51:21.652 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: reporter : along with the picture , the flight attendant wrote a letter saying she was prague for jack ' s safe return .
+2025-04-18 10:51:21.732 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:51:21.873 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:51:21.874 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: and thank you very much to your students for all the support and the letters that they sent out to us .
+2025-04-18 10:51:22.336 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:51:22.338 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: please take a few moments to drop her a note - lrb - i do not have an email address for her .
+2025-04-18 10:51:22.502 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:51:23.089 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:51:23.688 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:51:23.691 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: we get thousands of e - mail from our viewers every day .
+2025-04-18 10:51:24.108 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:51:24.634 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:51:25.114 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:51:25.309 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:51:45.891 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:51:45.903 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:51:45.924 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:51:45.963 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:51:45.964 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: a political public service message brought to you by clear channel . ' '
+2025-04-18 10:51:46.409 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:51:46.530 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:51:46.532 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: no phones , no e - mail , letters are the only link to home .
+2025-04-18 10:51:46.569 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:51:46.570 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-18 10:51:46.590 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: they ' ll also be taking your phone calls .
+2025-04-18 10:51:46.976 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:51:46.977 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: there will be more letters on the way .
+2025-04-18 10:51:47.181 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:51:47.232 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:51:47.234 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: that ' s sort of unusual in these calls , in my experience so far .
+2025-04-18 10:51:47.433 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:51:47.435 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: is that - - is that the one where somebody called a news -
+2025-04-18 10:51:47.796 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:52:08.426 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:52:08.878 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:52:08.879 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: it was said to be saddam hussein ' s response to a letter from his niece .
+2025-04-18 10:52:08.905 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:52:08.985 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:52:08.987 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-18 10:52:09.031 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:52:09.033 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: call carnival wedding dept .
+2025-04-18 10:52:10.528 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:52:10.535 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:52:10.537 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: no phones , no e - mail , letters are the only link to home .
+2025-04-18 10:52:31.580 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:52:31.604 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: everyone wanted to call .
+2025-04-18 10:52:31.646 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:52:32.334 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:52:32.336 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: letter writing , you know , is sometimes called a lost art in this age of electronic communication .
+2025-04-18 10:52:32.536 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:52:33.254 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range
+2025-04-18 10:52:33.259 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:52:33.807 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:52:34.013 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:52:34.018 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:52:34.020 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: and now joining us by phone from liverpool with more on the harry potter heist is caroline forham , press officer with the mercy side police .
+2025-04-18 10:52:34.648 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:52:34.797 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:52:55.387 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:52:55.693 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:52:55.698 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: you can e - mail us - - this done count , sorry .
+2025-04-18 10:52:55.908 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:52:55.999 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-18 10:52:56.063 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:52:56.074 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: on the other hand , if you were a scientist at noaa and were into saving people from tsunamis , you would think you might have figured out beforehand who you might call if you did get some advanced warning of such an event .
+2025-04-18 10:52:56.277 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:52:56.358 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:52:57.060 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:52:57.068 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:52:57.078 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-18 10:52:57.352 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:52:57.559 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:52:57.726 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:52:57.755 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: you might want to mention that in your letter as well .
+2025-04-18 10:53:17.700 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: that ' s sort of unusual in these calls , in my experience so far .
+2025-04-18 10:53:18.218 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:53:18.253 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:53:18.735 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:53:18.788 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: you can bet they are figuring out who they should have call next time .
+2025-04-18 10:53:18.954 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:53:18.956 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: you can bet they are figuring out who they should have call next time .
+2025-04-18 10:53:19.919 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:53:20.358 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:53:40.916 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:53:40.918 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: you can bet they are figuring out who they should have call next time .
+2025-04-18 10:53:41.274 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:53:41.400 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:53:41.405 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-18 10:53:41.431 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:53:41.977 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:53:41.978 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: her friend anna also got one .
+2025-04-18 10:53:42.044 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:53:42.045 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-18 10:53:45.475 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:54:06.167 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:54:06.467 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:54:06.469 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: uh , we have , uh , one of our married children in the same town up here , and one of them down in south carolina .
+2025-04-18 10:54:07.171 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:54:07.811 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:54:08.383 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:54:08.385 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: poor , native - born americans who otherwise would be paid higher wages for their manual labor .
+2025-04-18 10:54:28.950 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:54:29.502 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:54:29.504 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: they have no idea at this time what caused them .
+2025-04-18 10:54:29.560 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:54:30.996 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:54:30.999 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: well , um , i would - i would have to start - - - i would have to start , generally , in stating - - - stating what i think is the problem and - - - with the middle east and what - for me , one of the major problems is the fact that - - the - - united states government gives so much aid to the state of israel .
+2025-04-18 10:54:31.584 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:54:35.510 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:54:36.311 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:54:36.892 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:54:36.892 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: the cost of class actions is factored into the cost of everything you buy .
+2025-04-18 10:54:37.363 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:54:52.999 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 10:54:53.339 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:54:53.340 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: as for how long it lasts , i would say that it lasts for the rest of your sentence , but i ' m not sure about that .
+2025-04-18 10:54:54.475 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 10:54:54.477 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: well , he he he probably will , yeah .
+2025-04-18 10:55:19.190 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:55:19.192 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: president bush points this way today , even the most frivolous of lawsuits cost money , premiums go up and either way , the patient pays .
+2025-04-18 10:55:19.852 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: the cost of class actions is factored into the cost of everything you buy .
+2025-04-18 10:55:44.536 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:55:45.152 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:56:05.521 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: currently in california , 7000 people serving 25 to year life sentences under the three strikes law .
+2025-04-18 10:56:09.393 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:56:30.722 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:56:31.280 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:56:31.339 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:56:31.342 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: for some perspective , let ' s turn to miles o ' brien with retired air force general don shepperd .
+2025-04-18 10:56:31.455 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:56:31.457 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: yeah , we ' re a pretty small town , so our newspaper covers it a lot .
+2025-04-18 10:56:31.968 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:56:31.970 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-18 10:56:31.997 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 10:56:32.659 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 10:56:33.363 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:56:34.192 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 10:56:34.193 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-18 10:56:34.561 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:56:34.854 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:56:35.464 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 10:56:35.467 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: if you were president , which national figures would you appoint to your cabinet and why ?
+2025-04-18 10:56:59.480 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 10:56:59.481 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 10:56:59.502 | INFO     | __main__:run:85 - [FINISHED] Processing 475/564 item, remaning 89/564 in 767.67 seconds
+2025-04-18 10:56:59.503 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_4way_10shot.train.jsonl
+2025-04-18 10:56:59.504 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 10:56:59.508 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 10:56:59.510 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm2\ACE_5task_4way_5shot.train.jsonl...
+2025-04-18 10:56:59.563 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm2\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-18 10:56:59.565 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 10:56:59.566 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 10:56:59.568 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 10:57:19.486 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:57:20.111 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:57:20.113 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: saba has n ' t delivered yet .
+2025-04-18 10:57:20.754 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:57:20.955 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:57:21.375 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:57:21.559 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 10:57:21.561 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: and this final story : retired senator strom thurmond has never made a secret about his fondness for young , pretty women .
+2025-04-18 10:57:35.263 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:57:35.853 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:57:36.447 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:57:36.449 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: lieutenant colonel robert leonard , we appreciate your insights in urban combat , something that is not something that the u . s . military would prefer to engage in , but it might become inevitable .
+2025-04-18 10:57:42.573 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: we do n ' t need war .
+2025-04-18 10:57:44.034 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:57:44.170 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:57:44.347 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 10:57:44.364 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 10:57:44.679 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:57:44.772 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:57:44.977 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 10:57:44.981 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:57:58.769 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:57:59.351 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:57:59.353 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: yes , i ' m not saying take the threat of force .
+2025-04-18 10:58:00.076 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:58:01.604 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:58:03.120 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:58:03.122 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: now , this is a rural setting , but this could be applied to urban combat , yes .
+2025-04-18 10:58:05.065 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: on highest alert as a carrier at war .
+2025-04-18 10:58:05.161 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: i think - - i think rudy giuliani was a great mayor - - for nine eleven .
+2025-04-18 10:58:05.330 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: - lrb - on camera - rrb - : it is an elementary fact of life during wartime : a press pass provides no protection .
+2025-04-18 10:58:05.393 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: do you support the - - do you - do you support the war ?
+2025-04-18 10:58:06.546 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 10:58:07.227 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 10:58:27.837 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: list index out of range
+2025-04-18 10:58:27.990 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:58:28.436 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:58:28.438 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: lieutenant colonel robert leonard , we appreciate your insights in urban combat , something that is not something that the u . s . military would prefer to engage in , but it might become inevitable .
+2025-04-18 10:58:28.498 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: all one of the many young faces that bear the heavy mark of war .
+2025-04-18 10:58:29.941 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: list index out of range
+2025-04-18 10:59:13.613 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 10:59:13.615 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: i ' d say my overall opinion is that - - this conflict is way past that time .
+2025-04-18 10:59:14.295 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:59:14.913 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:59:15.647 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:59:15.648 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: what ' s believed to be the terror cell responsible for 9 / 11 .
+2025-04-18 10:59:31.324 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: the shootings _ which the israeli army said came in response to attacks by palestinians throwing stones and molotov cocktails _ came a day after israeli prime minister ariel sharon declared that israel ' s occupation in the west bank must end , stunning both dovish opponents and hardline allies .
+2025-04-18 10:59:31.325 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 2 got error 429 more than 3 times. Stoping ...
+2025-04-18 10:59:37.445 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: list index out of range
+2025-04-18 10:59:37.448 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: the army is eating much , much better than the grandfathers of these soldiers did and the great grandfathers of these soldiers in the second world war .
+2025-04-18 10:59:38.393 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 10:59:38.818 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 10:59:39.167 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 10:59:39.171 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: uh and just wipe it out ,
+2025-04-18 10:59:39.778 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 10:59:40.437 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 11:00:00.798 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: are they supposed to be neutral on the outcome of the war ?
+2025-04-18 11:00:04.593 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 11:00:29.126 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: Trigger word 'dropped off' not found in text a russian soyuz capsule dropped them off this morning after docking perfectly at the orbiting outpost ..
+2025-04-18 11:00:52.394 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 11:00:53.058 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 11:00:53.705 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 11:00:53.707 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: - i went to a place ca - - i want to say it was called stump town ,
+2025-04-18 11:01:42.136 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 11:01:42.757 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 11:01:43.052 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 11:01:43.538 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 11:01:43.539 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: mostly small arms fire , but the sand storm has enabled the iraqis to come very close to the road , and if i sound a little nervous , it ' s because we ' re in the soft skin vehicle and everybody else is in armor .
+2025-04-18 11:01:43.665 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 11:01:44.292 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 11:01:44.293 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: are you coming here ?
+2025-04-18 11:02:06.807 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: list index out of range
+2025-04-18 11:02:07.163 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 11:02:07.509 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: list index out of range
+2025-04-18 11:02:07.510 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: - i went to a place ca - - i want to say it was called stump town ,
+2025-04-18 11:02:07.776 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 11:02:07.777 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: it is a garden - - it is a large garden - type area for people to take their children to go and play .
+2025-04-18 11:02:08.230 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 11:02:29.971 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 11:02:30.614 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 11:02:30.654 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 11:02:30.655 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: your journey , particularly to southern iraq , what is evoked there a sense of both that you evoke is a sense of history of this regime .
+2025-04-18 11:02:31.255 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 11:02:31.256 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: if lou dobbs , on cnn , at 6 : 10 eastern , can say , ` ` this election was a success by any measure , ' ' that ' s good enough for me .
+2025-04-18 11:02:31.351 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 11:02:32.803 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 11:02:33.560 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 11:02:33.563 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-18 11:02:33.587 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range
+2025-04-18 11:02:34.149 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range
+2025-04-18 11:02:34.713 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range
+2025-04-18 11:02:34.716 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: um , yeah , i think - - you know i think they should have continued to go through with it , and you know um - - if - if there is - - if there ' s problems , you know , just - - still - - do n ' t , you know - - just ignore it , keep going , you know you ca n ' t - - stop , you know , if you already started something , you know , you should complete it , i think .
+2025-04-18 11:02:53.551 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 11:02:56.993 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 11:02:57.624 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 11:02:57.628 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: douglas wilder did , but they ' re bankrolling candidates for office - - white candidates for office .
+2025-04-18 11:04:31.322 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: list index out of range
+2025-04-18 11:04:32.012 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 11:04:32.673 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 11:04:32.675 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: see for a confirmation of the electoral arithmetic : the states where lincoln got an abolute majority of the popular vote - lrb - i . e . , all the free states except oregon , california , and new jersey - rrb - were sufficient to bring him a majority in the electoral college .
+2025-04-18 11:04:33.509 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range
+2025-04-18 11:04:34.109 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range
+2025-04-18 11:04:34.825 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range
+2025-04-18 11:04:34.826 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-18 11:04:43.854 | ERROR    | extractor.consumer:log:55 - [ERROR] Consuming interrupted by user. Stopping safely...
+2025-04-18 11:04:43.881 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:55.709 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range
+2025-04-18 11:04:56.307 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 11:04:56.308 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-18 11:04:56.747 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: list index out of range
+2025-04-18 11:04:57.370 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: list index out of range
+2025-04-18 11:04:57.371 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: i tell you all this not to worry you , but to give you comfort knowing what you hear and see is true and that , despite that , i am safe and will continue to be .
+2025-04-18 11:04:57.972 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-18 11:04:57.974 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 169
+2025-04-18 11:04:57.976 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:04:58.013 | INFO     | __main__:run:85 - [FINISHED] Processing 286/487 item, remaning 201/487 in 478.51 seconds
+2025-04-18 11:04:58.014 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_4way_5shot.train.jsonl
+2025-04-18 11:04:58.016 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:04:58.016 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:04:58.017 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm3\ACE_5task_2way_10shot.train.jsonl...
+2025-04-18 11:04:58.068 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm3\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 11:04:58.069 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:04:58.071 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:58.072 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:04:58.079 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:04:58.086 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-18 11:04:58.111 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:04:58.113 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:04:58.136 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.12 seconds
+2025-04-18 11:04:58.137 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_2way_10shot.train.jsonl
+2025-04-18 11:04:58.138 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:04:58.139 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:04:58.141 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm3\ACE_5task_2way_5shot.train.jsonl...
+2025-04-18 11:04:58.166 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm3\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 11:04:58.169 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:04:58.170 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:58.171 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:04:58.173 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:04:58.177 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-18 11:04:58.183 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:04:58.184 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:04:58.202 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.06 seconds
+2025-04-18 11:04:58.203 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_2way_5shot.train.jsonl
+2025-04-18 11:04:58.204 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:04:58.205 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:04:58.210 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm3\ACE_5task_4way_10shot.train.jsonl...
+2025-04-18 11:04:58.271 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm3\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-18 11:04:58.272 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:04:58.274 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:58.275 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:04:58.277 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:04:58.278 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-18 11:04:58.284 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:04:58.285 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:04:58.331 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.13 seconds
+2025-04-18 11:04:58.334 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_4way_10shot.train.jsonl
+2025-04-18 11:04:58.336 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:04:58.338 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:04:58.344 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm3\ACE_5task_4way_5shot.train.jsonl...
+2025-04-18 11:04:58.548 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm3\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-18 11:04:58.549 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:04:58.550 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:58.551 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:04:58.552 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:04:58.553 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-18 11:04:58.560 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:04:58.562 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:04:58.595 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.26 seconds
+2025-04-18 11:04:58.596 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_4way_5shot.train.jsonl
+2025-04-18 11:04:58.599 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:04:58.599 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:04:58.600 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm4\ACE_5task_2way_10shot.train.jsonl...
+2025-04-18 11:04:58.627 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm4\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 11:04:58.630 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:04:58.633 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:58.636 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:04:58.638 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:04:58.647 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-18 11:04:58.653 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:04:58.654 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:04:58.673 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.07 seconds
+2025-04-18 11:04:58.677 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_2way_10shot.train.jsonl
+2025-04-18 11:04:58.682 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:04:58.684 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:04:58.685 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm4\ACE_5task_2way_5shot.train.jsonl...
+2025-04-18 11:04:58.718 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm4\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 11:04:58.720 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:04:58.724 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:58.727 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:04:58.730 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:04:58.731 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-18 11:04:58.737 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:04:58.738 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:04:58.752 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.07 seconds
+2025-04-18 11:04:58.754 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_2way_5shot.train.jsonl
+2025-04-18 11:04:58.754 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:04:58.763 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:04:58.766 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm4\ACE_5task_4way_10shot.train.jsonl...
+2025-04-18 11:04:58.815 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm4\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-18 11:04:58.817 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:04:58.818 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:58.819 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:04:58.820 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:04:58.821 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-18 11:04:58.828 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:04:58.829 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:04:58.862 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.11 seconds
+2025-04-18 11:04:58.864 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_4way_10shot.train.jsonl
+2025-04-18 11:04:58.865 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:04:58.865 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:04:58.866 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm4\ACE_5task_4way_5shot.train.jsonl...
+2025-04-18 11:04:58.908 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm4\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-18 11:04:58.909 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:04:58.911 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:58.912 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:04:58.914 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:04:58.916 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-18 11:04:58.924 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:04:58.927 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:04:58.963 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.10 seconds
+2025-04-18 11:04:58.965 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_4way_5shot.train.jsonl
+2025-04-18 11:04:58.968 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:04:58.969 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-18 11:04:58.970 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to output/des

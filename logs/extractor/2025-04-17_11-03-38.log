@@ -1,0 +1,363 @@
+2025-04-17 11:03:38.068 | INFO     | __main__:<module>:159 - [INFO] Arguments:
+2025-04-17 11:03:38.069 | INFO     | __main__:<module>:160 - Input root: data/data_text
+2025-04-17 11:03:38.069 | INFO     | __main__:<module>:161 - Output root: output/des
+2025-04-17 11:03:38.070 | INFO     | __main__:<module>:162 - Datasets: ['MAVEN', 'ACE']
+2025-04-17 11:03:38.070 | INFO     | __main__:<module>:163 - Model: gemini-2.0-flash
+2025-04-17 11:03:38.071 | INFO     | __main__:<module>:164 - Candidate: 1
+2025-04-17 11:03:38.072 | INFO     | __main__:<module>:165 - Num try: 3
+2025-04-17 11:03:38.072 | INFO     | __main__:<module>:166 - Max consecutive 429 error: 3
+2025-04-17 11:03:38.073 | INFO     | __main__:<module>:167 - Max num threads: 12
+2025-04-17 11:03:38.074 | INFO     | __main__:<module>:168 - Resume: False
+2025-04-17 11:03:38.076 | INFO     | __main__:<module>:169 - Convert test: False
+2025-04-17 11:03:38.077 | INFO     | __main__:<module>:170 - [INFO] Start processing...
+2025-04-17 11:04:07.418 | INFO     | extractor.consumer:log:53 - [INFO] Found 11 valid extractors
+2025-04-17 11:04:07.419 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:07.424 | INFO     | extractor.consumer:log:53 - [START] Start 11 threads
+2025-04-17 11:04:07.425 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:07.426 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:07.426 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 11:04:07.435 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:07.437 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:07.438 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:07.457 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:08.413 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 10 got error: 'text'
+2025-04-17 11:04:08.415 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 10 got error: 'text'
+2025-04-17 11:04:08.417 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 10 got error: 'text'
+2025-04-17 11:04:08.419 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: 'text'
+2025-04-17 11:04:08.425 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: 'text'
+2025-04-17 11:04:08.428 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: 'text'
+2025-04-17 11:04:08.434 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: 'text'
+2025-04-17 11:04:08.437 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: 'text'
+2025-04-17 11:04:08.440 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: 'text'
+2025-04-17 11:04:08.442 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: 'text'
+2025-04-17 11:04:08.444 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: 'text'
+2025-04-17 11:04:08.445 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: 'text'
+2025-04-17 11:04:08.609 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: 'text'
+2025-04-17 11:04:08.611 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: 'text'
+2025-04-17 11:04:08.612 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: 'text'
+2025-04-17 11:04:08.734 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: 'text'
+2025-04-17 11:04:08.736 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: 'text'
+2025-04-17 11:04:08.738 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 7 got error: 'text'
+2025-04-17 11:04:08.775 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: 'text'
+2025-04-17 11:04:08.776 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: 'text'
+2025-04-17 11:04:08.778 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: 'text'
+2025-04-17 11:04:09.219 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 9 got error: 'text'
+2025-04-17 11:04:09.221 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: 'text'
+2025-04-17 11:04:09.222 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: 'text'
+2025-04-17 11:04:09.427 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: 'text'
+2025-04-17 11:04:09.429 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: 'text'
+2025-04-17 11:04:09.430 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: 'text'
+2025-04-17 11:04:09.633 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: 'text'
+2025-04-17 11:04:09.634 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: 'text'
+2025-04-17 11:04:09.636 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: 'text'
+2025-04-17 11:04:10.090 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: 'text'
+2025-04-17 11:04:10.091 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: 'text'
+2025-04-17 11:04:10.092 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: 'text'
+2025-04-17 11:04:10.487 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:10.489 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 269
+2025-04-17 11:04:10.494 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:10.495 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:10.743 | INFO     | __main__:run:85 - [FINISHED] Processing 0/269 item, remaning 269/269 in 3.32 seconds
+2025-04-17 11:04:10.744 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 11:04:10.745 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:10.746 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:10.747 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 11:04:10.752 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:10.754 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:10.755 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:10.757 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:10.758 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:10.760 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 11:04:10.765 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:10.767 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:10.774 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.03 seconds
+2025-04-17 11:04:10.775 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 11:04:10.776 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:10.777 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:10.777 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 11:04:10.784 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:10.786 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:10.787 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:10.789 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:10.790 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:10.792 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 11:04:10.797 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:10.797 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:10.806 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.03 seconds
+2025-04-17 11:04:10.806 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 11:04:10.807 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:10.808 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:10.809 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 11:04:10.815 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:10.817 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:10.819 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:10.820 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:10.822 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:10.823 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 11:04:10.827 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:10.828 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:10.837 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.03 seconds
+2025-04-17 11:04:10.838 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 11:04:10.840 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:10.840 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:10.841 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 11:04:10.847 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:10.848 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:10.850 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:10.851 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:10.852 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:10.853 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 11:04:10.858 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:10.858 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:10.868 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.03 seconds
+2025-04-17 11:04:10.869 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 11:04:10.869 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:10.870 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:10.871 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 11:04:10.969 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:10.971 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:10.972 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:10.973 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:10.974 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:10.975 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 11:04:10.980 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:10.980 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:10.988 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.12 seconds
+2025-04-17 11:04:10.988 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 11:04:10.990 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:10.990 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:10.991 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 11:04:10.997 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:10.999 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.001 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.002 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.003 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.004 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 11:04:11.008 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.009 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.019 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.03 seconds
+2025-04-17 11:04:11.020 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 11:04:11.021 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.022 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.023 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 11:04:11.028 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.030 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.031 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.033 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.034 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.035 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 11:04:11.039 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.040 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.048 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.03 seconds
+2025-04-17 11:04:11.049 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 11:04:11.050 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.051 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.052 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 11:04:11.061 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.062 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.064 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.065 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.067 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.068 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 11:04:11.071 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.071 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.085 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.03 seconds
+2025-04-17 11:04:11.086 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 11:04:11.086 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.087 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.087 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 11:04:11.095 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.097 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.098 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.100 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.101 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.102 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 11:04:11.105 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.106 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.117 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.03 seconds
+2025-04-17 11:04:11.118 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 11:04:11.119 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.119 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.120 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 11:04:11.137 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.139 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.140 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.141 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.141 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.142 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 11:04:11.147 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.148 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.171 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.05 seconds
+2025-04-17 11:04:11.172 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 11:04:11.173 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.174 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.174 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 11:04:11.190 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.192 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.193 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.194 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.194 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.195 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 11:04:11.201 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.202 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.223 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.05 seconds
+2025-04-17 11:04:11.224 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 11:04:11.226 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.226 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.227 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 11:04:11.238 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.239 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.240 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.241 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.242 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.243 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 11:04:11.247 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.247 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.261 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.03 seconds
+2025-04-17 11:04:11.261 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 11:04:11.262 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.263 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.264 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 11:04:11.273 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.274 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.275 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.276 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.277 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.278 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 11:04:11.283 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.283 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.294 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.03 seconds
+2025-04-17 11:04:11.294 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 11:04:11.295 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.296 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.297 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 11:04:11.407 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.408 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.409 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.411 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.412 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.413 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 11:04:11.419 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.420 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.443 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.15 seconds
+2025-04-17 11:04:11.444 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 11:04:11.445 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.445 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.446 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 11:04:11.462 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.464 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.466 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.468 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.470 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.471 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 11:04:11.477 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.477 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.502 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.06 seconds
+2025-04-17 11:04:11.503 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 11:04:11.504 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.504 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.505 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 11:04:11.515 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.517 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.518 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.519 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.521 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.522 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 11:04:11.526 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.527 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.541 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.04 seconds
+2025-04-17 11:04:11.542 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 11:04:11.543 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.543 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.544 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 11:04:11.554 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.555 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.556 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.558 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.559 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.560 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 11:04:11.564 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.565 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.577 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.03 seconds
+2025-04-17 11:04:11.578 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 11:04:11.580 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.581 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.582 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 11:04:11.601 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.603 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.604 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.605 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.606 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.607 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 11:04:11.612 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.613 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.640 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.06 seconds
+2025-04-17 11:04:11.641 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 11:04:11.642 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.643 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.643 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 11:04:11.660 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.661 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.662 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.663 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.664 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.666 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 11:04:11.670 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.671 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.694 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.05 seconds
+2025-04-17 11:04:11.694 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 11:04:11.696 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.696 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.697 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 11:04:11.707 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.708 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.709 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.710 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.711 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.712 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 11:04:11.717 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.718 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.732 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.04 seconds
+2025-04-17 11:04:11.733 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 11:04:11.733 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.734 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.735 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 11:04:11.743 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.745 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.747 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.749 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.750 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.751 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 11:04:11.755 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.755 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.770 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.04 seconds
+2025-04-17 11:04:11.771 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 11:04:11.772 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.773 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.773 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 11:04:11.887 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 11:04:11.888 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:11.889 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:11.890 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:11.891 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:11.893 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 11:04:11.899 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:11.900 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:11.961 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.19 seconds
+2025-04-17 11:04:11.983 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 11:04:11.985 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 11:04:11.988 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 11:04:11.989 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 11:04:12.019 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 11:04:12.020 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 11:04:12.021 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:12.022 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 11:04:12.023 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 11:04:12.024 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 11:04:12.028 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 11:04:12.028 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 11:04:12.069 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.08 seconds
+2025-04-17 11:04:12.070 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 11:04:12.071 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 11:04:12.071 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-17 11:04:12.072 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to output/des

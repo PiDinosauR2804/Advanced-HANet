@@ -1,0 +1,148 @@
+2025-04-18 11:08:22.744 | INFO     | __main__:<module>:159 - [INFO] Arguments:
+2025-04-18 11:08:22.745 | INFO     | __main__:<module>:160 - Input root: data/data_text
+2025-04-18 11:08:22.746 | INFO     | __main__:<module>:161 - Output root: test/output
+2025-04-18 11:08:22.747 | INFO     | __main__:<module>:162 - Datasets: ['MAVEN']
+2025-04-18 11:08:22.747 | INFO     | __main__:<module>:163 - Model: gemini-2.0-flash
+2025-04-18 11:08:22.747 | INFO     | __main__:<module>:164 - Candidate: 1
+2025-04-18 11:08:22.748 | INFO     | __main__:<module>:165 - Num try: 3
+2025-04-18 11:08:22.748 | INFO     | __main__:<module>:166 - Max consecutive 429 error: 3
+2025-04-18 11:08:22.749 | INFO     | __main__:<module>:167 - Max num threads: 12
+2025-04-18 11:08:22.749 | INFO     | __main__:<module>:168 - Resume: False
+2025-04-18 11:08:22.749 | INFO     | __main__:<module>:169 - Convert test: False
+2025-04-18 11:08:22.750 | INFO     | __main__:<module>:170 - [INFO] Start processing...
+2025-04-18 11:08:51.610 | INFO     | extractor.consumer:log:53 - [INFO] Found 11 valid extractors
+2025-04-18 11:08:51.611 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:08:51.616 | INFO     | extractor.consumer:log:53 - [START] Start 11 threads
+2025-04-18 11:08:51.618 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:08:51.621 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:08:51.622 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-18 11:08:51.744 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 11:08:51.747 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:08:51.748 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:08:51.779 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:08:53.361 | ERROR    | extractor.llm:extract_event:143 - [EXTRACT EVENT] No events found in the response.
+2025-04-18 11:08:53.362 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range
+2025-04-18 11:08:54.263 | ERROR    | extractor.llm:extract_event:143 - [EXTRACT EVENT] No events found in the response.
+2025-04-18 11:08:54.264 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: list index out of range
+2025-04-18 11:09:16.102 | ERROR    | extractor.llm:extract_event:143 - [EXTRACT EVENT] No events found in the response.
+2025-04-18 11:09:16.104 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: list index out of range
+2025-04-18 11:09:16.105 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: the poor state of the roads and rail lines in algeria meant that allied forces faced difficult logistic challenges which enabled the axis to prolong a defence.
+2025-04-18 11:09:37.656 | ERROR    | extractor.llm:extract_event:143 - [EXTRACT EVENT] No events found in the response.
+2025-04-18 11:09:37.658 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range
+2025-04-18 11:09:38.292 | ERROR    | extractor.llm:extract_event:143 - [EXTRACT EVENT] No events found in the response.
+2025-04-18 11:09:38.293 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range
+2025-04-18 11:09:38.295 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: the 2014 women ' s hockey world cup was the 13th edition of the women ' s hockey world cup field hockey tournament.
+2025-04-18 11:09:59.389 | ERROR    | extractor.llm:extract_event:143 - [EXTRACT EVENT] No events found in the response.
+2025-04-18 11:09:59.391 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range
+2025-04-18 11:10:25.416 | ERROR    | extractor.consumer:log:55 - [ERROR] Consuming interrupted by user. Stopping safely...
+2025-04-18 11:10:25.419 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:10:41.193 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 got none event list: the tournament has always been held in ` ` arena mexico ' ' in mexico city, mexico, the main arena of cmll.
+2025-04-18 11:10:41.739 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 got none event list: the 1951 asiad were originally scheduled to be held in 1950, but postponed until 1951 due to delays in preparations.
+2025-04-18 11:10:42.139 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 10 got none event list: singapore was awarded rights to host the southeast asian games in 2011 after several delays from 2007 due to the construction of the new national stadium.
+2025-04-18 11:10:42.444 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 got none event list: the shield is usually contested by the winners of the premier league and the fa cup, but since chelsea won the double, manchester united qualified by default as premier league runners - up.
+2025-04-18 11:11:01.710 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 got none event list: the doubles competition was scheduled first, though it is unclear whether the french pair that won had any competition.
+2025-04-18 11:11:02.326 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 got none event list: arsenal ' s victory was the biggest in the community shield in 16 years.
+2025-04-18 11:11:02.857 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 got none event list: when finally held in 1981, tournament organizer alan eagleson speculated it could be the last such event due to rising costs and disappointing attendance.
+2025-04-18 11:11:03.351 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 got none event list: the 2013 scottish cup final was the 128th final of the scottish cup, the most prestigious knockout football competition in scotland.
+2025-04-18 11:11:03.549 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 got none event list: after over a decade in the second tier of english football, brian clough took charge at derby and kickstarted a revolution at the club ; it went on to win the football league first division twice in the 1970s and reach the european cup semi finals in 1973 before rapidly declining back to the third tier and near financial meltdown within ten years of its second championship.
+2025-04-18 11:11:03.594 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 got none event list: in the reserve race, cambridge ' s goldie defeated oxford ' s isis, while cambridge won the women ' s boat race.
+2025-04-18 11:11:04.013 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 got none event list: this tournament was inaugurated on the basis of fifa confederations cup where the best teams from their respected confederations compete against each other but in this case the top teams in the icc odi championship compete with each other.
+2025-04-18 11:11:04.016 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-18 11:11:04.017 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 213
+2025-04-18 11:11:04.023 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:11:04.033 | INFO     | __main__:run:85 - [FINISHED] Processing 54/280 item, remaning 226/280 in 132.41 seconds
+2025-04-18 11:11:04.039 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-18 11:11:04.040 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:11:04.041 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:11:04.042 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-18 11:11:04.082 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 11:11:04.083 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:11:04.086 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:11:04.088 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:11:04.090 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:11:04.092 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-18 11:11:04.096 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:11:04.097 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:11:04.109 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.07 seconds
+2025-04-18 11:11:04.111 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-18 11:11:04.131 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:11:04.132 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:11:04.134 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-18 11:11:04.179 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 11:11:04.180 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:11:04.182 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:11:04.183 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:11:04.186 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:11:04.189 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-18 11:11:04.194 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:11:04.195 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:11:04.205 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.07 seconds
+2025-04-18 11:11:04.208 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-18 11:11:04.209 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:11:04.211 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:11:04.213 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-18 11:11:04.250 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 11:11:04.254 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:11:04.256 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:11:04.260 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:11:04.264 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:11:04.266 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-18 11:11:04.278 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:11:04.278 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:11:04.286 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.08 seconds
+2025-04-18 11:11:04.289 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-18 11:11:04.297 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:11:04.300 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:11:04.302 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-18 11:11:04.324 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 11:11:04.331 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:11:04.332 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:11:04.338 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:11:04.345 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:11:04.349 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-18 11:11:04.374 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:11:04.376 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:11:04.389 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.09 seconds
+2025-04-18 11:11:04.394 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-18 11:11:04.395 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:11:04.396 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:11:04.397 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-18 11:11:04.573 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 11:11:04.575 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:11:04.576 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:11:04.578 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:11:04.579 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:11:04.583 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-18 11:11:04.595 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:11:04.595 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:11:04.609 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.21 seconds
+2025-04-18 11:11:04.611 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-18 11:11:04.615 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:11:04.617 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:11:04.620 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-18 11:11:04.647 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-18 11:11:04.657 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:11:04.664 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:11:04.665 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:11:04.680 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:11:04.683 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-18 11:11:04.692 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:11:04.693 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:11:04.705 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.09 seconds
+2025-04-18 11:11:04.712 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-18 11:11:04.713 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 11:11:04.714 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 11:11:04.715 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-18 11:11:04.787 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-18 11:11:04.789 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-18 11:11:04.791 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:11:04.792 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-18 11:11:04.793 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-18 11:11:04.795 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-18 11:11:04.799 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-18 11:11:04.799 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-18 11:11:04.809 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.10 seconds
+2025-04-18 11:11:04.811 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-18 11:11:04.812 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-18 11:11:04.812 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-18 11:11:04.813 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to test/output
