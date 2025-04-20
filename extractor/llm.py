@@ -3,8 +3,8 @@ from google.genai import types
 import time
 import re
 import ast
+import random
 from loguru import logger
-from tqdm import tqdm
 
 class Extractor():
     def __init__(self, api_key:str):
@@ -17,12 +17,25 @@ class Extractor():
         """
         Extract events from text using Google Gemini API.
         """
-        return [[{"text": text, 
-                  "event_type": "meeting", 
-                  "trigger_word": text.split()[0], 
-                  "event_time": None, 
-                  "event_location": None, 
-                  "event_participants": []}]]  # Dummy response for the base class
+        ran = random.random()
+        if ran < 0.7:
+            return [[{"text": text, 
+                    "event_type": "meeting", 
+                    "trigger_word": text.split()[0], 
+                    "event_time": None, 
+                    "event_location": None, 
+                    "event_participants": []}]]  # Dummy response for the base class
+        elif ran < 0.8:
+            return [[{"text": text, 
+                    "event_type": "meeting", 
+                    "trigger_word": "abc", 
+                    "event_time": None, 
+                    "event_location": None, 
+                    "event_participants": []}]]  # Dummy response for the base class
+        elif ran < 0.9:
+            return []
+        else:
+            raise Exception("RESOURCE_EXHAUSTED")  # Simulate quota exhaustion
         
 class Extractor_Gemini(Extractor):
     def __init__(self, api_key:str):
@@ -31,22 +44,24 @@ class Extractor_Gemini(Extractor):
         """
         self.api_key = api_key
         self.client = genai.Client(api_key=api_key)
-        self.prompt = """You are an event extraction expert. Given a text, extract the event triggers. You should return a list of events in the last line with format:
-The events are: [...]. 
-Each event should be a dictionary with the following keys: "event_type", "trigger_word", "event_time", "event_location", "event_participants" and "description". 
+        self.prompt = """You are an event extraction expert. Given a text, let extract the event triggers from the text. 
+Each event should be a dictionary with the following keys: 
+"event_type", "trigger_word", "event_time", "event_location", "event_participants" and "description". 
 The values for these keys should be extracted from the text. If any of the keys are not present in the text, return None for that key.
+You should return a list of event dictionary, in the last line with format: The events are: [{{...}}, {{...}}, ...]. 
 For example:
 1. If the text is "John and Mary met at the park on Monday", the output should be:
 The events are: [{{"event_type": "meeting", "trigger_word": "met", "event_time": "Monday", "event_location": "park", "event_participants": ["John", "Mary"], "description": "The trigger word met refers to the event where two or more parties encountered each other, marking the occurrence of a meeting or interaction"}}]
 2. If the text is "The July 2006 earthquake was also centered in the Indian Ocean, from the coast of Java, and had a duration of more than three minutes.", the output should be:
 The events are: [{{"event_type": "catastrophe", "trigger_word": "earthquake", "event_time": "July 2006", "event_location": "Indian Ocean", "event_participants": None, "description": "The trigger word earthquake refers to the event of the earth shaking, often causing destruction and damage"}}, 
                 {{"event_type": "placing", "trigger_word": "centered", "event_time": "July 2006", "event_location": "Indian Ocean", "event_participants": None, "description": "The trigger word centered refers to the event of being located at a specific point or area"}}]
-3. If the text does not contain any events, return an empty list.
-The events are: []
 
-Now, please extract the events from the following text:
+Let extract at least 1 event dictionary from the text. Pay attention to the trigger word, it should be a verb or a noun that indicates an action or an event.
+Now, extract the list of event dictionary from the following text:
 {content}
 """
+# 3. If the text does not contain any events, return an empty list.
+# The events are: []
 
     def response_to_string(self, response, idx=0):
         if idx > len(response.candidates):
@@ -75,10 +90,10 @@ Now, please extract the events from the following text:
                 return events_list
             
             except ValueError as e:
-                logger.error(f"[EXTRACT EVENT] Error parsing events: {e}")
+                logger.error(f"[EXTRACT RESPONSE] Error parsing events: {e}")
                 return None
         else:
-            logger.error(f"[EXTRACT EVENT] No events found in the response.")
+            logger.error(f"[EXTRACT RESPONSE] No events found in the response.")
             return None
         
     def validate_event_list(self, event_list:list)->list:
@@ -88,7 +103,7 @@ Now, please extract the events from the following text:
         valid_events = []
         for event in event_list:
             if not isinstance(event, dict):
-                logger.error(f"[EXTRACT EVENT] Invalid event format: {event}")
+                logger.error(f"[VALIDATE EVENT LIST] Event is not a dict: {event}")
             else:
                 for key, value in event.items():
                     if isinstance(value, str):
@@ -104,16 +119,13 @@ Now, please extract the events from the following text:
                             event[key] = [v.lower().strip() for v in value if isinstance(v, str)]
                     else:
                         event[key] = None
+                        
             if event.get("trigger_word") is not None:
                 valid_events.append(event)
             else:
-                logger.error(f"[EXTRACT EVENT] Invalid event: {event}")
-        if len(valid_events) == 0:
-            logger.error(f"[EXTRACT EVENT] No valid events found in the response.")
-            return None
-        else: 
-            # logger.info(f"[EXTRACT EVENT] Found {valid_events}")
-            return valid_events
+                logger.error(f"[VALIDATE EVENT LIST] Event not have trigger_word attribute: {event}")
+
+        return valid_events
 
     def extract_event(self, text:str, model="gemini-2.0-flash", candidate=1):
         """
@@ -138,21 +150,21 @@ Now, please extract the events from the following text:
                 if valid_event_list:
                     res.append(valid_event_list)
                 else:
-                    logger.error(f"[EXTRACT EVENT] No valid events found in the response.")
+                    logger.error(f"[EXTRACT EVENT] | Text: {text} | Failed to validate event list: {event_list}")
             else:
-                logger.error(f"[EXTRACT EVENT] No events found in the response.")
+                logger.error(f"[EXTRACT EVENT] | Text: {text} | Failed to extract event list from response: {response_string}")
 
         return res
     
 def is_quota_exhausted_error(e: Exception):
     return "RESOURCE_EXHAUSTED" in str(e) or "429" in str(e)
 
-def is_valid_extractor(extractor, text="australia won the tournament, beating pakistan in the final by 25 runs.", max_try=2):
+def is_valid_extractor(extractor, text="australia won the tournament, beating pakistan in the final by 25 runs.", max_try=2, timeout=5):
     for _ in range(max_try):
         try:
             _ = extractor.extract_event(text, model="gemini-2.0-flash", candidate=1)
         except Exception as e:
             if is_quota_exhausted_error(e):
                 return False
-            time.sleep(5)
+            time.sleep(timeout)
     return True

@@ -12,8 +12,8 @@ def parse_arguments():
     parser.add_argument('--max_consecutive_429_error', default=3, type=int)
     parser.add_argument('--max_num_threads', default=10, type=int)
     parser.add_argument('--logs_dir', default='./logs/extractor', type=str)
-    parser.add_argument('--extractor_resume', default=False, type=bool)
-    parser.add_argument('--convert_test', default=False, type=bool)
+    parser.add_argument('--eresume', action='store_true')
+    parser.add_argument('--convert_test', action='store_true')
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
@@ -21,7 +21,7 @@ def parse_arguments():
     parser.add_argument('--log-dir', default='./outputs/log_terminal/02-10-nomap-clreps')
     parser.add_argument('--tb-dir', default='./outputs/log_tensorboard/02-10-nomap-clreps')
     parser.add_argument('--save-dir', default='')
-    parser.add_argument('--resume', default='')
+    parser.add_argument('--cresume', default='')
     parser.add_argument('--parallel', default='single', choices=['single', 'DP', 'DDP'])
     parser.add_argument('--device_ids', default='0,1')
     parser.add_argument("--local_rank", type=int, default=0)

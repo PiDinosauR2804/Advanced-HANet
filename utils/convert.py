@@ -53,7 +53,7 @@ def sent2ids(item:dict)->dict:
         if offset != -1:
             offsets.append([offset, offset + len(trigger_word) - 1])
         else:
-            raise ValueError(f"Trigger word '{trigger_word}' not found in text {item['text']}.")
+            raise ValueError(f"Trigger word '{trigger_word}' not found | Text: {item['text']}.")
         # Tìm vị trí của trigger word trong offsets_mp
         start = -1
         end = -1

@@ -106,9 +106,9 @@ def train(local_rank, args):
     
     # Tạo class dùng để lưu old sample từ task trước
     exemplars = Exemplars() # TODO: 
-    if args.resume:
-        logger.info(f"Resuming from {args.resume}")
-        state_dict = torch.load(args.resume)
+    if args.cresume:
+        logger.info(f"Resuming from {args.cresume}")
+        state_dict = torch.load(args.cresume)
         model.load_state_dict(state_dict['model'])
         optimizer.load_state_dict(state_dict['optimizer'])
         task_idx = task_idx[state_dict['stage']:]

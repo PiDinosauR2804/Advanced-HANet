@@ -16,14 +16,15 @@ class Consumer:
         self.candidate = candidate
         self.pbar = None
         self.results = []
+        self.processed_item = 0
+        self.remained_item = 0
+        self.queue_waiting_time = 1
+        self.error_waiting_time = 20
+        self.extractors = []
         # Attribute for threading
         self.stop_event = threading.Event()
         self.pause_event = threading.Event()
-        self.print_lock = threading.Lock()
-        self.append_lock = threading.Lock()
-        self.processed_item = 0
-        self.remained_item = 0
-        self.extractors = []
+        self.lock = threading.Lock()
 
         # Init extractors
         for i in range(len(GEMINI_KEY)):
@@ -37,28 +38,14 @@ class Consumer:
                 
             if len(self.extractors) >= max_num_threads:
                 break
-        self.log(f"[INFO] Found {len(self.extractors)} valid extractors", mode="INFO")   
+        logger.info(f"[INFO] Found {len(self.extractors)} valid extractors")   
         self.pause_threads()
         self.threads = []
         for i in range(len(self.extractors)):
             # Create a thread for each extractor
             self.threads.append(threading.Thread(target=self.worker, args=(i,)))
             self.threads[i].start()
-        self.log(f"[START] Start {len(self.threads)} threads", mode="INFO")
-            
-            
-    def log(self, str:str, mode="INFO"):
-        with self.print_lock:
-            if mode == "INFO":
-                logger.info(str)
-            elif mode == "ERROR":
-                logger.error(str)
-            elif mode == "WARNING":
-                logger.warning(str)
-            elif mode == "DEBUG":
-                logger.debug(str)
-            elif mode == "FATAL":
-                logger.critical(str)
+        logger.info(f"[START] Start {len(self.threads)} threads")
             
     def stop_threads(self):
         self.stop_event.set()
@@ -66,50 +53,51 @@ class Consumer:
         for thread in self.threads:
             thread.join()
             
-        self.log(f"[STOP] All threads stopped", mode="INFO")
+        logger.info(f"[STOP] All threads stopped")
             
     def pause_threads(self):
         self.pause_event.clear()
+        time.sleep(2*self.queue_waiting_time)  # Wait for a while before stopping the threads
         
-        self.log(f"[PAUSE] All threads paused", mode="INFO")
+        logger.info(f"[PAUSE] All threads paused")
         
     def resume_threads(self):
         self.pause_event.set()
         
-        self.log(f"[RESUME] All threads resumed", mode="INFO")
+        logger.info(f"[RESUME] All threads resumed")
     
     def clear_results(self):
         self.results = []
         self.processed_item = 0
         self.remained_item = 0
         
-        self.log(f"[CLEAR] All results cleared", mode="INFO")
+        logger.info(f"[CLEAR] All results cleared")
         
-    def append_results(self, line_idx, key, idx, item):
-        with self.append_lock:
+    def append_processed_item(self, line_idx, key, idx, item):
+        with self.lock:
             self.results.append((line_idx, key, idx, item))
+            self.processed_item += 1
+            self.task_queue.task_done()
+            self.pbar.update(1)
+        
+    def append_remained_item(self, line_idx, key, idx, item):
+        with self.lock:
+            self.results.append((line_idx, key, idx, item))
+            self.remained_item += 1
+            self.task_queue.task_done()
+            self.pbar.update(1)
         
     def consume_left_items(self):
-        self.log(f"[ERROR] Task queue is not empty after consuming. Remaining items: {self.task_queue.qsize()}", mode="ERROR")
-        # Giả sử self.task_queue là một Queue (ví dụ queue.Queue hoặc multiprocessing.Queue)
-        queue_size = self.task_queue.qsize()
-        pbar = tqdm(total=queue_size, desc="Consuming remaining items", unit="item")
-
         while not self.task_queue.empty():
             line_idx, key, idx, item = self.task_queue.get_nowait()
-
-            # self.log(f"[INFO] Consumed unprocessed item: {item['text'][:30]}", mode="INFO")
-            self.append_results(line_idx, key, idx, item)
-            self.remained_item += 1
-            pbar.update(1)
-            pbar.close()
+            self.append_remained_item(line_idx, key, idx, item)
 
     def worker(self, worker_id):
         extractor = self.extractors[worker_id]
         
         while not self.stop_event.is_set():
             if extractor['consecutive_429_error'] >= self.max_consecutive_429_error:
-                self.log(f"[FATAL] Worker {worker_id} got error 429 more than {self.max_consecutive_429_error:} times. Stoping ...", mode="FATAL")
+                logger.critical(f"[FATAL] Worker {worker_id} got error 429 more than {self.max_consecutive_429_error:} times. Stoping ...")
                 # Stop the thread
                 break
             
@@ -117,16 +105,13 @@ class Consumer:
             
             try:
                 line_idx, key, idx, item = self.task_queue.get(timeout=0.1)
-                self.pbar.update(1)
             except queue.Empty:
-                time.sleep(1)
+                time.sleep(self.queue_waiting_time)  # Wait for a while before checking the queue again
                 continue
             
             # Check if the item is already processed
             if 'events' in item:
-                # self.log(f"[SKIP] Worker {worker_id} processed item: {item['text'][:30]}")
-                self.append_results(line_idx, key, idx, item)
-                self.processed_item += 1
+                self.append_processed_item(line_idx, key, idx, item)
                 continue
             
             # Try to process the item
@@ -141,26 +126,22 @@ class Consumer:
                             'events': event_list,
                         }
                         new_item = sent2ids(new_item) # Add piece_ids, span and offsets
-                        self.append_results(line_idx, key, idx, new_item)
-                        self.processed_item += 1
-                        # self.log(f"[SUCCESS] Worker {worker_id} processed item: {item['text'][:30]}", mode="INFO")
+                        self.append_processed_item(line_idx, key, idx, new_item)
                         break
                     
                 except Exception as e:
                     if is_quota_exhausted_error(e):
-                        # self.log(f"[429 ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got 429 error", mode="WARNING")
                         extractor['consecutive_429_error'] += 1
-                        time.sleep(20)  # Wait for 15 seconds before retrying
+                        time.sleep(self.error_waiting_time)  # Wait for 15 seconds before retrying
                     else:
                         extractor['consecutive_429_error'] = 0
-                        self.log(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} | text: {item['text']} | got error: {e}", mode="ERROR")
+                        logger.error(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got error: {e} | Text: {item['text']}")
             else:
                 if not event_list:
-                    self.log(f"[ERROR] Worker {worker_id} got none event list: {item['text']}", mode="ERROR")
+                    logger.error(f"[FAIL] Worker {worker_id} cannot extract event list after {self.num_try} attempts. | Text: {item['text']}")
                 else:
-                    self.log(f"[ERROR] Worker {worker_id} failed to process item: {item['text']}", mode="ERROR")
-                self.append_results(line_idx, key, idx, item)
-                self.remained_item += 1
+                    logger.error(f"[FAIL] Worker {worker_id} fail to process event list: {event_list} | Text: {item['text']}")
+                self.append_remained_item(line_idx, key, idx, item)
  
     def is_any_thread_running(self):
         return any(thread.is_alive() for thread in self.threads)
@@ -170,26 +151,26 @@ class Consumer:
         self.model = model
         self.pbar = tqdm(total=self.task_queue.qsize(), desc=pbar_des, unit="item")
         self.clear_results()
+        logger.info(f"[CONSUMING] Start consuming.")
         self.resume_threads()
-        self.log(f"[CONSUMING] Start consuming.", mode="INFO")
         
         try:
-            while not self.task_queue.empty():
+            while self.task_queue.unfinished_tasks > 0:
                 if not self.is_any_thread_running():
-                    self.log(f"[ERROR] No threads are running. Stopping ...", mode="ERROR")
+                    logger.critical(f"[FATAL] No threads are running. Consuming remained {self.task_queue.qsize()} items ...")
                     self.consume_left_items()
                     break
                 
                 time.sleep(1)
-            self.pbar.close()
+            
             self.pause_threads()
-            self.log(f"[CONSUMING] Finished consuming.", mode="INFO")
-            return self.results, self.processed_item, self.remained_item
-                
+            
         except KeyboardInterrupt:
-            self.log(f"[ERROR] Consuming interrupted by user. Stopping safely...", mode="ERROR")
-            self.pbar.close()
+            logger.critical(f"[FALTAL] Consuming interrupted by user. Stopping safely...")
             self.stop_threads()
             self.consume_left_items()
-            self.log(f"[CONSUMING] Finished consuming.", mode="INFO")
+            
+        finally:
+            self.pbar.close()
+            logger.info(f"[CONSUMING] Finished consuming.")
             return self.results, self.processed_item, self.remained_item

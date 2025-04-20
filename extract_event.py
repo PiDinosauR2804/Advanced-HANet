@@ -42,7 +42,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
     for dataset in datasets:
         os.makedirs(os.path.join(output_path, dataset), exist_ok=True)
 
-        for i in range(1, 5):
+        for i in range(5):
             input_folder = os.path.join(input_path, dataset, "perm"+str(i))
             if not os.path.exists(input_folder):
                 logger.error(f"[ERROR] Folder {input_folder} is not exist", mode="ERROR")
@@ -134,7 +134,7 @@ if __name__ == "__main__":
     num_try = args.num_try
     max_consecutive_429_error = args.max_consecutive_429_error
     max_num_threads = args.max_num_threads
-    resume = args.extractor_resume
+    resume = args.eresume
     convert_test = args.convert_test
     logs_dir = args.logs_dir
     
