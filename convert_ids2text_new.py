@@ -11,7 +11,7 @@ tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 input_path = "data/data_ids"
 output_path = "raw_text"
 datasets = ["ACE", "MAVEN"]
-# datasets = ["ACE"]
+# datasets = ["MAVEN"]
 
 def ids2list(list_data: list) -> list:
     res = []
@@ -40,8 +40,10 @@ def ids2list(list_data: list) -> list:
             token_offsets.append((start, end))
 
         reconstructed_text = reconstructed_text.replace(" ' ", "'")
+        reconstructed_text = reconstructed_text.replace(" - ", "-")
         reconstructed_text = reconstructed_text.replace("[CLS] ", "")
         reconstructed_text = reconstructed_text.replace(" [SEP]", "")
+        reconstructed_text = reconstructed_text.replace(" n't", "n't")
 
         # Tính offset dựa theo span trong item
         offsets = []
