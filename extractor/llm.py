@@ -150,9 +150,9 @@ Now, extract the list of event dictionary from the following text:
                 if valid_event_list:
                     res.append(valid_event_list)
                 else:
-                    logger.error(f"[EXTRACT EVENT] | Text: {text} | Failed to validate event list: {event_list}")
+                    logger.error(f"[EXTRACT EVENT] Failed to validate event list: {event_list} | Text: {text}")
             else:
-                logger.error(f"[EXTRACT EVENT] | Text: {text} | Failed to extract event list from response: {response_string}")
+                logger.error(f"[EXTRACT EVENT] Failed to extract event list from response: {response_string} | Text: {text}")
 
         return res
     
