@@ -79,12 +79,7 @@ def main():
     # Khởi tạo API Key và cấu hình
     
     api_keys = [
-        "AIzaSyB6OBSAoTR7TCGzGsNqIBzHp7FrIW5R-2Q",   # bk
-        "AIzaSyDoc8Tq25ZkUYWl9XeyuLb7t1jyqp-nG3Y",   # nht
-        "AIzaSyAnfYceSbVi4Nj9SY_Xt6fEonRWwkwl4so",   # tomosia
-        "AIzaSyCOyorzZ8vm92BiuZY7Z2Hbt34i2D_Adkk",   # csp
-        "AIzaSyCa8KFLqX99kqT8HkjGijAAuRRcJQJxKzI",   # ntt
-        "AIzaSyC8rLSw15QLuWntg5T02mbIzJS19fk-5zc",   # ngo hoang ton     
+ 
     ]
     
     API_KEY = api_keys[0]
