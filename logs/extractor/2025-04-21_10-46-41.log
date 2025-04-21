@@ -1,0 +1,596 @@
+2025-04-21 10:46:41.868 | INFO     | __main__:<module>:163 - [INFO] Arguments:
+2025-04-21 10:46:41.868 | INFO     | __main__:<module>:164 - Input root: data/data_text
+2025-04-21 10:46:41.869 | INFO     | __main__:<module>:165 - Output root: test/output
+2025-04-21 10:46:41.869 | INFO     | __main__:<module>:166 - Datasets: ['MAVEN']
+2025-04-21 10:46:41.870 | INFO     | __main__:<module>:167 - Model: gemini-2.0-flash-lite
+2025-04-21 10:46:41.870 | INFO     | __main__:<module>:168 - Candidate: 5
+2025-04-21 10:46:41.871 | INFO     | __main__:<module>:169 - Num try: 3
+2025-04-21 10:46:41.871 | INFO     | __main__:<module>:170 - Max consecutive 429 error: 4
+2025-04-21 10:46:41.872 | INFO     | __main__:<module>:171 - Max num threads: 10
+2025-04-21 10:46:41.872 | INFO     | __main__:<module>:172 - Resume: False
+2025-04-21 10:46:41.873 | INFO     | __main__:<module>:173 - Convert test: False
+2025-04-21 10:46:41.873 | INFO     | __main__:<module>:174 - [INFO] Start processing...
+2025-04-21 10:47:18.098 | INFO     | extractor.consumer:__init__:45 - [INFO] Found 10 valid extractors
+2025-04-21 10:47:20.104 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 10:47:20.111 | INFO     | extractor.consumer:__init__:52 - [START] Start 10 threads
+2025-04-21 10:47:20.113 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 10:47:20.114 | INFO     | __main__:run:67 - ====================================================================================================
+2025-04-21 10:47:20.115 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-21 10:47:20.131 | INFO     | extractor.producer:produce:42 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 10:47:20.135 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 10:47:20.136 | INFO     | extractor.consumer:consume:163 - [CONSUMING] Start consuming.
+2025-04-21 10:47:20.138 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 10:49:19.248 | ERROR    | extractor.llm:extract_response:98 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+def extract_events(text):
+    events = []
+    # Event 1
+    event1 = {
+        "event_type": "attack",
+        "trigger_word": "attacked",
+        "event_time": "that day",
+        "event_location": "town",
+        "event_participants": ["242 japanese aircraft"],
+        "description": "The trigger word attacked indicates a hostile action involving the use of force to inflict damage or injury, typically against a location or target."
+    }
+    events.append(event1)
+
+    return events
+
+text = "on that day, 242 japanese aircraft, in two separate raids, attacked the town, ships in darwin ' s harbour and the town ' s two airfields in an attempt to prevent the allies from using them as bases to contest the invasion of timor and java during world war ii."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+
+2025-04-21 10:49:19.251 | ERROR    | extractor.llm:extract_event:191 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    events = []
+    # Event 1
+    event1 = {
+        "event_type": "attack",
+        "trigger_word": "attacked",
+        "event_time": "that day",
+        "event_location": "town",
+        "event_participants": ["242 japanese aircraft"],
+        "description": "The trigger word attacked indicates a hostile action involving the use of force to inflict damage or injury, typically against a location or target."
+    }
+    events.append(event1)
+
+    return events
+
+text = "on that day, 242 japanese aircraft, in two separate raids, attacked the town, ships in darwin ' s harbour and the town ' s two airfields in an attempt to prevent the allies from using them as bases to contest the invasion of timor and java during world war ii."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+ | Text: on that day, 242 japanese aircraft, in two separate raids, attacked the town, ships in darwin ' s harbour and the town ' s two airfields in an attempt to prevent the allies from using them as bases to contest the invasion of timor and java during world war ii.
+2025-04-21 10:49:23.234 | ERROR    | extractor.llm:extract_response:98 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+    # Event 1
+    event1 = {
+        "event_type": "attack",
+        "trigger_word": "attack",
+        "event_time": "end of march",
+        "event_location": "amman",
+        "event_participants": ["transjordan"],
+        "description": "The trigger word attack refers to an act of aggression or a military offensive against an enemy."
+    }
+    events.append(event1)
+    # Event 2
+    event2 = {
+        "event_type": "battle",
+        "trigger_word": "battle",
+        "event_time": "end of march",
+        "event_location": "amman",
+        "event_participants": ["transjordan"],
+        "description": "The trigger word battle refers to a sustained fight between armed forces."
+    }
+    events.append(event2)
+    # Event 3
+    event3 = {
+        "event_type": "attack",
+        "trigger_word": "attack",
+        "event_time": "end of april",
+        "event_location": "shunet nimrin and es salt",
+        "event_participants": ["transjordan"],
+        "description": "The trigger word attack refers to an act of aggression or a military offensive against an enemy."
+    }
+    events.append(event3)
+
+    return events
+text = "towards the end of march the first transjordan attack on amman and the first battle of amman were launched from the jordan valley followed a few weeks later by the equally unsuccessful second transjordan attack on shunet nimrin and es salt at the end of april."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+
+2025-04-21 10:49:23.238 | ERROR    | extractor.llm:extract_event:191 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+    # Event 1
+    event1 = {
+        "event_type": "attack",
+        "trigger_word": "attack",
+        "event_time": "end of march",
+        "event_location": "amman",
+        "event_participants": ["transjordan"],
+        "description": "The trigger word attack refers to an act of aggression or a military offensive against an enemy."
+    }
+    events.append(event1)
+    # Event 2
+    event2 = {
+        "event_type": "battle",
+        "trigger_word": "battle",
+        "event_time": "end of march",
+        "event_location": "amman",
+        "event_participants": ["transjordan"],
+        "description": "The trigger word battle refers to a sustained fight between armed forces."
+    }
+    events.append(event2)
+    # Event 3
+    event3 = {
+        "event_type": "attack",
+        "trigger_word": "attack",
+        "event_time": "end of april",
+        "event_location": "shunet nimrin and es salt",
+        "event_participants": ["transjordan"],
+        "description": "The trigger word attack refers to an act of aggression or a military offensive against an enemy."
+    }
+    events.append(event3)
+
+    return events
+text = "towards the end of march the first transjordan attack on amman and the first battle of amman were launched from the jordan valley followed a few weeks later by the equally unsuccessful second transjordan attack on shunet nimrin and es salt at the end of april."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+ | Text: towards the end of march the first transjordan attack on amman and the first battle of amman were launched from the jordan valley followed a few weeks later by the equally unsuccessful second transjordan attack on shunet nimrin and es salt at the end of april.
+2025-04-21 10:50:00.323 | ERROR    | extractor.llm:extract_response:98 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: Capture event
+    if "captured" in text:
+        event = {
+            "event_type": "capture",
+            "trigger_word": "captured",
+            "event_time": "between march 10 and 18",
+            "event_location": "key central highlands city of buon ma thuot",
+            "event_participants": ["the north vietnamese leadership", "the people ' s army of vietnam"],
+            "description": "The trigger word captured refers to the military event where a location is taken by force."
+        }
+        events.append(event)
+    
+    if "held" in text:
+        event = {
+            "event_type": "hold",
+            "trigger_word": "held",
+            "event_time": "between march 10 and 18",
+            "event_location": "key central highlands city of buon ma thuot",
+            "event_participants": ["the people ' s army of vietnam"],
+            "description": "The trigger word held refers to the event of maintaining the control of a location."
+        }
+        events.append(event)
+
+    return events
+    
+
+text = "after the initial success capturing phuoc long province, the north vietnamese leadership increased the scope of the people ' s army of vietnam ' s ( pavn ) offensive and captured and held the key central highlands city of buon ma thuot between march 10 and 18."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+2025-04-21 10:50:00.328 | ERROR    | extractor.llm:extract_event:191 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: Capture event
+    if "captured" in text:
+        event = {
+            "event_type": "capture",
+            "trigger_word": "captured",
+            "event_time": "between march 10 and 18",
+            "event_location": "key central highlands city of buon ma thuot",
+            "event_participants": ["the north vietnamese leadership", "the people ' s army of vietnam"],
+            "description": "The trigger word captured refers to the military event where a location is taken by force."
+        }
+        events.append(event)
+    
+    if "held" in text:
+        event = {
+            "event_type": "hold",
+            "trigger_word": "held",
+            "event_time": "between march 10 and 18",
+            "event_location": "key central highlands city of buon ma thuot",
+            "event_participants": ["the people ' s army of vietnam"],
+            "description": "The trigger word held refers to the event of maintaining the control of a location."
+        }
+        events.append(event)
+
+    return events
+    
+
+text = "after the initial success capturing phuoc long province, the north vietnamese leadership increased the scope of the people ' s army of vietnam ' s ( pavn ) offensive and captured and held the key central highlands city of buon ma thuot between march 10 and 18."
+events = extract_events(text)
+print(f"The events are: {events}")
+``` | Text: after the initial success capturing phuoc long province, the north vietnamese leadership increased the scope of the people ' s army of vietnam ' s ( pavn ) offensive and captured and held the key central highlands city of buon ma thuot between march 10 and 18.
+2025-04-21 10:51:00.214 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 7 cannot extract event list after 3 attempts. | Text: the second incident involved royal navy ships striking mines and the third incident occurred when the royal navy conducted mine-clearing operations in the corfu channel, but in albanian territorial waters, and albania complained about them to the united nations.
+2025-04-21 10:51:00.703 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: ushakov then turned toward the ottoman ships and firing began at about 3 p. m..
+2025-04-21 10:51:00.845 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 8 cannot extract event list after 3 attempts. | Text: the invasion ended when an armistice was signed on 17 april 1941, based on the unconditional surrender of the yugoslav army, which came into effect at noon on 18 april.
+2025-04-21 10:51:01.198 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 6 cannot extract event list after 3 attempts. | Text: on 19 december 2013, both of the attackers were found guilty of rigby ' s murder.
+2025-04-21 10:51:01.291 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: the battle of changsha ( 1944 ) ( also known as the battle of hengyang or campaign of changsha-hengyang ) was an invasion of the chinese province of hunan by japanese troops near the end of the second sino-japanese war.
+2025-04-21 10:51:01.538 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 9 cannot extract event list after 3 attempts. | Text: mortars, artillery fire and airstrikes covered their withdrawal, then pounded the battlefield into the evening.
+2025-04-21 10:51:01.599 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: according to statistics published by the israeli government, 757 missiles from gaza hit israel between the withdrawal and the end of june 2006.
+2025-04-21 10:51:01.631 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 5 cannot extract event list after 3 attempts. | Text: under their first king, geiseric, the formidable vandal navy carried out pirate attacks across the mediterranean, sacked rome and defeated a massive roman invasion in 468.
+2025-04-21 10:51:02.372 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: the killings underscored the suspicion christian-affiliated groups face from some afghans and government opponents and the wider risks faced by aid workers in the country.
+2025-04-21 10:51:02.433 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: the pavn, under the command of general van tien dung, began their final attack on saigon on april 29, 1975, with the army of the republic of vietnam ( arvn ) forces commanded by general nguyen van toan suffering a heavy artillery bombardment.
+2025-04-21 10:51:26.500 | ERROR    | extractor.llm:extract_response:98 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: planning
+    if "planning began" in text.lower():
+        event = {
+            "event_type": "planning",
+            "trigger_word": "began",
+            "event_time": "1942",
+            "event_location": "north africa",
+            "event_participants": ["allied forces"],
+            "description": "The trigger word began refers to the event where the planning was initiated"
+        }
+        events.append(event)
+
+    # Event 2: invasion
+    if "invasion" in text.lower():
+        event = {
+            "event_type": "military action",
+            "trigger_word": "invasion",
+            "event_time": "1942",
+            "event_location": "north africa",
+            "event_participants": ["allied forces", "1st parachute brigade", "2nd battalion, 509th parachute infantry regiment"],
+            "description": "The trigger word invasion refers to a military action of entering a country or region with an armed force."
+        }
+        events.append(event)
+
+    return events
+
+text = "when planning began for operation torch, the allied invasion of north africa in 1942, it was decided to attach the 1st parachute brigade, part of the 1st airborne division, to the allied forces taking part, as an american airborne unit, the 2nd battalion, 509th parachute infantry regiment, was also to be used during the invasion."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+
+2025-04-21 10:51:26.509 | ERROR    | extractor.llm:extract_event:191 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: planning
+    if "planning began" in text.lower():
+        event = {
+            "event_type": "planning",
+            "trigger_word": "began",
+            "event_time": "1942",
+            "event_location": "north africa",
+            "event_participants": ["allied forces"],
+            "description": "The trigger word began refers to the event where the planning was initiated"
+        }
+        events.append(event)
+
+    # Event 2: invasion
+    if "invasion" in text.lower():
+        event = {
+            "event_type": "military action",
+            "trigger_word": "invasion",
+            "event_time": "1942",
+            "event_location": "north africa",
+            "event_participants": ["allied forces", "1st parachute brigade", "2nd battalion, 509th parachute infantry regiment"],
+            "description": "The trigger word invasion refers to a military action of entering a country or region with an armed force."
+        }
+        events.append(event)
+
+    return events
+
+text = "when planning began for operation torch, the allied invasion of north africa in 1942, it was decided to attach the 1st parachute brigade, part of the 1st airborne division, to the allied forces taking part, as an american airborne unit, the 2nd battalion, 509th parachute infantry regiment, was also to be used during the invasion."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+ | Text: when planning began for operation torch, the allied invasion of north africa in 1942, it was decided to attach the 1st parachute brigade, part of the 1st airborne division, to the allied forces taking part, as an american airborne unit, the 2nd battalion, 509th parachute infantry regiment, was also to be used during the invasion.
+2025-04-21 10:51:51.266 | ERROR    | extractor.llm:extract_response:98 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+def extract_events(text):
+    """
+    Extracts events from a text and returns a list of event dictionaries.
+
+    Args:
+        text: The input text string.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: attack
+    if "attack" in text:
+        event = {
+            "event_type": "attack",
+            "trigger_word": "attack",
+            "event_time": "3 july 1940",
+            "event_location": "mers-el-kebir",
+            "event_participants": ["british", "french"],
+            "description": "The trigger word attack refers to the event of engaging in a violent assault on an enemy, often involving the use of weapons."
+        }
+        events.append(event)
+
+    # Event 2: known
+    if "known" in text:
+        event = {
+            "event_type": "designation",
+            "trigger_word": "known",
+            "event_time": "3 july 1940",
+            "event_location": "mers-el-kebir",
+            "event_participants": None,
+            "description": "The trigger word known refers to the event of being recognized or identified."
+        }
+        events.append(event)
+
+    # Event 3: battle
+    if "battle" in text:
+        event = {
+            "event_type": "military conflict",
+            "trigger_word": "battle",
+            "event_time": "3 july 1940",
+            "event_location": "mers el kebir",
+            "event_participants": ["british", "french"],
+            "description": "The trigger word battle refers to a sustained fight between armed forces."
+        }
+        events.append(event)
+
+    return events
+text = "the attack on mers-el-kebir ( 3 july 1940 ) also known as the battle of mers-el-kebir, was part of operation catapult, a british naval attack on french navy ships at the naval base at mers el kebir on the coast of french algeria."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+
+2025-04-21 10:51:51.270 | ERROR    | extractor.llm:extract_event:191 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from a text and returns a list of event dictionaries.
+
+    Args:
+        text: The input text string.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: attack
+    if "attack" in text:
+        event = {
+            "event_type": "attack",
+            "trigger_word": "attack",
+            "event_time": "3 july 1940",
+            "event_location": "mers-el-kebir",
+            "event_participants": ["british", "french"],
+            "description": "The trigger word attack refers to the event of engaging in a violent assault on an enemy, often involving the use of weapons."
+        }
+        events.append(event)
+
+    # Event 2: known
+    if "known" in text:
+        event = {
+            "event_type": "designation",
+            "trigger_word": "known",
+            "event_time": "3 july 1940",
+            "event_location": "mers-el-kebir",
+            "event_participants": None,
+            "description": "The trigger word known refers to the event of being recognized or identified."
+        }
+        events.append(event)
+
+    # Event 3: battle
+    if "battle" in text:
+        event = {
+            "event_type": "military conflict",
+            "trigger_word": "battle",
+            "event_time": "3 july 1940",
+            "event_location": "mers el kebir",
+            "event_participants": ["british", "french"],
+            "description": "The trigger word battle refers to a sustained fight between armed forces."
+        }
+        events.append(event)
+
+    return events
+text = "the attack on mers-el-kebir ( 3 july 1940 ) also known as the battle of mers-el-kebir, was part of operation catapult, a british naval attack on french navy ships at the naval base at mers el kebir on the coast of french algeria."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+ | Text: the attack on mers-el-kebir ( 3 july 1940 ) also known as the battle of mers-el-kebir, was part of operation catapult, a british naval attack on french navy ships at the naval base at mers el kebir on the coast of french algeria.
+2025-04-21 10:51:51.275 | ERROR    | extractor.llm:extract_response:98 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+def extract_events(text):
+    """
+    Extracts events from a text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: Attack
+    if "attack" in text.lower():
+        event = {
+            "event_type": "attack",
+            "trigger_word": "attack",
+            "event_time": "3 july 1940",
+            "event_location": "mers-el-kebir",
+            "event_participants": ["british navy", "french navy"],
+            "description": "The trigger word attack refers to the event of an aggressive action against an opponent."
+        }
+        events.append(event)
+
+    # Event 2: Battle
+    if "battle" in text.lower():
+        event = {
+            "event_type": "battle",
+            "trigger_word": "battle",
+            "event_time": "3 july 1940",
+            "event_location": "mers el kebir",
+            "event_participants": ["british navy", "french navy"],
+            "description": "The trigger word battle refers to the event of a sustained fight between armed forces."
+        }
+        events.append(event)
+
+    return events
+
+text = "the attack on mers-el-kebir ( 3 july 1940 ) also known as the battle of mers-el-kebir, was part of operation catapult, a british naval attack on french navy ships at the naval base at mers el kebir on the coast of french algeria."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+
+2025-04-21 10:51:51.278 | ERROR    | extractor.llm:extract_event:191 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from a text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: Attack
+    if "attack" in text.lower():
+        event = {
+            "event_type": "attack",
+            "trigger_word": "attack",
+            "event_time": "3 july 1940",
+            "event_location": "mers-el-kebir",
+            "event_participants": ["british navy", "french navy"],
+            "description": "The trigger word attack refers to the event of an aggressive action against an opponent."
+        }
+        events.append(event)
+
+    # Event 2: Battle
+    if "battle" in text.lower():
+        event = {
+            "event_type": "battle",
+            "trigger_word": "battle",
+            "event_time": "3 july 1940",
+            "event_location": "mers el kebir",
+            "event_participants": ["british navy", "french navy"],
+            "description": "The trigger word battle refers to the event of a sustained fight between armed forces."
+        }
+        events.append(event)
+
+    return events
+
+text = "the attack on mers-el-kebir ( 3 july 1940 ) also known as the battle of mers-el-kebir, was part of operation catapult, a british naval attack on french navy ships at the naval base at mers el kebir on the coast of french algeria."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+ | Text: the attack on mers-el-kebir ( 3 july 1940 ) also known as the battle of mers-el-kebir, was part of operation catapult, a british naval attack on french navy ships at the naval base at mers el kebir on the coast of french algeria.
+2025-04-21 10:52:56.327 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: the 2006 pangandaran earthquake and tsunami occurred on july 17 at along a subduction zone off the coast of west and central java, a large and densely populated island in the indonesian archipelago.
+2025-04-21 10:53:17.260 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 6 cannot extract event list after 3 attempts. | Text: the arena tour consisted of 16 shows that took place during may 2013, although blue only performed at four of these shows due to their own tour commitments.
+2025-04-21 10:53:17.465 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: the siege of roxburgh was a siege that took place in 1314.
+2025-04-21 10:53:17.681 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: the race takes place in the southern part of illinois beginning near wolf lake, illinois and ending in golconda, illinois.
+2025-04-21 10:53:18.191 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: the allied invasion of germany started with the western allies crossing the rhine river on 22 march 1945 before fanning out and overrunning all of western germany from the baltic in the north to the alpine passes in the south, where they linked up with troops of the u. s. fifth army in italy.
+2025-04-21 10:53:18.948 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 5 cannot extract event list after 3 attempts. | Text: a german bombardment of the belgian fortifications with heavy and super-heavy artillery began on 28 september.
+2025-04-21 10:53:19.460 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 9 cannot extract event list after 3 attempts. | Text: in september 1993, the group began a north american leg, which commenced in quebec city, canada.
+2025-04-21 10:53:19.660 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: as the plane came in on final approach, fog started to settle in and blocked view of the runway, and the approach controller informed the crew that visibility was below minimal.
+2025-04-21 10:53:19.877 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 8 cannot extract event list after 3 attempts. | Text: once over land, the system began to quickly weaken, and dissipated near the rio grande on july 22.
+2025-04-21 10:53:19.955 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 7 cannot extract event list after 3 attempts. | Text: when the danes left their camp he attacked, while the remaining rebels moved over the river.
+2025-04-21 10:53:21.012 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 10:53:42.278 | ERROR    | extractor.consumer:worker:152 - [FAIL] Worker 3 fail to process event list: [{'event_type': 'motion', 'trigger_word': 'floating', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word floating refers to the event of moving or being suspended in a liquid or gas.'}, {'event_type': 'motion', 'trigger_word': 'appear', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar', 'another guitar'], 'description': 'the trigger word appear refers to the event of come into sight; become visible or noticeable.'}, {'event_type': 'motion', 'trigger_word': 'shoot', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'the floating guitar', 'rockets', 'guitar'], 'description': 'the trigger word shoot refers to the event of firing a weapon or projectile.'}, {'event_type': 'destruction', 'trigger_word': 'blow up', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar', 'it'], 'description': 'the trigger word blow up refers to the event of an explosion or the destruction of something.'}, {'event_type': 'motion', 'trigger_word': 'aim', 'event_time': None, 'event_location': None, 'event_participants': ['neck', 'the neck', 'guitar', 'he', 'the floating guitar'], 'description': 'the trigger word aim refers to the action of directing a weapon or a tool towards a target'}] | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 10:54:23.266 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 9 cannot extract event list after 3 attempts. | Text: in march and early april 2013, the lebanese hezbollah militia moved fully into the homs ' fighting, in assistance to the syrian government forces.
+2025-04-21 10:54:23.268 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 9 got error 429 more than 4 times. Stoping ...
+2025-04-21 10:54:24.688 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 8 cannot extract event list after 3 attempts. | Text: the battle itself is unclear but the bulgarians were defeated mainly with the help of the varangian guard, led by harald hardrada.
+2025-04-21 10:54:24.780 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: in a stricter sense, the term refers to the swedish invasion and occupation of the commonwealth as a theatre of the second northern war ( 1655 – 1660 ) only ; in poland and lithuania this period is called the swedish deluge (, ), or less commonly the russo – swedish deluge ( ) due to the russian invasion in 1654.
+2025-04-21 10:54:24.916 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 6 cannot extract event list after 3 attempts. | Text: with the conclusion of the ottoman – safavid war ( 1603 – 18 ), shah abbas was secure enough for a war on his eastern frontier, so in 1621 he ordered an army to gather at nishapur.
+2025-04-21 10:54:25.596 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: the people of machias captured additional british ships, and fought off a large force that tried to take control of the town in the battle of machias in 1777.
+2025-04-21 10:54:25.627 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 7 cannot extract event list after 3 attempts. | Text: napoleon arrived at hanau with reinforcements and defeated wrede ’ s forces.
+2025-04-21 10:54:26.123 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: kent was struggling to remain independent against the growing power of mercia.
+2025-04-21 10:54:26.248 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: as a result of the war, the league captured and partitioned almost all remaining european territories of the ottoman empire.
+2025-04-21 10:54:26.543 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 5 cannot extract event list after 3 attempts. | Text: the german defence south of the road mostly collapsed and the french had ` ` complete success ' ' on both banks of the somme, as did the british from maricourt on the army boundary, where xiii corps took montauban and reached all its objectives and xv corps captured mametz and isolated fricourt.
+2025-04-21 10:54:46.013 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: brigadier la torre left angostura for the missions in order to reconquer the area and its resources.
+2025-04-21 10:54:46.015 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 3 got error 429 more than 4 times. Stoping ...
+2025-04-21 10:54:54.046 | CRITICAL | extractor.consumer:consume:178 - [FALTAL] Consuming interrupted by user. Stopping safely...
+2025-04-21 10:54:54.047 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 10:55:28.414 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 8 cannot extract event list after 3 attempts. | Text: the 1581 was one of the crucial battles in oda nobunaga ' s campaigns to seize iga province during japan ' s sengoku period.
+2025-04-21 10:55:28.492 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: with the increasing number of ` ` hopeless competitors ' ' and ` ` second-class golfers ' ' entering the open, a cut was introduced for the first time to reduce the number of players on the final day.
+2025-04-21 10:55:28.679 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 6 cannot extract event list after 3 attempts. | Text: after a part of the arbih 5th corps was threatened with defeat around the town of kljuc, the arbih requested assistance from the hv.
+2025-04-21 10:55:29.342 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 7 cannot extract event list after 3 attempts. | Text: the next day, ramle surrendered immediately, but the conquest of lydda took longer and led to an unknown number of deaths ; the palestinian historian aref al-aref, the only scholar who tried to draw up a balance sheet for the palestinian losses, estimated 426 palestinians died in lydda on 12 july, of which 176 in the mosque and 800 overall in the fighting.
+2025-04-21 10:55:29.839 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: they were drawn against turkish team besiktas in the first round, who they beat 4 – 1 over two-legs.
+2025-04-21 10:55:30.027 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: it was the first win by a russian side in any european competition, and was even more impressive considering that the final was held at the jose alvalade stadium, the home of sporting.
+2025-04-21 10:55:30.336 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 5 cannot extract event list after 3 attempts. | Text: the events were due to be held between 13 march, and 21 march 2010.
+2025-04-21 10:55:30.445 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: the tournament was divided into three stages.
+2025-04-21 10:55:30.447 | INFO     | extractor.consumer:stop_threads:60 - [STOP] All threads stopped
+2025-04-21 10:55:30.449 | INFO     | extractor.consumer:consume:184 - [FINISHED] Finished consuming 225/280 items with 55/280 remained items.
+2025-04-21 10:55:30.450 | INFO     | extractor.consumer:consume:194 - [FINISHED] Really processed 225/280 items with 1e+02% events are added | AVG added events: 2.45 | AVG added attributes: 1.04
+2025-04-21 10:55:30.674 | INFO     | __main__:run:89 - [SAVE FILE] All item saved to test/output\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 10:55:30.675 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 10:55:30.676 | INFO     | __main__:run:67 - ====================================================================================================
+2025-04-21 10:55:30.677 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-21 10:55:30.759 | INFO     | extractor.producer:produce:42 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 10:55:30.761 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 10:55:30.762 | INFO     | extractor.consumer:consume:163 - [CONSUMING] Start consuming.
+2025-04-21 10:55:30.763 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 10:55:30.765 | CRITICAL | extractor.consumer:consume:169 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-21 10:55:32.779 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 10:55:32.781 | INFO     | extractor.consumer:consume:184 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-21 10:55:32.842 | INFO     | __main__:run:89 - [SAVE FILE] All item saved to test/output\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 10:55:32.843 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 10:55:32.844 | INFO     | extractor.consumer:stop_threads:60 - [STOP] All threads stopped
+2025-04-21 10:55:32.844 | INFO     | __main__:run:129 - [FINISHED] All items processed and saved to test/output

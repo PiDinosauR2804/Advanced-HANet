@@ -9,18 +9,22 @@ from tqdm import tqdm
 
 class Consumer:
     def __init__(self, task_queue:queue.Queue, num_try=3, max_consecutive_429_error=3, model='gemini-2.0-flash', candidate=1, max_num_threads=10)->None:
+        # pram for consumer
         self.task_queue = task_queue
         self.num_try = num_try
         self.max_consecutive_429_error = max_consecutive_429_error
         self.model = model
         self.candidate = candidate
+        self.max_num_threads = max_num_threads
+        self.queue_waiting_time = 1
+        self.extractors = []
+        # param for each consumtion time
         self.pbar = None
         self.results = []
         self.processed_item = 0
         self.remained_item = 0
-        self.queue_waiting_time = 1
-        self.error_waiting_time = 20
-        self.extractors = []
+        self.num_added_event = []
+        self.num_added_attribute = []
         # Attribute for threading
         self.stop_event = threading.Event()
         self.pause_event = threading.Event()
@@ -57,7 +61,7 @@ class Consumer:
             
     def pause_threads(self):
         self.pause_event.clear()
-        time.sleep(2*self.queue_waiting_time)  # Wait for a while before stopping the threads
+        time.sleep(self.queue_waiting_time + 1)  # Wait for a while before stopping the threads
         
         logger.info(f"[PAUSE] All threads paused")
         
@@ -70,6 +74,8 @@ class Consumer:
         self.results = []
         self.processed_item = 0
         self.remained_item = 0
+        self.num_added_event = []
+        self.num_added_attribute = []
         
         logger.info(f"[CLEAR] All results cleared")
         
@@ -97,16 +103,15 @@ class Consumer:
         
         while not self.stop_event.is_set():
             if extractor['consecutive_429_error'] >= self.max_consecutive_429_error:
-                logger.critical(f"[FATAL] Worker {worker_id} got error 429 more than {self.max_consecutive_429_error:} times. Stoping ...")
+                logger.critical(f"[FATAL] Worker {worker_id} got error 429 more than {self.max_consecutive_429_error:} times and stoping. {sum(thread.is_alive() for thread in self.threads) - 1} threads are still running.")
                 # Stop the thread
                 break
             
             self.pause_event.wait()  # Wait until the pause event is set
             
             try:
-                line_idx, key, idx, item = self.task_queue.get(timeout=0.1)
+                line_idx, key, idx, item = self.task_queue.get(timeout=self.queue_waiting_time)
             except queue.Empty:
-                time.sleep(self.queue_waiting_time)  # Wait for a while before checking the queue again
                 continue
             
             # Check if the item is already processed
@@ -118,7 +123,8 @@ class Consumer:
             event_list = None
             for i in range(self.num_try):
                 try:
-                    event_list = extractor['extractor'].extract_event(item['text'], model=self.model, candidate=self.candidate)[0]
+                    event_list, num_added_event, num_added_attribute = \
+                        extractor['extractor'].extract_event(item['text'], model=self.model, candidate=self.candidate)
                     extractor['consecutive_429_error'] = 0
                     if event_list:
                         new_item = {
@@ -127,12 +133,15 @@ class Consumer:
                         }
                         new_item = sent2ids(new_item) # Add piece_ids, span and offsets
                         self.append_processed_item(line_idx, key, idx, new_item)
+                        with self.lock:
+                            self.num_added_event.append(num_added_event)
+                            self.num_added_attribute.append(num_added_attribute)
                         break
                     
                 except Exception as e:
                     if is_quota_exhausted_error(e):
                         extractor['consecutive_429_error'] += 1
-                        time.sleep(self.error_waiting_time)  # Wait for 15 seconds before retrying
+                        time.sleep(extractor['extractor'].error_waiting_time)  # Wait for 15 seconds before retrying
                     else:
                         extractor['consecutive_429_error'] = 0
                         logger.error(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got error: {e} | Text: {item['text']}")
@@ -142,9 +151,7 @@ class Consumer:
                 else:
                     logger.error(f"[FAIL] Worker {worker_id} fail to process event list: {event_list} | Text: {item['text']}")
                 self.append_remained_item(line_idx, key, idx, item)
- 
-    def is_any_thread_running(self):
-        return any(thread.is_alive() for thread in self.threads)
+
     
     def consume(self, pbar_des:str='Consuming item', model='gemini-2.0-flash', candidate=1):
         self.candidate = candidate
@@ -156,7 +163,7 @@ class Consumer:
         
         try:
             while self.task_queue.unfinished_tasks > 0:
-                if not self.is_any_thread_running():
+                if not any(thread.is_alive() for thread in self.threads):
                     logger.critical(f"[FATAL] No threads are running. Consuming remained {self.task_queue.qsize()} items ...")
                     self.consume_left_items()
                     break
@@ -172,5 +179,18 @@ class Consumer:
             
         finally:
             self.pbar.close()
-            logger.info(f"[CONSUMING] Finished consuming.")
+            logger.info(f"[FINISHED] Finished consuming {self.processed_item}/{len(self.results)} items with {self.remained_item}/{len(self.results)} remained items.")
+            # Print describetion of the number of added events and attributes
+            real_processed_item = len(self.num_added_event)
+            if real_processed_item > 0:
+                real_num_added_event = [num_added_event for num_added_event in self.num_added_event if num_added_event > 0]
+                real_num_added_attribute = [num_added_attribute for num_added_attribute in self.num_added_attribute if num_added_attribute > 0]
+                percent_is_added_event = len(real_num_added_event) / real_processed_item * 100
+                # Calculate the average number of added events and attributes
+                avg_added_event = sum(real_num_added_event) / real_processed_item
+                avg_added_attribute = sum(real_num_added_attribute) / real_processed_item
+                
+                logger.info(f"[FINISHED] Really processed {real_processed_item}/{len(self.results)} items with {percent_is_added_event:.2f}% event list are added \
+| AVG added events: {avg_added_event:.2f} | AVG added attributes: {avg_added_attribute:.2f}")
+            
             return self.results, self.processed_item, self.remained_item

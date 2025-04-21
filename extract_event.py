@@ -24,12 +24,13 @@ def get_lines_from_results(results:list)->list:
             output_lines[line_idx] = item
     return output_lines
 
-def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int, num_try:int, 
+def run(origin_input_path:str, output_path:str, datasets:list, model:str, candidate:int, num_try:int, 
         max_consecutive_429_error:int, max_num_threads:int, resume:bool=False, convert_test:bool=False)->None:
     # Resume from output_path if resume is True
     if resume:
         input_path = output_path
     else:
+        input_path = origin_input_path
         os.makedirs(output_path, exist_ok=True)
 
     # Create task queue, producer and consumer
@@ -44,6 +45,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
 
         for i in range(5):
             input_folder = os.path.join(input_path, dataset, "perm"+str(i))
+            origin_input_folder = os.path.join(origin_input_path, dataset, "perm"+str(i))
             if not os.path.exists(input_folder):
                 logger.error(f"[ERROR] Folder {input_folder} is not exist", mode="ERROR")
                 continue
@@ -56,13 +58,15 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
                     continue
 
                 input_file = os.path.join(input_folder, file_name)
+                origin_input_file = os.path.join(origin_input_folder, file_name)
                 output_file = os.path.join(output_folder, file_name)
                 
                 start_time = time.time()
                 # Start producing
                 logger.info("="*100)
+                logger.info(f"Start processing {input_file} to {output_file}")
                 logger.info("="*100)
-                producer.produce(input_file, is_train=True)
+                producer.produce(input_file, origin_input_file, is_train=True)
                 # Start consuming
                 try:
                     results, processed_item, remained_item = consumer.consume(pbar_des=f'{dataset}/perm{i}/{file_name}', model=model, candidate=candidate) # results is a list of tuples (line_idx, key, idx, item)
@@ -82,12 +86,13 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
                 
                 end_time = time.time()
                 elapsed_time = end_time - start_time
-                logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
+                # logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
                 logger.info(f"[SAVE FILE] All item saved to {output_file}")            
 
         if convert_test:
             # Convert test
             input_file = os.path.join(input_path, dataset, f"{dataset}.test.jsonl")
+            origin_input_file = os.path.join(origin_input_path, dataset, f"{dataset}.test.jsonl")
             output_file = os.path.join(output_path, dataset, f"{dataset}.test.jsonl")
 
             if not os.path.exists(input_file):
@@ -98,7 +103,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
             # Start producing
             logger.info("="*100)
             logger.info("="*100)
-            producer.produce(input_file, is_train=False)
+            producer.produce(input_file, origin_input_file, is_train=False)
             # Start consuming
             try:
                 results, processed_item, remained_item = consumer.consume(pbar_des=f'{dataset}/{dataset}/.test.jsonl', model=model, candidate=candidate) # results is a list of tuples (line_idx, key, idx, item)
@@ -118,7 +123,7 @@ def run(input_path:str, output_path:str, datasets:list, model:str, candidate:int
                         
             end_time = time.time()
             elapsed_time = end_time - start_time
-            logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
+            # logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
             logger.info(f"[SAVE FILE] All item saved to {output_file}")
         
     consumer.stop_threads()

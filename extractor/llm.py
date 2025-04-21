@@ -12,6 +12,7 @@ class Extractor():
         Initialize the Extractor with the provided API key and model.
         """
         self.api_key = api_key
+        self.error_waiting_time = 0.1
     
     def extract_event(self, text:str, **args):
         """
@@ -19,21 +20,21 @@ class Extractor():
         """
         ran = random.random()
         if ran < 0.7:
-            return [[{"text": text, 
+            return [{"text": text, 
                     "event_type": "meeting", 
-                    "trigger_word": text.split()[0], 
+                    "trigger_word": random.choice(text.split()),
                     "event_time": None, 
                     "event_location": None, 
-                    "event_participants": []}]]  # Dummy response for the base class
+                    "event_participants": []}], random.randint(0, 2), random.randint(0, 2)  # Dummy response for the base class
         elif ran < 0.8:
-            return [[{"text": text, 
+            return [{"text": text, 
                     "event_type": "meeting", 
                     "trigger_word": "abc", 
                     "event_time": None, 
                     "event_location": None, 
-                    "event_participants": []}]]  # Dummy response for the base class
+                    "event_participants": []}], 0, 0  # Dummy response for the base class
         elif ran < 0.9:
-            return []
+            return [], 0, 0
         else:
             raise Exception("RESOURCE_EXHAUSTED")  # Simulate quota exhaustion
         
@@ -44,15 +45,16 @@ class Extractor_Gemini(Extractor):
         """
         self.api_key = api_key
         self.client = genai.Client(api_key=api_key)
-        self.prompt = """You are an event extraction expert. Given a text, let extract the event triggers from the text. 
-Each event should be a dictionary with the following keys: 
+        self.error_waiting_time = 15
+        self.prompt = """You are an event extractor. Given a text, let extract the event triggers from the text. 
+Each event should form a dictionary with the following keys: 
 "event_type", "trigger_word", "event_time", "event_location", "event_participants" and "description". 
-The values for these keys should be extracted from the text. If any of the keys are not present in the text, return None for that key.
-You should return a list of event dictionary, in the last line with format: The events are: [{{...}}, {{...}}, ...]. 
+The values for these keys should be extracted from the text. If any of the keys are not present in the text, assign value None for that key.
+You should write a list of event dictionary in the last sentence of your response with format: The events are: [{{...}}, {{...}}, ...]. 
 For example:
-1. If the text is "John and Mary met at the park on Monday", the output should be:
+1. If the text is "John and Mary met at the park on Monday", the last sentence of your response should be:
 The events are: [{{"event_type": "meeting", "trigger_word": "met", "event_time": "Monday", "event_location": "park", "event_participants": ["John", "Mary"], "description": "The trigger word met refers to the event where two or more parties encountered each other, marking the occurrence of a meeting or interaction"}}]
-2. If the text is "The July 2006 earthquake was also centered in the Indian Ocean, from the coast of Java, and had a duration of more than three minutes.", the output should be:
+2. If the text is "The July 2006 earthquake was also centered in the Indian Ocean, from the coast of Java, and had a duration of more than three minutes.", the last sentence of your response should be:
 The events are: [{{"event_type": "catastrophe", "trigger_word": "earthquake", "event_time": "July 2006", "event_location": "Indian Ocean", "event_participants": None, "description": "The trigger word earthquake refers to the event of the earth shaking, often causing destruction and damage"}}, 
                 {{"event_type": "placing", "trigger_word": "centered", "event_time": "July 2006", "event_location": "Indian Ocean", "event_participants": None, "description": "The trigger word centered refers to the event of being located at a specific point or area"}}]
 
@@ -90,10 +92,10 @@ Now, extract the list of event dictionary from the following text:
                 return events_list
             
             except ValueError as e:
-                logger.error(f"[EXTRACT RESPONSE] Error parsing events: {e}")
+                logger.error(f"[EXTRACT RESPONSE] Error parsing events: {e} | Text: {text}")
                 return None
         else:
-            logger.error(f"[EXTRACT RESPONSE] No events found in the response.")
+            logger.error(f"[EXTRACT RESPONSE] No events found in the response | Text: {text}")
             return None
         
     def validate_event_list(self, event_list:list)->list:
@@ -121,11 +123,48 @@ Now, extract the list of event dictionary from the following text:
                         event[key] = None
                         
             if event.get("trigger_word") is not None:
-                valid_events.append(event)
+                if event.get("trigger_word") in event.get("text"):
+                    valid_events.append(event)
+                else:
+                    logger.error(f"[VALIDATE EVENT LIST] Trigger word not in text: {event.get('trigger_word')} | Text: {event.get('text')}")
             else:
-                logger.error(f"[VALIDATE EVENT LIST] Event not have trigger_word attribute: {event}")
+                logger.error(f"[VALIDATE EVENT LIST] Event not have trigger_word attribute: {event} | Text: {event.get('text')}")
 
         return valid_events
+    
+    def merge_event_list(self, event_lists: list[list[dict]]) -> tuple[list[dict], int, int]:
+        """
+        Merge multiple event lists into one, grouped by trigger_word.
+        Avoids duplicate events and merges attributes from similar events.
+        """
+        trigger2event = {}
+        num_added_event = 0
+        num_added_attribute = 0
+
+        for event_list in event_lists:
+            for event in event_list:
+                trigger = event['trigger_word']
+                if trigger not in trigger2event:
+                    trigger2event[trigger] = event.copy()
+                    num_added_event += 1
+                else:
+                    existing_event = trigger2event[trigger]
+                    for key, value in event.items():
+                        if not value:
+                            continue
+                        old_value = existing_event.get(key)
+                        if not old_value:
+                            existing_event[key] = value
+                            num_added_attribute += 1
+                        elif isinstance(old_value, list) and isinstance(value, list):
+                            merged = list(set(old_value + value))
+                            if len(merged) > len(old_value):
+                                existing_event[key] = merged
+                                num_added_attribute += 1
+        num_added_event -= len(event_lists[0])
+        merged_list = list(trigger2event.values())
+        return merged_list, num_added_event, num_added_attribute
+
 
     def extract_event(self, text:str, model="gemini-2.0-flash", candidate=1):
         """
@@ -154,7 +193,11 @@ Now, extract the list of event dictionary from the following text:
             else:
                 logger.error(f"[EXTRACT EVENT] Failed to extract event list from response: {response_string} | Text: {text}")
 
-        return res
+        if res:
+            merged_list, num_added_event, num_added_attribute = self.merge_event_list(res)
+            return merged_list, num_added_event, num_added_attribute
+        else:
+            return [], 0, 0
     
 def is_quota_exhausted_error(e: Exception):
     return "RESOURCE_EXHAUSTED" in str(e) or "429" in str(e)

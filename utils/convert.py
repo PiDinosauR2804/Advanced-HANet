@@ -53,7 +53,7 @@ def sent2ids(item:dict)->dict:
         if offset != -1:
             offsets.append([offset, offset + len(trigger_word) - 1])
         else:
-            raise ValueError(f"Trigger word '{trigger_word}' not found | Text: {item['text']}.")
+            raise ValueError(f"Trigger word '{trigger_word}' not found")
         # Tìm vị trí của trigger word trong offsets_mp
         start = -1
         end = -1
@@ -69,7 +69,7 @@ def sent2ids(item:dict)->dict:
         if start != -1 and end != -1:
             span.append((start, end-1))
         else:
-            raise ValueError(f"Span for trigger word '{trigger_word}' not found in offsets.")
+            raise ValueError(f"Span for trigger word '{trigger_word}' not found in offsets mapping")
     
     return {
         'text': item['text'],
