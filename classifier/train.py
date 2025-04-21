@@ -66,12 +66,17 @@ def train(local_rank, args):
     streams = collect_from_json(args.dataset, args.stream_root, 'stream')
     # streams = [streams[l] for l in PERM[int(args.perm_id)]] # permute the stream
     label2idx = {0:0}
+    idx2label = {}
     
     
     for st in streams:
         for lb in st:
             if lb not in label2idx:
                 label2idx[lb] = len(label2idx)
+    
+    for key, value in label2idx.items():
+        idx2label[value] = key
+    
     streams_indexed = [[label2idx[l] for l in st] for st in streams]
     
     # streams_indexed có dạng [[4, 5, 9, 11], [2, 1, 8, 33], ...] thể hiện thứ tự label class được học
@@ -244,9 +249,13 @@ def train(local_rank, args):
                 train_y = [torch.LongTensor(item).to(device) for item in train_y]           
                 train_span = [torch.LongTensor(item).to(device) for item in train_span]     # Sử dụng để lưu vị trí bắt đầu và kết thúc 1 từ của các ids
                 
-                labels = train_y.copy()
-                print("============================")
-                print(labels)
+                labels_for_loss_des = []
+                for y in train_y:
+                    for k in y:
+                        if k in learned_types and k != 0:
+                           labels_for_loss_des.append(idx2label[int(k)])
+                           break 
+                # print(labels)
                 
                 # if args.dataset == "ACE":
                 #     return_dict = model(train_x, train_masks)
@@ -368,6 +377,7 @@ def train(local_rank, args):
                 # if args.dataset == "ACE":
                 
                 if args.use_description:
+                    reps = return_dict['reps']
                     descriptions_representations = {}
                     final_description_res = {}
                     
@@ -392,17 +402,15 @@ def train(local_rank, args):
                             final_description_res[key] = temp
                             
                     negative_dict = find_negative_labels(final_description_res)
-                    
-                    print(negative_dict)     
-                    
-                    loss_des_cl = contrastive_loss_des(reps, labels, final_description_res, negative_dict)       
+                                        
+                    loss_des_cl = contrastive_loss_des(reps, labels_for_loss_des, final_description_res, negative_dict)       
                     print(loss_des_cl)            
                             
                     
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
                 loss_ce = criterion_ce(ce_outputs, ce_y)
-                loss = loss + loss_ce
+                loss = loss + loss_ce + loss_des_cl
                 w = len(prev_learned_types) / len(learned_types)
 
                 # Loss ce cho class ở task cũ
