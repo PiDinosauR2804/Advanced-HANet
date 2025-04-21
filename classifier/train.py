@@ -243,6 +243,11 @@ def train(local_rank, args):
                 train_masks = torch.LongTensor(train_masks).to(device)
                 train_y = [torch.LongTensor(item).to(device) for item in train_y]           
                 train_span = [torch.LongTensor(item).to(device) for item in train_span]     # Sử dụng để lưu vị trí bắt đầu và kết thúc 1 từ của các ids
+                
+                labels = train_y.copy()
+                print("============================")
+                print(labels)
+                
                 # if args.dataset == "ACE":
                 #     return_dict = model(train_x, train_masks)
                 # else: 
@@ -388,12 +393,10 @@ def train(local_rank, args):
                             
                     negative_dict = find_negative_labels(final_description_res)
                     
-                    print(negative_dict)                    
+                    print(negative_dict)     
                     
-
-                
-                            
-                            
+                    loss_des_cl = contrastive_loss_des(reps, labels, final_description_res, negative_dict)       
+                    print(loss_des_cl)            
                             
                     
                 # Loss ce cho class ở task hiện tại
