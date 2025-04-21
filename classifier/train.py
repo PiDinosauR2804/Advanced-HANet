@@ -88,8 +88,13 @@ def train(local_rank, args):
     with open(file_path_description, 'r', encoding='utf-8') as f:
         data_description = json.load(f)
         
-    description_dataset = DescriptionDataset(args, tokenizer)
-    description_stage_loader = DataLoader(description_dataset, batch_size=args.batch_size, shuffle=True)
+    description_stage_loader = DataLoader(
+        DescriptionDataset(args, tokenizer),
+        batch_size=args.batch_size,
+        shuffle=False,
+        collate_fn=collate_description
+    )
+
           
                 
     if args.parallel == 'DDP':
@@ -364,12 +369,13 @@ def train(local_rank, args):
                     model.eval()
                     with torch.no_grad():
                         for bt, description_batch in enumerate(tqdm(description_stage_loader)):
-                            train_x_description, train_masks_description, keys = zip(*description_batch)
+
+                            train_x_description, train_masks_description, keys = description_batch
                             train_x_description = torch.LongTensor(train_x_description).to(device)
                             train_masks_description = torch.LongTensor(train_masks_description).to(device)
                 
-                            return_dict_description = model(train_x_description, train_masks_description)
-                            context_feat_descriptions = return_dict_description['context_feat']
+                            return_dict_description = model.forward_cls(train_x_description, train_masks_description)
+                            context_feat_descriptions = return_dict_description
                             for key, context_feat_description in zip(keys, context_feat_descriptions):
                                 if key not in descriptions_representations:
                                     descriptions_representations[key] = []

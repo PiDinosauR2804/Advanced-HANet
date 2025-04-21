@@ -74,6 +74,13 @@ class BertED(nn.Module):
         x = self.backbone(x, attention_mask = masks)
         x = x.last_hidden_state
         return x
+    
+    def forward_cls(self, x, masks):
+        with torch.no_grad():
+            backbone_output = self.backbone(x, attention_mask=masks)
+            last_hidden_state = backbone_output.last_hidden_state 
+            cls_embedding = last_hidden_state[:, 0, :]              
+            return cls_embedding                                    
 
     def forward_input_map(self, x):
         return self.input_map(x)

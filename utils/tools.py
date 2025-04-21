@@ -5,6 +5,10 @@ from configs import parse_arguments
 args = parse_arguments()
 device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
 
+def collate_description(batch):
+    tokens, masks, keys = zip(*batch)
+    return list(tokens), list(masks), list(keys)
+
 def compute_CLLoss(Adj_mask, reprs, matsize): # compute InfoNCELoss
     logits_cl = torch.div(torch.matmul(reprs, reprs.T), args.cl_temp)
     if args.sub_max:

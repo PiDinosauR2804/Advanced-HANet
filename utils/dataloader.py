@@ -36,7 +36,7 @@ class DescriptionDataset(Dataset):
                     self.data.append((
                         token,                 # input_ids
                         token_mask,            # mask
-                        key, 
+                        int(key), 
                     ))
 
     def __len__(self):
