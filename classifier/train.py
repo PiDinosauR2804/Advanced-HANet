@@ -1,7 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import os, time, sys, json, datetime
+import os, time, sys, json
+from datetime import datetime
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -34,17 +35,28 @@ class Logger(object):
     def __init__(self, filename):
         self.terminal = sys.stdout
         self.log = open(filename, "w")
-        # self.tqdm_pattern = re.compile(r'\r.*')  # Loại bỏ các dòng tqdm
+        self.last_tqdm = ""  # để lưu lại trạng thái cuối của tqdm
+        self.tqdm_pattern = re.compile(r'^\r.*')  # dòng bắt đầu bằng \r (tqdm update)
 
     def write(self, message):
-        # if not self.tqdm_pattern.match(message):  # Bỏ qua tqdm
-        self.terminal.write(message)
-        self.log.write(message)
-        self.log.flush()
+        # Nếu là dòng cập nhật tqdm thì lưu lại nhưng không ghi vào file
+        if self.tqdm_pattern.match(message):
+            self.last_tqdm = message.strip()  # lưu lại dòng cuối
+        else:
+            self.terminal.write(message)
+            self.log.write(message)
+            self.log.flush()
 
     def flush(self):
         self.terminal.flush()
         self.log.flush()
+
+    def close(self):
+        # Khi kết thúc, ghi trạng thái cuối cùng của tqdm vào log
+        if self.last_tqdm:
+            self.log.write(f"{self.last_tqdm}\n")
+            self.log.flush()
+        self.log.close()
 
 # PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
 
@@ -455,12 +467,13 @@ def train(local_rank, args):
                             
                     negative_dict = find_negative_labels(final_description_res)       
                     loss_des_cl = contrastive_loss_des(reps, labels_for_loss_des, final_description_res, negative_dict)       
+                    loss = loss + loss_des_cl * args.ratio_loss_des_cl
                             
                     
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
                 loss_ce = criterion_ce(ce_outputs, ce_y)
-                loss = loss + loss_ce + loss_des_cl
+                loss = loss + loss_ce
                 w = len(prev_learned_types) / len(learned_types)
 
                 # Loss ce cho class ở task cũ
