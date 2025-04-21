@@ -3,9 +3,47 @@ import torch
 from torch.utils.data import Dataset
 from configs import parse_arguments
 from utils.tools import collect_from_json
+import json
 
 import numpy as np
 args = parse_arguments()
+
+
+class DescriptionDataset(Dataset):
+    def __init__(self, args, tokenizer):
+        file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"
+        with open(file_path_description, 'r', encoding='utf-8') as f:
+            data_description = json.load(f)
+        
+        self.data = []
+        self.max_seqlen = args.max_seqlen
+        self.num_description = args.num_description
+        
+        for key, value in data_description.items():
+            for idx, sample in enumerate(value):
+                if idx < self.num_description:
+                    input_ids = tokenizer.encode(sample, add_special_tokens=True)
+
+                    # truncate hoặc pad token
+                    if len(input_ids) >= self.max_seqlen + 2:
+                        token_sep = input_ids[-1]
+                        token = input_ids[:self.max_seqlen + 1] + [token_sep]
+                    else:
+                        token = input_ids + [0] * (self.max_seqlen + 2 - len(input_ids))
+                    
+                    token_mask = [1 if tkn != 0 else 0 for tkn in token]
+
+                    self.data.append((
+                        token,                 # input_ids
+                        token_mask,            # mask
+                        key, 
+                    ))
+
+    def __len__(self):
+        return len(self.data)
+    
+    def __getitem__(self, idx):
+        return self.data[idx]
 
 
 

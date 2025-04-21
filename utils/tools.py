@@ -1,5 +1,6 @@
 import json, os
 import torch
+import torch.nn.functional as F
 from configs import parse_arguments
 args = parse_arguments()
 device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
@@ -35,3 +36,47 @@ def collect_from_json(dataset, root, split):
             else:
                 data = json.load(f)
     return data
+
+def sim(x, y):
+    """
+    Tính độ tương đồng giữa hai vectơ x, y
+    
+    - x: Tensor (N, D), batch của N vectơ đầu vào
+    - y: Tensor (M, D), batch của M vectơ so sánh
+    
+    Trả về:
+    - sim: Tensor (N, M), ma trận độ tương đồng giữa x và y
+    """
+    x = F.normalize(x, p=2, dim=1)
+    y = F.normalize(y, p=2, dim=1)
+    
+    return torch.mm(x, y.t())
+
+@torch.no_grad()
+def find_negative_labels(description_res, k=4):
+    negative_dict = dict()
+    description_out = {}
+    description_matrix = []
+    
+    rel2id = dict()
+    with torch.no_grad():
+        for idx, (key, description) in enumerate(description_res.items()):
+            rel2id[idx] = key
+            description_matrix.append(description)
+        
+        
+    description_matrix = torch.stack(description_matrix, dim=0)
+
+    # Tính cosine similarity giữa reps và descriptions
+    similarities = sim(description_matrix, description_matrix) / 5  # (N, M)
+    
+    # Sắp xếp theo giá trị giảm dần (dim=1 để sắp theo hàng)
+    _, topk_indices = torch.topk(similarities, k=min(k+1,description_matrix.shape[0]), dim=1)  # k+1 để bỏ chính nó
+    
+    # Bỏ chính nó (index đầu tiên)
+    topk_indices = topk_indices[:, 1:].tolist()  # Chuyển thành list để dễ dùng
+    
+    for i in range(len(topk_indices)):
+        new_topk_indices = [rel2id[j] for j in topk_indices[i]]
+        negative_dict[rel2id[i]] = new_topk_indices
+    return negative_dict

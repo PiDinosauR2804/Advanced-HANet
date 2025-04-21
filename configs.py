@@ -28,7 +28,7 @@ def parse_arguments():
     parser.add_argument("--amp", action='store_true') 
     parser.add_argument('--perm-id', default=0, type=str, choices=[str(i) for i in range(5)])
     parser.add_argument('--dataset', default='MAVEN', choices=['MAVEN', 'ACE'])
-    parser.add_argument('--stream-root', default='./data_incremental', type=str)
+    parser.add_argument('--stream-root', default='./data/data_ids', type=str)
     parser.add_argument('--max_seqlen', default=120)
     parser.add_argument('--adamw_eps', default=1e-7)
     parser.add_argument('--fixed-enum', default=True, type=bool, help="whether to fix the exemplar number")
@@ -76,6 +76,9 @@ def parse_arguments():
     parser.add_argument('--skip-first-cl', choices=["ucl", "tlcl", "ucl+tlcl", "none"], default="none")
     parser.add_argument('--method', type=str)
     parser.add_argument('--my_test', default=False, type=bool)
+    
+    parser.add_argument('--num_description', default=1, type=int)
+    parser.add_argument('--use_description', default=True, type=bool)
     
     args, _ = parser.parse_known_args()
 

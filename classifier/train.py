@@ -1,22 +1,27 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import os, time, sys, json
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+
 from torch.utils.data import DataLoader
 from torch.nn.functional import normalize
 from torch.optim import AdamW
 from utils import *
 from configs import parse_arguments
-from classifier.model import BertED
+from model import BertED
 from tqdm import tqdm
-from classifier.exemplars import Exemplars
+from exemplars import Exemplars
 from copy import deepcopy
 from torch.utils.tensorboard import SummaryWriter   
-import os, time
 import logging
 import torch.distributed as dist
 import torch.multiprocessing as mp
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
+from transformers import BertTokenizerFast
 
 
 
@@ -24,7 +29,7 @@ from torch.utils.data.distributed import DistributedSampler
 
 # PERM_10 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]
 
-
+tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 
 def train(local_rank, args):
     torch.manual_seed(args.seed)
@@ -78,8 +83,15 @@ def train(local_rank, args):
     # if args.amp:
         # model, optimizer = amp.initialize(model, optimizer, opt_level="O1") 
         
+    # Get description
+    file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"   
+    with open(file_path_description, 'r', encoding='utf-8') as f:
+        data_description = json.load(f)
         
-        
+    description_dataset = DescriptionDataset(args, tokenizer)
+    description_stage_loader = DataLoader(description_dataset, batch_size=args.batch_size, shuffle=True)
+          
+                
     if args.parallel == 'DDP':
         torch.cuda.set_device(local_rank)
         dist.init_process_group("nccl", rank=local_rank, world_size=args.world_size)
@@ -344,6 +356,39 @@ def train(local_rank, args):
                 
                     # outputs[i].masked_fill_(invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
                 # if args.dataset == "ACE":
+                
+                if args.use_description:
+                    descriptions_representations = {}
+                    final_description_res = {}
+                    
+                    model.eval()
+                    with torch.no_grad():
+                        for bt, description_batch in enumerate(tqdm(description_stage_loader)):
+                            train_x_description, train_masks_description, keys = zip(*description_batch)
+                            train_x_description = torch.LongTensor(train_x_description).to(device)
+                            train_masks_description = torch.LongTensor(train_masks_description).to(device)
+                
+                            return_dict_description = model(train_x_description, train_masks_description)
+                            context_feat_descriptions = return_dict_description['context_feat']
+                            for key, context_feat_description in zip(keys, context_feat_descriptions):
+                                if key not in descriptions_representations:
+                                    descriptions_representations[key] = []
+                                descriptions_representations[key].append(context_feat_description)
+                                                                
+                        for key, value in descriptions_representations.items():
+                            feature = torch.stack(value, dim=0)
+                            temp = torch.mean(feature, dim=0)
+                            final_description_res[key] = temp
+                            
+                    negative_dict = find_negative_labels(final_description_res)
+                    
+                    print(negative_dict)                    
+                    
+
+                
+                            
+                            
+                            
                     
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
