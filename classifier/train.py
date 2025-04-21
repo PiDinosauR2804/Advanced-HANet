@@ -1,6 +1,10 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import os, time, sys, json
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from torch.utils.data import DataLoader
 from torch.nn.functional import normalize
 from torch.optim import AdamW
@@ -11,7 +15,6 @@ from tqdm import tqdm
 from classifier.exemplars import Exemplars
 from copy import deepcopy
 from torch.utils.tensorboard import SummaryWriter   
-import os, time
 import logging
 import torch.distributed as dist
 import torch.multiprocessing as mp
