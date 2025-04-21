@@ -24,7 +24,7 @@ def get_lines_from_results(results:list)->list:
             output_lines[line_idx] = item
     return output_lines
 
-def run(origin_input_path:str, output_path:str, datasets:list, model:str, candidate:int, num_try:int, 
+def run(origin_input_path:str, output_path:str, datasets:list, perms:list, model:str, candidate:int, num_try:int, 
         max_consecutive_429_error:int, max_num_threads:int, resume:bool=False, convert_test:bool=False)->None:
     # Resume from output_path if resume is True
     if resume:
@@ -43,7 +43,7 @@ def run(origin_input_path:str, output_path:str, datasets:list, model:str, candid
     for dataset in datasets:
         os.makedirs(os.path.join(output_path, dataset), exist_ok=True)
 
-        for i in range(5):
+        for i in perms:
             input_folder = os.path.join(input_path, dataset, "perm"+str(i))
             origin_input_folder = os.path.join(origin_input_path, dataset, "perm"+str(i))
             if not os.path.exists(input_folder):
@@ -66,7 +66,7 @@ def run(origin_input_path:str, output_path:str, datasets:list, model:str, candid
                 logger.info("="*100)
                 logger.info(f"Start processing {input_file} to {output_file}")
                 logger.info("="*100)
-                producer.produce(input_file, origin_input_file, is_train=True)
+                gt_list = producer.produce(input_file, origin_input_file, is_train=True)
                 # Start consuming
                 try:
                     results, processed_item, remained_item = consumer.consume(pbar_des=f'{dataset}/perm{i}/{file_name}', model=model, candidate=candidate) # results is a list of tuples (line_idx, key, idx, item)
@@ -86,7 +86,9 @@ def run(origin_input_path:str, output_path:str, datasets:list, model:str, candid
                 
                 end_time = time.time()
                 elapsed_time = end_time - start_time
-                # logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
+                avg_bleu, avg_precision, avg_recall, avg_f1 = eval(gt_list, results)
+                logger.info(f"[FINISHED] Processing {processed_item}/{len(results)} item, remaning {remained_item}/{len(results)} in {elapsed_time:.2f} seconds")
+                logger.info(f"[FINISHED] BLEU: {avg_bleu:.4f} | Precision: {avg_precision:.4f} | Recall: {avg_recall:.4f} | F1: {avg_f1:.4f}")
                 logger.info(f"[SAVE FILE] All item saved to {output_file}")            
 
         if convert_test:
@@ -134,6 +136,7 @@ if __name__ == "__main__":
     input_root = args.input_root
     output_root = args.output_root
     datasets = args.datasets
+    perms = args.perms
     model = args.model
     candidate = args.candidate
     num_try = args.num_try
@@ -165,6 +168,7 @@ if __name__ == "__main__":
     logger.info(f"Input root: {input_root}")
     logger.info(f"Output root: {output_root}")
     logger.info(f"Datasets: {datasets}")
+    logger.info(f"Perms: {perms}")
     logger.info(f"Model: {model}")
     logger.info(f"Candidate: {candidate}")
     logger.info(f"Num try: {num_try}")
@@ -174,6 +178,4 @@ if __name__ == "__main__":
     logger.info(f"Convert test: {convert_test}")
     logger.info(f"[INFO] Start processing...")
 
-    run(input_root, output_root, datasets, model, candidate, num_try, max_consecutive_429_error, max_num_threads, resume, convert_test)
-    
-    # eval()
+    run(input_root, output_root, datasets, perms, model, candidate, num_try, max_consecutive_429_error, max_num_threads, resume, convert_test)

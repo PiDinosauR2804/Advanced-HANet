@@ -26,8 +26,8 @@ class Producer:
             logger.critical(f"[FATAL] Number of lines in input ({len(input_lines)}) and origin ({len(origin_input_lines)}) do not match")
             raise ValueError(f"Number of lines in input ({len(input_lines)}) and origin ({len(origin_input_lines)}) do not match")
 
-
         num_item = 0
+        gt_list = []
         for line_idx, (line, line_origin) in enumerate(zip(input_lines, origin_input_lines)):
             if is_train:
                 for key in line:
@@ -43,12 +43,14 @@ class Producer:
                         raise ValueError(f"Number of items in {key} ({len(value)}) and origin {key} ({len(origin_value)}) do not match")
                     
                     for idx, (item, origin_item) in enumerate(zip(value, origin_value)):
-                        item['text'] = origin_item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
-                        # item['text'] = item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
+                        # item['text'] = origin_item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
+                        item['text'] = item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
                         self.task_queue.put((line_idx, key, idx, item))
+                        gt_list.append((line_idx, key, idx, origin_item))
                         num_item += 1
             else:
                 self.task_queue.put((line_idx, None, None, line))
                 num_item += 1
 
         logger.info(f"[PRODUCING] Finished producing {input_file} with {num_item} item in {len(input_lines)} lines")
+        return gt_list

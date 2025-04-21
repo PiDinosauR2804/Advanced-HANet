@@ -6,6 +6,7 @@ def parse_arguments():
     parser.add_argument('--input_root', default='./data/data_text', type=str)
     parser.add_argument('--output_root', default='./output', type=str)
     parser.add_argument('--datasets', default=['MAVEN'], type=str, nargs='+')
+    parser.add_argument('--perms', type=int, nargs='+', default=[0, 1, 2, 3, 4])
     parser.add_argument('--model', default='gemini-2.0-flash', type=str)
     parser.add_argument('--candidate', default=1, type=int)
     parser.add_argument('--num_try', default=3, type=int)

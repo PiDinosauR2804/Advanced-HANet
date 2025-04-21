@@ -2,6 +2,7 @@ python extract_event.py ^
     --input_root data/data_text ^
     --output_root output/des3 ^
     --datasets MAVEN ACE ^
+    --perms 0 ^
     --model gemini-2.0-flash-lite ^
     --candidate 5 ^
     --num_try 3 ^
