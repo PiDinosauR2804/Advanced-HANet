@@ -1,10 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import os, time, sys, json
+import os, time, sys, json, datetime
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 
 from torch.utils.data import DataLoader
 from torch.nn.functional import normalize
@@ -22,8 +21,30 @@ import torch.multiprocessing as mp
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
+import wandb
+import re
 
+wandb_api_key = "0806b2d5c00870a95f366d95c825d7680649abb7"  # Thay YOUR_WANDB_API_KEY bằng API key thực tế của bạn
 
+os.environ["WANDB_API_KEY"] = wandb_api_key
+
+wandb.login()
+
+class Logger(object):
+    def __init__(self, filename):
+        self.terminal = sys.stdout
+        self.log = open(filename, "w")
+        # self.tqdm_pattern = re.compile(r'\r.*')  # Loại bỏ các dòng tqdm
+
+    def write(self, message):
+        # if not self.tqdm_pattern.match(message):  # Bỏ qua tqdm
+        self.terminal.write(message)
+        self.log.write(message)
+        self.log.flush()
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
 
 # PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
 
@@ -57,6 +78,37 @@ def train(local_rank, args):
     for arg in vars(args):
         logger.info('{}={}'.format(arg.upper(), getattr(args, arg)))
     logger.info('')
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.num_description}_{timestamp}"    
+    
+    # Cấu hình logging
+    log_dir = "log_result"
+    os.makedirs(log_dir, exist_ok=True)  # Tạo thư mục nếu chưa tồn tại
+    log_filename = os.path.join(log_dir, f"{args.run_name}_log.txt")
+    
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        handlers=[
+            logging.FileHandler(log_filename, mode="w"),  # Ghi vào file
+            logging.StreamHandler(sys.stdout)  # Hiển thị trên terminal
+        ]
+    )
+    
+    # Ghi cả print() vào file log
+    sys.stdout = Logger(log_filename)
+    sys.stderr = sys.stdout  # Để ghi cả lỗi vào file
+    
+    wandb.init(
+        # set the wandb project where this run will be logged
+        project="Quang_HANet_First_Improve",
+        name = args.run_name,
+
+        # track hyperparameters and run metadata
+        config=args.__dict__,
+    )
+    
     # set device, whether to use cuda or cpu
     device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
     # get streams from json file and permute them in pre-defined order
@@ -401,10 +453,8 @@ def train(local_rank, args):
                             temp = torch.mean(feature, dim=0)
                             final_description_res[key] = temp
                             
-                    negative_dict = find_negative_labels(final_description_res)
-                                        
+                    negative_dict = find_negative_labels(final_description_res)       
                     loss_des_cl = contrastive_loss_des(reps, labels_for_loss_des, final_description_res, negative_dict)       
-                    print(loss_des_cl)            
                             
                     
                 # Loss ce cho class ở task hiện tại
@@ -576,11 +626,31 @@ def train(local_rank, args):
             logger.info(f'loss_ce: {loss_ce}')
             logger.info(f'loss_ucl: {loss_ucl}')
             logger.info(f'loss_tlcl: {loss_tlcl}')
+            logger.info(f'loss_des_cl: {loss_des_cl}')
             # logger.info(f'loss_ecl: {loss_ecl}')
             logger.info(f'loss_aug: {loss_aug}')
             logger.info(f'loss_fd: {loss_fd}')
             logger.info(f'loss_pd: {loss_pd}')
             logger.info(f'loss_all: {loss}')
+            wandb.log({
+                        f"loss_ce_task_{stage}": loss_ce,
+                        f"loss_ucl_{stage}": loss_ucl,
+                        f"loss_tlcl_{stage}": loss_tlcl,
+                        f"loss_des_cl_{stage}": loss_des_cl,
+                        f"loss_aug_{stage}": loss_aug,
+                        f"loss_fd_{stage}": loss_fd,
+                        f"loss_pd_{stage}": loss_pd,
+                        f"loss_all_{stage}": loss,
+                        
+                        f"loss_ce_task": loss_ce,
+                        f"loss_ucl": loss_ucl,
+                        f"loss_tlcl": loss_tlcl,
+                        f"loss_des_cl": loss_des_cl,
+                        f"loss_aug": loss_aug,
+                        f"loss_fd": loss_fd,
+                        f"loss_pd": loss_pd,
+                        f"loss_all": loss,
+                    })
             # writer.add_scalar(f'stage{stage}/loss/loss_ce', loss_ce, bt + ep * len(stage_loader))
             # writer.add_scalar(f'stage{stage}/loss/loss_ucl', loss_ucl, bt + ep * len(stage_loader))
             # writer.add_scalar(f'stage{stage}/loss/loss_tlcl', loss_tlcl, bt + ep * len(stage_loader))
@@ -622,6 +692,13 @@ def train(local_rank, args):
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                         calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
+                    
+                    wandb.log({
+                        f"precision": precision,
+                        f"recall": recall,
+                        f"micro_F1": micro_F1,
+                    })
+                    
                     if args.log:
                         writer.add_scalar(f'score/epoch/marco_F1', micro_F1,  ep + 1 + args.epochs * stage)
                     if args.log and (ep + 1) == args.epochs:
