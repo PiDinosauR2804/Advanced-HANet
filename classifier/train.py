@@ -435,7 +435,7 @@ def train(local_rank, args):
                             Adj_mask_tlcl = torch.matmul(tlcl_lbs_oh, tlcl_lbs_oh.T)
                             Adj_mask_tlcl = Adj_mask_tlcl * (torch.ones(mat_size) - torch.eye(mat_size)).to(device)
                             loss_tlcl = compute_CLLoss(Adj_mask_tlcl, tlcl_feature, mat_size)
-                    loss = loss + loss_ucl + loss_tlcl
+                    loss = loss + loss_ucl + loss_tlcl*args.weight_loss_tlcl
                     if args.joint_da_loss == "ce" or args.joint_da_loss == "mul":
                         ce_y = torch.cat(train_y + da_y)
                         ce_outputs = torch.cat([outputs, da_outputs])

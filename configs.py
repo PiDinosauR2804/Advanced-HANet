@@ -80,6 +80,7 @@ def parse_arguments():
     parser.add_argument('--num_description', default=1, type=int)
     parser.add_argument('--use_description', default=True, type=bool)
     parser.add_argument('--ratio_loss_des_cl', default=1, type=float)
+    parser.add_argument('--weight_loss_tlcl', default=0.1, type=float)
     
     args, _ = parser.parse_known_args()
 
