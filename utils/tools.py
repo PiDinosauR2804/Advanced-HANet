@@ -81,6 +81,7 @@ def collect_from_json(dataset, root, split):
     if not os.path.exists(pth):
         raise FileNotFoundError(f"Path {pth} do not exist!")
     else:
+        print(f"Opening path: {pth}")
         with open(pth) as f:
             if pth.endswith('.jsonl'):
                 data = [json.loads(line) for line in f]

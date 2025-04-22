@@ -152,19 +152,11 @@ def train(local_rank, args):
     # if args.amp:
         # model, optimizer = amp.initialize(model, optimizer, opt_level="O1") 
         
-    # Get description
-    file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"   
-    with open(file_path_description, 'r', encoding='utf-8') as f:
-        data_description = json.load(f)
-        
-    description_stage_loader = DataLoader(
-        DescriptionDataset(args, tokenizer),
-        batch_size=args.batch_size,
-        shuffle=False,
-        collate_fn=collate_description
-    )
-
-          
+    # # Get description
+    # file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"   
+    # with open(file_path_description, 'r', encoding='utf-8') as f:
+    #     data_description = json.load(f)
+                  
                 
     if args.parallel == 'DDP':
         torch.cuda.set_device(local_rank)
@@ -212,6 +204,7 @@ def train(local_rank, args):
         #     break
         logger.info(f"Stage {stage}")
         logger.info(f'Loading train instances for stage {stage}')
+        
         # stage = 1 # TODO: test use
         # exemplars = Exemplars() # TODO: test use
         if args.single_label:
@@ -278,6 +271,21 @@ def train(local_rank, args):
                 learned_types.append(item)
         logger.info(f'Learned types: {learned_types}')
         logger.info(f'Previous learned types: {prev_learned_types}')
+        
+        labels_all_learned_types = []
+        temp_1 = [idx2label[x] for x in prev_learned_types]
+        temp_2 = [idx2label[x] for x in learned_types if x not in temp_1]
+        labels_all_learned_types.extend(temp_1)
+        labels_all_learned_types.extend(temp_2)
+        
+        
+        description_stage_loader = DataLoader(
+            DescriptionDataset(args, tokenizer, labels_all_learned_types),
+            batch_size=args.batch_size,
+            shuffle=False,
+            collate_fn=collate_description
+        )
+        
         dev_score = None
         no_better = 0
         for ep in range(args.epochs):
@@ -441,7 +449,7 @@ def train(local_rank, args):
                 # if args.dataset == "ACE":
                 
                 if args.use_description:
-                    reps = return_dict['reps']
+                    reps = trig_feat
                     descriptions_representations = {}
                     final_description_res = {}
                     

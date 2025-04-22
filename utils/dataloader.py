@@ -10,7 +10,7 @@ args = parse_arguments()
 
 
 class DescriptionDataset(Dataset):
-    def __init__(self, args, tokenizer):
+    def __init__(self, args, tokenizer, learned_types):
         file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"
         with open(file_path_description, 'r', encoding='utf-8') as f:
             data_description = json.load(f)
@@ -20,6 +20,8 @@ class DescriptionDataset(Dataset):
         self.num_description = args.num_description
         
         for key, value in data_description.items():
+            if int(key) not in learned_types:
+                continue
             for idx, sample in enumerate(value):
                 if idx < self.num_description:
                     input_ids = tokenizer.encode(sample, add_special_tokens=True)
