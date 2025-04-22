@@ -447,7 +447,7 @@ def train(local_rank, args):
                 
                     # outputs[i].masked_fill_(invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
                 # if args.dataset == "ACE":
-                
+                loss_des_cl = torch.tensor(0.0, device=device)
                 if args.use_description:
                     reps = trig_feat
                     descriptions_representations = {}
