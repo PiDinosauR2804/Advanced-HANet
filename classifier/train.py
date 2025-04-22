@@ -470,6 +470,7 @@ def train(local_rank, args):
                             temp = torch.mean(feature, dim=0)
                             final_description_res[key] = temp
                             
+                    model.train()
                     negative_dict = find_negative_labels(final_description_res)       
                     loss_des_cl = contrastive_loss_des(reps, labels_for_loss_des, final_description_res, negative_dict)       
                     loss = loss + loss_des_cl * args.ratio_loss_des_cl
