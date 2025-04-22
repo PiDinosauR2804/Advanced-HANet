@@ -272,11 +272,8 @@ def train(local_rank, args):
         logger.info(f'Learned types: {learned_types}')
         logger.info(f'Previous learned types: {prev_learned_types}')
         
-        labels_all_learned_types = []
-        temp_1 = [idx2label[x] for x in prev_learned_types]
-        temp_2 = [idx2label[x] for x in learned_types if x not in temp_1]
-        labels_all_learned_types.extend(temp_1)
-        labels_all_learned_types.extend(temp_2)
+        labels_all_learned_types = [idx2label[x] for x in learned_types]
+
         
         
         description_stage_loader = DataLoader(
