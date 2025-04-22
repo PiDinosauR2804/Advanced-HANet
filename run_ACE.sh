@@ -11,7 +11,7 @@ do
                 do
                     for n in ACE
                     do
-                        python train.py \
+                        python classifier/train.py \
                             --data-root ./data/data_ids \
                             --dataset $n \
                             --backbone bert-base-uncased \
