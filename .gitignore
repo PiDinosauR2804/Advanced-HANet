@@ -6,5 +6,4 @@ test/
 **/api_key.py
 /logs
 output/MAVEN
-data/
 /match.py
