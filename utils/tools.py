@@ -107,7 +107,7 @@ def sim(x, y):
     return torch.mm(x, y.t())
 
 @torch.no_grad()
-def find_negative_labels(description_res, k=4):
+def find_negative_labels(description_res, k=2):
     negative_dict = dict()
     description_out = {}
     description_matrix = []
