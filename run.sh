@@ -25,6 +25,6 @@
   --tlcl \
   --ucl \
   --skip-first-cl ucl+tlcl \
-  --num_description 3 \       # Số description mỗi label
-  --use_description True \    # Có dùng description và description loss hay không
-  --ratio_loss_des_cl 0.1     # Tỉ lệ description_loss
+  --use_description \
+  --num_description 3 \      
+  --ratio_loss_des_cl 0.1     
