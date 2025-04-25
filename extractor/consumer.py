@@ -8,7 +8,8 @@ from loguru import logger
 from tqdm import tqdm
 
 class Consumer:
-    def __init__(self, task_queue:queue.Queue, num_try=3, max_consecutive_429_error=3, model='gemini-2.0-flash', candidate=1, max_num_threads=10)->None:
+    def __init__(self, task_queue:queue.Queue, num_try=3, max_consecutive_429_error=3, model='gemini-2.0-flash', 
+                 candidate=1, max_num_threads=10, gen_des:bool=False)->None:
         # pram for consumer
         self.task_queue = task_queue
         self.num_try = num_try
@@ -18,6 +19,7 @@ class Consumer:
         self.max_num_threads = max_num_threads
         self.queue_waiting_time = 1
         self.extractors = []
+        self.gen_des = gen_des
         # param for each consumtion time
         self.pbar = None
         self.results = []
@@ -25,6 +27,7 @@ class Consumer:
         self.remained_item = 0
         self.num_added_event = []
         self.num_added_attribute = []
+        self.num_added_description = []
         # Attribute for threading
         self.stop_event = threading.Event()
         self.pause_event = threading.Event()
@@ -123,14 +126,31 @@ class Consumer:
             event_list = None
             for i in range(self.num_try):
                 try:
-                    event_list, num_added_event, num_added_attribute = \
-                        extractor['extractor'].extract_event(item['text'], model=self.model, candidate=self.candidate)
+                    new_item = None
+                    if self.gen_des:
+                        event_list, num_added_event, num_added_attribute = \
+                            extractor['extractor'].extract_event2(item['text'], item['event_words'], model=self.model, candidate=self.candidate)
+                    
+                        if event_list:
+                            new_item = {
+                                'text': item['text'],
+                                'event_words': item['event_words'],
+                                'label': item['label'],
+                                'events': event_list,
+                            }
+    
+                    else:
+                        event_list, num_added_event, num_added_attribute = \
+                            extractor['extractor'].extract_event(item['text'], model=self.model, candidate=self.candidate)
+                            
+                        if event_list:
+                            new_item = {
+                                'text': item['text'],
+                                'events': event_list,
+                            }
+                            
                     extractor['consecutive_429_error'] = 0
-                    if event_list:
-                        new_item = {
-                            'text': item['text'],
-                            'events': event_list,
-                        }
+                    if new_item:
                         new_item = sent2ids(new_item) # Add piece_ids, span and offsets
                         self.append_processed_item(line_idx, key, idx, new_item)
                         with self.lock:
@@ -144,12 +164,13 @@ class Consumer:
                         time.sleep(extractor['extractor'].error_waiting_time)  # Wait for 15 seconds before retrying
                     else:
                         extractor['consecutive_429_error'] = 0
-                        logger.error(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got error: {e} | Text: {item['text']}")
+                        logger.error(f"[ERROR at ATTEMPT {i+1}/{self.num_try}] Worker {worker_id} got error: {e} | Text: {item['text']} | Trigger: {item.get('event_words')}")
+                        # raise e
             else:
                 if not event_list:
-                    logger.error(f"[FAIL] Worker {worker_id} cannot extract event list after {self.num_try} attempts. | Text: {item['text']}")
+                    logger.error(f"[FAIL] Worker {worker_id} cannot extract event list after {self.num_try} attempts. | Text: {item['text']} | Trigger: {item.get('event_words')}")
                 else:
-                    logger.error(f"[FAIL] Worker {worker_id} fail to process event list: {event_list} | Text: {item['text']}")
+                    logger.error(f"[FAIL] Worker {worker_id} fail to process event list: {event_list} | Text: {item['text']} | Trigger: {item.get('event_words')}")
                 self.append_remained_item(line_idx, key, idx, item)
 
     

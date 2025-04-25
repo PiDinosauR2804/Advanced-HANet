@@ -1,0 +1,22 @@
+2025-04-25 15:35:18.978 | INFO     | __main__:<module>:168 - [INFO] Arguments:
+2025-04-25 15:35:18.979 | INFO     | __main__:<module>:169 - Input root: data/data_text
+2025-04-25 15:35:18.980 | INFO     | __main__:<module>:170 - Output root: output/des4
+2025-04-25 15:35:18.981 | INFO     | __main__:<module>:171 - Datasets: ['MAVEN']
+2025-04-25 15:35:18.981 | INFO     | __main__:<module>:172 - Perms: [0]
+2025-04-25 15:35:18.981 | INFO     | __main__:<module>:173 - Model: gemini-2.0-flash-lite
+2025-04-25 15:35:18.982 | INFO     | __main__:<module>:174 - Candidate: 5
+2025-04-25 15:35:18.982 | INFO     | __main__:<module>:175 - Num try: 3
+2025-04-25 15:35:18.983 | INFO     | __main__:<module>:176 - Max consecutive 429 error: 5
+2025-04-25 15:35:18.984 | INFO     | __main__:<module>:177 - Max num threads: 10
+2025-04-25 15:35:18.984 | INFO     | __main__:<module>:178 - Resume: True
+2025-04-25 15:35:18.985 | INFO     | __main__:<module>:179 - Convert test: False
+2025-04-25 15:35:18.986 | INFO     | __main__:<module>:180 - Logs dir: logs/extractor
+2025-04-25 15:35:18.987 | INFO     | __main__:<module>:181 - Gen des: True
+2025-04-25 15:35:18.988 | INFO     | __main__:<module>:182 - [INFO] Start processing...
+2025-04-25 15:36:59.153 | INFO     | extractor.consumer:__init__:48 - [INFO] Found 10 valid extractors
+2025-04-25 15:37:01.170 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-25 15:37:01.321 | INFO     | extractor.consumer:__init__:55 - [START] Start 10 threads
+2025-04-25 15:37:01.323 | ERROR    | __main__:run:50 - [ERROR] Folder output/des4\MAVEN\perm0 is not exist
+2025-04-25 15:37:01.340 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-25 15:37:02.354 | INFO     | extractor.consumer:stop_threads:63 - [STOP] All threads stopped
+2025-04-25 15:37:02.355 | INFO     | __main__:run:132 - [FINISHED] All items processed and saved to output/des4

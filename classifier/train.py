@@ -240,7 +240,7 @@ def train(local_rank, args):
                     train_y[i].masked_fill_(invalid_mask_label, 0)
                 # outputs[:, 0] = 0
                 loss, loss_ucl, loss_aug, loss_fd, loss_pd, loss_tlcl = 0, 0, 0, 0, 0, 0
-                ce_y = torch.cat(train_y)
+                ce_y = torch.cat(train_y) # (sum of len(label), )
                 ce_outputs = outputs
                 if (args.ucl or args.tlcl) and (stage > 0 or (args.skip_first_cl != "ucl+tlcl" and stage == 0)):                        
                     # _, dpo_feature2 = model(train_x.clone(), train_masks, padded_train_span, span_len)

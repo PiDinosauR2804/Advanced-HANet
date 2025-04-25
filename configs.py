@@ -15,6 +15,7 @@ def parse_arguments():
     parser.add_argument('--logs_dir', default='./logs/extractor', type=str)
     parser.add_argument('--eresume', action='store_true')
     parser.add_argument('--convert_test', action='store_true')
+    parser.add_argument('--gen_des', action='store_true')
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)

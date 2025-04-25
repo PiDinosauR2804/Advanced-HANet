@@ -71,13 +71,12 @@ def sent2ids(item:dict)->dict:
         else:
             raise ValueError(f"Span for trigger word '{trigger_word}' not found in offsets mapping")
     
-    return {
-        'text': item['text'],
-        'events': item['events'],
-        'offsets': offsets,
+    final_item = item | {
         'piece_ids': piece_ids,
-        'span': span,
+        'span': span
     }
+    
+    return final_item
 
 def sent2ids_batch(list_sent:list)->list:
     ids_data = []

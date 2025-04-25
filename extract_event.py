@@ -25,7 +25,7 @@ def get_lines_from_results(results:list)->list:
     return output_lines
 
 def run(origin_input_path:str, output_path:str, datasets:list, perms:list, model:str, candidate:int, num_try:int, 
-        max_consecutive_429_error:int, max_num_threads:int, resume:bool=False, convert_test:bool=False)->None:
+        max_consecutive_429_error:int, max_num_threads:int, resume:bool=False, convert_test:bool=False, gen_des:bool=False)->None:
     # Resume from output_path if resume is True
     if resume:
         input_path = output_path
@@ -37,7 +37,7 @@ def run(origin_input_path:str, output_path:str, datasets:list, perms:list, model
     task_queue = queue.Queue()
     producer = Producer(task_queue)
     consumer = Consumer(task_queue, num_try=num_try, max_consecutive_429_error=max_consecutive_429_error, 
-                        model=model, candidate=candidate, max_num_threads=max_num_threads)
+                        model=model, candidate=candidate, max_num_threads=max_num_threads, gen_des=gen_des)
     
     # Convert dataset
     for dataset in datasets:
@@ -145,6 +145,7 @@ if __name__ == "__main__":
     resume = args.eresume
     convert_test = args.convert_test
     logs_dir = args.logs_dir
+    gen_des = args.gen_des
     
     # Configure logging
     os.makedirs(logs_dir, exist_ok=True)
@@ -176,6 +177,8 @@ if __name__ == "__main__":
     logger.info(f"Max num threads: {max_num_threads}")
     logger.info(f"Resume: {resume}")
     logger.info(f"Convert test: {convert_test}")
+    logger.info(f"Logs dir: {logs_dir}")
+    logger.info(f"Gen des: {gen_des}")
     logger.info(f"[INFO] Start processing...")
 
-    run(input_root, output_root, datasets, perms, model, candidate, num_try, max_consecutive_429_error, max_num_threads, resume, convert_test)
+    run(input_root, output_root, datasets, perms, model, candidate, num_try, max_consecutive_429_error, max_num_threads, resume, convert_test, gen_des)

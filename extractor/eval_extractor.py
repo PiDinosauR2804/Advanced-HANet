@@ -37,6 +37,11 @@ def eval(gt_list:list, pr_list:list):
             if gt_line_idx != pr_line_idx or gt_key != pr_key or gt_idx != pr_idx:
                 logger.error(f"[ERROR] Line index or key or idx do not match: {gt} vs {pr}")
                 continue
+            
+            if pr_item.get('span') is None:
+                # logger.error(f"[ERROR] Span is None in prediction: {pr_item}")
+                continue
+            
             # Calculate BLEU score for each item
             bleu = bleu_score(gt_item['text'], pr_item['text'])
             # get span at the position that corresponding label > 0

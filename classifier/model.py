@@ -51,11 +51,12 @@ class BertED(nn.Module):
                     x_cdt = x_cdt.contiguous().view(x_cdt.size(0), x_cdt.size(-1) * 2)
                     opt = self.input_map(x_cdt)
                 else:
-                    opt = torch.index_select(x[i], 0, span[i][:, 0]) + torch.index_select(x[i], 0, span[i][:, 1])
+                    # x is (batchsize, seq_len, hidden_size)
+                    opt = torch.index_select(x[i], 0, span[i][:, 0]) + torch.index_select(x[i], 0, span[i][:, 1]) # opt is (len(label), hidden_size)
                     # x = x_cdt.permute(1, 0, 2) 
-                trig_feature.append(opt)
-            trig_feature = torch.cat(trig_feature)
-        outputs = self.fc(trig_feature)
+                trig_feature.append(opt) # (batch_size, len(label), hidden_size)
+            trig_feature = torch.cat(trig_feature) # (sum of len(label), hidden_size)
+        outputs = self.fc(trig_feature) # (sum of len(label), output_size)
         return_dict['outputs'] = outputs
         return_dict['context_feat'] = context_feature
         return_dict['trig_feat'] = trig_feature

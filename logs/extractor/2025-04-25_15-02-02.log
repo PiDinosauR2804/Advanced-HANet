@@ -1,0 +1,15 @@
+2025-04-25 15:02:02.906 | INFO     | __main__:<module>:168 - [INFO] Arguments:
+2025-04-25 15:02:02.932 | INFO     | __main__:<module>:169 - Input root: data/data_text
+2025-04-25 15:02:02.932 | INFO     | __main__:<module>:170 - Output root: output/des4
+2025-04-25 15:02:02.933 | INFO     | __main__:<module>:171 - Datasets: ['MAVEN']
+2025-04-25 15:02:02.933 | INFO     | __main__:<module>:172 - Perms: [0]
+2025-04-25 15:02:02.934 | INFO     | __main__:<module>:173 - Model: gemini-2.0-flash-lite
+2025-04-25 15:02:02.935 | INFO     | __main__:<module>:174 - Candidate: 5
+2025-04-25 15:02:02.935 | INFO     | __main__:<module>:175 - Num try: 3
+2025-04-25 15:02:02.936 | INFO     | __main__:<module>:176 - Max consecutive 429 error: 5
+2025-04-25 15:02:02.936 | INFO     | __main__:<module>:177 - Max num threads: 10
+2025-04-25 15:02:02.937 | INFO     | __main__:<module>:178 - Resume: True
+2025-04-25 15:02:02.937 | INFO     | __main__:<module>:179 - Convert test: False
+2025-04-25 15:02:02.938 | INFO     | __main__:<module>:180 - Logs dir: logs/extractor
+2025-04-25 15:02:02.939 | INFO     | __main__:<module>:181 - Gen des: True
+2025-04-25 15:02:02.939 | INFO     | __main__:<module>:182 - [INFO] Start processing...
