@@ -198,6 +198,9 @@ def train(local_rank, args):
     if args.early_stop:
         e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
         
+    if args.use_description:
+        print("AliBABABABBABABAB")
+        
     # Xét từng task 
     for stage in task_idx:
         # if stage > 0:
