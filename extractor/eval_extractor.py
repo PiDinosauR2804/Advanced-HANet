@@ -35,7 +35,7 @@ def eval(gt_list:list, pr_list:list):
             gt_line_idx, gt_key, gt_idx, gt_item = gt
             pr_line_idx, pr_key, pr_idx, pr_item = pr
             if gt_line_idx != pr_line_idx or gt_key != pr_key or gt_idx != pr_idx:
-                logger.error(f"[ERROR] Line index or key or idx do not match: {gt} vs {pr}")
+                logger.error(f"[ERROR] Line index or key or idx do not match: {gt}\nvs\n{pr}")
                 continue
             
             if pr_item.get('span') is None:

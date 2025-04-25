@@ -48,7 +48,7 @@ class Producer:
                         labels = []
                         for word, label in zip(item['event_words'], item['label']):
                             if label > 0:
-                                event_words.append(word.lower())
+                                event_words.append(word.lower().replace(" - ", "-"))
                                 labels.append(label)
                                 
                         item['event_words'] = event_words
@@ -63,4 +63,6 @@ class Producer:
                 num_item += 1
 
         logger.info(f"[PRODUCING] Finished producing {input_file} with {num_item} item in {len(input_lines)} lines")
+        # sort the gt_list by line_idx, key and idx
+        gt_list.sort(key=lambda x: (x[0], x[1], x[2]))
         return gt_list

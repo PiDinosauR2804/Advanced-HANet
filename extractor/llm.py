@@ -175,8 +175,8 @@ please extract (write your answer, do not code) the event arguments and generate
         if match:
             events_str = match.group()
             try:
-                # events_list = ast.literal_eval(events_str)
-                events_list = json.loads(events_str.replace("None", "null"))
+                events_list = ast.literal_eval(events_str.replace("null", "None").replace("true", "True").replace("false", "False"))
+                # events_list = json.loads(events_str.replace("None", "null").replace("True", "true").replace("False", "false"))
                 return events_list
             
             except ValueError as e:
