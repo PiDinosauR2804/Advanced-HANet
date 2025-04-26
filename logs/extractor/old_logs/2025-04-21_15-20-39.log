@@ -1,0 +1,429 @@
+2025-04-21 15:20:39.846 | INFO     | __main__:<module>:164 - [INFO] Arguments:
+2025-04-21 15:20:39.846 | INFO     | __main__:<module>:165 - Input root: data/data_text
+2025-04-21 15:20:39.847 | INFO     | __main__:<module>:166 - Output root: output/des3
+2025-04-21 15:20:39.848 | INFO     | __main__:<module>:167 - Datasets: ['MAVEN', 'ACE']
+2025-04-21 15:20:39.848 | INFO     | __main__:<module>:168 - Model: gemini-2.0-flash-lite
+2025-04-21 15:20:39.849 | INFO     | __main__:<module>:169 - Candidate: 5
+2025-04-21 15:20:39.849 | INFO     | __main__:<module>:170 - Num try: 3
+2025-04-21 15:20:39.850 | INFO     | __main__:<module>:171 - Max consecutive 429 error: 4
+2025-04-21 15:20:39.850 | INFO     | __main__:<module>:172 - Max num threads: 10
+2025-04-21 15:20:39.851 | INFO     | __main__:<module>:173 - Resume: True
+2025-04-21 15:20:39.851 | INFO     | __main__:<module>:174 - Convert test: False
+2025-04-21 15:20:39.852 | INFO     | __main__:<module>:175 - [INFO] Start processing...
+2025-04-21 15:21:21.054 | INFO     | extractor.consumer:__init__:45 - [INFO] Found 10 valid extractors
+2025-04-21 15:21:23.062 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:21:23.068 | INFO     | extractor.consumer:__init__:52 - [START] Start 10 threads
+2025-04-21 15:21:23.069 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:21:23.069 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl to output/des3\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:21:23.071 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:21:23.071 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-21 15:21:23.101 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:21:23.103 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:21:23.104 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:21:23.106 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:21:27.380 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 15:21:30.715 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 2/3] Worker 0 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 15:21:34.103 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 3/3] Worker 0 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 15:21:34.105 | ERROR    | extractor.consumer:worker:152 - [FAIL] Worker 0 fail to process event list: [{'event_type': 'motion', 'trigger_word': 'floating', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word floating refers to the event of moving or being present in the air or on the surface of a liquid, not touching the ground.'}, {'event_type': 'motion', 'trigger_word': 'appear', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word appear refers to the event of coming into sight or presence; become visible or noticeable.'}, {'event_type': 'motion', 'trigger_word': 'aim', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word aim refers to the event of pointing or directing a weapon or other object towards a target.'}, {'event_type': 'attack', 'trigger_word': 'shoot', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'rockets'], 'description': 'the trigger word shoot refers to the event of firing a weapon.'}, {'event_type': 'explosion', 'trigger_word': 'blow', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'it'], 'description': 'the trigger word blow refers to the event of causing something to explode.'}, {'event_type': 'destruction', 'trigger_word': 'blow up', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'it'], 'description': 'the trigger word blow up refers to the event of destroy (something) by an explosion'}] | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 15:21:36.183 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:21:36.185 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 279/280 items with 1/280 remained items.
+2025-04-21 15:21:36.194 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:21:36.196 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:21:36.200 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl to output/des3\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:21:36.201 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:21:36.205 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-21 15:21:36.228 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:21:36.232 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:21:36.233 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:21:36.234 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:22:24.230 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 5 cannot extract event list after 3 attempts. | Text: the bombardment killed 1, 297 french servicemen, sank a battleship and damaged five ships, for a british loss of five aircraft shot down and two crewmen killed.
+2025-04-21 15:22:24.382 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 8 cannot extract event list after 3 attempts. | Text: the concerned citizens tribunal report, estimated that as many as 1, 926 may have been killed.
+2025-04-21 15:22:25.083 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: all four people were killed, with a fifth person, apparently unconnected to eta, injured in the shooting.
+2025-04-21 15:22:25.084 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 7 cannot extract event list after 3 attempts. | Text: overall, the hurricane caused $ 100 million in damage and killed at least 4, 112 people.
+2025-04-21 15:22:25.130 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: the number of serb civilian deaths is disputed — croatia claims that 214 were killed, while serbian sources cite 1, 192 civilians killed or missing.
+2025-04-21 15:22:27.380 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: hundreds of japanese troops were killed in the 30-minute coordinated attack ; the americans suffered minimal casualties.
+2025-04-21 15:22:42.592 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: elsewhere in the province, five people were killed, and 26, 000 were left homeless.
+2025-04-21 15:22:42.745 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 6 cannot extract event list after 3 attempts. | Text: of the 51 people on board, 27 were killed, including the captain and a member of the cabin crew.
+2025-04-21 15:22:42.822 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: the collingwood manor massacre, is the name that was given to a notorious hit put out on three chicago gunmen by the notorious purple gang on september 16, 1931.
+2025-04-21 15:22:44.345 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 2/3] Worker 4 got error: Trigger word 'flew' not found | Text: in raf bomber command had flown losing dropping approximately of bombs and killing over in duisburg alone.
+2025-04-21 15:22:44.457 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 9 cannot extract event list after 3 attempts. | Text: occurring near the end of the american civil war, the assassination was part of a larger conspiracy intended by booth to revive the confederate cause by eliminating the three most important officials of the united states government.
+2025-04-21 15:22:46.369 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 3/3] Worker 4 got error: Trigger word 'flew' not found | Text: in raf bomber command had flown losing dropping approximately of bombs and killing over in duisburg alone.
+2025-04-21 15:22:46.371 | ERROR    | extractor.consumer:worker:152 - [FAIL] Worker 4 fail to process event list: [{'event_type': 'attack', 'trigger_word': 'flown', 'event_time': None, 'event_location': 'duisburg', 'event_participants': ['raf bomber command'], 'description': 'the trigger word flown refers to the event of a plane traveling through the air.'}, {'event_type': 'attack', 'trigger_word': 'dropping', 'event_time': None, 'event_location': 'duisburg', 'event_participants': ['raf bomber command'], 'description': 'the trigger word dropping refers to the event of releasing bombs, indicating an act of military attack.'}, {'event_type': 'death', 'trigger_word': 'killing', 'event_time': None, 'event_location': 'duisburg', 'event_participants': ['raf bomber command', 'bombs'], 'description': 'the trigger word killing refers to the event of causing death, indicating an act of violence or warfare.'}, {'event_type': 'attack', 'trigger_word': 'flew', 'event_time': None, 'event_location': None, 'event_participants': ['raf bomber command'], 'description': 'the trigger word flew refers to the event of aircraft traveling through the air, indicating movement and action'}] | Text: in raf bomber command had flown losing dropping approximately of bombs and killing over in duisburg alone.
+2025-04-21 15:22:48.563 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 1/3] Worker 3 got error: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 4) | Text: american political scientist j. patrice mcsherry gives a figure of at least 402 killed in operations which crossed national borders in a 2002 source, and mentions in a 2009 source that of those who ` ` had gone into exile ' ' and were ` ` kidnapped, tortured and killed in allied countries or illegally transferred to their home countries to be executed.
+2025-04-21 15:23:12.325 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 5 cannot extract event list after 3 attempts. | Text: at the inquest, the coroner, finding no evidence of suicide, and lacking sufficient evidence of the circumstances, recorded an open verdict.
+2025-04-21 15:23:12.327 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 5 got error 429 more than 4 times and stoping. 10 threads are still running.
+2025-04-21 15:23:12.452 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 8 cannot extract event list after 3 attempts. | Text: the blood hole massacre occurred in what is now the australian state of victoria at middle creek, 6 – 7 miles from glengower station between clunes and newstead at the end of 1839 or early 1840, killing an unknown number of aborigines from the grampians district who were on their way home after trading goods for green stone axe blanks that they obtained near what is now lancefield.
+2025-04-21 15:23:12.454 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 8 got error 429 more than 4 times and stoping. 9 threads are still running.
+2025-04-21 15:23:13.897 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 7 cannot extract event list after 3 attempts. | Text: john witney, the driver of the suspects ' vehicle, was also convicted of the murders ; he was released from prison in 1991 but was killed in 1999 in an unconnected incident.
+2025-04-21 15:23:13.898 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 7 got error 429 more than 4 times and stoping. 8 threads are still running.
+2025-04-21 15:23:30.409 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 6 cannot extract event list after 3 attempts. | Text: on april 15, 2002, the aircraft on this route, a boeing 767-200er, crashed into a hill near busan, killing 129 of the 166 people on board.
+2025-04-21 15:23:30.411 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 6 got error 429 more than 4 times and stoping. 7 threads are still running.
+2025-04-21 15:23:32.493 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 9 cannot extract event list after 3 attempts. | Text: at least 2, 500 people drowned, while damage was estimated at $ 25 million.
+2025-04-21 15:23:32.495 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 9 got error 429 more than 4 times and stoping. 6 threads are still running.
+2025-04-21 15:23:55.033 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: after the french had been expelled from haiti in 1804, the newly independent nation was first ruled by jean-jacques dessalines, who was murdered in 1806 and replaced by two of his advisors, henri christophe and alexandre petion.
+2025-04-21 15:23:55.264 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: 67 israeli soldiers, 5 israeli civilians ( including one child ) and one thai civilian were killed and 469 idf soldiers and 261 israeli civilians were injured.
+2025-04-21 15:23:56.590 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: the bombing of tan son nhut air base occurred on april 28, 1975, just two days before the fall of saigon.
+2025-04-21 15:23:57.039 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: bereket simon, the country ' s communications minister told ` ` reuters ' ' the attack was carried out at 5 am on 17 january, by eritrean-trained groups.
+2025-04-21 15:24:26.990 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: no definitive link between the attacks has yet been established.
+2025-04-21 15:24:43.027 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: the battle started when minamoto no yukiie attempted a sneak attack against his enemies during the night.
+2025-04-21 15:24:43.029 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 2 got error 429 more than 4 times and stoping. 5 threads are still running.
+2025-04-21 15:24:43.288 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: with the ebb of the tide, olaf ' s forces began an assault across the small land bridge.
+2025-04-21 15:24:43.291 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 1 got error 429 more than 4 times and stoping. 4 threads are still running.
+2025-04-21 15:24:44.438 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: the naxalite – maoist insurgency again gained international media attention after the 2013 naxal attack in darbha valley resulted in the deaths of around 24 indian national congress leaders, including the former state minister mahendra karma and the chhattisgarh congress chief nand kumar patel.
+2025-04-21 15:24:44.440 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 4 got error 429 more than 4 times and stoping. 3 threads are still running.
+2025-04-21 15:24:44.999 | ERROR    | extractor.consumer:worker:150 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: important base installations such as the power station, dry dock, shipyard, maintenance, and fuel and torpedo storage facilities, as well as the submarine piers and headquarters building ( also home of the intelligence section ) were not attacked.
+2025-04-21 15:24:45.001 | CRITICAL | extractor.consumer:worker:106 - [FATAL] Worker 3 got error 429 more than 4 times and stoping. 2 threads are still running.
+2025-04-21 15:29:54.318 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 15:29:57.780 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 2/3] Worker 0 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 15:30:00.528 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 3/3] Worker 0 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 15:30:00.529 | ERROR    | extractor.consumer:worker:152 - [FAIL] Worker 0 fail to process event list: [{'event_type': 'motion', 'trigger_word': 'floating', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word floating describes the action of moving or drifting through the air'}, {'event_type': 'appearance', 'trigger_word': 'appear', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word appear refers to the action of coming into sight'}, {'event_type': 'motion', 'trigger_word': 'aim', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'neck', 'guitar'], 'description': 'the trigger word aim describes the action of directing something towards a target'}, {'event_type': 'attack', 'trigger_word': 'shoot', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'rockets'], 'description': 'the trigger word shoot describes the action of firing a projectile'}, {'event_type': 'destruction', 'trigger_word': 'blow', 'event_time': None, 'event_location': None, 'event_participants': ['he'], 'description': 'the trigger word blow describes the action of destroying something by explosion'}, {'event_type': 'destruction', 'trigger_word': 'blow up', 'event_time': None, 'event_location': None, 'event_participants': ['it', 'he', 'guitar'], 'description': 'the trigger word blow up refers to the event of destroying something with a blast'}] | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-21 15:31:05.025 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:31:05.028 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 214/240 items with 26/240 remained items.
+2025-04-21 15:31:05.029 | INFO     | extractor.consumer:consume:193 - [FINISHED] Really processed 150/240 items with 42.00% event list are added | AVG added events: 0.66 | AVG added attributes: 1.17
+2025-04-21 15:31:05.038 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:31:05.040 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:31:05.041 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl to output/des3\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:31:05.042 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:31:05.042 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-21 15:31:05.177 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:31:05.179 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:31:05.181 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:31:05.182 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:35:22.100 | ERROR    | extractor.llm:extract_event:191 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: this was the result of a new television deal between sanzar, the consortium of the three countries ' rugby federations that organises the tournament, and broadcasters in the sanzar countries and the united kingdom.
+2025-04-21 15:35:22.102 | ERROR    | extractor.llm:extract_event:191 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: this was the result of a new television deal between sanzar, the consortium of the three countries ' rugby federations that organises the tournament, and broadcasters in the sanzar countries and the united kingdom.
+2025-04-21 15:35:29.542 | ERROR    | extractor.consumer:worker:147 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 'defense' not found | Text: the poor state of the roads and rail lines in algeria meant that allied forces faced difficult logistic challenges which enabled the axis to prolong a defence.
+2025-04-21 15:41:34.318 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:41:34.320 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 280/280 items with 0/280 remained items.
+2025-04-21 15:41:34.322 | INFO     | extractor.consumer:consume:193 - [FINISHED] Really processed 280/280 items with 42.14% event list are added | AVG added events: 0.63 | AVG added attributes: 0.86
+2025-04-21 15:41:34.332 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:41:34.334 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:41:34.334 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl to output/des3\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:41:34.335 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:41:34.336 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-21 15:41:34.377 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:41:34.379 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:41:34.381 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:41:34.383 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:26.902 | CRITICAL | extractor.consumer:consume:176 - [FALTAL] Consuming interrupted by user. Stopping safely...
+2025-04-21 15:43:26.903 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:27.059 | INFO     | extractor.consumer:stop_threads:60 - [STOP] All threads stopped
+2025-04-21 15:43:27.063 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 49/240 items with 191/240 remained items.
+2025-04-21 15:43:27.063 | INFO     | extractor.consumer:consume:193 - [FINISHED] Really processed 49/240 items with 48.98% event list are added | AVG added events: 0.65 | AVG added attributes: 0.96
+2025-04-21 15:43:27.075 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:27.076 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:27.077 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl to output/des3\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:27.078 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:27.079 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-21 15:43:27.115 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:43:27.117 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:27.118 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:27.120 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:27.125 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-21 15:43:29.141 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:29.143 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-21 15:43:29.151 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:29.152 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:29.154 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl to output/des3\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:29.155 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:29.156 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-21 15:43:29.192 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:43:29.194 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:29.196 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:29.197 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:29.198 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-21 15:43:31.205 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:31.209 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-21 15:43:31.218 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:31.226 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:31.227 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl to output/des3\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:31.228 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:31.229 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-21 15:43:31.275 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:43:31.278 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:31.279 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:31.279 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:31.280 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-21 15:43:33.294 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:33.295 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-21 15:43:33.305 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:33.306 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:33.307 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl to output/des3\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:33.308 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:33.309 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-21 15:43:33.347 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:43:33.349 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:33.350 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:33.351 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:33.352 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-21 15:43:35.368 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:35.371 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-21 15:43:35.381 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:35.383 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:35.384 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl to output/des3\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:35.387 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:35.389 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-21 15:43:35.427 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:43:35.429 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:35.430 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:35.431 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:35.432 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-21 15:43:37.446 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:37.448 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-21 15:43:37.457 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:37.458 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:37.459 | INFO     | __main__:run:67 - Start processing output/des3\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl to output/des3\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:37.460 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:37.461 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-21 15:43:37.494 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:43:37.496 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:37.497 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:37.499 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:37.500 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-21 15:43:39.507 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:39.509 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-21 15:43:39.516 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:39.518 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:39.519 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm0\ACE_5task_2way_10shot.train.jsonl to output/des3\ACE\perm0\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:39.520 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:39.521 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm0\ACE_5task_2way_10shot.train.jsonl...
+2025-04-21 15:43:39.560 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm0\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:43:39.562 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:39.563 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:39.564 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:39.566 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-21 15:43:41.579 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:41.580 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-21 15:43:41.593 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm0\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:41.594 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:41.596 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm0\ACE_5task_2way_5shot.train.jsonl to output/des3\ACE\perm0\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:41.597 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:41.597 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm0\ACE_5task_2way_5shot.train.jsonl...
+2025-04-21 15:43:41.642 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm0\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:43:41.644 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:41.645 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:41.646 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:41.647 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-21 15:43:43.661 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:43.663 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-21 15:43:43.674 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm0\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:43.675 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:43.676 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm0\ACE_5task_4way_10shot.train.jsonl to output/des3\ACE\perm0\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:43:43.677 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:43.678 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm0\ACE_5task_4way_10shot.train.jsonl...
+2025-04-21 15:43:43.927 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm0\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-21 15:43:43.930 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:43.931 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:43.931 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:43.932 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-21 15:43:45.946 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:45.947 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/560 items with 560/560 remained items.
+2025-04-21 15:43:45.977 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm0\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:43:45.978 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:45.979 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm0\ACE_5task_4way_5shot.train.jsonl to output/des3\ACE\perm0\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:43:45.979 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:45.980 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm0\ACE_5task_4way_5shot.train.jsonl...
+2025-04-21 15:43:46.048 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm0\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-21 15:43:46.059 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:46.063 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:46.064 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:46.066 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-21 15:43:48.085 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:48.088 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/480 items with 480/480 remained items.
+2025-04-21 15:43:48.112 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm0\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:43:48.113 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:48.114 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm1\ACE_5task_2way_10shot.train.jsonl to output/des3\ACE\perm1\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:48.115 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:48.115 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm1\ACE_5task_2way_10shot.train.jsonl...
+2025-04-21 15:43:48.159 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm1\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:43:48.161 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:48.162 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:48.163 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:48.164 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-21 15:43:50.176 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:50.178 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-21 15:43:50.193 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm1\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:50.194 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:50.194 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm1\ACE_5task_2way_5shot.train.jsonl to output/des3\ACE\perm1\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:50.195 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:50.196 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm1\ACE_5task_2way_5shot.train.jsonl...
+2025-04-21 15:43:50.335 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm1\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:43:50.338 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:50.339 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:50.340 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:50.341 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-21 15:43:52.348 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:52.350 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-21 15:43:52.362 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm1\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:52.362 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:52.365 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm1\ACE_5task_4way_10shot.train.jsonl to output/des3\ACE\perm1\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:43:52.365 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:52.367 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm1\ACE_5task_4way_10shot.train.jsonl...
+2025-04-21 15:43:52.426 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm1\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-21 15:43:52.429 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:52.430 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:52.431 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:52.432 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-21 15:43:54.452 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:54.455 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/560 items with 560/560 remained items.
+2025-04-21 15:43:54.479 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm1\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:43:54.480 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:54.481 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm1\ACE_5task_4way_5shot.train.jsonl to output/des3\ACE\perm1\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:43:54.482 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:54.483 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm1\ACE_5task_4way_5shot.train.jsonl...
+2025-04-21 15:43:54.538 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm1\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-21 15:43:54.541 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:54.542 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:54.544 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:54.545 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-21 15:43:56.565 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:56.567 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/480 items with 480/480 remained items.
+2025-04-21 15:43:56.595 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm1\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:43:56.597 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:56.597 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm2\ACE_5task_2way_10shot.train.jsonl to output/des3\ACE\perm2\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:56.598 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:56.598 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm2\ACE_5task_2way_10shot.train.jsonl...
+2025-04-21 15:43:56.648 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm2\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:43:56.650 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:56.651 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:56.654 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:56.655 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-21 15:43:58.672 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:43:58.673 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-21 15:43:58.687 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm2\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:43:58.688 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:43:58.689 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm2\ACE_5task_2way_5shot.train.jsonl to output/des3\ACE\perm2\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:43:58.691 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:43:58.691 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm2\ACE_5task_2way_5shot.train.jsonl...
+2025-04-21 15:43:58.822 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm2\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:43:58.824 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:43:58.826 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:43:58.827 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:43:58.828 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-21 15:44:00.839 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:00.841 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-21 15:44:00.852 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm2\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:44:00.853 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:00.854 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm2\ACE_5task_4way_10shot.train.jsonl to output/des3\ACE\perm2\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:44:00.855 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:00.856 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm2\ACE_5task_4way_10shot.train.jsonl...
+2025-04-21 15:44:00.914 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm2\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-21 15:44:00.917 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:00.918 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:00.920 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:00.922 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-21 15:44:02.933 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:02.937 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/560 items with 560/560 remained items.
+2025-04-21 15:44:02.961 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm2\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:44:02.961 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:02.962 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm2\ACE_5task_4way_5shot.train.jsonl to output/des3\ACE\perm2\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:44:02.963 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:02.964 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm2\ACE_5task_4way_5shot.train.jsonl...
+2025-04-21 15:44:03.014 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm2\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-21 15:44:03.016 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:03.017 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:03.018 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:03.020 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-21 15:44:05.030 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:05.032 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/480 items with 480/480 remained items.
+2025-04-21 15:44:05.053 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm2\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:44:05.054 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:05.055 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm3\ACE_5task_2way_10shot.train.jsonl to output/des3\ACE\perm3\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:44:05.056 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:05.057 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm3\ACE_5task_2way_10shot.train.jsonl...
+2025-04-21 15:44:05.102 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm3\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:44:05.105 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:05.107 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:05.108 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:05.110 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-21 15:44:07.127 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:07.129 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-21 15:44:07.144 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm3\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:44:07.145 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:07.146 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm3\ACE_5task_2way_5shot.train.jsonl to output/des3\ACE\perm3\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:44:07.146 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:07.147 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm3\ACE_5task_2way_5shot.train.jsonl...
+2025-04-21 15:44:07.282 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm3\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:44:07.284 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:07.286 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:07.288 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:07.290 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-21 15:44:09.302 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:09.304 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-21 15:44:09.315 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm3\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:44:09.316 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:09.317 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm3\ACE_5task_4way_10shot.train.jsonl to output/des3\ACE\perm3\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:44:09.317 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:09.319 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm3\ACE_5task_4way_10shot.train.jsonl...
+2025-04-21 15:44:09.377 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm3\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-21 15:44:09.380 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:09.381 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:09.382 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:09.383 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-21 15:44:11.397 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:11.399 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/560 items with 560/560 remained items.
+2025-04-21 15:44:11.425 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm3\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:44:11.426 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:11.427 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm3\ACE_5task_4way_5shot.train.jsonl to output/des3\ACE\perm3\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:44:11.427 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:11.428 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm3\ACE_5task_4way_5shot.train.jsonl...
+2025-04-21 15:44:11.483 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm3\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-21 15:44:11.486 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:11.487 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:11.488 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:11.489 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-21 15:44:13.507 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:13.508 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/480 items with 480/480 remained items.
+2025-04-21 15:44:13.531 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm3\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:44:13.533 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:13.534 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm4\ACE_5task_2way_10shot.train.jsonl to output/des3\ACE\perm4\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:44:13.535 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:13.535 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm4\ACE_5task_2way_10shot.train.jsonl...
+2025-04-21 15:44:13.669 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm4\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-21 15:44:13.671 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:13.672 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:13.674 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:13.675 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-21 15:44:15.693 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:15.696 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-21 15:44:15.810 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm4\ACE_5task_2way_10shot.train.jsonl
+2025-04-21 15:44:15.811 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:15.812 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm4\ACE_5task_2way_5shot.train.jsonl to output/des3\ACE\perm4\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:44:15.812 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:15.814 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm4\ACE_5task_2way_5shot.train.jsonl...
+2025-04-21 15:44:15.856 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm4\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-21 15:44:15.858 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:15.860 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:15.861 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:15.862 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-21 15:44:17.868 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:17.870 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-21 15:44:17.884 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm4\ACE_5task_2way_5shot.train.jsonl
+2025-04-21 15:44:17.886 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:17.887 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm4\ACE_5task_4way_10shot.train.jsonl to output/des3\ACE\perm4\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:44:17.888 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:17.889 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm4\ACE_5task_4way_10shot.train.jsonl...
+2025-04-21 15:44:17.948 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm4\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-21 15:44:17.952 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:17.954 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:17.956 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:17.957 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-21 15:44:19.970 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:19.972 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/560 items with 560/560 remained items.
+2025-04-21 15:44:19.998 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm4\ACE_5task_4way_10shot.train.jsonl
+2025-04-21 15:44:19.999 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-21 15:44:19.999 | INFO     | __main__:run:67 - Start processing output/des3\ACE\perm4\ACE_5task_4way_5shot.train.jsonl to output/des3\ACE\perm4\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:44:20.000 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-21 15:44:20.001 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des3\ACE\perm4\ACE_5task_4way_5shot.train.jsonl...
+2025-04-21 15:44:20.060 | INFO     | extractor.producer:produce:53 - [PRODUCING] Finished producing output/des3\ACE\perm4\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-21 15:44:20.062 | INFO     | extractor.consumer:clear_results:80 - [CLEAR] All results cleared
+2025-04-21 15:44:20.063 | INFO     | extractor.consumer:consume:161 - [CONSUMING] Start consuming.
+2025-04-21 15:44:20.065 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:20.066 | CRITICAL | extractor.consumer:consume:167 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-21 15:44:22.074 | INFO     | extractor.consumer:pause_threads:66 - [PAUSE] All threads paused
+2025-04-21 15:44:22.076 | INFO     | extractor.consumer:consume:182 - [FINISHED] Finished consuming 0/480 items with 480/480 remained items.
+2025-04-21 15:44:22.099 | INFO     | __main__:run:90 - [SAVE FILE] All item saved to output/des3\ACE\perm4\ACE_5task_4way_5shot.train.jsonl
+2025-04-21 15:44:22.100 | INFO     | extractor.consumer:resume_threads:71 - [RESUME] All threads resumed
+2025-04-21 15:44:22.101 | INFO     | extractor.consumer:stop_threads:60 - [STOP] All threads stopped
+2025-04-21 15:44:22.102 | INFO     | __main__:run:130 - [FINISHED] All items processed and saved to output/des3

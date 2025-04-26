@@ -106,9 +106,9 @@ def train(local_rank, args):
     
     # Tạo class dùng để lưu old sample từ task trước
     exemplars = Exemplars() # TODO: 
-    if args.resume:
-        logger.info(f"Resuming from {args.resume}")
-        state_dict = torch.load(args.resume)
+    if args.cresume:
+        logger.info(f"Resuming from {args.cresume}")
+        state_dict = torch.load(args.cresume)
         model.load_state_dict(state_dict['model'])
         optimizer.load_state_dict(state_dict['optimizer'])
         task_idx = task_idx[state_dict['stage']:]
@@ -240,7 +240,7 @@ def train(local_rank, args):
                     train_y[i].masked_fill_(invalid_mask_label, 0)
                 # outputs[:, 0] = 0
                 loss, loss_ucl, loss_aug, loss_fd, loss_pd, loss_tlcl = 0, 0, 0, 0, 0, 0
-                ce_y = torch.cat(train_y)
+                ce_y = torch.cat(train_y) # (sum of len(label), )
                 ce_outputs = outputs
                 if (args.ucl or args.tlcl) and (stage > 0 or (args.skip_first_cl != "ucl+tlcl" and stage == 0)):                        
                     # _, dpo_feature2 = model(train_x.clone(), train_masks, padded_train_span, span_len)
