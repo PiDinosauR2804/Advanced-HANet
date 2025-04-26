@@ -9,7 +9,7 @@ output_path = 'Advanced-HANet\\output\\data_augment\\des4'
 datasets = ['MAVEN']
 NUM_PERM = 1
 
-def augment_data(line):
+def augment_data(line, num_descriptions:int=4)->list:
     augment_data_list = []
     for key, value in line.items():
         key_id = int(key)
@@ -22,19 +22,19 @@ def augment_data(line):
                     if data['label'][i] == key_id:
                         if 'description' in event:
                             description = event['description']
-                            for des in description:
+                            for j in range(num_descriptions):
                             # Tạo dữ liệu mới bằng cách kết hợp text và description
                             # Tạo dữ liệu mới bằng cách kết hợp text và description
                             #new_data = copy.deepcopy(data)
                             #new_data['text'] = new_data['text'] + ' ' + description
                                 new_data = {}
-                                new_data['text'] = data['text'] +' '+ des
+                                new_data['text'] = data['text'] +' '+ description[j]
                                 new_data['event_words'] = [data['event_words'][i]]
                                 new_data['label'] = [key_id]
                                 new_data['events'] = [copy.deepcopy(event)]
                                 new_data = sent2ids(new_data)
                                 new_augment_line[key].append(new_data)
-                                augment_data_list.append(new_data)
+        augment_data_list.append(new_augment_line)
 
     return augment_data_list
 
