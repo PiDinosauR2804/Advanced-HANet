@@ -4,31 +4,38 @@ from loguru import logger
 import copy
 from utils.convert import sent2ids
 
-input_path = 'output\\des'
-output_path = 'output\\data_augment'
-datasets = ['MAVEN','ACE']
-NUM_PERM = 5
+input_path = 'Advanced-HANet\\output\\des4'
+output_path = 'Advanced-HANet\\output\\data_augment\\des4'
+datasets = ['MAVEN']
+NUM_PERM = 1
 
 def augment_data(line):
     augment_data_list = []
     for key, value in line.items():
+        key_id = int(key)
         new_augment_line = {}
         new_augment_line[key] = []
         for data in value:
             if 'events' in data:
-                events = data['events']
+                events = data["events"]
                 for i, event in enumerate(events):
-                    if 'description' in event:
-                        description = event['description']
-                        # Tạo dữ liệu mới bằng cách kết hợp text và description
-                        #new_data = copy.deepcopy(data)
-                        #new_data['text'] = new_data['text'] + ' ' + description
-                        new_data = {}
-                        new_data['text'] = data['text'] + description
-                        new_data['events'] = [copy.deepcopy(event)]
-                        new_data = sent2ids(new_data)
-                        new_augment_line[key].append(new_data)
-                        augment_data_list.append(new_data)
+                    if data['label'][i] == key_id:
+                        if 'description' in event:
+                            description = event['description']
+                            for des in description:
+                            # Tạo dữ liệu mới bằng cách kết hợp text và description
+                            # Tạo dữ liệu mới bằng cách kết hợp text và description
+                            #new_data = copy.deepcopy(data)
+                            #new_data['text'] = new_data['text'] + ' ' + description
+                                new_data = {}
+                                new_data['text'] = data['text'] +' '+ des
+                                new_data['event_words'] = [data['event_words'][i]]
+                                new_data['label'] = [key_id]
+                                new_data['events'] = [copy.deepcopy(event)]
+                                new_data = sent2ids(new_data)
+                                new_augment_line[key].append(new_data)
+                                augment_data_list.append(new_data)
+
     return augment_data_list
 
 def augment_dataset(input_path, output_path, dataset):
@@ -53,6 +60,9 @@ def augment_dataset(input_path, output_path, dataset):
                         aug_data = augment_data(line)
                         new_data.append(aug_data)
                 # Ghi dữ liệu mới vào file đầu ra
+                if new_data is None:
+                    print(f"Error: No data in {file_name}")
+                    continue
                 with open(output_file, 'w') as f:
                     for line in new_data:
                         f.write(json.dumps(line) + '\n')
