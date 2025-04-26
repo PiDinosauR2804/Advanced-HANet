@@ -9,7 +9,7 @@ output_path = 'Advanced-HANet\\output\\data_augment\\des4'
 datasets = ['MAVEN']
 NUM_PERM = 1
 
-def augment_data(line, num_descriptions:int=4)->list:
+def augment_data(line, num_descriptions=4)->list:
     augment_data_list = []
     for key, value in line.items():
         key_id = int(key)
@@ -64,8 +64,9 @@ def augment_dataset(input_path, output_path, dataset):
                     print(f"Error: No data in {file_name}")
                     continue
                 with open(output_file, 'w') as f:
-                    for line in new_data:
-                        f.write(json.dumps(line) + '\n')
+                    for data in new_data:
+                        for line in data:
+                            f.write(json.dumps(line) + '\n')
                 logger.info(f"Augmented {file_name} and saved to {output_file}")
                 logger.info(f"[FINISHED] Processing {file_name} in {output_file}")
 
