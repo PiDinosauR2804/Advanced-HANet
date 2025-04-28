@@ -642,7 +642,7 @@ def train(local_rank, args):
                 
                 ####################################
                 if stage == 4:
-                    loss = loss * 0.1
+                    loss = loss * args.ratio_loss_final_stage
                 ####################################
                 
                 loss.backward()
