@@ -198,9 +198,6 @@ def train(local_rank, args):
     if args.early_stop:
         e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
         
-    if args.use_description:
-        print("AliBABABABBABABAB")
-        
     # Xét từng task 
     for stage in task_idx:
         # if stage > 0:
@@ -642,6 +639,12 @@ def train(local_rank, args):
                 #     with amp.scale_loss(loss, optimizer) as scaled_loss:
                 #         scaled_loss.backward()
                 # else:
+                
+                ####################################
+                if stage == 4:
+                    loss = loss * 0.1
+                ####################################
+                
                 loss.backward()
                 optimizer.step() 
                 

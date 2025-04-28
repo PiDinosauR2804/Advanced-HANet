@@ -76,7 +76,6 @@ def parse_arguments():
     parser.add_argument('--skip-first-cl', choices=["ucl", "tlcl", "ucl+tlcl", "none"], default="none")
     parser.add_argument('--method', type=str)
     parser.add_argument('--my_test', default=False, type=bool)
-    
     parser.add_argument('--use-description', action='store_true')
     parser.add_argument('--num_description', default=1, type=int)
     parser.add_argument('--ratio_loss_des_cl', default=1, type=float)
