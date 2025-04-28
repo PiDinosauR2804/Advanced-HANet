@@ -484,14 +484,16 @@ def train(local_rank, args):
                             des_feat.append(value_des)
                             des_y.append(key_des)
                         
-                        des_feat = torch.tensor(des_feat)
-                        des_y = [label2idx[int(xx)] for xx in des_y]
+                        des_feat = torch.stack(des_feat, dim=0) 
+                        des_y_tensor = torch.tensor([label2idx[int(xx)] for xx in des_y],
+                                                    dtype=torch.long,
+                                                    device=device)
                         
                         
                         des_cl_feature = torch.cat([trig_feat, des_feat])
                         # tlcl_feature = trig_feat
                         des_cl_feature = normalize(des_cl_feature, dim=-1)
-                        des_cl_lbs = torch.cat(train_y + des_y)
+                        des_cl_lbs = torch.cat(train_y + [des_y_tensor], dim=0)
                         # tlcl_lbs = torch.cat(train_y)
                         des_mat_size = des_cl_feature.shape[0]
                         des_cl_lbs_oh = F.one_hot(des_cl_lbs).float()
