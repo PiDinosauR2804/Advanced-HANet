@@ -81,6 +81,7 @@ def parse_arguments():
     parser.add_argument('--ratio_loss_des_cl', default=1, type=float)
     parser.add_argument('--weight_loss_tlcl', default=1, type=float)
     parser.add_argument('--ratio_loss_final_stage', default=1, type=float)
+    parser.add_argument('--loss_des_type', default="1", choices=["1", "2"])
     
     args, _ = parser.parse_known_args()
 

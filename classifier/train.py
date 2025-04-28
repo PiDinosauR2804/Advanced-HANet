@@ -446,6 +446,7 @@ def train(local_rank, args):
                 # if args.dataset == "ACE":
                 loss_des_cl = torch.tensor(0.0, device=device)
                 if args.use_description:
+                    
                     reps = trig_feat
                     descriptions_representations = {}
                     final_description_res = {}
@@ -471,10 +472,35 @@ def train(local_rank, args):
                             final_description_res[key] = temp
                             
                     model.train()
-                    negative_dict = find_negative_labels(final_description_res)       
-                    loss_des_cl = contrastive_loss_des(reps, labels_for_loss_des, final_description_res, negative_dict)       
-                    loss = loss + loss_des_cl * args.ratio_loss_des_cl
-                            
+                    
+                    if args.loss_des_type == "1":
+                        negative_dict = find_negative_labels(final_description_res)       
+                        loss_des_cl = contrastive_loss_des(reps, labels_for_loss_des, final_description_res, negative_dict)       
+        
+                    elif args.loss_des_type == "2":
+                        des_feat = []
+                        des_y = []
+                        for key_des, value_des in final_description_res.items():
+                            des_feat.append(value_des)
+                            des_y.append(key_des)
+                        
+                        des_feat = torch.tensor(des_feat)
+                        des_y = [label2idx[int(xx)] for xx in des_y]
+                        
+                        
+                        des_cl_feature = torch.cat([trig_feat, des_feat])
+                        # tlcl_feature = trig_feat
+                        des_cl_feature = normalize(des_cl_feature, dim=-1)
+                        des_cl_lbs = torch.cat(train_y + des_y)
+                        # tlcl_lbs = torch.cat(train_y)
+                        des_mat_size = des_cl_feature.shape[0]
+                        des_cl_lbs_oh = F.one_hot(des_cl_lbs).float()
+                        # tlcl_lbs_oh[:, 0] = 0 # whether to compute negative distance
+                        Des_adj_mask_tlcl = torch.matmul(des_cl_lbs_oh, des_cl_lbs_oh.T)
+                        Des_adj_mask_tlcl = Des_adj_mask_tlcl * (torch.ones(des_mat_size) - torch.eye(des_mat_size)).to(device)
+                        loss_des_cl = compute_CLLoss(Des_adj_mask_tlcl, des_cl_feature, des_mat_size)
+                    
+                    loss = loss + loss_des_cl * args.ratio_loss_des_cl      
                     
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
