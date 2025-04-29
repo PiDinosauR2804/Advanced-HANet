@@ -1,7 +1,7 @@
 source activate zhangchenlong
 for i in ucl tlcl ucl+tlcl none
 do
-    for j in 5
+    for j in 10
     do
         for k in shuffle RTR dropout none
         do

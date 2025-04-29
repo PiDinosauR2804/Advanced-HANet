@@ -24,4 +24,4 @@
     --cl_temp 0.07 \
     --tlcl \
     --ucl \
-    --skip-first-cl ucl
+    --skip-first-cl ucl+tlcl
