@@ -1,4 +1,4 @@
-!python classifier/train.py \
+python classifier/train.py \
   --data-root ./data/data_ids \
   --dataset MAVEN \
   --backbone bert-base-uncased \
