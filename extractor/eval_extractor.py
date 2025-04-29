@@ -48,7 +48,17 @@ def eval(gt_list:list, pr_list:list):
             gt_span = [span for label, span in zip(gt_item['label'], gt_item['span']) if label > 0]
             pr_span = pr_item['span']
             gt_set = set([tuple(span) for span in gt_span])
-            pr_set = set([tuple(span) for span in pr_span])
+            pr_set = set([tuple(span) for span in pr_span])#
+            # print false positive samples
+            false_positive = pr_set - gt_set
+            if len(false_positive) > 0:
+                # logger.error(f"[ERROR] False positive samples: {false_positive} | Text: {pr_item['text']}")
+                pass
+            # print false negative samples
+            false_negative = gt_set - pr_set
+            if len(false_negative) > 0:
+                # logger.error(f"[ERROR] False negative samples: {false_negative} | Text: {gt_item['text']}")
+                pass
             true_positive = len(gt_set & pr_set)
 
             precision = true_positive / len(pr_span) if len(pr_span) > 0 else 0.0

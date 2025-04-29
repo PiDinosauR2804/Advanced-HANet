@@ -1,0 +1,297 @@
+2025-04-26 09:58:40.312 | INFO     | __main__:<module>:168 - [INFO] Arguments:
+2025-04-26 09:58:40.385 | INFO     | __main__:<module>:169 - Input root: data/data_text
+2025-04-26 09:58:40.385 | INFO     | __main__:<module>:170 - Output root: output/des4
+2025-04-26 09:58:40.386 | INFO     | __main__:<module>:171 - Datasets: ['MAVEN']
+2025-04-26 09:58:40.386 | INFO     | __main__:<module>:172 - Perms: [0, 1, 2, 3, 4]
+2025-04-26 09:58:40.387 | INFO     | __main__:<module>:173 - Model: gemini-2.0-flash-lite
+2025-04-26 09:58:40.387 | INFO     | __main__:<module>:174 - Candidate: 5
+2025-04-26 09:58:40.388 | INFO     | __main__:<module>:175 - Num try: 3
+2025-04-26 09:58:40.388 | INFO     | __main__:<module>:176 - Max consecutive 429 error: 5
+2025-04-26 09:58:40.388 | INFO     | __main__:<module>:177 - Max num threads: 8
+2025-04-26 09:58:40.389 | INFO     | __main__:<module>:178 - Resume: True
+2025-04-26 09:58:40.389 | INFO     | __main__:<module>:179 - Convert test: False
+2025-04-26 09:58:40.390 | INFO     | __main__:<module>:180 - Logs dir: logs/extractor
+2025-04-26 09:58:40.391 | INFO     | __main__:<module>:181 - Gen des: True
+2025-04-26 09:58:40.395 | INFO     | __main__:<module>:182 - [INFO] Start processing...
+2025-04-26 09:59:09.279 | INFO     | extractor.consumer:__init__:48 - [INFO] Found 8 valid extractors
+2025-04-26 09:59:11.290 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 09:59:11.295 | INFO     | extractor.consumer:__init__:55 - [START] Start 8 threads
+2025-04-26 09:59:11.297 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 09:59:11.298 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 09:59:11.300 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 09:59:11.301 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-26 09:59:11.420 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 09:59:11.455 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 09:59:11.456 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 09:59:11.457 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 09:59:14.052 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: bombs | Event List: [{'trigger_word': 'exploded', 'event_type': 'explosion', 'event_time': '7 july 2013', 'event_location': 'mahabodhi temple complex, bodh gaya, india', 'event_participants': ['ten bombs', 'bombs'], 'description': ["the trigger word 'exploded' signifies a sudden and violent release of energy, often accompanied by a loud noise and the potential for damage.", "the event 'exploded' indicates a destructive event, likely causing significant damage or casualties, at a specific location and time.", "the event 'exploded' describes the detonation of ten bombs at the mahabodhi temple complex on a specific date.", "the event 'exploded' describes the detonation of bombs, likely causing damage to the mahabodhi temple complex.", "the event 'exploded' marks a specific instance of violence on 7 july 2013, targeting a significant religious site.", "the trigger word 'exploded' indicates a sudden and violent release of energy, often associated with destruction.", "the trigger word 'exploded' indicates a sudden and violent release of energy, typically associated with an explosive device.", "the explosion took place in and around a significant religious site, the mahabodhi temple complex, highlighting the event's potential impact and target.", 'exploded indicates a destructive event that occurred in a defined location.', "the trigger word 'exploded' signifies a sudden and violent release of energy, often accompanied by a loud noise and the scattering of fragments.", "the event 'exploded' describes the detonation of bombs within the vicinity of the mahabodhi temple complex.", "the context reveals 'exploded' as a destructive event, causing potential damage and disruption in the specified location.", "the event 'exploded' denotes the detonation of explosive devices, specifically 'bombs', at a particular time and location.", "the trigger word 'exploded' signifies a sudden and violent release of energy, often caused by a bomb.", "the event 'exploded' describes the detonation of ten bombs at the mahabodhi temple complex, a unesco world heritage site."]}]
+2025-04-26 09:59:14.055 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (2) | Text: on 7 july 2013 a series of ten bombs exploded in and around the mahabodhi temple complex , a unesco world heritage site in bodh gaya , india .
+2025-04-26 09:59:19.535 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 09:59:19.537 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 280/280 items with 0/280 remained items.
+2025-04-26 09:59:19.538 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 1/280 items with 100.00% event list are added | AVG added events: 1.00 | AVG added attributes: 4.00
+2025-04-26 09:59:20.165 | INFO     | __main__:run:90 - [FINISHED] Processing 280/280 item, remaning 0/280 in 8.32 seconds
+2025-04-26 09:59:20.167 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9675 | Recall: 0.9675 | F1: 0.9675
+2025-04-26 09:59:20.168 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 09:59:20.169 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 09:59:20.170 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 09:59:20.171 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 09:59:20.172 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-26 09:59:20.292 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 09:59:20.295 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 09:59:20.296 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 09:59:20.298 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 09:59:22.307 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 09:59:22.310 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 280/280 items with 0/280 remained items.
+2025-04-26 09:59:22.919 | INFO     | __main__:run:90 - [FINISHED] Processing 280/280 item, remaning 0/280 in 2.24 seconds
+2025-04-26 09:59:22.921 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9559 | Recall: 0.9559 | F1: 0.9559
+2025-04-26 09:59:22.922 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 09:59:22.922 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 09:59:22.923 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl to output/des4\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-26 09:59:22.924 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 09:59:22.926 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-26 09:59:23.167 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-26 09:59:23.169 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 09:59:23.170 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 09:59:23.171 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 09:59:25.188 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 09:59:25.190 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 240/240 items with 0/240 remained items.
+2025-04-26 09:59:25.613 | INFO     | __main__:run:90 - [FINISHED] Processing 240/240 item, remaning 0/240 in 2.30 seconds
+2025-04-26 09:59:25.614 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9546 | Recall: 0.9546 | F1: 0.9546
+2025-04-26 09:59:25.614 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-26 09:59:25.616 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 09:59:25.617 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 09:59:25.617 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 09:59:25.618 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-26 09:59:25.823 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 09:59:25.825 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 09:59:25.828 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 09:59:25.829 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 09:59:27.849 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 09:59:27.851 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 280/280 items with 0/280 remained items.
+2025-04-26 09:59:29.931 | INFO     | __main__:run:90 - [FINISHED] Processing 280/280 item, remaning 0/280 in 3.80 seconds
+2025-04-26 09:59:29.931 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9613 | Recall: 0.9613 | F1: 0.9613
+2025-04-26 09:59:29.933 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 09:59:29.933 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 09:59:29.933 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl to output/des4\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-26 09:59:29.934 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 09:59:29.935 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-26 09:59:30.081 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-26 09:59:30.083 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 09:59:30.085 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 09:59:30.086 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 09:59:32.103 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 09:59:32.105 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 240/240 items with 0/240 remained items.
+2025-04-26 09:59:32.635 | INFO     | __main__:run:90 - [FINISHED] Processing 240/240 item, remaning 0/240 in 2.24 seconds
+2025-04-26 09:59:32.636 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9598 | Recall: 0.9598 | F1: 0.9598
+2025-04-26 09:59:32.637 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-26 09:59:32.638 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 09:59:32.638 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 09:59:32.639 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 09:59:32.639 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-26 09:59:32.907 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 09:59:32.910 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 09:59:32.911 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 09:59:32.913 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 10:00:31.976 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "conflict",
+    "event_type": "conflict",
+    "event_time": "2014",
+    "event_location": "israel – gaza",
+    "event_participants": [],
+    "description": [
+        "The trigger word 'conflict' signifies a state of armed struggle or disagreement between opposing forces.",
+        "The event 'conflict' refers to a specific instance of hostilities, in this case the 2014 Israel-Gaza conflict, indicating a period of fighting and tension.",
+        "The term 'conflict' implies a period of violence and struggle, often involving military action or political maneuvering between the involved parties in Israel and Gaza."
+    ]
+}
+```
+2025-04-26 10:00:31.983 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "conflict",
+    "event_type": "conflict",
+    "event_time": "2014",
+    "event_location": "israel – gaza",
+    "event_participants": [],
+    "description": [
+        "The trigger word 'conflict' signifies a state of armed struggle or disagreement between opposing forces.",
+        "The event 'conflict' refers to a specific instance of hostilities, in this case the 2014 Israel-Gaza conflict, indicating a period of fighting and tension.",
+        "The term 'conflict' implies a period of violence and struggle, often involving military action or political maneuvering between the involved parties in Israel and Gaza."
+    ]
+}
+``` | Text: the 2014 israel – gaza conflict also known as operation protective edge ( , ` ` miv'tza tzuk eitan'' , lit .
+2025-04-26 10:00:31.986 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "conflict",
+    "event_type": "conflict",
+    "event_time": "2014",
+    "event_location": "israel – gaza",
+    "event_participants": [],
+    "description": [
+        "The trigger word 'conflict' signifies a state of armed fighting or disagreement between two or more parties.",
+        "The event 'conflict' refers to the 2014 Israel-Gaza conflict, also known as Operation Protective Edge, indicating a period of intense hostility.",
+        "The conflict took place in 2014 and was located in the area of Israel and Gaza, which included a specific military operation."
+    ]
+}
+```
+
+2025-04-26 10:00:31.988 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "conflict",
+    "event_type": "conflict",
+    "event_time": "2014",
+    "event_location": "israel – gaza",
+    "event_participants": [],
+    "description": [
+        "The trigger word 'conflict' signifies a state of armed fighting or disagreement between two or more parties.",
+        "The event 'conflict' refers to the 2014 Israel-Gaza conflict, also known as Operation Protective Edge, indicating a period of intense hostility.",
+        "The conflict took place in 2014 and was located in the area of Israel and Gaza, which included a specific military operation."
+    ]
+}
+```
+ | Text: the 2014 israel – gaza conflict also known as operation protective edge ( , ` ` miv'tza tzuk eitan'' , lit .
+2025-04-26 10:01:07.703 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 10:01:07.704 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 280/280 items with 0/280 remained items.
+2025-04-26 10:01:07.705 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 107/280 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 17.77
+2025-04-26 10:01:08.581 | INFO     | __main__:run:90 - [FINISHED] Processing 280/280 item, remaning 0/280 in 95.12 seconds
+2025-04-26 10:01:08.583 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9251 | Recall: 0.9251 | F1: 0.9251
+2025-04-26 10:01:08.583 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 10:01:08.584 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 10:01:08.585 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl to output/des4\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-26 10:01:08.586 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 10:01:08.587 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-26 10:01:08.838 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-26 10:01:08.839 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 10:01:08.843 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 10:01:08.844 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 10:02:10.984 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "cyclone",
+    "event_type": "cyclone formation/activity",
+    "event_time": None,
+    "event_location": "atlantic",
+    "event_participants": ["hurricane kyle"],
+    "description": [
+        "The trigger word 'cyclone' refers to a large-scale weather system characterized by low pressure and inward spiraling winds.",
+        "The event 'cyclone' in this context describes a tropical or subtropical cyclone, a specific type of storm.",
+        "The sentence mentions 'hurricane kyle' as an example of a cyclone, specifying its location and duration."
+    ]
+}
+```
+2025-04-26 10:02:10.986 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "cyclone",
+    "event_type": "cyclone formation/activity",
+    "event_time": None,
+    "event_location": "atlantic",
+    "event_participants": ["hurricane kyle"],
+    "description": [
+        "The trigger word 'cyclone' refers to a large-scale weather system characterized by low pressure and inward spiraling winds.",
+        "The event 'cyclone' in this context describes a tropical or subtropical cyclone, a specific type of storm.",
+        "The sentence mentions 'hurricane kyle' as an example of a cyclone, specifying its location and duration."
+    ]
+}
+``` | Text: hurricane kyle was the fifth-longest-lived atlantic tropical or subtropical cyclone on record .
+2025-04-26 10:02:29.781 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "events",
+    "event_type": "displacement",
+    "event_time": None,
+    "event_location": ["lydda", "ramle", "palestine"],
+    "event_participants": ["arab"],
+    "description": [
+        "The trigger word 'events' refers to the occurrences of actions that led to the displacement of Arabs.",
+        "The 'events' in Lydda and Ramle, part of a larger Arab exodus from Palestine, are described as a 'catastrophe'.",
+        "The events were a significant portion of the overall Arab exodus from Palestine, reflecting a major historical upheaval and displacement of a specific group of people."
+    ]
+}
+```
+2025-04-26 10:02:29.783 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "events",
+    "event_type": "displacement",
+    "event_time": None,
+    "event_location": ["lydda", "ramle", "palestine"],
+    "event_participants": ["arab"],
+    "description": [
+        "The trigger word 'events' refers to the occurrences of actions that led to the displacement of Arabs.",
+        "The 'events' in Lydda and Ramle, part of a larger Arab exodus from Palestine, are described as a 'catastrophe'.",
+        "The events were a significant portion of the overall Arab exodus from Palestine, reflecting a major historical upheaval and displacement of a specific group of people."
+    ]
+}
+``` | Text: the events in lydda and ramle accounted for one-tenth of the overall arab exodus from palestine , known in the arab world as ` ` al-nakba'' ( ` ` the catastrophe'' ) .
+2025-04-26 10:02:29.786 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "events",
+    "event_type": "displacement",
+    "event_time": None,
+    "event_location": ["lydda", "ramle", "palestine"],
+    "event_participants": ["arab"],
+    "description": [
+        "The trigger word 'events' here refers to a series of occurrences that led to the displacement of Arabs.",
+        "The 'events' in Lydda and Ramle are specifically mentioned as contributing to a larger displacement from Palestine.",
+        "These 'events' are described within the context of a historical catastrophe known as Al-Nakba, highlighting their significance."
+    ]
+}
+```
+2025-04-26 10:02:29.789 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "events",
+    "event_type": "displacement",
+    "event_time": None,
+    "event_location": ["lydda", "ramle", "palestine"],
+    "event_participants": ["arab"],
+    "description": [
+        "The trigger word 'events' here refers to a series of occurrences that led to the displacement of Arabs.",
+        "The 'events' in Lydda and Ramle are specifically mentioned as contributing to a larger displacement from Palestine.",
+        "These 'events' are described within the context of a historical catastrophe known as Al-Nakba, highlighting their significance."
+    ]
+}
+``` | Text: the events in lydda and ramle accounted for one-tenth of the overall arab exodus from palestine , known in the arab world as ` ` al-nakba'' ( ` ` the catastrophe'' ) .
+2025-04-26 10:04:18.945 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: the professional jury , the organizers of the festival and the tv station are tasked with determining the titles of the prizes that each finalist will be awarded . | Trigger: ['festival', 'determining', 'tasked']
+2025-04-26 10:04:19.023 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 7 cannot extract event list after 3 attempts. | Text: outside greece , solidarity demonstrations , riots and , in some cases , clashes with local police also took place in more than 70 cities around the world , in europe including amsterdam , barcelona , berlin , bordeaux , brussels , cologne , copenhagen , dublin , frankfurt , the hague , london , madrid , nicosia , paphos , paris , rome and seville and globally from sao paulo , san francisco and wellington to buenos aires and siberia . | Trigger: ['demonstrations', 'riots', 'clashes', 'took place']
+2025-04-26 10:05:02.899 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 10:05:02.901 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 238/240 items with 2/240 remained items.
+2025-04-26 10:05:02.902 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 238/240 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 17.24
+2025-04-26 10:05:06.352 | INFO     | __main__:run:90 - [FINISHED] Processing 238/240 item, remaning 2/240 in 237.29 seconds
+2025-04-26 10:05:06.353 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9150 | Recall: 0.9218 | F1: 0.9159
+2025-04-26 10:05:06.354 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-26 10:05:06.355 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 10:05:06.356 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 10:05:06.356 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 10:05:06.358 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-26 10:05:06.443 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 10:05:06.445 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 10:05:06.447 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 10:05:06.448 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 10:08:58.176 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 5 cannot extract event list after 3 attempts. | Text: the 2015 hop farm music festival and future events run by the hop farm are no longer related to john vincent power . | Trigger: ['festival', 'run']
+2025-04-26 10:08:58.225 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: in 2010 , taeyang held his second concert in support of his first studio album ` ` solar'' . | Trigger: ['concert', 'support', 'held']
+2025-04-26 10:08:59.396 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: in this year the isle of wight festival began to seriously stake its claim as one of the big festivals of britain . | Trigger: ['began', 'festival', 'festivals', 'claim']
+2025-04-26 10:09:02.884 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 6 cannot extract event list after 3 attempts. | Text: the giant baba memorial spectacular was a professional wrestling memorial event produced by the all-japan pro wrestling ( ajpw ) promotion , which took place on january 28 , 2001 at the tokyo egg dome in tokyo , japan . | Trigger: ['event', 'produced', 'took place']
+2025-04-26 10:09:03.478 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: the disrupted and unbalanced aerodynamics of the aircraft caused it to roll abruptly to the left until it was partially inverted , reaching a bank angle of 112 degrees , before crashing in an open field by a trailer park near the end of the runway . | Trigger: ['caused', 'disrupted', 'left', 'inverted', 'reaching', 'crashing', 'open', 'roll']
+2025-04-26 10:09:03.524 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: at the inauguration of the third hungarian republic in 1989 , 23 october was declared a national holiday . | Trigger: ['declared', 'inauguration']
+2025-04-26 10:09:04.435 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: after moving through the state , it hugged the coast of the southeastern united states on its way out to sea . | Trigger: ['moving', 'hugged']
+2025-04-26 10:09:04.591 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 7 cannot extract event list after 3 attempts. | Text: after the battle heister headed for stadtschlaining ` ` ( szalonak )'' and the dunantul was freed . | Trigger: ['freed', 'battle', 'headed']
+2025-04-26 10:09:32.609 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 10:09:32.611 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 272/280 items with 8/280 remained items.
+2025-04-26 10:09:32.612 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 272/280 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 17.46
+2025-04-26 10:09:33.140 | INFO     | __main__:run:90 - [FINISHED] Processing 272/280 item, remaning 8/280 in 266.31 seconds
+2025-04-26 10:09:33.140 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9418 | Recall: 0.9623 | F1: 0.9460
+2025-04-26 10:09:33.141 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-26 10:09:33.142 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 10:09:33.143 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl to output/des4\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-26 10:09:33.143 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 10:09:33.144 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-26 10:09:33.234 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-26 10:09:33.236 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 10:09:33.237 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 10:09:33.239 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 10:12:43.661 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 10:12:43.663 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 240/240 items with 0/240 remained items.
+2025-04-26 10:12:43.664 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 240/240 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 17.40
+2025-04-26 10:12:44.174 | INFO     | __main__:run:90 - [FINISHED] Processing 240/240 item, remaning 0/240 in 190.57 seconds
+2025-04-26 10:12:44.175 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9676 | Recall: 0.9676 | F1: 0.9676
+2025-04-26 10:12:44.176 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-26 10:12:44.177 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 10:12:45.186 | INFO     | extractor.consumer:stop_threads:63 - [STOP] All threads stopped
+2025-04-26 10:12:45.187 | INFO     | __main__:run:132 - [FINISHED] All items processed and saved to output/des4

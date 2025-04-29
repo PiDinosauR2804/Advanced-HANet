@@ -48,13 +48,13 @@ class Producer:
                         labels = []
                         for word, label in zip(item['event_words'], item['label']):
                             if label > 0:
-                                event_words.append(word.lower().replace(" - ", "-"))
+                                event_words.append(word.lower().replace(" - ", "-").replace(" ' s", "'s"))
                                 labels.append(label)
                                 
                         item['event_words'] = event_words
                         item['label'] = labels
-                        # item['text'] = origin_item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
-                        # item['span'] = origin_item['span']
+                        item['text'] = origin_item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
+                        item['span'] = origin_item['span']
                         self.task_queue.put((line_idx, key, idx, item))
                         gt_list.append((line_idx, key, idx, origin_item))
                         num_item += 1
