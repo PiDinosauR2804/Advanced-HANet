@@ -1,0 +1,27 @@
+!python classifier/train.py \
+    --data-root ./data/data_ids \
+    --dataset MAVEN \
+    --backbone bert-base-uncased \
+    --lr 2e-5 \
+    --decay 1e-4 \
+    --no-freeze-bert \
+    --shot-num 10 \
+    --batch-size 16 \
+    --device cuda:0 \
+    --log \
+    --log-dir ./outputs/log_incremental/temp7_submax/first_wo_UCL+TCL/ \
+    --log-name ashuffle_lnone_r1 \
+    --dweight_loss \
+    --rep-aug mean \
+    --distill mul \
+    --epoch 30 \
+    --class-num 20 \
+    --single-label \
+    --cl-aug shuffle \
+    --aug-repeat-times 5 \
+    --joint-da-loss none \
+    --sub-max \
+    --cl_temp 0.07 \
+    --tlcl \
+    --ucl \
+    --skip-first-cl ucl+tlcl
