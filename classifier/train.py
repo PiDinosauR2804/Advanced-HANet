@@ -92,7 +92,7 @@ def train(local_rank, args):
     logger.info('')
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
-    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{args.cl_aug}_{args.joint_da_loss}_{args.distill}_{timestamp}"    
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{args.cl_aug}_{args.joint_da_loss}_{args.skip_first_cl}_{timestamp}"    
     
     # Cấu hình logging
     log_dir = "log_result"
@@ -114,7 +114,7 @@ def train(local_rank, args):
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project="Quang_HANet_Find_Base_ACE",
+        project="Quang_HANet_Find_Base_ACE_After",
         name = args.run_name,
 
         # track hyperparameters and run metadata
