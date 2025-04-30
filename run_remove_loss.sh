@@ -6,7 +6,7 @@ do
     do
         for l in ce none
         do
-            for m in 10
+            for m in 5 10
             do
                 for n in fd mul none
                 do
@@ -28,7 +28,7 @@ do
                         --lr 2e-5 \
                         --decay 1e-4 \
                         --no-freeze-bert \
-                        --shot-num 5 \
+                        --shot-num $m \
                         --batch-size 16 \
                         --device cuda:0 \
                         --log \
@@ -38,7 +38,7 @@ do
                         --rep-aug mean \
                         --distill $n \
                         --epoch 30 \
-                        --class-num $m \
+                        --class-num 10 \
                         --single-label \
                         --cl-aug shuffle \
                         --aug-repeat-times 5 \

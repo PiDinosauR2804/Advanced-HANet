@@ -114,7 +114,7 @@ def train(local_rank, args):
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project="Quang_HANet_Find_Improve_ACE_After_10shot",
+        project="Quang_HANet_Find_optimize_loss",
         name = args.run_name,
 
         # track hyperparameters and run metadata
