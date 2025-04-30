@@ -25,10 +25,6 @@ from transformers import BertTokenizerFast
 import wandb
 import re
 
-wandb_api_key = "0806b2d5c00870a95f366d95c825d7680649abb7"  # Thay YOUR_WANDB_API_KEY bằng API key thực tế của bạn
-
-os.environ["WANDB_API_KEY"] = wandb_api_key
-
 wandb.login()
 
 class Logger(object):
@@ -114,7 +110,7 @@ def train(local_rank, args):
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project="Quang_HANet_Find_Base_ACE_After",
+        project="HANet",
         name = args.run_name,
 
         # track hyperparameters and run metadata
