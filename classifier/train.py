@@ -24,7 +24,7 @@ from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
 import wandb
 import re
-from tqdm import tqdm
+from tqdm.notebook import tqdm
 
 wandb.login()
 
