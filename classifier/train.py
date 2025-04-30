@@ -12,7 +12,7 @@ from torch.optim import AdamW
 from utils import *
 from configs import parse_arguments
 from model import BertED
-from tqdm import tqdm
+# from tqdm import tqdm
 from exemplars import Exemplars
 from copy import deepcopy
 from torch.utils.tensorboard import SummaryWriter   
@@ -282,7 +282,7 @@ def train(local_rank, args):
         
         dev_score = None
         no_better = 0
-        for ep in tqdm(range(args.epochs), desc="Epoch"):
+        for ep in range(args.epochs):
             if stage == 0 and args.skip_first:
                 continue
             # logger.info('-' * 100)
