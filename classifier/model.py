@@ -9,8 +9,6 @@ from random import shuffle
 args = parse_arguments()
 device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
 
-import torch.nn as nn
-
 class Classifier(nn.Module):
     def __init__(self, input_dim, hidden_dim, class_num, num_layers=1, dropout=0.1):
         """

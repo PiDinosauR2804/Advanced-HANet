@@ -20,7 +20,7 @@ def parse_arguments():
     # Args of QuangNM
     parser.add_argument('--freeze_embedding_layer', action='store_true')
     parser.add_argument('--freeze_encoder_layers', default=0, type=int, help="Number of encoder layers to freeze")
-    parser.add_argument('--classifer_layer', default=1, type=int, help="Number of classifier layers")
+    parser.add_argument('--classifier_layer', default=1, type=int, help="Number of classifier layers")
     parser.add_argument('--hidden_dim', default=128, type=int, help="Hidden dimension of classifier")
     parser.add_argument('--dropout', default=0.1, type=float, help="Dropout rate")
     
