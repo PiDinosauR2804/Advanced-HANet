@@ -24,6 +24,7 @@ from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
 import wandb
 import re
+from tqdm import tqdm
 
 wandb.login()
 
@@ -281,14 +282,14 @@ def train(local_rank, args):
         
         dev_score = None
         no_better = 0
-        for ep in range(args.epochs):
+        for ep in tqdm(range(args.epochs), desc="Epoch"):
             if stage == 0 and args.skip_first:
                 continue
-            logger.info('-' * 100)
-            logger.info(f"Stage {stage}: Epoch {ep}")
-            logger.info("Training process")
-            model.train()
-            logger.info("Training batch:")
+            # logger.info('-' * 100)
+            # logger.info(f"Stage {stage}: Epoch {ep}")
+            # logger.info("Training process")
+            # model.train()
+            # logger.info("Training batch:")
             iter_cnt = 0
             for bt, batch in enumerate(tqdm(stage_loader)):
                 iter_cnt += 1
@@ -691,15 +692,15 @@ def train(local_rank, args):
                             f"loss_all": loss,
                         })
                 
-            logger.info(f'loss_ce: {loss_ce}')
-            logger.info(f'loss_ucl: {loss_ucl}')
-            logger.info(f'loss_tlcl: {loss_tlcl}')
-            logger.info(f'loss_des_cl: {loss_des_cl}')
-            # logger.info(f'loss_ecl: {loss_ecl}')
-            logger.info(f'loss_aug: {loss_aug}')
-            logger.info(f'loss_fd: {loss_fd}')
-            logger.info(f'loss_pd: {loss_pd}')
-            logger.info(f'loss_all: {loss}')
+            # logger.info(f'loss_ce: {loss_ce}')
+            # logger.info(f'loss_ucl: {loss_ucl}')
+            # logger.info(f'loss_tlcl: {loss_tlcl}')
+            # logger.info(f'loss_des_cl: {loss_des_cl}')
+            # # logger.info(f'loss_ecl: {loss_ecl}')
+            # logger.info(f'loss_aug: {loss_aug}')
+            # logger.info(f'loss_fd: {loss_fd}')
+            # logger.info(f'loss_pd: {loss_pd}')
+            # logger.info(f'loss_all: {loss}')
             # writer.add_scalar(f'stage{stage}/loss/loss_ce', loss_ce, bt + ep * len(stage_loader))
             # writer.add_scalar(f'stage{stage}/loss/loss_ucl', loss_ucl, bt + ep * len(stage_loader))
             # writer.add_scalar(f'stage{stage}/loss/loss_tlcl', loss_tlcl, bt + ep * len(stage_loader))
