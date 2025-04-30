@@ -13,7 +13,7 @@
     --log-name ashuffle_lnone_r1 \
     --dweight_loss \
     --rep-aug mean \
-    --distill mul \
+    --distill fd \
     --epoch 30 \
     --class-num 10 \
     --single-label \
