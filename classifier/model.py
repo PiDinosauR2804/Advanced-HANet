@@ -18,8 +18,19 @@ class BertED(nn.Module):
             print("Freeze bert parameters")
             for _, param in list(self.backbone.named_parameters()):
                 param.requires_grad = False
+        elif args.freeze_embedding_layer:
+            print("Freeze embedding layer")
+            for param in self.backbone.embeddings.parameters():
+                param.requires_grad = False
+        elif args.freeze_encoder_layers > 0:
+            print(f"Freeze encoder layers from 0 to {args.freeze_encoder_layers}")
+            for i in range(args.freeze_encoder_layers):
+                for param in self.backbone.encoder.layer[i].parameters():
+                    param.requires_grad = False
         else:
             print("Update bert parameters")
+            
+                    
         self.is_input_mapping = input_map
         self.input_dim = self.backbone.config.hidden_size
         self.fc = nn.Linear(self.input_dim, class_num)

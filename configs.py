@@ -17,6 +17,10 @@ def parse_arguments():
     parser.add_argument('--convert_test', action='store_true')
     parser.add_argument('--gen_des', action='store_true')
     
+    # Args of QuangNM
+    parser.add_argument('--freeze_embedding_layer', action='store_true')
+    parser.add_argument('--freeze_encoder_layers', default=0, type=int, help="Number of encoder layers to freeze")
+    
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
     parser.add_argument('--skip-first', action='store_true')
