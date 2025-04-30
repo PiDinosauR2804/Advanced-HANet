@@ -9,6 +9,39 @@ from random import shuffle
 args = parse_arguments()
 device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
 
+import torch.nn as nn
+
+class Classifier(nn.Module):
+    def __init__(self, input_dim, hidden_dim, class_num, num_layers=1, dropout=0.1):
+        """
+        Args:
+            input_dim: int, kích thước đầu vào
+            hidden_dim: int, kích thước lớp ẩn
+            class_num: int, số lớp đầu ra
+            num_layers: int, số lượng lớp ẩn (không tính lớp output)
+            dropout: float, tỷ lệ dropout
+        """
+        super().__init__()
+        layers = []
+
+        # Lớp đầu tiên: input_dim -> hidden_dim
+        layers.append(nn.Linear(input_dim, hidden_dim))
+        layers.append(nn.ReLU())
+        layers.append(nn.Dropout(dropout))
+
+        # Các lớp ẩn tiếp theo: hidden_dim -> hidden_dim
+        for _ in range(num_layers - 1):
+            layers.append(nn.Linear(hidden_dim, hidden_dim))
+            layers.append(nn.ReLU())
+            layers.append(nn.Dropout(dropout))
+
+        # Lớp output: hidden_dim -> class_num
+        layers.append(nn.Linear(hidden_dim, class_num))
+        self.network = nn.Sequential(*layers)
+
+    def forward(self, x):
+        return self.network(x)
+
 
 class BertED(nn.Module):
     def __init__(self, class_num=args.class_num + 1, input_map=False):
@@ -35,7 +68,13 @@ class BertED(nn.Module):
                     
         self.is_input_mapping = input_map
         self.input_dim = self.backbone.config.hidden_size
-        self.fc = nn.Linear(self.input_dim, class_num)
+        
+        if args.classifier_layer > 1:
+            self.hidden_dim = args.hidden_dim
+            self.fc = Classifier(self.input_dim, self.hidden_dim, class_num, num_layers=args.classifier_layer, dropout=args.dropout)
+        else:
+            self.fc = nn.Linear(self.input_dim, class_num)
+            
         if self.is_input_mapping:
             self.map_hidden_dim = 512 # 512 is implemented by the paper
             self.map_input_dim =  self.input_dim * 2
