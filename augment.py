@@ -6,8 +6,8 @@ from utils.convert import sent2ids
 
 input_path = 'Advanced-HANet\\output\\des4'
 output_path = 'Advanced-HANet\\output\\data_augment\\des4'
-datasets = ['MAVEN']
-NUM_PERM = 1
+datasets = ['MAVEN', 'ACE']
+NUM_PERM = 5
 
 def augment_data(line, num_descriptions=4)->list:
     augment_data_list = []
@@ -42,33 +42,38 @@ def augment_dataset(input_path, output_path, dataset):
     os.path.exists(os.path.join(input_path))
     os.makedirs(output_path, exist_ok=True)
     for dataset in datasets:
-        for i in range(NUM_PERM):
-            input_folder = os.path.join(input_path, dataset, 'perm'+str(i))
-            output_folder = os.path.join(output_path, dataset, 'perm'+str(i))
-            os.makedirs(output_folder, exist_ok=True)
-            for file_name in os.listdir(input_folder):
-                if not file_name.endswith('.jsonl'):
+        if os.path.exists(os.path.join(input_path, dataset)):
+            for i in range(NUM_PERM):
+                input_folder = os.path.join(input_path, dataset, 'perm'+str(i))
+                if not os.path.exists(input_folder):
+                    print(f"Input folder {input_folder} does not exist.")
                     continue
-                input_file = os.path.join(input_folder, file_name)
-                output_file = os.path.join(output_folder, file_name)
-                print(f"[START] Processing {file_name} in {output_file}")
-                new_data = []
-                with open(input_file, 'r') as f:
-                    for line in f:
-                        line = json.loads(line)
-                        #Gọi hàm augment_data để tạo ra dữ liệu mới
-                        aug_data = augment_data(line)
-                        new_data.append(aug_data)
-                # Ghi dữ liệu mới vào file đầu ra
-                if new_data is None:
-                    print(f"Error: No data in {file_name}")
-                    continue
-                with open(output_file, 'w') as f:
-                    for data in new_data:
-                        for line in data:
-                            f.write(json.dumps(line) + '\n')
-                logger.info(f"Augmented {file_name} and saved to {output_file}")
-                logger.info(f"[FINISHED] Processing {file_name} in {output_file}")
+                output_folder = os.path.join(output_path, dataset, 'perm'+str(i))
+                os.makedirs(output_folder, exist_ok=True)
+                for file_name in os.listdir(input_folder):
+
+                    if not file_name.endswith('.jsonl'):
+                        continue
+                    input_file = os.path.join(input_folder, file_name)
+                    output_file = os.path.join(output_folder, file_name)
+                    print(f"[START] Processing {file_name} in {output_file}")
+                    new_data = []
+                    with open(input_file, 'r') as f:
+                        for line in f:
+                            line = json.loads(line)
+                            #Gọi hàm augment_data để tạo ra dữ liệu mới
+                            aug_data = augment_data(line)
+                            new_data.append(aug_data)
+                    # Ghi dữ liệu mới vào file đầu ra
+                    if new_data is None:
+                        print(f"Error: No data in {file_name}")
+                        continue
+                    with open(output_file, 'w') as f:
+                        for data in new_data:
+                            for line in data:
+                                f.write(json.dumps(line) + '\n')
+                    logger.info(f"Augmented {file_name} and saved to {output_file}")
+                    logger.info(f"[FINISHED] Processing {file_name} in {output_file}")
 
 if __name__ == "__main__":
     # Check if input path exists
