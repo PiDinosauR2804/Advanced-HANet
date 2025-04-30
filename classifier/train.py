@@ -671,6 +671,25 @@ def train(local_rank, args):
                 
                 loss.backward()
                 optimizer.step() 
+                wandb.log({
+                            f"loss_ce_task_{stage}": loss_ce,
+                            f"loss_ucl_{stage}": loss_ucl,
+                            f"loss_tlcl_{stage}": loss_tlcl,
+                            f"loss_des_cl_{stage}": loss_des_cl,
+                            f"loss_aug_{stage}": loss_aug,
+                            f"loss_fd_{stage}": loss_fd,
+                            f"loss_pd_{stage}": loss_pd,
+                            f"loss_all_{stage}": loss,
+                            
+                            f"loss_ce_task": loss_ce,
+                            f"loss_ucl": loss_ucl,
+                            f"loss_tlcl": loss_tlcl,
+                            f"loss_des_cl": loss_des_cl,
+                            f"loss_aug": loss_aug,
+                            f"loss_fd": loss_fd,
+                            f"loss_pd": loss_pd,
+                            f"loss_all": loss,
+                        })
                 
             logger.info(f'loss_ce: {loss_ce}')
             logger.info(f'loss_ucl: {loss_ucl}')
@@ -681,25 +700,6 @@ def train(local_rank, args):
             logger.info(f'loss_fd: {loss_fd}')
             logger.info(f'loss_pd: {loss_pd}')
             logger.info(f'loss_all: {loss}')
-            wandb.log({
-                        f"loss_ce_task_{stage}": loss_ce,
-                        f"loss_ucl_{stage}": loss_ucl,
-                        f"loss_tlcl_{stage}": loss_tlcl,
-                        f"loss_des_cl_{stage}": loss_des_cl,
-                        f"loss_aug_{stage}": loss_aug,
-                        f"loss_fd_{stage}": loss_fd,
-                        f"loss_pd_{stage}": loss_pd,
-                        f"loss_all_{stage}": loss,
-                        
-                        f"loss_ce_task": loss_ce,
-                        f"loss_ucl": loss_ucl,
-                        f"loss_tlcl": loss_tlcl,
-                        f"loss_des_cl": loss_des_cl,
-                        f"loss_aug": loss_aug,
-                        f"loss_fd": loss_fd,
-                        f"loss_pd": loss_pd,
-                        f"loss_all": loss,
-                    })
             # writer.add_scalar(f'stage{stage}/loss/loss_ce', loss_ce, bt + ep * len(stage_loader))
             # writer.add_scalar(f'stage{stage}/loss/loss_ucl', loss_ucl, bt + ep * len(stage_loader))
             # writer.add_scalar(f'stage{stage}/loss/loss_tlcl', loss_tlcl, bt + ep * len(stage_loader))
@@ -784,9 +784,6 @@ def train(local_rank, args):
             logger.info(f'state_dict saved to: {os.path.join(save_pth, save_name)}')
             torch.save(state, os.path.join(save_pth, save_name))
             os.remove(e_pth)
-
-
-
 
 
 if __name__ == "__main__":
