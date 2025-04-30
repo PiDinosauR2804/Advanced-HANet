@@ -72,6 +72,7 @@ class BertED(nn.Module):
         if args.classifier_layer > 1:
             self.hidden_dim = args.hidden_dim
             self.fc = Classifier(self.input_dim, self.hidden_dim, class_num, num_layers=args.classifier_layer, dropout=args.dropout)
+            print(f"Classifier with {args.classifier_layer} layers")
         else:
             self.fc = nn.Linear(self.input_dim, class_num)
             
