@@ -1,6 +1,6 @@
 source activate zhangchenlong
 
-for i in ucl+tlcl none
+for i in ucl tlcl ucl+tlcl none
 do
     for j in 10
     do

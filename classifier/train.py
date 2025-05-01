@@ -92,7 +92,17 @@ def train(local_rank, args):
     logger.info('')
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
-    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{args.cl_aug}_{args.joint_da_loss}_{args.skip_first_cl}_{timestamp}"    
+    if args.ucl: 
+        ucl_have = "ucl"
+    else:
+        ucl_have = ""
+    
+    if args.tlcl: 
+        tlcl_have = "tlcl"
+    else:
+        tlcl_have = ""
+        
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{tlcl_have}_{ucl_have}_{timestamp}"    
     
     # Cấu hình logging
     log_dir = "log_result"
@@ -114,7 +124,7 @@ def train(local_rank, args):
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project="Quang_HANet_Find_optimize_loss",
+        project="Quang_HANet_Find_optimize_loss_turn_2",
         name = args.run_name,
 
         # track hyperparameters and run metadata
