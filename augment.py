@@ -10,11 +10,10 @@ datasets = ['MAVEN', 'ACE']
 NUM_PERM = 5
 
 def augment_data(line, num_descriptions=4)->list:
-    augment_data_list = []
+    augment_data_list = {}
     for key, value in line.items():
         key_id = int(key)
-        new_augment_line = {}
-        new_augment_line[key] = []
+        augment_data_list[key] = []
         for data in value:
             if 'events' in data:
                 events = data["events"]
@@ -34,8 +33,7 @@ def augment_data(line, num_descriptions=4)->list:
                                 new_data['label'] = [key_id]
                                 new_data['events'] = [copy.deepcopy(event)]
                                 new_data = sent2ids(new_data)
-                                new_augment_line[key].append(new_data)
-        augment_data_list.append(new_augment_line)
+                                augment_data_list[key].append(new_data)
 
     return augment_data_list
 
@@ -70,9 +68,8 @@ def augment_dataset(input_path, output_path, dataset):
                         print(f"Error: No data in {file_name}")
                         continue
                     with open(output_file, 'w') as f:
-                        for data in new_data:
-                            for line in data:
-                                f.write(json.dumps(line) + '\n')
+                        for line in new_data:
+                            f.write(json.dumps(line) + '\n')
                     logger.info(f"Augmented {file_name} and saved to {output_file}")
                     logger.info(f"[FINISHED] Processing {file_name} in {output_file}")
 
