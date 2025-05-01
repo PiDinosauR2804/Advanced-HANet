@@ -8,7 +8,7 @@ do
         do
             for m in 5 10
             do
-                for n in fd mul none
+                for n in pd
                 do
                     # Tạo flags conditionally
                     UCL_FLAG=""
