@@ -101,6 +101,7 @@ def sent2ids_expand(item:dict, neg_size=5)->dict:
         new_item['label'].append(0)
         
     final_item = sent2ids(new_item)
+    
     return final_item
 
 def sent2ids_expand_batch(list_sent:list, neg_size=5)->list:

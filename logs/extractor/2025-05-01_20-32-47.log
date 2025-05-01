@@ -1,0 +1,74 @@
+2025-05-01 20:32:47.431 | INFO     | __main__:<module>:168 - [INFO] Arguments:
+2025-05-01 20:32:47.432 | INFO     | __main__:<module>:169 - Input root: data/data_text
+2025-05-01 20:32:47.433 | INFO     | __main__:<module>:170 - Output root: output/des4
+2025-05-01 20:32:47.433 | INFO     | __main__:<module>:171 - Datasets: ['MAVEN']
+2025-05-01 20:32:47.434 | INFO     | __main__:<module>:172 - Perms: [0]
+2025-05-01 20:32:47.434 | INFO     | __main__:<module>:173 - Model: gemini-2.0-flash
+2025-05-01 20:32:47.435 | INFO     | __main__:<module>:174 - Candidate: 5
+2025-05-01 20:32:47.435 | INFO     | __main__:<module>:175 - Num try: 10
+2025-05-01 20:32:47.436 | INFO     | __main__:<module>:176 - Max consecutive 429 error: 6
+2025-05-01 20:32:47.436 | INFO     | __main__:<module>:177 - Max num threads: 8
+2025-05-01 20:32:47.437 | INFO     | __main__:<module>:178 - Resume: True
+2025-05-01 20:32:47.438 | INFO     | __main__:<module>:179 - Convert test: False
+2025-05-01 20:32:47.438 | INFO     | __main__:<module>:180 - Logs dir: logs/extractor
+2025-05-01 20:32:47.439 | INFO     | __main__:<module>:181 - Gen des: True
+2025-05-01 20:32:47.440 | INFO     | __main__:<module>:182 - [INFO] Start processing...
+2025-05-01 20:33:19.375 | INFO     | extractor.consumer:__init__:48 - [INFO] Found 4 valid extractors
+2025-05-01 20:33:21.387 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-05-01 20:33:21.389 | INFO     | extractor.consumer:__init__:55 - [START] Start 4 threads
+2025-05-01 20:33:21.390 | INFO     | __main__:run:66 - ====================================================================================================
+2025-05-01 20:33:21.391 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-05-01 20:33:21.392 | INFO     | __main__:run:68 - ====================================================================================================
+2025-05-01 20:33:21.393 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-05-01 20:33:21.438 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-05-01 20:33:21.439 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-05-01 20:33:21.441 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-05-01 20:33:21.442 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-05-01 20:33:23.456 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-05-01 20:33:23.459 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 280/280 items with 0/280 remained items.
+2025-05-01 20:33:23.949 | INFO     | __main__:run:90 - [FINISHED] Processing 280/280 item, remaning 0/280 in 2.10 seconds
+2025-05-01 20:33:23.950 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.2786 | Recall: 1.0000 | F1: 0.4221
+2025-05-01 20:33:23.950 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-05-01 20:33:23.951 | INFO     | __main__:run:66 - ====================================================================================================
+2025-05-01 20:33:23.952 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl to output/des4\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-05-01 20:33:23.953 | INFO     | __main__:run:68 - ====================================================================================================
+2025-05-01 20:33:23.953 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl...
+2025-05-01 20:33:24.085 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-05-01 20:33:24.087 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-05-01 20:33:24.089 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-05-01 20:33:24.090 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-05-01 20:33:26.107 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-05-01 20:33:26.109 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 240/240 items with 0/240 remained items.
+2025-05-01 20:33:26.553 | INFO     | __main__:run:90 - [FINISHED] Processing 240/240 item, remaning 0/240 in 2.19 seconds
+2025-05-01 20:33:26.554 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.2842 | Recall: 1.0000 | F1: 0.4283
+2025-05-01 20:33:26.555 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-05-01 20:33:26.555 | INFO     | __main__:run:66 - ====================================================================================================
+2025-05-01 20:33:26.556 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm0\MAVEN_5task_4way_10shot.train.jsonl to output/des4\MAVEN\perm0\MAVEN_5task_4way_10shot.train.jsonl
+2025-05-01 20:33:26.557 | INFO     | __main__:run:68 - ====================================================================================================
+2025-05-01 20:33:26.557 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm0\MAVEN_5task_4way_10shot.train.jsonl...
+2025-05-01 20:33:26.626 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm0\MAVEN_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-05-01 20:33:26.628 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-05-01 20:33:26.630 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-05-01 20:33:26.631 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-05-01 20:33:28.650 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-05-01 20:33:28.653 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 560/560 items with 0/560 remained items.
+2025-05-01 20:33:29.641 | INFO     | __main__:run:90 - [FINISHED] Processing 560/560 item, remaning 0/560 in 2.17 seconds
+2025-05-01 20:33:29.642 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.2845 | Recall: 1.0000 | F1: 0.4270
+2025-05-01 20:33:29.643 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm0\MAVEN_5task_4way_10shot.train.jsonl
+2025-05-01 20:33:29.643 | INFO     | __main__:run:66 - ====================================================================================================
+2025-05-01 20:33:29.644 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm0\MAVEN_5task_4way_5shot.train.jsonl to output/des4\MAVEN\perm0\MAVEN_5task_4way_5shot.train.jsonl
+2025-05-01 20:33:29.644 | INFO     | __main__:run:68 - ====================================================================================================
+2025-05-01 20:33:29.645 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm0\MAVEN_5task_4way_5shot.train.jsonl...
+2025-05-01 20:33:29.709 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm0\MAVEN_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-05-01 20:33:29.711 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-05-01 20:33:29.712 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-05-01 20:33:29.714 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-05-01 20:33:35.765 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-05-01 20:33:35.767 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 480/480 items with 0/480 remained items.
+2025-05-01 20:33:35.768 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 1/480 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 20.00
+2025-05-01 20:33:36.671 | INFO     | __main__:run:90 - [FINISHED] Processing 480/480 item, remaning 0/480 in 6.21 seconds
+2025-05-01 20:33:36.671 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.2827 | Recall: 1.0000 | F1: 0.4244
+2025-05-01 20:33:36.672 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm0\MAVEN_5task_4way_5shot.train.jsonl
+2025-05-01 20:33:36.673 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-05-01 20:33:37.688 | INFO     | extractor.consumer:stop_threads:63 - [STOP] All threads stopped
+2025-05-01 20:33:37.689 | INFO     | __main__:run:132 - [FINISHED] All items processed and saved to output/des4

@@ -44,12 +44,13 @@ for dataset in datasets:
                 for key in line:
                     original_num_item += len(line[key])
                     new_items = []
+                    key_int = int(key)
                     
                     for idx, item in enumerate(line[key]):
                         new_items.append(item)
                         
                         for event, label in zip(item['events'], item['label']):
-                            if label > 0:
+                            if label == key_int:
                                 trigger_word = event['trigger_word']
                                 for des in event['description'][:num_des]:
                                     if trigger_word in des:
