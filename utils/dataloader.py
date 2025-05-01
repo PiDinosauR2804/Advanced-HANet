@@ -168,12 +168,11 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
                 valid_span = add_span
                 valid_label = [label2idx[item] if item in label2idx else 0 for item in add_label]
             else:
-                continue
-            # else:
-            #     token = dt['piece_ids']
-            #     valid_span = dt['span'].copy()
-            #     valid_label = [label2idx[item] if item in label2idx else 0 for item in dt['label']]
-                # max_seqlen = 90
+                token = dt['piece_ids']
+                valid_span = dt['span'].copy()
+                valid_label = [label2idx[item] if item in label2idx else 0 for item in dt['label']]
+                max_seqlen = 90
+                
             max_seqlen = args.max_seqlen # 344, 249, 230, 186, 167
             try:
                 if len(token) >= max_seqlen + 2:
