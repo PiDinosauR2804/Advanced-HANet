@@ -159,7 +159,7 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
             add_span = []
             new_t = {}
             for i in range(len(dt['label'])):
-                if dt['label'][i] == labels[idx]: 
+                if dt['label'][i] == labels[idx]:
                     add_label.append(dt['label'][i]) 
                     add_span.append(dt['span'][i])
             if len(add_label) != 0:
@@ -167,6 +167,8 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
                 new_t['label'] = add_label
                 valid_span = add_span
                 valid_label = [label2idx[item] if item in label2idx else 0 for item in add_label]
+            else:
+                continue
             # else:
             #     token = dt['piece_ids']
             #     valid_span = dt['span'].copy()
