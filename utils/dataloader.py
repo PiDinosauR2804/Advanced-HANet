@@ -3,9 +3,49 @@ import torch
 from torch.utils.data import Dataset
 from configs import parse_arguments
 from utils.tools import collect_from_json
+import json
 
 import numpy as np
 args = parse_arguments()
+
+
+class DescriptionDataset(Dataset):
+    def __init__(self, args, tokenizer, learned_types):
+        file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"
+        with open(file_path_description, 'r', encoding='utf-8') as f:
+            data_description = json.load(f)
+        
+        self.data = []
+        self.max_seqlen = args.max_seqlen
+        self.num_description = args.num_description
+        
+        for key, value in data_description.items():
+            if int(key) not in learned_types:
+                continue
+            for idx, sample in enumerate(value):
+                if idx < self.num_description:
+                    input_ids = tokenizer.encode(sample, add_special_tokens=True)
+
+                    # truncate hoặc pad token
+                    if len(input_ids) >= self.max_seqlen + 2:
+                        token_sep = input_ids[-1]
+                        token = input_ids[:self.max_seqlen + 1] + [token_sep]
+                    else:
+                        token = input_ids + [0] * (self.max_seqlen + 2 - len(input_ids))
+                    
+                    token_mask = [1 if tkn != 0 else 0 for tkn in token]
+
+                    self.data.append((
+                        token,                 # input_ids
+                        token_mask,            # mask
+                        int(key), 
+                    ))
+
+    def __len__(self):
+        return len(self.data)
+    
+    def __getitem__(self, idx):
+        return self.data[idx]
 
 
 
@@ -69,14 +109,21 @@ def collect_dataset(dataset, root, split, label2idx, stage_id, labels):
         #     valid_label = [label2idx[item] if item in label2idx else 0 for item in dt['label']]
             # max_seqlen = 90
         max_seqlen = args.max_seqlen # 344, 249, 230, 186, 167
-        if len(token) >= max_seqlen + 2:
-            token_sep = token[-1]
-            token = token[:max_seqlen + 1] + [token_sep]
-            invalid_span = np.unique(np.nonzero(np.asarray(valid_span) > max_seqlen)[0])
-            invalid_span = invalid_span[::-1]
-            for invalid_idx in invalid_span:
-                valid_span.pop(invalid_idx)
-                valid_label.pop(invalid_idx)
+        try:
+            if len(token) >= max_seqlen + 2:
+                token_sep = token[-1]
+                token = token[:max_seqlen + 1] + [token_sep]
+                invalid_span = np.unique(np.nonzero(np.asarray(valid_span) > max_seqlen)[0])
+                invalid_span = invalid_span[::-1]
+                for invalid_idx in invalid_span:
+                    valid_span.pop(invalid_idx)
+                    valid_label.pop(invalid_idx)
+        except Exception as e:
+            print(f"Error in labels: {labels}")
+            print(f"Error in dt labels: {dt['label']}")
+            print(f"Error in add labels: {add_label}")
+            raise e
+        
         if len(token) < max_seqlen + 2:
             token = token + [0] * (max_seqlen + 2 - len(token))
         token_mask = [1 if tkn != 0 else 0 for tkn in token]
@@ -112,7 +159,7 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
             add_span = []
             new_t = {}
             for i in range(len(dt['label'])):
-                if dt['label'][i] == labels[idx]: 
+                if dt['label'][i] == labels[idx]:
                     add_label.append(dt['label'][i]) 
                     add_span.append(dt['span'][i])
             if len(add_label) != 0:
@@ -120,20 +167,29 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
                 new_t['label'] = add_label
                 valid_span = add_span
                 valid_label = [label2idx[item] if item in label2idx else 0 for item in add_label]
-            # else:
-            #     token = dt['piece_ids']
-            #     valid_span = dt['span'].copy()
-            #     valid_label = [label2idx[item] if item in label2idx else 0 for item in dt['label']]
-                # max_seqlen = 90
+            else:
+                token = dt['piece_ids']
+                valid_span = dt['span'].copy()
+                valid_label = [label2idx[item] if item in label2idx else 0 for item in dt['label']]
+                max_seqlen = 90
+                
             max_seqlen = args.max_seqlen # 344, 249, 230, 186, 167
-            if len(token) >= max_seqlen + 2:
-                token_sep = token[-1]
-                token = token[:max_seqlen + 1] + [token_sep]
-                invalid_span = np.unique(np.nonzero(np.asarray(valid_span) > max_seqlen)[0])
-                invalid_span = invalid_span[::-1]
-                for invalid_idx in invalid_span:
-                    valid_span.pop(invalid_idx)
-                    valid_label.pop(invalid_idx)
+            try:
+                if len(token) >= max_seqlen + 2:
+                    token_sep = token[-1]
+                    token = token[:max_seqlen + 1] + [token_sep]
+                    invalid_span = np.unique(np.nonzero(np.asarray(valid_span) > max_seqlen)[0])
+                    invalid_span = invalid_span[::-1]
+                    for invalid_idx in invalid_span:
+                        valid_span.pop(invalid_idx)
+                        valid_label.pop(invalid_idx)
+            except Exception as e:
+                print(f"Error in labels: {labels}")
+                print(f"Error in dt labels: {dt['label']}")
+                print(f"Error in add labels: {add_label}")
+                raise e
+            
+            
             if len(token) < max_seqlen + 2:
                 token = token + [0] * (max_seqlen + 2 - len(token))
             token_mask = [1 if tkn != 0 else 0 for tkn in token]

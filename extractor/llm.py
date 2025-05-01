@@ -175,8 +175,8 @@ please extract (write your answer, do not code) the event arguments and generate
         if match:
             events_str = match.group()
             try:
-                # events_list = ast.literal_eval(events_str)
-                events_list = json.loads(events_str.replace("None", "null"))
+                events_list = ast.literal_eval(events_str.replace("null", "None").replace("true", "True").replace("false", "False"))
+                # events_list = json.loads(events_str.replace("None", "null").replace("True", "true").replace("False", "false"))
                 return events_list
             
             except ValueError as e:
@@ -346,7 +346,7 @@ please extract (write your answer, do not code) the event arguments and generate
     
     
 def is_quota_exhausted_error(e: Exception):
-    return "RESOURCE_EXHAUSTED" in str(e) or "429" in str(e)
+    return "RESOURCE_EXHAUSTED" in str(e) or "429" in str(e) or "UNAVAILABLE" in str(e) or "503" in str(e)
 
 def is_valid_extractor(extractor, text="australia won the tournament, beating pakistan in the final by 25 runs.", max_try=2, timeout=5):
     for _ in range(max_try):

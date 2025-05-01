@@ -1,30 +1,65 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import os, time, sys, json
+from datetime import datetime
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from torch.utils.data import DataLoader
 from torch.nn.functional import normalize
 from torch.optim import AdamW
 from utils import *
 from configs import parse_arguments
-from classifier.model import BertED
-from tqdm import tqdm
-from classifier.exemplars import Exemplars
+from model import BertED
+# from tqdm import tqdm
+from exemplars import Exemplars
 from copy import deepcopy
 from torch.utils.tensorboard import SummaryWriter   
-import os, time
 import logging
 import torch.distributed as dist
 import torch.multiprocessing as mp
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
+from transformers import BertTokenizerFast
+import wandb
+import re
+from tqdm.notebook import tqdm
 
+wandb.login()
 
+class Logger(object):
+    def __init__(self, filename):
+        self.terminal = sys.stdout
+        self.log = open(filename, "w")
+        self.last_tqdm = ""  # để lưu lại trạng thái cuối của tqdm
+        self.tqdm_pattern = re.compile(r'^\r.*')  # dòng bắt đầu bằng \r (tqdm update)
+
+    def write(self, message):
+        # Nếu là dòng cập nhật tqdm thì lưu lại nhưng không ghi vào file
+        if self.tqdm_pattern.match(message):
+            self.last_tqdm = message.strip()  # lưu lại dòng cuối
+        else:
+            self.terminal.write(message)
+            self.log.write(message)
+            self.log.flush()
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
+    def close(self):
+        # Khi kết thúc, ghi trạng thái cuối cùng của tqdm vào log
+        if self.last_tqdm:
+            self.log.write(f"{self.last_tqdm}\n")
+            self.log.flush()
+        self.log.close()
 
 # PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
 
 # PERM_10 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]
 
-
+tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 
 def train(local_rank, args):
     torch.manual_seed(args.seed)
@@ -52,6 +87,37 @@ def train(local_rank, args):
     for arg in vars(args):
         logger.info('{}={}'.format(arg.upper(), getattr(args, arg)))
     logger.info('')
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{args.cl_aug}_{args.joint_da_loss}_{args.skip_first_cl}_{timestamp}"    
+    
+    # Cấu hình logging
+    log_dir = "log_result"
+    os.makedirs(log_dir, exist_ok=True)  # Tạo thư mục nếu chưa tồn tại
+    log_filename = os.path.join(log_dir, f"{args.run_name}_log.txt")
+    
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        handlers=[
+            logging.FileHandler(log_filename, mode="w"),  # Ghi vào file
+            logging.StreamHandler(sys.stdout)  # Hiển thị trên terminal
+        ]
+    )
+    
+    # Ghi cả print() vào file log
+    sys.stdout = Logger(log_filename)
+    sys.stderr = sys.stdout  # Để ghi cả lỗi vào file
+    
+    wandb.init(
+        # set the wandb project where this run will be logged
+        project="HANet",
+        name = args.run_name,
+
+        # track hyperparameters and run metadata
+        config=args.__dict__,
+    )
+    
     # set device, whether to use cuda or cpu
     device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
     # get streams from json file and permute them in pre-defined order
@@ -61,12 +127,17 @@ def train(local_rank, args):
     streams = collect_from_json(args.dataset, args.stream_root, 'stream')
     # streams = [streams[l] for l in PERM[int(args.perm_id)]] # permute the stream
     label2idx = {0:0}
+    idx2label = {}
     
     
     for st in streams:
         for lb in st:
             if lb not in label2idx:
                 label2idx[lb] = len(label2idx)
+    
+    for key, value in label2idx.items():
+        idx2label[value] = key
+    
     streams_indexed = [[label2idx[l] for l in st] for st in streams]
     
     # streams_indexed có dạng [[4, 5, 9, 11], [2, 1, 8, 33], ...] thể hiện thứ tự label class được học
@@ -78,8 +149,12 @@ def train(local_rank, args):
     # if args.amp:
         # model, optimizer = amp.initialize(model, optimizer, opt_level="O1") 
         
-        
-        
+    # # Get description
+    # file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"   
+    # with open(file_path_description, 'r', encoding='utf-8') as f:
+    #     data_description = json.load(f)
+                  
+                
     if args.parallel == 'DDP':
         torch.cuda.set_device(local_rank)
         dist.init_process_group("nccl", rank=local_rank, world_size=args.world_size)
@@ -126,6 +201,7 @@ def train(local_rank, args):
         #     break
         logger.info(f"Stage {stage}")
         logger.info(f'Loading train instances for stage {stage}')
+        
         # stage = 1 # TODO: test use
         # exemplars = Exemplars() # TODO: test use
         if args.single_label:
@@ -192,16 +268,28 @@ def train(local_rank, args):
                 learned_types.append(item)
         logger.info(f'Learned types: {learned_types}')
         logger.info(f'Previous learned types: {prev_learned_types}')
+        
+        labels_all_learned_types = [idx2label[x] for x in learned_types]
+
+        
+        
+        description_stage_loader = DataLoader(
+            DescriptionDataset(args, tokenizer, labels_all_learned_types),
+            batch_size=args.batch_size,
+            shuffle=False,
+            collate_fn=collate_description
+        )
+        
         dev_score = None
         no_better = 0
         for ep in range(args.epochs):
             if stage == 0 and args.skip_first:
                 continue
-            logger.info('-' * 100)
-            logger.info(f"Stage {stage}: Epoch {ep}")
-            logger.info("Training process")
-            model.train()
-            logger.info("Training batch:")
+            # logger.info('-' * 100)
+            # logger.info(f"Stage {stage}: Epoch {ep}")
+            # logger.info("Training process")
+            # model.train()
+            # logger.info("Training batch:")
             iter_cnt = 0
             for bt, batch in enumerate(tqdm(stage_loader)):
                 iter_cnt += 1
@@ -226,9 +314,18 @@ def train(local_rank, args):
                 train_masks = torch.LongTensor(train_masks).to(device)
                 train_y = [torch.LongTensor(item).to(device) for item in train_y]           
                 train_span = [torch.LongTensor(item).to(device) for item in train_span]     # Sử dụng để lưu vị trí bắt đầu và kết thúc 1 từ của các ids
+                
+                labels_for_loss_des = []
+                for y in train_y:
+                    for k in y:
+                        if k in learned_types and k != 0:
+                           labels_for_loss_des.append(idx2label[int(k)])
+                           break 
+                # print(labels)
+                
                 # if args.dataset == "ACE":
                 #     return_dict = model(train_x, train_masks)
-                # else:
+                # else: 
                 return_dict = model(train_x, train_masks, train_span)
                 outputs, context_feat, trig_feat = return_dict['outputs'], return_dict['context_feat'], return_dict['trig_feat']
                 # invalid_mask_op = torch.BoolTensor([item not in learned_types for item in range(args.class_num)]).to(device)
@@ -335,7 +432,7 @@ def train(local_rank, args):
                             Adj_mask_tlcl = torch.matmul(tlcl_lbs_oh, tlcl_lbs_oh.T)
                             Adj_mask_tlcl = Adj_mask_tlcl * (torch.ones(mat_size) - torch.eye(mat_size)).to(device)
                             loss_tlcl = compute_CLLoss(Adj_mask_tlcl, tlcl_feature, mat_size)
-                    loss = loss + loss_ucl + loss_tlcl
+                    loss = loss + loss_ucl + loss_tlcl*args.weight_loss_tlcl
                     if args.joint_da_loss == "ce" or args.joint_da_loss == "mul":
                         ce_y = torch.cat(train_y + da_y)
                         ce_outputs = torch.cat([outputs, da_outputs])
@@ -344,6 +441,65 @@ def train(local_rank, args):
                 
                     # outputs[i].masked_fill_(invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
                 # if args.dataset == "ACE":
+                loss_des_cl = torch.tensor(0.0, device=device)
+                if args.use_description:
+                    
+                    reps = trig_feat
+                    descriptions_representations = {}
+                    final_description_res = {}
+                    
+                    model.eval()
+                    with torch.no_grad():
+                        for bt, description_batch in enumerate(tqdm(description_stage_loader)):
+
+                            train_x_description, train_masks_description, keys = description_batch
+                            train_x_description = torch.LongTensor(train_x_description).to(device)
+                            train_masks_description = torch.LongTensor(train_masks_description).to(device)
+                
+                            return_dict_description = model.forward_cls(train_x_description, train_masks_description)
+                            context_feat_descriptions = return_dict_description
+                            for key, context_feat_description in zip(keys, context_feat_descriptions):
+                                if key not in descriptions_representations:
+                                    descriptions_representations[key] = []
+                                descriptions_representations[key].append(context_feat_description)
+                                                                
+                        for key, value in descriptions_representations.items():
+                            feature = torch.stack(value, dim=0)
+                            temp = torch.mean(feature, dim=0)
+                            final_description_res[key] = temp
+                            
+                    model.train()
+                    
+                    if args.loss_des_type == "1":
+                        negative_dict = find_negative_labels(final_description_res)       
+                        loss_des_cl = contrastive_loss_des(reps, labels_for_loss_des, final_description_res, negative_dict)       
+        
+                    elif args.loss_des_type == "2":
+                        des_feat = []
+                        des_y = []
+                        for key_des, value_des in final_description_res.items():
+                            des_feat.append(value_des)
+                            des_y.append(key_des)
+                        
+                        des_feat = torch.stack(des_feat, dim=0) 
+                        des_y_tensor = torch.tensor([label2idx[int(xx)] for xx in des_y],
+                                                    dtype=torch.long,
+                                                    device=device)
+                        
+                        
+                        des_cl_feature = torch.cat([trig_feat, des_feat])
+                        # tlcl_feature = trig_feat
+                        des_cl_feature = normalize(des_cl_feature, dim=-1)
+                        des_cl_lbs = torch.cat(train_y + [des_y_tensor], dim=0)
+                        # tlcl_lbs = torch.cat(train_y)
+                        des_mat_size = des_cl_feature.shape[0]
+                        des_cl_lbs_oh = F.one_hot(des_cl_lbs).float()
+                        # tlcl_lbs_oh[:, 0] = 0 # whether to compute negative distance
+                        Des_adj_mask_tlcl = torch.matmul(des_cl_lbs_oh, des_cl_lbs_oh.T)
+                        Des_adj_mask_tlcl = Des_adj_mask_tlcl * (torch.ones(des_mat_size) - torch.eye(des_mat_size)).to(device)
+                        loss_des_cl = compute_CLLoss(Des_adj_mask_tlcl, des_cl_feature, des_mat_size)
+                    
+                    loss = loss + loss_des_cl * args.ratio_loss_des_cl      
                     
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
@@ -508,17 +664,43 @@ def train(local_rank, args):
                 #     with amp.scale_loss(loss, optimizer) as scaled_loss:
                 #         scaled_loss.backward()
                 # else:
+                
+                ####################################
+                if stage == 4:
+                    loss = loss * args.ratio_loss_final_stage
+                ####################################
+                
                 loss.backward()
                 optimizer.step() 
+                wandb.log({
+                            f"loss_ce_task_{stage}": loss_ce,
+                            f"loss_ucl_{stage}": loss_ucl,
+                            f"loss_tlcl_{stage}": loss_tlcl,
+                            f"loss_des_cl_{stage}": loss_des_cl,
+                            f"loss_aug_{stage}": loss_aug,
+                            f"loss_fd_{stage}": loss_fd,
+                            f"loss_pd_{stage}": loss_pd,
+                            f"loss_all_{stage}": loss,
+                            
+                            f"loss_ce_task": loss_ce,
+                            f"loss_ucl": loss_ucl,
+                            f"loss_tlcl": loss_tlcl,
+                            f"loss_des_cl": loss_des_cl,
+                            f"loss_aug": loss_aug,
+                            f"loss_fd": loss_fd,
+                            f"loss_pd": loss_pd,
+                            f"loss_all": loss,
+                        })
                 
-            logger.info(f'loss_ce: {loss_ce}')
-            logger.info(f'loss_ucl: {loss_ucl}')
-            logger.info(f'loss_tlcl: {loss_tlcl}')
-            # logger.info(f'loss_ecl: {loss_ecl}')
-            logger.info(f'loss_aug: {loss_aug}')
-            logger.info(f'loss_fd: {loss_fd}')
-            logger.info(f'loss_pd: {loss_pd}')
-            logger.info(f'loss_all: {loss}')
+            # logger.info(f'loss_ce: {loss_ce}')
+            # logger.info(f'loss_ucl: {loss_ucl}')
+            # logger.info(f'loss_tlcl: {loss_tlcl}')
+            # logger.info(f'loss_des_cl: {loss_des_cl}')
+            # # logger.info(f'loss_ecl: {loss_ecl}')
+            # logger.info(f'loss_aug: {loss_aug}')
+            # logger.info(f'loss_fd: {loss_fd}')
+            # logger.info(f'loss_pd: {loss_pd}')
+            # logger.info(f'loss_all: {loss}')
             # writer.add_scalar(f'stage{stage}/loss/loss_ce', loss_ce, bt + ep * len(stage_loader))
             # writer.add_scalar(f'stage{stage}/loss/loss_ucl', loss_ucl, bt + ep * len(stage_loader))
             # writer.add_scalar(f'stage{stage}/loss/loss_tlcl', loss_tlcl, bt + ep * len(stage_loader))
@@ -560,6 +742,13 @@ def train(local_rank, args):
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                         calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
+                    
+                    wandb.log({
+                        f"precision": precision,
+                        f"recall": recall,
+                        f"micro_F1": micro_F1,
+                    })
+                    
                     if args.log:
                         writer.add_scalar(f'score/epoch/marco_F1', micro_F1,  ep + 1 + args.epochs * stage)
                     if args.log and (ep + 1) == args.epochs:
@@ -596,9 +785,6 @@ def train(local_rank, args):
             logger.info(f'state_dict saved to: {os.path.join(save_pth, save_name)}')
             torch.save(state, os.path.join(save_pth, save_name))
             os.remove(e_pth)
-
-
-
 
 
 if __name__ == "__main__":

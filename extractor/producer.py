@@ -7,7 +7,7 @@ class Producer:
     def __init__(self, task_queue: queue.Queue) -> None:
         self.task_queue = task_queue
 
-    def produce(self, input_file: str, origin_input_file: str, is_train=True) -> None:
+    def produce(self, input_file: str, origin_input_file: str, is_train=True) -> list:
         if not input_file.endswith(".jsonl"):
             logger.error(f"[ERROR] File {input_file} is not a jsonl file")
             return
@@ -48,13 +48,13 @@ class Producer:
                         labels = []
                         for word, label in zip(item['event_words'], item['label']):
                             if label > 0:
-                                event_words.append(word.lower())
+                                event_words.append(word.lower().replace(" - ", "-").replace(" ' s", "'s"))
                                 labels.append(label)
                                 
                         item['event_words'] = event_words
                         item['label'] = labels
-                        # item['text'] = origin_item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
-                        # item['span'] = origin_item['span']
+                        item['text'] = origin_item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
+                        item['span'] = origin_item['span']
                         self.task_queue.put((line_idx, key, idx, item))
                         gt_list.append((line_idx, key, idx, origin_item))
                         num_item += 1
@@ -63,4 +63,6 @@ class Producer:
                 num_item += 1
 
         logger.info(f"[PRODUCING] Finished producing {input_file} with {num_item} item in {len(input_lines)} lines")
+        # sort the gt_list by line_idx, key and idx
+        gt_list.sort(key=lambda x: (x[0], x[1], x[2]))
         return gt_list

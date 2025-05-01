@@ -17,6 +17,15 @@ def parse_arguments():
     parser.add_argument('--convert_test', action='store_true')
     parser.add_argument('--gen_des', action='store_true')
     
+    # Args of QuangNM
+    parser.add_argument('--freeze_embedding_layer', action='store_true')
+    parser.add_argument('--freeze_encoder_layers', default=0, type=int, help="Number of encoder layers to freeze")
+    parser.add_argument('--classifier_layer', default=1, type=int, help="Number of classifier layers")
+    parser.add_argument('--hidden_dim', default=128, type=int, help="Hidden dimension of classifier")
+    parser.add_argument('--dropout', default=0.1, type=float, help="Dropout rate")
+    parser.add_argument("--use_lora", action="store_true", help="Enable LoRA adaptation")
+
+    
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
     parser.add_argument('--skip-first', action='store_true')
@@ -31,7 +40,7 @@ def parse_arguments():
     parser.add_argument("--amp", action='store_true') 
     parser.add_argument('--perm-id', default=0, type=str, choices=[str(i) for i in range(5)])
     parser.add_argument('--dataset', default='MAVEN', choices=['MAVEN', 'ACE'])
-    parser.add_argument('--stream-root', default='./data_incremental', type=str)
+    parser.add_argument('--stream-root', default='./data/data_ids', type=str)
     parser.add_argument('--max_seqlen', default=120)
     parser.add_argument('--adamw_eps', default=1e-7)
     parser.add_argument('--fixed-enum', default=True, type=bool, help="whether to fix the exemplar number")
@@ -79,6 +88,12 @@ def parse_arguments():
     parser.add_argument('--skip-first-cl', choices=["ucl", "tlcl", "ucl+tlcl", "none"], default="none")
     parser.add_argument('--method', type=str)
     parser.add_argument('--my_test', default=False, type=bool)
+    parser.add_argument('--use-description', action='store_true')
+    parser.add_argument('--num_description', default=1, type=int)
+    parser.add_argument('--ratio_loss_des_cl', default=1, type=float)
+    parser.add_argument('--weight_loss_tlcl', default=1, type=float)
+    parser.add_argument('--ratio_loss_final_stage', default=1, type=float)
+    parser.add_argument('--loss_des_type', default="2", choices=["1", "2"])
     
     args, _ = parser.parse_known_args()
 

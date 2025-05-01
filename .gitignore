@@ -5,5 +5,8 @@ test/
 *.ipynb
 **/api_key.py
 output/MAVEN
+<<<<<<< HEAD
 output/ACE
+=======
+>>>>>>> luyennd
 /match.py
