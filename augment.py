@@ -22,7 +22,8 @@ def augment_data(line, num_descriptions=4)->list:
                     if data['label'][i] == key_id:
                         if 'description' in event:
                             description = event['description']
-                            for j in range(num_descriptions):
+                            des_range = min(len(description), num_descriptions)
+                            for j in range(des_range):
                             # Tạo dữ liệu mới bằng cách kết hợp text và description
                             # Tạo dữ liệu mới bằng cách kết hợp text và description
                             #new_data = copy.deepcopy(data)
