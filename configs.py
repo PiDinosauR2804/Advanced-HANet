@@ -24,6 +24,10 @@ def parse_arguments():
     parser.add_argument('--hidden_dim', default=128, type=int, help="Hidden dimension of classifier")
     parser.add_argument('--dropout', default=0.1, type=float, help="Dropout rate")
     parser.add_argument("--use_lora", action="store_true", help="Enable LoRA adaptation")
+    parser.add_argument("--use_mole", action="store_true", help="Enable MoLE adaptation")
+    parser.add_argument('--num_lora_experts', type=int, default=4)
+    parser.add_argument('--top_k_experts', type=int, default=2)
+
 
     
     # Args for Classifier

@@ -97,17 +97,90 @@ class BertED(nn.Module):
             )
             self.backbone = get_peft_model(self.backbone, lora_config)
             
+        # MoLE: Mixture of LoRA Experts
+        self.use_mole = getattr(args, 'use_mole', False)
+        if self.use_mole:
+            print("Using MoLE (Mixture of LoRA Experts)")
+            self.n_experts = getattr(args, 'num_lora_experts', 4)
+            self.top_k = getattr(args, 'top_k_experts', 2)
+            self.experts = nn.ModuleList()
+            self.expert_keys = nn.Parameter(torch.randn(self.n_experts, self.input_dim))  # Learnable keys
+
+            for i in range(self.n_experts):
+                lora_config = LoraConfig(
+                    r=8,
+                    lora_alpha=16,
+                    target_modules=["query", "value"],
+                    lora_dropout=0.1,
+                    bias="none",
+                    task_type=TaskType.SEQ_CLS
+                )
+                expert = get_peft_model(BertModel.from_pretrained(args.backbone), lora_config)
+                if not args.no_freeze_bert:
+                    for _, p in expert.named_parameters():
+                        if 'lora' not in _:
+                            p.requires_grad = False
+                self.experts.append(expert)
+
+            # Keep one frozen backbone for query gating
+            self.backbone = BertModel.from_pretrained(args.backbone)
+            for p in self.backbone.parameters():
+                p.requires_grad = False
+
+            
         print("Trainable parameters:")
         for n, p in self.named_parameters():
             if p.requires_grad:
                 print(n, p.shape)
+                
+        def mole_backbone_forward(self, x, masks):
+            with torch.no_grad():
+                base_output = self.backbone(x, attention_mask=masks)
+                cls_embedding = base_output.last_hidden_state[:, 0, :]  # shape (B, H)
 
+            # Gating scores: (B, n_experts)
+            sim_scores = torch.matmul(cls_embedding, self.expert_keys.T)
+            topk_scores, topk_indices = torch.topk(sim_scores, self.top_k, dim=-1)  # shape (B, k)
+            topk_weights = torch.softmax(topk_scores, dim=-1)  # shape (B, k)
+
+            expert_outputs = []
+            for i in range(self.top_k):
+                expert_idx = topk_indices[:, i]  # shape (B,)
+                grouped_batch = {}  # map from expert_id to list of indices
+                for b, idx in enumerate(expert_idx):
+                    idx = idx.item()
+                    if idx not in grouped_batch:
+                        grouped_batch[idx] = []
+                    grouped_batch[idx].append(b)
+
+                batch_outputs = torch.zeros_like(base_output.last_hidden_state)
+                for expert_id, batch_indices in grouped_batch.items():
+                    input_ids_subset = x[batch_indices]
+                    mask_subset = masks[batch_indices]
+                    expert = self.experts[expert_id]
+                    output = expert(input_ids_subset, attention_mask=mask_subset).last_hidden_state
+                    for i, b in enumerate(batch_indices):
+                        batch_outputs[b] = output[i]
+
+                weighted_output = batch_outputs * topk_weights[:, i].unsqueeze(-1).unsqueeze(-1)  # shape (B, S, H)
+                expert_outputs.append(weighted_output)
+
+            mixed_output = torch.stack(expert_outputs).sum(0)  # shape (B, S, H)
+            pooled_output = mixed_output[:, 0, :]  # optional for downstream use
+
+            return mixed_output, pooled_output
 
     def forward(self, x, masks, span=None, aug=None):
         # x = self.backbone(x) #TODO: test use
         return_dict = {}
-        backbone_output = self.backbone(x, attention_mask = masks)
-        x, pooled_feat = backbone_output[0], backbone_output[1]
+        # backbone_output = self.backbone(x, attention_mask = masks)
+        # x, pooled_feat = backbone_output[0], backbone_output[1]
+        if self.use_mole:
+            x, pooled_feat = self.mole_backbone_forward(x, masks)
+        else:
+            backbone_output = self.backbone(x, attention_mask = masks)
+            x, pooled_feat = backbone_output[0], backbone_output[1]
+
         context_feature = x.view(-1, x.shape[-1])
         return_dict['reps'] = x[:, 0, :].clone()
         if span != None:
