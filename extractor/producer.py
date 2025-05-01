@@ -7,7 +7,7 @@ class Producer:
     def __init__(self, task_queue: queue.Queue) -> None:
         self.task_queue = task_queue
 
-    def produce(self, input_file: str, origin_input_file: str, is_train=True) -> None:
+    def produce(self, input_file: str, origin_input_file: str, is_train=True) -> list:
         if not input_file.endswith(".jsonl"):
             logger.error(f"[ERROR] File {input_file} is not a jsonl file")
             return

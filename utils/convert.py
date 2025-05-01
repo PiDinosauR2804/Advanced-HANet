@@ -1,4 +1,5 @@
 from transformers import BertTokenizerFast
+import random
 
 # Khởi tạo tokenizer
 tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
@@ -58,18 +59,15 @@ def sent2ids(item:dict)->dict:
         start = -1
         end = -1
         for i, (s, e) in enumerate(offsets_mp):
-            if s <= offset < e:
-                start = i
-                break
-        if start != -1:
-            for i, (s, e) in enumerate(offsets_mp[start:], start):
-                if s >= offset + len(trigger_word):
-                    end = i
-                    break
+            if item['text'][s:e] in trigger_word:
+                if start == -1:
+                    start = i
+                end = i  # cập nhật end liên tục
         if start != -1 and end != -1:
-            span.append((start, end-1))
+            span.append((start, end))
         else:
-            raise ValueError(f"Span for trigger word '{trigger_word}' not found in offsets mapping")
+            raise ValueError(f"Span for trigger word '{trigger_word}' not found in offsets mapping | text: {item['text']}")
+
     
     final_item = item | {
         'piece_ids': piece_ids,
@@ -78,9 +76,38 @@ def sent2ids(item:dict)->dict:
     
     return final_item
 
+
+
 def sent2ids_batch(list_sent:list)->list:
     ids_data = []
     for item in list_sent:
         ids_data.append(sent2ids(item))
     return ids_data
+
+
+def sent2ids_expand(item:dict, neg_size=5)->dict:
+    new_item = item.copy()
+    
+    # augment negative event
+    trigger_words = [event['trigger_word'] for event in item['events']]
+    text = item['text']
+    neg_words = [word for word in text.replace('.', ' . ').split() if word not in trigger_words]
+    neg_words = list(set(neg_words))
+    neg_words = [word for word in neg_words if len(word) > 1]
+    neg_words = random.sample(neg_words, min(neg_size, len(neg_words)))
+    
+    for neg_word in neg_words:
+        new_item['events'].append({
+            'trigger_word': neg_word,
+        })
         
+        new_item['label'].append(0)
+        
+    final_item = sent2ids(new_item)
+    return final_item
+
+def sent2ids_expand_batch(list_sent:list, neg_size=5)->list:
+    ids_data = []
+    for item in list_sent:
+        ids_data.append(sent2ids_expand(item, neg_size))
+    return ids_data
