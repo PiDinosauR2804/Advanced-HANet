@@ -62,8 +62,13 @@ for dataset in datasets:
                                             'label': [label],
                                         })
                                         new_num_item += 1
-                                        
-                    output_lines[line_idx][key] = sent2ids_expand_batch(new_items, neg_size=num_neg)
+                    converted_items = sent2ids_expand_batch(new_items, neg_size=num_neg)
+                    for item in converted_items:
+                        piece_ids = item['piece_ids']
+                        if len(piece_ids) == 0:
+                            raise ValueError(f"piece_ids is empty for item: {item}")
+
+                    output_lines[line_idx][key] = converted_items
                     
             with open(output_file, 'w') as f:
                 for line in output_lines:
