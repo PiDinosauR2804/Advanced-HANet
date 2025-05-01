@@ -35,47 +35,44 @@ def ids2sent_batch(list_sent:list)->list:
         sent_data.append(ids2sent(item))
     return sent_data
 
-def sent2ids(item:dict)->dict:
-    # Chuyển đổi các văn bản thành ID
+def sent2ids(item: dict) -> dict:
     opt = tokenizer(item['text'], return_offsets_mapping=True, truncation=True, max_length=512, padding="max_length")
-    # Lấy các ID của các token
-    piece_ids = opt['input_ids']
-    # Chỉ lấy các token không phải padding
-    piece_ids = [piece_id for piece_id in piece_ids if piece_id != tokenizer.pad_token_id]
-    # Lấy các span của các token
+    piece_ids = [piece_id for piece_id in opt['input_ids'] if piece_id != tokenizer.pad_token_id]
     offsets_mp = opt['offset_mapping']
-    # Lấy các span của các event word dựa vào offset mapping
+    input_tokens = tokenizer.convert_ids_to_tokens(opt['input_ids'])
+
+    # Lọc ra các offset hợp lệ (bỏ qua [CLS], [SEP], padding)
+    valid_offsets = [(i, span) for i, span in enumerate(offsets_mp) if span != (0, 0)]
+    
     span = []
-    offsets = []
     for event in item['events']:
         trigger_word = event['trigger_word']
-        # Tìm vị trí của trigger word trong văn bản
-        offset = item['text'].find(trigger_word)
-        if offset != -1:
-            offsets.append([offset, offset + len(trigger_word) - 1])
-        else:
-            raise ValueError(f"Trigger word '{trigger_word}' not found")
-        # Tìm vị trí của trigger word trong offsets_mp
-        start = -1
-        end = -1
-        for i, (s, e) in enumerate(offsets_mp):
-            if item['text'][s:e] in trigger_word:
-                if start == -1:
-                    start = i
-                end = i  # cập nhật end liên tục
-        if start != -1 and end != -1:
-            span.append((start, end))
+        start_char = item['text'].find(trigger_word)
+        if start_char == -1:
+            raise ValueError(f"Trigger word '{trigger_word}' not found in text: {item['text']}")
+
+        end_char = start_char + len(trigger_word)
+
+        # Tìm token span mà offset nằm trong khoảng trigger word
+        start_token_idx = end_token_idx = None
+        for i, (s, e) in valid_offsets:
+            if s <= start_char < e:
+                start_token_idx = i
+            if s < end_char <= e:
+                end_token_idx = i
+            if start_token_idx is not None and end_token_idx is not None:
+                break
+
+        if start_token_idx is not None and end_token_idx is not None:
+            span.append((start_token_idx, end_token_idx))
         else:
             raise ValueError(f"Span for trigger word '{trigger_word}' not found in offsets mapping | text: {item['text']}")
 
-    
     final_item = item | {
         'piece_ids': piece_ids,
         'span': span
     }
-    
     return final_item
-
 
 
 def sent2ids_batch(list_sent:list)->list:
