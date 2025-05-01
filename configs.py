@@ -23,6 +23,8 @@ def parse_arguments():
     parser.add_argument('--classifier_layer', default=1, type=int, help="Number of classifier layers")
     parser.add_argument('--hidden_dim', default=128, type=int, help="Hidden dimension of classifier")
     parser.add_argument('--dropout', default=0.1, type=float, help="Dropout rate")
+    parser.add_argument("--use_lora", action="store_true", help="Enable LoRA adaptation")
+
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)

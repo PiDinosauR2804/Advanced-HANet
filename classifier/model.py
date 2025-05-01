@@ -1,10 +1,9 @@
 import torch
 from transformers import BertModel
 import torch.nn as nn
-import torch.nn.functional as F
 from configs import parse_arguments
-from torch.nn.utils.rnn import unpad_sequence
-from random import shuffle
+from peft import get_peft_model, LoraConfig, TaskType
+
 
 args = parse_arguments()
 device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
@@ -85,6 +84,24 @@ class BertED(nn.Module):
                 nn.ReLU(),
             )
             self.fc = nn.Linear(self.map_hidden_dim, class_num)
+            
+        if args.use_lora:
+            print("Apply LoRA to backbone encoder")
+            lora_config = LoraConfig(
+                r=8,
+                lora_alpha=16,
+                target_modules=["query", "value"],  # hoặc ["q_proj", "v_proj"] tùy mô hình
+                lora_dropout=0.1,
+                bias="none",
+                task_type=TaskType.SEQ_CLS  # hoặc TaskType.TOKEN_CLS nếu cần
+            )
+            self.backbone = get_peft_model(self.backbone, lora_config)
+            
+        print("Trainable parameters:")
+        for n, p in self.named_parameters():
+            if p.requires_grad:
+                print(n, p.shape)
+
 
     def forward(self, x, masks, span=None, aug=None):
         # x = self.backbone(x) #TODO: test use

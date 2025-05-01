@@ -173,14 +173,22 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
             #     valid_label = [label2idx[item] if item in label2idx else 0 for item in dt['label']]
                 # max_seqlen = 90
             max_seqlen = args.max_seqlen # 344, 249, 230, 186, 167
-            if len(token) >= max_seqlen + 2:
-                token_sep = token[-1]
-                token = token[:max_seqlen + 1] + [token_sep]
-                invalid_span = np.unique(np.nonzero(np.asarray(valid_span) > max_seqlen)[0])
-                invalid_span = invalid_span[::-1]
-                for invalid_idx in invalid_span:
-                    valid_span.pop(invalid_idx)
-                    valid_label.pop(invalid_idx)
+            try:
+                if len(token) >= max_seqlen + 2:
+                    token_sep = token[-1]
+                    token = token[:max_seqlen + 1] + [token_sep]
+                    invalid_span = np.unique(np.nonzero(np.asarray(valid_span) > max_seqlen)[0])
+                    invalid_span = invalid_span[::-1]
+                    for invalid_idx in invalid_span:
+                        valid_span.pop(invalid_idx)
+                        valid_label.pop(invalid_idx)
+            except Exception as e:
+                print(f"Error in labels: {labels}")
+                print(f"Error in dt labels: {dt['label']}")
+                print(f"Error in add labels: {add_label}")
+                raise e
+            
+            
             if len(token) < max_seqlen + 2:
                 token = token + [0] * (max_seqlen + 2 - len(token))
             token_mask = [1 if tkn != 0 else 0 for tkn in token]
