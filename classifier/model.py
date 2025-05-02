@@ -79,7 +79,14 @@ class BertED(nn.Module):
                 task_type=TaskType.SEQ_CLS
             )
             self.backbone = get_peft_model(self.backbone, self.peft_config)
-            self.backbone.freeze_base_model()
+            try:
+                self.backbone.freeze_base_model()
+            except:
+                for name, param in self.backbone.named_parameters():
+                    if 'lora_' not in name:
+                        param.requires_grad = False
+                        
+                        
             self.backbone.print_trainable_parameters()
             
         # MoLE setup
@@ -95,7 +102,12 @@ class BertED(nn.Module):
             )
             
             self.backbone = get_peft_model(self.backbone, self.peft_config)
-            self.backbone.freeze_base_model()
+            try:
+                self.backbone.freeze_base_model()
+            except:
+                for name, param in self.backbone.named_parameters():
+                    if 'lora_' not in name:
+                        param.requires_grad = False
             
             for i in range(self.num_experts):
                 adapter_name = f"expert_{i}"
