@@ -23,7 +23,7 @@ do
 
                     python classifier/train.py \
                         --data-root ./data/data_ids \
-                        --dataset ACE \
+                        --dataset MAVEN \
                         --backbone bert-base-uncased \
                         --lr 2e-5 \
                         --decay 1e-4 \
@@ -38,7 +38,7 @@ do
                         --rep-aug mean \
                         --distill $n \
                         --epoch 30 \
-                        --class-num 10 \
+                        --class-num 20 \
                         --single-label \
                         --cl-aug shuffle \
                         --aug-repeat-times 5 \
