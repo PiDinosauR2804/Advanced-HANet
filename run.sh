@@ -1,5 +1,5 @@
 python classifier/train.py \
-  --data-root ./data/data_ids \
+  --data-root ./data/data_ids_aug \
   --dataset MAVEN \
   --backbone bert-base-uncased \
   --lr 2e-5 \
