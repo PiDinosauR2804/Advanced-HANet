@@ -711,7 +711,7 @@ def train(local_rank, args):
             # writer.add_scalar(f'stage{stage}/loss/loss_pd', loss_pd, bt + ep * len(stage_loader))
             # writer.add_scalar(f'stage{stage}/loss/loss_all', loss, bt + ep * len(stage_loader))
 
-            if ((ep + 1) % args.eval_freq == 0 and args.early_stop) or (ep + 1) == args.epochs: # TODO TODO
+            if ((ep + 1) % args.eval_freq == 0 and args.early_stop) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
                 logger.info("Evaluation process")
                 model.eval()
