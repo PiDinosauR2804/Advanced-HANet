@@ -23,4 +23,7 @@
     --sub-max \
     --cl_temp 0.07 \
     --ucl \
-    --skip-first-cl ucl+tlcl
+    --skip-first-cl ucl+tlcl \
+    --use_description \
+    --num_description 3 \
+    --ratio_loss_des_cl 0.1     

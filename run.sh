@@ -26,5 +26,5 @@
   --ucl \
   --skip-first-cl ucl+tlcl \
   --use_description \
-  --num_description 3 \      
+  --num_description 3 \
   --ratio_loss_des_cl 0.1     
