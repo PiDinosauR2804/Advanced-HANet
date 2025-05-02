@@ -18,6 +18,7 @@ def parse_arguments():
     parser.add_argument('--gen_des', action='store_true')
     
     # Args of QuangNM
+    parser.add_argument('--task_ep_time', default=1, type=int, help="Number of time of epoch for each task compared to base task")
     parser.add_argument('--freeze_embedding_layer', action='store_true')
     parser.add_argument('--freeze_encoder_layers', default=0, type=int, help="Number of encoder layers to freeze")
     parser.add_argument('--classifier_layer', default=1, type=int, help="Number of classifier layers")

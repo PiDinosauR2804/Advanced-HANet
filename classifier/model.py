@@ -89,12 +89,13 @@ class BertED(nn.Module):
                     if 'lora_' not in name:
                         param.requires_grad = False
                         
-                        
             self.backbone.print_trainable_parameters()
+                        
             
         # MoLE setup
         elif args.use_mole:
             print("Apply MoLE with shared backbone + multiple LoRA experts")
+            print(f"num_experts: {self.num_experts}, top_k: {self.top_k}")
             self.peft_config = LoraConfig(
                 r=args.lora_rank,
                 lora_alpha=args.lora_alpha,
@@ -118,6 +119,8 @@ class BertED(nn.Module):
 
             self.expert_keys = nn.Parameter(torch.randn(self.num_experts, self.input_dim))  # Learnable keys for gating
             self.softmax = nn.Softmax(dim=-1)
+            
+            self.backbone.print_trainable_parameters()
 
         print("Trainable parameters:")
         for n, p in self.named_parameters():

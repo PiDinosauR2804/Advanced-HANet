@@ -282,7 +282,8 @@ def train(local_rank, args):
         
         dev_score = None
         no_better = 0
-        for ep in range(args.epochs):
+        num_epochs = args.epochs * (args.task_ep_time if state > 0 else 1)
+        for ep in range(num_epochs):
             if stage == 0 and args.skip_first:
                 continue
             # logger.info('-' * 100)
