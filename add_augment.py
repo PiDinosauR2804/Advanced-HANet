@@ -1,5 +1,7 @@
 import os
 import json
+from loguru import logger
+
 augment_path = 'Advanced-HANet//output//data_augment//des4'
 train_path = 'Advanced-HANet//data//data_ids'
 output_path = 'Advanced-HANet//data//data_ids_aug'
@@ -13,20 +15,20 @@ NUM_PERM = 5
 def add_augment_data(input_path, original_path, output_path, dataset):
     for dataset in datasets:
         if not os.path.exists(os.path.join(train_path, dataset)):
-            print(f"Train folder {os.path.join(train_path, dataset)} does not exist.")
+            logger.info(f"Train folder {os.path.join(train_path, dataset)} does not exist.")
             continue
         if not os.path.exists(os.path.join(augment_path, dataset)):
-            print(f"Augment folder {os.path.join(augment_path, dataset)} does not exist.")
+            logger.info(f"Augment folder {os.path.join(augment_path, dataset)} does not exist.")
             continue
         for i in range(NUM_PERM):
             input_folder = os.path.join(augment_path, dataset, 'perm'+str(i))
             if not os.path.exists(input_folder):
-                print(f"Input folder {input_folder} does not exist.")
+                logger.info(f"Input folder {input_folder} does not exist.")
                 continue
 
             original_folder = os.path.join(train_path, dataset, 'perm'+str(i))
             if not os.path.exists(original_folder):
-                print(f"Original folder {original_folder} does not exist.")
+                logger.info(f"Original folder {original_folder} does not exist.")
                 continue
 
             output_folder = os.path.join(output_path, dataset, 'perm'+str(i))
@@ -38,7 +40,7 @@ def add_augment_data(input_path, original_path, output_path, dataset):
                 input_file = os.path.join(input_folder, file_name)
                 original_file = os.path.join(original_folder, file_name)
                 output_file = os.path.join(output_folder, file_name)
-                print(f"[START] Processing {file_name} in {output_file}")
+                logger.info(f"[START] Processing {file_name} in {output_file}")
                 aug_data = []
                 original_data = []
                 
@@ -60,8 +62,8 @@ def add_augment_data(input_path, original_path, output_path, dataset):
                             if key in aug_data[i]:
                                 new_data[key].extend(aug_data[i][key])
                         f.write(json.dumps(new_data) + '\n')
-                print(f"[END] Processing {file_name} in {output_file}")
+                logger.info(f"[END] Processing {file_name} in {output_file}")
 
 if __name__ == "__main__":
     add_augment_data(augment_path, train_path, output_path, datasets)
-    print("Add augment data done.")
+    logger.info("Add augment data done.")
