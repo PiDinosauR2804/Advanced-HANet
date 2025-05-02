@@ -48,6 +48,8 @@ class BertED(nn.Module):
         self.input_dim = self.backbone.config.hidden_size
         self.num_experts = args.mole_num_experts
         self.top_k = args.mole_top_k
+        self.use_mole = args.use_mole
+        self.use_lora = args.use_lora
 
         if args.classifier_layer > 1:
             self.hidden_dim = args.hidden_dim
@@ -125,44 +127,72 @@ class BertED(nn.Module):
     def forward(self, x, masks, span=None, aug=None):
         return_dict = {}
 
-        # Get CLS embedding from shared BERT without any adapter (base)
+        if not self.use_mole:
+            # Forward thông thường không MoLE
+            out = self.backbone(x, attention_mask=masks)
+            x = out.last_hidden_state  # (batch_size, seq_len, hidden_size)
+            return_dict['reps'] = x[:, 0, :].clone()
+
+            context_feature = x.view(-1, x.shape[-1])
+            return_dict['context_feat'] = context_feature
+
+            if span is not None:
+                trig_feature = []
+                for i in range(len(span)):
+                    if self.is_input_mapping:
+                        x_cdt = torch.stack([torch.index_select(x[i], 0, span[i][:, j]) for j in range(span[i].size(-1))])
+                        x_cdt = x_cdt.permute(1, 0, 2)
+                        x_cdt = x_cdt.contiguous().view(x_cdt.size(0), x_cdt.size(-1) * 2)
+                        opt = self.input_map(x_cdt)
+                    else:
+                        opt = torch.index_select(x[i], 0, span[i][:, 0]) + torch.index_select(x[i], 0, span[i][:, 1])
+                    trig_feature.append(opt)
+
+                trig_feature = torch.cat(trig_feature)
+                return_dict['trig_feat'] = trig_feature
+                outputs = self.fc(trig_feature)
+                return_dict['outputs'] = outputs
+
+                if aug is not None:
+                    feature_aug = trig_feature + torch.randn_like(trig_feature) * aug
+                    outputs_aug = self.fc(feature_aug)
+                    return_dict['feature_aug'] = feature_aug
+                    return_dict['outputs_aug'] = outputs_aug
+
+            return return_dict
+
+        # === MoLE Forward ===
         with torch.no_grad():
             base_output = self.backbone.base_model(x, attention_mask=masks)
             cls_embedding = base_output.last_hidden_state[:, 0, :]
 
-        # Compute gating scores
-        gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (batch_size, num_experts)
-        gating_weights = self.softmax(gating_logits)  # (batch_size, num_experts)
+        gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)
+        gating_weights = self.softmax(gating_logits)
 
-        # Get top-k experts
-        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (batch_size, k)
+        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)
 
-        # Run top-k experts separately and combine
         final_hidden_states = []
 
         for b in range(x.size(0)):
-            outputs_b = []
-            weights_b = topk_weights[b]  # (k,)
-            indices_b = topk_indices[b]  # (k,)
+            weights_b = topk_weights[b]
+            indices_b = topk_indices[b]
 
             expert_outputs = []
             for i, expert_idx in enumerate(indices_b):
                 expert_name = f"expert_{expert_idx.item()}"
                 self.backbone.set_adapter(expert_name)
                 out = self.backbone(x[b:b+1], attention_mask=masks[b:b+1])
-                expert_outputs.append(out.last_hidden_state)  # (1, seq_len, hidden_size)
+                expert_outputs.append(out.last_hidden_state)
 
-            expert_outputs = torch.stack(expert_outputs)  # (k, 1, seq_len, hidden_size)
-            weighted_output = torch.sum(weights_b.view(-1, 1, 1, 1) * expert_outputs, dim=0)  # (1, seq_len, hidden_size)
+            expert_outputs = torch.stack(expert_outputs)
+            weighted_output = torch.sum(weights_b.view(-1, 1, 1, 1) * expert_outputs, dim=0)
             final_hidden_states.append(weighted_output)
 
-        x = torch.cat(final_hidden_states, dim=0)  # (batch_size, seq_len, hidden_size)
+        x = torch.cat(final_hidden_states, dim=0)
         return_dict['reps'] = x[:, 0, :].clone()
-
         context_feature = x.view(-1, x.shape[-1])
         return_dict['context_feat'] = context_feature
 
-        # handle span
         if span is not None:
             trig_feature = []
             for i in range(len(span)):
@@ -175,7 +205,7 @@ class BertED(nn.Module):
                     opt = torch.index_select(x[i], 0, span[i][:, 0]) + torch.index_select(x[i], 0, span[i][:, 1])
                 trig_feature.append(opt)
 
-            trig_feature = torch.cat(trig_feature)  # (sum of len(label), hidden_size)
+            trig_feature = torch.cat(trig_feature)
             return_dict['trig_feat'] = trig_feature
             outputs = self.fc(trig_feature)
             return_dict['outputs'] = outputs
