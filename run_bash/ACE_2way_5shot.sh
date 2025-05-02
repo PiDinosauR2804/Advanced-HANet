@@ -13,15 +13,14 @@
     --log-name ashuffle_lnone_r1 \
     --dweight_loss \
     --rep-aug mean \
-    --distill fd \
+    --distill pd \
     --epoch 30 \
     --class-num 10 \
     --single-label \
     --cl-aug shuffle \
     --aug-repeat-times 5 \
-    --joint-da-loss none \
+    --joint-da-loss ce \
     --sub-max \
     --cl_temp 0.07 \
-    --tlcl \
     --ucl \
     --skip-first-cl ucl+tlcl
