@@ -76,9 +76,10 @@ class BertED(nn.Module):
                 target_modules=["query", "value"],
                 lora_dropout=args.lora_dropout,
                 bias="none",
-                task_type=TaskType.SEQ_CLS
+                task_type=TaskType.FEATURE_EXTRACTION
             )
             self.backbone = get_peft_model(self.backbone, self.peft_config)
+            print(f"type(self.backbone): {type(self.backbone)}")
             try:
                 self.backbone.freeze_base_model()
             except:
@@ -98,7 +99,7 @@ class BertED(nn.Module):
                 target_modules=["query", "value"],
                 lora_dropout=args.lora_dropout,
                 bias="none",
-                task_type=TaskType.SEQ_CLS
+                task_type=TaskType.FEATURE_EXTRACTION
             )
             
             self.backbone = get_peft_model(self.backbone, self.peft_config)
