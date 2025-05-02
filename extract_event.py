@@ -8,7 +8,7 @@ import os
 import time
 import queue
 from loguru import logger
-from tqdm import tqdm
+from tqdm.auto import tqdm
 
 def get_lines_from_results(results:list)->list:
     # Convert results to a list of lines

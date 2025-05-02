@@ -1,113 +1,55 @@
+from classifier.model import BertED
+from classifier.exemplars import Exemplars
+from configs import parse_arguments
+from utils.dataloader import (
+    collect_dataset, collect_exemplar_dataset, 
+    collect_sldataset, collect_from_json, 
+    collate_description, MAVEN_Dataset,
+    DescriptionDataset, collect_eval_sldataset
+)
+from utils.computeLoss import compute_CLLoss
+from utils.tools import contrastive_loss_des, find_negative_labels
+from utils.calcs import Calculator
+
+import os
+import time
+from datetime import datetime
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import os, time, sys, json
-from datetime import datetime
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from torch.utils.data import DataLoader
 from torch.nn.functional import normalize
 from torch.optim import AdamW
-from utils import *
-from configs import parse_arguments
-from model import BertED
-# from tqdm import tqdm
-from exemplars import Exemplars
 from copy import deepcopy
 from torch.utils.tensorboard import SummaryWriter   
-import logging
 import torch.distributed as dist
 import torch.multiprocessing as mp
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
 import wandb
-import re
-from tqdm.notebook import tqdm
-
-wandb.login()
-
-class Logger(object):
-    def __init__(self, filename):
-        self.terminal = sys.stdout
-        self.log = open(filename, "w")
-        self.last_tqdm = ""  # để lưu lại trạng thái cuối của tqdm
-        self.tqdm_pattern = re.compile(r'^\r.*')  # dòng bắt đầu bằng \r (tqdm update)
-
-    def write(self, message):
-        # Nếu là dòng cập nhật tqdm thì lưu lại nhưng không ghi vào file
-        if self.tqdm_pattern.match(message):
-            self.last_tqdm = message.strip()  # lưu lại dòng cuối
-        else:
-            self.terminal.write(message)
-            self.log.write(message)
-            self.log.flush()
-
-    def flush(self):
-        self.terminal.flush()
-        self.log.flush()
-
-    def close(self):
-        # Khi kết thúc, ghi trạng thái cuối cùng của tqdm vào log
-        if self.last_tqdm:
-            self.log.write(f"{self.last_tqdm}\n")
-            self.log.flush()
-        self.log.close()
+from loguru import logger
+from tqdm.auto import tqdm
+import optuna
 
 # PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
-
 # PERM_10 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]
 
 tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 
-def train(local_rank, args):
+def train(local_rank, args, trial=None):
+    # set the random seed for reproducibility
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
-    formatter = logging.Formatter(
-            "[%(asctime)s]-[%(filename)s line:%(lineno)d]:%(message)s "
-        )
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.INFO)
-    ch.setFormatter(formatter)
-    logger.addHandler(ch)
-    cur_time = time.strftime('%Y-%m-%d-%H-%M-%S')
-    if args.log:
-        if not os.path.exists(os.path.join(args.tb_dir, args.dataset, args.joint_da_loss, str(args.class_num) + "class", str(args.shot_num) + "shot", args.cl_aug, args.log_name, "perm" + str(args.perm_id))):
-            os.makedirs(os.path.join(args.tb_dir, args.dataset, args.joint_da_loss, str(args.class_num) + "class", str(args.shot_num) + "shot", args.cl_aug, args.log_name, "perm" + str(args.perm_id)))
-        if not os.path.exists(os.path.join(args.log_dir, args.dataset, args.joint_da_loss, str(args.class_num) + "class", str(args.shot_num) + "shot", args.cl_aug, args.log_name, "perm" + str(args.perm_id))):
-            os.makedirs(os.path.join(args.log_dir, args.dataset, args.joint_da_loss, str(args.class_num) + "class", str(args.shot_num) + "shot", args.cl_aug, args.log_name, "perm" + str(args.perm_id)))
-        writer = SummaryWriter(os.path.join(args.tb_dir, args.dataset, args.joint_da_loss, str(args.class_num) + "class", str(args.shot_num) + "shot", args.cl_aug, args.log_name, "perm" + str(args.perm_id), cur_time))
-        fh = logging.FileHandler(os.path.join(args.log_dir, args.dataset, args.joint_da_loss, str(args.class_num) + "class", str(args.shot_num) + "shot", args.cl_aug, args.log_name, "perm" + str(args.perm_id), cur_time + '.log'), mode='a')
-        fh.setLevel(logging.INFO)
-        fh.setFormatter(formatter)
-        logger.addHandler(fh)
-    for arg in vars(args):
-        logger.info('{}={}'.format(arg.upper(), getattr(args, arg)))
-    logger.info('')
+    # set device, whether to use cuda or cpu
+    device = torch.device(args.device if args.device != "cpu" and torch.cuda.is_available() else "cpu")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
-    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{args.cl_aug}_{args.joint_da_loss}_{args.skip_first_cl}_{timestamp}"    
-    
-    # Cấu hình logging
-    log_dir = "log_result"
-    os.makedirs(log_dir, exist_ok=True)  # Tạo thư mục nếu chưa tồn tại
-    log_filename = os.path.join(log_dir, f"{args.run_name}_log.txt")
-    
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        handlers=[
-            logging.FileHandler(log_filename, mode="w"),  # Ghi vào file
-            logging.StreamHandler(sys.stdout)  # Hiển thị trên terminal
-        ]
-    )
-    
-    # Ghi cả print() vào file log
-    sys.stdout = Logger(log_filename)
-    sys.stderr = sys.stdout  # Để ghi cả lỗi vào file
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{args.cl_aug}_{args.joint_da_loss}_{args.skip_first_cl}_{timestamp}"
+
+    # get streams from json file and permute them in pre-defined order
+    # PERM = PERM_5 if args.task_num == 5 else PERM_10
     
     wandb.init(
         # set the wandb project where this run will be logged
@@ -118,17 +60,11 @@ def train(local_rank, args):
         config=args.__dict__,
     )
     
-    # set device, whether to use cuda or cpu
-    device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
-    # get streams from json file and permute them in pre-defined order
-    # PERM = PERM_5 if args.task_num == 5 else PERM_10
-    
     # Đọc dữ liệu
     streams = collect_from_json(args.dataset, args.stream_root, 'stream')
     # streams = [streams[l] for l in PERM[int(args.perm_id)]] # permute the stream
     label2idx = {0:0}
     idx2label = {}
-    
     
     for st in streams:
         for lb in st:
@@ -141,7 +77,6 @@ def train(local_rank, args):
     streams_indexed = [[label2idx[l] for l in st] for st in streams]
     
     # streams_indexed có dạng [[4, 5, 9, 11], [2, 1, 8, 33], ...] thể hiện thứ tự label class được học
-    
     
     model = BertED(args.class_num+1, args.input_map) # define model
     model.to(device)
@@ -199,8 +134,7 @@ def train(local_rank, args):
     for stage in task_idx:
         # if stage > 0:
         #     break
-        logger.info(f"Stage {stage}")
-        logger.info(f'Loading train instances for stage {stage}')
+        logger.info(f"==================== Stage {stage} ====================")
         
         # stage = 1 # TODO: test use
         # exemplars = Exemplars() # TODO: test use
@@ -223,8 +157,6 @@ def train(local_rank, args):
                 batch_size=args.batch_size,
                 # batch_size=args.shot_num + int(args.class_num / args.shot_num),
                 collate_fn= lambda x:x)
-            
-        
             
         stage_loader = org_loader
         if stage > 0:
@@ -270,8 +202,6 @@ def train(local_rank, args):
         logger.info(f'Previous learned types: {prev_learned_types}')
         
         labels_all_learned_types = [idx2label[x] for x in learned_types]
-
-        
         
         description_stage_loader = DataLoader(
             DescriptionDataset(args, tokenizer, labels_all_learned_types),
@@ -282,17 +212,19 @@ def train(local_rank, args):
         
         dev_score = None
         no_better = 0
-        num_epochs = args.epochs * (args.task_ep_time if stage > 0 else 1)
-        for ep in range(num_epochs):
+        num_epochs = int(args.epochs * (args.task_ep_time if stage > 0 else 1))
+        
+        logger.info("Start training ...")
+        for ep in tqdm(range(num_epochs), desc="Epoch"):
             if stage == 0 and args.skip_first:
                 continue
-            # logger.info('-' * 100)
-            # logger.info(f"Stage {stage}: Epoch {ep}")
-            # logger.info("Training process")
-            # model.train()
-            # logger.info("Training batch:")
+            
+            model.train()
+            
+            wandb.log({"epoch": ep + 1 + args.epochs * stage, "stage": stage})
+            
             iter_cnt = 0
-            for bt, batch in enumerate(tqdm(stage_loader)):
+            for batch in stage_loader:
                 iter_cnt += 1
                 optimizer.zero_grad()
                 # if args.single_label:
@@ -674,42 +606,24 @@ def train(local_rank, args):
                 loss.backward()
                 optimizer.step() 
                 wandb.log({
-                            f"loss_ce_task_{stage}": loss_ce,
-                            f"loss_ucl_{stage}": loss_ucl,
-                            f"loss_tlcl_{stage}": loss_tlcl,
-                            f"loss_des_cl_{stage}": loss_des_cl,
-                            f"loss_aug_{stage}": loss_aug,
-                            f"loss_fd_{stage}": loss_fd,
-                            f"loss_pd_{stage}": loss_pd,
-                            f"loss_all_{stage}": loss,
+                            # f"loss_ce_task_{stage}": loss_ce,
+                            # f"loss_ucl_{stage}": loss_ucl,
+                            # f"loss_tlcl_{stage}": loss_tlcl,
+                            # f"loss_des_cl_{stage}": loss_des_cl,
+                            # f"loss_aug_{stage}": loss_aug,
+                            # f"loss_fd_{stage}": loss_fd,
+                            # f"loss_pd_{stage}": loss_pd,
+                            # f"loss_all_{stage}": loss,
                             
                             f"loss_ce_task": loss_ce,
-                            f"loss_ucl": loss_ucl,
-                            f"loss_tlcl": loss_tlcl,
-                            f"loss_des_cl": loss_des_cl,
-                            f"loss_aug": loss_aug,
-                            f"loss_fd": loss_fd,
-                            f"loss_pd": loss_pd,
+                            # f"loss_ucl": loss_ucl,
+                            # f"loss_tlcl": loss_tlcl,
+                            # f"loss_des_cl": loss_des_cl,
+                            # f"loss_aug": loss_aug,
+                            # f"loss_fd": loss_fd,
+                            # f"loss_pd": loss_pd,
                             f"loss_all": loss,
                         })
-                
-            # logger.info(f'loss_ce: {loss_ce}')
-            # logger.info(f'loss_ucl: {loss_ucl}')
-            # logger.info(f'loss_tlcl: {loss_tlcl}')
-            # logger.info(f'loss_des_cl: {loss_des_cl}')
-            # # logger.info(f'loss_ecl: {loss_ecl}')
-            # logger.info(f'loss_aug: {loss_aug}')
-            # logger.info(f'loss_fd: {loss_fd}')
-            # logger.info(f'loss_pd: {loss_pd}')
-            # logger.info(f'loss_all: {loss}')
-            # writer.add_scalar(f'stage{stage}/loss/loss_ce', loss_ce, bt + ep * len(stage_loader))
-            # writer.add_scalar(f'stage{stage}/loss/loss_ucl', loss_ucl, bt + ep * len(stage_loader))
-            # writer.add_scalar(f'stage{stage}/loss/loss_tlcl', loss_tlcl, bt + ep * len(stage_loader))
-            # # writer.add_scalar(f'stage{stage}/loss/loss_ecl', loss_ecl, bt + ep * len(stage_loader))
-            # writer.add_scalar(f'stage{stage}/loss/loss_aug', loss_aug, bt + ep * len(stage_loader))
-            # writer.add_scalar(f'stage{stage}/loss/loss_fd', loss_fd, bt + ep * len(stage_loader))
-            # writer.add_scalar(f'stage{stage}/loss/loss_pd', loss_pd, bt + ep * len(stage_loader))
-            # writer.add_scalar(f'stage{stage}/loss/loss_all', loss, bt + ep * len(stage_loader))
 
             if ((ep + 1) % args.eval_freq == 0 and args.early_stop) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
@@ -780,6 +694,7 @@ def train(local_rank, args):
             state = {'model':model.state_dict(), 'optimizer':optimizer.state_dict(), 'stage':stage + 1, 
                             'labels':labels, 'learned_types':learned_types, 'prev_learned_types':prev_learned_types}
             save_pth = os.path.join(args.save_dir, "perm" + str(args.perm_id))
+            cur_time = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
             save_name = f"stage_{save_stage}_{cur_time}.pth"
             if not os.path.exists(save_pth):
                 os.makedirs(save_pth)
@@ -790,6 +705,27 @@ def train(local_rank, args):
 
 if __name__ == "__main__":
     args = parse_arguments()
+    logs_dir = args.logs_dir
+    
+    # Configure logging
+    os.makedirs(logs_dir, exist_ok=True)
+    # --- Xoá handler mặc định ---
+    logger.remove()
+    # --- Thêm handler ghi log ra file ---
+    date_str = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
+    logger.add(os.path.join(logs_dir, f"{date_str}.log"), rotation="1 MB", retention="10 days", enqueue=True, level="INFO")
+    # --- Thêm handler ghi log qua tqdm.write ---
+    # Ghi log ra console qua tqdm.write + có màu
+    logger.level("CRITICAL", color="<bg red><white>")
+    logger.add(
+        lambda msg: tqdm.write(msg, end=""),
+        level="DEBUG",
+        colorize=True,
+        format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{file: >18}: {line: <4}</cyan> - <level>{message}</level>",
+    )
+    
+    wandb.login()
+        
     if args.parallel == 'DDP':
         os.environ["MASTER_ADDR"] = "localhost"
         os.environ["MASTER_PORT"] = "29500"
@@ -800,3 +736,4 @@ if __name__ == "__main__":
     else:
         train(0, args)
         
+    wandb.finish()
