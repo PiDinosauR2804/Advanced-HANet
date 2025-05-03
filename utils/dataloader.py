@@ -1,4 +1,4 @@
-from tqdm import tqdm
+from tqdm.auto import tqdm
 import torch
 from torch.utils.data import Dataset
 from configs import parse_arguments

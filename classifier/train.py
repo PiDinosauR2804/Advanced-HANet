@@ -688,8 +688,8 @@ def train(local_rank, args, trial=None):
                     
                     
                     logger.info(f'marco F1 {micro_F1}')
-                    dev_scores_ls.append(micro_F1)
-                    logger.info(f"Dev scores list: {dev_scores_ls}")
+                    # dev_scores_ls.append(micro_F1)
+                    # logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
                     
                     # report to optuna
@@ -704,8 +704,22 @@ def train(local_rank, args, trial=None):
                             logger.info(f'No better: {no_better}/{args.patience}')
                         if no_better >= args.patience:
                             logger.info("Early stopping with dev_score: " + str(dev_score))
-                            
+                            model.load_state_dict(torch.load(e_pth))
+                            dev_scores_ls.append(dev_score)
+                            logger.info(f"Dev scores list: {dev_scores_ls}")
                             break
+                    
+                    if ep + 1 == num_epochs:
+                        if args.early_stop:
+                            logger.info("Early stopping with dev_score: " + str(dev_score))
+                            model.load_state_dict(torch.load(e_pth))
+                            dev_scores_ls.append(dev_score)
+                            logger.info(f"Dev scores list: {dev_scores_ls}")
+                        else:
+                            logger.info("Final model with dev_score: " + str(micro_F1))
+                            model.load_state_dict(torch.load(e_pth))
+                            dev_scores_ls.append(micro_F1)
+                            logger.info(f"Dev scores list: {dev_scores_ls}")
                     
                     if trial is not None:
                         trial.report(micro_F1, ep + 1 + args.epochs * stage)
@@ -716,20 +730,20 @@ def train(local_rank, args, trial=None):
         for tp in streams_indexed[stage]:
             if not tp == 0:
                 labels.pop(labels.index(tp))
-        # save_stage = stage
-    if args.save_dir and local_rank == 0:
-        state = {'model':model.state_dict(), 'optimizer':optimizer.state_dict(), 'stage':5, 
-                        'labels':labels, 'learned_types':learned_types, 'prev_learned_types':prev_learned_types}
-        save_pth = os.path.join(args.save_dir, "perm" + str(args.perm_id))
-        cur_time = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
-        save_name = f"stage_{5}_{cur_time}.pth"
-        if not os.path.exists(save_pth):
-            os.makedirs(save_pth)
-        logger.info(f'state_dict saved to: {os.path.join(save_pth, save_name)}')
-        torch.save(state, os.path.join(save_pth, save_name))
-        os.remove(e_pth)
-    
-    logger.info(f"Best dev score: {dev_score}")
-    logger.info(f"Best model saved to: {os.path.join(save_pth, save_name)}")
+                
+        if args.save_dir and local_rank == 0:
+            save_stage = stage + 1
+            state = {'model':model.state_dict(), 'optimizer':optimizer.state_dict(), 'stage':save_stage, 
+                            'labels':labels, 'learned_types':learned_types, 'prev_learned_types':prev_learned_types}
+            save_pth = os.path.join(args.save_dir, "perm" + str(args.perm_id))
+            cur_time = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
+            save_name = f"stage_{save_stage}_{cur_time}.pth"
+            if not os.path.exists(save_pth):
+                os.makedirs(save_pth)
+            logger.info(f'state_dict saved to: {os.path.join(save_pth, save_name)}')
+            torch.save(state, os.path.join(save_pth, save_name))
+            os.remove(e_pth)
+            logger.info(f"Best model saved to {save_pth}")
+            
     
     wandb.finish()

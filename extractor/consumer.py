@@ -5,7 +5,7 @@ import time
 import threading
 import queue
 from loguru import logger
-from tqdm import tqdm
+from tqdm.auto import tqdm
 
 class Consumer:
     def __init__(self, task_queue:queue.Queue, num_try=3, max_consecutive_429_error=3, model='gemini-2.0-flash', 

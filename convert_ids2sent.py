@@ -1,6 +1,6 @@
 import json
 import pandas as pd
-from tqdm.notebook import tqdm
+from tqdm.auto import tqdm
 import os
 from transformers import BertTokenizerFast
 
