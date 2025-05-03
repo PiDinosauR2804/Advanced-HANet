@@ -751,3 +751,5 @@ def train(local_rank, args, trial=None):
             
     
     wandb.finish()
+    
+    return np.mean(dev_scores_ls)
