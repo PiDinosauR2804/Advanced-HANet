@@ -729,20 +729,3 @@ def train(local_rank, args, trial=None):
     logger.info(f"Best model saved to: {os.path.join(save_pth, save_name)}")
     
     wandb.finish()
-    
-
-
-if __name__ == "__main__":
-    args = parse_arguments()
-    
-    wandb.login()
-        
-    if args.parallel == 'DDP':
-        os.environ["MASTER_ADDR"] = "localhost"
-        os.environ["MASTER_PORT"] = "29500"
-        mp.spawn(train,
-            args=(args, ),
-            nprocs=args.world_size,
-            join=True)
-    else:
-        train(0, args)

@@ -52,6 +52,7 @@ def objective(trial):
     return f1
 
 if __name__ == "__main__":
+    wandb.login()
     pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=10, interval_steps=1)
     study = optuna.create_study(direction="maximize", pruner=pruner)
     study.optimize(objective, n_trials=20)
