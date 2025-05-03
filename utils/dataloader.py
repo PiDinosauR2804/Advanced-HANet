@@ -77,9 +77,9 @@ class MAVEN_Dataset(Dataset):
 
 def collect_dataset(dataset, root, split, label2idx, stage_id, labels, args):
     if split == 'train':
-        data = [instance for t in collect_from_json(dataset, root, split)[stage_id] for instance in t]
+        data = [instance for t in collect_from_json(dataset, root, split, args)[stage_id] for instance in t]
     else:
-        data = collect_from_json(dataset, root, split)
+        data = collect_from_json(dataset, root, split, args)
     data_tokens, data_labels, data_masks, data_spans = [], [], [], []
     for dt in tqdm(data):
         # pop useless properties
@@ -142,7 +142,7 @@ def collect_dataset(dataset, root, split, label2idx, stage_id, labels, args):
 
 
 def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels, args):
-    data = [[instance for instance in t] for t in collect_from_json(dataset, root, split)[stage_id]]
+    data = [[instance for instance in t] for t in collect_from_json(dataset, root, split, args)[stage_id]]
     data_tokens, data_labels, data_masks, data_spans = [], [], [], []
     for idx, task_data in enumerate(tqdm(data)):
         for dt in task_data:
@@ -204,7 +204,7 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels, 
                 
 
 def collect_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
-    data = [[instance for instance in t] for t in collect_from_json(dataset, root, split)[stage_id]]
+    data = [[instance for instance in t] for t in collect_from_json(dataset, root, split, args)[stage_id]]
     data_tokens, data_labels, data_masks, data_spans = [], [], [], []
     for idx, task_data in enumerate(tqdm(data)):
         for dt in task_data:
@@ -260,7 +260,7 @@ def collect_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
         return MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans)
 
 def collect_eval_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
-    data = collect_from_json(dataset, root, split)
+    data = collect_from_json(dataset, root, split, args)
     data_tokens, data_labels, data_masks, data_spans = [], [], [], []
     for dt in tqdm(data):
         # pop useless properties
