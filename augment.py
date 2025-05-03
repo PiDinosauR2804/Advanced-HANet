@@ -9,7 +9,7 @@ output_path = 'Advanced-HANet\\output\\data_augment\\des4'
 datasets = ['MAVEN', 'ACE']
 NUM_PERM = 5
 
-def augment_data(line, num_descriptions=4)->list:
+def augment_data(line, num_descriptions=10)->list:
     augment_data_list = {}
     for key, value in line.items():
         key_id = int(key)
