@@ -151,6 +151,7 @@ def train(local_rank, args, trial=None):
         
     if args.early_stop:
         e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
+        os.makedirs(os.path.dirname(e_pth), exist_ok=True)
         
     # Xét từng task 
     for stage in task_idx:
