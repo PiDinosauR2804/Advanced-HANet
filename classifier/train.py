@@ -183,7 +183,7 @@ def train(local_rank, args, trial=None):
             
         stage_loader = org_loader
         if stage > 0:
-            if args.early_stop and no_better == args.patience:
+            if args.early_stop and no_better >= args.patience:
                 logger.info("Early stopping finished, loading stage: " + str(stage))
                 model.load_state_dict(torch.load(e_pth))
             prev_model = deepcopy(model) # TODO:test use
@@ -705,7 +705,6 @@ def train(local_rank, args, trial=None):
                             logger.info(f'No better: {no_better}/{args.patience}')
                         if no_better >= args.patience:
                             logger.info("Early stopping with dev_score: " + str(dev_score))
-                            model.load_state_dict(torch.load(e_pth))
                             dev_scores_ls.append(dev_score)
                             logger.info(f"Dev scores list: {dev_scores_ls}")
                             break
@@ -713,12 +712,10 @@ def train(local_rank, args, trial=None):
                     if ep + 1 == num_epochs:
                         if args.early_stop:
                             logger.info("Early stopping with dev_score: " + str(dev_score))
-                            model.load_state_dict(torch.load(e_pth))
                             dev_scores_ls.append(dev_score)
                             logger.info(f"Dev scores list: {dev_scores_ls}")
                         else:
                             logger.info("Final model with dev_score: " + str(micro_F1))
-                            model.load_state_dict(torch.load(e_pth))
                             dev_scores_ls.append(micro_F1)
                             logger.info(f"Dev scores list: {dev_scores_ls}")
                     
