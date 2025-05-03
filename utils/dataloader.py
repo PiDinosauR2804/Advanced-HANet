@@ -1,12 +1,8 @@
 from tqdm.auto import tqdm
-import torch
 from torch.utils.data import Dataset
-from configs import parse_arguments
 from utils.tools import collect_from_json
 import json
-
 import numpy as np
-args = parse_arguments()
 
 
 class DescriptionDataset(Dataset):
@@ -18,6 +14,7 @@ class DescriptionDataset(Dataset):
         self.data = []
         self.max_seqlen = args.max_seqlen
         self.num_description = args.num_description
+        self.args = args
         
         for key, value in data_description.items():
             if int(key) not in learned_types:
@@ -78,7 +75,7 @@ class MAVEN_Dataset(Dataset):
     #     batch = pad_sequence([torch.LongTensor(item) for item in batch[2]])
     #     pass
 
-def collect_dataset(dataset, root, split, label2idx, stage_id, labels):
+def collect_dataset(dataset, root, split, label2idx, stage_id, labels, args):
     if split == 'train':
         data = [instance for t in collect_from_json(dataset, root, split)[stage_id] for instance in t]
     else:
@@ -144,7 +141,7 @@ def collect_dataset(dataset, root, split, label2idx, stage_id, labels):
         return MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans)
 
 
-def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
+def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels, args):
     data = [[instance for instance in t] for t in collect_from_json(dataset, root, split)[stage_id]]
     data_tokens, data_labels, data_masks, data_spans = [], [], [], []
     for idx, task_data in enumerate(tqdm(data)):
@@ -206,7 +203,7 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
     return MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans)
                 
 
-def collect_sldataset(dataset, root, split, label2idx, stage_id, labels):
+def collect_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
     data = [[instance for instance in t] for t in collect_from_json(dataset, root, split)[stage_id]]
     data_tokens, data_labels, data_masks, data_spans = [], [], [], []
     for idx, task_data in enumerate(tqdm(data)):
@@ -262,7 +259,7 @@ def collect_sldataset(dataset, root, split, label2idx, stage_id, labels):
     else:
         return MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans)
 
-def collect_eval_sldataset(dataset, root, split, label2idx, stage_id, labels):
+def collect_eval_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
     data = collect_from_json(dataset, root, split)
     data_tokens, data_labels, data_masks, data_spans = [], [], [], []
     for dt in tqdm(data):

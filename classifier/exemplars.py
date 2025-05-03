@@ -3,11 +3,9 @@ import numpy as np
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
-from configs import parse_arguments
-args = parse_arguments()
 
 class Exemplars():
-    def __init__(self) -> None:
+    def __init__(self, args) -> None:
         # self.exemplars = {}
         self.learned_nums = 0
         self.memory_size = args.enum * self.learned_nums if args.fixed_enum else args.enum
@@ -16,7 +14,7 @@ class Exemplars():
         self.exemplars_y = []
         self.exemplars_span = []
         self.radius = {}
-
+        self.args = args
 
     def __len__(self):
         return self.memory_size
@@ -42,8 +40,8 @@ class Exemplars():
     # learned_nums: Số lượng class đã học
     def set_exemplars(self, model: nn.Module, exemplar_loader: DataLoader, learned_nums, device):
         self.learned_nums = learned_nums - 1 if learned_nums > 0 else 1
-        if args.fixed_enum: # args.fixed_enum: có hay không cố định số lượng sample mỗi class.
-            exemplar_num = args.enum    # args.enum: số lượng sample cố định mỗi class.
+        if self.args.fixed_enum: # args.fixed_enum: có hay không cố định số lượng sample mỗi class.
+            exemplar_num = self.args.enum    # args.enum: số lượng sample cố định mỗi class.
             self.memory_size = exemplar_num * self.learned_nums
         else:
             exemplar_num = int(self.memory_size / self.learned_nums)
@@ -58,7 +56,7 @@ class Exemplars():
                 # tensor_masks = torch.LongTensor(data_masks).to('cpu')
                 tensor_x = torch.LongTensor(data_x).to(device)
                 tensor_masks = torch.LongTensor(data_masks).to(device)
-                if args.parallel == 'DP':
+                if self.args.parallel == 'DP':
                     rep = model.module.forward_backbone(tensor_x, tensor_masks)
                 else:
                     rep = model.forward_backbone(tensor_x, tensor_masks)
@@ -124,4 +122,4 @@ class Exemplars():
         mask = [item for t in self.exemplars_mask for item in t]
         span = [item for t in self.exemplars_span for item in t]    
         dataset.extend(x, y, mask, span)
-        return DataLoader(dataset=dataset, batch_size=args.batch_size, shuffle=True, collate_fn=collate_fn, drop_last=False)
+        return DataLoader(dataset=dataset, batch_size=self.args.batch_size, shuffle=True, collate_fn=collate_fn, drop_last=False)

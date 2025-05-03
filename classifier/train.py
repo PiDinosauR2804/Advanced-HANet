@@ -83,7 +83,7 @@ def train(local_rank, args, trial=None):
     )
     
     # Đọc dữ liệu
-    streams = collect_from_json(args.dataset, args.stream_root, 'stream')
+    streams = collect_from_json(args.dataset, args.stream_root, 'stream', args)
     # streams = [streams[l] for l in PERM[int(args.perm_id)]] # permute the stream
     label2idx = {0:0}
     idx2label = {}
@@ -137,7 +137,7 @@ def train(local_rank, args, trial=None):
     dev_scores_ls = []
     
     # Tạo class dùng để lưu old sample từ task trước
-    exemplars = Exemplars() # TODO: 
+    exemplars = Exemplars(args) # TODO: 
     if args.cresume:
         logger.info(f"Resuming from {args.cresume}")
         state_dict = torch.load(args.cresume)
@@ -162,9 +162,9 @@ def train(local_rank, args, trial=None):
         # stage = 1 # TODO: test use
         # exemplars = Exemplars() # TODO: test use
         if args.single_label:
-            stream_dataset = collect_sldataset(args.dataset, args.data_root, 'train', label2idx, stage, streams[stage])
+            stream_dataset = collect_sldataset(args.dataset, args.data_root, 'train', label2idx, stage, streams[stage], args)
         else:
-            stream_dataset = collect_dataset(args.dataset, args.data_root, 'train', label2idx, stage, [i for item in streams[stage:] for i in item])
+            stream_dataset = collect_dataset(args.dataset, args.data_root, 'train', label2idx, stage, [i for item in streams[stage:] for i in item], args)
         if args.parallel == 'DDP':
             stream_sampler = DistributedSampler(stream_dataset, shuffle=True)
             org_loader = DataLoader(
@@ -196,7 +196,7 @@ def train(local_rank, args, trial=None):
             logger.info(f'Loading train instances without negative instances for stage {stage}')
             
             # Lấy ra các sample để học cho task hiện tại
-            exemplar_dataset = collect_exemplar_dataset(args.dataset, args.data_root, 'train', label2idx, stage-1, streams[stage-1])
+            exemplar_dataset = collect_exemplar_dataset(args.dataset, args.data_root, 'train', label2idx, stage-1, streams[stage-1], args)
             exemplar_loader = DataLoader(
                 dataset=exemplar_dataset,
                 batch_size=64,
@@ -660,9 +660,9 @@ def train(local_rank, args, trial=None):
                 model.eval()
                 with torch.no_grad():
                     if args.single_label:
-                        eval_dataset = collect_eval_sldataset(args.dataset, args.data_root, 'test', label2idx, None, [i for item in streams for i in item])
+                        eval_dataset = collect_eval_sldataset(args.dataset, args.data_root, 'test', label2idx, None, [i for item in streams for i in item], args)
                     else:
-                        eval_dataset = collect_dataset(args.dataset, args.data_root, 'test', label2idx, None, [i for item in streams for i in item])
+                        eval_dataset = collect_dataset(args.dataset, args.data_root, 'test', label2idx, None, [i for item in streams for i in item], args)
                     eval_loader = DataLoader(
                         dataset=eval_dataset,
                         shuffle=False,
