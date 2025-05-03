@@ -43,9 +43,9 @@ def objective(trial):
     # --patience 2 \
     args.task_ep_time = 2
     args.early_stop = True
-    args.skip_eval_ep = 30
-    args.eval_freq = 5
-    args.patience = 2
+    args.skip_eval_ep = 50
+    args.eval_freq = 10
+    args.patience = 3
     
     
 
