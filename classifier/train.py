@@ -30,7 +30,7 @@ from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
 import wandb
 from loguru import logger
-from tqdm import tqdm
+from tqdm.auto import tqdm
 import optuna
 
 # PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
@@ -401,7 +401,7 @@ def train(local_rank, args, trial=None):
                     
                     model.eval()
                     with torch.no_grad():
-                        for bt, description_batch in enumerate(tqdm(description_stage_loader)):
+                        for bt, description_batch in enumerate(description_stage_loader):
 
                             train_x_description, train_masks_description, keys = description_batch
                             train_x_description = torch.LongTensor(train_x_description).to(device)
@@ -658,7 +658,7 @@ def train(local_rank, args, trial=None):
                         batch_size=4,
                         collate_fn=lambda x:x)
                     calcs = Calculator()
-                    for batch in tqdm(eval_loader, desc="Eval Batch", leave=False):
+                    for batch in eval_loader:
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)

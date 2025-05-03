@@ -37,6 +37,7 @@ def objective(trial):
     args.use_description = True
     args.num_description = 3
     args.ratio_loss_des_cl = 0.1
+    args.eval_freq = 5
     
 
     # Tham số cho Optuna trial

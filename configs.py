@@ -57,7 +57,7 @@ def parse_arguments():
     parser.add_argument('--task-num', default=5, type=int)
     parser.add_argument('--early-stop', action='store_true')
     parser.add_argument('--patience', type=int, default=5)
-    parser.add_argument('--eval_freq', type=int, default=1)
+    parser.add_argument('--eval_freq', type=int, default=5)
 
     parser.add_argument('--input-map', action='store_true', help="Whether to use input mapping, if False, use span_s to predict trigger type")
     parser.add_argument('--class-num', type=int, default=10)
