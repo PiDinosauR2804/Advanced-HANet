@@ -235,7 +235,13 @@ def train(local_rank, args, trial=None):
         
         dev_score = None
         no_better = 0
-        num_epochs = int(args.epochs * (args.task_ep_time if stage > 0 else 1))
+
+        if stage > 0:
+            ep_time = args.task_ep_time
+        else:
+            ep_time = 1
+            
+        num_epochs = int(args.epochs * ep_time)
         
         logger.info("Start training ...")
         for ep in tqdm(range(num_epochs), desc="Epoch"):
@@ -648,7 +654,7 @@ def train(local_rank, args, trial=None):
                             f"loss_all": loss,
                         })
 
-            if ((ep + 1) % args.eval_freq == 0 and args.early_stop) or (ep + 1) == num_epochs: # TODO TODO
+            if ((ep + 1) % int(args.eval_freq*ep_time) == 0 and args.early_stop and (ep + 1) >= args.skip_eval_ep*ep_time) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
                 logger.info("Evaluation process ...")
                 model.eval()

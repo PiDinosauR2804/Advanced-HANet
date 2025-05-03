@@ -31,6 +31,8 @@ def parse_arguments():
     parser.add_argument("--lora_rank", type=int, default=8)
     parser.add_argument("--lora_alpha", type=int, default=32)
     parser.add_argument("--lora_dropout", type=float, default=0.1)
+    parser.add_argument("--skip_eval_ep", type=int, default=0, help="Skip evaluation for the first n epochs")
+    parser.add_argument("--task_ep", type=int, default=10, help="Number of epochs for each task")
 
     
     # Args for Classifier
