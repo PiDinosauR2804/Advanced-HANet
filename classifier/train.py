@@ -242,7 +242,7 @@ def train(local_rank, args, trial=None):
             wandb.log({"epoch": ep + 1 + args.epochs * stage, "stage": stage})
             
             iter_cnt = 0
-            for batch in tqdm(stage_loader, desc="Batch", leave=False):
+            for batch in stage_loader:
                 iter_cnt += 1
                 optimizer.zero_grad()
                 # if args.single_label:
