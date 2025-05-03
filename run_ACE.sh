@@ -26,18 +26,30 @@ do
                             --log-name a${k}_l${l}_r${i} \
                             --dweight_loss \
                             --rep-aug mean \
+<<<<<<< HEAD
                             --distill $n \
+=======
+                            --distill mul \
+>>>>>>> origin/ngoc_augment
                             --epoch 30 \
                             --class-num $m \
                             --single-label \
                             --cl-aug $k \
+<<<<<<< HEAD
                             --aug-repeat-times 5 \
+=======
+                            --aug-repeat-times $i \
+>>>>>>> origin/ngoc_augment
                             --joint-da-loss $l \
                             --sub-max \
                             --cl_temp 0.07 \
                             --tlcl \
                             --ucl \
+<<<<<<< HEAD
                             --skip-first-cl $i
+=======
+                            --skip-first-cl ucl+tlcl
+>>>>>>> origin/ngoc_augment
                     done
                 done
             done
