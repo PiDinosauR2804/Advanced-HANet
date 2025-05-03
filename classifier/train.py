@@ -38,7 +38,24 @@ import optuna
 
 tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 
-def train(local_rank, args, trial=None):
+def train(local_rank, args, trial=None):    
+    # Configure logging
+    os.makedirs(args.logs_dir, exist_ok=True)
+    # --- Xoá handler mặc định ---
+    logger.remove()
+    # --- Thêm handler ghi log ra file ---
+    date_str = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
+    logger.add(os.path.join(args.logs_dir, f"{date_str}.log"), rotation="1 MB", retention="10 days", enqueue=True, level="INFO")
+    # --- Thêm handler ghi log qua tqdm.write ---
+    # Ghi log ra console qua tqdm.write + có màu
+    logger.level("CRITICAL", color="<bg red><white>")
+    logger.add(
+        lambda msg: tqdm.write(msg, end=""),
+        level="DEBUG",
+        colorize=True,
+        format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{file: >18}: {line: <4}</cyan> - <level>{message}</level>",
+    )
+    
     # set the random seed for reproducibility
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
@@ -58,6 +75,7 @@ def train(local_rank, args, trial=None):
 
         # track hyperparameters and run metadata
         config=args.__dict__,
+        reinit=True
     )
     
     # Đọc dữ liệu
@@ -224,7 +242,7 @@ def train(local_rank, args, trial=None):
             wandb.log({"epoch": ep + 1 + args.epochs * stage, "stage": stage})
             
             iter_cnt = 0
-            for batch in stage_loader:
+            for batch in tqdm(stage_loader, desc="Batch", leave=False):
                 iter_cnt += 1
                 optimizer.zero_grad()
                 # if args.single_label:
@@ -627,7 +645,7 @@ def train(local_rank, args, trial=None):
 
             if ((ep + 1) % args.eval_freq == 0 and args.early_stop) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
-                logger.info("Evaluation process")
+                logger.info("Evaluation process ...")
                 model.eval()
                 with torch.no_grad():
                     if args.single_label:
@@ -640,7 +658,7 @@ def train(local_rank, args, trial=None):
                         batch_size=4,
                         collate_fn=lambda x:x)
                     calcs = Calculator()
-                    for batch in tqdm(eval_loader):
+                    for batch in tqdm(eval_loader, desc="Eval Batch", leave=False):
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
@@ -664,14 +682,14 @@ def train(local_rank, args, trial=None):
                         f"micro_F1": micro_F1,
                     })
                     
-                    if args.log:
-                        writer.add_scalar(f'score/epoch/marco_F1', micro_F1,  ep + 1 + args.epochs * stage)
-                    if args.log and (ep + 1) == args.epochs:
-                        writer.add_scalar(f'score/stage/marco_F1', micro_F1, stage)
+                    
                     logger.info(f'marco F1 {micro_F1}')
                     dev_scores_ls.append(micro_F1)
                     logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
+                    
+                    # report to optuna
+                    
                     if args.early_stop:
                         if dev_score is None or dev_score < micro_F1:
                             no_better = 0
@@ -682,47 +700,40 @@ def train(local_rank, args, trial=None):
                             logger.info(f'No better: {no_better}/{args.patience}')
                         if no_better >= args.patience:
                             logger.info("Early stopping with dev_score: " + str(dev_score))
-                            if args.log:
-                                writer.add_scalar(f'score/stage/marco_F1', micro_F1, stage)
+                            
                             break
-
+                    
+                    if trial is not None:
+                        trial.report(micro_F1, ep + 1 + args.epochs * stage)
+                        if trial.should_prune():
+                            raise optuna.TrialPruned()
+                        
+                        
         for tp in streams_indexed[stage]:
             if not tp == 0:
                 labels.pop(labels.index(tp))
-        save_stage = stage
-        if args.save_dir and local_rank == 0:
-            state = {'model':model.state_dict(), 'optimizer':optimizer.state_dict(), 'stage':stage + 1, 
-                            'labels':labels, 'learned_types':learned_types, 'prev_learned_types':prev_learned_types}
-            save_pth = os.path.join(args.save_dir, "perm" + str(args.perm_id))
-            cur_time = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
-            save_name = f"stage_{save_stage}_{cur_time}.pth"
-            if not os.path.exists(save_pth):
-                os.makedirs(save_pth)
-            logger.info(f'state_dict saved to: {os.path.join(save_pth, save_name)}')
-            torch.save(state, os.path.join(save_pth, save_name))
-            os.remove(e_pth)
+        # save_stage = stage
+    if args.save_dir and local_rank == 0:
+        state = {'model':model.state_dict(), 'optimizer':optimizer.state_dict(), 'stage':5, 
+                        'labels':labels, 'learned_types':learned_types, 'prev_learned_types':prev_learned_types}
+        save_pth = os.path.join(args.save_dir, "perm" + str(args.perm_id))
+        cur_time = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
+        save_name = f"stage_{5}_{cur_time}.pth"
+        if not os.path.exists(save_pth):
+            os.makedirs(save_pth)
+        logger.info(f'state_dict saved to: {os.path.join(save_pth, save_name)}')
+        torch.save(state, os.path.join(save_pth, save_name))
+        os.remove(e_pth)
+    
+    logger.info(f"Best dev score: {dev_score}")
+    logger.info(f"Best model saved to: {os.path.join(save_pth, save_name)}")
+    
+    wandb.finish()
+    
 
 
 if __name__ == "__main__":
     args = parse_arguments()
-    logs_dir = args.logs_dir
-    
-    # Configure logging
-    os.makedirs(logs_dir, exist_ok=True)
-    # --- Xoá handler mặc định ---
-    logger.remove()
-    # --- Thêm handler ghi log ra file ---
-    date_str = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
-    logger.add(os.path.join(logs_dir, f"{date_str}.log"), rotation="1 MB", retention="10 days", enqueue=True, level="INFO")
-    # --- Thêm handler ghi log qua tqdm.write ---
-    # Ghi log ra console qua tqdm.write + có màu
-    logger.level("CRITICAL", color="<bg red><white>")
-    logger.add(
-        lambda msg: tqdm.write(msg, end=""),
-        level="DEBUG",
-        colorize=True,
-        format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{file: >18}: {line: <4}</cyan> - <level>{message}</level>",
-    )
     
     wandb.login()
         
@@ -735,5 +746,3 @@ if __name__ == "__main__":
             join=True)
     else:
         train(0, args)
-        
-    wandb.finish()
