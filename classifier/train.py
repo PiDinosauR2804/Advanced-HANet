@@ -149,9 +149,9 @@ def train(local_rank, args, trial=None):
         learned_types = state_dict['learned_types']
         prev_learned_types = state_dict['prev_learned_types']
         
-    if args.early_stop:
-        e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
-        os.makedirs(os.path.dirname(e_pth), exist_ok=True)
+    
+    e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
+    os.makedirs(os.path.dirname(e_pth), exist_ok=True)
         
     # Xét từng task 
     for stage in task_idx:
