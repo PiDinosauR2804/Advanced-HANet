@@ -30,7 +30,7 @@ from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
 import wandb
 from loguru import logger
-from tqdm.auto import tqdm
+from tqdm import tqdm
 import optuna
 
 # PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
@@ -367,7 +367,7 @@ def train(local_rank, args, trial=None):
                             for i in range(aug_repeat_times):
                                 Adj_mask_ucl += torch.eye(bs * (1 + aug_repeat_times)).to(device)
                                 Adj_mask_ucl = torch.roll(Adj_mask_ucl, bs, -1)                    
-                            loss_ucl = compute_CLLoss(Adj_mask_ucl, ucl_reps, bs * (1 + aug_repeat_times))
+                            loss_ucl = compute_CLLoss(Adj_mask_ucl, ucl_reps, bs * (1 + aug_repeat_times), args, device)
                             
                     # Contrastive loss cho trigger
                     if args.tlcl:
@@ -382,7 +382,7 @@ def train(local_rank, args, trial=None):
                             # tlcl_lbs_oh[:, 0] = 0 # whether to compute negative distance
                             Adj_mask_tlcl = torch.matmul(tlcl_lbs_oh, tlcl_lbs_oh.T)
                             Adj_mask_tlcl = Adj_mask_tlcl * (torch.ones(mat_size) - torch.eye(mat_size)).to(device)
-                            loss_tlcl = compute_CLLoss(Adj_mask_tlcl, tlcl_feature, mat_size)
+                            loss_tlcl = compute_CLLoss(Adj_mask_tlcl, tlcl_feature, mat_size, args, device)
                     loss = loss + loss_ucl + loss_tlcl*args.weight_loss_tlcl
                     if args.joint_da_loss == "ce" or args.joint_da_loss == "mul":
                         ce_y = torch.cat(train_y + da_y)
@@ -448,7 +448,7 @@ def train(local_rank, args, trial=None):
                         # tlcl_lbs_oh[:, 0] = 0 # whether to compute negative distance
                         Des_adj_mask_tlcl = torch.matmul(des_cl_lbs_oh, des_cl_lbs_oh.T)
                         Des_adj_mask_tlcl = Des_adj_mask_tlcl * (torch.ones(des_mat_size) - torch.eye(des_mat_size)).to(device)
-                        loss_des_cl = compute_CLLoss(Des_adj_mask_tlcl, des_cl_feature, des_mat_size)
+                        loss_des_cl = compute_CLLoss(Des_adj_mask_tlcl, des_cl_feature, des_mat_size, args, device)
                     
                     loss = loss + loss_des_cl * args.ratio_loss_des_cl      
                     

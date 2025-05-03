@@ -1,6 +1,6 @@
 import torch
 
-def compute_CLLoss(Adj_mask, reprs, matsize): # compute InfoNCELoss
+def compute_CLLoss(Adj_mask, reprs, matsize, args, device): # compute InfoNCELoss
     logits_cl = torch.div(torch.matmul(reprs, reprs.T), args.cl_temp)
     if args.sub_max:
         logits_max_cl, _ = torch.max(logits_cl, dim=-1, keepdim=True)
