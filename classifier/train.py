@@ -4,11 +4,11 @@ from configs import parse_arguments
 from utils.dataloader import (
     collect_dataset, collect_exemplar_dataset, 
     collect_sldataset, collect_from_json, 
-    collate_description, MAVEN_Dataset,
+    MAVEN_Dataset,
     DescriptionDataset, collect_eval_sldataset
 )
 from utils.computeLoss import compute_CLLoss
-from utils.tools import contrastive_loss_des, find_negative_labels
+from utils.tools import contrastive_loss_des, find_negative_labels, collate_description
 from utils.calcs import Calculator
 
 import os
