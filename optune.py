@@ -8,7 +8,6 @@ args = parse_arguments()
 def objective(trial):
     # Hằng 
     args.epochs = 100
-    args.early_stopping = True
     args.use_lora = True
     args.logs_dir = "logs/classifier"
     args.data_root = "./data/data_ids"
@@ -37,7 +36,17 @@ def objective(trial):
     args.use_description = True
     args.num_description = 3
     args.ratio_loss_des_cl = 0.1
+    # --task_ep_time 2 \
+    # --early-stop \
+    # --skip_eval_ep 30 \
+    # --eval_freq 5 \
+    # --patience 2 \
+    args.task_ep_time = 2
+    args.early_stop = True
+    args.skip_eval_ep = 30
     args.eval_freq = 5
+    args.patience = 2
+    
     
 
     # Tham số cho Optuna trial
