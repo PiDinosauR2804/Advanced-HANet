@@ -637,7 +637,7 @@ def train(local_rank, args, trial=None):
                     loss = loss * args.ratio_loss_final_stage
                 ####################################
                 
-                if args.use_mole:
+                if args.use_mole and not model.uniform_expert:
                     loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']
                     
                 loss.backward()
