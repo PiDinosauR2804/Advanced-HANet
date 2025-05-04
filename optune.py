@@ -22,7 +22,7 @@ def objective(trial):
     args.log_name = "ashuffle_lnone_r1"
     args.dweight_loss = True
     args.rep_aug = "mean"
-    args.distill = "mul"
+    args.distill = "pd"
     args.class_num = 20
     args.single_label = True
     args.cl_aug = "shuffle"
@@ -30,27 +30,43 @@ def objective(trial):
     args.joint_da_loss = "ce"
     args.sub_max = True
     args.cl_temp = 0.07
-    args.tlcl = True
+    args.tlcl = False
     args.ucl = True
     args.skip_first_cl = "ucl+tlcl"
     args.use_description = True
     args.num_description = 3
-    args.ratio_loss_des_cl = 0.1
+    args.ratio_loss_des_cl = 1
     args.task_ep_time = 2
     args.early_stop = True
     args.skip_eval_ep = 50
     args.eval_freq = 10
     args.patience = 3
-    
-    
+    args.early_stop = True
+    args.classifier_layer = 1
+    args.hidden_dim = 128
+    args.dropout = 0.5
+    args.use_general_expert = True
+    args.uniform_ep = 20
+    args.use_mole = True
+    args.step_size = 50
 
     # Tham số cho Optuna trial
-    args.lr = trial.suggest_float("lr", 1e-5, 1e-3, log=True)
+    args.lr = trial.suggest_float("lr", 1e-4, 1e-2, log=True)
     args.lora_rank = trial.suggest_int("lora_rank", 32, 256, step=32)
     args.lora_alpha = trial.suggest_int("lora_alpha", 16, 128, step=16)
-    args.lora_dropout = trial.suggest_float("lora_dropout", 0.1, 0.3, step=0.05)
+    args.lora_dropout = trial.suggest_float("lora_dropout", 0.1, 0.5, step=0.05)
     args.task_ep_time = trial.suggest_int("task_ep_time", 1, 5)
     args.batch_size = trial.suggest_categorical("batch_size", [4, 8, 16, 32, 64])
+    args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [2, 4, 8, 16])
+    if args.mole_num_experts <= 8:
+        args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
+    else:
+        args.mole_top_k = trial.suggest_categorical("mole_top_k", [4, 8])
+        
+    args.gammalr = trial.suggest_float("gamma", 0.1, 1.0, step=0.1)
+    args.entropy_weight = trial.suggest_float("entropy_weight", 0.01, 1.0, step=0.01)
+    args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.01, 1.0, step=0.01)
+    args.general_expert_weight = trial.suggest_float("general_expert_weight", 0.1, 1.0, step=0.1)
     
     f1 = train(0, args, trial)
     
@@ -60,7 +76,7 @@ if __name__ == "__main__":
     wandb.login()
     pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=10, interval_steps=1)
     study = optuna.create_study(direction="maximize", pruner=pruner)
-    study.optimize(objective, n_trials=5)
+    study.optimize(objective, n_trials=10)
     
     print("Best trial:")
     trial = study.best_trial

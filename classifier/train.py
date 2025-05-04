@@ -654,14 +654,17 @@ def train(local_rank, args, trial=None):
                             # f"loss_pd_{stage}": loss_pd,
                             # f"loss_all_{stage}": loss,
                             
-                            f"loss_ce_task": loss_ce,
-                            # f"loss_ucl": loss_ucl,
-                            # f"loss_tlcl": loss_tlcl,
-                            # f"loss_des_cl": loss_des_cl,
-                            # f"loss_aug": loss_aug,
-                            # f"loss_fd": loss_fd,
-                            # f"loss_pd": loss_pd,
-                            f"loss_all": loss,
+                            "loss_ce_task": loss_ce,
+                            "entropy_loss": return_dict['entropy_loss'],
+                            "load_balance_loss": return_dict['load_balance_loss'],
+                            # "loss_ucl": loss_ucl,
+                            # "loss_tlcl": loss_tlcl,
+                            # "loss_des_cl": loss_des_cl,
+                            # "loss_aug": loss_aug,
+                            # "loss_fd": loss_fd,
+                            # "loss_pd": loss_pd,
+                            "loss_all": loss,
+                            "learning_rate": optimizer.param_groups[0]['lr'],
                         })
 
             if ((ep + 1) % int(args.eval_freq*ep_time) == 0 and args.early_stop and (ep + 1) >= args.skip_eval_ep*ep_time) or (ep + 1) == num_epochs: # TODO TODO
