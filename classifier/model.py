@@ -5,8 +5,6 @@ from configs import parse_arguments
 from peft import get_peft_model, LoraConfig, TaskType
 from loguru import logger
 
-args = parse_arguments()
-device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
 
 class Classifier(nn.Module):
     def __init__(self, input_dim, hidden_dim, class_num, num_layers=1, dropout=0.1):
@@ -42,15 +40,17 @@ class Classifier(nn.Module):
 
 
 class BertED(nn.Module):
-    def __init__(self, class_num=args.class_num + 1, input_map=False):
+    def __init__(self, args):
         super().__init__()
-        self.is_input_mapping = input_map
+        self.is_input_mapping = args.input_map
+        self.class_num = args.class_num + 1
         self.use_mole = args.use_mole
         self.use_lora = args.use_lora
         self.top_k = args.mole_top_k
         self.num_experts = args.mole_num_experts
         self.use_general_expert = args.use_general_expert
         self.uniform_expert = False
+        self.general_expert_weight = args.general_expert_weight
 
         # Load backbone
         self.backbone = BertModel.from_pretrained(args.backbone)
@@ -59,10 +59,10 @@ class BertED(nn.Module):
         # Classifier
         if args.classifier_layer > 1:
             self.hidden_dim = args.hidden_dim
-            self.fc = Classifier(self.input_dim, self.hidden_dim, class_num,
+            self.fc = Classifier(self.input_dim, self.hidden_dim, self.class_num,
                                  num_layers=args.classifier_layer, dropout=args.dropout)
         else:
-            self.fc = nn.Linear(self.input_dim, class_num)
+            self.fc = nn.Linear(self.input_dim, self.class_num)
 
         # Optional input mapping
         if self.is_input_mapping:
@@ -75,7 +75,7 @@ class BertED(nn.Module):
                 nn.Linear(self.map_hidden_dim, self.map_hidden_dim),
                 nn.ReLU(),
             )
-            self.fc = nn.Linear(self.map_hidden_dim, class_num)
+            self.fc = nn.Linear(self.map_hidden_dim, self.class_num)
 
         # Setup LoRA or MoLE
         if self.use_lora or self.use_mole:
@@ -172,7 +172,7 @@ class BertED(nn.Module):
             if self.use_general_expert:
                 self.backbone.set_adapter("general_expert")
                 general_output = self.backbone(x[b:b+1], attention_mask=masks[b:b+1])
-                weighted_hidden += avg_weights[b] * general_output.last_hidden_state
+                weighted_hidden += self.general_expert_weight * general_output.last_hidden_state
             for i, expert_idx in enumerate(topk_indices[b]):
                 weight = topk_weights[b, i]
                 self.backbone.set_adapter(f"expert_{expert_idx.item()}")

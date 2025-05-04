@@ -35,8 +35,10 @@ def parse_arguments():
     parser.add_argument("--mole_top_k", type=int, default=2)
     parser.add_argument("--uniform_ep", type=int, default=20, help="Number of epochs for mole uniform")
     parser.add_argument("--use_general_expert", action="store_true", help="Use general expert for MoLE")
+    parser.add_argument("--general_expert_weight", type=float, default=0.1, help="Weight for general expert")
     parser.add_argument("--entropy_weight", type=float, default=0.01, help="Weight for entropy loss")
     parser.add_argument("--loss_balane_weight", type=float, default=1, help="Weight for loss balance")
+    
 
     
     # Args for Classifier

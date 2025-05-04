@@ -99,7 +99,7 @@ def train(local_rank, args, trial=None):
     
     # streams_indexed có dạng [[4, 5, 9, 11], [2, 1, 8, 33], ...] thể hiện thứ tự label class được học
     
-    model = BertED(args.class_num+1, args.input_map) # define model
+    model = BertED(args) # define model
     model.to(device)
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.decay, eps=args.adamw_eps, betas=(0.9, 0.999)) #TODO: Hyper parameters
     # if args.amp:
