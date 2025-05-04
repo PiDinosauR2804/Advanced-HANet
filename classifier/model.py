@@ -111,8 +111,9 @@ class BertED(nn.Module):
                 print(n, p.shape)
                 
     def turn_uniform_expert(self, turn_on=True):
-        self.uniform_expert = turn_on
-        logger.info(f"Uniform expert: {turn_on}")
+        if self.uniform_expert != turn_on:
+            self.uniform_expert = turn_on
+            logger.info(f"Uniform expert: {turn_on}")
 
     def forward(self, x, masks, span=None, aug=None):
         if self.use_mole:
