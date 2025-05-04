@@ -19,7 +19,7 @@
     --single-label \
     --cl-aug shuffle \
     --aug-repeat-times 5 \
-    --joint-da-loss none \
+    --joint-da-loss ce \
     --sub-max \
     --cl_temp 0.07 \
     --ucl \
