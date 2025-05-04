@@ -36,11 +36,6 @@ def objective(trial):
     args.use_description = True
     args.num_description = 3
     args.ratio_loss_des_cl = 0.1
-    # --task_ep_time 2 \
-    # --early-stop \
-    # --skip_eval_ep 30 \
-    # --eval_freq 5 \
-    # --patience 2 \
     args.task_ep_time = 2
     args.early_stop = True
     args.skip_eval_ep = 50

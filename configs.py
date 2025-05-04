@@ -25,14 +25,18 @@ def parse_arguments():
     parser.add_argument('--hidden_dim', default=128, type=int, help="Hidden dimension of classifier")
     parser.add_argument('--dropout', default=0.1, type=float, help="Dropout rate")
     parser.add_argument("--use_lora", action="store_true", help="Enable LoRA adaptation")
-    parser.add_argument("--use_mole", action="store_true")
-    parser.add_argument("--mole_num_experts", type=int, default=4)
-    parser.add_argument("--mole_top_k", type=int, default=2)
     parser.add_argument("--lora_rank", type=int, default=8)
     parser.add_argument("--lora_alpha", type=int, default=32)
     parser.add_argument("--lora_dropout", type=float, default=0.1)
     parser.add_argument("--skip_eval_ep", type=int, default=0, help="Skip evaluation for the first n epochs")
     parser.add_argument("--task_ep", type=int, default=10, help="Number of epochs for each task")
+    parser.add_argument("--use_mole", action="store_true")
+    parser.add_argument("--mole_num_experts", type=int, default=4)
+    parser.add_argument("--mole_top_k", type=int, default=2)
+    parser.add_argument("--uniform_ep", type=int, default=20, help="Number of epochs for mole uniform")
+    parser.add_argument("--use_general_expert", action="store_true", help="Use general expert for MoLE")
+    parser.add_argument("--entropy_weight", type=float, default=0.01, help="Weight for entropy loss")
+    parser.add_argument("--loss_balane_weight", type=float, default=1, help="Weight for loss balance")
 
     
     # Args for Classifier

@@ -26,9 +26,8 @@ from torch.utils.data import DataLoader
 from torch.nn.functional import normalize
 from torch.optim import AdamW
 from copy import deepcopy
-from torch.utils.tensorboard import SummaryWriter   
 import torch.distributed as dist
-import torch.multiprocessing as mp
+from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
@@ -248,6 +247,12 @@ def train(local_rank, args, trial=None):
             if stage == 0 and args.skip_first:
                 continue
             
+            if args.use_mole:
+                if ep < args.uniform_ep:
+                    model.turn_uniform_expert(turn_on=True)
+                else:
+                    model.turn_uniform_expert(turn_on=False)
+                    
             model.train()
             
             wandb.log({"epoch": ep + 1 + args.epochs * stage, "stage": stage})
@@ -632,6 +637,9 @@ def train(local_rank, args, trial=None):
                     loss = loss * args.ratio_loss_final_stage
                 ####################################
                 
+                if args.use_mole:
+                    loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_blance_weight * return_dict['load_balance_loss']
+                    
                 loss.backward()
                 optimizer.step() 
                 wandb.log({
