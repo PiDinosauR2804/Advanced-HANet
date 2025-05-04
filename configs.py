@@ -37,7 +37,7 @@ def parse_arguments():
     parser.add_argument("--use_general_expert", action="store_true", help="Use general expert for MoLE")
     parser.add_argument("--general_expert_weight", type=float, default=0.1, help="Weight for general expert")
     parser.add_argument("--entropy_weight", type=float, default=0.01, help="Weight for entropy loss")
-    parser.add_argument("--load_balane_weight", type=float, default=1, help="Weight for loss balance")
+    parser.add_argument("--load_balance_weight", type=float, default=1, help="Weight for loss balance")
     
 
     

@@ -638,7 +638,7 @@ def train(local_rank, args, trial=None):
                 ####################################
                 
                 if args.use_mole:
-                    loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_blance_weight * return_dict['load_balance_loss']
+                    loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']
                     
                 loss.backward()
                 optimizer.step() 
