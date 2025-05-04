@@ -1,6 +1,5 @@
 from classifier.model import BertED
 from classifier.exemplars import Exemplars
-from configs import parse_arguments
 from utils.dataloader import (
     collect_dataset, collect_exemplar_dataset, 
     collect_sldataset, collect_from_json, 
@@ -27,7 +26,7 @@ from torch.nn.functional import normalize
 from torch.optim import AdamW
 from copy import deepcopy
 import torch.distributed as dist
-from torch.optim.lr_scheduler import CosineAnnealingLR
+from torch.optim.lr_scheduler import StepLR
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
@@ -102,6 +101,9 @@ def train(local_rank, args, trial=None):
     model = BertED(args) # define model
     model.to(device)
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.decay, eps=args.adamw_eps, betas=(0.9, 0.999)) #TODO: Hyper parameters
+    
+    scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr) # TODO: Hyper parameters
+
     # if args.amp:
         # model, optimizer = amp.initialize(model, optimizer, opt_level="O1") 
         
@@ -738,6 +740,7 @@ def train(local_rank, args, trial=None):
                         if trial.should_prune():
                             raise optuna.TrialPruned()
                         
+            scheduler.step()
                         
         for tp in streams_indexed[stage]:
             if not tp == 0:
