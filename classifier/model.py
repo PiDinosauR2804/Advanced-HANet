@@ -142,46 +142,63 @@ class BertED(nn.Module):
         return return_dict
 
     def _forward_mole(self, x, masks, span=None, aug=None):
+        B = x.size(0)
+
         with torch.no_grad():
             base_output = self.backbone.base_model(x, attention_mask=masks)
-            cls_embedding = base_output.last_hidden_state[:, 0, :]
+            cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
 
-        # Gating
-        gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)
+        # Gating: tính trọng số softmax hoặc uniform
+        gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (B, E)
         gating_weights = self.softmax(gating_logits)
 
-        # Nếu uniform_expert được bật, sử dụng trọng số đồng đều cho các expert
         if self.uniform_expert:
             gating_weights = torch.full_like(gating_weights, 1.0 / self.num_experts)
 
-        avg_weights = gating_weights.mean(dim=0)
-        uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
-        load_balancing_loss = torch.sum((avg_weights - uniform) ** 2)
-        entropy = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
+        return_dict = {}
 
-        return_dict = {
-            'load_balance_loss': load_balancing_loss,
-            'entropy_loss': entropy,
-        }
+        # Balance loss (tính khi không dùng uniform)
+        if not self.uniform_expert:
+            avg_weights = gating_weights.mean(dim=0)
+            uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
+            return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
+            return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
 
         # Top-k routing
-        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)
-        final_hidden_states = []
+        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
+        all_hidden_states = []
 
-        for b in range(x.size(0)):
-            weighted_hidden = 0
-            if self.use_general_expert:
-                self.backbone.set_adapter("general_expert")
-                general_output = self.backbone(x[b:b+1], attention_mask=masks[b:b+1])
-                weighted_hidden += self.general_expert_weight * general_output.last_hidden_state
-            for i, expert_idx in enumerate(topk_indices[b]):
-                weight = topk_weights[b, i]
-                self.backbone.set_adapter(f"expert_{expert_idx.item()}")
-                expert_output = self.backbone(x[b:b+1], attention_mask=masks[b:b+1])
-                weighted_hidden += weight * expert_output.last_hidden_state
-            final_hidden_states.append(weighted_hidden)
+        for i in range(self.top_k):
+            idx = topk_indices[:, i]  # (B,)
+            weight = topk_weights[:, i]  # (B,)
 
-        x_out = torch.cat(final_hidden_states, dim=0)
+            reps = []
+            for expert_id in idx.unique():
+                expert_mask = (idx == expert_id)
+                if expert_mask.sum() == 0:
+                    continue
+                self.backbone.set_adapter(f"expert_{expert_id.item()}")
+                expert_out = self.backbone(
+                    x[expert_mask], attention_mask=masks[expert_mask]
+                ).last_hidden_state  # (N, T, H)
+                reps.append((expert_mask, expert_out))
+
+            weighted_hidden = torch.zeros_like(base_output.last_hidden_state)
+            for expert_mask, expert_out in reps:
+                expanded_weight = weight[expert_mask].view(-1, 1, 1)
+                weighted_hidden[expert_mask] += expanded_weight * expert_out
+
+            all_hidden_states.append(weighted_hidden)
+
+        # Tổng hợp top-k weighted expert
+        x_out = sum(all_hidden_states)
+
+        # Optional: add general expert
+        if self.use_general_expert:
+            self.backbone.set_adapter("general_expert")
+            general_out = self.backbone(x, attention_mask=masks).last_hidden_state
+            x_out += self.general_expert_weight * general_out
+
         return_dict['reps'] = x_out[:, 0, :].clone()
         return_dict['context_feat'] = x_out.view(-1, x_out.shape[-1])
 
