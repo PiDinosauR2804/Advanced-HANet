@@ -102,7 +102,13 @@ def train(local_rank, args):
     else:
         tlcl_have = ""
         
-    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{tlcl_have}_{ucl_have}_{timestamp}"    
+    if args.use_description: 
+        use_description = "use_description"
+    else:
+        use_description = ""
+        
+    # args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{tlcl_have}_{ucl_have}_{timestamp}"    
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{use_description}_{args.distill}_{tlcl_have}_{ucl_have}_{timestamp}"  
     
     # Cấu hình logging
     log_dir = "log_result"
@@ -124,7 +130,7 @@ def train(local_rank, args):
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project="Quang_HANet_Find_optimize_loss_improve_MAVEN_MAVEN",
+        project=f"Quang_HANet_run_with_augment_{args.dataset}",
         name = args.run_name,
 
         # track hyperparameters and run metadata
