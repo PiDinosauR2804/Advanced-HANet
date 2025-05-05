@@ -23,6 +23,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from torch.utils.data import DataLoader
 from torch.nn.functional import normalize
+from torch.nn.utils import clip_grad_norm_
 from torch.optim import AdamW
 from copy import deepcopy
 import torch.distributed as dist
@@ -643,6 +644,7 @@ def train(local_rank, args, trial=None):
                     loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']
                     
                 loss.backward()
+                clip_grad_norm_(model.parameters(), max_norm=1.0)
                 optimizer.step() 
                 wandb.log({
                             # f"loss_ce_task_{stage}": loss_ce,
@@ -657,6 +659,7 @@ def train(local_rank, args, trial=None):
                             "loss_ce_task": loss_ce,
                             "entropy_loss": return_dict.get('entropy_loss', 0),
                             "load_balance_loss": return_dict.get('load_balance_loss', 0),
+                            "grad_norm": torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0),
                             # "loss_ucl": loss_ucl,
                             # "loss_tlcl": loss_tlcl,
                             # "loss_des_cl": loss_des_cl,
@@ -666,6 +669,7 @@ def train(local_rank, args, trial=None):
                             "loss_all": loss,
                             "learning_rate": optimizer.param_groups[0]['lr'],
                         })
+            scheduler.step()
 
             if ((ep + 1) % int(args.eval_freq*ep_time) == 0 and args.early_stop and (ep + 1) >= args.skip_eval_ep*ep_time) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
@@ -743,7 +747,6 @@ def train(local_rank, args, trial=None):
                         if trial.should_prune():
                             raise optuna.TrialPruned()
                         
-            scheduler.step()
                         
         for tp in streams_indexed[stage]:
             if not tp == 0:
