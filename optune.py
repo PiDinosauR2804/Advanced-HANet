@@ -36,9 +36,9 @@ def objective(trial):
     args.use_description = True
     args.num_description = 3
     args.ratio_loss_des_cl = 1
-    args.task_ep_time = 2
+    args.task_ep_time = 1
     args.early_stop = True
-    args.skip_eval_ep = 50
+    args.skip_eval_ep = 40
     args.eval_freq = 10
     args.patience = 3
     args.early_stop = True
@@ -51,7 +51,7 @@ def objective(trial):
     args.step_size = 50
 
     # Tham số cho Optuna trial
-    args.lr = trial.suggest_float("lr", 1e-4, 1e-2, log=True)
+    args.lr = trial.suggest_float("lr", 1e-5, 2e-4, log=True)
     args.lora_rank = trial.suggest_int("lora_rank", 32, 256, step=32)
     args.lora_alpha = trial.suggest_int("lora_alpha", 16, 128, step=16)
     args.lora_dropout = trial.suggest_float("lora_dropout", 0.1, 0.5, step=0.05)
