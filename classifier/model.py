@@ -1,7 +1,6 @@
 import torch
 from transformers import BertModel
 import torch.nn as nn
-from configs import parse_arguments
 from peft import get_peft_model, LoraConfig, TaskType
 from loguru import logger
 
@@ -119,9 +118,9 @@ class BertED(nn.Module):
         if self.use_mole:
             return self._forward_mole(x, masks, span, aug)
         else:
-            return self._forward_normal(x, masks, span, aug, use_lora=self.use_lora)
+            return self._forward_normal(x, masks, span, aug)
 
-    def _forward_normal(self, x, masks, span=None, aug=None, use_lora=False):
+    def _forward_normal(self, x, masks, span=None, aug=None):
         out = self.backbone(x, attention_mask=masks)
         hidden = out.last_hidden_state
         return_dict = {
@@ -142,46 +141,59 @@ class BertED(nn.Module):
         return return_dict
 
     def _forward_mole(self, x, masks, span=None, aug=None):
+        B = x.size(0)
+
         with torch.no_grad():
             base_output = self.backbone.base_model(x, attention_mask=masks)
-            cls_embedding = base_output.last_hidden_state[:, 0, :]
+            cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
 
         # Gating
-        gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)
+        gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (B, E)
         gating_weights = self.softmax(gating_logits)
 
-        # Nếu uniform_expert được bật, sử dụng trọng số đồng đều cho các expert
         if self.uniform_expert:
             gating_weights = torch.full_like(gating_weights, 1.0 / self.num_experts)
 
-        avg_weights = gating_weights.mean(dim=0)
-        uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
-        load_balancing_loss = torch.sum((avg_weights - uniform) ** 2)
-        entropy = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
+        return_dict = {}
 
-        return_dict = {
-            'load_balance_loss': load_balancing_loss,
-            'entropy_loss': entropy,
-        }
+        if not self.uniform_expert:
+            avg_weights = gating_weights.mean(dim=0)
+            uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
+            return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
+            return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
 
         # Top-k routing
-        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)
-        final_hidden_states = []
+        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
 
-        for b in range(x.size(0)):
-            weighted_hidden = 0
-            if self.use_general_expert:
-                self.backbone.set_adapter("general_expert")
-                general_output = self.backbone(x[b:b+1], attention_mask=masks[b:b+1])
-                weighted_hidden += self.general_expert_weight * general_output.last_hidden_state
-            for i, expert_idx in enumerate(topk_indices[b]):
-                weight = topk_weights[b, i]
-                self.backbone.set_adapter(f"expert_{expert_idx.item()}")
-                expert_output = self.backbone(x[b:b+1], attention_mask=masks[b:b+1])
-                weighted_hidden += weight * expert_output.last_hidden_state
-            final_hidden_states.append(weighted_hidden)
+        # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
+        expert_outputs = [torch.zeros_like(base_output.last_hidden_state) for _ in range(self.top_k)]
 
-        x_out = torch.cat(final_hidden_states, dim=0)
+        for k in range(self.top_k):
+            expert_ids = topk_indices[:, k]  # (B,)
+            weights = topk_weights[:, k]     # (B,)
+
+            for expert_id in expert_ids.unique():
+                mask = (expert_ids == expert_id)
+                if mask.sum() == 0:
+                    continue
+
+                self.backbone.set_adapter(f"expert_{expert_id.item()}")
+                out = self.backbone(
+                    x[mask], attention_mask=masks[mask]
+                ).last_hidden_state  # (N, T, H)
+
+                weighted = weights[mask].view(-1, 1, 1) * out
+                expert_outputs[k][mask] = weighted
+
+        # Tổng hợp top-k expert output
+        x_out = sum(expert_outputs)
+
+        # Optional: add general expert
+        if self.use_general_expert:
+            self.backbone.set_adapter("general_expert")
+            general_out = self.backbone(x, attention_mask=masks).last_hidden_state
+            x_out += self.general_expert_weight * general_out
+
         return_dict['reps'] = x_out[:, 0, :].clone()
         return_dict['context_feat'] = x_out.view(-1, x_out.shape[-1])
 
@@ -196,7 +208,6 @@ class BertED(nn.Module):
                 return_dict['outputs_aug'] = self.fc(feature_aug)
 
         return return_dict
-
 
     def _extract_trigger(self, x, span):
         trig_feature = []
