@@ -655,8 +655,8 @@ def train(local_rank, args, trial=None):
                             # f"loss_all_{stage}": loss,
                             
                             "loss_ce_task": loss_ce,
-                            "entropy_loss": return_dict['entropy_loss'],
-                            "load_balance_loss": return_dict['load_balance_loss'],
+                            "entropy_loss": return_dict.get('entropy_loss', 0),
+                            "load_balance_loss": return_dict.get('load_balance_loss', 0),
                             # "loss_ucl": loss_ucl,
                             # "loss_tlcl": loss_tlcl,
                             # "loss_des_cl": loss_des_cl,
