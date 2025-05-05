@@ -4,7 +4,7 @@ import json
 
 
 input_root = './output/des4'
-output_root = './output/ids2'
+output_root = './output/ids3'
 
 datasets = ['MAVEN', 'ACE']
 perms = [0, 1, 2, 3, 4]
@@ -47,14 +47,13 @@ for dataset in datasets:
                     key_int = int(key)
                     
                     for idx, item in enumerate(line[key]):
-                        new_items.append(item)
-                        
+                        des_items = []       
                         for event, label in zip(item['events'], item['label']):
                             if label == key_int:
                                 trigger_word = event['trigger_word']
                                 for des in event['description'][:num_des]:
                                     if trigger_word in des:
-                                        new_items.append({
+                                        des_items.append({
                                             'text': des,
                                             'events': [{
                                                 'trigger_word': trigger_word,
@@ -62,6 +61,9 @@ for dataset in datasets:
                                             'label': [label],
                                         })
                                         new_num_item += 1
+                                        
+                        new_des_items = sent2ids_expand_batch(des_items, neg_size=num_neg)
+                        new_items.append(item | {'des_samples': new_des_items})
                     converted_items = sent2ids_expand_batch(new_items, neg_size=num_neg)
                     for item in converted_items:
                         piece_ids = item['piece_ids']
