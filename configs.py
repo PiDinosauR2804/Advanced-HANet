@@ -83,6 +83,9 @@ def parse_arguments():
     parser.add_argument('--ratio_loss_final_stage', default=1, type=float)
     parser.add_argument('--loss_des_type', default="2", choices=["1", "2"])
     
+    # Args for CrossEntropyLossWithWeight
+    parser.add_argument('--alpha_ce', default=0.1, type=float)
+    
     args, _ = parser.parse_known_args()
 
     return args

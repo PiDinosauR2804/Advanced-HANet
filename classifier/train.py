@@ -522,7 +522,7 @@ def train(local_rank, args):
                     
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
-                loss_ce = criterion_ce(ce_outputs, ce_y)
+                loss_ce = CrossEntropyLossWithWeight(ce_outputs, ce_y, alpha=args.alpha_ce)
                 loss = loss + loss_ce
                 w = len(prev_learned_types) / len(learned_types)
 
@@ -548,7 +548,7 @@ def train(local_rank, args):
                     if args.leave_zero:
                         outputs_aug[:, 0] = 0
                     outputs_aug = outputs_aug[:, learned_types].squeeze(-1)
-                    loss_aug = criterion_ce(outputs_aug, torch.cat(aug_y))
+                    loss_aug = CrossEntropyLossWithWeight(outputs_aug, torch.cat(aug_y), alpha=args.alpha_ce)
                     # loss = loss_ce * w + loss_aug * (1 - w)
                     # loss = loss_ce * (1 - w) + loss_aug * w
                     loss = args.gamma * loss + args.theta * loss_aug
