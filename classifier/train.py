@@ -259,7 +259,8 @@ def train(local_rank, args, trial=None):
                     
             model.train()
             if args.gradient_checkpointing:
-                model.gradient_checkpointing_enable()
+                # model.gradient_checkpointing_enable()
+                pass
             
             wandb.log({"epoch": ep + 1 + args.epochs * stage, "stage": stage})
             
