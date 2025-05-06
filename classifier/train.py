@@ -644,8 +644,9 @@ def train(local_rank, args, trial=None):
                     loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']
                     
                 loss.backward()
-                clip_grad_norm_(model.parameters(), max_norm=1.0)
+                total_norm = clip_grad_norm_(model.parameters(), max_norm=1.0)
                 optimizer.step() 
+                stats = torch.cuda.memory_stats()
                 wandb.log({
                             # f"loss_ce_task_{stage}": loss_ce,
                             # f"loss_ucl_{stage}": loss_ucl,
@@ -659,7 +660,15 @@ def train(local_rank, args, trial=None):
                             "loss_ce_task": loss_ce,
                             "entropy_loss": return_dict.get('entropy_loss', 0),
                             "load_balance_loss": return_dict.get('load_balance_loss', 0),
-                            "grad_norm": torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0),
+                            "total_norm": total_norm,
+                            "memory/allocated_MB": stats["allocated_bytes.all.current"] / 1024**2,
+                            "memory/allocated_peak_MB": stats["allocated_bytes.all.peak"] / 1024**2,
+                            "memory/reserved_MB": stats["reserved_bytes.all.current"] / 1024**2,
+                            "memory/reserved_peak_MB": stats["reserved_bytes.all.peak"] / 1024**2,
+                            "memory/active_MB": stats["active_bytes.all.current"] / 1024**2,
+                            "memory/num_ooms": stats["num_ooms"],
+                            "memory/alloc_retries": stats["num_alloc_retries"],
+                            
                             # "loss_ucl": loss_ucl,
                             # "loss_tlcl": loss_tlcl,
                             # "loss_des_cl": loss_des_cl,
