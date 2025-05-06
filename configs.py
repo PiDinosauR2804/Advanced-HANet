@@ -40,7 +40,7 @@ def parse_arguments():
     parser.add_argument("--load_balance_weight", type=float, default=1, help="Weight for loss balance")
     parser.add_argument("--step_size", type=int, default=10, help="Step size for learning rate decay")
     parser.add_argument("--gammalr", type=float, default=0.1, help="Gamma for learning rate decay")
-
+    parser.add_argument("--gradient_checkpointing", action="store_true", help="Enable gradient checkpointing")
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)

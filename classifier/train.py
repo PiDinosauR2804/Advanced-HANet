@@ -35,6 +35,7 @@ import wandb
 from loguru import logger
 from tqdm.auto import tqdm
 import optuna
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 # PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
 # PERM_10 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]
@@ -154,7 +155,7 @@ def train(local_rank, args, trial=None):
     
     e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
     os.makedirs(os.path.dirname(e_pth), exist_ok=True)
-        
+    
     # Xét từng task 
     for stage in task_idx:
         # if stage > 0:
@@ -257,6 +258,8 @@ def train(local_rank, args, trial=None):
                     model.turn_uniform_expert(turn_on=False)
                     
             model.train()
+            if args.gradient_checkpointing:
+                model.gradient_checkpointing_enable()
             
             wandb.log({"epoch": ep + 1 + args.epochs * stage, "stage": stage})
             
