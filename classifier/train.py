@@ -696,10 +696,10 @@ def train(local_rank, args, trial=None):
                     eval_loader = DataLoader(
                         dataset=eval_dataset,
                         shuffle=False,
-                        batch_size=4,
+                        batch_size=args.eval_batch_size,
                         collate_fn=lambda x:x)
                     calcs = Calculator()
-                    for batch in eval_loader:
+                    for batch in tqdm(eval_loader, desc="Eval", leave=False):
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
