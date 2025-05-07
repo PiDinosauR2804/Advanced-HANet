@@ -84,6 +84,7 @@ def parse_arguments():
     parser.add_argument('--loss_des_type', default="2", choices=["1", "2"])
     
     # Args for CrossEntropyLossWithWeight
+    parser.add_argument('--use-weight-ce', action='store_true')
     parser.add_argument('--alpha_ce', default=0.1, type=float)
     
     args, _ = parser.parse_known_args()
