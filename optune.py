@@ -57,15 +57,12 @@ def objective(trial):
     # Tham số cho Optuna trial
     args.uniform_ep = trial.suggest_int("uniform_ep", 1, 10)
     args.lr = trial.suggest_float("lr", 1e-5, 2e-4, log=True)
-    args.lora_rank = trial.suggest_int("lora_rank", 32, 256, step=32)
-    args.lora_alpha = trial.suggest_int("lora_alpha", 16, 128, step=16)
+    args.lora_rank = trial.suggest_categorical("lora_rank", [32, 64, 128])
+    args.lora_alpha = trial.suggest_categorical("lora_alpha", [16, 32, 64])
     args.lora_dropout = trial.suggest_float("lora_dropout", 0.1, 0.5, step=0.05)
     args.batch_size = trial.suggest_categorical("batch_size", [4, 8, 16])
-    args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [2, 4, 8, 16])
-    if args.mole_num_experts <= 8:
-        args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
-    else:
-        args.mole_top_k = trial.suggest_categorical("mole_top_k", [4, 8])
+    args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [4, 8])
+    args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
         
     args.gammalr = trial.suggest_float("gamma", 0.9, 1.0, step=0.01)
     args.entropy_weight = trial.suggest_float("entropy_weight", 0.01, 1.0, step=0.01)

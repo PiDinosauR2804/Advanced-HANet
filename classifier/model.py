@@ -45,8 +45,10 @@ class BertED(nn.Module):
         self.class_num = args.class_num + 1
         self.use_mole = args.use_mole
         self.use_lora = args.use_lora
-        self.top_k = args.mole_top_k
         self.num_experts = args.mole_num_experts
+        self.top_k = args.mole_top_k
+        # self.top_k = int(args.num_experts * args.mole_topk_ratio)
+        
         self.use_general_expert = args.use_general_expert
         self.uniform_expert = False
         self.general_expert_weight = args.general_expert_weight

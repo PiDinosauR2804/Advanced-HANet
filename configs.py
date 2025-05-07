@@ -44,6 +44,7 @@ def parse_arguments():
     parser.add_argument("--eval_batch_size", type=int, default=256, help="Batch size for evaluation")
     parser.add_argument("--wandb", action="store_true", help="Enable Weights & Biases logging")
     parser.add_argument("--eval_ratio", type=float, default=0.1, help="Ratio of data for evaluation")
+    parser.add_argument("--mole_topk_ratio", type=float, default=0.5, help="Ratio of top-k experts for MoLE")
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
