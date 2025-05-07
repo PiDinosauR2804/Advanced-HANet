@@ -7,7 +7,7 @@ args = parse_arguments()
 
 def objective(trial):
     # Hằng 
-    args.epochs = 100
+    args.epochs = 50
     args.use_lora = True
     args.logs_dir = "logs/classifier"
     args.data_root = "./data/data_ids"
@@ -38,24 +38,26 @@ def objective(trial):
     args.ratio_loss_des_cl = 1
     args.task_ep_time = 1
     args.early_stop = True
-    args.skip_eval_ep = 40
-    args.eval_freq = 10
+    args.skip_eval_ep = 10
+    args.eval_freq = 2
     args.patience = 3
     args.early_stop = True
     args.classifier_layer = 1
     args.hidden_dim = 128
     args.dropout = 0.5
     args.use_general_expert = True
-    args.uniform_ep = 20
     args.use_mole = True
-    args.step_size = 50
+    args.step_size = 5
+    args.wandb = True
+    args.eval_batch_size = 64
+    args.task_ep_time = 1
 
     # Tham số cho Optuna trial
+    args.uniform_ep = trial.suggest_int("uniform_ep", 1, 10)
     args.lr = trial.suggest_float("lr", 1e-5, 2e-4, log=True)
     args.lora_rank = trial.suggest_int("lora_rank", 32, 256, step=32)
     args.lora_alpha = trial.suggest_int("lora_alpha", 16, 128, step=16)
     args.lora_dropout = trial.suggest_float("lora_dropout", 0.1, 0.5, step=0.05)
-    args.task_ep_time = trial.suggest_int("task_ep_time", 1, 5)
     args.batch_size = trial.suggest_categorical("batch_size", [4, 8, 16, 32, 64])
     args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [2, 4, 8, 16])
     if args.mole_num_experts <= 8:
@@ -63,7 +65,7 @@ def objective(trial):
     else:
         args.mole_top_k = trial.suggest_categorical("mole_top_k", [4, 8])
         
-    args.gammalr = trial.suggest_float("gamma", 0.1, 1.0, step=0.1)
+    args.gammalr = trial.suggest_float("gamma", 0.9, 1.0, step=0.01)
     args.entropy_weight = trial.suggest_float("entropy_weight", 0.01, 1.0, step=0.01)
     args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.01, 1.0, step=0.01)
     args.general_expert_weight = trial.suggest_float("general_expert_weight", 0.1, 1.0, step=0.1)

@@ -164,7 +164,7 @@ def train(local_rank, args, trial=None):
     os.makedirs(os.path.dirname(e_pth), exist_ok=True)
     
     # Xét từng task 
-    for stage in task_idx:
+    for stage in [0]:
         # if stage > 0:
         #     break
         logger.info(f"==================== Stage {stage} ====================")
@@ -706,8 +706,8 @@ def train(local_rank, args, trial=None):
                         batch_size=args.eval_batch_size,
                         collate_fn=lambda x:x)
                     calcs = Calculator()
-                    eval_ep = len(eval_loader)
-                    for j, batch in tqdm(enumerate(eval_loader), total=eval_ep, desc="Eval"):
+                    
+                    for j, batch in eval_loader:
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
@@ -723,9 +723,7 @@ def train(local_rank, args, trial=None):
                             eval_outputs[:, 0] = 0
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                         calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
-                        if j % int(eval_ep * args.eval_ratio) == 0:
-                            bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
-                            logger.info(f"Eval {j}/{eval_ep} - micro_F1: {micro_F1}")
+                        
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
                     
                     wandb.log({
