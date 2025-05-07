@@ -49,7 +49,7 @@ def objective(trial):
     args.use_mole = True
     args.step_size = 5
     args.wandb = True
-    args.eval_batch_size = 64
+    args.eval_batch_size = 32
     args.task_ep_time = 1
 
     # Tham số cho Optuna trial
@@ -59,11 +59,8 @@ def objective(trial):
     args.lora_alpha = trial.suggest_int("lora_alpha", 16, 128, step=16)
     args.lora_dropout = trial.suggest_float("lora_dropout", 0.1, 0.5, step=0.05)
     args.batch_size = trial.suggest_categorical("batch_size", [4, 8, 16])
-    args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [2, 4, 8, 16])
-    if args.mole_num_experts <= 8:
-        args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
-    else:
-        args.mole_top_k = trial.suggest_categorical("mole_top_k", [4, 8])
+    args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [2, 4, 8])
+    args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
         
     args.gammalr = trial.suggest_float("gamma", 0.9, 1.0, step=0.01)
     args.entropy_weight = trial.suggest_float("entropy_weight", 0.01, 1.0, step=0.01)
