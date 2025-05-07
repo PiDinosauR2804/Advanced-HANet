@@ -35,14 +35,14 @@ import wandb
 from loguru import logger
 from tqdm.auto import tqdm
 import optuna
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 # PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
 # PERM_10 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]
 
-tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 
 def train(local_rank, args, trial=None):    
+    tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     # Configure logging
     os.makedirs(args.logs_dir, exist_ok=True)
     # --- Xoá handler mặc định ---
@@ -72,15 +72,22 @@ def train(local_rank, args, trial=None):
     # get streams from json file and permute them in pre-defined order
     # PERM = PERM_5 if args.task_num == 5 else PERM_10
     
-    wandb.init(
-        # set the wandb project where this run will be logged
-        project="HANet_mole",
-        name = args.run_name,
+    if args.wandb:
+        wandb.init(
+            # set the wandb project where this run will be logged
+            project="HANet_mole",
+            name = args.run_name,
 
-        # track hyperparameters and run metadata
-        config=args.__dict__,
-        reinit=True
-    )
+            # track hyperparameters and run metadata
+            config=args.__dict__,
+            reinit=True
+        )
+    else:
+        wandb.init(
+            project="HANet_mole",
+            name = args.run_name,
+            mode="disabled"
+        )
     
     # Đọc dữ liệu
     streams = collect_from_json(args.dataset, args.stream_root, 'stream', args)

@@ -42,6 +42,7 @@ def parse_arguments():
     parser.add_argument("--gammalr", type=float, default=0.1, help="Gamma for learning rate decay")
     parser.add_argument("--gradient_checkpointing", action="store_true", help="Enable gradient checkpointing")
     parser.add_argument("--eval_batch_size", type=int, default=256, help="Batch size for evaluation")
+    parser.add_argument("--wandb", action="store_true", help="Enable Weights & Biases logging")
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
