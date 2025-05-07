@@ -707,7 +707,7 @@ def train(local_rank, args, trial=None):
                         collate_fn=lambda x:x)
                     calcs = Calculator()
                     
-                    for j, batch in eval_loader:
+                    for batch in eval_loader:
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
