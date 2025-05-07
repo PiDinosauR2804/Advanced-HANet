@@ -75,7 +75,7 @@ def train(local_rank, args, trial=None):
     if args.wandb:
         wandb.init(
             # set the wandb project where this run will be logged
-            project="HANet_mole",
+            project="HANet_mol_full",
             name = args.run_name,
 
             # track hyperparameters and run metadata
@@ -84,7 +84,7 @@ def train(local_rank, args, trial=None):
         )
     else:
         wandb.init(
-            project="HANet_mole",
+            project="HANet_mole_full",
             name = args.run_name,
             mode="disabled"
         )
@@ -164,7 +164,7 @@ def train(local_rank, args, trial=None):
     os.makedirs(os.path.dirname(e_pth), exist_ok=True)
     
     # Xét từng task 
-    for stage in [0]:
+    for stage in task_idx:
         # if stage > 0:
         #     break
         logger.info(f"==================== Stage {stage} ====================")
@@ -707,7 +707,7 @@ def train(local_rank, args, trial=None):
                         collate_fn=lambda x:x)
                     calcs = Calculator()
                     
-                    for j, batch in eval_loader:
+                    for batch in eval_loader:
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)

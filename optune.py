@@ -2,6 +2,8 @@ from classifier.train import train
 from configs import parse_arguments
 import optuna
 import wandb
+import os
+os.environ["WANDB_API_KEY"] = "bbee5bd41b9c06ce3048243c9611e36701652ef2"  # Thay thế bằng API key của bạn
 
 args = parse_arguments()
 
