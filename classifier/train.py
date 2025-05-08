@@ -164,7 +164,7 @@ def train(local_rank, args, trial=None):
     os.makedirs(os.path.dirname(e_pth), exist_ok=True)
     
     # Xét từng task 
-    for stage in [0]:
+    for stage in task_idx:
         # if stage > 0:
         #     break
         logger.info(f"==================== Stage {stage} ====================")
@@ -707,13 +707,13 @@ def train(local_rank, args, trial=None):
                         collate_fn=lambda x:x)
                     calcs = Calculator()
                     
-                    for batch in eval_loader:
+                    for batch in tqdm(eval_loader, desc="Eval"):
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
-                        eval_return_dict = model(eval_x, eval_masks, eval_span)
+                        eval_return_dict = model(eval_x, eval_masks, eval_span, batch_size=32, train=False)
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
                         for i in range(len(eval_y)):
