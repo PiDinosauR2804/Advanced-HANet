@@ -713,7 +713,7 @@ def train(local_rank, args, trial=None):
                         eval_masks = torch.LongTensor(eval_masks).to(device)
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
-                        eval_return_dict = model(eval_x, eval_masks, eval_span, batch_size=32, train=False)
+                        eval_return_dict = model(eval_x, eval_masks, eval_span, train=False)
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
                         for i in range(len(eval_y)):
