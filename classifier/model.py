@@ -129,8 +129,7 @@ class BertED(nn.Module):
             out_x = self.backbone(x[start:start + batch_size], attention_mask=masks[start:start + batch_size])
             out.append(out_x.last_hidden_state)
             
-        out = torch.cat(out, dim=0)
-        hidden = out.last_hidden_state
+        hidden = torch.cat(out, dim=0)  # (B, Seqlen, H)
         return_dict = {
             'reps': hidden[:, 0, :].clone(),
             'context_feat': hidden.view(-1, hidden.shape[-1])
