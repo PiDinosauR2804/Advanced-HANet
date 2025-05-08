@@ -202,7 +202,7 @@ class BertED(nn.Module):
             
             # Gán vào expert_outputs output có trọng số
             try:
-                expert_outputs[mask, expert_id] = out_x * gating_weights[mask, expert_id].unsqueeze(-1)  # (M, Seqlen, H)
+                expert_outputs[mask, expert_id] = out_x * gating_weights[mask, expert_id].view(-1, 1, 1)  # (M, Seqlen, H)
             except Exception as e:
                 logger.error(f"Error in expert_outputs assignment: mask.sum()={mask.sum()}, expert_id={expert_id}, gating_weights[mask, expert_id].shape={gating_weights[mask, expert_id].shape}, out_x.shape={out_x.shape}")
                 raise e
