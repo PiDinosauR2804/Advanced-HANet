@@ -281,7 +281,7 @@ def train(local_rank, args):
             # else:
             #     e_loader = list(exemplars.build_stage_loader(MAVEN_Dataset([], [], [], [])))
             if args.rep_aug != "none":
-                e_loader = exemplars.build_stage_loader(MAVEN_Dataset([], [], [], []))
+                e_loader = exemplars.build_stage_loader(MAVEN_Dataset([], [], [], [], []))
             # prev_model.to(args.device)   # TODO: test use
 
         for item in streams_indexed[stage]:
