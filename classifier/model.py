@@ -124,10 +124,8 @@ class BertED(nn.Module):
         # ========== [1] Forward qua backbone base_model theo batch size ==========
         B = x.size(0)
         out = []
-        for batch in range(0, B, batch_size):
-            start = batch
-            end = min(batch + batch_size, B)
-            out_x = self.backbone(x[start:end], attention_mask=masks[start:end])
+        for start in range(0, B, batch_size):
+            out_x = self.backbone(x[start:start + batch_size], attention_mask=masks[start:start + batch_size])
             out.append(out_x.last_hidden_state)
             
         out = torch.cat(out, dim=0)
@@ -162,10 +160,8 @@ class BertED(nn.Module):
         # ========== [2] Forward qua backbone base_model theo batch size ==========
             with torch.no_grad():
                 cls_embedding = []
-                for batch in range(0, B, batch_size):
-                    start = batch
-                    end = min(batch + batch_size, B)
-                    base_output = self.backbone.base_model(x[start:end], attention_mask=masks[start:end])
+                for start in range(0, B, batch_size):
+                    base_output = self.backbone.base_model(x[start:start + batch_size], attention_mask=masks[start:start + batch_size])
                     cls_embedding.append(base_output.last_hidden_state[:, 0, :])  # Lấy embedding của [CLS]
                 cls_embedding = torch.cat(cls_embedding, dim=0)  # (B, H)
             gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (B, E)
@@ -194,9 +190,9 @@ class BertED(nn.Module):
             
             # Chia batch để forward
             out_x = []
-            for i in range(0, mask.sum().item(), batch_size):
-                sub_x = x[mask][i:i + batch_size]
-                sub_masks = masks[mask][i:i + batch_size]
+            for start in range(0, mask.sum().item(), batch_size):
+                sub_x = x[mask][start:start + batch_size]
+                sub_masks = masks[mask][start:start + batch_size]
                 out_x_batch = self.backbone(sub_x, attention_mask=sub_masks).last_hidden_state
                 out_x.append(out_x_batch)
             
@@ -213,10 +209,8 @@ class BertED(nn.Module):
         if self.use_general_expert:
             self.backbone.set_adapter("general_expert")
             general_out = []
-            for i in range(0, B, batch_size):
-                start = i
-                end = min(i + batch_size, B)
-                general_out_batch = self.backbone(x[start:end], attention_mask=masks[start:end]).last_hidden_state
+            for start in range(0, B, batch_size):
+                general_out_batch = self.backbone(x[start:start + batch_size], attention_mask=masks[start:start + batch_size]).last_hidden_state
                 general_out.append(general_out_batch)
             general_out = torch.cat(general_out, dim=0)
             expert_outputs += self.general_expert_weight * general_out
