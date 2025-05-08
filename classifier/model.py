@@ -54,6 +54,7 @@ class BertED(nn.Module):
         # Load backbone
         self.backbone = BertModel.from_pretrained(args.backbone)
         self.input_dim = self.backbone.config.hidden_size
+        self.seqlen = args.max_seqlen + 2  # +2 for [CLS] and [SEP]
 
         # Classifier
         if args.classifier_layer > 1:
@@ -114,9 +115,9 @@ class BertED(nn.Module):
             self.uniform_expert = turn_on
             logger.info(f"Uniform expert: {turn_on}")
 
-    def forward(self, x, masks, span=None, aug=None):
+    def forward(self, x, masks, span=None, aug=None, train=True):
         if self.use_mole:
-            return self._forward_mole(x, masks, span, aug)
+            return self._forward_mole(x, masks, span, aug, train)
         else:
             return self._forward_normal(x, masks, span, aug)
 
@@ -140,33 +141,31 @@ class BertED(nn.Module):
 
         return return_dict
 
-    def _forward_mole(self, x, masks, span=None, aug=None):
+    def _forward_mole(self, x, masks, span=None, aug=None, train=True):
         B = x.size(0)
-
-        with torch.no_grad():
-            base_output = self.backbone.base_model(x, attention_mask=masks)
-            cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
-
-        # Gating
-        gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (B, E)
-        gating_weights = self.softmax(gating_logits)
-
-        if self.uniform_expert:
-            gating_weights = torch.full_like(gating_weights, 1.0 / self.num_experts)
-
         return_dict = {}
 
         if not self.uniform_expert:
-            avg_weights = gating_weights.mean(dim=0)
-            uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
-            return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
-            return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
+            with torch.no_grad():
+                base_output = self.backbone.base_model(x, attention_mask=masks)
+                cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
 
-        # Top-k routing
-        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
+            # Gating
+            gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (B, E)
+            gating_weights = self.softmax(gating_logits)
+            topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
+            if train:
+                avg_weights = gating_weights.mean(dim=0)
+                uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
+                return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
+                return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
+        else:
+            topk_weights = torch.full((B, self.top_k), 1.0 / self.top_k).to(x.device)
+            # randomly chọn k expert cho mỗi batch, topk của một sample phải khác nhau
+            topk_indices = torch.stack([torch.randperm(self.num_experts)[:self.top_k] for _ in range(B)], dim=0).to(x.device)
 
         # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
-        expert_outputs = [torch.zeros_like(base_output.last_hidden_state) for _ in range(self.top_k)]
+        expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim) for _ in range(self.top_k)]
 
         for k in range(self.top_k):
             expert_ids = topk_indices[:, k]  # (B,)
