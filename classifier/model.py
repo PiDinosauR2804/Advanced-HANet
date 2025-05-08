@@ -114,14 +114,23 @@ class BertED(nn.Module):
             self.uniform_expert = turn_on
             logger.info(f"Uniform expert: {turn_on}")
 
-    def forward(self, x, masks, span=None, aug=None):
+    def forward(self, x, masks, span=None, aug=None, batch_size=32, train=True):
         if self.use_mole:
-            return self._forward_mole(x, masks, span, aug)
+            return self._forward_mole(x, masks, span, aug, batch_size, train)
         else:
-            return self._forward_normal(x, masks, span, aug)
+            return self._forward_normal(x, masks, span, aug, batch_size, train)
 
-    def _forward_normal(self, x, masks, span=None, aug=None):
-        out = self.backbone(x, attention_mask=masks)
+    def _forward_normal(self, x, masks, span=None, aug=None, batch_size=32, train=True):
+        # ========== [1] Forward qua backbone base_model theo batch size ==========
+        B = x.size(0)
+        out = []
+        for batch in range(0, B, batch_size):
+            start = batch
+            end = min(batch + batch_size, B)
+            out_x = self.backbone(x[start:end], attention_mask=masks[start:end])
+            out.append(out_x.last_hidden_state)
+            
+        out = torch.cat(out, dim=0)
         hidden = out.last_hidden_state
         return_dict = {
             'reps': hidden[:, 0, :].clone(),
@@ -140,14 +149,20 @@ class BertED(nn.Module):
 
         return return_dict
 
-    def _forward_mole(self, x, masks, span=None, aug=None):
+    def _forward_mole(self, x, masks, span=None, aug=None, batch_size=32, train=True):
         B = x.size(0)
 
+        # ========== [1] Forwar d qua backbone base_model theo batch size ==========
         with torch.no_grad():
-            base_output = self.backbone.base_model(x, attention_mask=masks)
-            cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
+            cls_embedding = []
+            for batch in range(0, B, batch_size):
+                start = batch
+                end = min(batch + batch_size, B)
+                base_output = self.backbone.base_model(x[start:end], attention_mask=masks[start:end])
+                cls_embedding.append(base_output.last_hidden_state[:, 0, :])  # Lấy embedding của [CLS]
+            cls_embedding = torch.cat(cls_embedding, dim=0)  # (B, H)
 
-        # Gating
+        # ========== [2] Tính gating và top-k ==========
         gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (B, E)
         gating_weights = self.softmax(gating_logits)
 
@@ -156,47 +171,75 @@ class BertED(nn.Module):
 
         return_dict = {}
 
-        if not self.uniform_expert:
+        if not self.uniform_expert and train:
             avg_weights = gating_weights.mean(dim=0)
             uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
             return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
             return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
 
-        # Top-k routing
-        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
+        # Lấy top-k expert cho mỗi sample
+        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k)
 
-        # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
+        # ========== [3] Gom nhóm theo expert_id ==========
         expert_outputs = [torch.zeros_like(base_output.last_hidden_state) for _ in range(self.top_k)]
+        expert_batches = {expert_id: [] for expert_id in range(self.num_experts)}
 
+        # Gom các sample theo expert
         for k in range(self.top_k):
-            expert_ids = topk_indices[:, k]  # (B,)
-            weights = topk_weights[:, k]     # (B,)
+            for i, expert_id in enumerate(topk_indices[:, k]):
+                expert_batches[expert_id.item()].append((i, topk_weights[i, k]))
 
-            for expert_id in expert_ids.unique():
-                mask = (expert_ids == expert_id)
-                if mask.sum() == 0:
-                    continue
+        # ========== [4] Forward từng expert theo batch size ==========
+        for expert_id, batch_data in expert_batches.items():
+            if not batch_data:
+                continue
 
-                self.backbone.set_adapter(f"expert_{expert_id.item()}")
-                out = self.backbone(
-                    x[mask], attention_mask=masks[mask]
-                ).last_hidden_state  # (N, T, H)
+            # Chuyển sang tensor
+            indices, weights = zip(*batch_data)
+            indices = list(indices)
+            weights = torch.tensor(weights, device=x.device).unsqueeze(-1).unsqueeze(-1)  # (N, 1, 1)
 
-                weighted = weights[mask].view(-1, 1, 1) * out
-                expert_outputs[k][mask] = weighted
+            # Lấy input cho expert hiện tại
+            input_x = x[indices]
+            mask_x = masks[indices]
 
-        # Tổng hợp top-k expert output
+            # Set adapter cho expert
+            self.backbone.set_adapter(f"expert_{expert_id}")
+
+            # Forward theo batch size để tối ưu VRAM
+            out_x = []
+            for batch in range(0, input_x.size(0), batch_size):
+                start = batch
+                end = min(batch + batch_size, input_x.size(0))
+                input_x_batch = input_x[start:end]
+                mask_x_batch = mask_x[start:end]
+
+                # Forward pass
+                out_x_batch = self.backbone(input_x_batch, attention_mask=mask_x_batch).last_hidden_state
+                out_x.append(out_x_batch)
+
+            # Kết hợp kết quả
+            out_x = torch.cat(out_x, dim=0)  # (N, L, H)
+            out_x *= weights  # (N, L, H)
+
+            # Phân phối output vào expert_outputs theo chỉ số ban đầu
+            for k, idx in enumerate(indices):
+                expert_outputs[k][idx] = out_x[k]
+
+        # ========== [5] Tổng hợp top-k expert output ==========
         x_out = sum(expert_outputs)
 
-        # Optional: add general expert
+        # ========== [6] Optional: add general expert ==========
         if self.use_general_expert:
             self.backbone.set_adapter("general_expert")
             general_out = self.backbone(x, attention_mask=masks).last_hidden_state
             x_out += self.general_expert_weight * general_out
 
+        # Lưu kết quả vào return_dict
         return_dict['reps'] = x_out[:, 0, :].clone()
         return_dict['context_feat'] = x_out.view(-1, x_out.shape[-1])
 
+        # ========== [7] Xử lý trigger features nếu có ==========
         if span is not None:
             trig_feature = self._extract_trigger(x_out, span)
             return_dict['trig_feat'] = trig_feature
@@ -208,6 +251,7 @@ class BertED(nn.Module):
                 return_dict['outputs_aug'] = self.fc(feature_aug)
 
         return return_dict
+
 
     def _extract_trigger(self, x, span):
         trig_feature = []

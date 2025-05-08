@@ -26,7 +26,7 @@ def objective(trial):
     args.class_num = 20
     args.single_label = True
     args.cl_aug = "shuffle"
-    args.aug_repeat_times = 5
+    args.aug_repeat_times = 2
     args.joint_da_loss = "ce"
     args.sub_max = True
     args.cl_temp = 0.07
@@ -51,14 +51,14 @@ def objective(trial):
     args.wandb = True
     args.eval_batch_size = 32
     args.task_ep_time = 1
+    args.uniform_ep = 2
+    args.lora_dropout = 0.3
+    args.batch_size = 8
 
     # Tham số cho Optuna trial
-    args.uniform_ep = trial.suggest_int("uniform_ep", 1, 10)
-    args.lr = trial.suggest_float("lr", 1e-5, 2e-4, log=True)
-    args.lora_rank = trial.suggest_int("lora_rank", 32, 256, step=32)
-    args.lora_alpha = trial.suggest_int("lora_alpha", 16, 128, step=16)
-    args.lora_dropout = trial.suggest_float("lora_dropout", 0.1, 0.5, step=0.05)
-    args.batch_size = trial.suggest_categorical("batch_size", [4, 8, 16])
+    args.lr = trial.suggest_float("lr", 5e-5, 2e-4, log=True)
+    args.lora_rank = trial.suggest_categorical("lora_rank", [64, 128, 256])
+    args.lora_alpha = trial.suggest_int("lora_alpha", 32, 128, step=32)
     args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [4, 8])
     args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
         
@@ -73,8 +73,8 @@ def objective(trial):
 
 if __name__ == "__main__":
     wandb.login()
-    pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=10, interval_steps=1)
-    study = optuna.create_study(direction="maximize", pruner=pruner)
+    # pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=10, interval_steps=1)
+    study = optuna.create_study(direction="maximize")
     study.optimize(objective, n_trials=10)
     
     print("Best trial:")
