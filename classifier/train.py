@@ -330,11 +330,15 @@ def train(local_rank, args):
                 #     padded_train_span, span_len = None, None
                 # else:
                 
-                train_x, train_y, train_masks, train_span = zip(*batch)
+                train_x, train_y, train_masks, train_span, train_augment = zip(*batch)
                 train_x = torch.LongTensor(train_x).to(device)
                 train_masks = torch.LongTensor(train_masks).to(device)
                 train_y = [torch.LongTensor(item).to(device) for item in train_y]           
                 train_span = [torch.LongTensor(item).to(device) for item in train_span]     # Sử dụng để lưu vị trí bắt đầu và kết thúc 1 từ của các ids
+                train_augment = [
+                    [torch.LongTensor(part).to(device) for part in sample]
+                    for sample in train_augment
+                ]
                 
                 labels_for_loss_des = []
                 for y in train_y:
@@ -536,12 +540,17 @@ def train(local_rank, args):
                 if args.rep_aug != "none" and stage > 0:
                     outputs_aug, aug_y = [], []
                     for e_batch in e_loader:
-                        exemplar_x, exemplars_y, exemplar_masks, exemplar_span = zip(*e_batch)
+                        exemplar_x, exemplars_y, exemplar_masks, exemplar_span, exemplar_augment = zip(*e_batch)
                         exemplar_radius = [exemplars.radius[y[0]] for y in exemplars_y]
                         exemplar_x = torch.LongTensor(exemplar_x).to(device)
                         exemplar_masks = torch.LongTensor(exemplar_masks).to(device)
                         exemplars_y = [torch.LongTensor(item).to(device) for item in exemplars_y]
-                        exemplar_span = [torch.LongTensor(item).to(device) for item in exemplar_span]            
+                        exemplar_span = [torch.LongTensor(item).to(device) for item in exemplar_span]    
+                        exemplar_augment = [
+                            [torch.LongTensor(part).to(device) for part in sample]
+                            for sample in exemplar_augment
+                        ]
+                                
                         if args.rep_aug == "relative":
                             aug_return_dict = model(exemplar_x, exemplar_masks, exemplar_span, torch.sqrt(torch.stack(exemplar_radius)).unsqueeze(-1))
                         else:
@@ -758,6 +767,8 @@ def train(local_rank, args):
                         eval_masks = torch.LongTensor(eval_masks).to(device)
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
+                        
+                        
                         eval_return_dict = model(eval_x, eval_masks, eval_span)
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
