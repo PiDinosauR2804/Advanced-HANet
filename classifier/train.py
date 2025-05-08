@@ -335,10 +335,17 @@ def train(local_rank, args):
                 train_masks = torch.LongTensor(train_masks).to(device)
                 train_y = [torch.LongTensor(item).to(device) for item in train_y]           
                 train_span = [torch.LongTensor(item).to(device) for item in train_span]     # Sử dụng để lưu vị trí bắt đầu và kết thúc 1 từ của các ids
-                train_augment = [
-                    [torch.LongTensor(part).to(device) for part in sample]
-                    for sample in train_augment
-                ]
+                # ví dụ với phần valid_span_aug = [[s11, s12], [s21, s22], …]
+                augment_x = {}
+                augment_masks = {}
+                augment_y = {}
+                augment_span = {}
+                for aug_ids in range(args.num_augmention):
+                    augment_x[aug_ids] = [torch.LongTensor(item[0][aug_ids]).to(device) for item in train_augment]
+                    augment_masks[aug_ids] = [torch.LongTensor(item[1][aug_ids]).to(device) for item in train_augment]
+                    augment_y[aug_ids] = [torch.LongTensor(item[2][aug_ids]).to(device) for item in train_augment]
+                    augment_span[aug_ids] = [torch.LongTensor(item[3][aug_ids]).to(device) for item in train_augment]
+
                 
                 labels_for_loss_des = []
                 for y in train_y:
@@ -546,8 +553,20 @@ def train(local_rank, args):
                         exemplar_masks = torch.LongTensor(exemplar_masks).to(device)
                         exemplars_y = [torch.LongTensor(item).to(device) for item in exemplars_y]
                         exemplar_span = [torch.LongTensor(item).to(device) for item in exemplar_span]    
-                        exemplar_augment = [
-                            [torch.LongTensor(part).to(device) for part in sample]
+                        aug_exemplar_x = [
+                            [torch.LongTensor(span).to(device) for span in sample[0]]
+                            for sample in exemplar_augment
+                        ]
+                        aug_exemplar_masks = [
+                            [torch.LongTensor(span).to(device) for span in sample[1]]
+                            for sample in exemplar_augment
+                        ]
+                        aug_exemplars_y = [
+                            [torch.LongTensor(span).to(device) for span in sample[2]]
+                            for sample in exemplar_augment
+                        ]
+                        aug_exemplar_span = [
+                            [torch.LongTensor(span).to(device) for span in sample[3]]
                             for sample in exemplar_augment
                         ]
                                 

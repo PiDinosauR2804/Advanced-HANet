@@ -87,6 +87,9 @@ def parse_arguments():
     parser.add_argument('--use-weight-ce', action='store_true')
     parser.add_argument('--alpha_ce', default=0.1, type=float)
     
+    # Args for Augment
+    parser.add_argument('--num_augmention', default=1, type=int)
+    
     args, _ = parser.parse_known_args()
 
     return args

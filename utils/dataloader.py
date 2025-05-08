@@ -77,6 +77,32 @@ class MAVEN_Dataset(Dataset):
     # def collate_fn(self, batch):
     #     batch = pad_sequence([torch.LongTensor(item) for item in batch[2]])
     #     pass
+    
+class Eval_MAVEN_Dataset(Dataset):
+    def __init__(self, tokens, labels, masks, spans) -> None:
+        super(Dataset).__init__()
+        self.tokens = tokens
+        self.masks = masks
+        self.labels = labels
+        self.spans = spans
+        # self.requires_cl = [0 for _ in range(len(spans))]
+        # self.labels = []
+        # for stream in streams:
+        #     for lb in stream:
+        #         if not lb in self.label2idx:
+        #             self.label2idx[lb] = len(self.label2idx)
+        # for label_ls in labels:
+        #     self.labels.append([self.label2idx[label]  for label in label_ls])
+    def __getitem__(self, index):
+        return [self.tokens[index], self.labels[index], self.masks[index], self.spans[index]]
+    def __len__(self):
+        return len(self.labels)
+    def extend(self, tokens, labels, masks, spans, augment):
+        self.tokens.extend(tokens)
+        self.labels.extend(labels)
+        self.masks.extend(masks)
+        self.spans.extend(spans)
+
 
 def collect_dataset(dataset, root, split, label2idx, stage_id, labels):
     if split == 'train':
@@ -422,9 +448,9 @@ def collect_eval_sldataset(dataset, root, split, label2idx, stage_id, labels):
         data_spans.append(valid_span)
             # data_spans.append(valid_span)
     if args.my_test:
-        return MAVEN_Dataset(data_tokens[:100], data_labels[:100], data_masks[:100], data_spans[:100]) # TODO:test use
+        return Eval_MAVEN_Dataset(data_tokens[:100], data_labels[:100], data_masks[:100], data_spans[:100]) # TODO:test use
     else:
-        return MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans)
+        return Eval_MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans)
 
 
 # def collect_fewshot_dataset(dataset, root, split, labels, label2idx):
