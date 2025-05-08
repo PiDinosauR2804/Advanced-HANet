@@ -215,7 +215,8 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
             add_span = []
             new_t = {}
             for i in range(len(dt['label'])):
-                if dt['label'][i] == labels[idx]: 
+                # if dt['label'][i] == labels[idx]: 
+                if dt['label'][i] in labels: 
                     add_label.append(dt['label'][i]) 
                     add_span.append(dt['span'][i])
             if len(add_label) != 0:
