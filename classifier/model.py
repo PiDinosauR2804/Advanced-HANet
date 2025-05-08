@@ -54,6 +54,8 @@ class BertED(nn.Module):
         # Load backbone
         self.backbone = BertModel.from_pretrained(args.backbone)
         self.input_dim = self.backbone.config.hidden_size
+        self.seqlen = args.max_seqlen + 2  # +2 for [CLS] and [SEP]
+        self.backbone.resize_token_embeddings(self.seqlen)
 
         # Classifier
         if args.classifier_layer > 1:
@@ -165,10 +167,10 @@ class BertED(nn.Module):
                     cls_embedding.append(base_output.last_hidden_state[:, 0, :])  # Lấy embedding của [CLS]
                 cls_embedding = torch.cat(cls_embedding, dim=0)  # (B, H)
             gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (B, E)
-            gating_weights = self.softmax(gating_logits)
+            gating_weights = self.softmax(gating_logits) # (B, E)
         # ======== 3. Lấy top-k expert cho mỗi sample và tạo mask ========
             topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k)
-            topk_mask = torch.zeros(B, self.num_experts, device=x.device, dtype=torch.bool).scatter_(1, topk_indices, True)
+            topk_mask = torch.zeros(B, self.num_experts, device=x.device, dtype=torch.bool).scatter_(1, topk_indices, True) # (B, E)
 
         return_dict = {}
 
@@ -179,7 +181,7 @@ class BertED(nn.Module):
             return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
 
         # ======== 4. Gom nhóm các sample theo expert ========
-        expert_outputs = torch.zeros(B, self.num_experts, self.input_dim, device=x.device)  # (B, E, H)
+        expert_outputs = torch.zeros(B, self.num_experts, self.seqlen, self.input_dim, device=x.device)  # (B, E, H)
         
         for expert_id in range(self.num_experts):
             mask = topk_mask[:, expert_id]  # Chọn tất cả sample thuộc expert_id
@@ -197,13 +199,17 @@ class BertED(nn.Module):
                 out_x.append(out_x_batch)
             
             # Kết hợp batch
-            out_x = torch.cat(out_x, dim=0)
+            out_x = torch.cat(out_x, dim=0) # (M, Seqlen, H)
             
             # Gán vào expert_outputs output có trọng số
-            expert_outputs[mask, expert_id] = out_x * gating_weights[mask, expert_id].unsqueeze(-1)  # (B, E, H)
+            try:
+                expert_outputs[mask, expert_id] = out_x * gating_weights[mask, expert_id].unsqueeze(-1)  # (M, Seqlen, H)
+            except Exception as e:
+                logger.error(f"Error in expert_outputs assignment: mask.sum()={mask.sum()}, expert_id={expert_id}, gating_weights[mask, expert_id].shape={gating_weights[mask, expert_id].shape}, out_x.shape={out_x.shape}")
+                raise e
             
         # ======== 5. Tính tổng đầu ra các expert ========
-        expert_outputs = torch.sum(expert_outputs, dim=1)  # (B, H)
+        expert_outputs = torch.sum(expert_outputs, dim=1)  # (B, Seqlen, H)
 
         # ======== 5. Optional: add general expert ========
         if self.use_general_expert:
@@ -212,8 +218,8 @@ class BertED(nn.Module):
             for start in range(0, B, batch_size):
                 general_out_batch = self.backbone(x[start:start + batch_size], attention_mask=masks[start:start + batch_size]).last_hidden_state
                 general_out.append(general_out_batch)
-            general_out = torch.cat(general_out, dim=0)
-            expert_outputs += self.general_expert_weight * general_out
+            general_out = torch.cat(general_out, dim=0) # (B, Seqlen, H)
+            expert_outputs += self.general_expert_weight * general_out # (B, Seqlen, H)
 
         # ======== 6. Tổng hợp kết quả và trả về ========
         return_dict['reps'] = expert_outputs[:, 0, :].clone()
