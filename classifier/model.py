@@ -165,7 +165,7 @@ class BertED(nn.Module):
             topk_indices = torch.stack([torch.randperm(self.num_experts)[:self.top_k] for _ in range(B)], dim=0).to(x.device)
 
         # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
-        expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim) for _ in range(self.top_k)]
+        expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
 
         for k in range(self.top_k):
             expert_ids = topk_indices[:, k]  # (B,)
