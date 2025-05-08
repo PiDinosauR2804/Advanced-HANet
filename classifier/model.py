@@ -55,7 +55,6 @@ class BertED(nn.Module):
         self.backbone = BertModel.from_pretrained(args.backbone)
         self.input_dim = self.backbone.config.hidden_size
         self.seqlen = args.max_seqlen + 2  # +2 for [CLS] and [SEP]
-        self.backbone.resize_token_embeddings(self.seqlen)
 
         # Classifier
         if args.classifier_layer > 1:
