@@ -11,7 +11,7 @@ for i in ACE MAVEN; do
     fi
     # lặp qua shot-num = 5 và 10
     for j in 5 10; do
-        for k in 0.9 0.7 0.5 0.3 0.1
+        for k in 0.9 0.7 0.5 0.3 0.1; do
             python classifier/train.py \
                 --data-root ./data/data_ids_aug \
                 --dataset "$i" \
