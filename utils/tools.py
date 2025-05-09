@@ -69,6 +69,7 @@ def compute_CLLoss(Adj_mask, reprs, matsize): # compute InfoNCELoss
     return torch.mean(log_prob_cl[log_prob_cl > 0])
 
 def collect_from_json(dataset, root, split):
+    key = None
     default = ['train', 'dev', 'test']
     if split == "train":
         pth = os.path.join(root, dataset, "perm"+str(args.perm_id), f"{dataset}_{args.task_num}task_{args.class_num // args.task_num}way_{args.shot_num}shot.{split}.jsonl")
@@ -86,11 +87,11 @@ def collect_from_json(dataset, root, split):
             if pth.endswith('.jsonl'):
                 data = [json.loads(line) for line in f]
                 if split == "train":
-                    data = [list(i.values()) for i in data]
                     key = [list(i.keys()) for i in data]
+                    data = [list(i.values()) for i in data]
+                    
             else:
                 data = json.load(f)
-                key = None
     return data, key
 
 def sim(x, y):

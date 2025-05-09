@@ -145,7 +145,7 @@ def train(local_rank, args):
     # PERM = PERM_5 if args.task_num == 5 else PERM_10
     
     # Đọc dữ liệu
-    streams = collect_from_json(args.dataset, args.stream_root, 'stream')
+    streams, _ = collect_from_json(args.dataset, args.stream_root, 'stream')
     # streams = [streams[l] for l in PERM[int(args.perm_id)]] # permute the stream
     label2idx = {0:0}
     idx2label = {}
