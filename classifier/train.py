@@ -346,6 +346,29 @@ def train(local_rank, args):
                     augment_masks[aug_ids] = [torch.LongTensor(item[2][aug_ids]).to(device) for item in train_augment]
                     augment_span[aug_ids] = [torch.LongTensor(item[3][aug_ids]).to(device) for item in train_augment]
 
+                augment_x_list = [
+                    torch.stack(value, dim=0)  # → (B, L)
+                    for _, value in augment_x.items()
+                ]
+                augment_x_total = torch.cat(augment_x_list, dim=0).to(device)
+
+                augment_y_list = [
+                    torch.stack(value, dim=0)  # → (B, L)
+                    for _, value in augment_y.items()
+                ]
+                augment_y_total = torch.cat(augment_y_list, dim=0).to(device)
+                
+                augment_masks_list = [
+                    torch.stack(value, dim=0)  # → (B, L)
+                    for _, value in augment_masks.items()
+                ]
+                augment_masks_total = torch.cat(augment_masks_list, dim=0).to(device)
+                
+                augment_span_list = [
+                    torch.stack(value, dim=0)  # → (B, L)
+                    for _, value in augment_span.items()
+                ]
+                augment_span_total = torch.cat(augment_span_list, dim=0).to(device)
                 
                 labels_for_loss_des = []
                 for y in train_y:
@@ -473,9 +496,9 @@ def train(local_rank, args):
                 
                     # outputs[i].masked_fill_(invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
                 # if args.dataset == "ACE":
+                                  
                 loss_des_cl = torch.tensor(0.0, device=device)
                 if args.use_description:
-                    
                     reps = trig_feat
                     descriptions_representations = {}
                     final_description_res = {}
@@ -532,7 +555,27 @@ def train(local_rank, args):
                         loss_des_cl = compute_CLLoss(Des_adj_mask_tlcl, des_cl_feature, des_mat_size)
                     
                     loss = loss + loss_des_cl * args.ratio_loss_des_cl      
+                
+                lgacl_loss = torch.tensor(0.0, device=device)
+                if args.gpt_augmention:
                     
+                    augment_return_dict = model(augment_x_total, augment_masks_total, augment_span_total)
+                    augment_trig_feat = augment_return_dict['trig_feat']
+                    
+                    lgacl_feature = torch.cat([trig_feat, augment_trig_feat])
+                    # tlcl_feature = trig_feat
+                    lgacl_feature = normalize(lgacl_feature, dim=-1)
+                    lgacl_lbs = torch.cat(train_y + da_y)
+                    # tlcl_lbs = torch.cat(train_y)
+                    mat_size = lgacl_feature.shape[0]
+                    lgacl_lbs_oh = F.one_hot(lgacl_lbs).float()
+                    # tlcl_lbs_oh[:, 0] = 0 # whether to compute negative distance
+                    Adj_mask_lgacl = torch.matmul(lgacl_lbs_oh, lgacl_lbs_oh.T)
+                    Adj_mask_lgacl = Adj_mask_lgacl * (torch.ones(mat_size) - torch.eye(mat_size)).to(device)
+                    lgacl_loss = compute_CLLoss(Adj_mask_lgacl, lgacl_feature, mat_size)
+                
+                loss = loss + lgacl_loss
+                
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
                 if args.use_weight_ce:

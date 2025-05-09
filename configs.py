@@ -89,6 +89,7 @@ def parse_arguments():
     
     # Args for Augment
     parser.add_argument('--num_augmention', default=1, type=int)
+    parser.add_argument('--gpt_augmention', action='store_true')
     
     args, _ = parser.parse_known_args()
 
