@@ -558,14 +558,13 @@ def train(local_rank, args):
                 
                 lgacl_loss = torch.tensor(0.0, device=device)
                 if args.gpt_augmention:
-                    
                     augment_return_dict = model(augment_x_total, augment_masks_total, augment_span_total)
                     augment_trig_feat = augment_return_dict['trig_feat']
                     
                     lgacl_feature = torch.cat([trig_feat, augment_trig_feat])
                     # tlcl_feature = trig_feat
                     lgacl_feature = normalize(lgacl_feature, dim=-1)
-                    lgacl_lbs = torch.cat(train_y + da_y)
+                    lgacl_lbs = torch.cat(train_y + augment_y_total)
                     # tlcl_lbs = torch.cat(train_y)
                     mat_size = lgacl_feature.shape[0]
                     lgacl_lbs_oh = F.one_hot(lgacl_lbs).float()

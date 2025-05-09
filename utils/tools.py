@@ -5,6 +5,46 @@ from configs import parse_arguments
 args = parse_arguments()
 device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
 
+import torch
+
+def balance_zero_with_nonzero(
+    tlcl_feature: torch.Tensor,
+    tlcl_lbs: torch.Tensor
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """
+    Giữ lại tất cả các nhãn != 0, và chỉ giữ lại một số nhãn 0 sao cho
+    count(0) == count(non_zero). Nếu count(0) <= count(non_zero) thì không drop.
+
+    Args:
+        tlcl_feature: Tensor [N, D]
+        tlcl_lbs:     Tensor [N]
+
+    Returns:
+        filtered_feature, filtered_lbs
+    """
+    # vị trí các nhãn 0
+    zero_idx = (tlcl_lbs == 0).nonzero(as_tuple=False).flatten()
+    num_zero = zero_idx.numel()//(args.class_num // args.task_num)
+    # số nhãn khác 0
+    num_non_zero = tlcl_lbs.size(0) - num_zero
+
+    # tính số cần drop
+    drop_num = num_zero - num_non_zero
+    if drop_num <= 0:
+        # đã cân bằng hoặc không có 0 dư, trả về nguyên bản
+        return tlcl_feature, tlcl_lbs
+
+    # chọn ngẫu nhiên drop_num chỉ số trong zero_idx
+    perm = torch.randperm(num_zero, device=tlcl_lbs.device)
+    drop_idx = zero_idx[perm[:drop_num]]
+
+    # tạo mask để giữ tất cả ngoại trừ drop_idx
+    mask = torch.ones(tlcl_lbs.size(0), dtype=torch.bool, device=tlcl_lbs.device)
+    mask[drop_idx] = False
+
+    return tlcl_feature[mask], tlcl_lbs[mask]
+
+
 def collate_description(batch):
     tokens, masks, keys = zip(*batch)
     return list(tokens), list(masks), list(keys)
