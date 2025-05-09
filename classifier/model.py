@@ -53,7 +53,7 @@ class BertED(nn.Module):
 
         # Load backbone
         if backbone_path is not None:
-            self.backbone = BertModel.from_pretrained(args.backbone, state_dict=torch.load(backbone_path))
+            self.backbone = BertModel.from_pretrained(state_dict=torch.load(backbone_path))
         else:
             self.backbone = BertModel.from_pretrained(args.backbone)
         self.input_dim = self.backbone.config.hidden_size
