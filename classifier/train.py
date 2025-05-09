@@ -564,7 +564,6 @@ def train(local_rank, args):
                     lgacl_feature = torch.cat([trig_feat, augment_trig_feat])
                     # tlcl_feature = trig_feat
                     lgacl_feature = normalize(lgacl_feature, dim=-1)
-                    lgacl_lbs = torch.cat([train_y_total, augment_y_total], dim=0)
                     train_y_total = torch.cat(train_y, dim=0).to(device)
                     lgacl_lbs = torch.cat([train_y_total, augment_y_total], dim=0)
                     # tlcl_lbs = torch.cat(train_y)
