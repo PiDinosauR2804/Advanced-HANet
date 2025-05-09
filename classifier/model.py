@@ -111,6 +111,7 @@ class BertED(nn.Module):
                 if args.gating == "softmax":
                     self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
                     self.softmax = nn.Softmax(dim=-1)
+                    logger.info("Gating: softmax")
                 elif args.gating == "tanh":
                     self.gating_layer = nn.Sequential(
                         nn.Linear(self.input_dim, self.num_experts),
@@ -118,9 +119,11 @@ class BertED(nn.Module):
                         nn.Linear(self.num_experts, self.num_experts),
                     )
                     self.softmax = nn.Softmax(dim=-1)
+                    logger.info("Gating: tanh")
                 elif args.gating == "sigmoid":
                     self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
                     self.softmax = nn.Sigmoid()
+                    logger.info("Gating: sigmoid")
 
 
             self.backbone.print_trainable_parameters()
