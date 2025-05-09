@@ -9,41 +9,50 @@ import torch
 
 def balance_zero_with_nonzero(
     tlcl_feature: torch.Tensor,
-    tlcl_lbs: torch.Tensor
+    tlcl_lbs: torch.Tensor,
 ) -> tuple[torch.Tensor, torch.Tensor]:
     """
     Giữ lại tất cả các nhãn != 0, và chỉ giữ lại một số nhãn 0 sao cho
-    count(0) == count(non_zero). Nếu count(0) <= count(non_zero) thì không drop.
+    count(0) == count(non_zero) / (class_num / task_num)
+
+    Sau đó flatten feature thành [N*D], label thành [N]
 
     Args:
         tlcl_feature: Tensor [N, D]
         tlcl_lbs:     Tensor [N]
+        args:         Đối tượng chứa class_num và task_num
 
     Returns:
-        filtered_feature, filtered_lbs
+        flattened_feature: Tensor [N*D]
+        flattened_lbs:     Tensor [N]
     """
     # vị trí các nhãn 0
     zero_idx = (tlcl_lbs == 0).nonzero(as_tuple=False).flatten()
-    num_zero = zero_idx.numel()//(args.class_num // args.task_num)
-    # số nhãn khác 0
-    num_non_zero = tlcl_lbs.size(0) - num_zero
 
-    # tính số cần drop
-    drop_num = num_zero - num_non_zero
-    if drop_num <= 0:
-        # đã cân bằng hoặc không có 0 dư, trả về nguyên bản
-        return tlcl_feature, tlcl_lbs
+    # số lượng nhãn 0 cần giữ lại để cân bằng
+    scale_factor = args.class_num // args.task_num
+    keep_zero_count = len(zero_idx) // scale_factor
+    num_non_zero = tlcl_lbs.size(0) - len(zero_idx)
 
-    # chọn ngẫu nhiên drop_num chỉ số trong zero_idx
-    perm = torch.randperm(num_zero, device=tlcl_lbs.device)
-    drop_idx = zero_idx[perm[:drop_num]]
+    # nếu không cần xóa gì thì giữ nguyên
+    if len(zero_idx) <= keep_zero_count:
+        filtered_feature = tlcl_feature
+        filtered_lbs = tlcl_lbs
+    else:
+        # chọn ngẫu nhiên phần cần drop
+        perm = torch.randperm(len(zero_idx), device=tlcl_lbs.device)
+        drop_idx = zero_idx[perm[:len(zero_idx) - keep_zero_count]]
 
-    # tạo mask để giữ tất cả ngoại trừ drop_idx
-    mask = torch.ones(tlcl_lbs.size(0), dtype=torch.bool, device=tlcl_lbs.device)
-    mask[drop_idx] = False
+        # tạo mask
+        mask = torch.ones(tlcl_lbs.size(0), dtype=torch.bool, device=tlcl_lbs.device)
+        mask[drop_idx] = False
 
-    return tlcl_feature[mask], tlcl_lbs[mask]
+        filtered_feature = tlcl_feature[mask]
+        filtered_lbs = tlcl_lbs[mask]
 
+    # Flatten feature: [N, D] → [N*D]
+    # flattened_feature = filtered_feature.view(-1)
+    return filtered_feature, filtered_lbs
 
 def collate_description(batch):
     tokens, masks, keys = zip(*batch)

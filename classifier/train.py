@@ -110,7 +110,7 @@ def train(local_rank, args):
         use_description = ""
         
     # args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{tlcl_have}_{ucl_have}_{timestamp}"    
-    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{use_description}_{args.distill}_{tlcl_have}_{ucl_have}_{timestamp}"  
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{use_description}_{args.alpha_ce}_{timestamp}"  
     
     # Cấu hình logging
     log_dir = "log_result"
@@ -132,7 +132,7 @@ def train(local_rank, args):
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project=f"Quang_HANet_run_with_augment_{args.dataset}",
+        project=f"Quang_HANet_run_{use_description}",
         name = args.run_name,
 
         # track hyperparameters and run metadata
@@ -480,6 +480,8 @@ def train(local_rank, args):
                             # tlcl_feature = trig_feat
                             tlcl_feature = normalize(tlcl_feature, dim=-1)
                             tlcl_lbs = torch.cat(train_y + da_y)
+                            if args.decrease_0_gpt_augmention:
+                                tlcl_feature, tlcl_lbs = balance_zero_with_nonzero(tlcl_feature, tlcl_lbs)
                             # tlcl_lbs = torch.cat(train_y)
                             mat_size = tlcl_feature.shape[0]
                             tlcl_lbs_oh = F.one_hot(tlcl_lbs).float()
@@ -565,6 +567,8 @@ def train(local_rank, args):
                     # tlcl_feature = trig_feat
                     lgacl_feature = normalize(lgacl_feature, dim=-1)
                     lgacl_lbs = torch.cat(train_y + augment_y_total, dim=0)
+                    if args.decrease_0_gpt_augmention:
+                        lgacl_feature, lgacl_lbs = balance_zero_with_nonzero(lgacl_feature, lgacl_lbs)
                     # tlcl_lbs = torch.cat(train_y)
                     mat_size = lgacl_feature.shape[0]
                     lgacl_lbs_oh = F.one_hot(lgacl_lbs).float()
@@ -620,7 +624,7 @@ def train(local_rank, args):
                     if args.use_weight_ce:
                         loss_aug = CrossEntropyLossWithWeight(outputs_aug, torch.cat(aug_y), alpha=args.alpha_ce)
                     else:
-                        loss_ce = criterion_ce(ce_outputs, ce_y)
+                        loss_ce = criterion_ce(outputs_aug, torch.cat(aug_y))
                     # loss = loss_ce * w + loss_aug * (1 - w)
                     # loss = loss_ce * (1 - w) + loss_aug * w
                     loss = args.gamma * loss + args.theta * loss_aug
@@ -768,6 +772,7 @@ def train(local_rank, args):
             logger.info(f'loss_ucl: {loss_ucl}')
             logger.info(f'loss_tlcl: {loss_tlcl}')
             logger.info(f'loss_des_cl: {loss_des_cl}')
+            logger.info(f'lgacl_loss: {lgacl_loss}')
             # logger.info(f'loss_ecl: {loss_ecl}')
             logger.info(f'loss_aug: {loss_aug}')
             logger.info(f'loss_fd: {loss_fd}')
@@ -778,6 +783,7 @@ def train(local_rank, args):
                         f"loss_ucl_{stage}": loss_ucl,
                         f"loss_tlcl_{stage}": loss_tlcl,
                         f"loss_des_cl_{stage}": loss_des_cl,
+                        f"lgacl_loss_{stage}": lgacl_loss,
                         f"loss_aug_{stage}": loss_aug,
                         f"loss_fd_{stage}": loss_fd,
                         f"loss_pd_{stage}": loss_pd,
