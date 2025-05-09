@@ -56,6 +56,7 @@ class BertED(nn.Module):
             self.backbone = BertModel.from_pretrained(args.backbone)
             self.input_dim = self.backbone.config.hidden_size
             self.backbone.load_state_dict(torch.load(backbone_path)) 
+            logger.info(f"Load backbone from {backbone_path}")
         else:
             self.backbone = BertModel.from_pretrained(args.backbone)
             self.input_dim = self.backbone.config.hidden_size
