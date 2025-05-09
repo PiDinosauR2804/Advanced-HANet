@@ -12,7 +12,7 @@ for i in ACE MAVEN; do
     # lặp qua shot-num = 5 và 10
     for j in 5 10
         for k in gpt_augmention decrease_0_gpt_augmention gpt_augmention+decrease_0_gpt_augmention
-            for l in 0.7 0.5 0.3
+            for l in 0.7 0.5 0.3; do
                 GPT=""
                 DECREASE=""
 
