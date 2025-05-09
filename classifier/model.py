@@ -88,12 +88,13 @@ class BertED(nn.Module):
                 task_type=TaskType.FEATURE_EXTRACTION,
             )
             self.backbone = get_peft_model(self.backbone, self.peft_config)
-            try:
-                self.backbone.freeze_base_model()
-            except:
-                for name, param in self.backbone.named_parameters():
-                    if 'lora_' not in name:
-                        param.requires_grad = False
+            if not args.no_freeze_bert:
+                try:
+                    self.backbone.freeze_base_model()
+                except:
+                    for name, param in self.backbone.named_parameters():
+                        if 'lora_' not in name:
+                            param.requires_grad = False
 
             if self.use_mole:
                 self.backbone.add_adapter("general_expert", self.peft_config)
