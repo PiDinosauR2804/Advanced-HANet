@@ -97,6 +97,9 @@ class BertED(nn.Module):
                             param.requires_grad = False
                 logger.info("Freeze base model")
             else:
+                for param in self.backbone.base_model.parameters():
+                    param.requires_grad = True
+
                 logger.info("Do not freeze base model")
 
             if self.use_mole:
