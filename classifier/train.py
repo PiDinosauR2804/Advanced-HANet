@@ -748,7 +748,7 @@ def train(local_rank, args, trial=None):
                             dev_score = micro_F1
                             torch.save(model.state_dict(), e_pth)
                             if stage == 0:
-                                torch.save(model.state_dict(), "outputs/best_model0.pth")
+                                torch.save(model.backbone.state_dict(), "outputs/best_model0.pth")
                         else:
                             no_better += 1
                             logger.info(f'No better: {no_better}/{args.patience}')
