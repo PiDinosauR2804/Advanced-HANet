@@ -342,8 +342,8 @@ def train(local_rank, args):
                 augment_span = {}
                 for aug_ids in range(args.num_augmention):
                     augment_x[aug_ids] = [torch.LongTensor(item[0][aug_ids]).to(device) for item in train_augment]
-                    augment_masks[aug_ids] = [torch.LongTensor(item[1][aug_ids]).to(device) for item in train_augment]
-                    augment_y[aug_ids] = [torch.LongTensor(item[2][aug_ids]).to(device) for item in train_augment]
+                    augment_y[aug_ids] = [torch.LongTensor(item[1][aug_ids]).to(device) for item in train_augment]
+                    augment_masks[aug_ids] = [torch.LongTensor(item[2][aug_ids]).to(device) for item in train_augment]
                     augment_span[aug_ids] = [torch.LongTensor(item[3][aug_ids]).to(device) for item in train_augment]
 
                 
@@ -553,22 +553,16 @@ def train(local_rank, args):
                         exemplar_masks = torch.LongTensor(exemplar_masks).to(device)
                         exemplars_y = [torch.LongTensor(item).to(device) for item in exemplars_y]
                         exemplar_span = [torch.LongTensor(item).to(device) for item in exemplar_span]    
-                        aug_exemplar_x = [
-                            [torch.LongTensor(span).to(device) for span in sample[0]]
-                            for sample in exemplar_augment
-                        ]
-                        aug_exemplar_masks = [
-                            [torch.LongTensor(span).to(device) for span in sample[1]]
-                            for sample in exemplar_augment
-                        ]
-                        aug_exemplars_y = [
-                            [torch.LongTensor(span).to(device) for span in sample[2]]
-                            for sample in exemplar_augment
-                        ]
-                        aug_exemplar_span = [
-                            [torch.LongTensor(span).to(device) for span in sample[3]]
-                            for sample in exemplar_augment
-                        ]
+                        
+                        augment_exemplars_x = {}
+                        augment_exemplars_masks = {}
+                        augment_exemplars_y = {}
+                        augment_exemplars_span = {}
+                        for aug_ids in range(args.num_augmention):
+                            augment_exemplars_x[aug_ids] = [torch.LongTensor(item[0][aug_ids]).to(device) for item in exemplar_augment]
+                            augment_exemplars_y[aug_ids] = [torch.LongTensor(item[1][aug_ids]).to(device) for item in exemplar_augment]
+                            augment_exemplars_masks[aug_ids] = [torch.LongTensor(item[2][aug_ids]).to(device) for item in exemplar_augment]
+                            augment_exemplars_span[aug_ids] = [torch.LongTensor(item[3][aug_ids]).to(device) for item in exemplar_augment]
                                 
                         if args.rep_aug == "relative":
                             aug_return_dict = model(exemplar_x, exemplar_masks, exemplar_span, torch.sqrt(torch.stack(exemplar_radius)).unsqueeze(-1))

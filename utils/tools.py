@@ -87,9 +87,11 @@ def collect_from_json(dataset, root, split):
                 data = [json.loads(line) for line in f]
                 if split == "train":
                     data = [list(i.values()) for i in data]
+                    key = [list(i.keys()) for i in data]
             else:
                 data = json.load(f)
-    return data
+                key = None
+    return data, key
 
 def sim(x, y):
     """

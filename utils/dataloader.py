@@ -105,10 +105,11 @@ class Eval_MAVEN_Dataset(Dataset):
 
 
 def collect_dataset(dataset, root, split, label2idx, stage_id, labels):
+    data_stream , _ = collect_from_json(dataset, root, split)
     if split == 'train':
-        data = [instance for t in collect_from_json(dataset, root, split)[stage_id] for instance in t]
+        data = [instance for t in data_stream[stage_id] for instance in t]
     else:
-        data = collect_from_json(dataset, root, split)
+        data = data_stream
     data_tokens, data_labels, data_masks, data_spans, data_augment = [], [], [], [], []
     for dt in tqdm(data):
         # pop useless properties
@@ -201,7 +202,13 @@ def collect_dataset(dataset, root, split, label2idx, stage_id, labels):
 
 
 def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
-    data = [[instance for instance in t] for t in collect_from_json(dataset, root, split)[stage_id]]
+    data_stream , key_stream = collect_from_json(dataset, root, split)
+    new_labels = []
+    for i in key_stream:
+        if i in labels:
+            new_labels.append(i)
+            
+    data = [[instance for instance in t] for t in data_stream[stage_id]]
     data_tokens, data_labels, data_masks, data_spans, data_augment = [], [], [], [], []
     for idx, task_data in enumerate(tqdm(data)):
         for dt in task_data:
@@ -215,8 +222,8 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
             add_span = []
             new_t = {}
             for i in range(len(dt['label'])):
-                # if dt['label'][i] == labels[idx]: 
-                if dt['label'][i] in labels: 
+                if dt['label'][i] == new_labels[idx]: 
+                # if dt['label'][i] in labels: 
                     add_label.append(dt['label'][i]) 
                     add_span.append(dt['span'][i])
             if len(add_label) != 0:
@@ -255,7 +262,7 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
                 add_span_aug = []
                 new_t_aug = {}
                 for i in range(len(augs['label'])):
-                    if augs['label'][i] in labels or augs['label'][i] == 0: # if the label of instance is in the query
+                    if augs['label'][i] in labels: # if the label of instance is in the query
                         add_label_aug.append(augs['label'][i]) # append the instance and the label
                         add_span_aug.append(augs['span'][i]) # the same as label
                 if len(add_label_aug) != 0:
@@ -298,7 +305,8 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
                 
 
 def collect_sldataset(dataset, root, split, label2idx, stage_id, labels):
-    data = [[instance for instance in t] for t in collect_from_json(dataset, root, split)[stage_id]]
+    data_stream , _ = collect_from_json(dataset, root, split)
+    data = [[instance for instance in t] for t in data_stream[stage_id]]
     data_tokens, data_labels, data_masks, data_spans, data_augment = [], [], [], [], []
     for idx, task_data in enumerate(tqdm(data)):
         for dt in task_data:

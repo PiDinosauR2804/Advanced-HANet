@@ -121,6 +121,17 @@ class Exemplars():
                 self.exemplars_span.append([item[3] for item in data_topk])
                 self.exemplars_augment.append([item[4] for item in data_topk])
                 
+                # for idx, p in enumerate(self.exemplars_augment):
+                #     cur_label = int(self.exemplars_y[idx])
+                #     new_label = []
+                #     new_span = []
+                #     for idx_1, label_token in enumerate(p[1]):
+                #         if label_token == cur_label:
+                #             new_label.append(label_token)
+                #             new_span.append(p[3][idx_1])
+                #     self.exemplars_augment[idx][1] = new_label
+                #     self.exemplars_augment[idx][3] = new_span
+                
                 self.radius[l] = radius
         
     def build_stage_loader(self, dataset, collate_fn=lambda x:x):
