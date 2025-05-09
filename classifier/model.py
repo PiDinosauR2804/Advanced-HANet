@@ -107,8 +107,21 @@ class BertED(nn.Module):
                 for i in range(self.num_experts):
                     self.backbone.add_adapter(f"expert_{i}", self.peft_config)
 
-                self.expert_keys = nn.Parameter(torch.randn(self.num_experts, self.input_dim))
-                self.softmax = nn.Softmax(dim=-1)
+                # Khai báo Linear layer (bao gồm cả weight và bias)
+                if args.gating == "softmax":
+                    self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
+                    self.softmax = nn.Softmax(dim=-1)
+                elif args.gating == "tanh":
+                    self.gating_layer = nn.Sequential(
+                        nn.Linear(self.input_dim, self.num_experts),
+                        nn.Tanh(),
+                        nn.Linear(self.num_experts, self.num_experts),
+                    )
+                    self.softmax = nn.Softmax(dim=-1)
+                elif args.gating == "sigmoid":
+                    self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
+                    self.softmax = nn.Sigmoid()
+
 
             self.backbone.print_trainable_parameters()
 
@@ -163,7 +176,7 @@ class BertED(nn.Module):
                 cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
 
             # Gating
-            gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (B, E)
+            gating_logits = self.gating_layer(cls_embedding)  # (B, E)
             gating_weights = self.softmax(gating_logits)
             topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
             if train:
