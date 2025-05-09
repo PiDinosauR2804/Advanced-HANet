@@ -110,9 +110,14 @@ class BertED(nn.Module):
             self.backbone.print_trainable_parameters()
 
         print("Trainable parameters:")
+        print("\n==== Parameters in Original Model ====")
+        for n, p in self.backbone.base_model.named_parameters():
+            print(n, p.requires_grad)
+        print("==== Parameters in PEFT Wrapper ====")
         for n, p in self.named_parameters():
             if p.requires_grad:
                 print(n, p.shape)
+                
                 
     def turn_uniform_expert(self, turn_on=True):
         if self.uniform_expert != turn_on:
