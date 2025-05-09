@@ -341,10 +341,10 @@ def train(local_rank, args):
                 augment_y = {}
                 augment_span = {}
                 for aug_ids in range(args.num_augmention):
-                    augment_x[aug_ids] = [torch.LongTensor(item[0][aug_ids]).to(device) for item in train_augment]
-                    augment_y[aug_ids] = [torch.LongTensor(item[1][aug_ids]).to(device) for item in train_augment]
-                    augment_masks[aug_ids] = [torch.LongTensor(item[2][aug_ids]).to(device) for item in train_augment]
-                    augment_span[aug_ids] = [torch.LongTensor(item[3][aug_ids]).to(device) for item in train_augment]
+                    augment_x[aug_ids] = [torch.LongTensor(item[aug_ids][0]).to(device) for item in train_augment]
+                    augment_y[aug_ids] = [torch.LongTensor(item[aug_ids][1]).to(device) for item in train_augment]
+                    augment_masks[aug_ids] = [torch.LongTensor(item[aug_ids][2]).to(device) for item in train_augment]
+                    augment_span[aug_ids] = [torch.LongTensor(item[aug_ids][3]).to(device) for item in train_augment]
 
                 augment_x_list = [
                     torch.stack(value, dim=0)  # → (B, L)
@@ -353,9 +353,9 @@ def train(local_rank, args):
                 augment_x_total = torch.cat(augment_x_list, dim=0).to(device)
 
                 augment_y_list = [
-                    torch.stack(value, dim=0)  # → (B, L)
-                    for _, value in augment_y.items()
+                    y for _, value in augment_y.items() for y in value
                 ]
+
                 augment_y_total = torch.cat(augment_y_list, dim=0).to(device)
                 
                 augment_masks_list = [
@@ -564,7 +564,9 @@ def train(local_rank, args):
                     lgacl_feature = torch.cat([trig_feat, augment_trig_feat])
                     # tlcl_feature = trig_feat
                     lgacl_feature = normalize(lgacl_feature, dim=-1)
-                    lgacl_lbs = torch.cat(train_y + augment_y_total)
+                    lgacl_lbs = torch.cat([train_y_total, augment_y_total], dim=0)
+                    train_y_total = torch.cat(train_y, dim=0).to(device)
+                    lgacl_lbs = torch.cat([train_y_total, augment_y_total], dim=0)
                     # tlcl_lbs = torch.cat(train_y)
                     mat_size = lgacl_feature.shape[0]
                     lgacl_lbs_oh = F.one_hot(lgacl_lbs).float()
@@ -601,10 +603,10 @@ def train(local_rank, args):
                         augment_exemplars_y = {}
                         augment_exemplars_span = {}
                         for aug_ids in range(args.num_augmention):
-                            augment_exemplars_x[aug_ids] = [torch.LongTensor(item[0][aug_ids]).to(device) for item in exemplar_augment]
-                            augment_exemplars_y[aug_ids] = [torch.LongTensor(item[1][aug_ids]).to(device) for item in exemplar_augment]
-                            augment_exemplars_masks[aug_ids] = [torch.LongTensor(item[2][aug_ids]).to(device) for item in exemplar_augment]
-                            augment_exemplars_span[aug_ids] = [torch.LongTensor(item[3][aug_ids]).to(device) for item in exemplar_augment]
+                            augment_exemplars_x[aug_ids] = [torch.LongTensor(item[aug_ids][0]).to(device) for item in exemplar_augment]
+                            augment_exemplars_y[aug_ids] = [torch.LongTensor(item[aug_ids][1]).to(device) for item in exemplar_augment]
+                            augment_exemplars_masks[aug_ids] = [torch.LongTensor(item[aug_ids][2]).to(device) for item in exemplar_augment]
+                            augment_exemplars_span[aug_ids] = [torch.LongTensor(item[aug_ids][3]).to(device) for item in exemplar_augment]
                                 
                         if args.rep_aug == "relative":
                             aug_return_dict = model(exemplar_x, exemplar_masks, exemplar_span, torch.sqrt(torch.stack(exemplar_radius)).unsqueeze(-1))
