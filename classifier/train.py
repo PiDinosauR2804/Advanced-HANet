@@ -352,11 +352,11 @@ def train(local_rank, args):
                 ]
                 augment_x_total = torch.cat(augment_x_list, dim=0).to(device)
 
-                augment_y_list = [
-                    y for _, value in augment_y.items() for y in value
+                augment_y_total = [
+                    tensor
+                    for value in augment_y.values()
+                    for tensor in value
                 ]
-
-                augment_y_total = torch.cat(augment_y_list, dim=0).to(device)
                 
                 augment_masks_list = [
                     torch.stack(value, dim=0)  # → (B, L)
@@ -364,11 +364,11 @@ def train(local_rank, args):
                 ]
                 augment_masks_total = torch.cat(augment_masks_list, dim=0).to(device)
                 
-                augment_span_list = [
-                    torch.stack(value, dim=0)  # → (B, L)
-                    for _, value in augment_span.items()
+                augment_span_total = [
+                    tensor
+                    for value in augment_span.values()
+                    for tensor in value
                 ]
-                augment_span_total = torch.cat(augment_span_list, dim=0).to(device)
                 
                 labels_for_loss_des = []
                 for y in train_y:
@@ -564,8 +564,7 @@ def train(local_rank, args):
                     lgacl_feature = torch.cat([trig_feat, augment_trig_feat])
                     # tlcl_feature = trig_feat
                     lgacl_feature = normalize(lgacl_feature, dim=-1)
-                    train_y_total = torch.cat(train_y, dim=0).to(device)
-                    lgacl_lbs = torch.cat([train_y_total, augment_y_total], dim=0)
+                    lgacl_lbs = torch.cat(train_y + augment_y_total, dim=0)
                     # tlcl_lbs = torch.cat(train_y)
                     mat_size = lgacl_feature.shape[0]
                     lgacl_lbs_oh = F.one_hot(lgacl_lbs).float()
