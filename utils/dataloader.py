@@ -302,10 +302,14 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels):
             data_spans.append(valid_span)
             data_augment.append(aug_sample)
     return MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans, data_augment)
-                
-
+               
 def collect_sldataset(dataset, root, split, label2idx, stage_id, labels):
-    data_stream , _ = collect_from_json(dataset, root, split)
+    data_stream , key_stream = collect_from_json(dataset, root, split)
+    new_labels = []
+    for i in key_stream[stage_id]:
+        if int(i) in labels:
+            new_labels.append(int(i))
+            
     data = [[instance for instance in t] for t in data_stream[stage_id]]
     data_tokens, data_labels, data_masks, data_spans, data_augment = [], [], [], [], []
     for idx, task_data in enumerate(tqdm(data)):
@@ -320,7 +324,7 @@ def collect_sldataset(dataset, root, split, label2idx, stage_id, labels):
             add_span = []
             new_t = {}
             for i in range(len(dt['label'])):
-                if dt['label'][i] == labels[idx] or dt['label'][i] == 0: 
+                if dt['label'][i] == new_labels[idx] or dt['label'][i] == 0: 
                     add_label.append(dt['label'][i]) 
                     add_span.append(dt['span'][i])
             if len(add_label) != 0:
@@ -360,7 +364,7 @@ def collect_sldataset(dataset, root, split, label2idx, stage_id, labels):
                 add_span_aug = []
                 new_t_aug = {}
                 for i in range(len(augs['label'])):
-                    if augs['label'][i] in labels or augs['label'][i] == 0: # if the label of instance is in the query
+                    if augs['label'][i] == new_labels[idx] or augs['label'][i] == 0: # if the label of instance is in the query
                         add_label_aug.append(augs['label'][i]) # append the instance and the label
                         add_span_aug.append(augs['span'][i]) # the same as label
                 if len(add_label_aug) != 0:
