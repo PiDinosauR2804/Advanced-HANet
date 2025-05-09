@@ -96,6 +96,8 @@ class BertED(nn.Module):
                         if 'lora_' not in name:
                             param.requires_grad = False
                 logger.info("Freeze base model")
+            else:
+                logger.info("Do not freeze base model")
 
             if self.use_mole:
                 self.backbone.add_adapter("general_expert", self.peft_config)
