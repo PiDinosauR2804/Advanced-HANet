@@ -106,8 +106,10 @@ def train(local_rank, args, trial=None):
     streams_indexed = [[label2idx[l] for l in st] for st in streams]
     
     # streams_indexed có dạng [[4, 5, 9, 11], [2, 1, 8, 33], ...] thể hiện thứ tự label class được học
-    
-    model = BertED(args) # define model
+    if args.backbone_path != "":
+        model = BertED(args, args.backbone_path) # define model
+    else:
+        model = BertED(args) # define model
     model.to(device)
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.decay, eps=args.adamw_eps, betas=(0.9, 0.999)) #TODO: Hyper parameters
     
@@ -745,6 +747,8 @@ def train(local_rank, args, trial=None):
                             no_better = 0
                             dev_score = micro_F1
                             torch.save(model.state_dict(), e_pth)
+                            if stage == 0:
+                                torch.save(model.state_dict(), "outputs/best_model0.pth")
                         else:
                             no_better += 1
                             logger.info(f'No better: {no_better}/{args.patience}')

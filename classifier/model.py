@@ -39,7 +39,7 @@ class Classifier(nn.Module):
 
 
 class BertED(nn.Module):
-    def __init__(self, args):
+    def __init__(self, args, backbone_path=None):
         super().__init__()
         self.is_input_mapping = args.input_map
         self.class_num = args.class_num + 1
@@ -52,7 +52,10 @@ class BertED(nn.Module):
         self.general_expert_weight = args.general_expert_weight
 
         # Load backbone
-        self.backbone = BertModel.from_pretrained(args.backbone)
+        if backbone_path is not None:
+            self.backbone = BertModel.from_pretrained(args.backbone, state_dict=torch.load(backbone_path))
+        else:
+            self.backbone = BertModel.from_pretrained(args.backbone)
         self.input_dim = self.backbone.config.hidden_size
         self.seqlen = args.max_seqlen + 2  # +2 for [CLS] and [SEP]
 
