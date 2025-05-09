@@ -10,7 +10,7 @@ for i in ACE MAVEN; do
         m=20
     fi
     # lặp qua shot-num = 5 và 10
-    for j in 5 10; do
+    for j in 5 10
         for k in gpt_augmention decrease_0_gpt_augmention gpt_augmention+decrease_0_gpt_augmention
             for l in 0.7 0.5 0.3
                 GPT=""
@@ -23,7 +23,7 @@ for i in ACE MAVEN; do
                     DECREASE="--decrease_0_gpt_augmention"
                 fi
                 python classifier/train.py \
-                    --data-root ./data/data_ids_aug \
+                    --data-root ./data/data_ids_enhence \
                     --dataset "$i" \
                     --backbone bert-base-uncased \
                     --lr 2e-5 \

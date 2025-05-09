@@ -13,7 +13,7 @@ for i in ACE MAVEN; do
     for j in 5 10; do
         for k in 0.9 0.7 0.5 0.3 0.1; do
             python classifier/train.py \
-                --data-root ./data/data_ids_aug \
+                --data-root ./data/data_ids_enhence \
                 --dataset "$i" \
                 --backbone bert-base-uncased \
                 --lr 2e-5 \
