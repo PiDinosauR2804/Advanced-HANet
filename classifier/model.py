@@ -177,8 +177,9 @@ class BertED(nn.Module):
 
         if not self.uniform_expert:
             with torch.no_grad():
-                base_output = self.backbone.base_model(x, attention_mask=masks)
-                cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
+                with self.backbone.disable_adapter():
+                    base_output = self.backbone(x, attention_mask=masks)
+                    cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
 
             # Gating
             gating_logits = self.gating_layer(cls_embedding)  # (B, E)
