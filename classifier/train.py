@@ -256,8 +256,8 @@ def train(local_rank, args, trial=None):
         num_epochs = int(args.epochs * ep_time)
         
         logger.info("Start training ...")
-        num_choose = [0] * model.num_experts
         for ep in tqdm(range(num_epochs), desc="Epoch"):
+            num_choose = [0] * model.num_experts
             if stage == 0 and args.skip_first:
                 continue
             
