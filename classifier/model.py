@@ -186,7 +186,11 @@ class BertED(nn.Module):
                 return_dict['outputs_aug'] = self.fc(feature_aug)
 
         return return_dict
-
+    
+    def set_adapter(self, name):
+        self.set_adapter(name)
+        self.unfreeze_lora()
+        
     def _forward_mole(self, x, masks, span=None, aug=None, train=True):
         B = x.size(0)
         return_dict = {}
@@ -224,7 +228,7 @@ class BertED(nn.Module):
                 else:
                     num_choose[expert_id.item()] +=  mask.sum().item()
 
-                self.backbone.set_adapter(f"expert_{expert_id.item()}")
+                self.set_adapter(f"expert_{expert_id.item()}")
                 out = self.backbone(
                     x[mask], attention_mask=masks[mask]
                 ).last_hidden_state  # (N, T, H)
@@ -237,7 +241,7 @@ class BertED(nn.Module):
 
         # Optional: add general expert
         if self.use_general_expert:
-            self.backbone.set_adapter("general_expert")
+            self.set_adapter("general_expert")
             general_out = self.backbone(x, attention_mask=masks).last_hidden_state
             x_out += self.general_expert_weight * general_out
 
