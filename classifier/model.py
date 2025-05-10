@@ -154,7 +154,7 @@ class BertED(nn.Module):
         for name, param in self.backbone.named_parameters():
             if 'lora_' in name:
                 param.requires_grad = True
-        logger.info("Unfreeze LoRA parameters")
+        # logger.info("Unfreeze LoRA parameters")
         
     def turn_uniform_expert(self, turn_on=True):
         if self.uniform_expert != turn_on:
