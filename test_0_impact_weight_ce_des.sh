@@ -2,7 +2,7 @@
 source activate zhangchenlong
 
 # lặp qua 2 dataset ACE và MAVEN
-for i in ACE MAVEN; do
+for i in MAVEN; do
     # gán class-num theo dataset
     if [ "$i" = "ACE" ]; then
         m=10
@@ -11,7 +11,7 @@ for i in ACE MAVEN; do
     fi
     # lặp qua shot-num = 5 và 10
     for j in 5 10; do
-        for k in 0.9 0.7 0.5 0.3 0.1; do
+        for k in 0.35 0.375 0.4 0.425 0.45 0.475 0.5 0.525 0.55 0.575 0.6 0.625 0.65; do
             python classifier/train.py \
                 --data-root ./data/data_ids_enhence \
                 --dataset "$i" \

@@ -132,7 +132,7 @@ def train(local_rank, args):
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project=f"Quang_HANet_run_advanced_10_5_{use_description}",
+        project=f"Quang_HANet_run_find_weight_for_MAVEN_{use_description}",
         name = args.run_name,
 
         # track hyperparameters and run metadata
