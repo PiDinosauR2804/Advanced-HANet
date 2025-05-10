@@ -38,8 +38,8 @@ def objective(trial):
     args.ratio_loss_des_cl = 1
     args.task_ep_time = 1
     args.early_stop = True
-    args.skip_eval_ep = 10
-    args.eval_freq = 2
+    args.skip_eval_ep = 0
+    args.eval_freq = 1
     args.patience = 3
     args.early_stop = True
     args.classifier_layer = 1
