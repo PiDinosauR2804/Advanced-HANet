@@ -54,6 +54,7 @@ def objective(trial):
     args.uniform_ep = 3
     args.lora_dropout = 0.3
     args.batch_size = 8
+    args.project_name = "HANet_mole_bert_full"
 
     # Tham số cho Optuna trial
     args.lr = trial.suggest_float("lr", 5e-5, 2e-4, log=True)

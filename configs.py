@@ -47,6 +47,7 @@ def parse_arguments():
     parser.add_argument("--gating", type=str, default="softmax", choices=["softmax", "sigmoid", "tanh"], help="Gating mechanism for MoLE")
     parser.add_argument("--backbone_path", type=str, default="", help="Path to the backbone model")
     parser.add_argument("--print_trainable_params", action="store_true", help="Print trainable parameters")
+    parser.add_argument("--project_name", type=str, default="HANet_mole", help="Project name for Weights & Biases")
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)

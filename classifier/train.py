@@ -75,7 +75,7 @@ def train(local_rank, args, trial=None):
     if args.wandb:
         wandb.init(
             # set the wandb project where this run will be logged
-            project="HANet_mole",
+            project=args.project_name,
             name = args.run_name,
 
             # track hyperparameters and run metadata
@@ -84,7 +84,7 @@ def train(local_rank, args, trial=None):
         )
     else:
         wandb.init(
-            project="HANet_mole",
+            project=args.project_name,
             name = args.run_name,
             mode="disabled"
         )
