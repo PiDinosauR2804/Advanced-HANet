@@ -50,6 +50,7 @@ class BertED(nn.Module):
         self.use_general_expert = args.use_general_expert
         self.uniform_expert = False
         self.general_expert_weight = args.general_expert_weight
+        self.args = args
 
         # Load backbone
         if backbone_path is not None:
@@ -133,6 +134,8 @@ class BertED(nn.Module):
     def unfreeze_lora(self):
         for name, param in self.backbone.named_parameters():
             if 'lora_' in name:
+                param.requires_grad = True
+            elif self.args.no_freeze_bert:
                 param.requires_grad = True
         # logger.info("Unfreeze LoRA parameters")
         
