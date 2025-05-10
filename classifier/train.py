@@ -658,6 +658,9 @@ def train(local_rank, args, trial=None):
                     
                 loss.backward()
                 total_norm = clip_grad_norm_(model.parameters(), max_norm=1.0)
+                
+                model.print_trainable_parameters()
+                
                 optimizer.step() 
                 stats = torch.cuda.memory_stats()
                 wandb.log({

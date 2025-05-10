@@ -103,8 +103,9 @@ class BertED(nn.Module):
                             param.requires_grad = False
                 logger.info("Freeze base model")
             else:
-                for param in self.backbone.base_model.parameters():
-                    param.requires_grad = True
+                for name, param in self.backbone.named_parameters():
+                    if 'lora_' not in name:
+                        param.requires_grad = True
 
                 logger.info("Do not freeze base model")
 
@@ -142,7 +143,12 @@ class BertED(nn.Module):
         for n, p in self.named_parameters():
             if p.requires_grad:
                 print(n, p.shape)
-                
+
+    def print_trainable_parameters(self):
+        print("Trainable parameters:")
+        for n, p in self.named_parameters():
+            if p.requires_grad:
+                print(n, p.shape)
                 
     def turn_uniform_expert(self, turn_on=True):
         if self.uniform_expert != turn_on:
