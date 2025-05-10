@@ -2,6 +2,8 @@ from classifier.train import train
 from configs import parse_arguments
 import optuna
 import wandb
+import torch
+from loguru import logger
 
 args = parse_arguments()
 
@@ -68,9 +70,17 @@ def objective(trial):
     args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.1, 1.0, step=0.1)
     args.general_expert_weight = trial.suggest_float("general_expert_weight", 0.1, 1.0, step=0.1)
     
-    f1 = train(0, args, trial)
-    
-    return f1
+    try:
+        f1 = train(0, args, trial)
+        return f1
+    except RuntimeError as e:
+        if "CUDA out of memory" in str(e):
+            logger.warning("CUDA out of memory. Releasing GPU memory...")
+            torch.cuda.empty_cache()  # Giải phóng bộ nhớ GPU
+            return float('inf')  # Giá trị lỗi để Optuna bỏ qua
+        else:
+            raise e  # Nếu là lỗi khác, vẫn cho nó raise lên
+
 
 if __name__ == "__main__":
     wandb.login()
