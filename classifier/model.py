@@ -212,7 +212,7 @@ class BertED(nn.Module):
 
         # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
         expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
-
+        num_choose = [0] * self.num_experts
         for k in range(self.top_k):
             expert_ids = topk_indices[:, k]  # (B,)
             weights = topk_weights[:, k]     # (B,)
@@ -221,6 +221,8 @@ class BertED(nn.Module):
                 mask = (expert_ids == expert_id)
                 if mask.sum() == 0:
                     continue
+                else:
+                    num_choose[expert_id.item()] +=  mask.sum().item()
 
                 self.backbone.set_adapter(f"expert_{expert_id.item()}")
                 out = self.backbone(
@@ -241,6 +243,7 @@ class BertED(nn.Module):
 
         return_dict['reps'] = x_out[:, 0, :].clone()
         return_dict['context_feat'] = x_out.view(-1, x_out.shape[-1])
+        return_dict['num_choose'] = num_choose
 
         if span is not None:
             trig_feature = self._extract_trigger(x_out, span)

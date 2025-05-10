@@ -712,7 +712,7 @@ def train(local_rank, args, trial=None):
                         batch_size=args.eval_batch_size,
                         collate_fn=lambda x:x)
                     calcs = Calculator()
-                    
+                    num_choose = [0] * model.num_experts
                     for batch in tqdm(eval_loader, desc="Eval"):
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
@@ -720,6 +720,8 @@ def train(local_rank, args, trial=None):
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
                         eval_return_dict = model(eval_x, eval_masks, eval_span, train=False)
+                        for i, num in enumerate(eval_return_dict['num_choose']):
+                            num_choose[i] += num
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
                         for i in range(len(eval_y)):
@@ -731,7 +733,6 @@ def train(local_rank, args, trial=None):
                         calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
-                    
                     wandb.log({
                         f"precision": precision,
                         f"recall": recall,
@@ -743,6 +744,7 @@ def train(local_rank, args, trial=None):
                     # dev_scores_ls.append(micro_F1)
                     # logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
+                    logger.info(f"Num choose: {num_choose}")
                     
                     # report to optuna
                     
