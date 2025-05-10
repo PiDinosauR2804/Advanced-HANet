@@ -91,26 +91,11 @@ class BertED(nn.Module):
                 target_modules=["query", "value"],
                 lora_dropout=args.lora_dropout,
                 bias="none",
-                task_type=TaskType.FEATURE_EXTRACTION,
+                task_type=TaskType.TOKEN_CLS,
             )
-            self.backbone = get_peft_model(self.backbone, self.peft_config)
-            if not args.no_freeze_bert:
-                try:
-                    self.backbone.freeze_base_model()
-                except:
-                    for name, param in self.backbone.named_parameters():
-                        if 'lora_' not in name:
-                            param.requires_grad = False
-                logger.info("Freeze base model")
-            else:
-                for name, param in self.backbone.named_parameters():
-                    if 'lora_' not in name:
-                        param.requires_grad = True
-
-                logger.info("Do not freeze base model")
+            self.backbone = get_peft_model(self.backbone, self.peft_config, adapter_name="general_expert")
 
             if self.use_mole:
-                self.backbone.add_adapter("general_expert", self.peft_config)
                 for i in range(self.num_experts):
                     self.backbone.add_adapter(f"expert_{i}", self.peft_config)
 
@@ -132,14 +117,9 @@ class BertED(nn.Module):
                     self.softmax = nn.Sigmoid()
                     logger.info("Gating: sigmoid")
 
-
             self.backbone.print_trainable_parameters()
 
         print("Trainable parameters:")
-        print("\n==== Parameters in Original Model ====")
-        for n, p in self.backbone.base_model.named_parameters():
-            print(n, p.requires_grad)
-        print("==== Parameters in PEFT Wrapper ====")
         for n, p in self.named_parameters():
             if p.requires_grad:
                 print(n, p.shape)
@@ -188,7 +168,7 @@ class BertED(nn.Module):
         return return_dict
     
     def set_adapter(self, name):
-        self.set_adapter(name)
+        self.backbone.set_adapter(name)
         self.unfreeze_lora()
         
     def _forward_mole(self, x, masks, span=None, aug=None, train=True):
