@@ -47,11 +47,11 @@ def objective(trial):
     args.dropout = 0.5
     args.use_general_expert = True
     args.use_mole = True
-    args.step_size = 5
+    args.step_size = 1
     args.wandb = True
-    args.eval_batch_size = 32
+    args.eval_batch_size = 64
     args.task_ep_time = 1
-    args.uniform_ep = 2
+    args.uniform_ep = 3
     args.lora_dropout = 0.3
     args.batch_size = 8
 
@@ -62,9 +62,9 @@ def objective(trial):
     args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [4, 8])
     args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
         
-    args.gammalr = trial.suggest_float("gamma", 0.9, 1.0, step=0.01)
-    args.entropy_weight = trial.suggest_float("entropy_weight", 0.01, 1.0, step=0.01)
-    args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.01, 1.0, step=0.01)
+    args.gammalr = trial.suggest_float("gamma", 0.8, 1.0, step=0.01)
+    args.entropy_weight = trial.suggest_float("entropy_weight", 0.1, 1, step=0.01)
+    args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.1, 1.0, step=0.1)
     args.general_expert_weight = trial.suggest_float("general_expert_weight", 0.1, 1.0, step=0.1)
     
     f1 = train(0, args, trial)
