@@ -45,10 +45,6 @@ class Logger(object):
 
 def train(local_rank, args):
     
-    log_dir = "log_result"
-    os.makedirs(log_dir, exist_ok=True)  # Tạo thư mục nếu chưa tồn tại
-    log_filename = os.path.join(log_dir, f"{args.run_name}_log.txt")
-    
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
     logger = logging.getLogger()
@@ -67,7 +63,7 @@ def train(local_rank, args):
         if not os.path.exists(os.path.join("output_hehe", args.dataset, str(args.shot_num) + "shot")):
             os.makedirs(os.path.join("output_hehe",args.dataset, str(args.shot_num) + "shot"))
         writer = SummaryWriter(os.path.join(args.tb_dir, args.dataset, args.joint_da_loss, str(args.class_num) + "class", str(args.shot_num) + "shot", args.cl_aug, args.log_name, "perm" + str(args.perm_id), cur_time))
-        fh = logging.FileHandler(os.path.join("output_hehe",args.dataset, str(args.shot_num) + "shot",args.seed+"__" + cur_time + '.log'), mode='a')
+        fh = logging.FileHandler(os.path.join("output_hehe",args.dataset, str(args.shot_num) + "shot",str(args.seed)+"__" + cur_time + '.log'), mode='a')
         fh.setLevel(logging.INFO)
         fh.setFormatter(formatter)
         logger.addHandler(fh)
