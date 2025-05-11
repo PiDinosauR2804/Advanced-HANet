@@ -28,7 +28,7 @@ def objective(trial):
     args.class_num = 20
     args.single_label = True
     args.cl_aug = "shuffle"
-    args.aug_repeat_times = 2
+    args.aug_repeat_times = 3
     args.joint_da_loss = "ce"
     args.sub_max = True
     args.cl_temp = 0.07
@@ -42,7 +42,7 @@ def objective(trial):
     args.early_stop = True
     args.skip_eval_ep = 0
     args.eval_freq = 1
-    args.patience = 3
+    args.patience = 4
     args.early_stop = True
     args.classifier_layer = 1
     args.hidden_dim = 128
@@ -66,7 +66,7 @@ def objective(trial):
     args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
         
     args.gammalr = trial.suggest_float("gamma", 0.8, 1.0, step=0.01)
-    args.entropy_weight = trial.suggest_float("entropy_weight", 0.1, 1, step=0.01)
+    args.entropy_weight = trial.suggest_float("entropy_weight", 0.1, 1, step=0.1)
     args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.1, 1.0, step=0.1)
     args.general_expert_weight = trial.suggest_float("general_expert_weight", 0.1, 1.0, step=0.1)
     
@@ -86,7 +86,7 @@ if __name__ == "__main__":
     wandb.login()
     # pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=10, interval_steps=1)
     study = optuna.create_study(direction="maximize")
-    study.optimize(objective, n_trials=10)
+    study.optimize(objective, n_trials=20)
     
     print("Best trial:")
     trial = study.best_trial
