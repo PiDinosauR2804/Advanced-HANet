@@ -39,7 +39,7 @@ class Classifier(nn.Module):
 
 
 class BertED(nn.Module):
-    def __init__(self, args):
+    def __init__(self, args, backbone_path=None):
         super().__init__()
         self.is_input_mapping = args.input_map
         self.class_num = args.class_num + 1
@@ -52,10 +52,18 @@ class BertED(nn.Module):
         self.use_general_expert = args.use_general_expert
         self.uniform_expert = False
         self.general_expert_weight = args.general_expert_weight
+        self.args = args
 
         # Load backbone
-        self.backbone = BertModel.from_pretrained(args.backbone)
-        self.input_dim = self.backbone.config.hidden_size
+        if backbone_path is not None:
+            self.backbone = BertModel.from_pretrained(args.backbone)
+            self.input_dim = self.backbone.config.hidden_size
+            self.backbone.load_state_dict(torch.load(backbone_path)) 
+            logger.info(f"Load backbone from {backbone_path}")
+        else:
+            self.backbone = BertModel.from_pretrained(args.backbone)
+            self.input_dim = self.backbone.config.hidden_size
+        self.seqlen = args.max_seqlen + 2  # +2 for [CLS] and [SEP]
 
         # Classifier
         if args.classifier_layer > 1:
@@ -88,21 +96,29 @@ class BertED(nn.Module):
                 bias="none",
                 task_type=TaskType.FEATURE_EXTRACTION,
             )
-            self.backbone = get_peft_model(self.backbone, self.peft_config)
-            try:
-                self.backbone.freeze_base_model()
-            except:
-                for name, param in self.backbone.named_parameters():
-                    if 'lora_' not in name:
-                        param.requires_grad = False
+            self.backbone = get_peft_model(self.backbone, self.peft_config, adapter_name="general_expert")
 
             if self.use_mole:
-                self.backbone.add_adapter("general_expert", self.peft_config)
                 for i in range(self.num_experts):
                     self.backbone.add_adapter(f"expert_{i}", self.peft_config)
 
-                self.expert_keys = nn.Parameter(torch.randn(self.num_experts, self.input_dim))
-                self.softmax = nn.Softmax(dim=-1)
+                # Khai báo Linear layer (bao gồm cả weight và bias)
+                if args.gating == "softmax":
+                    self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
+                    self.softmax = nn.Softmax(dim=-1)
+                    logger.info("Gating: softmax")
+                elif args.gating == "tanh":
+                    self.gating_layer = nn.Sequential(
+                        nn.Linear(self.input_dim, self.num_experts),
+                        nn.Tanh(),
+                        nn.Linear(self.num_experts, self.num_experts),
+                    )
+                    self.softmax = nn.Softmax(dim=-1)
+                    logger.info("Gating: tanh")
+                elif args.gating == "sigmoid":
+                    self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
+                    self.softmax = nn.Sigmoid()
+                    logger.info("Gating: sigmoid")
 
             self.backbone.print_trainable_parameters()
 
@@ -110,15 +126,29 @@ class BertED(nn.Module):
         for n, p in self.named_parameters():
             if p.requires_grad:
                 print(n, p.shape)
-                
+
+    def print_trainable_parameters(self):
+        print("Trainable parameters:")
+        for n, p in self.named_parameters():
+            if p.requires_grad:
+                print(n, p.shape)
+            
+    def unfreeze_lora(self):
+        for name, param in self.backbone.named_parameters():
+            if 'lora_' in name:
+                param.requires_grad = True
+            elif self.args.no_freeze_bert:
+                param.requires_grad = True
+        # logger.info("Unfreeze LoRA parameters")
+        
     def turn_uniform_expert(self, turn_on=True):
         if self.uniform_expert != turn_on:
             self.uniform_expert = turn_on
             logger.info(f"Uniform expert: {turn_on}")
 
-    def forward(self, x, masks, span=None, aug=None):
+    def forward(self, x, masks, span=None, aug=None, train=True):
         if self.use_mole:
-            return self._forward_mole(x, masks, span, aug)
+            return self._forward_mole(x, masks, span, aug, train)
         else:
             return self._forward_normal(x, masks, span, aug)
 
@@ -141,35 +171,38 @@ class BertED(nn.Module):
                 return_dict['outputs_aug'] = self.fc(feature_aug)
 
         return return_dict
-
-    def _forward_mole(self, x, masks, span=None, aug=None):
+    
+    def set_adapter(self, name):
+        self.backbone.set_adapter(name)
+        self.unfreeze_lora()
+        
+    def _forward_mole(self, x, masks, span=None, aug=None, train=True):
         B = x.size(0)
-
-        with torch.no_grad():
-            base_output = self.backbone.base_model(x, attention_mask=masks)
-            cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
-
-        # Gating
-        gating_logits = torch.matmul(cls_embedding, self.expert_keys.T)  # (B, E)
-        gating_weights = self.softmax(gating_logits)
-
-        if self.uniform_expert:
-            gating_weights = torch.full_like(gating_weights, 1.0 / self.num_experts)
-
         return_dict = {}
 
         if not self.uniform_expert:
-            avg_weights = gating_weights.mean(dim=0)
-            uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
-            return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
-            return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
+            with torch.no_grad():
+                with self.backbone.disable_adapter():
+                    base_output = self.backbone(x, attention_mask=masks)
+                    cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
 
-        # Top-k routing
-        topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
+            # Gating
+            gating_logits = self.gating_layer(cls_embedding)  # (B, E)
+            gating_weights = self.softmax(gating_logits)
+            topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
+            if train:
+                avg_weights = gating_weights.mean(dim=0)
+                uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
+                return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
+                return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
+        else:
+            topk_weights = torch.full((B, self.top_k), 1.0 / self.top_k).to(x.device)
+            # randomly chọn k expert cho mỗi batch, topk của một sample phải khác nhau
+            topk_indices = torch.stack([torch.randperm(self.num_experts)[:self.top_k] for _ in range(B)], dim=0).to(x.device)
 
         # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
-        expert_outputs = [torch.zeros_like(base_output.last_hidden_state) for _ in range(self.top_k)]
-
+        expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
+        num_choose = [0] * self.num_experts
         for k in range(self.top_k):
             expert_ids = topk_indices[:, k]  # (B,)
             weights = topk_weights[:, k]     # (B,)
@@ -178,8 +211,10 @@ class BertED(nn.Module):
                 mask = (expert_ids == expert_id)
                 if mask.sum() == 0:
                     continue
+                else:
+                    num_choose[expert_id.item()] +=  mask.sum().item()
 
-                self.backbone.set_adapter(f"expert_{expert_id.item()}")
+                self.set_adapter(f"expert_{expert_id.item()}")
                 out = self.backbone(
                     x[mask], attention_mask=masks[mask]
                 ).last_hidden_state  # (N, T, H)
@@ -192,12 +227,13 @@ class BertED(nn.Module):
 
         # Optional: add general expert
         if self.use_general_expert:
-            self.backbone.set_adapter("general_expert")
+            self.set_adapter("general_expert")
             general_out = self.backbone(x, attention_mask=masks).last_hidden_state
             x_out += self.general_expert_weight * general_out
 
         return_dict['reps'] = x_out[:, 0, :].clone()
         return_dict['context_feat'] = x_out.view(-1, x_out.shape[-1])
+        return_dict['num_choose'] = num_choose
 
         if span is not None:
             trig_feature = self._extract_trigger(x_out, span)

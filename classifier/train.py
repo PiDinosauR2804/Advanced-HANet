@@ -75,7 +75,7 @@ def train(local_rank, args, trial=None):
     if args.wandb:
         wandb.init(
             # set the wandb project where this run will be logged
-            project="HANet_mol_full",
+            project=args.project_name,
             name = args.run_name,
 
             # track hyperparameters and run metadata
@@ -84,7 +84,7 @@ def train(local_rank, args, trial=None):
         )
     else:
         wandb.init(
-            project="HANet_mole_full",
+            project=args.project_name,
             name = args.run_name,
             mode="disabled"
         )
@@ -106,8 +106,10 @@ def train(local_rank, args, trial=None):
     streams_indexed = [[label2idx[l] for l in st] for st in streams]
     
     # streams_indexed có dạng [[4, 5, 9, 11], [2, 1, 8, 33], ...] thể hiện thứ tự label class được học
-    
-    model = BertED(args) # define model
+    if args.backbone_path != "":
+        model = BertED(args, args.backbone_path) # define model
+    else:
+        model = BertED(args) # define model
     model.to(device)
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.decay, eps=args.adamw_eps, betas=(0.9, 0.999)) #TODO: Hyper parameters
     
@@ -255,6 +257,7 @@ def train(local_rank, args, trial=None):
         
         logger.info("Start training ...")
         for ep in tqdm(range(num_epochs), desc="Epoch"):
+            num_choose = [0] * model.num_experts
             if stage == 0 and args.skip_first:
                 continue
             
@@ -309,6 +312,9 @@ def train(local_rank, args, trial=None):
                 # else: 
                 return_dict = model(train_x, train_masks, train_span)
                 outputs, context_feat, trig_feat = return_dict['outputs'], return_dict['context_feat'], return_dict['trig_feat']
+                if args.use_mole:
+                    for i, num in enumerate(return_dict['num_choose']):
+                        num_choose[i] += num
                 # invalid_mask_op = torch.BoolTensor([item not in learned_types for item in range(args.class_num)]).to(device)
                 # not from below's codes
                 
@@ -653,9 +659,13 @@ def train(local_rank, args, trial=None):
                 
                 if args.use_mole and not model.uniform_expert:
                     loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']
-                    
+                model.unfreeze_lora()
                 loss.backward()
                 total_norm = clip_grad_norm_(model.parameters(), max_norm=1.0)
+                
+                if args.print_trainable_params:
+                    model.print_trainable_parameters()
+                
                 optimizer.step() 
                 stats = torch.cuda.memory_stats()
                 wandb.log({
@@ -690,8 +700,8 @@ def train(local_rank, args, trial=None):
                             "learning_rate": optimizer.param_groups[0]['lr'],
                         })
             scheduler.step()
-
-            if ((ep + 1) % int(args.eval_freq*ep_time) == 0 and args.early_stop and (ep + 1) >= args.skip_eval_ep*ep_time) or (ep + 1) == num_epochs: # TODO TODO
+            logger.info(f"Num choose: {num_choose}")
+            if ((ep + 1) % int(args.eval_freq*ep_time) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
                 logger.info("Evaluation process ...")
                 model.eval()
@@ -706,14 +716,17 @@ def train(local_rank, args, trial=None):
                         batch_size=args.eval_batch_size,
                         collate_fn=lambda x:x)
                     calcs = Calculator()
-                    
-                    for batch in eval_loader:
+                    num_choose = [0] * model.num_experts
+                    for batch in tqdm(eval_loader, desc="Eval"):
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
-                        eval_return_dict = model(eval_x, eval_masks, eval_span)
+                        eval_return_dict = model(eval_x, eval_masks, eval_span, train=False)
+                        if args.use_mole:
+                            for i, num in enumerate(eval_return_dict['num_choose']):
+                                num_choose[i] += num
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
                         for i in range(len(eval_y)):
@@ -725,7 +738,6 @@ def train(local_rank, args, trial=None):
                         calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
-                    
                     wandb.log({
                         f"precision": precision,
                         f"recall": recall,
@@ -737,6 +749,7 @@ def train(local_rank, args, trial=None):
                     # dev_scores_ls.append(micro_F1)
                     # logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
+                    logger.info(f"Num choose: {num_choose}")
                     
                     # report to optuna
                     
@@ -745,6 +758,8 @@ def train(local_rank, args, trial=None):
                             no_better = 0
                             dev_score = micro_F1
                             torch.save(model.state_dict(), e_pth)
+                            if stage == 0:
+                                torch.save(model.backbone.state_dict(), "outputs/best_model0.pth")
                         else:
                             no_better += 1
                             logger.info(f'No better: {no_better}/{args.patience}')

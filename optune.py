@@ -2,8 +2,8 @@ from classifier.train import train
 from configs import parse_arguments
 import optuna
 import wandb
-import os
-os.environ["WANDB_API_KEY"] = "bbee5bd41b9c06ce3048243c9611e36701652ef2"  # Thay thế bằng API key của bạn
+import torch
+from loguru import logger
 
 args = parse_arguments()
 
@@ -28,7 +28,7 @@ def objective(trial):
     args.class_num = 20
     args.single_label = True
     args.cl_aug = "shuffle"
-    args.aug_repeat_times = 5
+    args.aug_repeat_times = 3
     args.joint_da_loss = "ce"
     args.sub_max = True
     args.cl_temp = 0.07
@@ -40,44 +40,53 @@ def objective(trial):
     args.ratio_loss_des_cl = 1
     args.task_ep_time = 1
     args.early_stop = True
-    args.skip_eval_ep = 10
-    args.eval_freq = 2
-    args.patience = 3
+    args.skip_eval_ep = 0
+    args.eval_freq = 1
+    args.patience = 4
     args.early_stop = True
     args.classifier_layer = 1
     args.hidden_dim = 128
     args.dropout = 0.5
     args.use_general_expert = True
     args.use_mole = True
-    args.step_size = 5
+    args.step_size = 1
     args.wandb = True
     args.eval_batch_size = 64
     args.task_ep_time = 1
+    args.uniform_ep = 3
+    args.lora_dropout = 0.3
+    args.batch_size = 8
+    args.project_name = "HANet_mole_bert_full"
 
     # Tham số cho Optuna trial
-    args.uniform_ep = trial.suggest_int("uniform_ep", 1, 10)
-    args.lr = trial.suggest_float("lr", 1e-5, 2e-4, log=True)
-    args.lora_rank = trial.suggest_categorical("lora_rank", [32, 64, 128])
-    args.lora_alpha = trial.suggest_categorical("lora_alpha", [16, 32, 64])
-    args.lora_dropout = trial.suggest_float("lora_dropout", 0.1, 0.5, step=0.05)
-    args.batch_size = trial.suggest_categorical("batch_size", [4, 8, 16])
+    args.lr = trial.suggest_float("lr", 5e-5, 2e-4, log=True)
+    args.lora_rank = trial.suggest_categorical("lora_rank", [64, 128, 256])
+    args.lora_alpha = trial.suggest_int("lora_alpha", 32, 128, step=32)
     args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [4, 8])
     args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
         
-    args.gammalr = trial.suggest_float("gamma", 0.9, 1.0, step=0.01)
-    args.entropy_weight = trial.suggest_float("entropy_weight", 0.01, 1.0, step=0.01)
-    args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.01, 1.0, step=0.01)
+    args.gammalr = trial.suggest_float("gamma", 0.8, 1.0, step=0.01)
+    args.entropy_weight = trial.suggest_float("entropy_weight", 0.1, 1, step=0.1)
+    args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.1, 1.0, step=0.1)
     args.general_expert_weight = trial.suggest_float("general_expert_weight", 0.1, 1.0, step=0.1)
     
-    f1 = train(0, args, trial)
-    
-    return f1
+    try:
+        f1 = train(0, args, trial)
+        return f1
+    except RuntimeError as e:
+        if "CUDA out of memory" in str(e):
+            logger.warning("CUDA out of memory. Releasing GPU memory...")
+            torch.cuda.empty_cache()  # Giải phóng bộ nhớ GPU
+            return float('inf')  # Giá trị lỗi để Optuna bỏ qua
+        else:
+            raise e  # Nếu là lỗi khác, vẫn cho nó raise lên
+
 
 if __name__ == "__main__":
     wandb.login()
-    pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=10, interval_steps=1)
-    study = optuna.create_study(direction="maximize", pruner=pruner)
-    study.optimize(objective, n_trials=10)
+    # pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=10, interval_steps=1)
+    study = optuna.create_study(direction="maximize")
+    study.optimize(objective, n_trials=20)
     
     print("Best trial:")
     trial = study.best_trial
