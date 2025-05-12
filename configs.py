@@ -118,6 +118,15 @@ def parse_arguments():
     parser.add_argument('--ratio_loss_final_stage', default=1, type=float)
     parser.add_argument('--loss_des_type', default="2", choices=["1", "2"])
     
+    # Args for CrossEntropyLossWithWeight
+    parser.add_argument('--use_weight_ce', action='store_true')
+    parser.add_argument('--alpha_ce', default=0.1, type=float)
+    
+    # Args for Augment
+    parser.add_argument('--num_augmention', default=1, type=int)
+    parser.add_argument('--gpt_augmention', action='store_true')
+    parser.add_argument('--decrease_0_gpt_augmention', action='store_true')
+    
     args, _ = parser.parse_known_args()
 
     return args

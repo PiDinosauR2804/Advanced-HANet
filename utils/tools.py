@@ -1,6 +1,53 @@
 import json, os
 import torch
 import torch.nn.functional as F
+def balance_zero_with_nonzero(
+    tlcl_feature: torch.Tensor,
+    tlcl_lbs: torch.Tensor,
+    args
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """
+    Giữ lại tất cả các nhãn != 0, và chỉ giữ lại một số nhãn 0 sao cho
+    count(0) == count(non_zero) / (class_num / task_num)
+
+    Sau đó flatten feature thành [N*D], label thành [N]
+
+    Args:
+        tlcl_feature: Tensor [N, D]
+        tlcl_lbs:     Tensor [N]
+        args:         Đối tượng chứa class_num và task_num
+
+    Returns:
+        flattened_feature: Tensor [N*D]
+        flattened_lbs:     Tensor [N]
+    """
+    # vị trí các nhãn 0
+    zero_idx = (tlcl_lbs == 0).nonzero(as_tuple=False).flatten()
+
+    # số lượng nhãn 0 cần giữ lại để cân bằng
+    scale_factor = args.class_num // args.task_num
+    keep_zero_count = len(zero_idx) // scale_factor
+    num_non_zero = tlcl_lbs.size(0) - len(zero_idx)
+
+    # nếu không cần xóa gì thì giữ nguyên
+    if len(zero_idx) <= keep_zero_count:
+        filtered_feature = tlcl_feature
+        filtered_lbs = tlcl_lbs
+    else:
+        # chọn ngẫu nhiên phần cần drop
+        perm = torch.randperm(len(zero_idx), device=tlcl_lbs.device)
+        drop_idx = zero_idx[perm[:len(zero_idx) - keep_zero_count]]
+
+        # tạo mask
+        mask = torch.ones(tlcl_lbs.size(0), dtype=torch.bool, device=tlcl_lbs.device)
+        mask[drop_idx] = False
+
+        filtered_feature = tlcl_feature[mask]
+        filtered_lbs = tlcl_lbs[mask]
+
+    # Flatten feature: [N, D] → [N*D]
+    # flattened_feature = filtered_feature.view(-1)
+    return filtered_feature, filtered_lbs
 
 def collate_description(batch):
     tokens, masks, keys = zip(*batch)
@@ -66,6 +113,7 @@ def compute_CLLoss(Adj_mask, reprs, matsize, args, device): # compute InfoNCELos
     return torch.mean(log_prob_cl[log_prob_cl > 0])
 
 def collect_from_json(dataset, root, split, args):
+    key = None
     default = ['train', 'dev', 'test']
     if split == "train":
         pth = os.path.join(root, dataset, "perm"+str(args.perm_id), f"{dataset}_{args.task_num}task_{args.class_num // args.task_num}way_{args.shot_num}shot.{split}.jsonl")
@@ -83,10 +131,12 @@ def collect_from_json(dataset, root, split, args):
             if pth.endswith('.jsonl'):
                 data = [json.loads(line) for line in f]
                 if split == "train":
+                    key = [list(i.keys()) for i in data]
                     data = [list(i.values()) for i in data]
+                    
             else:
                 data = json.load(f)
-    return data
+    return data, key
 
 def sim(x, y):
     """

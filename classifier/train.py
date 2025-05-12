@@ -6,8 +6,8 @@ from utils.dataloader import (
     MAVEN_Dataset,
     DescriptionDataset, collect_eval_sldataset
 )
-from utils.computeLoss import compute_CLLoss
-from utils.tools import contrastive_loss_des, find_negative_labels, collate_description
+from utils.computeLoss import compute_CLLoss, CrossEntropyLossWithWeight
+from utils.tools import contrastive_loss_des, find_negative_labels, collate_description, balance_zero_with_nonzero
 from utils.calcs import Calculator
 
 import os
@@ -90,7 +90,7 @@ def train(local_rank, args, trial=None):
         )
     
     # Đọc dữ liệu
-    streams = collect_from_json(args.dataset, args.stream_root, 'stream', args)
+    streams, _ = collect_from_json(args.dataset, args.stream_root, 'stream', args)
     # streams = [streams[l] for l in PERM[int(args.perm_id)]] # permute the stream
     label2idx = {0:0}
     idx2label = {}
@@ -293,11 +293,44 @@ def train(local_rank, args, trial=None):
                 #     padded_train_span, span_len = None, None
                 # else:
                 
-                train_x, train_y, train_masks, train_span = zip(*batch)
+                train_x, train_y, train_masks, train_span, train_augment = zip(*batch)
                 train_x = torch.LongTensor(train_x).to(device)
                 train_masks = torch.LongTensor(train_masks).to(device)
                 train_y = [torch.LongTensor(item).to(device) for item in train_y]           
                 train_span = [torch.LongTensor(item).to(device) for item in train_span]     # Sử dụng để lưu vị trí bắt đầu và kết thúc 1 từ của các ids
+                augment_x = {}
+                augment_masks = {}
+                augment_y = {}
+                augment_span = {}
+                for aug_ids in range(args.num_augmention):
+                    augment_x[aug_ids] = [torch.LongTensor(item[aug_ids][0]).to(device) for item in train_augment]
+                    augment_y[aug_ids] = [torch.LongTensor(item[aug_ids][1]).to(device) for item in train_augment]
+                    augment_masks[aug_ids] = [torch.LongTensor(item[aug_ids][2]).to(device) for item in train_augment]
+                    augment_span[aug_ids] = [torch.LongTensor(item[aug_ids][3]).to(device) for item in train_augment]
+
+                augment_x_list = [
+                    torch.stack(value, dim=0)  # → (B, L)
+                    for _, value in augment_x.items()
+                ]
+                augment_x_total = torch.cat(augment_x_list, dim=0).to(device)
+
+                augment_y_total = [
+                    tensor
+                    for value in augment_y.values()
+                    for tensor in value
+                ]
+                
+                augment_masks_list = [
+                    torch.stack(value, dim=0)  # → (B, L)
+                    for _, value in augment_masks.items()
+                ]
+                augment_masks_total = torch.cat(augment_masks_list, dim=0).to(device)
+                
+                augment_span_total = [
+                    tensor
+                    for value in augment_span.values()
+                    for tensor in value
+                ]
                 
                 labels_for_loss_des = []
                 for y in train_y:
@@ -488,9 +521,33 @@ def train(local_rank, args, trial=None):
                     
                     loss = loss + loss_des_cl * args.ratio_loss_des_cl      
                     
+                lgacl_loss = torch.tensor(0.0, device=device)
+                if args.gpt_augmention:
+                    augment_return_dict = model(augment_x_total, augment_masks_total, augment_span_total)
+                    augment_trig_feat = augment_return_dict['trig_feat']
+                    
+                    lgacl_feature = torch.cat([trig_feat, augment_trig_feat])
+                    # tlcl_feature = trig_feat
+                    lgacl_feature = normalize(lgacl_feature, dim=-1)
+                    lgacl_lbs = torch.cat(train_y + augment_y_total, dim=0)
+                    if args.decrease_0_gpt_augmention:
+                        lgacl_feature, lgacl_lbs = balance_zero_with_nonzero(lgacl_feature, lgacl_lbs)
+                    # tlcl_lbs = torch.cat(train_y)
+                    mat_size = lgacl_feature.shape[0]
+                    lgacl_lbs_oh = F.one_hot(lgacl_lbs).float()
+                    # tlcl_lbs_oh[:, 0] = 0 # whether to compute negative distance
+                    Adj_mask_lgacl = torch.matmul(lgacl_lbs_oh, lgacl_lbs_oh.T)
+                    Adj_mask_lgacl = Adj_mask_lgacl * (torch.ones(mat_size) - torch.eye(mat_size)).to(device)
+                    lgacl_loss = compute_CLLoss(Adj_mask_lgacl, lgacl_feature, mat_size, args, device)
+                
+                loss = loss + lgacl_loss
+                
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
-                loss_ce = criterion_ce(ce_outputs, ce_y)
+                if args.use_weight_ce:
+                    loss_ce = CrossEntropyLossWithWeight(ce_outputs, ce_y, alpha=args.alpha_ce)
+                else:
+                    loss_ce = criterion_ce(ce_outputs, ce_y)
                 loss = loss + loss_ce
                 w = len(prev_learned_types) / len(learned_types)
 
@@ -499,12 +556,22 @@ def train(local_rank, args, trial=None):
                 if args.rep_aug != "none" and stage > 0:
                     outputs_aug, aug_y = [], []
                     for e_batch in e_loader:
-                        exemplar_x, exemplars_y, exemplar_masks, exemplar_span = zip(*e_batch)
+                        exemplar_x, exemplars_y, exemplar_masks, exemplar_span, exemplar_augment = zip(*e_batch)
                         exemplar_radius = [exemplars.radius[y[0]] for y in exemplars_y]
                         exemplar_x = torch.LongTensor(exemplar_x).to(device)
                         exemplar_masks = torch.LongTensor(exemplar_masks).to(device)
                         exemplars_y = [torch.LongTensor(item).to(device) for item in exemplars_y]
-                        exemplar_span = [torch.LongTensor(item).to(device) for item in exemplar_span]            
+                        exemplar_span = [torch.LongTensor(item).to(device) for item in exemplar_span]    
+                        augment_exemplars_x = {}
+                        augment_exemplars_masks = {}
+                        augment_exemplars_y = {}
+                        augment_exemplars_span = {}
+                        for aug_ids in range(args.num_augmention):
+                            augment_exemplars_x[aug_ids] = [torch.LongTensor(item[aug_ids][0]).to(device) for item in exemplar_augment]
+                            augment_exemplars_y[aug_ids] = [torch.LongTensor(item[aug_ids][1]).to(device) for item in exemplar_augment]
+                            augment_exemplars_masks[aug_ids] = [torch.LongTensor(item[aug_ids][2]).to(device) for item in exemplar_augment]
+                            augment_exemplars_span[aug_ids] = [torch.LongTensor(item[aug_ids][3]).to(device) for item in exemplar_augment]
+                                    
                         if args.rep_aug == "relative":
                             aug_return_dict = model(exemplar_x, exemplar_masks, exemplar_span, torch.sqrt(torch.stack(exemplar_radius)).unsqueeze(-1))
                         else:
@@ -651,11 +718,6 @@ def train(local_rank, args, trial=None):
                 #     with amp.scale_loss(loss, optimizer) as scaled_loss:
                 #         scaled_loss.backward()
                 # else:
-                
-                ####################################
-                if stage == 4:
-                    loss = loss * args.ratio_loss_final_stage
-                ####################################
                 
                 if args.use_mole and not model.uniform_expert:
                     loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']

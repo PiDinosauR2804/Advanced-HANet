@@ -12,6 +12,7 @@ class Exemplars():
         self.exemplars_mask = []
         self.exemplars_y = []
         self.exemplars_span = []
+        self.exemplars_augment = []
         self.radius = {}
         self.args = args
 
@@ -23,8 +24,9 @@ class Exemplars():
         x = [item for t in self.exemplars_x for item in t]
         y = [item for t in self.exemplars_y for item in t]
         mask = [item for t in self.exemplars_mask for item in t]
-        span = [item for t in self.exemplars_span for item in t]    
-        return (x, mask, y, span ,self.radius)
+        span = [item for t in self.exemplars_span for item in t]  
+        aug = [item for t in self.exemplars_augment for item in t]      
+        return (x, mask, y, span, aug ,self.radius)
 
     # Cắt bớt những old sample cũ đã vượt quá giới hạn của memory
     # Cắt đều đi cho mỗi class
@@ -34,6 +36,7 @@ class Exemplars():
             self.exemplars_mask = [i[:exemplar_num] for i in self.exemplars_mask]
             self.exemplars_y = [i[:exemplar_num] for i in self.exemplars_y]
             self.exemplars_span = [i[:exemplar_num] for i in self.exemplars_span]
+            self.exemplars_augment = [i[:exemplar_num] for i in self.exemplars_augment]
             
     # Add thêm sample vào tập cũ
     # learned_nums: Số lượng class đã học
@@ -50,7 +53,7 @@ class Exemplars():
         with torch.no_grad():
             print("Setting exemplars, loading exemplar batch:")
             for batch in tqdm(exemplar_loader):
-                data_x, data_y, data_masks, data_span = zip(*batch)
+                data_x, data_y, data_masks, data_span, data_aug = zip(*batch)
                 # tensor_x = torch.LongTensor(data_x).to('cpu')
                 # tensor_masks = torch.LongTensor(data_masks).to('cpu')
                 tensor_x = torch.LongTensor(data_x).to(device)
@@ -66,7 +69,7 @@ class Exemplars():
                             if not label in rep_dict:
                                 rep_dict[label], data_dict[label] = [], []
                             # data_dict[label].append([data_x[i], data_y[i], data_masks[i], data_span[i]])
-                            data_dict[label].append([data_x[i], [label], data_masks[i], [data_span[i][j]]])
+                            data_dict[label].append([data_x[i], [label], data_masks[i], [data_span[i][j]], data_aug[i]])
                             rep_dict[label].append(rep[i, 0, :].squeeze(0)) # lưu token cls
                 # if len(rep_dict) > 20: # TODO: test use
                 #     break
@@ -112,6 +115,7 @@ class Exemplars():
                 self.exemplars_y.append([item[1] for item in data_topk])
                 self.exemplars_mask.append([item[2] for item in data_topk])
                 self.exemplars_span.append([item[3] for item in data_topk])
+                self.exemplars_augment.append([item[4] for item in data_topk])
                 
                 self.radius[l] = radius
         
@@ -120,5 +124,6 @@ class Exemplars():
         y = [item for t in self.exemplars_y for item in t]
         mask = [item for t in self.exemplars_mask for item in t]
         span = [item for t in self.exemplars_span for item in t]    
-        dataset.extend(x, y, mask, span)
+        aug = [item for t in self.exemplars_augment for item in t]  
+        dataset.extend(x, y, mask, span, aug)
         return DataLoader(dataset=dataset, batch_size=self.args.batch_size, shuffle=True, collate_fn=collate_fn, drop_last=False)
