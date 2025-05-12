@@ -198,7 +198,7 @@ def collect_dataset(dataset, root, split, label2idx, stage_id, labels, args):
         return MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans, data_augment)
 
 def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels, args):
-    data_stream , key_stream = collect_from_json(dataset, root, split)
+    data_stream , key_stream = collect_from_json(dataset, root, split, args)
     new_labels = []
     for i in key_stream[stage_id]:
         if int(i) in labels:
@@ -300,7 +300,7 @@ def collect_exemplar_dataset(dataset, root, split, label2idx, stage_id, labels, 
     return MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans, data_augment)
                
 def collect_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
-    data_stream , key_stream = collect_from_json(dataset, root, split)
+    data_stream , key_stream = collect_from_json(dataset, root, split, args)
     new_labels = []
     for i in key_stream[stage_id]:
         if int(i) in labels:
@@ -405,7 +405,7 @@ def collect_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
         return MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans, data_augment)
 
 def collect_eval_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
-    data, _ = collect_from_json(dataset, root, split)
+    data, _ = collect_from_json(dataset, root, split, args)
     data_tokens, data_labels, data_masks, data_spans = [], [], [], []
     for dt in tqdm(data):
         # pop useless properties

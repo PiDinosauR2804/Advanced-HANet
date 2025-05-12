@@ -227,7 +227,7 @@ def train(local_rank, args, trial=None):
             # else:
             #     e_loader = list(exemplars.build_stage_loader(MAVEN_Dataset([], [], [], [])))
             if args.rep_aug != "none":
-                e_loader = exemplars.build_stage_loader(MAVEN_Dataset([], [], [], []))
+                e_loader = exemplars.build_stage_loader(MAVEN_Dataset([], [], [], [], []))
             # prev_model.to(args.device)   # TODO: test use
 
         for item in streams_indexed[stage]:
@@ -531,7 +531,7 @@ def train(local_rank, args, trial=None):
                     lgacl_feature = normalize(lgacl_feature, dim=-1)
                     lgacl_lbs = torch.cat(train_y + augment_y_total, dim=0)
                     if args.decrease_0_gpt_augmention:
-                        lgacl_feature, lgacl_lbs = balance_zero_with_nonzero(lgacl_feature, lgacl_lbs)
+                        lgacl_feature, lgacl_lbs = balance_zero_with_nonzero(lgacl_feature, lgacl_lbs, args)
                     # tlcl_lbs = torch.cat(train_y)
                     mat_size = lgacl_feature.shape[0]
                     lgacl_lbs_oh = F.one_hot(lgacl_lbs).float()

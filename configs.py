@@ -120,7 +120,7 @@ def parse_arguments():
     
     # Args for CrossEntropyLossWithWeight
     parser.add_argument('--use_weight_ce', action='store_true')
-    parser.add_argument('--alpha_ce', default=0.1, type=float)
+    parser.add_argument('--alpha_ce', default=0.7, type=float)
     
     # Args for Augment
     parser.add_argument('--num_augmention', default=1, type=int)
