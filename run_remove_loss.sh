@@ -10,6 +10,11 @@ do
             do
                 for n in 0.1 0.3 0.5 0.7
                 do
+                    if [ "$j" = "ACE" ]; then
+                        t=10
+                    else
+                        t=20
+                    fi
                     # Tạo flags conditionally
                     UCL_FLAG=""
                     TLCL_FLAG=""
@@ -38,7 +43,7 @@ do
                         --rep-aug mean \
                         --distill mul \
                         --epoch 30 \
-                        --class-num 20 \
+                        --class-num $t \
                         --single-label \
                         --cl-aug shuffle \
                         --aug-repeat-times 5 \
