@@ -55,7 +55,7 @@ do
                         --skip-first-cl ucl+tlcl \
                         --use-description \
                         --num_description 3 \
-                        --ratio_loss_des_cl n     
+                        --ratio_loss_des_cl $n     
                 done
             done
         done
