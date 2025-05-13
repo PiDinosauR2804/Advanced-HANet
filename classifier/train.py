@@ -133,7 +133,7 @@ def train(local_rank, args):
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project=f"Quang_HANet_run_with_augment_{args.dataset}",
+        project=f"Quang_HANet_run_with_13_5_{args.dataset}",
         name = args.run_name,
 
         # track hyperparameters and run metadata
