@@ -4,6 +4,8 @@ import optuna
 import wandb
 import torch
 from loguru import logger
+import os 
+os.environp['WANDB_API_KEY'] = 'bbee5bd41b9c06ce3048243c9611e36701652ef2'  # Đặt API key của bạn ở đây
 
 args = parse_arguments()
 
@@ -56,9 +58,11 @@ def objective(trial):
     args.uniform_ep = 3
     args.lora_dropout = 0.3
     args.gpt_augmention = True
+    args.use_weight_ce = True
     args.project_name = "HANet_mole_bert_full_v2"
 
     # Tham số cho Optuna trial
+    args.alpha_ce = trial.suggest_float("alpha_ce", 0.5, 1.0, step=0.1)
     args.decrease_0_gpt_augmention = trial.suggest_categorical("decrease_0_gpt_augmention", [True, False])
     args.batch_size = trial.suggest_categorical("batch_size", [4, 8])
     args.lr = trial.suggest_float("lr", 5e-5, 2e-4, log=True)
