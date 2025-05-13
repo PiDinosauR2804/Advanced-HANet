@@ -14,7 +14,7 @@ def objective(trial):
     args.epochs = 10
     args.use_lora = True
     args.logs_dir = "logs/classifier"
-    args.data_root = "./data/data_ids"
+    args.data_root = "./data/data_ids_enhence"
     args.dataset = "MAVEN"
     args.backbone = "bert-base-uncased"
     args.decay = 1e-4
