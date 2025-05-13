@@ -110,7 +110,8 @@ def train(local_rank, args):
         use_description = ""
         
     # args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{tlcl_have}_{ucl_have}_{timestamp}"    
-    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{use_description}_{args.distill}_{tlcl_have}_{ucl_have}_{timestamp}"  
+    # args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{use_description}_{args.ratio_loss_des_cl}_{tlcl_have}_{ucl_have}_{timestamp}" 
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.ratio_loss_des_cl}_{tlcl_have}_{ucl_have}_{args.joint_da_loss}_{timestamp}"  
     
     # Cấu hình logging
     log_dir = "log_result"

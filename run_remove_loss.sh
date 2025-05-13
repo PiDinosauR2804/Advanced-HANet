@@ -47,7 +47,7 @@ do
                         --cl_temp 0.07 \
                         $UCL_FLAG \
                         $TLCL_FLAG \
-                        --skip-first-cl $i \
+                        --skip-first-cl ucl+tlcl \
                         --use-description \
                         --num_description 3 \
                         --ratio_loss_des_cl n     
