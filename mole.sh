@@ -1,0 +1,47 @@
+!python main.py \
+    --data_root ./data/data_ids_enhence \
+    --dataset MAVEN \
+    --backbone bert-base-uncased \
+    --lr 5e-5 \
+    --decay 1e-4 \
+    --no_freeze_bert \
+    --shot_num 5 \
+    --batch_size 16 \
+    --device cuda:0 \
+    --log \
+    --log_dir ./outputs/log_incremental/temp7_submax/first_wo_UCL+TCL/ \
+    --log_name ashuffle_lnone_r1 \
+    --dweight_loss \
+    --rep_aug mean \
+    --distill pd \
+    --class_num 20 \
+    --single_label \
+    --cl_aug shuffle \
+    --aug_repeat_times 5 \
+    --joint_da_loss ce \
+    --sub_max \
+    --cl_temp 0.07 \
+    --ucl \
+    --skip_first_cl ucl+tlcl \
+    --use_description \
+    --num_description 3 \
+    --ratio_loss_des_cl 0.1 \
+    --task_ep_time 1 \
+    --early_stop \
+    --epoch 80 \
+    --uniform_ep 10 \
+    --eval_freq 2 \
+    --skip_eval_ep 15 \
+    --patience 3 \
+    --lora_rank 64 \
+    --lora_alpha 16 \
+    --use_lora \
+    --use_mole \
+    --mole_num_experts 4 \
+    --mole_top_k 2 \
+    --use_general_expert \
+    --entropy_weight 0.1 \
+    --load_balance_weight 1 \
+    --general_expert_weight 0.1 \
+    --step_size 10 \
+    --gammalr 0.9
