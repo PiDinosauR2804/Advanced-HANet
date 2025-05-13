@@ -2,13 +2,13 @@ source activate zhangchenlong
 
 for i in ucl tlcl ucl+tlcl none
 do
-    for j in 10
+    for j in ACE MAVEN
     do
         for l in ce none
         do
-            for m in 5 10
+            for m in 5
             do
-                for n in pd fd mul none
+                for n in 0.1 0.3 0.5 0.7
                 do
                     # Tạo flags conditionally
                     UCL_FLAG=""
@@ -23,20 +23,20 @@ do
 
                     python classifier/train.py \
                         --data-root ./data/data_ids \
-                        --dataset MAVEN \
+                        --dataset $j \
                         --backbone bert-base-uncased \
                         --lr 2e-5 \
                         --decay 1e-4 \
                         --no-freeze-bert \
                         --shot-num $m \
-                        --batch-size 16 \
+                        --batch-size 4 \
                         --device cuda:0 \
                         --log \
                         --log-dir ./outputs/log_incremental/temp7_submax/first_wo_UCL+TCL/ \
                         --log-name ashuffle_lnone_r1 \
                         --dweight_loss \
                         --rep-aug mean \
-                        --distill $n \
+                        --distill mul \
                         --epoch 30 \
                         --class-num 20 \
                         --single-label \
@@ -50,7 +50,7 @@ do
                         --skip-first-cl $i \
                         --use-description \
                         --num_description 3 \
-                        --ratio_loss_des_cl 0.1     
+                        --ratio_loss_des_cl n     
                 done
             done
         done
