@@ -9,7 +9,7 @@ args = parse_arguments()
 
 def objective(trial):
     # Hằng 
-    args.epochs = 50
+    args.epochs = 10
     args.use_lora = True
     args.logs_dir = "logs/classifier"
     args.data_root = "./data/data_ids"
@@ -38,7 +38,7 @@ def objective(trial):
     args.use_description = True
     args.num_description = 3
     args.ratio_loss_des_cl = 1
-    args.task_ep_time = 1
+    args.task_ep_time = 4
     args.early_stop = True
     args.skip_eval_ep = 0
     args.eval_freq = 1
@@ -55,16 +55,18 @@ def objective(trial):
     args.task_ep_time = 1
     args.uniform_ep = 3
     args.lora_dropout = 0.3
-    args.batch_size = 8
-    args.project_name = "HANet_mole_bert_full"
+    args.gpt_augmention = True
+    args.project_name = "HANet_mole_bert_full_v2"
 
     # Tham số cho Optuna trial
+    args.decrease_0_gpt_augmention = trial.suggest_categorical("decrease_0_gpt_augmention", [True, False])
+    args.batch_size = trial.suggest_categorical("batch_size", [4, 8])
     args.lr = trial.suggest_float("lr", 5e-5, 2e-4, log=True)
     args.lora_rank = trial.suggest_categorical("lora_rank", [64, 128, 256])
     args.lora_alpha = trial.suggest_int("lora_alpha", 32, 128, step=32)
     args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [4, 8])
     args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
-        
+    
     args.gammalr = trial.suggest_float("gamma", 0.8, 1.0, step=0.01)
     args.entropy_weight = trial.suggest_float("entropy_weight", 0.1, 1, step=0.1)
     args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.1, 1.0, step=0.1)
