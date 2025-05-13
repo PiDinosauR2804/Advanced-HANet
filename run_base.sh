@@ -12,12 +12,12 @@ for i in ACE MAVEN; do
 
     # lặp qua shot-num = 5 và 10
     for j in 5 10; do
-        for k in 0 1 2 3 4; do
+        for k in 1 2 3 4 42; do
             python classifier/train.py \
                 --data-root ./data/data_ids \
                 --dataset "$i" \
                 --backbone bert-base-uncased \
-                --perm-id $k \
+                --seed $k \
                 --lr 2e-5 \
                 --decay 1e-4 \
                 --no-freeze-bert \

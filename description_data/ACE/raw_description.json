@@ -1,0 +1,32 @@
+{
+    "9": [
+        "A PHONE-WRITE Event occurs when two or more people directly engage in discussion which does not take place ‘face-to-face’. To make this Event less open-ended, we limit it to written or telephone communication where at least two parties are specified. Communication that takes place in person should be considered a MEET Event. The very common ‘PERSON told reporters’ is not a taggable Event, nor is ‘issued a statement’. A PHONE-WRITE Event must be explicit phone or written communication between two or more parties."
+    ],
+    "2": [
+        "A TRANSPORT Event occurs whenever an ARTIFACT (WEAPON or VEHICLE) or a PERSON is moved from one PLACE (GPE, FACILITY, LOCATION) to another."
+    ],
+    "6": [
+        "An ELECT Event occurs whenever a candidate wins an election designed to determine the PERSON argument of a START-POSITION Event."
+    ],
+    "3": [
+        "A DIE Event occurs whenever the life of a PERSON Entity ends. DIE Events can be accidental, intentional or self-inflicted."
+    ],
+    "1": [
+        "An ATTACK Event is defined as a violent physical act causing harm or damage. ATTACK Events include any such Event not covered by the INJURE or DIE subtypes, including Events where there is no stated agent. The ATTACK Event type includes less specific violence-related nouns such as ‘conflict’, ‘clashes’, and ‘fighting’. ‘Gunfire’, which has the qualities of both an Event and a weapon, should always be tagged as an ATTACK Event, if only for the sake of consistency. A ‘coup’ is a kind of ATTACK (and so is a ‘war’)."
+    ],
+    "5": [
+        "An END-POSITION Event occurs whenever a PERSON Entity stops working for (or changes offices within) an ORGANIZATION or GPE. The change of office case will only be taggable when the office being left is explicitly mentioned within the scope of the Event. This includes government officials ending terms, whether elected or appointed."
+    ],
+    "7": [
+        "TRANSFER-MONEY Events refer to the giving, receiving, borrowing, or lending money when it is not in the context of purchasing something. The canonical examples are: (1) people giving money to organizations (and getting nothing tangible in return); and (2) organizations lending money to people or other orgs."
+    ],
+    "10": [
+        "A TRIAL-HEARING Event can have a CRIME attribute filled by a string from the text. It is important that the PROSECUTER-ARG be a state actor (GPE, ORGANIZATION subpart or PERSON representing them)."
+    ],
+    "8": [
+        "An INJURE Event occurs whenever a PERSON Entity experiences physical harm. INJURE Events can be accidental, intentional or self-inflicted."
+    ],
+    "4": [
+        "A MEET Event occurs whenever two or more Entities come together at a single location and interact with one another face-to-face.  MEET Events include talks, summits, conferences, meetings, visits, and any other Event where two or more parties get together at some location."
+    ]
+}
