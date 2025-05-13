@@ -5,7 +5,7 @@ import wandb
 import torch
 from loguru import logger
 import os 
-os.environp['WANDB_API_KEY'] = 'bbee5bd41b9c06ce3048243c9611e36701652ef2'  # Đặt API key của bạn ở đây
+os.environ['WANDB_API_KEY'] = 'bbee5bd41b9c06ce3048243c9611e36701652ef2'  # Đặt API key của bạn ở đây
 
 args = parse_arguments()
 
