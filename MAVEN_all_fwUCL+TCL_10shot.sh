@@ -1,7 +1,7 @@
 source activate zhangchenlong
 for i in 5 10
 do
-    for j in 5
+    for j in 10
     do
         for k in shuffle
         do
