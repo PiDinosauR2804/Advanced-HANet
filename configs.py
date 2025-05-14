@@ -126,6 +126,7 @@ def parse_arguments():
     parser.add_argument('--num_augmention', default=1, type=int)
     parser.add_argument('--gpt_augmention', action='store_true')
     parser.add_argument('--decrease_0_gpt_augmention', action='store_true')
+    parser.add_argument('--ratio_loss_lgacl', default=1, type=float)
     
     args, _ = parser.parse_known_args()
 

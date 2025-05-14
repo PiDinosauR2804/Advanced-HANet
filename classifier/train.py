@@ -540,7 +540,7 @@ def train(local_rank, args, trial=None):
                     Adj_mask_lgacl = Adj_mask_lgacl * (torch.ones(mat_size) - torch.eye(mat_size)).to(device)
                     lgacl_loss = compute_CLLoss(Adj_mask_lgacl, lgacl_feature, mat_size, args, device)
                 
-                loss = loss + lgacl_loss
+                loss = loss + lgacl_loss * args.ratio_loss_lgacl
                 
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]

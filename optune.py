@@ -59,22 +59,24 @@ def objective(trial):
     args.lora_dropout = 0.3
     args.gpt_augmention = True
     args.use_weight_ce = True
+    args.entropy_weight = 0.1
+    args.load_balance_weight = 1
+    args.general_expert_weight = 0.2
+    args.lora_rank = 64
+    args.lora_alpha = 64
+    args.mole_num_experts = 4
+    args.mole_top_k = 2
     args.project_name = "HANet_mole_bert_full_v2"
 
     # Tham số cho Optuna trial
     args.alpha_ce = trial.suggest_float("alpha_ce", 0.5, 1.0, step=0.1)
     args.decrease_0_gpt_augmention = trial.suggest_categorical("decrease_0_gpt_augmention", [True, False])
+    args.ratio_loss_lgacl = trial.suggest_float("ratio_loss_lgacl", 0.1, 1.0, step=0.1)
+    
     args.batch_size = trial.suggest_categorical("batch_size", [4, 8])
     args.lr = trial.suggest_float("lr", 5e-5, 2e-4, log=True)
-    args.lora_rank = trial.suggest_categorical("lora_rank", [64, 128, 256])
-    args.lora_alpha = trial.suggest_int("lora_alpha", 32, 128, step=32)
-    args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [4, 8])
-    args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
+    args.gammalr = trial.suggest_float("gamma", 0.95, 1.0, step=0.01)
     
-    args.gammalr = trial.suggest_float("gamma", 0.8, 1.0, step=0.01)
-    args.entropy_weight = trial.suggest_float("entropy_weight", 0.1, 1, step=0.1)
-    args.load_balance_weight = trial.suggest_float("load_balance_weight", 0.1, 1.0, step=0.1)
-    args.general_expert_weight = trial.suggest_float("general_expert_weight", 0.1, 1.0, step=0.1)
     
     try:
         f1 = train(0, args, trial)
