@@ -120,11 +120,6 @@ class BertED(nn.Module):
 
             self.backbone.print_trainable_parameters()
 
-        print("Trainable parameters:")
-        for n, p in self.named_parameters():
-            if p.requires_grad:
-                print(n, p.shape)
-
     def print_trainable_parameters(self):
         print("Trainable parameters:")
         for n, p in self.named_parameters():
