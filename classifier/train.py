@@ -701,7 +701,8 @@ def train(local_rank, args, trial=None):
                         })
             scheduler.step()
             logger.info(f"Num choose: {num_choose}")
-            if ((ep + 1) % int(args.eval_freq*ep_time) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) or (ep + 1) == num_epochs: # TODO TODO
+            if ((ep + 1) % max(int(args.eval_freq*ep_time), 1) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) \
+                or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
                 logger.info("Evaluation process ...")
                 model.eval()
