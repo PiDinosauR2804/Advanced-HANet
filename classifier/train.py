@@ -731,14 +731,15 @@ def train(local_rank, args, trial=None):
                 optimizer.step() 
                 stats = torch.cuda.memory_stats()
                 wandb.log({
-                            # f"loss_ce_task_{stage}": loss_ce,
-                            # f"loss_ucl_{stage}": loss_ucl,
-                            # f"loss_tlcl_{stage}": loss_tlcl,
-                            # f"loss_des_cl_{stage}": loss_des_cl,
-                            # f"loss_aug_{stage}": loss_aug,
-                            # f"loss_fd_{stage}": loss_fd,
-                            # f"loss_pd_{stage}": loss_pd,
-                            # f"loss_all_{stage}": loss,
+                            f"loss_ce_task_{stage}": loss_ce,
+                            f"loss_ucl_{stage}": loss_ucl,
+                            f"loss_tlcl_{stage}": loss_tlcl,
+                            f"loss_des_cl_{stage}": loss_des_cl,
+                            f"loss_lgacl_{stage}": lgacl_loss,
+                            f"loss_aug_{stage}": loss_aug,
+                            f"loss_fd_{stage}": loss_fd,
+                            f"loss_pd_{stage}": loss_pd,
+                            f"loss_all_{stage}": loss,
                             
                             "loss_ce_task": loss_ce,
                             "entropy_loss": return_dict.get('entropy_loss', 0),
