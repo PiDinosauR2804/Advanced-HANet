@@ -661,7 +661,10 @@ def train(local_rank, args, trial=None):
                     loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']
                 model.unfreeze_lora()
                 loss.backward()
-                total_norm = clip_grad_norm_(model.parameters(), max_norm=1.0)
+                if args.clip_grad:
+                    total_norm = clip_grad_norm_(model.parameters(), max_norm=1.0)
+                else:
+                    total_norm = 0
                 
                 if args.print_trainable_params:
                     model.print_trainable_parameters()
