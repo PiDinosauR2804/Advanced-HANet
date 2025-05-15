@@ -75,7 +75,7 @@ do
                         --use_weight_ce \
                         --alpha_ce $k
                 done
-            done+
+            done
         done
     done
 done
