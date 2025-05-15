@@ -218,7 +218,8 @@ def collect_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
             add_span = []
             new_t = {}
             for i in range(len(dt['label'])):
-                if dt['label'][i] == labels[idx] or dt['label'][i] == 0: 
+                if dt['label'][i] == labels[idx] or \
+                (dt['label'][i] == 0 and np.random.random() <= args.down_0_sample_ratio): 
                     add_label.append(dt['label'][i]) 
                     add_span.append(dt['span'][i])
             if len(add_label) != 0:

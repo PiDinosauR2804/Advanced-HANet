@@ -49,6 +49,7 @@ def parse_arguments():
     parser.add_argument("--print_trainable_params", action="store_true", help="Print trainable parameters")
     parser.add_argument("--project_name", type=str, default="HANet_mole", help="Project name for Weights & Biases")
     parser.add_argument("--clip_grad", action="store_true", help="Enable gradient clipping")
+    parser.add_argument("--down_0_sample_ratio", type=float, default=1, help="Downsample ratio for 0 class")
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
