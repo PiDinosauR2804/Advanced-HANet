@@ -4,26 +4,16 @@ for i in 2 3 4
 do
     for j in 3 4 5 6
     do
-        for k in 0.1 0.3
+        for k in 0.1 0.3 0.5 0.7 0.9
         do
-            for l in 0.3 0.5 0.7
+            for l in 0.1
             do
-                for n in mul
+                for n in pd
                 do
                     if [ "$j" = "ACE" ]; then
                         t=10
                     else
                         t=20
-                    fi
-                    # Tạo flags conditionally
-                    UCL_FLAG=""
-                    TLCL_FLAG=""
-
-                    if [[ "$i" == "ucl" || "$i" == "ucl+tlcl" ]]; then
-                        UCL_FLAG="--ucl"
-                    fi
-                    if [[ "$i" == "tlcl" || "$i" == "ucl+tlcl" ]]; then
-                        TLCL_FLAG="--tlcl"
                     fi
 
                     python main.py \
@@ -31,8 +21,8 @@ do
                         --dataset ACE \
                         --perm_id 0 \
                         --seed 42 \
-                        --shot_num 5 \
-                        --class_num 10 \
+                        --shot_num 10 \
+                        --class_num $t \
                         --backbone bert-base-uncased \
                         --lr 2e-5 \
                         --decay 1e-4 \
@@ -42,6 +32,8 @@ do
                         --log \
                         --log_dir ./outputs/log_incremental/temp7_submax/first_wo_UCL+TCL/ \
                         --log_name ashuffle_lnone_r1 \
+                        --wandb \
+                        --project_name ACE_5_shot_16_5_pd \
                         --dweight_loss \
                         --rep_aug mean \
                         --distill $n \
@@ -79,11 +71,11 @@ do
                         --eval_ratio 0.25 \
                         --gpt_augmention \
                         --decrease_0_gpt_augmention \
-                        --ratio_loss_gpt $k \
+                        --ratio_loss_gpt $l \
                         --use_weight_ce \
-                        --alpha_ce $l
+                        --alpha_ce $k
                 done
-            done
+            done+
         done
     done
 done

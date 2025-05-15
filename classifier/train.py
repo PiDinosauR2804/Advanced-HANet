@@ -67,7 +67,7 @@ def train(local_rank, args, trial=None):
     device = torch.device(args.device if args.device != "cpu" and torch.cuda.is_available() else "cpu")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
-    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.distill}_{args.cl_aug}_{args.joint_da_loss}_{args.skip_first_cl}_{timestamp}"
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.epoch}_{args.task_ep_time}_{args.distill}_{args.alpha_ce}_{timestamp}"
 
     # get streams from json file and permute them in pre-defined order
     # PERM = PERM_5 if args.task_num == 5 else PERM_10
