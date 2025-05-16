@@ -33,13 +33,13 @@ do
                         --log_dir ./outputs/log_incremental/temp7_submax/first_wo_UCL+TCL/ \
                         --log_name ashuffle_lnone_r1 \
                         --wandb \
-                        --project_name ACE_10_shot_16_5_pd \
+                        --project_name ACE_10_shot_17_5_pd \
                         --dweight_loss \
                         --rep_aug mean \
                         --distill $n \
                         --single_label \
                         --cl_aug shuffle \
-                        --aug_repeat_times 9 \
+                        --aug_repeat_times 8 \
                         --joint_da_loss ce \
                         --sub_max \
                         --cl_temp 0.07 \
