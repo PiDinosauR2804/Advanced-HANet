@@ -3,13 +3,13 @@ import os
 import json
 
 
-input_root = './output/des4'
-output_root = './output/ids3'
+input_root = './output/des5'
+output_root = './output/ids4'
 
 datasets = ['MAVEN', 'ACE']
 perms = [0, 1, 2, 3, 4]
 num_des = 10
-num_neg = 10
+num_neg = 0
 
 for dataset in datasets:
     os.makedirs(os.path.join(output_root, dataset), exist_ok=True)

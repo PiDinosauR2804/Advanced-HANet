@@ -43,18 +43,19 @@ class Producer:
                         raise ValueError(f"Number of items in {key} ({len(value)}) and origin {key} ({len(origin_value)}) do not match")
                     
                     for idx, (item, origin_item) in enumerate(zip(value, origin_value)):
-                        item['text'] = item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
                         event_words = []
                         labels = []
                         for word, label in zip(item['event_words'], item['label']):
                             if label > 0:
                                 event_words.append(word.lower().replace(" - ", "-").replace(" ' s", "'s"))
-                                labels.append(label)
+                                # labels.append(label)
                                 
                         item['event_words'] = event_words
-                        item['label'] = labels
-                        item['text'] = origin_item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
+                        # item['label'] = labels
+                        item['label'] = origin_item['label']
                         item['span'] = origin_item['span']
+                        item['text'] = origin_item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
+                        # item['text'] = item['text'].replace("[CLS]", "").replace("[SEP]", "").lower().strip().replace(" - ", "-")
                         self.task_queue.put((line_idx, key, idx, item))
                         gt_list.append((line_idx, key, idx, origin_item))
                         num_item += 1

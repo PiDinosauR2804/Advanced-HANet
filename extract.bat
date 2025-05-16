@@ -1,8 +1,8 @@
 python extract_event.py ^
     --input_root data/data_text ^
-    --output_root output/des4 ^
-    --datasets MAVEN ^
-    --perms 0 ^
+    --output_root output/des5 ^
+    --datasets MAVEN ACE ^
+    --perms 0 1 2 3 4 ^
     --model gemini-2.0-flash ^
     --candidate 5 ^
     --num_try 3 ^
