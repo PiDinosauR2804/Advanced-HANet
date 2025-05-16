@@ -35,7 +35,7 @@ for i in ACE MAVEN; do
                 --single-label \
                 --cl-aug shuffle \
                 --aug-repeat-times 10 \
-                --joint-da-loss none \
+                --joint-da-loss ce \
                 --sub-max \
                 --cl_temp 0.07 \
                 --tlcl \
