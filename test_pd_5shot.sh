@@ -22,7 +22,7 @@ do
                         --perm_id 0 \
                         --seed 42 \
                         --shot_num 5 \
-                        --class_num $t \
+                        --class_num 10 \
                         --backbone bert-base-uncased \
                         --lr 2e-5 \
                         --decay 1e-4 \
