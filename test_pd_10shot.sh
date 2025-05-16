@@ -39,7 +39,7 @@ do
                         --distill $n \
                         --single_label \
                         --cl_aug shuffle \
-                        --aug_repeat_times 9 \
+                        --aug_repeat_times 8 \
                         --joint_da_loss ce \
                         --sub_max \
                         --cl_temp 0.07 \
