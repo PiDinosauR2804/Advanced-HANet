@@ -418,6 +418,9 @@ class BertED(nn.Module):
             else:
                 param.requires_grad = False
         # logger.info("Freeze backbone parameters")
+        
+    def turn_uniform_expert(self, turn_on=False):
+        pass
 
     def forward(self, x, masks, span=None, aug=None):
         out = self.backbone(x, attention_mask=masks)
@@ -426,6 +429,10 @@ class BertED(nn.Module):
             'reps': hidden[:, 0, :].clone(),
             'context_feat': hidden.view(-1, hidden.shape[-1])
         }
+        
+        if self.use_mole:
+            return_dict['entropy_loss'] = 0
+            return_dict['load_balance_loss'] = 0
 
         if span is not None:
             trig_feature = self._extract_trigger(hidden, span)
