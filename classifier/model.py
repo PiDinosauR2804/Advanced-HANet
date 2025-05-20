@@ -393,7 +393,7 @@ class BertED(nn.Module):
             for layer in self.backbone.encoder.layer:
                 layer.attention.self = BertSelfAttentionWrapper(layer.attention.self, bert_config, self.args)
 
-            self.backbone.print_trainable_parameters()
+        # self.print_trainable_parameters()
 
     def print_trainable_parameters(self):
         print("Trainable parameters:")
