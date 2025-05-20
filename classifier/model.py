@@ -1,5 +1,5 @@
 import torch
-from transformers import BertModel
+from transformers import BertModel, BertConfig
 from transformers.models.bert.modeling_bert import BertSelfAttention, BertSdpaSelfAttention
 import torch.nn as nn
 from torch.nn import functional as F
@@ -167,13 +167,12 @@ class LoraRouter(nn.Module):
 class BertSelfAttentionWrapper(nn.Module):
     """Multi-headed attention from 'Attention Is All You Need' paper"""
 
-    def __init__(self, old_attention_layer: BertSelfAttention, prompt_config, position_embedding_type=None):
+    def __init__(self, old_attention_layer: BertSelfAttention, config, prompt_config, position_embedding_type=None):
         super().__init__()
-        self.config = old_attention_layer.config
-        self.dropout_prob = old_attention_layer.config.attention_probs_dropout_prob
-        self.hidden_size = old_attention_layer.config.hidden_size
-        self.num_heads = old_attention_layer.config.num_attention_heads
-        self.max_position_embeddings = old_attention_layer.config.max_position_embeddings
+        self.dropout_prob = config.attention_probs_dropout_prob
+        self.hidden_size = config.hidden_size
+        self.num_heads = config.num_attention_heads
+        self.max_position_embeddings = config.max_position_embeddings
         self.require_contiguous_qkv = version.parse(get_torch_version()) < version.parse("2.2.0")
         self.head_dim = self.hidden_size // self.num_heads
         self.prompt_config = prompt_config
@@ -390,8 +389,9 @@ class BertED(nn.Module):
             self.backbone = get_peft_model(self.backbone, self.peft_config, adapter_name="general_expert")
 
         elif self.use_mole:
+            bert_config = BertConfig()
             for layer in self.backbone.encoder.layer:
-                layer.attention.self = BertSelfAttentionWrapper(layer.attention.self, self.args)
+                layer.attention.self = BertSelfAttentionWrapper(layer.attention.self, bert_config, self.args)
 
             self.backbone.print_trainable_parameters()
 
