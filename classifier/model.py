@@ -1,5 +1,5 @@
 import torch
-from transformers import BertModel, BertConfig
+from transformers import BertModel
 from transformers.models.bert.modeling_bert import BertSelfAttention, BertSdpaSelfAttention
 import torch.nn as nn
 from torch.nn import functional as F
@@ -177,6 +177,7 @@ class BertSelfAttentionWrapper(nn.Module):
         self.head_dim = self.hidden_size // self.num_heads
         self.prompt_config = prompt_config
         self.is_decoder = old_attention_layer.is_decoder
+        self.position_embedding_type = position_embedding_type if position_embedding_type is not None else config.position_embedding_type
 
         # self.experts_num = prompt_config['experts_num']
         # self.experts_pool_num = prompt_config['experts_pool_num']
@@ -389,7 +390,7 @@ class BertED(nn.Module):
             self.backbone = get_peft_model(self.backbone, self.peft_config, adapter_name="general_expert")
 
         elif self.use_mole:
-            bert_config = BertConfig()
+            bert_config = self.backbone.config
             for layer in self.backbone.encoder.layer:
                 layer.attention.self = BertSelfAttentionWrapper(layer.attention.self, bert_config, self.args)
 
