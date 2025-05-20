@@ -188,6 +188,7 @@ class BertSelfAttentionWrapper(nn.Module):
         # self.task_id = prompt_config["task_id"]
         self.experts_pool_num = prompt_config.mole_num_experts
         self.fixed_experts_num = prompt_config.mole_num_general_expert
+        self.fixed_experts_weight = prompt_config.general_expert_weight
         self.task_experts_num = 0
         self.experts_num = self.experts_pool_num + self.fixed_experts_num + self.task_experts_num
         self.select_experts_num = prompt_config.mole_top_k
@@ -211,7 +212,7 @@ class BertSelfAttentionWrapper(nn.Module):
 
         self.lora_router = LoraRouter(self.hidden_size, experts_num=self.experts_num, experts_pool_num=self.experts_pool_num, 
                                       fixed_experts_num=self.fixed_experts_num, task_experts_num=self.task_experts_num, 
-                                      select_experts_num=self.select_experts_num, task_num=self.task_num)
+                                      select_experts_num=self.select_experts_num, task_num=self.task_num, fixed_experts_weight=self.fixed_experts_weight)
 
         self.lora_experts_q, self.lora_experts_v = None, None
         self.lora_experts_q = nn.ModuleList()
