@@ -135,6 +135,7 @@ class LoraRouter(nn.Module):
 
         ## quangnm
         fixed_indices = torch.full((batch_size, seq_length), self.experts_pool_num).to(device=top_k_indices.device)
+        fixed_score = torch.full((batch_size, seq_length), 1).to(device=top_k_indices.device)
         ## quangnm
         # select_weight = self.select_experts_num/(self.select_experts_num+self.fixed_experts_num+self.task_experts_num)
         # fixed_weight = 1-select_weight
