@@ -178,7 +178,7 @@ class BertSelfAttentionWrapper(nn.Module):
         self.prompt_config = prompt_config
         self.is_decoder = old_attention_layer.is_decoder
         self.position_embedding_type = position_embedding_type if position_embedding_type is not None else config.position_embedding_type
-
+        self.all_head_size = self.num_heads * self.head_dim
         # self.experts_num = prompt_config['experts_num']
         # self.experts_pool_num = prompt_config['experts_pool_num']
         # self.task_experts_num = prompt_config['task_experts_num']
@@ -270,7 +270,9 @@ class BertSelfAttentionWrapper(nn.Module):
         lora_experts_v = self.lora_experts_v
         
         ## quangnm
-        query_layer = (self.q_proj(hidden_states)+agg_lora_states(hidden_states, lora_experts_q, top_k_indices, top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
+        query_layer = (self.q_proj(hidden_states) + 
+                       agg_lora_states(hidden_states, lora_experts_q, top_k_indices, 
+                                       top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
 
         # If this is instantiated as a cross-attention module, the keys and values come from an encoder; the attention
         # mask needs to be such that the encoder's padding tokens are not attended to.
@@ -283,7 +285,9 @@ class BertSelfAttentionWrapper(nn.Module):
         if is_cross_attention and past_key_value and past_key_value[0].shape[2] == current_states.shape[1]:
             key_layer, value_layer = past_key_value
         else:
-            value_layer = (self.v_proj(current_states)+agg_lora_states(current_states, lora_experts_v, top_k_indices, top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
+            value_layer = (self.v_proj(current_states) + 
+                           agg_lora_states(current_states, lora_experts_v, top_k_indices, 
+                                           top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
             key_layer = self.k_proj(current_states).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
 
             if past_key_value is not None and not is_cross_attention:
