@@ -167,8 +167,8 @@ class LoraRouter(nn.Module):
 class BertSelfAttentionWrapper(nn.Module):
     """Multi-headed attention from 'Attention Is All You Need' paper"""
 
-    def __init__(self, old_attention_layer: BertSelfAttention, config, prompt_config, position_embedding_type=None):
-        super().__init__(config, position_embedding_type=position_embedding_type)
+    def __init__(self, old_attention_layer: BertSelfAttention, prompt_config, position_embedding_type=None):
+        super().__init__()
         self.config = old_attention_layer.config
         self.dropout_prob = old_attention_layer.config.attention_probs_dropout_prob
         self.hidden_size = old_attention_layer.config.hidden_size
@@ -177,14 +177,22 @@ class BertSelfAttentionWrapper(nn.Module):
         self.require_contiguous_qkv = version.parse(get_torch_version()) < version.parse("2.2.0")
         self.head_dim = self.hidden_size // self.num_heads
         self.prompt_config = prompt_config
+        self.is_decoder = old_attention_layer.is_decoder
 
-        self.experts_num = prompt_config['experts_num']
-        self.experts_pool_num = prompt_config['experts_pool_num']
-        self.task_experts_num = prompt_config['task_experts_num']
-        self.fixed_experts_num = prompt_config['fixed_experts_num']
-        self.select_experts_num = prompt_config['select_experts_num']
-        self.task_num = prompt_config['task_num']
-        self.task_id = prompt_config["task_id"]
+        # self.experts_num = prompt_config['experts_num']
+        # self.experts_pool_num = prompt_config['experts_pool_num']
+        # self.task_experts_num = prompt_config['task_experts_num']
+        # self.fixed_experts_num = prompt_config['fixed_experts_num']
+        # self.select_experts_num = prompt_config['select_experts_num']
+        # self.task_num = prompt_config['task_num']
+        # self.task_id = prompt_config["task_id"]
+        self.experts_pool_num = prompt_config.mole_num_experts
+        self.fixed_experts_num = prompt_config.mole_num_general_expert
+        self.task_experts_num = 0
+        self.experts_num = self.experts_pool_num + self.fixed_experts_num + self.task_experts_num
+        self.select_experts_num = prompt_config.mole_top_k
+        self.task_num = prompt_config.task_num
+
 
         if (self.head_dim * self.num_heads) != self.hidden_size:
             raise ValueError(
@@ -216,17 +224,25 @@ class BertSelfAttentionWrapper(nn.Module):
 
     def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
         return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
-
+    
+    # Adapted from BertSelfAttention
     def forward(
         self,
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
-        position_ids: Optional[torch.LongTensor] = None,
-        past_key_value: Optional[Tuple[torch.Tensor]] = None,
-        output_attentions: bool = False,
-        use_cache: bool = False,
-    ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
-        bsz, q_len, _ = hidden_states.size()
+        head_mask: Optional[torch.FloatTensor] = None,
+        encoder_hidden_states: Optional[torch.FloatTensor] = None,
+        encoder_attention_mask: Optional[torch.FloatTensor] = None,
+        past_key_value: Optional[Tuple[Tuple[torch.FloatTensor]]] = None,
+        output_attentions: Optional[bool] = False,
+    ) -> Tuple[torch.Tensor]:
+        
+        if self.position_embedding_type != "absolute" or output_attentions or head_mask is not None:
+            raise NotImplementedError(
+                f"position_embedding_type: {self.position_embedding_type} and output_attentions: {output_attentions} "
+                f"and head_mask: {head_mask} are not supported in this wrapper."
+            )
+        bsz, tgt_len, _ = hidden_states.size()
         
         def agg_lora_states(hidden_states, lora_layer, top_k_indices, top_k_scores, expert_mask):
             batch_size, sequence_length, hidden_dim = hidden_states.shape
@@ -247,62 +263,71 @@ class BertSelfAttentionWrapper(nn.Module):
         top_k_indices, top_k_scores, expert_mask = self.lora_router(hidden_states)
         lora_experts_q = self.lora_experts_q
         lora_experts_v = self.lora_experts_v
-        query_states = (self.q_proj(hidden_states)+agg_lora_states(hidden_states, lora_experts_q, top_k_indices, top_k_scores, expert_mask)).view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-        value_states = (self.v_proj(hidden_states)+agg_lora_states(hidden_states, lora_experts_v, top_k_indices, top_k_scores, expert_mask)).view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-        key_states = self.k_proj(hidden_states).view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
         
-        
-        kv_seq_len = key_states.shape[-2]
-        if past_key_value is not None:
-            kv_seq_len += past_key_value[0].shape[-2]
-        cos, sin = self.rotary_emb(value_states, seq_len=kv_seq_len)
-        query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin, position_ids)
-        # [bsz, nh, t, hd]
+        ## quangnm
+        query_layer = (self.q_proj(hidden_states)+agg_lora_states(hidden_states, lora_experts_q, top_k_indices, top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
 
-        if past_key_value is not None:
-            # reuse k, v, self_attention
-            key_states = torch.cat([past_key_value[0], key_states], dim=2)
-            value_states = torch.cat([past_key_value[1], value_states], dim=2)
+        # If this is instantiated as a cross-attention module, the keys and values come from an encoder; the attention
+        # mask needs to be such that the encoder's padding tokens are not attended to.
+        is_cross_attention = encoder_hidden_states is not None
 
-        past_key_value = (key_states, value_states) if use_cache else None
+        current_states = encoder_hidden_states if is_cross_attention else hidden_states
+        attention_mask = encoder_attention_mask if is_cross_attention else attention_mask
 
-        attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+        # Check `seq_length` of `past_key_value` == `len(current_states)` to support prefix tuning
+        if is_cross_attention and past_key_value and past_key_value[0].shape[2] == current_states.shape[1]:
+            key_layer, value_layer = past_key_value
+        else:
+            value_layer = (self.v_proj(current_states)+agg_lora_states(current_states, lora_experts_v, top_k_indices, top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
+            key_layer = self.k_proj(current_states).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
 
-        if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
-            raise ValueError(
-                f"Attention weights should be of size {(bsz, self.num_heads, q_len, kv_seq_len)}, but is"
-                f" {attn_weights.size()}"
-            )
+            if past_key_value is not None and not is_cross_attention:
+                key_layer = torch.cat([past_key_value[0], key_layer], dim=2)
+                value_layer = torch.cat([past_key_value[1], value_layer], dim=2)
 
-        if attention_mask is not None:
-            if attention_mask.size() != (bsz, 1, q_len, kv_seq_len):
-                raise ValueError(
-                    f"Attention mask should be of size {(bsz, 1, q_len, kv_seq_len)}, but is {attention_mask.size()}"
-                )
-            attn_weights = attn_weights + attention_mask
-            attn_weights = torch.max(
-                attn_weights, torch.tensor(torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
-            )
+        if self.is_decoder:
+            # if cross_attention save Tuple(torch.Tensor, torch.Tensor) of all cross attention key/value_states.
+            # Further calls to cross_attention layer can then reuse all cross-attention
+            # key/value_states (first "if" case)
+            # if uni-directional self-attention (decoder) save Tuple(torch.Tensor, torch.Tensor) of
+            # all previous decoder key/value_states. Further calls to uni-directional self-attention
+            # can concat previous decoder key/value_states to current projected key/value_states (third "elif" case)
+            # if encoder bi-directional self-attention `past_key_value` is always `None`
+            past_key_value = (key_layer, value_layer)
 
-        # upcast attention to fp32
-        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
-        attn_output = torch.matmul(attn_weights, value_states)
+        # SDPA with memory-efficient backend is broken in torch==2.1.2 when using non-contiguous inputs and a custom
+        # attn_mask, so we need to call `.contiguous()` here. This was fixed in torch==2.2.0.
+        # Reference: https://github.com/pytorch/pytorch/issues/112577
+        if self.require_contiguous_qkv and query_layer.device.type == "cuda" and attention_mask is not None:
+            query_layer = query_layer.contiguous()
+            key_layer = key_layer.contiguous()
+            value_layer = value_layer.contiguous()
 
-        if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
-            raise ValueError(
-                f"`attn_output` should be of size {(bsz, self.num_heads, q_len, self.head_dim)}, but is"
-                f" {attn_output.size()}"
-            )
+        # We dispatch to SDPA's Flash Attention or Efficient kernels via this `is_causal` if statement instead of an inline conditional assignment
+        # in SDPA to support both torch.compile's dynamic shapes and full graph options. An inline conditional prevents dynamic shapes from compiling.
+        # The tgt_len > 1 is necessary to match with AttentionMaskConverter.to_causal_4d that does not create
+        # a causal mask in case tgt_len == 1.
+        is_causal = (
+            True if self.is_decoder and not is_cross_attention and attention_mask is None and tgt_len > 1 else False
+        )
+
+        attn_output = torch.nn.functional.scaled_dot_product_attention(
+            query_layer,
+            key_layer,
+            value_layer,
+            attn_mask=attention_mask,
+            dropout_p=self.dropout_prob if self.training else 0.0,
+            is_causal=is_causal,
+        )
 
         attn_output = attn_output.transpose(1, 2)
-        attn_output = attn_output.reshape(bsz, q_len, self.hidden_size)
+        attn_output = attn_output.reshape(bsz, tgt_len, self.all_head_size)
 
-        attn_output = self.o_proj(attn_output.to(self.o_proj.weight.dtype))
-
-        if not output_attentions:
-            attn_weights = None
-
-        return attn_output, attn_weights, past_key_value
+        outputs = (attn_output,)
+        if self.is_decoder:
+            outputs = outputs + (past_key_value,)
+        return outputs
+        
         
 class BertED(nn.Module):
     def __init__(self, args, backbone_path=None):
@@ -363,26 +388,8 @@ class BertED(nn.Module):
             self.backbone = get_peft_model(self.backbone, self.peft_config, adapter_name="general_expert")
 
         elif self.use_mole:
-            for i in range(self.num_experts):
-                self.backbone.add_adapter(f"expert_{i}", self.peft_config)
-
-            # Khai báo Linear layer (bao gồm cả weight và bias)
-            if args.gating == "softmax":
-                self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
-                self.softmax = nn.Softmax(dim=-1)
-                logger.info("Gating: softmax")
-            elif args.gating == "tanh":
-                self.gating_layer = nn.Sequential(
-                    nn.Linear(self.input_dim, self.num_experts),
-                    nn.Tanh(),
-                    nn.Linear(self.num_experts, self.num_experts),
-                )
-                self.softmax = nn.Softmax(dim=-1)
-                logger.info("Gating: tanh")
-            elif args.gating == "sigmoid":
-                self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
-                self.softmax = nn.Sigmoid()
-                logger.info("Gating: sigmoid")
+            for layer in self.backbone.encoder.layer:
+                layer.attention.self = BertSelfAttentionWrapper(layer.attention.self, self.args)
 
             self.backbone.print_trainable_parameters()
 
@@ -399,6 +406,16 @@ class BertED(nn.Module):
             elif self.args.no_freeze_bert:
                 param.requires_grad = True
         # logger.info("Unfreeze LoRA parameters")
+        
+    def freeze_backbone(self):
+        for name, param in self.backbone.named_parameters():
+            if 'experts' in name:
+                param.requires_grad = True
+            elif self.args.no_freeze_bert:
+                param.requires_grad = True
+            else:
+                param.requires_grad = False
+        # logger.info("Freeze backbone parameters")
 
     def forward(self, x, masks, span=None, aug=None):
         out = self.backbone(x, attention_mask=masks)

@@ -1,13 +1,9 @@
-from tqdm.auto import tqdm
-import time
+import argparse
 
+parser = argparse.ArgumentParser()
 
-if __name__ == "__main__":
-    for epoch in tqdm(range(1, 6), desc="Epochs"):
-        for batch in tqdm(range(1, 11), desc="Batches", leave=False):
-            time.sleep(0.2)
-            tqdm.write(f"Processing batch {batch} of epoch {epoch}...")
-        tqdm.write(f"Epoch {epoch} completed.")
-    
-    print("All epochs completed.")
-  
+parser.add_argument('--input_root', default='./data/data_text', type=str)
+
+args, _ = parser.parse_known_args()
+print(args.input_root)
+print(args['input_root'])
