@@ -192,6 +192,9 @@ class BertSelfAttentionWrapper(nn.Module):
         self.experts_num = self.experts_pool_num + self.fixed_experts_num + self.task_experts_num
         self.select_experts_num = prompt_config.mole_top_k
         self.task_num = prompt_config.task_num
+        self.lora_r = prompt_config.lora_rank
+        self.lora_alpha = prompt_config.lora_alpha
+        self.lora_dropout = prompt_config.lora_dropout
 
 
         if (self.head_dim * self.num_heads) != self.hidden_size:
@@ -213,12 +216,14 @@ class BertSelfAttentionWrapper(nn.Module):
         self.lora_experts_q, self.lora_experts_v = None, None
         self.lora_experts_q = nn.ModuleList()
         for i in range(self.experts_num):
-            layer = LoRALayer(self.hidden_size, self.num_heads * self.head_dim, r=prompt_config["lora_r"], lora_alpha=prompt_config["lora_alpha"], lora_dropout=prompt_config["lora_dropout"])
+            layer = LoRALayer(self.hidden_size, self.num_heads * self.head_dim, 
+                              r=self.lora_r, lora_alpha=self.lora_alpha, lora_dropout=self.lora_dropout)
             self.lora_experts_q.append(layer)
 
         self.lora_experts_v = nn.ModuleList()
         for i in range(self.experts_num):
-            layer = LoRALayer(self.hidden_size, self.num_heads * self.head_dim, r=prompt_config["lora_r"], lora_alpha=prompt_config["lora_alpha"], lora_dropout=prompt_config["lora_dropout"])
+            layer = LoRALayer(self.hidden_size, self.num_heads * self.head_dim, 
+                              r=self.lora_r, lora_alpha=self.lora_alpha, lora_dropout=self.lora_dropout)
             self.lora_experts_v.append(layer)
         
 
