@@ -1,79 +1,123 @@
 import torch
-from transformers import BertModel
 import torch.nn as nn
-import torch.nn.functional as F
-from configs import parse_arguments
-from torch.nn.utils.rnn import unpad_sequence
-from random import shuffle
+from torch.utils.data import DataLoader, Dataset
+from transformers import BertModel, BertTokenizer, BertConfig
+from torch.optim import AdamW
+from transformers.models.bert.modeling_bert import BertSelfAttention
 
-args = parse_arguments()
-device = torch.device(args.device if torch.cuda.is_available() and args.device != 'cpu' else "cpu")  # type: ignore
+class SampleDataset(Dataset):
+    def __init__(self, tokenizer, texts, labels, max_length=32):
+        self.tokenizer = tokenizer
+        self.texts = texts
+        self.labels = labels
+        self.max_length = max_length
 
+    def __len__(self):
+        return len(self.texts)
 
-class BertED(nn.Module):
-    def __init__(self, class_num=args.class_num + 1, input_map=False):
+    def __getitem__(self, idx):
+        inputs = self.tokenizer(
+            self.texts[idx],
+            padding='max_length',
+            truncation=True,
+            max_length=self.max_length,
+            return_tensors="pt"
+        )
+        inputs = {k: v.squeeze(0) for k, v in inputs.items()}
+        inputs['labels'] = torch.tensor(self.labels[idx], dtype=torch.long)
+        return inputs
+
+# Khởi tạo tokenizer
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+# Dữ liệu mẫu
+texts = ["Hello world!", "Deep learning is powerful.", "BERT attention mechanism"]
+labels = [0, 1, 0]
+dataset = SampleDataset(tokenizer, texts, labels)
+dataloader = DataLoader(dataset, batch_size=2, shuffle=True)
+
+class CustomAttention(nn.Module):
+    def __init__(self, original_attention: BertSelfAttention, config):
+        super(CustomAttention, self).__init__()
+        self.original_attention = original_attention
+        self.new_attention = BertSelfAttention(config)
+        self.output_layer = nn.Linear(2 * config.hidden_size, config.hidden_size)
+
+    def forward(self, 
+                hidden_states, 
+                attention_mask=None, 
+                head_mask=None, 
+                encoder_hidden_states=None, 
+                encoder_attention_mask=None, 
+                past_key_value=None, 
+                output_attentions=False):
+        
+        # Gọi Attention gốc
+        original_output = self.original_attention(
+            hidden_states, 
+            attention_mask, 
+            head_mask, 
+            encoder_hidden_states, 
+            encoder_attention_mask, 
+            past_key_value, 
+            output_attentions
+        )
+
+        # Gọi Attention mới chạy song song
+        new_output = self.new_attention(
+            hidden_states, 
+            attention_mask, 
+            head_mask, 
+            encoder_hidden_states, 
+            encoder_attention_mask, 
+            past_key_value, 
+            output_attentions
+        )
+
+        # Lấy hidden_states từ kết quả
+        original_hidden_states = original_output[0]
+        new_hidden_states = new_output[0]
+
+        # Kết hợp hai output (concatenation)
+        combined_output = torch.cat((original_hidden_states, new_hidden_states), dim=-1)
+        
+        # Chiếu lại về kích thước ban đầu
+        final_hidden_states = self.output_layer(combined_output)
+        
+        # Trả về cùng định dạng với BertSelfAttention:
+        # (hidden_states, attention_weights, past_key_value)
+        outputs = (final_hidden_states,) + original_output[1:]
+        return outputs
+
+class CustomBERTModel(nn.Module):
+    def __init__(self, config):
         super().__init__()
-        self.backbone = BertModel.from_pretrained(args.backbone)
-        if not args.no_freeze_bert:
-            print("Freeze bert parameters")
-            for _, param in list(self.backbone.named_parameters()):
-                param.requires_grad = False
-        else:
-            print("Update bert parameters")
-        self.is_input_mapping = input_map
-        self.input_dim = self.backbone.config.hidden_size
-        self.fc = nn.Linear(self.input_dim, class_num)
-        if self.is_input_mapping:
-            self.map_hidden_dim = 512 # 512 is implemented by the paper
-            self.map_input_dim =  self.input_dim * 2
-            self.input_map = nn.Sequential(
-                nn.Linear(self.map_input_dim, self.map_hidden_dim),
-                nn.ReLU(),
-                nn.Dropout(0.2),
-                nn.Linear(self.map_hidden_dim, self.map_hidden_dim),
-                nn.ReLU(),
-            )
-            self.fc = nn.Linear(self.map_hidden_dim, class_num)
+        self.bert = BertModel(config)
+        self.dropout = nn.Dropout(0.3)
+        self.classifier = nn.Linear(config.hidden_size, 2)  # Giả sử bài toán phân loại nhị phân
 
-    def forward(self, x, masks, span=None, aug=None):
-        # x = self.backbone(x) #TODO: test use
-        return_dict = {}
-        backbone_output = self.backbone(x, attention_mask = masks)
-        x, pooled_feat = backbone_output[0], backbone_output[1]
-        context_feature = x.view(-1, x.shape[-1])
-        return_dict['reps'] = x[:, 0, :].clone()
-        if span != None:
-            outputs, trig_feature = [], []
-            for i in range(len(span)):
-                if self.is_input_mapping:
-                    x_cdt = torch.stack([torch.index_select(x[i], 0, span[i][:, j]) for j in range(span[i].size(-1))])
-                    x_cdt = x_cdt.permute(1, 0, 2)
-                    x_cdt = x_cdt.contiguous().view(x_cdt.size(0), x_cdt.size(-1) * 2)
-                    opt = self.input_map(x_cdt)
-                else:
-                    opt = torch.index_select(x[i], 0, span[i][:, 0]) + torch.index_select(x[i], 0, span[i][:, 1])
-                    # x = x_cdt.permute(1, 0, 2) 
-                trig_feature.append(opt)
-            trig_feature = torch.cat(trig_feature)
-        outputs = self.fc(trig_feature)
-        return_dict['outputs'] = outputs
-        return_dict['context_feat'] = context_feature
-        return_dict['trig_feat'] = trig_feature
-        # if args.single_label:
-        #     return_outputs = self.fc(enc_out_feature).view(-1, args.class_num + 1)
-        # else:
-        #     return_outputs = self.fc(feature)
-        if aug is not None:
-            feature_aug = trig_feature + torch.randn_like(trig_feature) * aug
-            outputs_aug = self.fc(feature_aug)
-            return_dict['feature_aug'] = feature_aug
-            return_dict['outputs_aug'] = outputs_aug
-        return return_dict
-
-    def forward_backbone(self, x, masks):
-        x = self.backbone(x, attention_mask = masks)
-        x = x.last_hidden_state
-        return x
-
-    def forward_input_map(self, x):
-        return self.input_map(x)
+    def forward(self, 
+                input_ids, 
+                attention_mask=None, 
+                token_type_ids=None,   # Thêm dòng này
+                labels=None):
+        
+        # Truyền thêm token_type_ids vào BERT
+        outputs = self.bert(
+            input_ids=input_ids, 
+            attention_mask=attention_mask, 
+            token_type_ids=token_type_ids
+        )
+        
+        # Lấy output của BERT
+        pooled_output = outputs.last_hidden_state[:, 0]  # Chọn token [CLS]
+        pooled_output = self.dropout(pooled_output)
+        
+        # Đưa qua classifier
+        logits = self.classifier(pooled_output)
+        
+        loss = None
+        if labels is not None:
+            loss_fct = nn.CrossEntropyLoss()
+            loss = loss_fct(logits.view(-1, 2), labels.view(-1))
+        
+        return logits, loss

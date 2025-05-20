@@ -1,9 +1,14 @@
 import torch
 from transformers import BertModel
+from transformers.models.bert.modeling_bert import BertSelfAttention, BertSdpaSelfAttention
 import torch.nn as nn
+from torch.nn import functional as F
 from peft import get_peft_model, LoraConfig, TaskType
 from loguru import logger
-
+import math
+from typing import Optional, Tuple
+from packaging import version
+from transformers.utils import get_torch_version
 
 class Classifier(nn.Module):
     def __init__(self, input_dim, hidden_dim, class_num, num_layers=1, dropout=0.1):
@@ -35,9 +40,270 @@ class Classifier(nn.Module):
 
     def forward(self, x):
         return self.network(x)
+    
+class LoRALayer(nn.Module):
+    def __init__(
+        self,
+        in_features: int,
+        out_features: int,
+        r: int, 
+        lora_alpha: int = 1, 
+        lora_dropout: float = 0.
+    ):
+        super(LoRALayer, self).__init__()
+        self.r = r
+        self.lora_alpha = lora_alpha
+
+        self.out_features = out_features
+
+        self.lora_A = nn.Parameter(torch.zeros((r, in_features)))
+        self.lora_B = nn.Parameter(torch.zeros((out_features, r)))
+
+        self.scaling = self.lora_alpha / self.r
+        # Optional dropout
+        if lora_dropout > 0.:
+            self.lora_dropout = nn.Dropout(p=lora_dropout)
+        else:
+            self.lora_dropout = lambda x: x
+        # Mark the weight as unmerged
+        
+        self.reset_parameters()
+    
+    def reset_parameters(self):
+        # initialize A the same way as the default for nn.Linear and B to zero
+        nn.init.kaiming_uniform_(self.lora_A, a=math.sqrt(5))
+        nn.init.zeros_(self.lora_B)
+    
+    def forward(self, x: torch.Tensor):
+        result = (self.lora_dropout(x) @ self.lora_A.transpose(0, 1) @ self.lora_B.transpose(0, 1)) * self.scaling
+        return result.reshape(x.shape[0], -1, self.out_features)
+
+class LoraRouter(nn.Module):
+    def __init__(self, hidden_size, experts_num=8, experts_pool_num=4, fixed_experts_num=1, 
+                 task_experts_num=1, select_experts_num=2, task_num=3, fixed_experts_weight=0.5):
+        super().__init__()
+        self.experts_num = experts_num
+        self.select_experts_num = select_experts_num
+        self.experts_pool_num = experts_pool_num
+        self.task_experts_num = task_experts_num
+        self.fixed_experts_num = fixed_experts_num
+        self.fixed_experts_weight = fixed_experts_weight
+
+        self.router_network = torch.nn.Sequential(
+            torch.nn.Linear(hidden_size, experts_pool_num, bias=False),
+            torch.nn.Tanh(),
+            torch.nn.Linear(experts_pool_num, experts_pool_num, bias=False),
+        )
+        # task_keys = torch.randn(task_num, hidden_size)
+        # self.task_keys = nn.Parameter(task_keys, requires_grad = True)
+
+        self.hidden_size = hidden_size
+        self.softmax = nn.Softmax(1)
+        
+    def forward(self, hidden_state):
+        batch_size, seq_length, hz = hidden_state.shape
+        hidden_state = hidden_state.view(-1, hz)
+
+        # TODO
+        logits_router = self.router_network(hidden_state)
+        # top_logits, top_indices = logits_router.topk(min(self.select_experts_num + 1, self.experts_pool_num), dim=1)  # 选择并排序前k+1个权重
+        # top_k_logits = top_logits[:, :self.select_experts_num]
+        # top_k_indices = top_indices[:, :self.select_experts_num]
+        top_k_logits, top_k_indices = logits_router.topk(min(self.select_experts_num, self.experts_pool_num), dim=1)  # 选择并排序前k+1个权重
+
+        top_k_scores = self.softmax(top_k_logits.to(torch.float32))
+        top_k_scores = top_k_scores.to(hidden_state.dtype)
+        top_k_indices = top_k_indices.view(batch_size, seq_length, -1)
+        top_k_scores = top_k_scores.view(batch_size, seq_length, -1)
+
+        # hidden_state = hidden_state.view(batch_size, seq_length, -1)
+        # hidden_state_mean = hidden_state.mean(dim=1)
+        # similarity = F.cosine_similarity(hidden_state_mean.unsqueeze(1), self.task_keys.unsqueeze(0), dim=-1)
+        # _, indices = torch.topk(similarity, 1, dim=-1)
+        # similarity = torch.gather(similarity, dim=-1, index=indices)
+
+        # k_values = torch.arange(1, self.task_experts_num + 1).to(device = indices.device)
+        # task_indices = self.experts_num - indices * self.task_experts_num - k_values  
+
+        # fixed_indices = torch.full((task_indices.shape), self.experts_pool_num).to(device = indices.device)
+        # fixed_indices = torch.cat([fixed_indices, task_indices],dim=1)
+
+        # similarity =  torch.clamp(similarity, min=0.75)
+        # first_col = 1 - similarity  
+        # rest_cols = (similarity / self.task_experts_num).repeat(1, self.task_experts_num).to(device = indices.device)
+        # fixed_score = torch.cat([first_col, rest_cols], dim=1)
+
+        ## quangnm
+        fixed_indices = torch.full((batch_size, seq_length), self.experts_pool_num).to(device=top_k_indices.device)
+        ## quangnm
+        # select_weight = self.select_experts_num/(self.select_experts_num+self.fixed_experts_num+self.task_experts_num)
+        # fixed_weight = 1-select_weight
+
+        
+        btz, seq, _ = top_k_indices.shape
+        if self.fixed_experts_num != 0:
+            fixed_values = fixed_indices.unsqueeze(1).clone().detach().to(device=top_k_indices.device).expand(btz, seq, -1)
+            top_k_indices = torch.cat([top_k_indices, fixed_values], dim=-1)
+            fixed_score = fixed_score.unsqueeze(1).clone().detach().to(device=top_k_indices.device).expand(btz, seq, -1)
+            # top_k_scores = torch.cat([top_k_scores*select_weight, fixed_score*fixed_weight], dim=-1)
+            ## quangnm
+            top_k_scores = torch.cat([top_k_scores, fixed_score*self.fixed_experts_weight], dim=-1)
+            ## quangnm
+        expert_mask = torch.nn.functional.one_hot(top_k_indices.view(batch_size*seq_length, -1), num_classes=self.experts_num).permute(2, 1, 0)
+        top_k_scores = top_k_scores.view(batch_size*seq_length, -1)
+
+        return top_k_indices, top_k_scores, expert_mask
+
+    def model_replay(self, inputs_embeds):
+        hidden_state_mean = inputs_embeds.mean(dim=1)
+        similarity = F.cosine_similarity(hidden_state_mean.unsqueeze(1), self.task_keys.unsqueeze(0), dim=-1)
+
+        inputs_embeds = inputs_embeds.view(-1, self.hidden_size)
+        logits_router = self.router_network(inputs_embeds)
+        
+        return logits_router.to(torch.float32), similarity.to(torch.float32)
 
 
+class BertSelfAttentionWrapper(nn.Module):
+    """Multi-headed attention from 'Attention Is All You Need' paper"""
 
+    def __init__(self, old_attention_layer: BertSelfAttention, config, prompt_config, position_embedding_type=None):
+        super().__init__(config, position_embedding_type=position_embedding_type)
+        self.config = old_attention_layer.config
+        self.dropout_prob = old_attention_layer.config.attention_probs_dropout_prob
+        self.hidden_size = old_attention_layer.config.hidden_size
+        self.num_heads = old_attention_layer.config.num_attention_heads
+        self.max_position_embeddings = old_attention_layer.config.max_position_embeddings
+        self.require_contiguous_qkv = version.parse(get_torch_version()) < version.parse("2.2.0")
+        self.head_dim = self.hidden_size // self.num_heads
+        self.prompt_config = prompt_config
+
+        self.experts_num = prompt_config['experts_num']
+        self.experts_pool_num = prompt_config['experts_pool_num']
+        self.task_experts_num = prompt_config['task_experts_num']
+        self.fixed_experts_num = prompt_config['fixed_experts_num']
+        self.select_experts_num = prompt_config['select_experts_num']
+        self.task_num = prompt_config['task_num']
+        self.task_id = prompt_config["task_id"]
+
+        if (self.head_dim * self.num_heads) != self.hidden_size:
+            raise ValueError(
+                f"hidden_size must be divisible by num_heads (got `hidden_size`: {self.hidden_size}"
+                f" and `num_heads`: {self.num_heads})."
+            )
+
+        self.q_proj = old_attention_layer.query
+        self.k_proj = old_attention_layer.key
+        self.v_proj = old_attention_layer.value
+
+        # LoRA layers for previous task
+
+        self.lora_router = LoraRouter(self.hidden_size, experts_num=self.experts_num, experts_pool_num=self.experts_pool_num, 
+                                      fixed_experts_num=self.fixed_experts_num, task_experts_num=self.task_experts_num, 
+                                      select_experts_num=self.select_experts_num, task_num=self.task_num)
+
+        self.lora_experts_q, self.lora_experts_v = None, None
+        self.lora_experts_q = nn.ModuleList()
+        for i in range(self.experts_num):
+            layer = LoRALayer(self.hidden_size, self.num_heads * self.head_dim, r=prompt_config["lora_r"], lora_alpha=prompt_config["lora_alpha"], lora_dropout=prompt_config["lora_dropout"])
+            self.lora_experts_q.append(layer)
+
+        self.lora_experts_v = nn.ModuleList()
+        for i in range(self.experts_num):
+            layer = LoRALayer(self.hidden_size, self.num_heads * self.head_dim, r=prompt_config["lora_r"], lora_alpha=prompt_config["lora_alpha"], lora_dropout=prompt_config["lora_dropout"])
+            self.lora_experts_v.append(layer)
+        
+
+    def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
+        return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
+
+    def forward(
+        self,
+        hidden_states: torch.Tensor,
+        attention_mask: Optional[torch.Tensor] = None,
+        position_ids: Optional[torch.LongTensor] = None,
+        past_key_value: Optional[Tuple[torch.Tensor]] = None,
+        output_attentions: bool = False,
+        use_cache: bool = False,
+    ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
+        bsz, q_len, _ = hidden_states.size()
+        
+        def agg_lora_states(hidden_states, lora_layer, top_k_indices, top_k_scores, expert_mask):
+            batch_size, sequence_length, hidden_dim = hidden_states.shape
+            hidden_states = hidden_states.view(-1, hidden_dim)
+            final_hidden_states = torch.zeros((batch_size * sequence_length, hidden_dim), dtype=hidden_states.dtype, device=hidden_states.device)
+            for expert_idx in range(self.experts_num):
+                expert_layer = lora_layer[expert_idx]
+                idx, top_x = torch.where(expert_mask[expert_idx])
+                top_x_list = top_x.tolist()
+                idx_list = idx.tolist()
+                if len(top_x_list) == 0:
+                    continue
+                current_state = hidden_states[None, top_x_list].reshape(-1, hidden_dim)
+                current_hidden_states = expert_layer(current_state).squeeze() * top_k_scores[top_x_list, idx_list, None]
+                final_hidden_states.index_add_(0, top_x, current_hidden_states.to(hidden_states.dtype))
+            return final_hidden_states.view(batch_size, sequence_length, hidden_dim)
+
+        top_k_indices, top_k_scores, expert_mask = self.lora_router(hidden_states)
+        lora_experts_q = self.lora_experts_q
+        lora_experts_v = self.lora_experts_v
+        query_states = (self.q_proj(hidden_states)+agg_lora_states(hidden_states, lora_experts_q, top_k_indices, top_k_scores, expert_mask)).view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
+        value_states = (self.v_proj(hidden_states)+agg_lora_states(hidden_states, lora_experts_v, top_k_indices, top_k_scores, expert_mask)).view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
+        key_states = self.k_proj(hidden_states).view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
+        
+        
+        kv_seq_len = key_states.shape[-2]
+        if past_key_value is not None:
+            kv_seq_len += past_key_value[0].shape[-2]
+        cos, sin = self.rotary_emb(value_states, seq_len=kv_seq_len)
+        query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin, position_ids)
+        # [bsz, nh, t, hd]
+
+        if past_key_value is not None:
+            # reuse k, v, self_attention
+            key_states = torch.cat([past_key_value[0], key_states], dim=2)
+            value_states = torch.cat([past_key_value[1], value_states], dim=2)
+
+        past_key_value = (key_states, value_states) if use_cache else None
+
+        attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+
+        if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
+            raise ValueError(
+                f"Attention weights should be of size {(bsz, self.num_heads, q_len, kv_seq_len)}, but is"
+                f" {attn_weights.size()}"
+            )
+
+        if attention_mask is not None:
+            if attention_mask.size() != (bsz, 1, q_len, kv_seq_len):
+                raise ValueError(
+                    f"Attention mask should be of size {(bsz, 1, q_len, kv_seq_len)}, but is {attention_mask.size()}"
+                )
+            attn_weights = attn_weights + attention_mask
+            attn_weights = torch.max(
+                attn_weights, torch.tensor(torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
+            )
+
+        # upcast attention to fp32
+        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+        attn_output = torch.matmul(attn_weights, value_states)
+
+        if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
+            raise ValueError(
+                f"`attn_output` should be of size {(bsz, self.num_heads, q_len, self.head_dim)}, but is"
+                f" {attn_output.size()}"
+            )
+
+        attn_output = attn_output.transpose(1, 2)
+        attn_output = attn_output.reshape(bsz, q_len, self.hidden_size)
+
+        attn_output = self.o_proj(attn_output.to(self.o_proj.weight.dtype))
+
+        if not output_attentions:
+            attn_weights = None
+
+        return attn_output, attn_weights, past_key_value
+        
 class BertED(nn.Module):
     def __init__(self, args, backbone_path=None):
         super().__init__()
@@ -85,7 +351,7 @@ class BertED(nn.Module):
             self.fc = nn.Linear(self.map_hidden_dim, self.class_num)
 
         # Setup LoRA or MoLE
-        if self.use_lora or self.use_mole:
+        if self.use_lora:
             self.peft_config = LoraConfig(
                 r=args.lora_rank,
                 lora_alpha=args.lora_alpha,
@@ -96,27 +362,27 @@ class BertED(nn.Module):
             )
             self.backbone = get_peft_model(self.backbone, self.peft_config, adapter_name="general_expert")
 
-            if self.use_mole:
-                for i in range(self.num_experts):
-                    self.backbone.add_adapter(f"expert_{i}", self.peft_config)
+        elif self.use_mole:
+            for i in range(self.num_experts):
+                self.backbone.add_adapter(f"expert_{i}", self.peft_config)
 
-                # Khai báo Linear layer (bao gồm cả weight và bias)
-                if args.gating == "softmax":
-                    self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
-                    self.softmax = nn.Softmax(dim=-1)
-                    logger.info("Gating: softmax")
-                elif args.gating == "tanh":
-                    self.gating_layer = nn.Sequential(
-                        nn.Linear(self.input_dim, self.num_experts),
-                        nn.Tanh(),
-                        nn.Linear(self.num_experts, self.num_experts),
-                    )
-                    self.softmax = nn.Softmax(dim=-1)
-                    logger.info("Gating: tanh")
-                elif args.gating == "sigmoid":
-                    self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
-                    self.softmax = nn.Sigmoid()
-                    logger.info("Gating: sigmoid")
+            # Khai báo Linear layer (bao gồm cả weight và bias)
+            if args.gating == "softmax":
+                self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
+                self.softmax = nn.Softmax(dim=-1)
+                logger.info("Gating: softmax")
+            elif args.gating == "tanh":
+                self.gating_layer = nn.Sequential(
+                    nn.Linear(self.input_dim, self.num_experts),
+                    nn.Tanh(),
+                    nn.Linear(self.num_experts, self.num_experts),
+                )
+                self.softmax = nn.Softmax(dim=-1)
+                logger.info("Gating: tanh")
+            elif args.gating == "sigmoid":
+                self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
+                self.softmax = nn.Sigmoid()
+                logger.info("Gating: sigmoid")
 
             self.backbone.print_trainable_parameters()
 
@@ -133,19 +399,8 @@ class BertED(nn.Module):
             elif self.args.no_freeze_bert:
                 param.requires_grad = True
         # logger.info("Unfreeze LoRA parameters")
-        
-    def turn_uniform_expert(self, turn_on=True):
-        if self.uniform_expert != turn_on:
-            self.uniform_expert = turn_on
-            logger.info(f"Uniform expert: {turn_on}")
 
-    def forward(self, x, masks, span=None, aug=None, train=True):
-        if self.use_mole:
-            return self._forward_mole(x, masks, span, aug, train)
-        else:
-            return self._forward_normal(x, masks, span, aug)
-
-    def _forward_normal(self, x, masks, span=None, aug=None):
+    def forward(self, x, masks, span=None, aug=None):
         out = self.backbone(x, attention_mask=masks)
         hidden = out.last_hidden_state
         return_dict = {
@@ -155,81 +410,6 @@ class BertED(nn.Module):
 
         if span is not None:
             trig_feature = self._extract_trigger(hidden, span)
-            return_dict['trig_feat'] = trig_feature
-            return_dict['outputs'] = self.fc(trig_feature)
-
-            if aug is not None:
-                feature_aug = trig_feature + torch.randn_like(trig_feature) * aug
-                return_dict['feature_aug'] = feature_aug
-                return_dict['outputs_aug'] = self.fc(feature_aug)
-
-        return return_dict
-    
-    def set_adapter(self, name):
-        self.backbone.set_adapter(name)
-        self.unfreeze_lora()
-        
-    def _forward_mole(self, x, masks, span=None, aug=None, train=True):
-        B = x.size(0)
-        return_dict = {}
-
-        if not self.uniform_expert:
-            with torch.no_grad():
-                with self.backbone.disable_adapter():
-                    base_output = self.backbone(x, attention_mask=masks)
-                    cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
-
-            # Gating
-            gating_logits = self.gating_layer(cls_embedding)  # (B, E)
-            gating_weights = self.softmax(gating_logits)
-            topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
-            if train:
-                avg_weights = gating_weights.mean(dim=0)
-                uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
-                return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
-                return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
-        else:
-            topk_weights = torch.full((B, self.top_k), 1.0 / self.top_k).to(x.device)
-            # randomly chọn k expert cho mỗi batch, topk của một sample phải khác nhau
-            topk_indices = torch.stack([torch.randperm(self.num_experts)[:self.top_k] for _ in range(B)], dim=0).to(x.device)
-
-        # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
-        expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
-        num_choose = [0] * self.num_experts
-        for k in range(self.top_k):
-            expert_ids = topk_indices[:, k]  # (B,)
-            weights = topk_weights[:, k]     # (B,)
-
-            for expert_id in expert_ids.unique():
-                mask = (expert_ids == expert_id)
-                if mask.sum() == 0:
-                    continue
-                else:
-                    num_choose[expert_id.item()] +=  mask.sum().item()
-
-                self.set_adapter(f"expert_{expert_id.item()}")
-                out = self.backbone(
-                    x[mask], attention_mask=masks[mask]
-                ).last_hidden_state  # (N, T, H)
-
-                weighted = weights[mask].view(-1, 1, 1) * out
-                expert_outputs[k][mask] = weighted
-
-        # Tổng hợp top-k expert output
-        x_out = sum(expert_outputs)
-
-        # Optional: add general expert
-        if self.use_general_expert:
-            self.set_adapter("general_expert")
-            general_out = self.backbone(x, attention_mask=masks).last_hidden_state
-            x_out += self.general_expert_weight * general_out
-
-        return_dict['reps'] = x_out[:, 0, :].clone()
-        return_dict['context_feat'] = x_out.view(-1, x_out.shape[-1])
-        return_dict['num_choose'] = num_choose
-
-        if span is not None:
-            trig_feature = self._extract_trigger(x_out, span)
             return_dict['trig_feat'] = trig_feature
             return_dict['outputs'] = self.fc(trig_feature)
 
