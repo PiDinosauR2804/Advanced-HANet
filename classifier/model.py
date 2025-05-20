@@ -133,25 +133,62 @@ class LoraRouter(nn.Module):
         # rest_cols = (similarity / self.task_experts_num).repeat(1, self.task_experts_num).to(device = indices.device)
         # fixed_score = torch.cat([first_col, rest_cols], dim=1)
 
-        ## quangnm
-        fixed_indices = torch.full((batch_size, seq_length), self.experts_pool_num).to(device=top_k_indices.device)
-        fixed_score = torch.full((batch_size, seq_length), 1).to(device=top_k_indices.device)
-        ## quangnm
-        # select_weight = self.select_experts_num/(self.select_experts_num+self.fixed_experts_num+self.task_experts_num)
-        # fixed_weight = 1-select_weight
+        # ## quangnm
+        # fixed_indices = torch.full((batch_size, seq_length), self.experts_pool_num).to(device=top_k_indices.device)
+        # fixed_score = torch.full((batch_size, seq_length), 1).to(device=top_k_indices.device)
+        # ## quangnm
+        # # select_weight = self.select_experts_num/(self.select_experts_num+self.fixed_experts_num+self.task_experts_num)
+        # # fixed_weight = 1-select_weight
 
         
-        btz, seq, _ = top_k_indices.shape
+        # btz, seq, _ = top_k_indices.shape
+        # if self.fixed_experts_num != 0:
+        #     fixed_values = fixed_indices.unsqueeze(1).clone().detach().to(device=top_k_indices.device).expand(btz, seq, -1)
+        #     top_k_indices = torch.cat([top_k_indices, fixed_values], dim=-1)
+        #     fixed_score = fixed_score.unsqueeze(1).clone().detach().to(device=top_k_indices.device).expand(btz, seq, -1)
+        #     # top_k_scores = torch.cat([top_k_scores*select_weight, fixed_score*fixed_weight], dim=-1)
+        #     ## quangnm
+        #     top_k_scores = torch.cat([top_k_scores, fixed_score*self.fixed_experts_weight], dim=-1)
+        #     ## quangnm
+        # expert_mask = torch.nn.functional.one_hot(top_k_indices.view(batch_size*seq_length, -1), num_classes=self.experts_num).permute(2, 1, 0)
+        # top_k_scores = top_k_scores.view(batch_size*seq_length, -1)
+        
+        btz, seq_len, k = top_k_indices.shape
+        device = top_k_indices.device
+
+        # 1. Xử lý fixed experts nếu có
         if self.fixed_experts_num != 0:
-            fixed_values = fixed_indices.unsqueeze(1).clone().detach().to(device=top_k_indices.device).expand(btz, seq, -1)
-            top_k_indices = torch.cat([top_k_indices, fixed_values], dim=-1)
-            fixed_score = fixed_score.unsqueeze(1).clone().detach().to(device=top_k_indices.device).expand(btz, seq, -1)
-            # top_k_scores = torch.cat([top_k_scores*select_weight, fixed_score*fixed_weight], dim=-1)
-            ## quangnm
-            top_k_scores = torch.cat([top_k_scores, fixed_score*self.fixed_experts_weight], dim=-1)
-            ## quangnm
-        expert_mask = torch.nn.functional.one_hot(top_k_indices.view(batch_size*seq_length, -1), num_classes=self.experts_num).permute(2, 1, 0)
-        top_k_scores = top_k_scores.view(batch_size*seq_length, -1)
+            # a. Tạo các chỉ số fixed experts (giả sử liên tiếp từ experts_pool_num)
+            fixed_indices = torch.arange(
+                self.experts_pool_num,
+                self.experts_pool_num + self.fixed_experts_num,
+                device=device
+            )  # shape: (fixed_experts_num,)
+
+            # b. Expand thành shape: (btz, seq_len, fixed_experts_num)
+            fixed_indices = fixed_indices.view(1, 1, -1).expand(btz, seq_len, -1)
+
+            # c. Fixed scores: cùng shape và giá trị
+            fixed_scores = torch.full_like(fixed_indices, fill_value=self.fixed_experts_weight, dtype=top_k_scores.dtype)
+
+            # d. Nối với top-k indices và scores
+            top_k_indices = torch.cat([top_k_indices, fixed_indices], dim=-1)     # (btz, seq_len, k + fixed_experts_num)
+            top_k_scores  = torch.cat([top_k_scores, fixed_scores], dim=-1)
+
+        # 2. Flatten để routing hoặc tạo mask
+        flat_indices = top_k_indices.view(-1, top_k_indices.shape[-1])  # (btz * seq_len, total_k)
+        # flat_scores  = top_k_scores.view(-1, top_k_scores.shape[-1])
+
+        # 3. (Tùy chọn) Tạo expert mask (nếu cần thiết)
+        # Sử dụng one_hot có thể tốn VRAM lớn nếu self.experts_num lớn
+        # => Nếu cần mask sparse để routing:
+        # expert_mask = torch.zeros((self.experts_num, flat_indices.shape[0]), dtype=torch.bool, device=device)
+        # for i in range(flat_indices.shape[1]):
+        #     expert_mask.scatter_(0, flat_indices[:, i].unsqueeze(0), True)
+
+        # Nếu bạn vẫn muốn dùng one_hot:
+        expert_mask = torch.nn.functional.one_hot(flat_indices, num_classes=self.experts_num).permute(2, 1, 0)
+
 
         return top_k_indices, top_k_scores, expert_mask
 
