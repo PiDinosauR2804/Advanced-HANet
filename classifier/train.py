@@ -721,7 +721,7 @@ def train(local_rank, args, trial=None):
                 
                 if args.use_mole and not model.uniform_expert:
                     loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']
-                model.unfreeze_lora()
+
                 loss.backward()
                 total_norm = clip_grad_norm_(model.parameters(), max_norm=1.0)
                 

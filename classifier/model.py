@@ -398,7 +398,10 @@ class BertED(nn.Module):
             for layer in self.backbone.encoder.layer:
                 layer.attention.self = BertSelfAttentionWrapper(layer.attention.self, bert_config, self.args)
 
-        # self.print_trainable_parameters()
+        if not args.no_freeze_bert:
+            self.freeze_backbone()
+            
+        self.print_trainable_parameters()
 
     def print_trainable_parameters(self):
         print("Trainable parameters:")
@@ -406,23 +409,14 @@ class BertED(nn.Module):
             if p.requires_grad:
                 print(n, p.shape)
             
-    def unfreeze_lora(self):
+    def freeze_backbone(self):
         for name, param in self.backbone.named_parameters():
             if 'lora_' in name:
                 param.requires_grad = True
-            elif self.args.no_freeze_bert:
-                param.requires_grad = True
-        # logger.info("Unfreeze LoRA parameters")
-        
-    def freeze_backbone(self):
-        for name, param in self.backbone.named_parameters():
-            if 'experts' in name:
-                param.requires_grad = True
-            elif self.args.no_freeze_bert:
-                param.requires_grad = True
             else:
                 param.requires_grad = False
-        # logger.info("Freeze backbone parameters")
+                
+        logger.info("Freeze backbone parameters")
         
     def turn_uniform_expert(self, turn_on=False):
         pass
