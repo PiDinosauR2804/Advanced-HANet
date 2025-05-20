@@ -12,10 +12,9 @@ args = parse_arguments()
 def objective(trial):
     # Hằng 
     args.epochs = 10
-    args.use_lora = True
     args.logs_dir = "logs/classifier"
     args.data_root = "./data/data_ids_enhence"
-    args.dataset = "MAVEN"
+    args.dataset = "ACE"
     args.backbone = "bert-base-uncased"
     args.decay = 1e-4
     args.no_freeze_bert = True
@@ -27,7 +26,7 @@ def objective(trial):
     args.dweight_loss = True
     args.rep_aug = "mean"
     args.distill = "pd"
-    args.class_num = 20
+    args.class_num = 10
     args.single_label = True
     args.cl_aug = "shuffle"
     args.aug_repeat_times = 3
@@ -40,16 +39,15 @@ def objective(trial):
     args.use_description = True
     args.num_description = 3
     args.ratio_loss_des_cl = 1
-    args.task_ep_time = 4
+    args.task_ep_time = 1
     args.early_stop = True
     args.skip_eval_ep = 0
     args.eval_freq = 1
-    args.patience = 4
+    args.patience = 5
     args.early_stop = True
     args.classifier_layer = 1
     args.hidden_dim = 128
     args.dropout = 0.5
-    args.use_general_expert = True
     args.use_mole = True
     args.step_size = 1
     args.wandb = True
@@ -62,21 +60,18 @@ def objective(trial):
     args.entropy_weight = 0.1
     args.load_balance_weight = 1
     args.general_expert_weight = 0.2
-    args.lora_rank = 64
-    args.lora_alpha = 64
-    args.mole_num_experts = 4
-    args.mole_top_k = 2
-    args.project_name = "HANet_mole_bert_full_v2"
+    args.batch_size = 4
+    args.project_name = "HANet_new_mole_ace_2_5"
 
     # Tham số cho Optuna trial
-    args.alpha_ce = trial.suggest_float("alpha_ce", 0.5, 1.0, step=0.1)
-    args.decrease_0_gpt_augmention = trial.suggest_categorical("decrease_0_gpt_augmention", [True, False])
-    args.ratio_loss_lgacl = trial.suggest_float("ratio_loss_lgacl", 0.1, 1.0, step=0.1)
+    args.lora_rank = trial.suggest_int("lora_rank", 64, 256, step=64)
+    args.lora_alpha = trial.suggest_int("lora_alpha", 64, 256, step=64)
+    args.mole_num_experts = trial.suggest_categorical("mole_num_experts", [4, 8])
+    args.mole_top_k = trial.suggest_categorical("mole_top_k", [2, 4])
+    args.mole_num_general_expert = trial.suggest_categorical("mole_num_general_expert", [0, 1, 2])
     
-    args.batch_size = trial.suggest_categorical("batch_size", [4, 8])
-    args.lr = trial.suggest_float("lr", 5e-5, 2e-4, log=True)
-    args.gammalr = trial.suggest_float("gamma", 0.95, 1.0, step=0.01)
-    
+    args.lr = trial.suggest_float("lr", 2e-5, 2e-4, log=True)
+    args.gammalr = trial.suggest_float("gamma", 0.9, 1.0, step=0.01)
     
     try:
         f1 = train(0, args, trial)
