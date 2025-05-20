@@ -433,6 +433,7 @@ class BertED(nn.Module):
         if self.use_mole:
             return_dict['entropy_loss'] = 0
             return_dict['load_balance_loss'] = 0
+            return_dict['num_choose'] = [0] * self.num_experts
 
         if span is not None:
             trig_feature = self._extract_trigger(hidden, span)
