@@ -422,7 +422,7 @@ class BertED(nn.Module):
     def turn_uniform_expert(self, turn_on=False):
         pass
 
-    def forward(self, x, masks, span=None, aug=None):
+    def forward(self, x, masks, span=None, aug=None, train=True):
         out = self.backbone(x, attention_mask=masks)
         hidden = out.last_hidden_state
         return_dict = {
