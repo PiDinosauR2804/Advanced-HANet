@@ -845,7 +845,6 @@ def train(local_rank, args, trial=None):
                     logger.info(f"bc:{bc}")
                     num_choose = model.get_num_choose()
                     model.clear_num_choose()
-                    _print_num_choose(num_choose)
                     
                     # report to optuna
                     
@@ -860,12 +859,14 @@ def train(local_rank, args, trial=None):
                             no_better += 1
                             logger.info(f'No better: {no_better}/{args.patience}')
                         if no_better >= args.patience:
+                            _print_num_choose(num_choose)
                             logger.info("Early stopping with dev_score: " + str(dev_score))
                             dev_scores_ls.append(dev_score)
                             logger.info(f"Dev scores list: {dev_scores_ls}")
                             break
                     
                     if ep + 1 == num_epochs:
+                        _print_num_choose(num_choose)
                         if args.early_stop:
                             logger.info("Early stopping with dev_score: " + str(dev_score))
                             dev_scores_ls.append(dev_score)
