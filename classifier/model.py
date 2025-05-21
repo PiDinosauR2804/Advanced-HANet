@@ -284,9 +284,6 @@ class BertSelfAttentionWrapper(nn.Module):
         else:
             percent = self.num_choose[:self.experts_pool_num] / self.num_choose[:self.experts_pool_num].sum()
 
-        # Trung bình theo batch
-        percent = percent.mean(dim=0)  # (experts_pool_num,)
-
         # Xác định expert nào nên giảm (-1), tăng (+1), hoặc giữ nguyên (0)
         tune[percent < (balance_choose * (1 - self.balance_ratio))] = 1
         tune[percent > (balance_choose * (1 + self.balance_ratio))] = -1
