@@ -173,14 +173,26 @@ def train(local_rank, args, trial=None):
 
         # Làm tròn đến 2 chữ số thập phân
         percent = torch.round(percent * 100) / 100
-
-        # Chuyển sang numpy để in dạng thập phân không khoa học, định dạng chuỗi
         percent_np = percent.cpu().numpy()
-        percent_str = "\n".join(
-            ["[" + ", ".join(f"{x:.2f}" for x in row) + "]" for row in percent_np]
+
+        # Tạo header cột: Expert 1, Expert 2, ...
+        headers = [f"Expert {i+1}" for i in range(model.num_experts)]
+
+        # Độ rộng cột cố định để căn đều
+        col_width = 10
+
+        # Chuẩn bị header string
+        header_str = "".join(f"{h:>{col_width}}" for h in headers)
+
+        # Chuẩn bị từng dòng dữ liệu đã căn đều, 2 chữ số thập phân
+        rows_str = "\n".join(
+            "".join(f"{x:>{col_width}.2f}" for x in row)
+            for row in percent_np
         )
 
-        logger.info(f"Num choose (percent):\n{percent_str}")
+        # In ra
+        logger.info(f"Num choose (percent):\n{header_str}\n{rows_str}")
+
 
     # Xét từng task 
     for stage in task_idx:
