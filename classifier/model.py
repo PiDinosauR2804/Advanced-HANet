@@ -280,9 +280,9 @@ class BertSelfAttentionWrapper(nn.Module):
 
         # Tính phần trăm chọn của mỗi expert
         if self.fixed_experts_num == 0:
-            percent = self.num_choose / self.num_choose.sum(1, keepdim=True)
+            percent = self.num_choose / self.num_choose.sum(0, keepdim=True)
         else:
-            percent = self.num_choose[:self.experts_pool_num] / self.num_choose[:self.experts_pool_num].sum(1, keepdim=True)
+            percent = self.num_choose[:self.experts_pool_num] / self.num_choose[:self.experts_pool_num].sum(0, keepdim=True)
 
         # Trung bình theo batch
         percent = percent.mean(dim=0)  # (experts_pool_num,)
