@@ -80,28 +80,44 @@ class LoRALayer(nn.Module):
 
 class LoraRouter(nn.Module):
     def __init__(self, hidden_size, experts_num=8, experts_pool_num=4, fixed_experts_num=1, 
-                 task_experts_num=1, select_experts_num=2, task_num=3, fixed_experts_weight=0.5, 
-                 gamma=1.05, device=None):
+                 task_experts_num=1, select_experts_num=2, task_num=3, prompt_config=None):
         super().__init__()
         self.experts_num = experts_num
         self.select_experts_num = select_experts_num
         self.experts_pool_num = experts_pool_num
         self.task_experts_num = task_experts_num
         self.fixed_experts_num = fixed_experts_num
-        self.fixed_experts_weight = fixed_experts_weight
+        self.fixed_experts_weight = prompt_config.general_expert_weight
         self.hidden_size = hidden_size
+        self.gatting = prompt_config.gating
 
-        self.router_network = torch.nn.Sequential(
-            torch.nn.Linear(hidden_size, experts_pool_num, bias=False),
-            torch.nn.Tanh(),
-            torch.nn.Linear(experts_pool_num, experts_pool_num, bias=False),
-        )
+        if self.gatting == "tanh":
+            self.router_network = torch.nn.Sequential(
+                torch.nn.Linear(hidden_size, experts_pool_num, bias=False),
+                torch.nn.Tanh(),
+                torch.nn.Linear(experts_pool_num, experts_pool_num, bias=False),
+            )
+            
+            self.softmax = nn.Softmax(1)
+            
+        elif self.gatting == "softmax":
+            self.router_network = torch.nn.Sequential(
+                torch.nn.Linear(hidden_size, experts_pool_num, bias=False),
+            )
+            
+            self.softmax = nn.Softmax(1)
+            
+        elif self.gatting == "sigmoid":
+            self.router_network = torch.nn.Sequential(
+                torch.nn.Linear(hidden_size, experts_pool_num, bias=False),
+                torch.nn.Sigmoid(),
+            )
+            
         # task_keys = torch.randn(task_num, hidden_size)
         # self.task_keys = nn.Parameter(task_keys, requires_grad = True)
-        self.router_bias = torch.ones(experts_pool_num, device=device if device is not None else "cpu")
-        self.gamma = gamma
+        self.router_bias = torch.ones(experts_pool_num, device=prompt_config.device, dtype=torch.float32)
+        self.gamma = prompt_config.gamma_router
 
-        self.softmax = nn.Softmax(1)
         
     def tune_bias(self, tune: torch.Tensor):
         assert tune.shape == self.router_bias.shape, "Mismatch shape"
@@ -124,7 +140,12 @@ class LoraRouter(nn.Module):
         _, top_k_indices = torch.topk(logits_router + self.router_bias, min(self.select_experts_num, self.experts_pool_num), dim=1)  # get top k logits and indices
         top_k_logits = logits_router.gather(1, top_k_indices)  # gather top k logits
         
-        top_k_scores = self.softmax(top_k_logits.to(torch.float32))
+        if self.gatting == "sigmoid":
+            # normalize scores to sum to 1
+            top_k_scores = top_k_scores / top_k_scores.sum(dim=1, keepdim=True)
+        else:
+            top_k_scores = self.softmax(top_k_logits.to(torch.float32))
+            
         top_k_scores = top_k_scores.to(hidden_state.dtype)
         top_k_indices = top_k_indices.view(batch_size, seq_length, -1)
         top_k_scores = top_k_scores.view(batch_size, seq_length, -1)
@@ -245,8 +266,7 @@ class BertSelfAttentionWrapper(nn.Module):
 
         self.lora_router = LoraRouter(self.hidden_size, experts_num=self.experts_num, experts_pool_num=self.experts_pool_num, 
                                       fixed_experts_num=self.fixed_experts_num, task_experts_num=self.task_experts_num, 
-                                      select_experts_num=self.select_experts_num, task_num=self.task_num, 
-                                      fixed_experts_weight=self.fixed_experts_weight, gamma=prompt_config.gamma_router, device=prompt_config.device)
+                                      select_experts_num=self.select_experts_num, task_num=self.task_num, prompt_config=prompt_config)
 
         self.lora_experts_q, self.lora_experts_v = None, None
         self.lora_experts_q = nn.ModuleList()
@@ -288,18 +308,18 @@ class BertSelfAttentionWrapper(nn.Module):
         tune[percent < (balance_choose * (1 - self.balance_ratio))] = 1
         tune[percent > (balance_choose * (1 + self.balance_ratio))] = -1
 
-        logger.info("="*100)
-        logger.info(f"balance_choose: {balance_choose}")
-        logger.info(f"percent: {percent}")
-        logger.info(f"tune_bias: {tune}")
-        logger.info(f"bias before: {self.lora_router.router_bias}")
+        # logger.info("="*100)
+        # logger.info(f"balance_choose: {balance_choose}")
+        # logger.info(f"percent: {percent}")
+        # logger.info(f"tune_bias: {tune}")
+        # logger.info(f"bias before: {self.lora_router.router_bias}")
+        
         # Gọi hàm tune_bias từ lora_router
         self.lora_router.tune_bias(tune.to(dtype=torch.float32))
         
-        logger.info(f"bias after: {self.lora_router.router_bias}")
+        # logger.info(f"bias after: {self.lora_router.router_bias}")
         
 
-            
     # Adapted from BertSelfAttention
     def forward(
         self,
