@@ -430,8 +430,9 @@ class BertED(nn.Module):
 
         if not args.no_freeze_bert:
             self.freeze_backbone()
-            
-        self.print_trainable_parameters()
+        
+        if args.print_trainable_params:
+            self.print_trainable_parameters()
 
     def print_trainable_parameters(self):
         print("Trainable parameters:")
