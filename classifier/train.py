@@ -770,8 +770,8 @@ def train(local_rank, args, trial=None):
                             # f"loss_all_{stage}": loss,
                             
                             "loss_ce_task": loss_ce,
-                            "entropy_loss": return_dict.get('entropy_loss', 0),
-                            "load_balance_loss": return_dict.get('load_balance_loss', 0),
+                            # "entropy_loss": return_dict.get('entropy_loss', 0),
+                            # "load_balance_loss": return_dict.get('load_balance_loss', 0),
                             "total_norm": total_norm,
                             "memory/allocated_MB": stats["allocated_bytes.all.current"] / 1024**2,
                             "memory/allocated_peak_MB": stats["allocated_bytes.all.peak"] / 1024**2,
