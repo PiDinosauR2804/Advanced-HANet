@@ -756,6 +756,8 @@ def train(local_rank, args, trial=None):
                     pass
                 
                 optimizer.step() 
+                model.tune_bias()
+                model.clear_num_choose()
                 stats = torch.cuda.memory_stats()
                 wandb.log({
                             # f"loss_ce_task_{stage}": loss_ce,
@@ -791,9 +793,9 @@ def train(local_rank, args, trial=None):
             
             scheduler.step()
             num_choose = model.get_num_choose()
-            model.tune_bias()
-            model.clear_num_choose()
-            _print_num_choose(num_choose)
+            # model.tune_bias()
+            # model.clear_num_choose()
+            # _print_num_choose(num_choose)
     
             if ((ep + 1) % max(int(args.eval_freq*ep_time), 1) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
