@@ -44,7 +44,7 @@ def parse_arguments():
     parser.add_argument("--eval_batch_size", type=int, default=256, help="Batch size for evaluation")
     parser.add_argument("--wandb", action="store_true", help="Enable Weights & Biases logging")
     parser.add_argument("--eval_ratio", type=float, default=0.1, help="Ratio of data for evaluation")
-    parser.add_argument("--gating", type=str, default="softmax", choices=["softmax", "sigmoid", "tanh"], help="Gating mechanism for MoLE")
+    parser.add_argument("--gate", type=str, default="softmax", choices=["softmax", "sigmoid", "tanh"], help="Gate mechanism for MoLE")
     parser.add_argument("--backbone_path", type=str, default="", help="Path to the backbone model")
     parser.add_argument("--print_trainable_params", action="store_true", help="Print trainable parameters")
     parser.add_argument("--project_name", type=str, default="HANet_mole", help="Project name for Weights & Biases")

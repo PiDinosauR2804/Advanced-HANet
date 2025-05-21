@@ -89,9 +89,9 @@ class LoraRouter(nn.Module):
         self.fixed_experts_num = fixed_experts_num
         self.fixed_experts_weight = prompt_config.general_expert_weight
         self.hidden_size = hidden_size
-        self.gatting = prompt_config.gating
+        self.gate = prompt_config.gate
 
-        if self.gatting == "tanh":
+        if self.gate == "tanh":
             self.router_network = torch.nn.Sequential(
                 torch.nn.Linear(hidden_size, experts_pool_num, bias=False),
                 torch.nn.Tanh(),
@@ -100,14 +100,14 @@ class LoraRouter(nn.Module):
             
             self.softmax = nn.Softmax(1)
             
-        elif self.gatting == "softmax":
+        elif self.gate == "softmax":
             self.router_network = torch.nn.Sequential(
                 torch.nn.Linear(hidden_size, experts_pool_num, bias=False),
             )
             
             self.softmax = nn.Softmax(1)
             
-        elif self.gatting == "sigmoid":
+        elif self.gate == "sigmoid":
             self.router_network = torch.nn.Sequential(
                 torch.nn.Linear(hidden_size, experts_pool_num, bias=False),
                 torch.nn.Sigmoid(),
@@ -140,7 +140,7 @@ class LoraRouter(nn.Module):
         _, top_k_indices = torch.topk(logits_router + self.router_bias, min(self.select_experts_num, self.experts_pool_num), dim=1)  # get top k logits and indices
         top_k_logits = logits_router.gather(1, top_k_indices)  # gather top k logits
         
-        if self.gatting == "sigmoid":
+        if self.gate == "sigmoid":
             # normalize scores to sum to 1
             top_k_scores = top_k_scores / top_k_scores.sum(dim=1, keepdim=True)
         else:
