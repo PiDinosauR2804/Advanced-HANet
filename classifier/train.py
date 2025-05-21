@@ -165,6 +165,23 @@ def train(local_rank, args, trial=None):
     e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
     os.makedirs(os.path.dirname(e_pth), exist_ok=True)
     
+    def _print_num_choose(num_choose):
+        if args.mole_num_general_expert == 0:
+            percent = num_choose / num_choose.sum(1, keepdim=True) * 100
+        else:
+            percent = num_choose / num_choose[:, -1].unsqueeze(1) * 100
+
+        # Làm tròn đến 2 chữ số thập phân
+        percent = torch.round(percent * 100) / 100
+
+        # Chuyển sang numpy để in dạng thập phân không khoa học, định dạng chuỗi
+        percent_np = percent.cpu().numpy()
+        percent_str = "\n".join(
+            ["[" + ", ".join(f"{x:.2f}" for x in row) + "]" for row in percent_np]
+        )
+
+        logger.info(f"Num choose (percent):\n{percent_str}")
+
     # Xét từng task 
     for stage in task_idx:
         # if stage > 0:
@@ -762,12 +779,7 @@ def train(local_rank, args, trial=None):
             scheduler.step()
             num_choose = model.get_num_choose()
             model.clear_num_choose()
-            if args.mole_num_general_expert == 0:
-                percent = num_choose / num_choose.sum(1, keepdim=True) * 100
-            else:
-                percent = num_choose / num_choose[:, -1].unsqueeze(1) * 100
-            percent = torch.round(percent * 100) / 100  # Làm tròn đến 2 chữ số thập phân
-            logger.info(f"Num choose:\n{percent}")
+            _print_num_choose(num_choose)
     
             if ((ep + 1) % max(int(args.eval_freq*ep_time), 1) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
@@ -817,10 +829,7 @@ def train(local_rank, args, trial=None):
                     logger.info(f"bc:{bc}")
                     num_choose = model.get_num_choose()
                     model.clear_num_choose()
-                    percent = num_choose / num_choose.sum(1, keepdim=True) * 100
-                    percent = torch.round(percent * 100) / 100  # Làm tròn đến 2 chữ số thập phân
-                    logger.info(f"Num choose:\n{percent}")
-                    
+                    _print_num_choose(num_choose)
                     
                     # report to optuna
                     
