@@ -80,7 +80,7 @@ class LoRALayer(nn.Module):
 
 class LoraRouter(nn.Module):
     def __init__(self, hidden_size, experts_num=8, experts_pool_num=4, fixed_experts_num=1, 
-                 task_experts_num=1, select_experts_num=2, task_num=3, fixed_experts_weight=0.5):
+                 task_experts_num=1, select_experts_num=2, task_num=3, fixed_experts_weight=0.5, gamma=1.05):
         super().__init__()
         self.experts_num = experts_num
         self.select_experts_num = select_experts_num
@@ -88,6 +88,7 @@ class LoraRouter(nn.Module):
         self.task_experts_num = task_experts_num
         self.fixed_experts_num = fixed_experts_num
         self.fixed_experts_weight = fixed_experts_weight
+        self.hidden_size = hidden_size
 
         self.router_network = torch.nn.Sequential(
             torch.nn.Linear(hidden_size, experts_pool_num, bias=False),
@@ -96,9 +97,16 @@ class LoraRouter(nn.Module):
         )
         # task_keys = torch.randn(task_num, hidden_size)
         # self.task_keys = nn.Parameter(task_keys, requires_grad = True)
+        self.router_bias = torch.ones(experts_pool_num)
+        self.gamma = gamma
 
-        self.hidden_size = hidden_size
         self.softmax = nn.Softmax(1)
+        
+    def tune_bias(self, tune: torch.Tensor):
+        assert tune.shape == self.router_bias.shape, "Mismatch shape"
+        scale = self.gamma ** tune.to(dtype=self.router_bias.dtype)
+        self.router_bias *= scale
+
         
     def forward(self, hidden_state):
         batch_size, seq_length, hz = hidden_state.shape
@@ -106,11 +114,15 @@ class LoraRouter(nn.Module):
 
         # TODO
         logits_router = self.router_network(hidden_state)
-        # top_logits, top_indices = logits_router.topk(min(self.select_experts_num + 1, self.experts_pool_num), dim=1)  # 选择并排序前k+1个权重
+        # top_logits, top_indices = logits_router.topk(min(self.select_experts_num + 1, self.experts_pool_num), dim=1)  # get top k logits and indices
         # top_k_logits = top_logits[:, :self.select_experts_num]
         # top_k_indices = top_indices[:, :self.select_experts_num]
-        top_k_logits, top_k_indices = logits_router.topk(min(self.select_experts_num, self.experts_pool_num), dim=1)  # 选择并排序前k+1个权重
-
+        
+        # top_k_logits, top_k_indices = logits_router.topk(min(self.select_experts_num, self.experts_pool_num), dim=1)  # get top k logits and indices
+        
+        _, top_k_indices = torch.topk(logits_router + self.router_bias, min(self.select_experts_num, self.experts_pool_num), dim=1)  # get top k logits and indices
+        top_k_logits = logits_router.gather(1, top_k_indices)  # gather top k logits
+        
         top_k_scores = self.softmax(top_k_logits.to(torch.float32))
         top_k_scores = top_k_scores.to(hidden_state.dtype)
         top_k_indices = top_k_indices.view(batch_size, seq_length, -1)
@@ -216,7 +228,7 @@ class BertSelfAttentionWrapper(nn.Module):
         self.lora_alpha = prompt_config.lora_alpha
         self.lora_dropout = prompt_config.lora_dropout
         self.num_choose = torch.zeros(self.experts_num, device=prompt_config.device, dtype=torch.int64)
-
+        self.balance_ratio = prompt_config.balance_ratio
 
         if (self.head_dim * self.num_heads) != self.hidden_size:
             raise ValueError(
@@ -232,7 +244,8 @@ class BertSelfAttentionWrapper(nn.Module):
 
         self.lora_router = LoraRouter(self.hidden_size, experts_num=self.experts_num, experts_pool_num=self.experts_pool_num, 
                                       fixed_experts_num=self.fixed_experts_num, task_experts_num=self.task_experts_num, 
-                                      select_experts_num=self.select_experts_num, task_num=self.task_num, fixed_experts_weight=self.fixed_experts_weight)
+                                      select_experts_num=self.select_experts_num, task_num=self.task_num, 
+                                      fixed_experts_weight=self.fixed_experts_weight, gamma=prompt_config.gamma_router)
 
         self.lora_experts_q, self.lora_experts_v = None, None
         self.lora_experts_q = nn.ModuleList()
@@ -257,6 +270,30 @@ class BertSelfAttentionWrapper(nn.Module):
     def get_num_choose(self):
         return self.num_choose
     
+    def tune_bias(self):
+        # Khởi tạo vector tune
+        tune = torch.zeros(self.experts_pool_num, device=self.num_choose.device, dtype=torch.int8)
+
+        # Mức cân bằng lý tưởng (phần trăm chọn đều cho mỗi expert)
+        balance_choose = 1 / self.experts_pool_num
+
+        # Tính phần trăm chọn của mỗi expert
+        if self.fixed_experts_num == 0:
+            percent = self.num_choose / self.num_choose.sum(1, keepdim=True)
+        else:
+            percent = self.num_choose[:self.experts_pool_num] / self.num_choose[:self.experts_pool_num].sum(1, keepdim=True)
+
+        # Trung bình theo batch
+        percent = percent.mean(dim=0)  # (experts_pool_num,)
+
+        # Xác định expert nào nên giảm (-1), tăng (+1), hoặc giữ nguyên (0)
+        tune[percent < (balance_choose * (1 - self.balance_ratio))] = 1
+        tune[percent > (balance_choose * (1 + self.balance_ratio))] = -1
+
+        # Gọi hàm tune_bias từ lora_router
+        self.lora_router.tune_bias(tune.to(dtype=torch.float32))
+
+            
     # Adapted from BertSelfAttention
     def forward(
         self,
@@ -469,6 +506,13 @@ class BertED(nn.Module):
             return num_choose
         else:
             return None
+        
+    def tune_bias(self):
+        if self.use_mole:
+            for layer in self.backbone.encoder.layer:
+                layer.attention.self.tune_bias()
+        else:
+            pass
 
     def forward(self, x, masks, span=None, aug=None, train=True):
         out = self.backbone(x, attention_mask=masks)

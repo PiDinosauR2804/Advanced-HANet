@@ -788,8 +788,10 @@ def train(local_rank, args, trial=None):
                             "loss_all": loss,
                             "learning_rate": optimizer.param_groups[0]['lr'],
                         })
+            
             scheduler.step()
             num_choose = model.get_num_choose()
+            model.tune_bias()
             model.clear_num_choose()
             _print_num_choose(num_choose)
     
