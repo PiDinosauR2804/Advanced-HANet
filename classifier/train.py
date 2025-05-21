@@ -257,7 +257,6 @@ def train(local_rank, args, trial=None):
         
         logger.info("Start training ...")
         for ep in tqdm(range(num_epochs), desc="Epoch"):
-            num_choose = [0] * model.num_experts
             if stage == 0 and args.skip_first:
                 continue
             
@@ -345,9 +344,7 @@ def train(local_rank, args, trial=None):
                 # else: 
                 return_dict = model(train_x, train_masks, train_span)
                 outputs, context_feat, trig_feat = return_dict['outputs'], return_dict['context_feat'], return_dict['trig_feat']
-                if args.use_mole:
-                    for i, num in enumerate(return_dict['num_choose']):
-                        num_choose[i] += num
+
                 # invalid_mask_op = torch.BoolTensor([item not in learned_types for item in range(args.class_num)]).to(device)
                 # not from below's codes
                 
@@ -762,7 +759,9 @@ def train(local_rank, args, trial=None):
                             "learning_rate": optimizer.param_groups[0]['lr'],
                         })
             scheduler.step()
-            logger.info(f"Num choose: {num_choose}")
+            logger.info(f"Num choose:\{model.get_num_choose()}")
+            model.clear_num_choose()
+            
             if ((ep + 1) % max(int(args.eval_freq*ep_time), 1) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
                 logger.info("Evaluation process ...")
@@ -778,7 +777,7 @@ def train(local_rank, args, trial=None):
                         batch_size=args.eval_batch_size,
                         collate_fn=lambda x:x)
                     calcs = Calculator()
-                    num_choose = [0] * model.num_experts
+
                     for batch in tqdm(eval_loader, desc="Eval"):
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
@@ -786,9 +785,7 @@ def train(local_rank, args, trial=None):
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
                         eval_return_dict = model(eval_x, eval_masks, eval_span, train=False)
-                        if args.use_mole:
-                            for i, num in enumerate(eval_return_dict['num_choose']):
-                                num_choose[i] += num
+
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
                         for i in range(len(eval_y)):
@@ -811,7 +808,8 @@ def train(local_rank, args, trial=None):
                     # dev_scores_ls.append(micro_F1)
                     # logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
-                    logger.info(f"Num choose: {num_choose}")
+                    logger.info(f"Num choose: {model.get_num_choose()}")
+                    model.clear_num_choose()
                     
                     # report to optuna
                     

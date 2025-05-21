@@ -215,6 +215,7 @@ class BertSelfAttentionWrapper(nn.Module):
         self.lora_r = prompt_config.lora_rank
         self.lora_alpha = prompt_config.lora_alpha
         self.lora_dropout = prompt_config.lora_dropout
+        self.num_choose = torch.zeros(self.experts_num).to(torch.int64)
 
 
         if (self.head_dim * self.num_heads) != self.hidden_size:
@@ -249,6 +250,12 @@ class BertSelfAttentionWrapper(nn.Module):
 
     def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
         return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
+    
+    def clear_num_choose(self):
+        self.num_choose = torch.zeros(self.experts_num).to(torch.int64)
+    
+    def get_num_choose(self):
+        return self.num_choose
     
     # Adapted from BertSelfAttention
     def forward(
@@ -286,6 +293,9 @@ class BertSelfAttentionWrapper(nn.Module):
             return final_hidden_states.view(batch_size, sequence_length, hidden_dim)
 
         top_k_indices, top_k_scores, expert_mask = self.lora_router(hidden_states)
+        
+        self.num_choose += torch.sum(expert_mask, dim=2).sum(0).to(torch.int64)
+            
         lora_experts_q = self.lora_experts_q
         lora_experts_v = self.lora_experts_v
         
@@ -440,6 +450,24 @@ class BertED(nn.Module):
         
     def turn_uniform_expert(self, turn_on=False):
         pass
+    
+    def clear_num_choose(self):
+        if self.use_mole:
+            for layer in self.backbone.encoder.layer:
+                layer.attention.self.clear_num_choose()
+        else:
+            pass
+        
+    def get_num_choose(self):
+        if self.use_mole:
+            num_choose = []
+            for layer in self.backbone.encoder.layer:
+                num_choose.append(layer.attention.self.get_num_choose())
+                
+            num_choose = torch.stack(num_choose, dim=0)
+            return num_choose
+        else:
+            return None
 
     def forward(self, x, masks, span=None, aug=None, train=True):
         out = self.backbone(x, attention_mask=masks)
@@ -452,7 +480,6 @@ class BertED(nn.Module):
         if self.use_mole:
             return_dict['entropy_loss'] = 0
             return_dict['load_balance_loss'] = 0
-            return_dict['num_choose'] = [0] * self.num_experts
 
         if span is not None:
             trig_feature = self._extract_trigger(hidden, span)
