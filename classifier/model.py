@@ -80,7 +80,8 @@ class LoRALayer(nn.Module):
 
 class LoraRouter(nn.Module):
     def __init__(self, hidden_size, experts_num=8, experts_pool_num=4, fixed_experts_num=1, 
-                 task_experts_num=1, select_experts_num=2, task_num=3, fixed_experts_weight=0.5, gamma=1.05):
+                 task_experts_num=1, select_experts_num=2, task_num=3, fixed_experts_weight=0.5, 
+                 gamma=1.05, device=None):
         super().__init__()
         self.experts_num = experts_num
         self.select_experts_num = select_experts_num
@@ -97,7 +98,7 @@ class LoraRouter(nn.Module):
         )
         # task_keys = torch.randn(task_num, hidden_size)
         # self.task_keys = nn.Parameter(task_keys, requires_grad = True)
-        self.router_bias = torch.ones(experts_pool_num)
+        self.router_bias = torch.ones(experts_pool_num, device=device if device is not None else "cpu")
         self.gamma = gamma
 
         self.softmax = nn.Softmax(1)
@@ -245,7 +246,7 @@ class BertSelfAttentionWrapper(nn.Module):
         self.lora_router = LoraRouter(self.hidden_size, experts_num=self.experts_num, experts_pool_num=self.experts_pool_num, 
                                       fixed_experts_num=self.fixed_experts_num, task_experts_num=self.task_experts_num, 
                                       select_experts_num=self.select_experts_num, task_num=self.task_num, 
-                                      fixed_experts_weight=self.fixed_experts_weight, gamma=prompt_config.gamma_router)
+                                      fixed_experts_weight=self.fixed_experts_weight, gamma=prompt_config.gamma_router, device=prompt_config.device)
 
         self.lora_experts_q, self.lora_experts_v = None, None
         self.lora_experts_q = nn.ModuleList()
