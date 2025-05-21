@@ -763,7 +763,7 @@ def train(local_rank, args, trial=None):
             num_choose = model.get_num_choose()
             model.clear_num_choose()
             percent = num_choose / num_choose.sum(1, keepdim=True) * 100
-            percent = percent.round(2)
+            percent = torch.round(percent * 100) / 100  # Làm tròn đến 2 chữ số thập phân
             logger.info(f"Num choose:\n{percent}")
     
             if ((ep + 1) % max(int(args.eval_freq*ep_time), 1) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) or (ep + 1) == num_epochs: # TODO TODO
@@ -815,7 +815,7 @@ def train(local_rank, args, trial=None):
                     num_choose = model.get_num_choose()
                     model.clear_num_choose()
                     percent = num_choose / num_choose.sum(1, keepdim=True) * 100
-                    percent = percent.round(2)
+                    percent = torch.round(percent * 100) / 100  # Làm tròn đến 2 chữ số thập phân
                     logger.info(f"Num choose:\n{percent}")
                     
                     
