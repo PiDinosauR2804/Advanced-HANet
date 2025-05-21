@@ -762,7 +762,10 @@ def train(local_rank, args, trial=None):
             scheduler.step()
             num_choose = model.get_num_choose()
             model.clear_num_choose()
-            percent = num_choose / num_choose.sum(1, keepdim=True) * 100
+            if args.mole_num_general_expert == 0:
+                percent = num_choose / num_choose.sum(1, keepdim=True) * 100
+            else:
+                percent = num_choose / num_choose[:, -1].unsqueeze(1) * 100
             percent = torch.round(percent * 100) / 100  # Làm tròn đến 2 chữ số thập phân
             logger.info(f"Num choose:\n{percent}")
     
