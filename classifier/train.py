@@ -176,10 +176,10 @@ def train(local_rank, args, trial=None):
         percent_np = percent.cpu().numpy()
 
         # Tạo header cột: Expert 1, Expert 2, ...
-        headers = [f"Expert {i+1}" for i in range(model.num_experts)]
+        headers = [f"Exp {i+1}" for i in range(model.num_experts)]
 
         # Độ rộng cột cố định để căn đều
-        col_width = 10
+        col_width = 7
 
         # Chuẩn bị header string
         header_str = "".join(f"{h:>{col_width}}" for h in headers)
