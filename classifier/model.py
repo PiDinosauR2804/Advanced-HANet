@@ -280,9 +280,9 @@ class BertSelfAttentionWrapper(nn.Module):
 
         # Tính phần trăm chọn của mỗi expert
         if self.fixed_experts_num == 0:
-            percent = self.num_choose / self.num_choose.sum(0, keepdim=True)
+            percent = self.num_choose / self.num_choose.sum()
         else:
-            percent = self.num_choose[:self.experts_pool_num] / self.num_choose[:self.experts_pool_num].sum(0, keepdim=True)
+            percent = self.num_choose[:self.experts_pool_num] / self.num_choose[:self.experts_pool_num].sum()
 
         # Trung bình theo batch
         percent = percent.mean(dim=0)  # (experts_pool_num,)
@@ -292,6 +292,8 @@ class BertSelfAttentionWrapper(nn.Module):
         tune[percent > (balance_choose * (1 + self.balance_ratio))] = -1
 
         logger.info("="*100)
+        logger.info(f"balance_choose: {balance_choose}")
+        logger.info(f"percent: {percent}")
         logger.info(f"tune_bias: {tune}")
         logger.info(f"bias before: {self.lora_router.router_bias}")
         # Gọi hàm tune_bias từ lora_router
