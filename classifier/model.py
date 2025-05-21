@@ -291,8 +291,14 @@ class BertSelfAttentionWrapper(nn.Module):
         tune[percent < (balance_choose * (1 - self.balance_ratio))] = 1
         tune[percent > (balance_choose * (1 + self.balance_ratio))] = -1
 
+        logger.info("="*100)
+        logger.info(f"tune_bias: {tune}")
+        logger.info(f"bias before: {self.lora_router.router_bias}")
         # Gọi hàm tune_bias từ lora_router
         self.lora_router.tune_bias(tune.to(dtype=torch.float32))
+        
+        logger.info(f"bias after: {self.lora_router.router_bias}")
+        
 
             
     # Adapted from BertSelfAttention
