@@ -35,7 +35,7 @@ do
             --use_description \
             --num_description 3 \
             --ratio_loss_des_cl 0.1 \
-            --epoch $i \
+            --epochs $i \
             --task_ep_time $j \
             --uniform_ep 1 \
             --eval_freq 1 \

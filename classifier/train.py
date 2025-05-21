@@ -51,7 +51,7 @@ def train(local_rank, args, trial=None):
     date_str = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
-    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.epoch}_{args.task_ep_time}_{args.seed}_{args.alpha_ce}_{timestamp}"
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.epochs}_{args.task_ep_time}_{args.seed}_{args.alpha_ce}_{timestamp}"
 
     
     save_path = os.path.join(args.save_output, args.dataset, str(args.shot_num))
