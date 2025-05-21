@@ -294,7 +294,7 @@ class BertSelfAttentionWrapper(nn.Module):
 
         top_k_indices, top_k_scores, expert_mask = self.lora_router(hidden_states)
         
-        self.num_choose += torch.sum(expert_mask, dim=2).sum(0).to(torch.int64)
+        self.num_choose += expert_mask.sum(dim=(1, 2)).to(self.num_choose.dtype)
             
         lora_experts_q = self.lora_experts_q
         lora_experts_v = self.lora_experts_v
