@@ -142,7 +142,7 @@ class LoraRouter(nn.Module):
         
         if self.gate == "sigmoid":
             # normalize scores to sum to 1
-            top_k_scores = top_k_scores / top_k_scores.sum(dim=1, keepdim=True)
+            top_k_scores = top_k_logits / top_k_logits.sum(dim=1, keepdim=True)
         else:
             top_k_scores = self.softmax(top_k_logits.to(torch.float32))
             
