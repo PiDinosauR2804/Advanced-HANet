@@ -215,7 +215,7 @@ class BertSelfAttentionWrapper(nn.Module):
         self.lora_r = prompt_config.lora_rank
         self.lora_alpha = prompt_config.lora_alpha
         self.lora_dropout = prompt_config.lora_dropout
-        self.num_choose = torch.zeros(self.experts_num).to(torch.int64)
+        self.num_choose = torch.zeros(self.experts_num, device=prompt_config.device, dtype=torch.int64)
 
 
         if (self.head_dim * self.num_heads) != self.hidden_size:
@@ -252,7 +252,7 @@ class BertSelfAttentionWrapper(nn.Module):
         return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
     
     def clear_num_choose(self):
-        self.num_choose = torch.zeros(self.experts_num).to(torch.int64)
+        self.num_choose = torch.zeros(self.experts_num, device=self.num_choose.device, dtype=self.num_choose.dtype)
     
     def get_num_choose(self):
         return self.num_choose
