@@ -20,7 +20,7 @@ do
             --log_dir ./outputs/log_incremental/temp7_submax/first_wo_UCL+TCL/ \
             --log_name ashuffle_lnone_r1 \
             --wandb \
-            --project_name quangnm4_find_ace_5shot_10ep \
+            --project_name quangnm4_find_ace_5shot_4ep \
             --dweight_loss \
             --rep_aug mean \
             --distill mul \
@@ -45,8 +45,8 @@ do
             --lora_alpha 128 \
             --lora_dropout 0.1 \
             --use_mole \
-            --mole_num_experts 10 \
-            --mole_top_k 4 \
+            --mole_num_experts 4 \
+            --mole_top_k 1 \
             --mole_num_general_expert 1 \
             --entropy_weight 0.1 \
             --load_balance_weight 1 \
