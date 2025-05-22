@@ -45,7 +45,7 @@ do
             --lora_alpha 128 \
             --lora_dropout 0.1 \
             --use_mole \
-            --mole_num_experts 16 \
+            --mole_num_experts 10 \
             --mole_top_k 4 \
             --mole_num_general_expert 1 \
             --entropy_weight 0.1 \
