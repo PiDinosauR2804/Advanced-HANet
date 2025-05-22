@@ -46,7 +46,7 @@ do
             --lora_dropout 0.1 \
             --use_mole \
             --mole_num_experts 4 \
-            --mole_top_k 1 \
+            --mole_top_k 2 \
             --mole_num_general_expert 1 \
             --entropy_weight 0.1 \
             --load_balance_weight 1 \
