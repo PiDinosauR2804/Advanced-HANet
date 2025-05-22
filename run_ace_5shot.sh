@@ -1,6 +1,6 @@
 source activate zhangchenlong
 
-for i in 3 4 5 
+for i in 2 3 4 5 
 do
     for j in 3 4 5 6
     do
@@ -12,7 +12,7 @@ do
             --shot_num 5 \
             --class_num 10 \
             --backbone bert-base-uncased \
-            --lr 5e-5 \
+            --lr 8e-5 \
             --decay 1e-4 \
             --batch_size 4 \
             --device cuda:0 \
@@ -20,7 +20,7 @@ do
             --log_dir ./outputs/log_incremental/temp7_submax/first_wo_UCL+TCL/ \
             --log_name ashuffle_lnone_r1 \
             --wandb \
-            --project_name quangnm4_find_ace_5shot_4ep \
+            --project_name quangnm4_find_ace_5shot_4ep_8e_5 \
             --dweight_loss \
             --rep_aug mean \
             --distill mul \
