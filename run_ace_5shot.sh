@@ -20,7 +20,7 @@ do
             --log_dir ./outputs/log_incremental/temp7_submax/first_wo_UCL+TCL/ \
             --log_name ashuffle_lnone_r1 \
             --wandb \
-            --project_name quangnm4_find_ace_5shot \
+            --project_name quangnm4_find_ace_5shot_10ep \
             --dweight_loss \
             --rep_aug mean \
             --distill mul \
