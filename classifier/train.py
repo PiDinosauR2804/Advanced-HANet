@@ -49,9 +49,30 @@ def train(local_rank, args, trial=None):
     logger.remove()
     # --- Thêm handler ghi log ra file ---
     date_str = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
-    logger.add(os.path.join(args.logs_dir, f"{date_str}.log"), rotation="1 MB", retention="10 days", enqueue=True, level="INFO")
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.epochs}_{args.task_ep_time}_{args.seed}_{args.alpha_ce}_{timestamp}"
+
+    
+    save_path = os.path.join(args.save_output, args.dataset, str(args.shot_num))
+    if os.path.exists(save_path) and os.path.isdir(save_path):
+        print(f"✅ Thư mục '{save_path}' tồn tại.")
+    else:
+        print(f"❌ Thư mục '{save_path}' không tồn tại. Đang tạo mới...")
+        os.makedirs(save_path, exist_ok=True)
+        print(f"✅ Đã tạo thư mục '{save_path}'.")
+    log_file_path = os.path.join(save_path, f"{args.run_name}.txt")
+    
+    logger.add(
+        log_file_path,
+        rotation="1 MB",        # Tự động chia file khi >1MB
+        retention="10 days",    # Giữ lại log trong 10 ngày
+        enqueue=True,           # Hỗ trợ đa tiến trình
+        level="INFO"
+    )
     # --- Thêm handler ghi log qua tqdm.write ---
     # Ghi log ra console qua tqdm.write + có màu
+    
     logger.level("CRITICAL", color="<bg red><white>")
     logger.add(
         lambda msg: tqdm.write(msg, end=""),

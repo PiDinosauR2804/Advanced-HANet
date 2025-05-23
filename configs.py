@@ -128,6 +128,8 @@ def parse_arguments():
     parser.add_argument('--decrease_0_gpt_augmention', action='store_true')
     parser.add_argument('--ratio_loss_gpt', default=1, type=float)
     
+    parser.add_argument('--save_output', default="output_logg", type=str)
+    
     args, _ = parser.parse_known_args()
 
     return args

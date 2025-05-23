@@ -34,6 +34,7 @@ do
                         --log_name ashuffle_lnone_r1 \
                         --wandb \
                         --project_name ACE_5_shot_17_5_pd \
+                        --save_output output_logg \
                         --dweight_loss \
                         --rep_aug mean \
                         --distill $n \
