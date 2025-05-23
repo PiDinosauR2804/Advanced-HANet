@@ -36,9 +36,6 @@ from loguru import logger
 from tqdm.auto import tqdm
 import optuna
 
-# PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
-# PERM_10 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]
-
 
 def train(local_rank, args, trial=None):    
     tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
@@ -114,14 +111,6 @@ def train(local_rank, args, trial=None):
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.decay, eps=args.adamw_eps, betas=(0.9, 0.999)) #TODO: Hyper parameters
     
     scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr) # TODO: Hyper parameters
-
-    # if args.amp:
-        # model, optimizer = amp.initialize(model, optimizer, opt_level="O1") 
-        
-    # # Get description
-    # file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"   
-    # with open(file_path_description, 'r', encoding='utf-8') as f:
-    #     data_description = json.load(f)
                   
                 
     if args.parallel == 'DDP':
@@ -231,9 +220,7 @@ def train(local_rank, args, trial=None):
             for item in streams_indexed[stage - 1]:
                 if not item in prev_learned_types:
                     prev_learned_types.append(item)
-            # TODO: test use
-            # prev_model = deepcopy(model) # TODO: How does optimizer distinguish deep copy parameters
-            # exclude_none_labels = [t for t in streams_indexed[stage - 1] if t != 0]
+
             logger.info(f'Loading train instances without negative instances for stage {stage}')
             
             # Lấy ra các sample để học cho task hiện tại
@@ -244,9 +231,6 @@ def train(local_rank, args, trial=None):
                 shuffle=True,
                 collate_fn=lambda x:x)
             
-            # exclude_none_loader = train_ecn_loaders[stage - 1]
-            # TODO: test use
-            # exemplars.set_exemplars(prev_model.to('cpu'), exclude_none_loader, len(learned_types), device)
             
             # Thực hiện lấy ra các sample từ class trước
             exemplars.set_exemplars(prev_model, exemplar_loader, len(learned_types), device)
@@ -306,20 +290,6 @@ def train(local_rank, args, trial=None):
             for batch in stage_loader:
                 iter_cnt += 1
                 optimizer.zero_grad()
-                # if args.single_label:
-                #     train_x, train_y, train_masks, train_span = zip(*batch)
-                #     y = [[0] * len(train_x[0]) for _ in train_x]
-                #     for i in range(len(train_span)):
-                #         for j in range(len(train_span[i])):
-                #             y[i][train_span[i][j][0]] = train_y[i][j]
-                #     train_x = torch.LongTensor(train_x).to(device)
-                #     train_masks = torch.LongTensor(train_masks).to(device)
-                #     outputs, feature = model(train_x, train_masks)
-                #     logits = outputs[:, learned_types]
-                #     y = torch.LongTensor(y).to(device)
-                #     loss_ce = criterion_ce(logits, y.view(-1))
-                #     padded_train_span, span_len = None, None
-                # else:
                 
                 train_x, train_y, train_masks, train_span, train_augment = zip(*batch)
                 train_x = torch.LongTensor(train_x).to(device)
@@ -373,6 +343,7 @@ def train(local_rank, args, trial=None):
                 # else: 
                 return_dict = model(train_x, train_masks, train_span)
                 outputs, context_feat, trig_feat = return_dict['outputs'], return_dict['context_feat'], return_dict['trig_feat']
+                logits_router = return_dict['logits_router']
 
                 # invalid_mask_op = torch.BoolTensor([item not in learned_types for item in range(args.class_num)]).to(device)
                 # not from below's codes
@@ -386,21 +357,7 @@ def train(local_rank, args, trial=None):
                 ce_y = torch.cat(train_y) # (sum of len(label), )
                 ce_outputs = outputs
                 if (args.ucl or args.tlcl) and (stage > 0 or (args.skip_first_cl != "ucl+tlcl" and stage == 0)):                        
-                    # _, dpo_feature2 = model(train_x.clone(), train_masks, padded_train_span, span_len)
-                    # scl_idx = torch.cat(train_y).nonzero().squeeze(-1)
-                    # scl_y = torch.cat(train_y)[scl_idx]
-                    # Adj_mat2 = torch.eq(scl_y.unsqueeze(1), scl_y.unsqueeze(1).T).float() - torch.eye(len(scl_y)).to(device)
-                    # scl_feat = dpo_feature2[scl_idx, :]
-                    # scl_feat = normalize(scl_feat, dim=-1)
-                    # logits2 = torch.div(torch.matmul(scl_feat, scl_feat.T), args.cl_temp)
-                    # logits_max2, _ = torch.max(logits2, dim=1, keepdim=True)
-                    # logits2 = logits2 - logits_max2.detach()
-                    # exp_logits2 =  torch.exp(logits2)
-                    # denom2 = torch.sum(exp_logits2 * (1 - torch.eye(len(Adj_mat2)).to(device)), dim = -1)
-                    # log_prob2 = logits2 - torch.log(denom2)
-                    # pos_log_prob2 = torch.sum(Adj_mat2 * log_prob2, dim=-1) / (len(log_prob2) - 1)
-                    # loss_scl = -torch.sum(pos_log_prob2)
-                    # loss = 0.5 * loss + 0.5 * loss_scl
+
                     reps = return_dict['reps']
                     bs, hdim = reps.shape
                     aug_repeat_times = args.aug_repeat_times
@@ -452,6 +409,7 @@ def train(local_rank, args, trial=None):
                     # Hidden representaion của data augment
                     da_return_dict = model(da_x, da_masks, da_span)
                     da_outputs, da_reps, da_context_feat, da_trig_feat = da_return_dict['outputs'], da_return_dict['reps'], da_return_dict['context_feat'], da_return_dict['trig_feat']
+                    da_logits_router = da_return_dict['logits_router']
                     
                     # Contrastive loss cho sentence
                     if args.ucl:
@@ -478,7 +436,7 @@ def train(local_rank, args, trial=None):
                             Adj_mask_tlcl = torch.matmul(tlcl_lbs_oh, tlcl_lbs_oh.T)
                             Adj_mask_tlcl = Adj_mask_tlcl * (torch.ones(mat_size) - torch.eye(mat_size)).to(device)
                             loss_tlcl = compute_CLLoss(Adj_mask_tlcl, tlcl_feature, mat_size, args, device)
-                    loss = loss + loss_ucl + loss_tlcl*args.weight_loss_tlcl
+                    # loss = loss + loss_ucl + loss_tlcl*args.weight_loss_tlcl
                     if args.joint_da_loss == "ce" or args.joint_da_loss == "mul":
                         ce_y = torch.cat(train_y + da_y)
                         ce_outputs = torch.cat([outputs, da_outputs])
@@ -545,7 +503,7 @@ def train(local_rank, args, trial=None):
                         Des_adj_mask_tlcl = Des_adj_mask_tlcl * (torch.ones(des_mat_size) - torch.eye(des_mat_size)).to(device)
                         loss_des_cl = compute_CLLoss(Des_adj_mask_tlcl, des_cl_feature, des_mat_size, args, device)
                     
-                    loss = loss + loss_des_cl * args.ratio_loss_des_cl      
+                    # loss = loss + loss_des_cl * args.ratio_loss_des_cl      
                     
                 lgacl_loss = torch.tensor(0.0, device=device)
                 if args.gpt_augmention:
@@ -566,7 +524,7 @@ def train(local_rank, args, trial=None):
                     Adj_mask_lgacl = Adj_mask_lgacl * (torch.ones(mat_size) - torch.eye(mat_size)).to(device)
                     lgacl_loss = compute_CLLoss(Adj_mask_lgacl, lgacl_feature, mat_size, args, device)
                 
-                loss = loss + lgacl_loss * args.ratio_loss_lgacl
+                # loss = loss + lgacl_loss * args.ratio_loss_lgacl
                 
                 # Loss ce cho class ở task hiện tại
                 ce_outputs = ce_outputs[:, learned_types]
@@ -574,7 +532,7 @@ def train(local_rank, args, trial=None):
                     loss_ce = CrossEntropyLossWithWeight(ce_outputs, ce_y, alpha=args.alpha_ce)
                 else:
                     loss_ce = criterion_ce(ce_outputs, ce_y)
-                loss = loss + loss_ce
+                # loss = loss + loss_ce
                 w = len(prev_learned_types) / len(learned_types)
 
                 # Loss ce cho class ở task cũ
@@ -612,54 +570,8 @@ def train(local_rank, args, trial=None):
                     loss_aug = criterion_ce(outputs_aug, torch.cat(aug_y))
                     # loss = loss_ce * w + loss_aug * (1 - w)
                     # loss = loss_ce * (1 - w) + loss_aug * w
-                    loss = args.gamma * loss + args.theta * loss_aug
-                    
-
-                    
-
-                # if stage > 0 and args.ecl != "none":
-                #     _, dpo_feature = model(train_x.clone(), train_masks, padded_train_span, span_len)
-                    
-                #     # dpo_feature = model.forward_cl(train_x.clone(), train_masks)
-                #     ecl_ys, ecl_features = [], []
-                #     for e_batch in e_loader:
-                #         ecl_x, ecl_y, ecl_masks, ecl_span = zip(*e_batch)
-                #         ecl_span_len = [len(item) for item in ecl_span]
-                #         ecl_x = torch.LongTensor(ecl_x).to(device)
-                #         ecl_masks = torch.LongTensor(ecl_masks).to(device)
-                #         ecl_y = [torch.LongTensor(item).to(device) for item in ecl_y]
-                #         ecl_span = [torch.LongTensor(item).to(device) for item in ecl_span]            
-                #         padded_ecl_span = pad_sequence(ecl_span, batch_first=True, padding_value=-1).to(device)
-                #         _, ecl_feature = model(ecl_x, ecl_masks, padded_ecl_span, ecl_span_len)
-                #         # ecl_feature = model.forward_cl(ecl_x, ecl_masks)
-
-                #         ecl_features.append(ecl_feature)
-                #         ecl_ys.extend(ecl_y)
-                #     ecl_ys = torch.cat(ecl_ys)
-                #     valid_idx = torch.cat(train_y).nonzero().squeeze(-1)
-                #     # feat_idx = [[i] * len(item.nonzero().squeeze(-1)) for (i, item) in enumerate(train_y)]
-                #     # s_feat = torch.cat([dpo_feature[i, :] for i in feat_idx])
-                #     s_feat = dpo_feature[valid_idx, :]
-                #     cl_y = torch.cat(train_y)[valid_idx]
-                #     m_index = torch.nonzero(torch.isin(cl_y, ecl_ys)).squeeze(-1)
-                #     ecl_index = torch.eq(cl_y.unsqueeze(1), ecl_ys.unsqueeze(1).T).float().argmax(-1)[m_index] # index of exemplars that correspond to the train instance' s label
-                #     r_feat = s_feat.clone()
-                #     ecl_feat = torch.cat(ecl_features)
-                #     r_feat[m_index, :] = ecl_feat[ecl_index, :]
-                #     h_feat = normalize(torch.cat((s_feat, r_feat)), dim=-1)
-                #     all_y = cl_y.repeat(2)
-                #     Adj_mat = torch.eq(all_y.unsqueeze(1), all_y.unsqueeze(1).T).float() - torch.eye(len(all_y)).to(device)
-                #     pos_num = torch.sum(Adj_mat, dim=-1)
-                #     logits = torch.div(torch.matmul(h_feat, h_feat.T), args.cl_temp)
-                #     logits_max, _ = torch.max(logits, dim=1, keepdim=True)
-                #     logits = logits - logits_max.detach()
-                #     exp_logits =  torch.exp(logits)
-                #     denom = torch.sum(exp_logits * (1 - torch.eye(len(Adj_mat)).to(device)), dim = -1)
-                #     log_prob = logits - torch.log(denom)
-                #     pos_log_prob = torch.sum(Adj_mat * log_prob, dim=-1) / pos_num
-                #     loss_scl = -torch.sum(pos_log_prob) / len(pos_log_prob)
-                #     loss = 0.5 * loss + 0.5 * loss_scl
-                    
+                    # loss = args.gamma * loss + args.theta * loss_aug
+                
                     
                 # Loss distill của previous model cho current model nhằm giữ lại kiến thức cũ từ mô hình cũ. ( Không dùng đến trong bài )
                 if stage > 0 and args.distill != "none":
@@ -667,87 +579,54 @@ def train(local_rank, args, trial=None):
                     with torch.no_grad():
                         prev_return_dict = prev_model(train_x, train_masks, train_span)
                         prev_outputs, prev_feature = prev_return_dict['outputs'], prev_return_dict['context_feat']
+                        prev_logits_router = prev_return_dict['logits_router']
+                        
 
                         if args.joint_da_loss == "dist" or args.joint_da_loss == "mul":
                             outputs = torch.cat([outputs, da_outputs])
                             context_feat = torch.cat([context_feat, da_context_feat])
+                            logits_router = torch.cat([logits_router, da_logits_router])
                             prev_return_dict_cl = prev_model(da_x, da_masks, da_span)
                             prev_outputs_cl, prev_feature_cl = prev_return_dict_cl['outputs'], prev_return_dict_cl['context_feat']
+                            prev_logits_router_cl = prev_return_dict_cl['logits_router']
                             prev_outputs, prev_feature = torch.cat([prev_outputs, prev_outputs_cl]), torch.cat([prev_feature, prev_feature_cl])
+                            prev_logits_router = torch.cat([prev_logits_router, prev_logits_router_cl])
                     # prev_invalid_mask_op = torch.BoolTensor([item not in prev_learned_types for item in range(args.class_num)]).to(device)
                     prev_valid_mask_op = torch.nonzero(torch.BoolTensor([item in prev_learned_types for item in range(args.class_num + 1)]).to(device))
-                    if args.distill == "fd" or args.distill == "mul":
+                    if "fd" in args.distill or "mul" in args.distill:
                         prev_feature = normalize(prev_feature.view(-1, prev_feature.shape[-1]), dim=-1)
                         cur_feature = normalize(context_feat.view(-1, prev_feature.shape[-1]), dim=-1)
                         loss_fd = criterion_fd(prev_feature, cur_feature, torch.ones(prev_feature.size(0)).to(device)) # TODO: Don't know whether the code is right
                     else:
                         loss_fd = 0
-                    if args.distill == "pd" or args.distill == "mul":
+
+                    if "pd" in args.distill or "mul" in args.distill:
                         T = args.temperature
                         if args.leave_zero:
                             prev_outputs[:, 0] = 0
                         prev_outputs = prev_outputs[:, prev_valid_mask_op].squeeze(-1)
                         cur_outputs = outputs[:, prev_valid_mask_op].squeeze(-1)
-                        # prev_outputs[i].masked_fill_(prev_invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
                         prev_p = torch.softmax(prev_outputs / T, dim= -1)
                         p = torch.log_softmax(cur_outputs / T, dim = -1)
                         loss_pd = -torch.mean(torch.sum(prev_p * p, dim = -1), dim = 0)
                     else:
                         loss_pd = 0
-                    # loss_pd = criterion_pd(torch.cat([item / T for item in outputs]), torch.cat([item / T for item in prev_outputs]))
-                    if args.dweight_loss and stage > 0:
-                        loss = loss * (1 - w) + (loss_fd + loss_pd) * w
+                        
+                    if "rd" in args.distill or "mul" in args.distill:
+                        loss_rd = criterion_fd(prev_logits_router, logits_router, torch.ones(prev_logits_router.size(0)).to(device))
                     else:
-                        loss = loss + args.alpha * loss_fd + args.beta * loss_pd
-                    # if args.replay and iter_cnt % args.period == 0:
-                    #     e_idx = (iter_cnt // args.period - 1) % len(e_loader) 
-                    #     ep_x, ep_y, ep_masks, ep_span = zip(*e_loader[e_idx])
-                    #     ep_span_len = [len(item) for item in ep_span]
-                    #     if np.count_nonzero(ep_span_len) == len(ep_span_len): 
-                    #         ep_x = torch.LongTensor(ep_x).to(device)
-                    #         ep_masks = torch.LongTensor(ep_masks).to(device)
-                    #         ep_y = [torch.LongTensor(item).to(device) for item in ep_y]
-                    #         ep_span = [torch.LongTensor(item).to(device) for item in ep_span]                
-                    #         padded_ep_span = pad_sequence(ep_span, batch_first=True, padding_value=-1).to(device) 
-                    #         e_outputs, e_features = model(ep_x, padded_ep_span, ep_masks, ep_span_len)
-                    #         # invalid_mask_op = torch.BoolTensor([item not in learned_types for item in range(args.class_num)]).to(device)
-                    #         # not from below's codes
-                    #         for i in range(len(ep_y)):
-                    #             invalid_mask_e = torch.BoolTensor([item not in learned_types for item in ep_y[i]]).to(device)
-                    #             ep_y[i].masked_fill_(invalid_mask_e, 0)
-                    #             # outputs[i].masked_fill_(invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
-                    #         prev_model.eval()
-                    #         with torch.no_grad():
-                    #             e_prev_outputs, e_prev_features = prev_model(ep_x, padded_ep_span, ep_masks, ep_span_len)
-                    #         e_outputs[:, 0] = 0
-                    #         e_c_outputs = e_outputs[:, learned_types].squeeze(-1)
-                    #         e_loss_ce = criterion_ce(e_c_outputs, torch.cat(ep_y))
-                    #         e_prev_features = normalize(e_prev_features, dim=-1)
-                    #         e_cur_features = normalize(e_features, dim=-1)
-                    #         e_loss_fd = criterion_fd(e_prev_features, e_cur_features, torch.ones(1).to(device)) 
-                    #         T = args.temperature
-                    #         e_prev_outputs[:, 0] = 0
-                    #         e_prev_outputs = e_prev_outputs[:, prev_valid_mask_op].squeeze(-1)
-                    #         e_cur_outputs = e_outputs[:, prev_valid_mask_op].squeeze(-1)
-                    #                 # prev_outputs[i].masked_fill_(prev_invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
-                    #         e_prev_p = torch.softmax(e_prev_outputs / T, dim= -1)
-                    #         e_p = torch.log_softmax(e_cur_outputs / T, dim = -1)
-                    #         e_loss_pd = -torch.mean(torch.sum(e_prev_p * e_p, dim = -1), dim = 0)
-                    #         if args.dweight_loss and stage > 0:
-                    #             e_loss = e_loss_ce * (1 - w) + (e_loss_fd + e_loss_pd) * w
-                    #         else:
-                    #             e_loss = e_loss_ce + args.alpha * e_loss_fd + args.beta * e_loss_pd
-                    #             loss = (len(learned_types) * loss + args.e_weight * e_loss) / (len(learned_types) + args.e_weight)
+                        loss_rd = 0
+
                     
+                    # if args.dweight_loss and stage > 0:
+                    #     loss = loss * (1 - w) + (loss_fd + loss_pd + loss_rd) * w
+                    # else:
+                    #     loss = loss + args.alpha * loss_fd + args.beta * loss_pd
 
-                # if args.amp:
-                #     with amp.scale_loss(loss, optimizer) as scaled_loss:
-                #         scaled_loss.backward()
-                # else:
-                
-                if args.use_mole and not model.uniform_expert:
-                    loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']
-
+                loss = loss_ce + loss_ucl * args.ratio_loss_ucl + \
+                        loss_tlcl * args.ratio_loss_tlcl + loss_des_cl * args.ratio_loss_des_cl + \
+                        loss_aug * args.ratio_loss_aug + lgacl_loss * args.ratio_loss_lgacl + \
+                        loss_fd * args.ratio_loss_fd + loss_pd * args.ratio_loss_pd + loss_rd * args.ratio_loss_rd
                 loss.backward()
                 total_norm = clip_grad_norm_(model.parameters(), max_norm=1.0)
                 
@@ -758,28 +637,15 @@ def train(local_rank, args, trial=None):
                 optimizer.step() 
                 model.tune_bias()
                 model.clear_num_choose()
-                stats = torch.cuda.memory_stats()
-                wandb.log({
-                            # f"loss_ce_task_{stage}": loss_ce,
-                            # f"loss_ucl_{stage}": loss_ucl,
-                            # f"loss_tlcl_{stage}": loss_tlcl,
-                            # f"loss_des_cl_{stage}": loss_des_cl,
-                            # f"loss_aug_{stage}": loss_aug,
-                            # f"loss_fd_{stage}": loss_fd,
-                            # f"loss_pd_{stage}": loss_pd,
-                            # f"loss_all_{stage}": loss,
-                            
-                            "loss_ce_task": loss_ce,
-                            # "entropy_loss": return_dict.get('entropy_loss', 0),
-                            # "load_balance_loss": return_dict.get('load_balance_loss', 0),
-                            "total_norm": total_norm,
-                            "memory/allocated_MB": stats["allocated_bytes.all.current"] / 1024**2,
-                            "memory/allocated_peak_MB": stats["allocated_bytes.all.peak"] / 1024**2,
-                            "memory/reserved_MB": stats["reserved_bytes.all.current"] / 1024**2,
-                            "memory/reserved_peak_MB": stats["reserved_bytes.all.peak"] / 1024**2,
-                            "memory/active_MB": stats["active_bytes.all.current"] / 1024**2,
-                            "memory/num_ooms": stats["num_ooms"],
-                            "memory/alloc_retries": stats["num_alloc_retries"],
+                # stats = torch.cuda.memory_stats()
+                wandb.log({      
+                            # "memory/allocated_MB": stats["allocated_bytes.all.current"] / 1024**2,
+                            # "memory/allocated_peak_MB": stats["allocated_bytes.all.peak"] / 1024**2,
+                            # "memory/reserved_MB": stats["reserved_bytes.all.current"] / 1024**2,
+                            # "memory/reserved_peak_MB": stats["reserved_bytes.all.peak"] / 1024**2,
+                            # "memory/active_MB": stats["active_bytes.all.current"] / 1024**2,
+                            # "memory/num_ooms": stats["num_ooms"],
+                            # "memory/alloc_retries": stats["num_alloc_retries"],
                             
                             # "loss_ucl": loss_ucl,
                             # "loss_tlcl": loss_tlcl,
@@ -788,14 +654,13 @@ def train(local_rank, args, trial=None):
                             # "loss_fd": loss_fd,
                             # "loss_pd": loss_pd,
                             "loss_all": loss,
+                            "loss_ce": loss_ce,
                             "learning_rate": optimizer.param_groups[0]['lr'],
+                            "total_norm": total_norm,
                         })
             
             scheduler.step()
             num_choose = model.get_num_choose()
-            # model.tune_bias()
-            # model.clear_num_choose()
-            # _print_num_choose(num_choose)
     
             if ((ep + 1) % max(int(args.eval_freq*ep_time), 1) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
@@ -837,17 +702,14 @@ def train(local_rank, args, trial=None):
                         f"recall": recall,
                         f"micro_F1": micro_F1,
                     })
-                    
+
                     
                     logger.info(f'marco F1 {micro_F1}')
-                    # dev_scores_ls.append(micro_F1)
-                    # logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
                     num_choose = model.get_num_choose()
                     model.clear_num_choose()
                     
                     # report to optuna
-                    
                     if args.early_stop:
                         if dev_score is None or dev_score < micro_F1:
                             no_better = 0
@@ -876,10 +738,10 @@ def train(local_rank, args, trial=None):
                             dev_scores_ls.append(micro_F1)
                             logger.info(f"Dev scores list: {dev_scores_ls}")
                     
-                    if trial is not None:
-                        trial.report(micro_F1, ep + 1 + args.epochs * stage)
-                        if trial.should_prune():
-                            raise optuna.TrialPruned()
+                    # if trial is not None:
+                    #     trial.report(micro_F1, ep + 1 + args.epochs * stage)
+                    #     if trial.should_prune():
+                    #         raise optuna.TrialPruned()
                         
                         
         for tp in streams_indexed[stage]:

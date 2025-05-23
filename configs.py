@@ -50,6 +50,18 @@ def parse_arguments():
     parser.add_argument("--project_name", type=str, default="HANet_mole", help="Project name for Weights & Biases")
     parser.add_argument("--gamma_router", type=float, default=1.01, help="Gamma for router")
     parser.add_argument("--balance_ratio", type=float, default=0.5, help="Balance ratio for router")
+    # loss = loss_ce + loss_ucl * args.ratio_loss_ucl + \
+    #                     loss_tlcl * args.ratio_loss_tlcl + loss_des_cl * args.ratio_loss_des_cl + \
+    #                     loss_aug * args.ratio_loss_aug + lgacl_loss * args.ratio_loss_lgacl + \
+    #                     loss_fd * args.ratio_loss_fd + loss_pd * args.ratio_loss_pd + loss_rd * args.ratio_loss_rd
+    parser.add_argument("--ratio_loss_ucl", type=float, default=1, help="Ratio for ucl loss")
+    parser.add_argument("--ratio_loss_tlcl", type=float, default=1, help="Ratio for tlcl loss")
+    parser.add_argument("--ratio_loss_aug", type=float, default=1, help="Ratio for augmentation loss")
+    parser.add_argument("--ratio_loss_fd", type=float, default=1, help="Ratio for fd loss")
+    parser.add_argument("--ratio_loss_pd", type=float, default=1, help="Ratio for pd loss")
+    parser.add_argument("--ratio_loss_rd", type=float, default=1, help="Ratio for rd loss")
+    parser.add_argument("--ratio_loss_lgacl", type=float, default=1, help="Ratio for lgacl loss")
+    parser.add_argument("--ratio_loss_des_cl", type=float, default=1, help="Ratio for des_cl loss")
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
@@ -96,7 +108,7 @@ def parse_arguments():
     parser.add_argument('--dweight_loss', action='store_true')
     parser.add_argument('--alpha', type=float, default=2.0)
     parser.add_argument('--beta', type=float, default=3.0)
-    parser.add_argument('--distill', default='mul', choices=["fd", "pd", "mul", "none"])
+    parser.add_argument('--distill', type=str, nargs='+', default=['mul'], choices=['mul', 'fd', 'pd', 'rd'])
     parser.add_argument('--rep_aug', default='mean', choices=["none", "mean", "relative"])
     parser.add_argument('--gamma', type=float, default=1)
     parser.add_argument('--theta',type=float, default=6)
@@ -128,7 +140,6 @@ def parse_arguments():
     parser.add_argument('--num_augmention', default=1, type=int)
     parser.add_argument('--gpt_augmention', action='store_true')
     parser.add_argument('--decrease_0_gpt_augmention', action='store_true')
-    parser.add_argument('--ratio_loss_lgacl', default=1, type=float)
     
     args, _ = parser.parse_known_args()
 

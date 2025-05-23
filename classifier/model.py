@@ -131,12 +131,6 @@ class LoraRouter(nn.Module):
 
         # TODO
         logits_router = self.router_network(hidden_state)
-        # top_logits, top_indices = logits_router.topk(min(self.select_experts_num + 1, self.experts_pool_num), dim=1)  # get top k logits and indices
-        # top_k_logits = top_logits[:, :self.select_experts_num]
-        # top_k_indices = top_indices[:, :self.select_experts_num]
-        
-        # top_k_logits, top_k_indices = logits_router.topk(min(self.select_experts_num, self.experts_pool_num), dim=1)  # get top k logits and indices
-        
         _, top_k_indices = torch.topk(logits_router + self.router_bias, min(self.select_experts_num, self.experts_pool_num), dim=1)  # get top k logits and indices
         top_k_logits = logits_router.gather(1, top_k_indices)  # gather top k logits
         
@@ -150,39 +144,6 @@ class LoraRouter(nn.Module):
         top_k_indices = top_k_indices.view(batch_size, seq_length, -1)
         top_k_scores = top_k_scores.view(batch_size, seq_length, -1)
 
-        # hidden_state = hidden_state.view(batch_size, seq_length, -1)
-        # hidden_state_mean = hidden_state.mean(dim=1)
-        # similarity = F.cosine_similarity(hidden_state_mean.unsqueeze(1), self.task_keys.unsqueeze(0), dim=-1)
-        # _, indices = torch.topk(similarity, 1, dim=-1)
-        # similarity = torch.gather(similarity, dim=-1, index=indices)
-
-        # k_values = torch.arange(1, self.task_experts_num + 1).to(device = indices.device)
-        # task_indices = self.experts_num - indices * self.task_experts_num - k_values  
-
-        # fixed_indices = torch.full((task_indices.shape), self.experts_pool_num).to(device = indices.device)
-        # fixed_indices = torch.cat([fixed_indices, task_indices],dim=1)
-
-        # similarity =  torch.clamp(similarity, min=0.75)
-        # first_col = 1 - similarity  
-        # rest_cols = (similarity / self.task_experts_num).repeat(1, self.task_experts_num).to(device = indices.device)
-        # fixed_score = torch.cat([first_col, rest_cols], dim=1)
-
-        # select_weight = self.select_experts_num/(self.select_experts_num+self.fixed_experts_num+self.task_experts_num)
-        # fixed_weight = 1-select_weight
-
-        
-        ## quangnm
-        btz, seq, _ = top_k_indices.shape
-        
-        # if self.fixed_experts_num != 0:
-        #     fixed_indices = torch.full((batch_size, seq_length), self.experts_pool_num).to(device=top_k_indices.device)
-        #     fixed_score = torch.full((batch_size, seq_length), 1).to(device=top_k_indices.device)
-        #     fixed_values = fixed_indices.unsqueeze(1).expand(btz, seq, -1)
-        #     top_k_indices = torch.cat([top_k_indices, fixed_values], dim=-1)
-        #     fixed_score = fixed_score.unsqueeze(1).expand(btz, seq, -1)
-        #     # top_k_scores = torch.cat([top_k_scores*select_weight, fixed_score*fixed_weight], dim=-1)
-        #     top_k_scores = torch.cat([top_k_scores, fixed_score*self.fixed_experts_weight], dim=-1)
-            
         # 1. Xử lý fixed experts nếu có
         if self.fixed_experts_num != 0:
             # a. Tạo các chỉ số fixed experts (giả sử liên tiếp từ experts_pool_num)
@@ -192,29 +153,26 @@ class LoraRouter(nn.Module):
                 device=top_k_indices.device,
             )  # shape: (fixed_experts_num,)
 
-            # b. Expand thành shape: (btz, seq_len, fixed_experts_num)
-            fixed_indices = fixed_indices.view(1, 1, -1).expand(btz, seq, -1)
+            # b. Expand thành shape: (batch_size, seq_length_len, fixed_experts_num)
+            fixed_indices = fixed_indices.view(1, 1, -1).expand(batch_size, seq_length, -1)
 
             # c. Fixed scores: cùng shape và giá trị
             fixed_scores = torch.full_like(fixed_indices, fill_value=self.fixed_experts_weight, dtype=top_k_scores.dtype)
 
             # d. Nối với top-k indices và scores
-            top_k_indices = torch.cat([top_k_indices, fixed_indices], dim=-1)     # (btz, seq_len, k + fixed_experts_num)
+            top_k_indices = torch.cat([top_k_indices, fixed_indices], dim=-1)     # (batch_size, seq_length, select_experts_num + fixed_experts_num)
             top_k_scores  = torch.cat([top_k_scores, fixed_scores], dim=-1)
             
         expert_mask = torch.nn.functional.one_hot(top_k_indices.view(batch_size*seq_length, -1), num_classes=self.experts_num).permute(2, 1, 0)
         top_k_scores = top_k_scores.view(batch_size*seq_length, -1)
 
-        return top_k_indices, top_k_scores, expert_mask
+        return top_k_indices, top_k_scores, expert_mask, logits_router
 
     def model_replay(self, inputs_embeds):
-        hidden_state_mean = inputs_embeds.mean(dim=1)
-        similarity = F.cosine_similarity(hidden_state_mean.unsqueeze(1), self.task_keys.unsqueeze(0), dim=-1)
-
         inputs_embeds = inputs_embeds.view(-1, self.hidden_size)
         logits_router = self.router_network(inputs_embeds)
         
-        return logits_router.to(torch.float32), similarity.to(torch.float32)
+        return logits_router.to(torch.float32)
 
 
 class BertSelfAttentionWrapper(nn.Module):
@@ -232,13 +190,7 @@ class BertSelfAttentionWrapper(nn.Module):
         self.is_decoder = old_attention_layer.is_decoder
         self.position_embedding_type = position_embedding_type if position_embedding_type is not None else config.position_embedding_type
         self.all_head_size = self.num_heads * self.head_dim
-        # self.experts_num = prompt_config['experts_num']
-        # self.experts_pool_num = prompt_config['experts_pool_num']
-        # self.task_experts_num = prompt_config['task_experts_num']
-        # self.fixed_experts_num = prompt_config['fixed_experts_num']
-        # self.select_experts_num = prompt_config['select_experts_num']
-        # self.task_num = prompt_config['task_num']
-        # self.task_id = prompt_config["task_id"]
+
         self.experts_pool_num = prompt_config.mole_num_experts
         self.fixed_experts_num = prompt_config.mole_num_general_expert
         self.fixed_experts_weight = prompt_config.general_expert_weight
@@ -250,6 +202,7 @@ class BertSelfAttentionWrapper(nn.Module):
         self.lora_alpha = prompt_config.lora_alpha
         self.lora_dropout = prompt_config.lora_dropout
         self.num_choose = torch.zeros(self.experts_num, device=prompt_config.device, dtype=torch.int64)
+        self.logits_router = None
         self.balance_ratio = prompt_config.balance_ratio
 
         if (self.head_dim * self.num_heads) != self.hidden_size:
@@ -355,7 +308,7 @@ class BertSelfAttentionWrapper(nn.Module):
                 final_hidden_states.index_add_(0, top_x, current_hidden_states.to(hidden_states.dtype))
             return final_hidden_states.view(batch_size, sequence_length, hidden_dim)
 
-        top_k_indices, top_k_scores, expert_mask = self.lora_router(hidden_states)
+        top_k_indices, top_k_scores, expert_mask, self.logits_router = self.lora_router(hidden_states)
         
         self.num_choose += expert_mask.sum(dim=(1, 2)).to(self.num_choose.dtype)
             
@@ -539,13 +492,25 @@ class BertED(nn.Module):
                 layer.attention.self.tune_bias()
         else:
             pass
+        
+    def get_logits_router(self):
+        if self.use_mole:
+            logits_router = []
+            for layer in self.backbone.encoder.layer:
+                logits_router.append(layer.attention.self.logits_router)
+                
+            logits_router = torch.stack(logits_router, dim=0)
+            return logits_router
+        else:
+            return None
 
     def forward(self, x, masks, span=None, aug=None, train=True):
         out = self.backbone(x, attention_mask=masks)
         hidden = out.last_hidden_state
         return_dict = {
             'reps': hidden[:, 0, :].clone(),
-            'context_feat': hidden.view(-1, hidden.shape[-1])
+            'context_feat': hidden.view(-1, hidden.shape[-1]),
+            'logits_router': self.get_logits_router(),
         }
         
         if self.use_mole:
