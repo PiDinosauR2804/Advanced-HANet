@@ -124,7 +124,7 @@ def train(local_rank, args, trial=None):
             if stage_ep < args.warmup_ep:
                 return stage_ep / args.warmup_ep
             else:
-                return 1.0 - ((stage_ep - args.warmup_ep) / (stage_total_ep - args.warmup_ep))
+                return max(1.0 - ((stage_ep - args.warmup_ep) / (stage_total_ep - args.warmup_ep)), args.min_lambda_ratio)
 
         return _lr_lambda(stage_ep, stage_total_ep)
     
