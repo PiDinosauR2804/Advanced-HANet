@@ -19,14 +19,14 @@ def CrossEntropyLossWithWeight(ce_outputs, ce_y, alpha = 0.3):
 
     # 3) Tính mean loss từng nhóm (nếu không có sample thì về 0)
     if mask0.any():
-        loss_group0 = per_sample_loss[mask0].mean()
+        loss_group0 = per_sample_loss[mask0]
     else:
         loss_group0 = torch.tensor(0., device=ce_outputs.device)
 
     if mask_other.any():
-        loss_group_other = per_sample_loss[mask_other].mean()
+        loss_group_other = per_sample_loss[mask_other]
     else:
         loss_group_other = torch.tensor(0., device=ce_outputs.device)
-
-    loss_ce = alpha * loss_group0 + (1.0 - alpha) * loss_group_other
+    
+    loss_ce = (alpha * loss_group0.sum() + loss_group_other.sum()) / (alpha * mask0.sum() + mask_other.sum())
     return loss_ce
