@@ -27,7 +27,7 @@ from torch.nn.utils import clip_grad_norm_
 from torch.optim import AdamW
 from copy import deepcopy
 import torch.distributed as dist
-from torch.optim.lr_scheduler import StepLR
+from torch.optim.lr_scheduler import StepLR, LambdaLR
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
@@ -110,7 +110,28 @@ def train(local_rank, args, trial=None):
     model.to(device)
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.decay, eps=args.adamw_eps, betas=(0.9, 0.999)) #TODO: Hyper parameters
     
-    scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr) # TODO: Hyper parameters
+    def _lr_lambda_wapper(epoch):
+        if epoch < args.epochs:
+            stage = 0
+            stage_ep = epoch
+            stage_total_ep = args.epochs
+        else:
+            stage = (epoch - args.epochs) // int(args.epochs * args.task_ep_time) + 1
+            stage_ep = epoch - args.epochs - (stage - 1) * int(args.epochs * args.task_ep_time)
+            stage_total_ep = int(args.epochs * args.task_ep_time)
+            
+        def _lr_lambda(stage_ep, stage_total_ep):
+            if stage_ep < args.warmup_ep:
+                return stage_ep / args.warmup_ep
+            else:
+                return 1.0 - ((stage_ep - args.warmup_ep) / (stage_total_ep - args.warmup_ep))
+
+        return _lr_lambda(stage_ep, stage_total_ep)
+    
+    if args.lambda_lr:
+        scheduler = LambdaLR(optimizer, lr_lambda=_lr_lambda_wapper)
+    else:
+        scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr) # TODO: Hyper parameters
                   
                 
     if args.parallel == 'DDP':

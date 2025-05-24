@@ -50,18 +50,20 @@ def parse_arguments():
     parser.add_argument("--project_name", type=str, default="HANet_mole", help="Project name for Weights & Biases")
     parser.add_argument("--gamma_router", type=float, default=1.01, help="Gamma for router")
     parser.add_argument("--balance_ratio", type=float, default=0.5, help="Balance ratio for router")
+    parser.add_argument("--warmup_ep", type=int, default=0, help="Warmup steps for learning rate")
+    parser.add_argument("--lambdalr", action="store_true", help="Enable lambda learning rate")
     # loss = loss_ce + loss_ucl * args.ratio_loss_ucl + \
     #                     loss_tlcl * args.ratio_loss_tlcl + loss_des_cl * args.ratio_loss_des_cl + \
     #                     loss_aug * args.ratio_loss_aug + lgacl_loss * args.ratio_loss_lgacl + \
     #                     loss_fd * args.ratio_loss_fd + loss_pd * args.ratio_loss_pd + loss_rd * args.ratio_loss_rd
-    parser.add_argument("--ratio_loss_ucl", type=float, default=1, help="Ratio for ucl loss")
-    parser.add_argument("--ratio_loss_tlcl", type=float, default=1, help="Ratio for tlcl loss")
-    parser.add_argument("--ratio_loss_aug", type=float, default=1, help="Ratio for augmentation loss")
-    parser.add_argument("--ratio_loss_fd", type=float, default=1, help="Ratio for fd loss")
-    parser.add_argument("--ratio_loss_pd", type=float, default=1, help="Ratio for pd loss")
-    parser.add_argument("--ratio_loss_rd", type=float, default=1, help="Ratio for rd loss")
-    parser.add_argument("--ratio_loss_lgacl", type=float, default=1, help="Ratio for lgacl loss")
-    parser.add_argument("--ratio_loss_des_cl", type=float, default=1, help="Ratio for des_cl loss")
+    parser.add_argument("--ratio_loss_ucl", type=float, default=0, help="Ratio for ucl loss")
+    parser.add_argument("--ratio_loss_tlcl", type=float, default=0, help="Ratio for tlcl loss")
+    parser.add_argument("--ratio_loss_aug", type=float, default=0, help="Ratio for augmentation loss")
+    parser.add_argument("--ratio_loss_fd", type=float, default=0, help="Ratio for fd loss")
+    parser.add_argument("--ratio_loss_pd", type=float, default=0, help="Ratio for pd loss")
+    parser.add_argument("--ratio_loss_rd", type=float, default=0, help="Ratio for rd loss")
+    parser.add_argument("--ratio_loss_lgacl", type=float, default=0, help="Ratio for lgacl loss")
+    parser.add_argument("--ratio_loss_des_cl", type=float, default=0, help="Ratio for des_cl loss")
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
