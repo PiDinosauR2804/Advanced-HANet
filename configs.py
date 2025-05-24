@@ -108,7 +108,7 @@ def parse_arguments():
     parser.add_argument('--dweight_loss', action='store_true')
     parser.add_argument('--alpha', type=float, default=2.0)
     parser.add_argument('--beta', type=float, default=3.0)
-    parser.add_argument('--distill', type=str, nargs='+', default=['mul'], choices=['mul', 'fd', 'pd', 'rd'])
+    parser.add_argument('--distill', type=str, nargs='+', choices=['mul', 'fd', 'pd', 'rd'], default=[])
     parser.add_argument('--rep_aug', default='mean', choices=["none", "mean", "relative"])
     parser.add_argument('--gamma', type=float, default=1)
     parser.add_argument('--theta',type=float, default=6)
