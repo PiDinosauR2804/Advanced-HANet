@@ -523,6 +523,8 @@ def train(local_rank, args, trial=None):
                     Adj_mask_lgacl = torch.matmul(lgacl_lbs_oh, lgacl_lbs_oh.T)
                     Adj_mask_lgacl = Adj_mask_lgacl * (torch.ones(mat_size) - torch.eye(mat_size)).to(device)
                     lgacl_loss = compute_CLLoss(Adj_mask_lgacl, lgacl_feature, mat_size, args, device)
+                else:
+                    lgacl_loss = torch.tensor(0.0, device=device)
                 
                 # loss = loss + lgacl_loss * args.ratio_loss_lgacl
                 
