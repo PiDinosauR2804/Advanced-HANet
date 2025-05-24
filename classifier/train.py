@@ -130,8 +130,10 @@ def train(local_rank, args, trial=None):
     
     if args.use_lambdalr:
         scheduler = LambdaLR(optimizer, lr_lambda=_lr_lambda_wapper)
+        logger.info(f"Using LambdaLR with warmup epochs: {args.warmup_ep}")
     else:
         scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr) # TODO: Hyper parameters
+        logger.info(f"Using StepLR with step size: {args.step_size} and gamma: {args.gammalr}")
                   
                 
     if args.parallel == 'DDP':
