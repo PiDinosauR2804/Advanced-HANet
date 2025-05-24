@@ -618,6 +618,11 @@ def train(local_rank, args, trial=None):
                         loss_rd = criterion_fd(prev_logits_router, logits_router, torch.ones(prev_logits_router.size(0)).to(device))
                     else:
                         loss_rd = 0
+                
+                else:
+                    loss_fd = 0
+                    loss_pd = 0
+                    loss_rd = 0
 
                     
                     # if args.dweight_loss and stage > 0:
