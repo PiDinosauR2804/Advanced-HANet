@@ -615,7 +615,15 @@ def train(local_rank, args, trial=None):
                         loss_pd = 0
                         
                     if "rd" in args.distill or "mul" in args.distill:
-                        loss_rd = criterion_fd(prev_logits_router, logits_router, torch.ones(prev_logits_router.size(0)).to(device))
+                        # Flatten từ [num_layer, num_token, num_experts] => [num_layer * num_token, num_experts]
+                        prev_flat = prev_logits_router.view(-1, prev_logits_router.shape[-1])
+                        cur_flat  = logits_router.view(-1, logits_router.shape[-1])
+
+                        # Tạo target cho cosine embedding loss (1 nghĩa là muốn chúng giống nhau)
+                        target = torch.ones(prev_flat.size(0)).to(device)
+
+                        # Tính loss distill cho logits_router
+                        loss_rd = criterion_fd(prev_flat, cur_flat, target).to(device)
                     else:
                         loss_rd = 0
                 
