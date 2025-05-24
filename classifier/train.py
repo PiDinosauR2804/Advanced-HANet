@@ -128,7 +128,7 @@ def train(local_rank, args, trial=None):
 
         return _lr_lambda(stage_ep, stage_total_ep)
     
-    if args.lambda_lr:
+    if args.use_lambdalr:
         scheduler = LambdaLR(optimizer, lr_lambda=_lr_lambda_wapper)
     else:
         scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr) # TODO: Hyper parameters
