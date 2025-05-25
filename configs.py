@@ -51,8 +51,10 @@ def parse_arguments():
     parser.add_argument("--gamma_router", type=float, default=1.01, help="Gamma for router")
     parser.add_argument("--balance_ratio", type=float, default=0.5, help="Balance ratio for router")
     parser.add_argument("--warmup_ep", type=int, default=0, help="Warmup steps for learning rate")
-    parser.add_argument("--use_lambdalr", action="store_true", help="Enable lambda learning rate")
-    parser.add_argument("--min_lambda_ratio", type=float, default=0.1, help="Minimum lambda ratio")
+    parser.add_argument("--warmup_ratio", type=float, default=0.1, help="Warmup ratio for learning rate")
+    parser.add_argument("--min_lr_ratio", type=float, default=0.1, help="Minimum lr ratio")
+    parser.add_argument("--scheduler", type=str, default="lambda", choices=["lambda", "cyclic", "step"], help="Scheduler type for learning rate")
+    parser.add_argument("--lambda_type", type=str, default="batch", choices=["epoch", "batch"], help="Type of lambda scheduler")
     # loss = loss_ce + loss_ucl * args.ratio_loss_ucl + \
     #                     loss_tlcl * args.ratio_loss_tlcl + loss_des_cl * args.ratio_loss_des_cl + \
     #                     loss_aug * args.ratio_loss_aug + lgacl_loss * args.ratio_loss_lgacl + \

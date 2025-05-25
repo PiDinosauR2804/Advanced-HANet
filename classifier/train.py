@@ -27,7 +27,7 @@ from torch.nn.utils import clip_grad_norm_
 from torch.optim import AdamW
 from copy import deepcopy
 import torch.distributed as dist
-from torch.optim.lr_scheduler import StepLR, LambdaLR
+from torch.optim.lr_scheduler import StepLR, LambdaLR, CyclicLR
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
 from transformers import BertTokenizerFast
@@ -122,18 +122,55 @@ def train(local_rank, args, trial=None):
             
         def _lr_lambda(stage_ep, stage_total_ep):
             if stage_ep < args.warmup_ep:
-                return max(stage_ep / args.warmup_ep, args.min_lambda_ratio)
+                return max(stage_ep / args.warmup_ep, args.min_lr_ratio)
             else:
-                return max(1.0 - ((stage_ep - args.warmup_ep) / (stage_total_ep - args.warmup_ep)), args.min_lambda_ratio)
+                return max(1.0 - ((stage_ep - args.warmup_ep) / (stage_total_ep - args.warmup_ep)), args.min_lr_ratio)
 
         return _lr_lambda(stage_ep, stage_total_ep)
     
-    if args.use_lambdalr:
-        scheduler = LambdaLR(optimizer, lr_lambda=_lr_lambda_wapper)
-        logger.info(f"Using LambdaLR with warmup epochs: {args.warmup_ep}")
-    else:
+    class LambdaLRFunc:
+        def __init__(self, min_lr_ratio=0.1, warmup_ratio=0.1):
+            self.prev_num_steps = 0
+            self.num_steps = 0
+            self.min_lr_ratio = min_lr_ratio
+            self.warmup_ratio = warmup_ratio
+            
+        def set_num_steps(self, num_steps):
+            self.prev_num_steps = self.num_steps
+            self.num_steps = num_steps
+                
+        def get_lr(self, batch):
+            batch -= self.prev_num_steps
+            warmup_steps = int(self.num_steps * self.warmup_ratio)
+            if batch < warmup_steps:
+                return batch / warmup_steps * (1.0 - self.min_lr_ratio) + self.min_lr_ratio
+            else:
+                return (1.0 - (batch - warmup_steps) / (self.num_steps - warmup_steps)) * (1.0 - self.min_lr_ratio) + self.min_lr_ratio
+                
+    lambda_lr_func = LambdaLRFunc(args.min_lr_ratio, args.warmup_ratio)
+    
+    if args.scheduler == 'lambda':
+        if args.lambda_type == 'epoch':
+            scheduler = LambdaLR(optimizer, lr_lambda=_lr_lambda_wapper)
+            logger.info(f"Using LambdaLR with epoch-based warmup, warmup epochs: {args.warmup_ep}, min lr ratio: {args.min_lr_ratio}")
+        elif args.lambda_type == 'batch':
+            scheduler = LambdaLR(optimizer, lr_lambda=lambda_lr_func.get_lr)
+            logger.info(f"Using LambdaLR with batch-based warmup, warmup ratio: {args.warmup_ratio}, min lr ratio: {args.min_lr_ratio}")
+        else:
+            logger.error(f"Unknown lambda type: {args.lambda_type}, using default epoch-based warmup")
+            scheduler = LambdaLR(optimizer, lr_lambda=_lr_lambda_wapper)
+            
+    elif args.scheduler == 'cyclic':
+        scheduler = CyclicLR(optimizer, base_lr=args.lr*args.min_lr_ration, max_lr=args.lr, mode='triangular2')
+        logger.info(f"Using CyclicLR with base lr: {args.lr*args.min_lr_ration} and max lr: {args.lr}")
+        
+    elif args.scheduler == 'step':
         scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr) # TODO: Hyper parameters
         logger.info(f"Using StepLR with step size: {args.step_size} and gamma: {args.gammalr}")
+        
+    else:
+        logger.error(f"Unknown scheduler: {args.scheduler}, using default StepLR")
+        scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr)
                   
                 
     if args.parallel == 'DDP':
@@ -310,6 +347,7 @@ def train(local_rank, args, trial=None):
             wandb.log({"epoch": ep + 1 + args.epochs * stage, "stage": stage})
             
             iter_cnt = 0
+            lambda_lr_func.set_num_steps(len(stage_loader))
             for batch in stage_loader:
                 iter_cnt += 1
                 optimizer.zero_grad()
@@ -675,6 +713,8 @@ def train(local_rank, args, trial=None):
                 optimizer.step() 
                 model.tune_bias()
                 model.clear_num_choose()
+                if args.scheduler == 'lambda' and args.lambda_type == 'batch':
+                    scheduler.step()
                 # stats = torch.cuda.memory_stats()
                 wandb.log({      
                             # "memory/allocated_MB": stats["allocated_bytes.all.current"] / 1024**2,
@@ -698,9 +738,10 @@ def train(local_rank, args, trial=None):
                             "learning_rate": optimizer.param_groups[0]['lr'],
                             "total_norm": total_norm,
                         })
+                
             
-            scheduler.step()
-            num_choose = model.get_num_choose()
+            if not (args.scheduler == 'lambda' and args.lambda_type == 'batch'):
+                scheduler.step()
     
             if ((ep + 1) % max(int(args.eval_freq*ep_time), 1) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) or (ep + 1) == num_epochs: # TODO TODO
                 # Evaluation process
