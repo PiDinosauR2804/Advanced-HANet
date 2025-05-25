@@ -138,14 +138,19 @@ def train(local_rank, args, trial=None):
         def set_num_steps(self, num_steps):
             self.prev_num_steps = self.num_steps
             self.num_steps = num_steps
+            logger.info(f"Setting num steps: {self.num_steps}, prev num steps: {self.prev_num_steps}, warmup ratio: {self.warmup_ratio}, min lr ratio: {self.min_lr_ratio}")
                 
         def get_lr(self, batch):
             batch -= self.prev_num_steps
             warmup_steps = int(self.num_steps * self.warmup_ratio)
-            if batch < warmup_steps:
-                return batch / warmup_steps * (1.0 - self.min_lr_ratio) + self.min_lr_ratio
-            else:
-                return (1.0 - (batch - warmup_steps) / (self.num_steps - warmup_steps)) * (1.0 - self.min_lr_ratio) + self.min_lr_ratio
+            try:
+                if batch < warmup_steps:
+                    return batch / warmup_steps * (1.0 - self.min_lr_ratio) + self.min_lr_ratio
+                else:
+                    return (1.0 - (batch - warmup_steps) / (self.num_steps - warmup_steps)) * (1.0 - self.min_lr_ratio) + self.min_lr_ratio
+            except ZeroDivisionError as e:
+                logger.error(f"ZeroDivisionError in LambdaLRFunc.get_lr, num_steps: {self.num_steps}, warmup_ratio: {self.warmup_ratio}, min_lr_ratio: {self.min_lr_ratio}")
+                raise e
                 
     lambda_lr_func = LambdaLRFunc(args.min_lr_ratio, args.warmup_ratio)
     
