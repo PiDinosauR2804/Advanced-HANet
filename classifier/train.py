@@ -129,15 +129,18 @@ def train(local_rank, args, trial=None):
         return _lr_lambda(stage_ep, stage_total_ep)
     
     class LambdaLRFunc:
-        def __init__(self, min_lr_ratio=0.1, warmup_ratio=0.1):
+        def __init__(self, min_lr_ratio=0.1, warmup_ratio=0.1, stage_lr_ratio=1.0):
             self.prev_num_steps = 0
             self.num_steps = 0
             self.min_lr_ratio = min_lr_ratio
+            self.max_lr_ratio = 1.0
             self.warmup_ratio = warmup_ratio
+            self.stage_lr_ratio = stage_lr_ratio
             
         def set_num_steps(self, num_steps):
             self.prev_num_steps = self.num_steps
             self.num_steps = num_steps
+            self.max_lr_ratio *= self.stage_lr_ratio
             logger.info(f"Setting num steps: {self.num_steps}, prev num steps: {self.prev_num_steps}, warmup ratio: {self.warmup_ratio}, min lr ratio: {self.min_lr_ratio}")
                 
         def get_lr(self, batch):
@@ -145,9 +148,10 @@ def train(local_rank, args, trial=None):
             warmup_steps = int(self.num_steps * self.warmup_ratio)
             try:
                 if batch < warmup_steps:
-                    return batch / warmup_steps * (1.0 - self.min_lr_ratio) + self.min_lr_ratio
+                    return (batch / warmup_steps * (1.0 - self.min_lr_ratio) + self.min_lr_ratio) * self.max_lr_ratio
                 else:
-                    return (1.0 - (batch - warmup_steps) / (self.num_steps - warmup_steps)) * (1.0 - self.min_lr_ratio) + self.min_lr_ratio
+                    return ((1.0 - (batch - warmup_steps) / (self.num_steps - warmup_steps)) \
+                            * (1.0 - self.min_lr_ratio) + self.min_lr_ratio) * self.max_lr_ratio
             except ZeroDivisionError as e:
                 logger.error(f"ZeroDivisionError in LambdaLRFunc with num_steps: {self.num_steps}, warmup_ratio: {self.warmup_ratio}")
                 return self.min_lr_ratio  # Trả về min_lr_ratio nếu num_steps là 0 hoặc warmup_ratio là 0
