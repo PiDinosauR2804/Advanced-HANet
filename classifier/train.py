@@ -333,6 +333,7 @@ def train(local_rank, args, trial=None):
             
         num_epochs = int(args.epochs * ep_time)
         
+        lambda_lr_func.set_num_steps(len(stage_loader) * num_epochs)
         logger.info("Start training ...")
         for ep in tqdm(range(num_epochs), desc="Epoch"):
             if stage == 0 and args.skip_first:
@@ -352,7 +353,6 @@ def train(local_rank, args, trial=None):
             wandb.log({"epoch": ep + 1 + args.epochs * stage, "stage": stage})
             
             iter_cnt = 0
-            lambda_lr_func.set_num_steps(len(stage_loader))
             for batch in stage_loader:
                 iter_cnt += 1
                 optimizer.zero_grad()
