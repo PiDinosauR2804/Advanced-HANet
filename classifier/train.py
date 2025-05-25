@@ -138,7 +138,7 @@ def train(local_rank, args, trial=None):
             self.stage_lr_ratio = stage_lr_ratio
             
         def set_num_steps(self, num_steps):
-            self.prev_num_steps = self.num_steps
+            self.prev_num_steps += self.num_steps
             self.num_steps = num_steps
             self.max_lr_ratio *= self.stage_lr_ratio
             logger.info(f"Setting num steps: {self.num_steps}, prev num steps: {self.prev_num_steps}, warmup ratio: {self.warmup_ratio}, min lr ratio: {self.min_lr_ratio}")
@@ -355,7 +355,7 @@ def train(local_rank, args, trial=None):
                 # model.gradient_checkpointing_enable()
                 pass
             
-            wandb.log({"epoch": ep + 1 + args.epochs * stage, "stage": stage})
+            wandb.log({"epoch": ep + 1 + (num_epochs * (stage - 1) + args.epochs if stage > 0 else 0), "stage": stage})
             
             iter_cnt = 0
             for batch in stage_loader:
