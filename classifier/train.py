@@ -149,8 +149,8 @@ def train(local_rank, args, trial=None):
                 else:
                     return (1.0 - (batch - warmup_steps) / (self.num_steps - warmup_steps)) * (1.0 - self.min_lr_ratio) + self.min_lr_ratio
             except ZeroDivisionError as e:
-                logger.error(f"ZeroDivisionError in LambdaLRFunc.get_lr, num_steps: {self.num_steps}, warmup_ratio: {self.warmup_ratio}, min_lr_ratio: {self.min_lr_ratio}")
-                raise e
+                logger.error(f"ZeroDivisionError in LambdaLRFunc with num_steps: {self.num_steps}, warmup_ratio: {self.warmup_ratio}")
+                return self.min_lr_ratio  # Trả về min_lr_ratio nếu num_steps là 0 hoặc warmup_ratio là 0
                 
     lambda_lr_func = LambdaLRFunc(args.min_lr_ratio, args.warmup_ratio)
     
