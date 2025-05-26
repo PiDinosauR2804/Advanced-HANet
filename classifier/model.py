@@ -90,6 +90,7 @@ class LoraRouter(nn.Module):
         self.fixed_experts_weight = prompt_config.general_expert_weight
         self.hidden_size = hidden_size
         self.gate = prompt_config.gate
+        self.level = prompt_config.mole_level
 
         if self.gate == "tanh":
             self.router_network = torch.nn.Sequential(
@@ -127,7 +128,12 @@ class LoraRouter(nn.Module):
         
     def forward(self, hidden_state):
         batch_size, seq_length, hz = hidden_state.shape
-        hidden_state = hidden_state.view(-1, hz)
+        if self.level == "token":
+            hidden_state = hidden_state.view(-1, hz)
+        elif self.level == "sequence":
+            cls_token = hidden_state[:, 0, :]  # shape: [batch_size, hz]
+            hidden_state = cls_token.unsqueeze(1).expand(-1, seq_length, -1)  # shape: [batch_size, seq_length, hz]
+            hidden_state = hidden_state.contiguous().view(-1, hz)  # flatten
 
         # TODO
         logits_router = self.router_network(hidden_state)
