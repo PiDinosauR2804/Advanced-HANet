@@ -171,7 +171,7 @@ def train(local_rank, args, trial=None):
             
     elif args.scheduler == 'cyclic':
         scheduler = CyclicLR(optimizer, base_lr=args.lr*args.min_lr_ratio, max_lr=args.lr, mode='triangular2')
-        logger.info(f"Using CyclicLR with base lr: {args.lr*args.min_lr_ration} and max lr: {args.lr}")
+        logger.info(f"Using CyclicLR with base lr: {args.lr*args.min_lr_ratio} and max lr: {args.lr}")
         
     elif args.scheduler == 'step':
         scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr) # TODO: Hyper parameters
