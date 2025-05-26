@@ -449,7 +449,9 @@ class BertED(nn.Module):
 
         elif self.use_mole:
             bert_config = self.backbone.config
-            for layer in self.backbone.encoder.layer:
+            for i, layer in enumerate(self.backbone.encoder.layer):
+                if i < self.args.reeze_encoder_layers:
+                    continue
                 layer.attention.self = BertSelfAttentionWrapper(layer.attention.self, bert_config, self.args)
                 
             logger.info(f"Use MoLE with {self.num_experts} experts, top-k {args.mole_top_k}, route level {args.mole_level}, "
@@ -481,7 +483,9 @@ class BertED(nn.Module):
     
     def clear_num_choose(self):
         if self.use_mole:
-            for layer in self.backbone.encoder.layer:
+            for i, layer in enumerate(self.backbone.encoder.layer):
+                if i < self.args.reeze_encoder_layers:
+                    continue
                 layer.attention.self.clear_num_choose()
         else:
             pass
@@ -489,7 +493,9 @@ class BertED(nn.Module):
     def get_num_choose(self):
         if self.use_mole:
             num_choose = []
-            for layer in self.backbone.encoder.layer:
+            for i, layer in enumerate(self.backbone.encoder.layer):
+                if i < self.args.reeze_encoder_layers:
+                    continue
                 num_choose.append(layer.attention.self.get_num_choose())
                 
             num_choose = torch.stack(num_choose, dim=0)
@@ -499,7 +505,9 @@ class BertED(nn.Module):
         
     def tune_bias(self):
         if self.use_mole:
-            for layer in self.backbone.encoder.layer:
+            for i, layer in enumerate(self.backbone.encoder.layer):
+                if i < self.args.reeze_encoder_layers:
+                    continue
                 layer.attention.self.tune_bias()
         else:
             pass
@@ -507,7 +515,9 @@ class BertED(nn.Module):
     def get_logits_router(self):
         if self.use_mole:
             logits_router = []
-            for layer in self.backbone.encoder.layer:
+            for i, layer in enumerate(self.backbone.encoder.layer):
+                if i < self.args.reeze_encoder_layers:
+                    continue
                 logits_router.append(layer.attention.self.logits_router)
                 
             logits_router = torch.stack(logits_router, dim=0)
