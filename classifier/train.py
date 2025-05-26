@@ -170,7 +170,7 @@ def train(local_rank, args, trial=None):
             scheduler = LambdaLR(optimizer, lr_lambda=_lr_lambda_wapper)
             
     elif args.scheduler == 'cyclic':
-        scheduler = CyclicLR(optimizer, base_lr=args.lr*args.min_lr_ratio, max_lr=args.lr, mode='triangular2', step_size_up=args.step_size)
+        scheduler = CyclicLR(optimizer, base_lr=args.lr*args.min_lr_ratio, max_lr=args.lr, mode='exp_range', step_size_up=args.step_size, gamma = args.gammalr) # TODO: Hyper parameters
         logger.info(f"Using CyclicLR with base lr: {args.lr*args.min_lr_ratio} and max lr: {args.lr}")
         
     elif args.scheduler == 'step':
