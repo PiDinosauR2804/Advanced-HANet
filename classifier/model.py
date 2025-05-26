@@ -134,6 +134,8 @@ class LoraRouter(nn.Module):
             cls_token = hidden_state[:, 0, :]  # shape: [batch_size, hz]
             hidden_state = cls_token.unsqueeze(1).expand(-1, seq_length, -1)  # shape: [batch_size, seq_length, hz]
             hidden_state = hidden_state.contiguous().view(-1, hz)  # flatten
+        else:
+            raise ValueError(f"Unsupported level: {self.level}. Supported levels are 'token' and 'sequence'.")
 
         # TODO
         logits_router = self.router_network(hidden_state)
@@ -449,6 +451,9 @@ class BertED(nn.Module):
             bert_config = self.backbone.config
             for layer in self.backbone.encoder.layer:
                 layer.attention.self = BertSelfAttentionWrapper(layer.attention.self, bert_config, self.args)
+                
+            logger.info(f"Use MoLE with {self.num_experts} experts, top-k {args.mole_top_k}, route level {args.mole_level}, "
+                        f"general expert weight {args.general_expert_weight}, balance ratio {args.balance_ratio}, ")
 
         if not args.no_freeze_bert:
             self.freeze_backbone()
