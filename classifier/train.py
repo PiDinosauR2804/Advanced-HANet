@@ -159,18 +159,18 @@ def train(local_rank, args, trial=None):
     lambda_lr_func = LambdaLRFunc(args.min_lr_ratio, args.warmup_ratio, args.stage_lr_ratio)
     
     if args.scheduler == 'lambda':
-        if args.lambda_type == 'epoch':
+        if args.sheduler_type == 'epoch':
             scheduler = LambdaLR(optimizer, lr_lambda=_lr_lambda_wapper)
             logger.info(f"Using LambdaLR with epoch-based warmup, warmup epochs: {args.warmup_ep}, min lr ratio: {args.min_lr_ratio}")
-        elif args.lambda_type == 'batch':
+        elif args.sheduler_type == 'batch':
             scheduler = LambdaLR(optimizer, lr_lambda=lambda_lr_func.get_lr)
             logger.info(f"Using LambdaLR with batch-based warmup, warmup ratio: {args.warmup_ratio}, min lr ratio: {args.min_lr_ratio}")
         else:
-            logger.error(f"Unknown lambda type: {args.lambda_type}, using default epoch-based warmup")
+            logger.error(f"Unknown lambda type: {args.sheduler_type}, using default epoch-based warmup")
             scheduler = LambdaLR(optimizer, lr_lambda=_lr_lambda_wapper)
             
     elif args.scheduler == 'cyclic':
-        scheduler = CyclicLR(optimizer, base_lr=args.lr*args.min_lr_ratio, max_lr=args.lr, mode='triangular2')
+        scheduler = CyclicLR(optimizer, base_lr=args.lr*args.min_lr_ratio, max_lr=args.lr, mode='triangular2', step_size_up=args.step_size)
         logger.info(f"Using CyclicLR with base lr: {args.lr*args.min_lr_ratio} and max lr: {args.lr}")
         
     elif args.scheduler == 'step':
@@ -723,7 +723,7 @@ def train(local_rank, args, trial=None):
                 optimizer.step() 
                 model.tune_bias()
                 model.clear_num_choose()
-                if args.scheduler == 'lambda' and args.lambda_type == 'batch':
+                if args.sheduler_type == 'batch':
                     scheduler.step()
                 # stats = torch.cuda.memory_stats()
                 wandb.log({      
@@ -750,7 +750,7 @@ def train(local_rank, args, trial=None):
                         })
                 
             
-            if not (args.scheduler == 'lambda' and args.lambda_type == 'batch'):
+            if args.sheduler_type == 'epoch':
                 scheduler.step()
     
             if ((ep + 1) % max(int(args.eval_freq*ep_time), 1) == 0 and args.early_stop and ((ep + 1) >= args.skip_eval_ep*ep_time or stage > 0)) or (ep + 1) == num_epochs: # TODO TODO

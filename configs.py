@@ -55,7 +55,7 @@ def parse_arguments():
     parser.add_argument("--min_lr_ratio", type=float, default=0.1, help="Minimum lr ratio")
     parser.add_argument("--stage_lr_ratio", type=float, default=1.0, help="Stage learning rate ratio")
     parser.add_argument("--scheduler", type=str, default="lambda", choices=["lambda", "cyclic", "step"], help="Scheduler type for learning rate")
-    parser.add_argument("--lambda_type", type=str, default="batch", choices=["epoch", "batch"], help="Type of lambda scheduler")
+    parser.add_argument("--sheduler_type", type=str, default="batch", choices=["epoch", "batch"], help="Type of lambda scheduler")
     parser.add_argument("--mole_level", type=str, default="token", choices=["token", "sequence"], help="Mode for MoLE")
     # loss = loss_ce + loss_ucl * args.ratio_loss_ucl + \
     #                     loss_tlcl * args.ratio_loss_tlcl + loss_des_cl * args.ratio_loss_des_cl + \
