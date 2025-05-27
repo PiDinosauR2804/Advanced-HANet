@@ -795,7 +795,7 @@ def train(local_rank, args, trial=None):
                                     distinct_labels = torch.unique(labels).tolist()
                                     for label in distinct_labels:
                                         for idx in topk.tolist():
-                                                class_expert[label2idx[label]][idx] += 1
+                                                class_expert[label][idx] += 1
                             except Exception as e:
                                 print(f"Label: {label}, {type(label)}. Topk: {topk}, {type(topk)}")
                                 raise e
