@@ -561,13 +561,23 @@ class BertED(nn.Module):
             if i < self.args.freeze_encoder_layers:
                 continue
             layer.attention.self.set_middle_hidden_states(hidden_states)
+            
+    def set_mole(self, enable=True):
+        """
+        Enable or disable MoLE routing.
+        This can be used to switch between MoLE and standard attention.
+        """
+        for i, layer in enumerate(self.backbone.encoder.layer):
+            if i < self.args.freeze_encoder_layers:
+                continue
+            layer.attention.self.set_mole(enable)
 
     def forward(self, x, masks, span=None, aug=None, train=True):
         if self.args.mole_middle and self.use_mole:
-            self.backbone.set_mole(False)
+            self.set_mole(False)
             no_mole_hidden_states = self.backbone(x, attention_mask=masks).last_hidden_state
             self.set_mole_middle(no_mole_hidden_states)
-            self.backbone.set_mole(True)
+            self.set_mole(True)
             
         out = self.backbone(x, attention_mask=masks)
         hidden = out.last_hidden_state
