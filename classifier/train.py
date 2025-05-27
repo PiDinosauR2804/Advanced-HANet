@@ -213,8 +213,8 @@ def train(local_rank, args, trial=None):
 
         # Chuẩn bị từng dòng dữ liệu đã căn đều, 2 chữ số thập phân
         rows_str = "\n".join(
-            "       " + "".join(f"{x:>{col_width}.2f}" for x in row) + f"{sup:>{col_width}}"
-            for row, sup in zip(percent_np, support_np)
+            f"Cls {i:>{col_width - 4}}" + "".join(f"{x:>{col_width}.2f}" for x in row) + f"{sup:>{col_width}}"
+            for i, row, sup in enumerate(zip(percent_np, support_np))
         )
 
         # In ra
@@ -850,6 +850,8 @@ def train(local_rank, args, trial=None):
                                 for la, tk in zip(eval_y, eval_return_dict['topk_indices']):
                                     distinct_labels = torch.unique(la).tolist()
                                     for l in distinct_labels:
+                                        if l not in learned_types:
+                                            continue
                                         for idx in tk.tolist():
                                                 class_expert[l][idx] += 1
                             except Exception as e:
