@@ -214,7 +214,7 @@ def train(local_rank, args, trial=None):
         # Chuẩn bị từng dòng dữ liệu đã căn đều, 2 chữ số thập phân
         rows_str = "\n".join(
             f"Cls {i:>{col_width - 4}}" + "".join(f"{x:>{col_width}.2f}" for x in row) + f"{sup:>{col_width}}"
-            for i, row, sup in enumerate(zip(percent_np, support_np))
+            for i, (row, sup) in enumerate(zip(percent_np, support_np))
         )
         
         last_row = "Total  " + "".join(f"{x:>{col_width}.2f}" for x in percent_np.sum(0)) + f"{support_np.sum():>{col_width}}"
@@ -940,4 +940,4 @@ def train(local_rank, args, trial=None):
     
     wandb.finish()
     
-    return np.mean(dev_scores_ls) 
+    return np.mean(dev_scores_ls)
