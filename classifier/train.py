@@ -792,7 +792,7 @@ def train(local_rank, args, trial=None):
                                 num_choose[i] += num
                             try:
                                 for labels, topk in zip(eval_y, eval_return_dict['topk_indices']):
-                                    distinct_labels = torch.unique(labels)
+                                    distinct_labels = torch.unique(labels).items()
                                     for label in distinct_labels:
                                         for idx in topk:
                                                 class_expert[label2idx[label]][idx] += 1
