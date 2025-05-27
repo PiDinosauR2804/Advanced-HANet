@@ -790,11 +790,12 @@ def train(local_rank, args, trial=None):
                         if args.use_mole:
                             for i, num in enumerate(eval_return_dict['num_choose']):
                                 num_choose[i] += num
-                            for label, topk in zip(eval_y, eval_return_dict['topk_indices']):
+                            for labels, topk in zip(eval_y, eval_return_dict['topk_indices']):
                                 print(f"Label: {label}, {type(label)}. Topk: {topk[0]}, {type(topk[0])}")
-                                
-                                for idx in topk:
-                                        class_expert[label][idx] += 1
+                                distinct_labels = torch.unique(labels)
+                                for label in distinct_labels:
+                                    for idx in topk:
+                                            class_expert[label][idx] += 1
                                 
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
