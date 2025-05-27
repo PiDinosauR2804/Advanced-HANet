@@ -791,6 +791,8 @@ def train(local_rank, args, trial=None):
                             for i, num in enumerate(eval_return_dict['num_choose']):
                                 num_choose[i] += num
                             for label, topk in zip(eval_y, eval_return_dict['topk_indices']):
+                                print(f"Label: {label}, {type(label)}. Topk: {topk[0]}, {type(topk[0])}")
+                                
                                 for idx in topk:
                                         class_expert[label][idx] += 1
                                 
