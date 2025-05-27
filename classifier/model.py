@@ -227,6 +227,7 @@ class BertED(nn.Module):
         return_dict['reps'] = x_out[:, 0, :].clone()
         return_dict['context_feat'] = x_out.view(-1, x_out.shape[-1])
         return_dict['num_choose'] = num_choose
+        return_dict['topk_indices'] = topk_indices
 
         if span is not None:
             trig_feature = self._extract_trigger(x_out, span)
