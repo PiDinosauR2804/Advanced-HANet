@@ -201,6 +201,8 @@ def train(local_rank, args, trial=None):
         # Làm tròn đến 2 chữ số thập phân
         percent = torch.round(percent * 100) / 100
         percent_np = percent.cpu().numpy()
+        # fill nan with 0
+        percent_np = np.nan_to_num(percent_np, nan=0.0)
 
         # Tạo header cột: Expert 1, Expert 2, ...
         headers = [f"Exp {i+1}" for i in range(model.num_experts)]
