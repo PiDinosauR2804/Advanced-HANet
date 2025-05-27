@@ -791,13 +791,13 @@ def train(local_rank, args, trial=None):
                             for i, num in enumerate(eval_return_dict['num_choose']):
                                 num_choose[i] += num
                             try:
-                                for labels, topk in zip(eval_y, eval_return_dict['topk_indices']):
-                                    distinct_labels = torch.unique(labels).tolist()
-                                    for label in distinct_labels:
-                                        for idx in topk.tolist():
-                                                class_expert[label][idx] += 1
+                                for la, tk in zip(eval_y, eval_return_dict['topk_indices']):
+                                    distinct_labels = torch.unique(la).tolist()
+                                    for l in distinct_labels:
+                                        for idx in tk.tolist():
+                                                class_expert[l][idx] += 1
                             except Exception as e:
-                                print(f"Label: {label}, {type(label)}. Topk: {topk}, {type(topk)}")
+                                print(f"Label: {l}, {type(l)}. Topk: {tk}, {type(tk)}")
                                 raise e
                                 
                         eval_outputs = eval_return_dict['outputs']
