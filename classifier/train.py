@@ -194,9 +194,9 @@ def train(local_rank, args, trial=None):
         logger.info(f"Num choose (percent):\n{header_str}\n{rows_str}")
         
     def _print_class_choose(num_choose):
-        support = num_choose.sum(1, keepdim=True) // args.mole_top_k
+        support = num_choose.sum(1) // args.mole_top_k
         support_np = support.cpu().numpy()
-        percent = num_choose / support * 100
+        percent = num_choose / support.unsqueeze(1) * 100
 
         # Làm tròn đến 2 chữ số thập phân
         percent = torch.round(percent * 100) / 100
@@ -940,4 +940,4 @@ def train(local_rank, args, trial=None):
     
     wandb.finish()
     
-    return np.mean(dev_scores_ls)
+    return np.mean(dev_scores_ls) 
