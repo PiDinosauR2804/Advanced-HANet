@@ -194,7 +194,9 @@ def train(local_rank, args, trial=None):
         logger.info(f"Num choose (percent):\n{header_str}\n{rows_str}")
         
     def _print_class_choose(num_choose):
-        percent = num_choose / num_choose.sum(1, keepdim=True) * 100
+        support = num_choose.sum(1, keepdim=True) // args.mole_top_k
+        support_np = support.cpu().numpy()
+        percent = num_choose / support * 100
 
         # Làm tròn đến 2 chữ số thập phân
         percent = torch.round(percent * 100) / 100
@@ -207,12 +209,12 @@ def train(local_rank, args, trial=None):
         col_width = 7
 
         # Chuẩn bị header string
-        header_str = "".join(f"{h:>{col_width}}" for h in headers)
+        header_str = "       " + "".join(f"{h:>{col_width}}" for h in headers) + "Support"
 
         # Chuẩn bị từng dòng dữ liệu đã căn đều, 2 chữ số thập phân
         rows_str = "\n".join(
-            "".join(f"{x:>{col_width}.2f}" for x in row)
-            for row in percent_np
+            "       " + "".join(f"{x:>{col_width}.2f}" for x in row) + f"{sup:>{col_width}}"
+            for row, sup in zip(percent_np, support_np)
         )
 
         # In ra
@@ -934,4 +936,4 @@ def train(local_rank, args, trial=None):
     
     wandb.finish()
     
-    return np.mean(dev_scores_ls)
+    return np.mean(dev_scores_ls) 
