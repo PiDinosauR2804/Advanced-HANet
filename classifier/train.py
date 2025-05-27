@@ -165,6 +165,59 @@ def train(local_rank, args, trial=None):
     e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
     os.makedirs(os.path.dirname(e_pth), exist_ok=True)
     
+    def _print_num_choose(num_choose):
+        if args.mole_num_general_expert == 0:
+            percent = num_choose / num_choose.sum(1, keepdim=True) * 100
+        else:
+            percent = num_choose / num_choose[:, -1].unsqueeze(1) * 100
+
+        # Làm tròn đến 2 chữ số thập phân
+        percent = torch.round(percent * 100) / 100
+        percent_np = percent.cpu().numpy()
+
+        # Tạo header cột: Expert 1, Expert 2, ...
+        headers = [f"Exp {i+1}" for i in range(model.num_experts)]
+
+        # Độ rộng cột cố định để căn đều
+        col_width = 7
+
+        # Chuẩn bị header string
+        header_str = "".join(f"{h:>{col_width}}" for h in headers)
+
+        # Chuẩn bị từng dòng dữ liệu đã căn đều, 2 chữ số thập phân
+        rows_str = "\n".join(
+            "".join(f"{x:>{col_width}.2f}" for x in row)
+            for row in percent_np
+        )
+
+        # In ra
+        logger.info(f"Num choose (percent):\n{header_str}\n{rows_str}")
+        
+    def _print_class_choose(num_choose):
+        percent = num_choose / num_choose.sum(1, keepdim=True) * 100
+
+        # Làm tròn đến 2 chữ số thập phân
+        percent = torch.round(percent * 100) / 100
+        percent_np = percent.cpu().numpy()
+
+        # Tạo header cột: Expert 1, Expert 2, ...
+        headers = [f"Exp {i+1}" for i in range(model.num_experts)]
+
+        # Độ rộng cột cố định để căn đều
+        col_width = 7
+
+        # Chuẩn bị header string
+        header_str = "".join(f"{h:>{col_width}}" for h in headers)
+
+        # Chuẩn bị từng dòng dữ liệu đã căn đều, 2 chữ số thập phân
+        rows_str = "\n".join(
+            "".join(f"{x:>{col_width}.2f}" for x in row)
+            for row in percent_np
+        )
+
+        # In ra
+        logger.info(f"Class choose (percent):\n{header_str}\n{rows_str}")
+    
     # Xét từng task 
     for stage in task_idx:
         # if stage > 0:
@@ -823,7 +876,7 @@ def train(local_rank, args, trial=None):
                     # logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
                     logger.info(f"Num choose: {num_choose}")
-                    logger.info(f"Class expert:\n{class_expert}")
+                    _print_class_choose(class_expert)
                     
                     # report to optuna
                     
