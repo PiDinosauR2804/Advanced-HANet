@@ -791,7 +791,7 @@ def train(local_rank, args, trial=None):
                             for i, num in enumerate(eval_return_dict['num_choose']):
                                 num_choose[i] += num
                             try:
-                                for labels, topk in zip(eval_y.to(dtype=torch.int), eval_return_dict['topk_indices'].to(dtype=torch.int)):
+                                for labels, topk in zip(eval_y, eval_return_dict['topk_indices']):
                                     distinct_labels = torch.unique(labels).tolist()
                                     for label in distinct_labels:
                                         for idx in topk.tolist():
