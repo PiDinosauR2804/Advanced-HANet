@@ -216,9 +216,11 @@ def train(local_rank, args, trial=None):
             f"Cls {i:>{col_width - 4}}" + "".join(f"{x:>{col_width}.2f}" for x in row) + f"{sup:>{col_width}}"
             for i, row, sup in enumerate(zip(percent_np, support_np))
         )
+        
+        last_row = "Total  " + "".join(f"{x:>{col_width}.2f}" for x in percent_np.sum(0)) + f"{support_np.sum():>{col_width}}"
 
         # In ra
-        logger.info(f"Class choose (percent):\n{header_str}\n{rows_str}")
+        logger.info(f"Class choose (percent):\n{header_str}\n{rows_str}\n{last_row}")
     
     # Xét từng task 
     for stage in task_idx:
