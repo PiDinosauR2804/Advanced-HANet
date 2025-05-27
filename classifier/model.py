@@ -212,6 +212,8 @@ class BertSelfAttentionWrapper(nn.Module):
         self.num_choose = torch.zeros(self.experts_num, device=prompt_config.device, dtype=torch.int64)
         self.logits_router = None
         self.balance_ratio = prompt_config.balance_ratio
+        self.middle_hidden_states = None
+        self.enable_mole = True
 
         if (self.head_dim * self.num_heads) != self.hidden_size:
             raise ValueError(
@@ -245,6 +247,20 @@ class BertSelfAttentionWrapper(nn.Module):
 
     def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
         return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
+    
+    def set_middle_hidden_states(self, hidden_states):
+        """
+        Set the middle hidden states for debugging or analysis.
+        This is useful to inspect the intermediate representations of the model.
+        """
+        self.middle_hidden_states = hidden_states
+        
+    def set_mole(self, enable=True):
+        """
+        Enable or disable MoLE routing.
+        This can be used to switch between MoLE and standard attention.
+        """
+        self.enable_mole = enable
     
     def clear_num_choose(self):
         self.num_choose = torch.zeros(self.experts_num, device=self.num_choose.device, dtype=self.num_choose.dtype)
@@ -315,18 +331,25 @@ class BertSelfAttentionWrapper(nn.Module):
                 current_hidden_states = expert_layer(current_state).squeeze() * top_k_scores[top_x_list, idx_list, None]
                 final_hidden_states.index_add_(0, top_x, current_hidden_states.to(hidden_states.dtype))
             return final_hidden_states.view(batch_size, sequence_length, hidden_dim)
-
-        top_k_indices, top_k_scores, expert_mask, self.logits_router = self.lora_router(hidden_states)
         
-        self.num_choose += expert_mask.sum(dim=(1, 2)).to(self.num_choose.dtype)
+        if self.enable_mole:
+            if self.prompt_config.mole_middle:
+                top_k_indices, top_k_scores, expert_mask, self.logits_router = self.lora_router(self.middle_hidden_states)
+            else:
+                top_k_indices, top_k_scores, expert_mask, self.logits_router = self.lora_router(hidden_states)
             
-        lora_experts_q = self.lora_experts_q
-        lora_experts_v = self.lora_experts_v
+            
+            self.num_choose += expert_mask.sum(dim=(1, 2)).to(self.num_choose.dtype)
+                
+            lora_experts_q = self.lora_experts_q
+            lora_experts_v = self.lora_experts_v
         
-        ## quangnm
-        query_layer = (self.q_proj(hidden_states) + 
-                       agg_lora_states(hidden_states, lora_experts_q, top_k_indices, 
-                                       top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
+            ## quangnm
+            query_layer = (self.q_proj(hidden_states) + 
+                            agg_lora_states(hidden_states, lora_experts_q, top_k_indices, 
+                                        top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
+        else:
+            query_layer = self.q_proj(hidden_states).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
 
         # If this is instantiated as a cross-attention module, the keys and values come from an encoder; the attention
         # mask needs to be such that the encoder's padding tokens are not attended to.
@@ -339,9 +362,13 @@ class BertSelfAttentionWrapper(nn.Module):
         if is_cross_attention and past_key_value and past_key_value[0].shape[2] == current_states.shape[1]:
             key_layer, value_layer = past_key_value
         else:
-            value_layer = (self.v_proj(current_states) + 
-                           agg_lora_states(current_states, lora_experts_v, top_k_indices, 
-                                           top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
+            if self.enable_mole:
+                value_layer = (self.v_proj(current_states) + 
+                            agg_lora_states(current_states, lora_experts_v, top_k_indices, 
+                                            top_k_scores, expert_mask)).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
+            else:
+                value_layer = self.v_proj(current_states).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
+            
             key_layer = self.k_proj(current_states).view(bsz, tgt_len, self.num_heads, self.head_dim).transpose(1, 2)
 
             if past_key_value is not None and not is_cross_attention:
@@ -524,8 +551,24 @@ class BertED(nn.Module):
             return logits_router
         else:
             return None
+        
+    def set_mole_middle(self, hidden_states):
+        """
+        Set the middle hidden states for MoLE routing.
+        This is useful to inspect the intermediate representations of the model.
+        """
+        for i, layer in enumerate(self.backbone.encoder.layer):
+            if i < self.args.freeze_encoder_layers:
+                continue
+            layer.attention.self.set_middle_hidden_states(hidden_states)
 
     def forward(self, x, masks, span=None, aug=None, train=True):
+        if self.args.mole_middle and self.use_mole:
+            self.backbone.set_mole(False)
+            no_mole_hidden_states = self.backbone(x, attention_mask=masks).last_hidden_state
+            self.set_mole_middle(no_mole_hidden_states)
+            self.backbone.set_mole(True)
+            
         out = self.backbone(x, attention_mask=masks)
         hidden = out.last_hidden_state
         return_dict = {
