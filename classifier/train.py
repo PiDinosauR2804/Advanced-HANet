@@ -832,7 +832,8 @@ def train(local_rank, args, trial=None):
                         collate_fn=lambda x:x)
                     calcs = Calculator()
                     num_choose = [0] * model.num_experts
-                    class_expert = [[0] * model.num_experts] * (args.class_num + 1)
+                    # class_expert = [[0] * model.num_experts] * (args.class_num + 1)
+                    class_expert = torch.zeros((args.class_num + 1, model.num_experts), dtype=torch.int64)
                     for batch in tqdm(eval_loader, desc="Eval"):
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
