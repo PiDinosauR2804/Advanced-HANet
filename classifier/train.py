@@ -211,11 +211,11 @@ def train(local_rank, args, trial=None):
         col_width = 7
 
         # Chuẩn bị header string
-        header_str = "       " + "".join(f"{h:>{col_width}}" for h in headers) + "Support"
+        header_str = "       " + "".join(f"{h:>{col_width}}" for h in headers) + "    Sup"
 
         # Chuẩn bị từng dòng dữ liệu đã căn đều, 2 chữ số thập phân
         rows_str = "\n".join(
-            f"Cls {i:>{col_width - 4}}" + "".join(f"{x:>{col_width}.2f}" for x in row) + f"{sup:>{col_width}}"
+            f"Cls {i:<{col_width - 4}}" + "".join(f"{x:>{col_width}.2f}" for x in row) + f"{sup:>{col_width}}"
             for i, (row, sup) in enumerate(zip(percent_np, support_np))
         )
         
