@@ -792,6 +792,7 @@ def train(local_rank, args, trial=None):
                         
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                         logger.debug(f"Eval: {eval_outputs.argmax(-1)}")
+                        logger.debug(f"Eval y: {torch.cat(eval_y)}")
                         calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
