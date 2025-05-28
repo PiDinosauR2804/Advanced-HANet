@@ -579,11 +579,17 @@ class BertED(nn.Module):
         if self.args.mole_middle and self.use_mole:
             self.set_mole(False)
             no_mole_hidden_states = self.backbone(x, attention_mask=masks).last_hidden_state
+            if no_mole_hidden_states.shape != x.shape:
+                logger.warning(f"Hidden states shape {no_mole_hidden_states.shape} does not match input shape {x.shape}.")
+            
             self.set_mole_middle(no_mole_hidden_states)
             self.set_mole(True)
             
         out = self.backbone(x, attention_mask=masks)
         hidden = out.last_hidden_state
+        if hidden.shape != (x.shape[0], self.seqlen, self.input_dim):
+            logger.warning(f"Hidden states shape {hidden.shape} does not match input shape {x.shape}.")
+            
         return_dict = {
             'reps': hidden[:, 0, :].clone(),
             'context_feat': hidden.view(-1, hidden.shape[-1]),
