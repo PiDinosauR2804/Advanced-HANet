@@ -578,18 +578,23 @@ class BertED(nn.Module):
     def forward(self, x, masks, span=None, aug=None, train=True):
         if x.shape[0] != self.args.batch_size and x.shape[0] != self.args.eval_batch_size:
             logger.warning(f"Input shape {x.shape} does not match expected batch size {self.args.batch_size} or {self.args.eval_batch_size}.")
-            
+        logger.debug(f"Input shape: {x.shape}, masks shape: {masks.shape}")
         if self.args.mole_middle and self.use_mole:
             self.set_mole(False)
             no_mole_hidden_states = self.backbone(x, attention_mask=masks).last_hidden_state
             if no_mole_hidden_states.shape[0:2] != x.shape:
                 logger.warning(f"Hidden states shape {no_mole_hidden_states.shape} does not match input shape {x.shape}.")
-            
+            logger.debug(f"Set middle hidden states for MoLE: {no_mole_hidden_states.shape}")
             self.set_mole_middle(no_mole_hidden_states)
+            for i, layer in enumerate(self.backbone.encoder.layer):
+                # if i < self.args.freeze_encoder_layers:
+                #     continue
+                logger.debug(f"Layer {i} MoLE middle hidden states set with shape {layer.attention.self.middle_hidden_states.shape}")
             self.set_mole(True)
             
         out = self.backbone(x, attention_mask=masks)
         hidden = out.last_hidden_state
+        logger.debug(f"Backbone output shape: {hidden.shape}")
         if hidden.shape != (x.shape[0], self.seqlen, self.input_dim):
             logger.warning(f"Hidden states shape {hidden.shape} does not match input shape {x.shape}.")
             
