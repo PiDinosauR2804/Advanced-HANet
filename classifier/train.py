@@ -787,6 +787,8 @@ def train(local_rank, args, trial=None):
                             eval_outputs[:, 0] = 0
                         if args.zero_prediction:
                             eval_outputs[:, 0] = 1
+                            # fill other with 0
+                            eval_outputs[:, 1:] = 0
                             
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                         calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
