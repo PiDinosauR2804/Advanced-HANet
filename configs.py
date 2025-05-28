@@ -6,7 +6,7 @@ def parse_arguments():
     parser.add_argument('--input_root', default='./data/data_text', type=str)
     parser.add_argument('--output_root', default='./output', type=str)
     parser.add_argument('--datasets', default=['MAVEN'], type=str, nargs='+')
-    parser.add_argument('--perms', type=int, nargs='+', default=[0, 1, 2, 3, 4])
+    parser.add_argument('--perms', type=int, nargs='+', default=[])
     parser.add_argument('--model', default='gemini_2.0_flash', type=str)
     parser.add_argument('--candidate', default=1, type=int)
     parser.add_argument('--num_try', default=3, type=int)
@@ -59,6 +59,7 @@ def parse_arguments():
     parser.add_argument("--mole_level", type=str, default="token", choices=["token", "sequence"], help="Mode for MoLE")
     parser.add_argument("--mole_middle", action="store_true", help="Enable MoLE middle")
     parser.add_argument("--log_level", type=str, default="info", choices=["debug", "info", "warning", "error", "critical"], help="Logging level")
+    parser.add_argument("--zero_prediction", action="store_true", help="Enable zero prediction")
     # loss = loss_ce + loss_ucl * args.ratio_loss_ucl + \
     #                     loss_tlcl * args.ratio_loss_tlcl + loss_des_cl * args.ratio_loss_des_cl + \
     #                     loss_aug * args.ratio_loss_aug + lgacl_loss * args.ratio_loss_lgacl + \

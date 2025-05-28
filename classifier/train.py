@@ -770,13 +770,14 @@ def train(local_rank, args, trial=None):
                     calcs = Calculator()
 
                     for batch in tqdm(eval_loader, desc="Eval"):
+                            
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
-                        eval_return_dict = model(eval_x, eval_masks, eval_span, train=False)
 
+                        eval_return_dict = model(eval_x, eval_masks, eval_span, train=False)
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
                         for i in range(len(eval_y)):
@@ -785,7 +786,12 @@ def train(local_rank, args, trial=None):
                         if args.leave_zero:
                             eval_outputs[:, 0] = 0
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
-                        calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
+                        
+                        if args.zero_prediction:
+                            zero_prediction = torch.zeros(eval_outputs.shape[0], eval_outputs.shape[1]).to(device)
+                            calcs.extend(zero_prediction, torch.cat(eval_y))
+                        else:
+                            calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
                     wandb.log({
