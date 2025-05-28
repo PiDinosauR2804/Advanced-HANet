@@ -579,7 +579,7 @@ class BertED(nn.Module):
         if self.args.mole_middle and self.use_mole:
             self.set_mole(False)
             no_mole_hidden_states = self.backbone(x, attention_mask=masks).last_hidden_state
-            if no_mole_hidden_states.shape != x.shape:
+            if no_mole_hidden_states.shape[0:2] != x.shape:
                 logger.warning(f"Hidden states shape {no_mole_hidden_states.shape} does not match input shape {x.shape}.")
             
             self.set_mole_middle(no_mole_hidden_states)
