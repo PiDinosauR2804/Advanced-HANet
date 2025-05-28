@@ -334,6 +334,9 @@ class BertSelfAttentionWrapper(nn.Module):
         
         if self.enable_mole:
             if self.prompt_config.mole_middle:
+                if self.middle_hidden_states.shape != hidden_states.shape:
+                    logger.warning(f"Middle hidden states shape {self.middle_hidden_states.shape} does not match hidden states shape {hidden_states.shape}.")
+                    
                 top_k_indices, top_k_scores, expert_mask, self.logits_router = self.lora_router(self.middle_hidden_states)
             else:
                 top_k_indices, top_k_scores, expert_mask, self.logits_router = self.lora_router(hidden_states)

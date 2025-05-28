@@ -3,6 +3,9 @@ from configs import parse_arguments
 import wandb
 import os
 import torch.multiprocessing as mp
+import os
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+
 
 if __name__ == "__main__":
     args = parse_arguments()
