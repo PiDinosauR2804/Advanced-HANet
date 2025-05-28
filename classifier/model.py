@@ -576,7 +576,7 @@ class BertED(nn.Module):
             layer.attention.self.set_mole(enable)
 
     def forward(self, x, masks, span=None, aug=None, train=True):
-        if x.shape[0] != self.args.batch_size or x.shape[0] != self.args.eval_batch_size:
+        if x.shape[0].item() != self.args.batch_size or x.shape[0].item() != self.args.eval_batch_size:
             logger.warning(f"Input shape {x.shape} does not match expected batch size {self.args.batch_size} or {self.args.eval_batch_size}.")
             
         if self.args.mole_middle and self.use_mole:
