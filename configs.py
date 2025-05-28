@@ -58,6 +58,7 @@ def parse_arguments():
     parser.add_argument("--sheduler_type", type=str, default="batch", choices=["epoch", "batch"], help="Type of lambda scheduler")
     parser.add_argument("--mole_level", type=str, default="token", choices=["token", "sequence"], help="Mode for MoLE")
     parser.add_argument("--mole_middle", action="store_true", help="Enable MoLE middle")
+    parser.add_argument("--log_level", type=str, default="info", choices=["debug", "info", "warning", "error", "critical"], help="Logging level")
     # loss = loss_ce + loss_ucl * args.ratio_loss_ucl + \
     #                     loss_tlcl * args.ratio_loss_tlcl + loss_des_cl * args.ratio_loss_des_cl + \
     #                     loss_aug * args.ratio_loss_aug + lgacl_loss * args.ratio_loss_lgacl + \
