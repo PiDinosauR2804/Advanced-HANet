@@ -785,13 +785,11 @@ def train(local_rank, args, trial=None):
                             eval_y[i].masked_fill_(invalid_mask_eval_label, 0)
                         if args.leave_zero:
                             eval_outputs[:, 0] = 0
-                        eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
-                        
                         if args.zero_prediction:
-                            zero_prediction = torch.zeros(eval_outputs.shape[0], eval_outputs.shape[1]).to(device)
-                            calcs.extend(zero_prediction, torch.cat(eval_y))
-                        else:
-                            calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
+                            eval_outputs[:, 0] = 1
+                            
+                        eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
+                        calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
                     wandb.log({
