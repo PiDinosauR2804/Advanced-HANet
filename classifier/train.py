@@ -36,6 +36,9 @@ from loguru import logger
 from tqdm.auto import tqdm
 import optuna
 
+wandb_api_key = "0806b2d5c00870a95f366d95c825d7680649abb7"
+os.environ['WANDB_API_KEY'] = wandb_api_key
+wandb.login()
 
 def train(local_rank, args, trial=None):    
     tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
@@ -45,8 +48,22 @@ def train(local_rank, args, trial=None):
     # --- Xoá handler mặc định ---
     logger.remove()
     # --- Thêm handler ghi log ra file ---
+    # --- Thêm handler ghi log ra file ---
     date_str = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
-    logger.add(os.path.join(args.logs_dir, f"{date_str}.log"), rotation="1 MB", retention="10 days", enqueue=True, level="INFO")
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
+    args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.epochs}_{args.task_ep_time}_{args.seed}_{args.alpha_ce}_{timestamp}"
+
+    
+    save_path = os.path.join(args.save_output, args.dataset, str(args.shot_num))
+    if os.path.exists(save_path) and os.path.isdir(save_path):
+        print(f"✅ Thư mục '{save_path}' tồn tại.")
+    else:
+        print(f"❌ Thư mục '{save_path}' không tồn tại. Đang tạo mới...")
+        os.makedirs(save_path, exist_ok=True)
+        print(f"✅ Đã tạo thư mục '{save_path}'.")
+    log_file_path = os.path.join(save_path, f"{args.run_name}.txt")
+    
     # --- Thêm handler ghi log qua tqdm.write ---
     # Ghi log ra console qua tqdm.write + có màu
     logger.level("CRITICAL", color="<bg red><white>")
