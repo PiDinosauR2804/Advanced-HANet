@@ -487,7 +487,7 @@ def train(local_rank, args, trial=None):
                     # outputs[i].masked_fill_(invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
                 # if args.dataset == "ACE":
                 loss_des_cl = torch.tensor(0.0, device=device)
-                if args.use_description:
+                if args.use_description and (stage > 0 or ((not args.skip_des) and stage == 0)): 
                     
                     reps = trig_feat
                     descriptions_representations = {}
@@ -547,7 +547,7 @@ def train(local_rank, args, trial=None):
                     loss = loss + loss_des_cl * args.ratio_loss_des_cl      
                     
                 lgacl_loss = torch.tensor(0.0, device=device)
-                if args.gpt_augmention:
+                if args.gpt_augmention and (stage > 0 or ((not args.skip_aug) and stage == 0)):
                     augment_return_dict = model(augment_x_total, augment_masks_total, augment_span_total)
                     augment_trig_feat = augment_return_dict['trig_feat']
                     

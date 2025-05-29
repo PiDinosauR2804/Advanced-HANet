@@ -2,16 +2,14 @@ source activate zhangchenlong
 
 for i in ACE MAVEN
 do
-    for j in 1 2 3 4 42
+    for j in 42
     do
         for k in 5 10
         do
             if [ "$i" = "ACE" ]; then
                 t=10
-                tt=0.3
             else
                 t=20
-                tt=0.3
             fi
 
             python main.py \
@@ -31,7 +29,7 @@ do
                 --log_dir ./outputs/log_incremental/temp7_submax/first_wo_UCL+TCL/ \
                 --log_name ashuffle_lnone_r1 \
                 --wandb \
-                --project_name ACE_5_shot_17_5_mul \
+                --project_name ACE_test_skip \
                 --save_output output_logg \
                 --dweight_loss \
                 --rep_aug mean \
@@ -47,8 +45,8 @@ do
                 --use_description \
                 --num_description 3 \
                 --ratio_loss_des_cl 0.1 \
-                --epochs $i \
-                --task_ep_time $j \
+                --epochs 3 \
+                --task_ep_time 6 \
                 --uniform_ep 1 \
                 --eval_freq 2 \
                 --skip_eval_ep 0 \
@@ -72,7 +70,9 @@ do
                 --decrease_0_gpt_augmention \
                 --ratio_loss_gpt 0.1 \
                 --use_weight_ce \
-                --alpha_ce $tt
+                --alpha_ce 0.3 \
+                --skip_aug \
+                --skip_des
         done
     done
 done
