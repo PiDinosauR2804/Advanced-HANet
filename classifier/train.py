@@ -884,7 +884,7 @@ def train(local_rank, args, trial=None):
                     })
                     
                     
-                    logger.info(f'marco F1 {micro_F1}')
+                    logger.info(f'marco F1 {micro_F1} | precision {precision} | recall {recall}')
                     # dev_scores_ls.append(micro_F1)
                     # logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
