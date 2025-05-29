@@ -876,6 +876,9 @@ def train(local_rank, args, trial=None):
                         candidate_TP += (eval_y[eval_label_mask] != 0).sum().item()
                         candidate_T += (eval_y != 0).sum().item()
                         candidate_P += eval_label_mask.sum().item()
+                        logger.debug(f"Eval label mask: {eval_label_mask}")
+                        logger.debug(f"candidate_TP: {candidate_TP} | candidate_T: {candidate_T} | candidate_P: {candidate_P}")
+                        
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
                     wandb.log({
