@@ -784,7 +784,8 @@ def train(local_rank, args, trial=None):
                             invalid_mask_eval_label = torch.BoolTensor([item not in learned_types for item in eval_y[i]]).to(device)
                             eval_y[i].masked_fill_(invalid_mask_eval_label, 0)
                         if args.leave_zero:
-                            eval_outputs[:, 0] = 0
+                            # assign -inf to zero class
+                            eval_outputs[:, 0] = float("-inf")
                         if args.zero_prediction:
                             eval_outputs[:, 0] = 1
                             # fill other with 0
