@@ -64,6 +64,14 @@ def train(local_rank, args, trial=None):
         print(f"✅ Đã tạo thư mục '{save_path}'.")
     log_file_path = os.path.join(save_path, f"{args.run_name}.txt")
     
+    logger.add(
+        log_file_path,
+        rotation="1 MB",        # Tự động chia file khi >1MB
+        retention="10 days",    # Giữ lại log trong 10 ngày
+        enqueue=True,           # Hỗ trợ đa tiến trình
+        level="INFO"
+    )
+    
     # --- Thêm handler ghi log qua tqdm.write ---
     # Ghi log ra console qua tqdm.write + có màu
     logger.level("CRITICAL", color="<bg red><white>")
