@@ -871,7 +871,7 @@ def train(local_rank, args, trial=None):
                         else:
                             eval_prediction = eval_outputs.argmax(-1)
                             
-                        calcs.extend(eval_prediction, torch.cat(eval_y))
+                        calcs.extend(eval_prediction, eval_y)
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
                     wandb.log({
