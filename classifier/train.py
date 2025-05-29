@@ -866,7 +866,7 @@ def train(local_rank, args, trial=None):
     
                             eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                             eval_prediction = eval_outputs.argmax(-1)
-                            eval_prediction.masked_fill_(~torch.cat(eval_label_mask), 0)
+                            eval_prediction.masked_fill_(~eval_label_mask, 0)
                                 
                         else:
                             eval_prediction = eval_outputs.argmax(-1)
