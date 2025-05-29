@@ -62,6 +62,7 @@ def parse_arguments():
     parser.add_argument("--zero_prediction", action="store_true", help="Enable zero prediction")
     parser.add_argument("--llm_candidate", action="store_true", help="Enable LLM candidate")
     parser.add_argument("--second_choice", action="store_true", help="Enable second choice")
+    parser.add_argument("--use_general_expert", action="store_true", help="Use general expert in MoLE")
     # loss = loss_ce + loss_ucl * args.ratio_loss_ucl + \
     #                     loss_tlcl * args.ratio_loss_tlcl + loss_des_cl * args.ratio_loss_des_cl + \
     #                     loss_aug * args.ratio_loss_aug + lgacl_loss * args.ratio_loss_lgacl + \
