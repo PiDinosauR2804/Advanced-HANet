@@ -61,7 +61,7 @@ def parse_arguments():
     parser.add_argument("--log_level", type=str, default="info", choices=["debug", "info", "warning", "error", "critical"], help="Logging level")
     parser.add_argument("--zero_prediction", action="store_true", help="Enable zero prediction")
     parser.add_argument("--llm_candidate", action="store_true", help="Enable LLM candidate")
-    
+    parser.add_argument("--second_choice", action="store_true", help="Enable second choice")
     # loss = loss_ce + loss_ucl * args.ratio_loss_ucl + \
     #                     loss_tlcl * args.ratio_loss_tlcl + loss_des_cl * args.ratio_loss_des_cl + \
     #                     loss_aug * args.ratio_loss_aug + lgacl_loss * args.ratio_loss_lgacl + \

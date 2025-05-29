@@ -862,12 +862,16 @@ def train(local_rank, args, trial=None):
                             # fill other with 0
                             eval_outputs[:, 1:] = 0
                         if args.llm_candidate:
+                            if args.second_choice:
+                                eval_outputs[eval_label_mask,:,0] = float("-inf")
+    
+                            eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                             eval_prediction = eval_outputs.argmax(-1)
                             eval_prediction.masked_fill_(~torch.cat(eval_label_mask), 0)
+                                
                         else:
                             eval_prediction = eval_outputs.argmax(-1)
                             
-                        eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                         logger.debug(f"Eval: {eval_prediction}")
                         logger.debug(f"Eval y: {torch.cat(eval_y)}")
                         calcs.extend(eval_prediction, torch.cat(eval_y))
