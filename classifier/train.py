@@ -838,8 +838,9 @@ def train(local_rank, args, trial=None):
                         collate_fn=lambda x:x)
                     calcs = Calculator()
                     num_choose = [0] * model.num_experts
-                    cover_percent = 0
-                    cover_sum = 0
+                    candidate_TP = 0
+                    candidate_T = 0
+                    candidate_P = 0
                     for batch in tqdm(eval_loader, desc="Eval"):
                         eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
@@ -872,8 +873,9 @@ def train(local_rank, args, trial=None):
                             eval_prediction = eval_outputs.argmax(-1)
                             
                         calcs.extend(eval_prediction, eval_y)
-                        cover_percent += (eval_y[eval_label_mask] != 0).sum().item()
-                        cover_sum += (eval_y != 0).sum().item()
+                        candidate_TP += (eval_y[eval_label_mask] != 0).sum().item()
+                        candidate_T += (eval_y != 0).sum().item()
+                        candidate_P += eval_label_mask.sum().item()
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
                     wandb.log({
@@ -882,7 +884,7 @@ def train(local_rank, args, trial=None):
                         f"micro_F1": micro_F1,
                     })
                     
-                    logger.info(f"Cover percent: {cover_percent / cover_sum * 100:.2f}%")
+                    logger.info(f"Cover recall: {candidate_TP / candidate_T * 100:.2f}% | Cover precision: {candidate_TP / candidate_P * 100:.2f}%")
                     logger.info(f'marco F1 {micro_F1} | precision {precision} | recall {recall}')
                     # dev_scores_ls.append(micro_F1)
                     # logger.info(f"Dev scores list: {dev_scores_ls}")
