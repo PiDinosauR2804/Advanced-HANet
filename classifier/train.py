@@ -838,8 +838,6 @@ def train(local_rank, args, trial=None):
                         collate_fn=lambda x:x)
                     calcs = Calculator()
                     num_choose = [0] * model.num_experts
-                    # class_expert = [[0] * model.num_experts] * (args.class_num + 1)
-                    class_expert = torch.zeros((args.class_num + 1, model.num_experts), dtype=torch.int64)
                     for batch in tqdm(eval_loader, desc="Eval"):
                         eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
@@ -886,7 +884,6 @@ def train(local_rank, args, trial=None):
                     # logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
                     logger.info(f"Num choose: {num_choose}")
-                    _print_class_choose(class_expert)
                     
                     # report to optuna
                     
