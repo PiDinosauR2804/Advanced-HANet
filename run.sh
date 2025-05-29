@@ -71,7 +71,6 @@ do
                 --ratio_loss_gpt 0.1 \
                 --use_weight_ce \
                 --alpha_ce 0.3 \
-                --skip_aug \
                 --skip_des
         done
     done

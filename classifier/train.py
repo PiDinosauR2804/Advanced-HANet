@@ -547,7 +547,7 @@ def train(local_rank, args, trial=None):
                     loss = loss + loss_des_cl * args.ratio_loss_des_cl      
                     
                 lgacl_loss = torch.tensor(0.0, device=device)
-                if args.gpt_augmention and (stage > 0 or ((not args.skip_aug) and stage == 0)):
+                if args.gpt_augmention:
                     augment_return_dict = model(augment_x_total, augment_masks_total, augment_span_total)
                     augment_trig_feat = augment_return_dict['trig_feat']
                     

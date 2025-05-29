@@ -130,7 +130,6 @@ def parse_arguments():
     
     parser.add_argument('--save_output', default="output_logg", type=str)
     parser.add_argument('--skip_des', action='store_true')
-    parser.add_argument('--skip_aug', action='store_true')
     
     args, _ = parser.parse_known_args()
 
