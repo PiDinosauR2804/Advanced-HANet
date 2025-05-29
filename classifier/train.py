@@ -55,7 +55,7 @@ def train(local_rank, args, trial=None):
     logger.level("CRITICAL", color="<bg red><white>")
     logger.add(
         lambda msg: tqdm.write(msg, end=""),
-        level="DEBUG",
+        level=args.log_level.upper(),
         colorize=True,
         format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{file: >18}: {line: <4}</cyan> - <level>{message}</level>",
     )
