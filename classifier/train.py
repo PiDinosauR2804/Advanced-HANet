@@ -844,16 +844,15 @@ def train(local_rank, args, trial=None):
                         eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
-                        eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
+                        eval_y = torch.cat([torch.LongTensor(item).to(device) for item in eval_y])
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
-                        eval_label_mask = [torch.BoolTensor(item).to(device) for item in eval_label_mask]
+                        eval_label_mask = torch.cat([torch.BoolTensor(item).to(device) for item in eval_label_mask])
 
                         eval_return_dict = model(eval_x, eval_masks, eval_span, train=False)
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
-                        for i in range(len(eval_y)):
-                            invalid_mask_eval_label = torch.BoolTensor([item not in learned_types for item in eval_y[i]]).to(device)
-                            eval_y[i].masked_fill_(invalid_mask_eval_label, 0)
+                        invalid_mask_eval_label = torch.BoolTensor([item not in learned_types for item in eval_y]).to(device)
+                        eval_y.masked_fill_(invalid_mask_eval_label, 0)
                         if args.leave_zero:
                             # assign -inf to zero class
                             eval_outputs[:, 0] = float("-inf")
