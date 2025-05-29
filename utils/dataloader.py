@@ -76,12 +76,13 @@ class MAVEN_Dataset(Dataset):
     #     pass
     
 class Eval_MAVEN_Dataset(Dataset):
-    def __init__(self, tokens, labels, masks, spans) -> None:
+    def __init__(self, tokens, labels, masks, spans, label_mask) -> None:
         super(Dataset).__init__()
         self.tokens = tokens
         self.masks = masks
         self.labels = labels
         self.spans = spans
+        self.label_mask = label_mask
         # self.requires_cl = [0 for _ in range(len(spans))]
         # self.labels = []
         # for stream in streams:
@@ -91,7 +92,7 @@ class Eval_MAVEN_Dataset(Dataset):
         # for label_ls in labels:
         #     self.labels.append([self.label2idx[label]  for label in label_ls])
     def __getitem__(self, index):
-        return [self.tokens[index], self.labels[index], self.masks[index], self.spans[index]]
+        return [self.tokens[index], self.labels[index], self.masks[index], self.spans[index], self.label_mask[index]]
     def __len__(self):
         return len(self.labels)
     def extend(self, tokens, labels, masks, spans, augment):
@@ -407,6 +408,7 @@ def collect_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
 def collect_eval_sldataset(dataset, root, split, label2idx, stage_id, labels, args):
     data, _ = collect_from_json(dataset, root, split, args)
     data_tokens, data_labels, data_masks, data_spans = [], [], [], []
+    data_label_mask = []
     for dt in tqdm(data):
         # pop useless properties
         if 'mention_id' in dt.keys():
@@ -415,17 +417,20 @@ def collect_eval_sldataset(dataset, root, split, label2idx, stage_id, labels, ar
             dt.pop('sentence_id')
         # if split == 'train':
         add_label = []
+        add_label_mask = []
         add_span = []
         new_t = {}
         for i in range(len(dt['label'])):
             if dt['label'][i] in labels or dt['label'][i] == 0: # if the label of instance is in the query
                 add_label.append(dt['label'][i]) # append the instance and the label
                 add_span.append(dt['span'][i]) # the same as label
+                add_label_mask.append(dt['label_mask'][i])
         if len(add_label) != 0:
             token = dt['piece_ids']
             new_t['label'] = add_label
             valid_span = add_span
             valid_label = [label2idx[item] if item in label2idx else 0 for item in add_label]
+            valid_label_mask = add_label_mask
         # else:
         #     token = dt['piece_ids']
         #     valid_span = dt['span'].copy()
@@ -440,6 +445,7 @@ def collect_eval_sldataset(dataset, root, split, label2idx, stage_id, labels, ar
             for invalid_idx in invalid_span:
                 valid_span.pop(invalid_idx)
                 valid_label.pop(invalid_idx)
+                valid_label_mask.pop(invalid_idx)
         if len(token) < max_seqlen + 2:
             token = token + [0] * (max_seqlen + 2 - len(token))
         token_mask = [1 if tkn != 0 else 0 for tkn in token]
@@ -455,11 +461,12 @@ def collect_eval_sldataset(dataset, root, split, label2idx, stage_id, labels, ar
         data_labels.append(valid_label)
         data_masks.append(token_mask)
         data_spans.append(valid_span)
+        data_label_mask.append(valid_label_mask)
             # data_spans.append(valid_span)
     if args.my_test:
         return Eval_MAVEN_Dataset(data_tokens[:100], data_labels[:100], data_masks[:100], data_spans[:100]) # TODO:test use
     else:
-        return Eval_MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans)
+        return Eval_MAVEN_Dataset(data_tokens, data_labels, data_masks, data_spans, data_label_mask)
 
 
 # def collect_fewshot_dataset(dataset, root, split, labels, label2idx):

@@ -771,7 +771,7 @@ def train(local_rank, args, trial=None):
 
                     for batch in tqdm(eval_loader, desc="Eval"):
                             
-                        eval_x, eval_y, eval_masks, eval_span = zip(*batch)
+                        eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
@@ -790,11 +790,16 @@ def train(local_rank, args, trial=None):
                             eval_outputs[:, 0] = 1
                             # fill other with 0
                             eval_outputs[:, 1:] = 0
-                        
+                        if args.llm_candidate:
+                            eval_prediction = eval_outputs.argmax(-1)
+                            eval_prediction.masked_fill_(~torch.cat(eval_label_mask), 0)
+                        else:
+                            eval_prediction = eval_outputs.argmax(-1)
+                            
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
-                        logger.debug(f"Eval: {eval_outputs.argmax(-1)}")
+                        logger.debug(f"Eval: {eval_prediction}")
                         logger.debug(f"Eval y: {torch.cat(eval_y)}")
-                        calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
+                        calcs.extend(eval_prediction, torch.cat(eval_y))
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
                     wandb.log({
