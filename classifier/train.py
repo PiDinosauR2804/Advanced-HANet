@@ -863,7 +863,7 @@ def train(local_rank, args, trial=None):
                             eval_outputs[:, 1:] = 0
                         if args.llm_candidate:
                             if args.second_choice:
-                                eval_outputs[eval_label_mask,:,0] = float("-inf")
+                                eval_outputs[eval_label_mask, 0] = float("-inf")
     
                             eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                             eval_prediction = eval_outputs.argmax(-1)
