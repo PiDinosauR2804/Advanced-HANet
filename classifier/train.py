@@ -841,36 +841,36 @@ def train(local_rank, args, trial=None):
                     # class_expert = [[0] * model.num_experts] * (args.class_num + 1)
                     class_expert = torch.zeros((args.class_num + 1, model.num_experts), dtype=torch.int64)
                     for batch in tqdm(eval_loader, desc="Eval"):
-                        eval_x, eval_y, eval_masks, eval_span = zip(*batch)
+                        eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
+                        eval_label_mask = [torch.BoolTensor(item).to(device) for item in eval_label_mask]
+
                         eval_return_dict = model(eval_x, eval_masks, eval_span, train=False)
-                        if args.use_mole:
-                            for i, num in enumerate(eval_return_dict['num_choose']):
-                                num_choose[i] += num
-                            try:
-                                for la, tk in zip(eval_y, eval_return_dict['topk_indices']):
-                                    distinct_labels = torch.unique(la).tolist()
-                                    for l in distinct_labels:
-                                        if l not in learned_types:
-                                            continue
-                                        for idx in tk.tolist():
-                                                class_expert[l][idx] += 1
-                            except Exception as e:
-                                print(f"Label: {l}, {type(l)}. Topk: {tk}, {type(tk)}")
-                                raise e
-                                
                         eval_outputs = eval_return_dict['outputs']
                         valid_mask_eval_op = torch.BoolTensor([idx in learned_types for idx in range(args.class_num + 1)]).to(device)
                         for i in range(len(eval_y)):
                             invalid_mask_eval_label = torch.BoolTensor([item not in learned_types for item in eval_y[i]]).to(device)
                             eval_y[i].masked_fill_(invalid_mask_eval_label, 0)
                         if args.leave_zero:
-                            eval_outputs[:, 0] = 0
+                            # assign -inf to zero class
+                            eval_outputs[:, 0] = float("-inf")
+                        if args.zero_prediction:
+                            eval_outputs[:, 0] = 1
+                            # fill other with 0
+                            eval_outputs[:, 1:] = 0
+                        if args.llm_candidate:
+                            eval_prediction = eval_outputs.argmax(-1)
+                            eval_prediction.masked_fill_(~torch.cat(eval_label_mask), 0)
+                        else:
+                            eval_prediction = eval_outputs.argmax(-1)
+                            
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
-                        calcs.extend(eval_outputs.argmax(-1), torch.cat(eval_y))
+                        logger.debug(f"Eval: {eval_prediction}")
+                        logger.debug(f"Eval y: {torch.cat(eval_y)}")
+                        calcs.extend(eval_prediction, torch.cat(eval_y))
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
                     wandb.log({
