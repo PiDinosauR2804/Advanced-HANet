@@ -870,7 +870,7 @@ def train(local_rank, args, trial=None):
                             eval_prediction = eval_outputs.argmax(-1)
                             
                         calcs.extend(eval_prediction, eval_y)
-                        cover_precent = (eval_y[eval_label_mask] != 0).sum().item() / (eval_ y != 0).sum().item()
+                        cover_percent = (eval_y[eval_label_mask] != 0).sum().item() / (eval_y != 0).sum().item()
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
                     wandb.log({
@@ -879,7 +879,7 @@ def train(local_rank, args, trial=None):
                         f"micro_F1": micro_F1,
                     })
                     
-                    logger.info(f"Cover percent: {cover_precent * 100:.2f}%")
+                    logger.info(f"Cover percent: {cover_percent * 100:.2f}%")
                     logger.info(f'marco F1 {micro_F1} | precision {precision} | recall {recall}')
                     # dev_scores_ls.append(micro_F1)
                     # logger.info(f"Dev scores list: {dev_scores_ls}")
