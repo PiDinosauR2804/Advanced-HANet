@@ -841,6 +841,7 @@ def train(local_rank, args, trial=None):
                     candidate_TP = 0
                     candidate_T = 0
                     candidate_P = 0
+                    candidate_P2 = 0
                     for batch in tqdm(eval_loader, desc="Eval"):
                         eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
@@ -876,8 +877,9 @@ def train(local_rank, args, trial=None):
                         candidate_TP += (eval_y[eval_label_mask] != 0).sum().item()
                         candidate_T += (eval_y != 0).sum().item()
                         candidate_P += eval_label_mask.sum().item()
+                        candidate_P2 += eval_label_mask.mask[~invalid_mask_eval_label].sum().item()
                         logger.debug(f"Eval label mask: {eval_label_mask}")
-                        logger.debug(f"candidate_TP: {candidate_TP} | candidate_T: {candidate_T} | candidate_P: {candidate_P}")
+                        logger.debug(f"candidate_TP: {candidate_TP} | candidate_T: {candidate_T} | candidate_P: {candidate_P} | candidate_P2: {candidate_P2}")
                         
                         
                     bc, (precision, recall, micro_F1) = calcs.by_class(learned_types)
@@ -887,7 +889,7 @@ def train(local_rank, args, trial=None):
                         f"micro_F1": micro_F1,
                     })
                     
-                    logger.info(f"Cover recall: {candidate_TP / candidate_T * 100:.2f}% | Cover precision: {candidate_TP / candidate_P * 100:.2f}%")
+                    logger.info(f"Cover recall: {candidate_TP / candidate_T * 100:.2f}% | Cover precision: {candidate_TP / candidate_P * 100:.2f}% | Cover precision 2: {candidate_TP / candidate_P2 * 100:.2f}%")
                     logger.info(f'marco F1 {micro_F1} | precision {precision} | recall {recall}')
                     # dev_scores_ls.append(micro_F1)
                     # logger.info(f"Dev scores list: {dev_scores_ls}")
