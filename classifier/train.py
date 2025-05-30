@@ -792,12 +792,13 @@ def train(local_rank, args, trial=None):
 
                     for batch in tqdm(eval_loader, desc="Eval"):
                             
-                        eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
+                        # eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
+                        eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
                         eval_masks = torch.LongTensor(eval_masks).to(device)
                         eval_y = [torch.LongTensor(item).to(device) for item in eval_y]
                         eval_span = [torch.LongTensor(item).to(device) for item in eval_span]  
-                        eval_label_mask = [torch.BoolTensor(item).to(device) for item in eval_label_mask]
+                        # eval_label_mask = [torch.BoolTensor(item).to(device) for item in eval_label_mask]
 
                         eval_return_dict = model(eval_x, eval_masks, eval_span, train=False)
                         eval_outputs = eval_return_dict['outputs']
@@ -814,7 +815,7 @@ def train(local_rank, args, trial=None):
                             eval_outputs[:, 1:] = 0
                         if args.llm_candidate:
                             eval_prediction = eval_outputs.argmax(-1)
-                            eval_prediction.masked_fill_(~torch.cat(eval_label_mask), 0)
+                            # eval_prediction.masked_fill_(~torch.cat(eval_label_mask), 0)
                         else:
                             eval_prediction = eval_outputs.argmax(-1)
                             
