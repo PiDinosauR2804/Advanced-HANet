@@ -69,7 +69,7 @@ do
                 --use_description \
                 --gpt_augmention \
                 --joint_da_loss none \
-                --project_name mole_maven_4 \
+                --project_name mole_maven_4_$k \
                 --wandb
         done
     done
