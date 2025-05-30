@@ -36,10 +36,6 @@ from loguru import logger
 from tqdm.auto import tqdm
 import optuna
 
-wandb_api_key = "0806b2d5c00870a95f366d95c825d7680649abb7"
-os.environ['WANDB_API_KEY'] = wandb_api_key
-wandb.login()
-
 def train(local_rank, args, trial=None):    
     tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
