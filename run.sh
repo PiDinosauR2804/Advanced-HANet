@@ -74,3 +74,6 @@ do
         done
     done
 done
+
+
+=TEXT(AVERAGE(Seed1!B8; Seed2!B8; Seed3!B8; Seed4!B8; Seed42!B8); "0.00") & " ± " & TEXT(STDEV.P(Seed1!B8; Seed2!B8; Seed3!B8; Seed4!B8; Seed42!B8); "0.00")
