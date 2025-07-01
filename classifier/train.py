@@ -822,7 +822,7 @@ def train(local_rank, args, trial=None):
                         print(
                             "=============================",
                             f"Text: {tokenizer.decode(eval_x[0]).replace('[PAD]', '')}",
-                            f"Label: {eval_y.cpu().numpy()}",
+                            f"Label: {eval_y}",
                             f"Prediction: {eval_prediction.item()}",
                             "=============================",
                             sep="\n"
