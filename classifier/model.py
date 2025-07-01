@@ -545,12 +545,12 @@ class BertED(nn.Module):
     def get_logits_router(self):
         if self.use_mole:
             logits_router = []
-            for i, layer in enumerate(self.backbone.encoder.layer):
+            # for i, layer in enumerate(self.backbone.encoder.layer):
                 # if i < self.args.freeze_encoder_layers:
                 #     continue
-                logits_router.append(layer.attention.self.logits_router)
+                # logits_router.append(layer.attention.self.logits_router)
                 
-            logits_router = torch.stack(logits_router, dim=0)
+            # logits_router = torch.stack(logits_router, dim=0)
             return logits_router
         else:
             return None
