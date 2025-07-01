@@ -577,10 +577,10 @@ class BertED(nn.Module):
 
     def forward(self, x, masks, span=None, aug=None, train=True):
         if self.args.mole_middle and self.use_mole:
-            self.set_mole(False)
+            # self.set_mole(False)
             no_mole_hidden_states = self.backbone(x, attention_mask=masks).last_hidden_state
-            self.set_mole_middle(no_mole_hidden_states)
-            self.set_mole(True)
+            # self.set_mole_middle(no_mole_hidden_states)
+            # self.set_mole(True)
             
         out = self.backbone(x, attention_mask=masks)
         hidden = out.last_hidden_state
@@ -620,16 +620,16 @@ class BertED(nn.Module):
         return torch.cat(trig_feature)
 
     def forward_backbone(self, x, masks):
-        self.set_mole(False)
+        # self.set_mole(False)
         out = self.backbone(x, attention_mask=masks)
-        self.set_mole(True)
+        # self.set_mole(True)
         return out.last_hidden_state
 
     def forward_cls(self, x, masks):
         with torch.no_grad():
-            self.set_mole(False)
+            # self.set_mole(False)
             out = self.backbone(x, attention_mask=masks)
-            self.set_mole(True)
+            # self.set_mole(True)
             return out.last_hidden_state[:, 0, :]
 
     def forward_input_map(self, x):
