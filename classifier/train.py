@@ -819,14 +819,14 @@ def train(local_rank, args, trial=None):
                         else:
                             eval_prediction = eval_outputs.argmax(-1)
                         
-                        print(
-                            "=============================",
-                            f"Text: {tokenizer.decode(eval_x[0]).replace('[PAD]', '')}",
-                            f"Label: {eval_y[0].tolist()}",
-                            f"Prediction: {eval_prediction.tolist()[:len(eval_y[0])]}",
-                            "=============================",
-                            sep="\n"
-                        )
+                        for i in range(len(eval_y)):
+                            print(
+                                f"Text: {tokenizer.decode(eval_x[i]).replace('[PAD]', '')}",
+                                f"Label: {eval_y[i].tolist()}",
+                                f"Prediction: {eval_prediction.tolist()[:len(eval_y[i])]}",
+                                f"Event word: {[tokenizer.decode(eval_x[i][span[0]: span[1] + 1]) for span in eval_span[i]]}",
+                                sep="\n"
+                            )
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                         logger.debug(f"Eval: {eval_prediction}")
                         logger.debug(f"Eval y: {torch.cat(eval_y)}")
