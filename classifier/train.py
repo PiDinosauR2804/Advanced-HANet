@@ -878,13 +878,14 @@ def train(local_rank, args, trial=None):
                                 
                         else:
                             eval_prediction = eval_outputs.argmax(-1)
-                        print(
-                            "================================================================================\n"
-                            f"Text: {tokenizer.decode(eval_x[0])}\n",
-                            f"Prediction: {eval_prediction[0]}\n",
-                            f"Label: {eval_y[0]}\n",
-                            "================================================================================"
-                        )
+                        for i in range(len(eval_y)):
+                            print(
+                                f"Text: {tokenizer.decode(eval_x[i]).replace('[PAD]', '')}",
+                                f"Label: {eval_y[i].tolist()}",
+                                f"Prediction: {eval_prediction.tolist()[:len(eval_y[i])]}",
+                                f"Event word: {[tokenizer.decode(eval_x[i][span[0]: span[1] + 1]) for span in eval_span[i]]}",
+                                sep="\n"
+                            )
                         calcs.extend(eval_prediction, eval_y)
                         candidate_TP += (eval_y[eval_label_mask] != 0).sum().item()
                         candidate_T += (eval_y != 0).sum().item()
