@@ -789,9 +789,9 @@ def train(local_rank, args, trial=None):
                         batch_size=args.eval_batch_size,
                         collate_fn=lambda x:x)
                     calcs = Calculator()
-
+                    
+                    from utils.convert import tokenizer
                     for batch in tqdm(eval_loader, desc="Eval"):
-                            
                         # eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
                         eval_x, eval_y, eval_masks, eval_span = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
@@ -818,7 +818,15 @@ def train(local_rank, args, trial=None):
                             # eval_prediction.masked_fill_(~torch.cat(eval_label_mask), 0)
                         else:
                             eval_prediction = eval_outputs.argmax(-1)
-                            
+                        
+                        print(
+                            "=============================",
+                            f"Text: {tokenizer.decode(eval_x[0]).replace('[PAD]', '')}",
+                            f"Label: {eval_y.cpu().numpy()}",
+                            f"Prediction: {eval_prediction.item()}",
+                            "=============================",
+                            sep="\n"
+                        )
                         eval_outputs = eval_outputs[:, valid_mask_eval_op].squeeze(-1)
                         logger.debug(f"Eval: {eval_prediction}")
                         logger.debug(f"Eval y: {torch.cat(eval_y)}")
