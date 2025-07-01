@@ -842,6 +842,12 @@ def train(local_rank, args, trial=None):
                     candidate_T = 0
                     candidate_P = 0
                     candidate_P2 = 0
+                    from utils.convert import tokenizer
+                    # for i, line in enumerate(open('data/data_text/ACE/ACE.test.jsonl', 'r', encoding='utf-8')):
+                    #     if i in [100]:
+                    #         ace = json.loads(line)
+                    #         x, y, mask, span, label_mask = ace['piece_ids'], ace['label'], ace['mask'], ace['span'], ace['label_mask']
+                        
                     for batch in tqdm(eval_loader, desc="Eval"):
                         eval_x, eval_y, eval_masks, eval_span, eval_label_mask = zip(*batch)
                         eval_x = torch.LongTensor(eval_x).to(device)
@@ -872,13 +878,19 @@ def train(local_rank, args, trial=None):
                                 
                         else:
                             eval_prediction = eval_outputs.argmax(-1)
-                            
+                        print(
+                            "================================================================================\n"
+                            f"Text: {tokenizer.decode(eval_x[0])}\n",
+                            f"Prediction: {eval_prediction[0]}\n",
+                            f"Label: {eval_y[0]}\n",
+                            "================================================================================"
+                        )
                         calcs.extend(eval_prediction, eval_y)
                         candidate_TP += (eval_y[eval_label_mask] != 0).sum().item()
                         candidate_T += (eval_y != 0).sum().item()
                         candidate_P += eval_label_mask.sum().item()
                         candidate_P2 += eval_label_mask[~invalid_mask_eval_label].sum().item()
-                        logger.debug(f"Eval label mask: {eval_label_mask}")
+                        logger.debug(f"Text: {tokenizer.decode(eval_x[0])}")
                         logger.debug(f"candidate_TP: {candidate_TP} | candidate_T: {candidate_T} | candidate_P: {candidate_P} | candidate_P2: {candidate_P2}")
                         
                         
