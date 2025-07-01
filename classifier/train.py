@@ -823,7 +823,7 @@ def train(local_rank, args, trial=None):
                             "=============================",
                             f"Text: {tokenizer.decode(eval_x[0]).replace('[PAD]', '')}",
                             f"Label: {eval_y[0].tolist()}",
-                            f"Prediction: {eval_prediction.tolist()[len(eval_y[0]) - 1:]}",
+                            f"Prediction: {eval_prediction.tolist()[:len(eval_y[0])]}",
                             "=============================",
                             sep="\n"
                         )
