@@ -620,16 +620,16 @@ class BertED(nn.Module):
         return torch.cat(trig_feature)
 
     def forward_backbone(self, x, masks):
-        # self.set_mole(False)
+        self.set_mole(False)
         out = self.backbone(x, attention_mask=masks)
-        # self.set_mole(True)
+        self.set_mole(True)
         return out.last_hidden_state
 
     def forward_cls(self, x, masks):
         with torch.no_grad():
-            # self.set_mole(False)
+            self.set_mole(False)
             out = self.backbone(x, attention_mask=masks)
-            # self.set_mole(True)
+            self.set_mole(True)
             return out.last_hidden_state[:, 0, :]
 
     def forward_input_map(self, x):
