@@ -370,6 +370,7 @@ def train(local_rank, args, trial=None):
                 # else: 
                 return_dict = model(train_x, train_masks, train_span)
                 outputs, context_feat, trig_feat = return_dict['outputs'], return_dict['context_feat'], return_dict['trig_feat']
+                imp_mask, cur_feat_imp = return_dict['imp_mask'], return_dict['cur_feat_imp']
                 if args.use_mole:
                     for i, num in enumerate(return_dict['num_choose']):
                         num_choose[i] += num
@@ -451,7 +452,7 @@ def train(local_rank, args, trial=None):
                     # Hidden representaion của data augment
                     da_return_dict = model(da_x, da_masks, da_span)
                     da_outputs, da_reps, da_context_feat, da_trig_feat = da_return_dict['outputs'], da_return_dict['reps'], da_return_dict['context_feat'], da_return_dict['trig_feat']
-                    
+                    da_imp_mask, da_cur_feat_imp = da_return_dict['imp_mask'], da_return_dict['cur_feat_imp']
                     # Contrastive loss cho sentence
                     if args.ucl:
                         if not ((args.skip_first_cl == "ucl" or args.skip_first_cl == "ucl+tlcl") and stage == 0):
@@ -664,14 +665,26 @@ def train(local_rank, args, trial=None):
                 if stage > 0 and args.distill != "none":
                     prev_model.eval()
                     with torch.no_grad():
-                        prev_return_dict = prev_model(train_x, train_masks, train_span)
-                        prev_outputs, prev_feature = prev_return_dict['outputs'], prev_return_dict['context_feat']
+                        prev_return_dict = prev_model(train_x, train_masks, train_span, None, True, imp_mask)
+                        prev_outputs = prev_return_dict['outputs']
+                        if args.distill_imp:
+                            prev_feature = prev_return_dict['cur_feat_imp']
+                        else:
+                            prev_feature = prev_return_dict['context_feat']
 
                         if args.joint_da_loss == "dist" or args.joint_da_loss == "mul":
                             outputs = torch.cat([outputs, da_outputs])
-                            context_feat = torch.cat([context_feat, da_context_feat])
-                            prev_return_dict_cl = prev_model(da_x, da_masks, da_span)
-                            prev_outputs_cl, prev_feature_cl = prev_return_dict_cl['outputs'], prev_return_dict_cl['context_feat']
+                            if args.distill_imp:
+                                context_feat = torch.cat([cur_feat_imp, da_cur_feat_imp])
+                            else:
+                                context_feat = torch.cat([context_feat, da_context_feat])
+                            prev_return_dict_cl = prev_model(da_x, da_masks, da_span, None, True, da_imp_mask)
+                            prev_outputs_cl = prev_return_dict_cl['outputs']
+                            if args.distill_imp:
+                                prev_feature_cl = prev_return_dict_cl['cur_feat_imp']
+                            else:
+                                prev_feature_cl = prev_return_dict_cl['context_feat']
+                            
                             prev_outputs, prev_feature = torch.cat([prev_outputs, prev_outputs_cl]), torch.cat([prev_feature, prev_feature_cl])
                     # prev_invalid_mask_op = torch.BoolTensor([item not in prev_learned_types for item in range(args.class_num)]).to(device)
                     prev_valid_mask_op = torch.nonzero(torch.BoolTensor([item in prev_learned_types for item in range(args.class_num + 1)]).to(device))

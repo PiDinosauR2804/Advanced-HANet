@@ -6,31 +6,39 @@ from loguru import logger
 import torch.nn.functional as F
 
 
-def _l2_normalize(self, x, dim: int = -1):
+def _l2_normalize(x, dim: int = -1):
     return F.normalize(x, p=2.0, dim=dim)
 
-def _select_important_tokens(self,
-                             att_last,        # (B, H, L, L)
-                             att_mask,        # (B, L)
+def _select_important_tokens(att_last,         # (B, H, L, L)
+                             att_mask,         # (B, L)
                              span=None,
                              topk_ratio: float = 0.1):
     """
-    Trả về mask bool (B, L) : token quan trọng = trigger ∪ top-k attention.
+    Trả về mask bool (B, L) :
+        important = (top-k attention)  ∪  (trigger start & end token).
     """
-    score = att_last.mean(dim=1).sum(dim=1)                 # (B, L)
+    # ---------- (1) Attention-based scores ----------------------------
+    score = att_last.mean(dim=1).sum(dim=1)         # (B, L)
     score = score.masked_fill(~att_mask.bool(), -1e4)
 
     B, L = score.shape
     k = max(1, int(topk_ratio * L))
 
     imp_mask = torch.zeros_like(att_mask, dtype=torch.bool)
-    topk_idx = score.topk(k, dim=1).indices                 # (B, k)
+    topk_idx = score.topk(k, dim=1).indices         # (B, k)
     imp_mask.scatter_(1, topk_idx, True)
 
+    # ---------- (2) Add trigger tokens (start & end only) -------------
     if span is not None:
         for b, sp in enumerate(span):
-            for s, e in sp.tolist():                        # [s, e)  Python style
-                imp_mask[b, s:e] = True
+            if sp.numel() == 0:
+                continue
+            # sp shape (N_trig, 2): columns = [start, end]
+            starts = sp[:, 0]
+            ends   = sp[:, 1]
+            imp_mask[b, starts] = True
+            imp_mask[b, ends]   = True
+            # (Nếu muốn cả đoạn, dùng: for s,e in sp: imp_mask[b, s:e+1] = True)
     return imp_mask
 
 class Classifier(nn.Module):
@@ -80,9 +88,6 @@ class BertED(nn.Module):
         self.general_expert_weight = args.general_expert_weight
         self.args = args
         self.topk_ratio = 0.1   # hoặc tham số hoá theo args
-
-        
-        self._normalize = l2_normalize
 
         # Load backbone
         if backbone_path is not None:
@@ -208,20 +213,16 @@ class BertED(nn.Module):
         self.backbone.set_adapter(name)
         self.unfreeze_lora()
         
-    def _forward_mole(self, x, masks, span=None, aug=None, train=True):
-        B = x.size(0)
+    def _forward_mole(self, x, masks, span=None, aug=None, train=True, imp_mask=None):
+        B, L = x.size(0), x.size(1)
+        num_heads = self.backbone.config.num_attention_heads
         return_dict = {}
 
         if not self.uniform_expert:
             with torch.no_grad():
                 with self.backbone.disable_adapter():
                     base_output = self.backbone(x, attention_mask=masks, return_dict=True)
-                    hidden = base_output.last_hidden_state
                     cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
-                    
-            
-            B_1, L, D = hidden.shape
-            flat_hidden = hidden.view(B_1 * L, D) 
 
             # Gating
             gating_logits = self.gating_layer(cls_embedding)  # (B, E)
@@ -239,7 +240,8 @@ class BertED(nn.Module):
 
         # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
         expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
-        expert_outputs_attentions = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
+        expert_outputs_attn = [torch.zeros(B, num_heads, L, L, device=x.device)
+                           for _ in range(self.top_k)]
         num_choose = [0] * self.num_experts
         for k in range(self.top_k):
             expert_ids = topk_indices[:, k]  # (B,)
@@ -257,18 +259,18 @@ class BertED(nn.Module):
                     x[mask], attention_mask=masks[mask], output_attentions=True
                 )                
                 _ = out.last_hidden_state  # (N, T, H)
-                attention = out.attentions[-1]  # (N, T, H)
+                attn_expert = out.attentions[-1]  # (N, T, H)
                 
 
                 weighted = weights[mask].view(-1, 1, 1) * _
                 expert_outputs[k][mask] = weighted
                 
-                weighted_attention = weights[mask].view(-1, 1, 1) * attention
-                expert_outputs_attentions[k][mask] = weighted_attention
+                w_attn = weights[mask].view(-1, 1, 1, 1)         # (N,1,1,1)
+                expert_outputs_attn[k][mask] = w_attn * attn_expert
 
         # Tổng hợp top-k expert output
         x_out = sum(expert_outputs)
-        total_attention = sum(expert_outputs_attentions)
+        total_attention = sum(expert_outputs_attn)
 
         # Optional: add general expert
         if self.use_general_expert:
@@ -280,16 +282,18 @@ class BertED(nn.Module):
             total_attention += self.general_expert_weight * _2
 
         # ================== KHỐI MỚI: trích cur_feat_imp ======================
-        with torch.no_grad():
-            imp_mask = self._select_important_tokens(
-                total_attention,          # (B,H,L,L) – lấy layer cuối
-                masks,               # (B,L)
-                span=span,
-                topk_ratio=self.topk_ratio
-            )                        # (B,L) bool
+        if imp_mask is None:
+            with torch.no_grad():
+                imp_mask = _select_important_tokens(
+                    total_attention,          # (B,H,L,L) – lấy layer cuối
+                    masks,               # (B,L)
+                    span=span,
+                    topk_ratio=self.topk_ratio
+                )                        # (B,L) bool
 
         flat_out = x_out.view(-1, x_out.size(-1))                # (B*L, D)
-        cur_feat_imp = self._l2_normalize(flat_out[imp_mask.view(-1)])
+        cur_feat_imp = _l2_normalize(flat_out[imp_mask.view(-1)])
+        return_dict['imp_mask'] = imp_mask
         return_dict['cur_feat_imp'] = cur_feat_imp
         # ======================================================================
 
