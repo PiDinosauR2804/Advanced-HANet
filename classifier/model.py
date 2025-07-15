@@ -6,41 +6,32 @@ from loguru import logger
 import torch.nn.functional as F
 
 
-def l2_normalize(x: torch.Tensor, dim: int = -1):
-    """L2-normalize theo chiều `dim`."""
+def _l2_normalize(self, x, dim: int = -1):
     return F.normalize(x, p=2.0, dim=dim)
 
-
-def select_important_tokens(att_last,  # (B, H, L, L)
-                            att_mask,  # (B, L)  – 1 = real token
-                            span=None,
-                            topk_ratio: float = 0.1):
+def _select_important_tokens(self,
+                             att_last,        # (B, H, L, L)
+                             att_mask,        # (B, L)
+                             span=None,
+                             topk_ratio: float = 0.1):
     """
-    Trả về bool-mask [B,L] đánh dấu token quan trọng.
-    * Token quan trọng = token xuất hiện trong `span`  **hoặc**
-                        thuộc top-k theo attention-score.
+    Trả về mask bool (B, L) : token quan trọng = trigger ∪ top-k attention.
     """
-    # 1) attention-score = tổng attention mà token *được nhận* từ người khác
-    score = att_last.mean(dim=1).sum(dim=1)                   # (B,L)
+    score = att_last.mean(dim=1).sum(dim=1)                 # (B, L)
     score = score.masked_fill(~att_mask.bool(), -1e4)
 
     B, L = score.shape
-    k = torch.clamp((topk_ratio * L).long(), min=1)
+    k = max(1, int(topk_ratio * L))
 
     imp_mask = torch.zeros_like(att_mask, dtype=torch.bool)
-
-    # 2) lấy top-k mỗi câu
-    topk_idx = score.topk(k.item(), dim=1).indices            # (B,k)
+    topk_idx = score.topk(k, dim=1).indices                 # (B, k)
     imp_mask.scatter_(1, topk_idx, True)
 
-    # 3) thêm trigger span
     if span is not None:
         for b, sp in enumerate(span):
-            # sp:  Tensor[N_trig, 2]  (start, end) – [không bao gồm end]
-            for s, e in sp.tolist():
+            for s, e in sp.tolist():                        # [s, e)  Python style
                 imp_mask[b, s:e] = True
-
-    return imp_mask                                             # (B,L) bool
+    return imp_mask
 
 class Classifier(nn.Module):
     def __init__(self, input_dim, hidden_dim, class_num, num_layers=1, dropout=0.1):
@@ -88,6 +79,8 @@ class BertED(nn.Module):
         self.uniform_expert = False
         self.general_expert_weight = args.general_expert_weight
         self.args = args
+        self.topk_ratio = 0.1   # hoặc tham số hoá theo args
+
         
         self._normalize = l2_normalize
 
@@ -222,13 +215,13 @@ class BertED(nn.Module):
         if not self.uniform_expert:
             with torch.no_grad():
                 with self.backbone.disable_adapter():
-                    base_output = self.backbone(x, attention_mask=masks, output_attentions=True, return_dict=True)
+                    base_output = self.backbone(x, attention_mask=masks, return_dict=True)
                     hidden = base_output.last_hidden_state
                     cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
-                    attentions = base_output.attentions[-1] 
+                    
             
-            B, L, D = hidden.shape
-            flat_hidden = hidden.view(B * L, D) 
+            B_1, L, D = hidden.shape
+            flat_hidden = hidden.view(B_1 * L, D) 
 
             # Gating
             gating_logits = self.gating_layer(cls_embedding)  # (B, E)
@@ -246,6 +239,7 @@ class BertED(nn.Module):
 
         # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
         expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
+        expert_outputs_attentions = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
         num_choose = [0] * self.num_experts
         for k in range(self.top_k):
             expert_ids = topk_indices[:, k]  # (B,)
@@ -260,29 +254,44 @@ class BertED(nn.Module):
 
                 self.set_adapter(f"expert_{expert_id.item()}")
                 out = self.backbone(
-                    x[mask], attention_mask=masks[mask]
-                ).last_hidden_state  # (N, T, H)
+                    x[mask], attention_mask=masks[mask], output_attentions=True
+                )                
+                _ = out.last_hidden_state  # (N, T, H)
+                attention = out.attentions[-1]  # (N, T, H)
+                
 
-                weighted = weights[mask].view(-1, 1, 1) * out
+                weighted = weights[mask].view(-1, 1, 1) * _
                 expert_outputs[k][mask] = weighted
+                
+                weighted_attention = weights[mask].view(-1, 1, 1) * attention
+                expert_outputs_attentions[k][mask] = weighted_attention
 
         # Tổng hợp top-k expert output
         x_out = sum(expert_outputs)
+        total_attention = sum(expert_outputs_attentions)
 
         # Optional: add general expert
         if self.use_general_expert:
             self.set_adapter("general_expert")
-            general_out = self.backbone(x, attention_mask=masks).last_hidden_state
-            x_out += self.general_expert_weight * general_out
+            general_out = self.backbone(x, attention_mask=masks, output_attentions=True)
+            _1 = general_out.last_hidden_state
+            _2 = general_out.attentions[-1]
+            x_out += self.general_expert_weight * _1
+            total_attention += self.general_expert_weight * _2
 
-        # ------------------------------------------------ distill tokens
-        imp_mask = select_important_tokens(
-            attentions, masks, span=span, topk_ratio=self.topk_ratio
-        )                                                         # (B,L) bool
-        imp_mask_flat = imp_mask.view(-1)
+        # ================== KHỐI MỚI: trích cur_feat_imp ======================
+        with torch.no_grad():
+            imp_mask = self._select_important_tokens(
+                total_attention,          # (B,H,L,L) – lấy layer cuối
+                masks,               # (B,L)
+                span=span,
+                topk_ratio=self.topk_ratio
+            )                        # (B,L) bool
 
-        cur_feat_imp = self._normalize(flat_hidden[imp_mask_flat])  # (N_imp,D)
+        flat_out = x_out.view(-1, x_out.size(-1))                # (B*L, D)
+        cur_feat_imp = self._l2_normalize(flat_out[imp_mask.view(-1)])
         return_dict['cur_feat_imp'] = cur_feat_imp
+        # ======================================================================
 
         return_dict['reps'] = x_out[:, 0, :].clone()
         return_dict['context_feat'] = x_out.view(-1, x_out.shape[-1])
