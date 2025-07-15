@@ -87,7 +87,7 @@ class BertED(nn.Module):
         self.uniform_expert = False
         self.general_expert_weight = args.general_expert_weight
         self.args = args
-        self.topk_ratio = 0.1   # hoặc tham số hoá theo args
+        self.topk_ratio = args.topk_ratio   # hoặc tham số hoá theo args
 
         # Load backbone
         if backbone_path is not None:
@@ -183,9 +183,9 @@ class BertED(nn.Module):
             self.uniform_expert = turn_on
             logger.info(f"Uniform expert: {turn_on}")
 
-    def forward(self, x, masks, span=None, aug=None, train=True):
+    def forward(self, x, masks, span=None, aug=None, train=True, imp_mask=None):
         if self.use_mole:
-            return self._forward_mole(x, masks, span, aug, train)
+            return self._forward_mole(x, masks, span, aug, train, imp_mask)
         else:
             return self._forward_normal(x, masks, span, aug)
 
@@ -291,10 +291,23 @@ class BertED(nn.Module):
                     topk_ratio=self.topk_ratio
                 )                        # (B,L) bool
 
-        flat_out = x_out.view(-1, x_out.size(-1))                # (B*L, D)
-        cur_feat_imp = _l2_normalize(flat_out[imp_mask.view(-1)])
-        return_dict['imp_mask'] = imp_mask
+        imp_mask = imp_mask.to(x.device).bool()
+        assert imp_mask.shape == masks.shape, "imp_mask size mismatch"
+
+        # (1) chuẩn hoá toàn tensor rồi (2) zero-out token không quan trọng
+        normed_out = _l2_normalize(x_out, dim=-1)             # (B,L,D)
+        cur_feat_imp = torch.zeros_like(normed_out)           # (B,L,D)
+        cur_feat_imp[imp_mask] = normed_out[imp_mask]         # copy back only important
+        
+        return_dict['imp_mask']     = imp_mask.detach()
         return_dict['cur_feat_imp'] = cur_feat_imp
+
+
+        # flat_out = x_out.view(-1, x_out.size(-1))                # (B*L, D)
+        # cur_feat_imp = _l2_normalize(flat_out[imp_mask.view(-1)])
+        # return_dict['imp_mask'] = imp_mask
+        # return_dict['cur_feat_imp'] = cur_feat_imp
+        
         # ======================================================================
 
         return_dict['reps'] = x_out[:, 0, :].clone()
