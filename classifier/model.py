@@ -3,7 +3,44 @@ from transformers import BertModel
 import torch.nn as nn
 from peft import get_peft_model, LoraConfig, TaskType
 from loguru import logger
+import torch.nn.functional as F
 
+
+def l2_normalize(x: torch.Tensor, dim: int = -1):
+    """L2-normalize theo chiều `dim`."""
+    return F.normalize(x, p=2.0, dim=dim)
+
+
+def select_important_tokens(att_last,  # (B, H, L, L)
+                            att_mask,  # (B, L)  – 1 = real token
+                            span=None,
+                            topk_ratio: float = 0.1):
+    """
+    Trả về bool-mask [B,L] đánh dấu token quan trọng.
+    * Token quan trọng = token xuất hiện trong `span`  **hoặc**
+                        thuộc top-k theo attention-score.
+    """
+    # 1) attention-score = tổng attention mà token *được nhận* từ người khác
+    score = att_last.mean(dim=1).sum(dim=1)                   # (B,L)
+    score = score.masked_fill(~att_mask.bool(), -1e4)
+
+    B, L = score.shape
+    k = torch.clamp((topk_ratio * L).long(), min=1)
+
+    imp_mask = torch.zeros_like(att_mask, dtype=torch.bool)
+
+    # 2) lấy top-k mỗi câu
+    topk_idx = score.topk(k.item(), dim=1).indices            # (B,k)
+    imp_mask.scatter_(1, topk_idx, True)
+
+    # 3) thêm trigger span
+    if span is not None:
+        for b, sp in enumerate(span):
+            # sp:  Tensor[N_trig, 2]  (start, end) – [không bao gồm end]
+            for s, e in sp.tolist():
+                imp_mask[b, s:e] = True
+
+    return imp_mask                                             # (B,L) bool
 
 class Classifier(nn.Module):
     def __init__(self, input_dim, hidden_dim, class_num, num_layers=1, dropout=0.1):
@@ -51,6 +88,8 @@ class BertED(nn.Module):
         self.uniform_expert = False
         self.general_expert_weight = args.general_expert_weight
         self.args = args
+        
+        self._normalize = l2_normalize
 
         # Load backbone
         if backbone_path is not None:
@@ -124,12 +163,14 @@ class BertED(nn.Module):
         for n, p in self.named_parameters():
             if p.requires_grad:
                 print(n, p.shape)
+                break
 
     def print_trainable_parameters(self):
         print("Trainable parameters:")
         for n, p in self.named_parameters():
             if p.requires_grad:
                 print(n, p.shape)
+                break
             
     def unfreeze_lora(self):
         for name, param in self.backbone.named_parameters():
@@ -181,8 +222,13 @@ class BertED(nn.Module):
         if not self.uniform_expert:
             with torch.no_grad():
                 with self.backbone.disable_adapter():
-                    base_output = self.backbone(x, attention_mask=masks)
+                    base_output = self.backbone(x, attention_mask=masks, output_attentions=True, return_dict=True)
+                    hidden = base_output.last_hidden_state
                     cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
+                    attentions = base_output.attentions[-1] 
+            
+            B, L, D = hidden.shape
+            flat_hidden = hidden.view(B * L, D) 
 
             # Gating
             gating_logits = self.gating_layer(cls_embedding)  # (B, E)
@@ -228,6 +274,15 @@ class BertED(nn.Module):
             self.set_adapter("general_expert")
             general_out = self.backbone(x, attention_mask=masks).last_hidden_state
             x_out += self.general_expert_weight * general_out
+
+        # ------------------------------------------------ distill tokens
+        imp_mask = select_important_tokens(
+            attentions, masks, span=span, topk_ratio=self.topk_ratio
+        )                                                         # (B,L) bool
+        imp_mask_flat = imp_mask.view(-1)
+
+        cur_feat_imp = self._normalize(flat_hidden[imp_mask_flat])  # (N_imp,D)
+        return_dict['cur_feat_imp'] = cur_feat_imp
 
         return_dict['reps'] = x_out[:, 0, :].clone()
         return_dict['context_feat'] = x_out.view(-1, x_out.shape[-1])
