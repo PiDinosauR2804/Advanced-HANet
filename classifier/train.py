@@ -665,7 +665,11 @@ def train(local_rank, args, trial=None):
                 if stage > 0 and args.distill != "none":
                     prev_model.eval()
                     with torch.no_grad():
-                        prev_return_dict = prev_model(train_x, train_masks, train_span, None, True, imp_mask)
+                        if args.distill_imp:
+                            prev_return_dict = prev_model(train_x, train_masks, train_span, None, True, imp_mask)
+                        else:
+                            prev_return_dict = prev_model(train_x, train_masks, train_span)
+                            
                         prev_outputs = prev_return_dict['outputs']
                         if args.distill_imp:
                             prev_feature = prev_return_dict['cur_feat_imp']
@@ -678,7 +682,11 @@ def train(local_rank, args, trial=None):
                                 context_feat = torch.cat([cur_feat_imp, da_cur_feat_imp])
                             else:
                                 context_feat = torch.cat([context_feat, da_context_feat])
-                            prev_return_dict_cl = prev_model(da_x, da_masks, da_span, None, True, da_imp_mask)
+                            
+                            if args.distill_imp:
+                                prev_return_dict_cl = prev_model(da_x, da_masks, da_span, None, True, da_imp_mask)
+                            else:
+                                prev_return_dict_cl = prev_model(da_x, da_masks, da_span)
                             prev_outputs_cl = prev_return_dict_cl['outputs']
                             if args.distill_imp:
                                 prev_feature_cl = prev_return_dict_cl['cur_feat_imp']
