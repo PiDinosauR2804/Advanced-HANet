@@ -291,16 +291,32 @@ class BertED(nn.Module):
                     topk_ratio=self.topk_ratio
                 )                        # (B,L) bool
 
+
         imp_mask = imp_mask.to(x.device).bool()
         assert imp_mask.shape == masks.shape, "imp_mask size mismatch"
 
         # (1) chuẩn hoá toàn tensor rồi (2) zero-out token không quan trọng
-        normed_out = _l2_normalize(x_out, dim=-1)             # (B,L,D)
-        cur_feat_imp = torch.zeros_like(normed_out)           # (B,L,D)
-        cur_feat_imp[imp_mask] = normed_out[imp_mask]         # copy back only important
+        # normed_out = _l2_normalize(x_out, dim=-1)             # (B,L,D)
+        # cur_feat_imp = torch.zeros_like(normed_out)           # (B,L,D)
+        # cur_feat_imp[imp_mask] = normed_out[imp_mask]         # copy back only important
         
-        return_dict['imp_mask']     = imp_mask.detach()
-        return_dict['cur_feat_imp'] = cur_feat_imp
+        # return_dict['imp_mask']     = imp_mask.detach()
+        # return_dict['cur_feat_imp'] = cur_feat_imp
+
+        # cur_token_imp = imp_mask.nonzero(as_tuple=False)     
+
+        # 2) biểu diễn token quan trọng (đã normalize)  -> (N_imp, D)
+        normed_out           = _l2_normalize(x_out, dim=-1)  # (B, L, D)
+        cur_feat_tokens_imp  = normed_out[imp_mask]          # indexing theo mask bool
+
+        # 3) list per-batch cho logging/debug
+        # imp_tokens_list = [imp_mask[b].nonzero(as_tuple=True)[0].tolist()
+                        # for b in range(B)]
+
+        # return_dict['cur_token_imp']      = cur_token_imp.detach()
+        return_dict['imp_mask']    = imp_mask
+        return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp.detach()
+
 
 
         # flat_out = x_out.view(-1, x_out.size(-1))                # (B*L, D)
