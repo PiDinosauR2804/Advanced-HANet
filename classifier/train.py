@@ -678,7 +678,7 @@ def train(local_rank, args, trial=None):
                         if args.joint_da_loss == "dist" or args.joint_da_loss == "mul":
                             outputs = torch.cat([outputs, da_outputs])
                             if args.distill_imp:
-                                context_feat_add = torch.cat([cur_feat_tokens_imp, da_cur_feat_tokens_imp])
+                                cur_feat_tokens_imp = torch.cat([cur_feat_tokens_imp, da_cur_feat_tokens_imp])
                                 
                             context_feat = torch.cat([context_feat, da_context_feat])
                             
@@ -703,8 +703,8 @@ def train(local_rank, args, trial=None):
                         
                         if args.distill_imp:
                             prev_feature_add = normalize(prev_feature_add.view(-1, prev_feature.shape[-1]), dim=-1)
-                            cur_feature_add = normalize(context_feat_add.view(-1, prev_feature.shape[-1]), dim=-1)
-                            loss_fd += criterion_fd(prev_feature_add, cur_feature_add, torch.ones(prev_feature.size(0)).to(device))
+                            cur_feature_add = normalize(cur_feat_tokens_imp.view(-1, prev_feature.shape[-1]), dim=-1)
+                            loss_fd += criterion_fd(prev_feature_add, cur_feature_add, torch.ones(prev_feature_add.size(0)).to(device))
                         
                     else:
                         loss_fd = 0
