@@ -722,7 +722,7 @@ def train(local_rank, args, trial=None):
                         loss_pd = 0
                     # loss_pd = criterion_pd(torch.cat([item / T for item in outputs]), torch.cat([item / T for item in prev_outputs]))
                     if args.dweight_loss and stage > 0:
-                        loss = loss * (1 - w) + (loss_fd + loss_pd) * w
+                        loss = loss * (1 - w) + (loss_fd + loss_pd) * w * args.ratio_loss_distill
                     else:
                         loss = loss + args.alpha * loss_fd + args.beta * loss_pd
                     # if args.replay and iter_cnt % args.period == 0:

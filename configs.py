@@ -133,6 +133,7 @@ def parse_arguments():
     
     parser.add_argument('--distill_imp', action='store_true')
     parser.add_argument('--topk_ratio', default=0.5, type=float)
+    parser.add_argument('--ratio_loss_distill', default=5, type=float)
     
     args, _ = parser.parse_known_args()
 
