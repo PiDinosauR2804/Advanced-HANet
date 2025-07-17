@@ -704,7 +704,7 @@ def train(local_rank, args, trial=None):
                         if args.distill_imp:
                             prev_feature_add = normalize(prev_feature_add.view(-1, prev_feature.shape[-1]), dim=-1)
                             cur_feature_add = normalize(cur_feat_tokens_imp.view(-1, prev_feature.shape[-1]), dim=-1)
-                            loss_fd += criterion_fd(prev_feature_add, cur_feature_add, torch.ones(prev_feature_add.size(0)).to(device))
+                            loss_fd += criterion_fd(prev_feature_add, cur_feature_add, torch.ones(prev_feature_add.size(0)).to(device)) * args.ratio_loss_distill
                         
                     else:
                         loss_fd = 0
@@ -722,7 +722,7 @@ def train(local_rank, args, trial=None):
                         loss_pd = 0
                     # loss_pd = criterion_pd(torch.cat([item / T for item in outputs]), torch.cat([item / T for item in prev_outputs]))
                     if args.dweight_loss and stage > 0:
-                        loss = loss * (1 - w) + (loss_fd + loss_pd) * w * args.ratio_loss_distill
+                        loss = loss * (1 - w) + (loss_fd + loss_pd) * w
                     else:
                         loss = loss + args.alpha * loss_fd + args.beta * loss_pd
                     # if args.replay and iter_cnt % args.period == 0:
