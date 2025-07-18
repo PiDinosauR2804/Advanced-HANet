@@ -370,7 +370,9 @@ def train(local_rank, args, trial=None):
                 # else: 
                 return_dict = model(train_x, train_masks, train_span)
                 outputs, context_feat, trig_feat = return_dict['outputs'], return_dict['context_feat'], return_dict['trig_feat']
+                # DISTILL ----------------------------
                 imp_mask, cur_feat_tokens_imp = return_dict['imp_mask'], return_dict['cur_feat_tokens_imp']
+                # DISTILL ----------------------------
                 if args.use_mole:
                     for i, num in enumerate(return_dict['num_choose']):
                         num_choose[i] += num
@@ -452,7 +454,9 @@ def train(local_rank, args, trial=None):
                     # Hidden representaion của data augment
                     da_return_dict = model(da_x, da_masks, da_span)
                     da_outputs, da_reps, da_context_feat, da_trig_feat = da_return_dict['outputs'], da_return_dict['reps'], da_return_dict['context_feat'], da_return_dict['trig_feat']
+                    # DISTILL ----------------------------
                     da_imp_mask, da_cur_feat_tokens_imp = da_return_dict['imp_mask'], da_return_dict['cur_feat_tokens_imp']
+                    # DISTILL ----------------------------
                     # Contrastive loss cho sentence
                     if args.ucl:
                         if not ((args.skip_first_cl == "ucl" or args.skip_first_cl == "ucl+tlcl") and stage == 0):
@@ -665,47 +669,61 @@ def train(local_rank, args, trial=None):
                 if stage > 0 and args.distill != "none":
                     prev_model.eval()
                     with torch.no_grad():
+                        # DISTILL ----------------------------
                         if args.distill_imp:
                             prev_return_dict = prev_model(train_x, train_masks, train_span, None, True, imp_mask)
                         else:
                             prev_return_dict = prev_model(train_x, train_masks, train_span)
-                            
+                        # DISTILL ----------------------------
+                        
                         prev_outputs = prev_return_dict['outputs']
+                        # DISTILL ----------------------------
                         if args.distill_imp:
                             prev_feature_add = prev_return_dict['cur_feat_tokens_imp']
                         prev_feature = prev_return_dict['context_feat']
+                        # DISTILL ----------------------------
 
                         if args.joint_da_loss == "dist" or args.joint_da_loss == "mul":
                             outputs = torch.cat([outputs, da_outputs])
+                            # DISTILL ----------------------------
                             if args.distill_imp:
                                 cur_feat_tokens_imp = torch.cat([cur_feat_tokens_imp, da_cur_feat_tokens_imp])
-                                
+                            # DISTILL ----------------------------
+                            
                             context_feat = torch.cat([context_feat, da_context_feat])
                             
+                            # DISTILL ----------------------------
                             if args.distill_imp:
                                 prev_return_dict_cl = prev_model(da_x, da_masks, da_span, None, True, da_imp_mask)
                             else:
                                 prev_return_dict_cl = prev_model(da_x, da_masks, da_span)
+                            # DISTILL ----------------------------
                             prev_outputs_cl = prev_return_dict_cl['outputs']
+                            
+                            # DISTILL ----------------------------
                             if args.distill_imp:
                                 prev_feature_cl_add = prev_return_dict_cl['cur_feat_tokens_imp']
+                            # DISTILL ----------------------------
+                            
                             prev_feature_cl = prev_return_dict_cl['context_feat']
                             
                             prev_outputs, prev_feature = torch.cat([prev_outputs, prev_outputs_cl]), torch.cat([prev_feature, prev_feature_cl])
+                            # DISTILL ----------------------------
                             if args.distill_imp:
                                 prev_feature_add = torch.cat([prev_feature_add, prev_feature_cl_add])
+                            # DISTILL ----------------------------
                     # prev_invalid_mask_op = torch.BoolTensor([item not in prev_learned_types for item in range(args.class_num)]).to(device)
                     prev_valid_mask_op = torch.nonzero(torch.BoolTensor([item in prev_learned_types for item in range(args.class_num + 1)]).to(device))
                     if args.distill == "fd" or args.distill == "mul":
-                        # prev_feature = normalize(prev_feature.view(-1, prev_feature.shape[-1]), dim=-1)
-                        # cur_feature = normalize(context_feat.view(-1, prev_feature.shape[-1]), dim=-1)
-                        # loss_fd = criterion_fd(prev_feature, cur_feature, torch.ones(prev_feature.size(0)).to(device)) # TODO: Don't know whether the code is right
-                        
+                        prev_feature = normalize(prev_feature.view(-1, prev_feature.shape[-1]), dim=-1)
+                        cur_feature = normalize(context_feat.view(-1, prev_feature.shape[-1]), dim=-1)
+                        loss_fd = criterion_fd(prev_feature, cur_feature, torch.ones(prev_feature.size(0)).to(device)) # TODO: Don't know whether the code is right
+                        # DISTILL ----------------------------
                         if args.distill_imp:
                             prev_feature_add = normalize(prev_feature_add.view(-1, prev_feature.shape[-1]), dim=-1)
                             cur_feature_add = normalize(cur_feat_tokens_imp.view(-1, prev_feature.shape[-1]), dim=-1)
                             loss_fd += criterion_fd(prev_feature_add, cur_feature_add, torch.ones(prev_feature_add.size(0)).to(device)) * args.ratio_loss_distill
-                        
+                        # DISTILL ----------------------------
                     else:
                         loss_fd = 0
                     if args.distill == "pd" or args.distill == "mul":
