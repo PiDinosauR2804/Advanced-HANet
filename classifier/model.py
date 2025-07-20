@@ -315,7 +315,8 @@ class BertED(nn.Module):
 
         # return_dict['cur_token_imp']      = cur_token_imp.detach()
         return_dict['imp_mask']    = imp_mask
-        return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp.detach()
+        # return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp.detach()
+        return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp
 
 
 

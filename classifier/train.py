@@ -886,31 +886,34 @@ def train(local_rank, args, trial=None):
                     
                     # report to optuna
                     
-                    if args.early_stop:
-                        if dev_score is None or dev_score < micro_F1:
-                            no_better = 0
-                            dev_score = micro_F1
-                            torch.save(model.state_dict(), e_pth)
-                            if stage == 0:
-                                torch.save(model.backbone.state_dict(), "outputs/best_model0.pth")
-                        else:
-                            no_better += 1
-                            logger.info(f'No better: {no_better}/{args.patience}')
-                        if no_better >= args.patience:
-                            logger.info("Early stopping with dev_score: " + str(dev_score))
-                            dev_scores_ls.append(dev_score)
-                            logger.info(f"Dev scores list: {dev_scores_ls}")
-                            break
+                    # if args.early_stop:
+                    #     if dev_score is None or dev_score < micro_F1:
+                    #         no_better = 0
+                    #         dev_score = micro_F1
+                    #         torch.save(model.state_dict(), e_pth)
+                    #         if stage == 0:
+                    #             torch.save(model.backbone.state_dict(), "outputs/best_model0.pth")
+                    #     else:
+                    #         no_better += 1
+                    #         logger.info(f'No better: {no_better}/{args.patience}')
+                    #     if no_better >= args.patience:
+                    #         logger.info("Early stopping with dev_score: " + str(dev_score))
+                    #         dev_scores_ls.append(dev_score)
+                    #         logger.info(f"Dev scores list: {dev_scores_ls}")
+                    #         break
                     
                     if ep + 1 == num_epochs:
-                        if args.early_stop:
-                            logger.info("Early stopping with dev_score: " + str(dev_score))
-                            dev_scores_ls.append(dev_score)
-                            logger.info(f"Dev scores list: {dev_scores_ls}")
-                        else:
-                            logger.info("Final model with dev_score: " + str(micro_F1))
-                            dev_scores_ls.append(micro_F1)
-                            logger.info(f"Dev scores list: {dev_scores_ls}")
+                        # if args.early_stop:
+                        #     logger.info("Early stopping with dev_score: " + str(dev_score))
+                        #     dev_scores_ls.append(dev_score)
+                        #     logger.info(f"Dev scores list: {dev_scores_ls}")
+                        # else:
+                        #     logger.info("Final model with dev_score: " + str(micro_F1))
+                        #     dev_scores_ls.append(micro_F1)
+                        #     logger.info(f"Dev scores list: {dev_scores_ls}")
+                        logger.info("Final model with dev_score: " + str(micro_F1))
+                        dev_scores_ls.append(micro_F1)
+                        logger.info(f"Dev scores list: {dev_scores_ls}")
                     
                     if trial is not None:
                         trial.report(micro_F1, ep + 1 + args.epochs * stage)
