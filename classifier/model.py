@@ -294,7 +294,7 @@ class BertED(nn.Module):
 
         imp_mask = imp_mask.to(x.device).bool()
         assert imp_mask.shape == masks.shape, "imp_mask size mismatch"
-
+  
         # (1) chuẩn hoá toàn tensor rồi (2) zero-out token không quan trọng
         # normed_out = _l2_normalize(x_out, dim=-1)             # (B,L,D)
         # cur_feat_imp = torch.zeros_like(normed_out)           # (B,L,D)
@@ -315,7 +315,8 @@ class BertED(nn.Module):
 
         # return_dict['cur_token_imp']      = cur_token_imp.detach()
         return_dict['imp_mask']    = imp_mask
-        return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp.detach()
+        # return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp.detach()
+        return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp
 
 
 
