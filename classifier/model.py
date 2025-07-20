@@ -306,8 +306,9 @@ class BertED(nn.Module):
         # cur_token_imp = imp_mask.nonzero(as_tuple=False)     
 
         # 2) biểu diễn token quan trọng (đã normalize)  -> (N_imp, D)
-        normed_out           = _l2_normalize(x_out, dim=-1)  # (B, L, D)
-        cur_feat_tokens_imp  = normed_out[imp_mask]          # indexing theo mask bool
+        # normed_out           = _l2_normalize(x_out, dim=-1)  # (B, L, D)
+        # cur_feat_tokens_imp  = normed_out[imp_mask]          # indexing theo mask bool
+        cur_feat_tokens_imp  = x_out[imp_mask]          # indexing theo mask bool
 
         # 3) list per-batch cho logging/debug
         # imp_tokens_list = [imp_mask[b].nonzero(as_tuple=True)[0].tolist()

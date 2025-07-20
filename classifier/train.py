@@ -716,9 +716,9 @@ def train(local_rank, args, trial=None):
                     # prev_invalid_mask_op = torch.BoolTensor([item not in prev_learned_types for item in range(args.class_num)]).to(device)
                     prev_valid_mask_op = torch.nonzero(torch.BoolTensor([item in prev_learned_types for item in range(args.class_num + 1)]).to(device))
                     if args.distill == "fd" or args.distill == "mul":
-                        prev_feature = normalize(prev_feature.view(-1, prev_feature.shape[-1]), dim=-1)
-                        cur_feature = normalize(context_feat.view(-1, prev_feature.shape[-1]), dim=-1)
-                        loss_fd = criterion_fd(prev_feature, cur_feature, torch.ones(prev_feature.size(0)).to(device)) # TODO: Don't know whether the code is right
+                        # prev_feature = normalize(prev_feature.view(-1, prev_feature.shape[-1]), dim=-1)
+                        # cur_feature = normalize(context_feat.view(-1, prev_feature.shape[-1]), dim=-1)
+                        # loss_fd = criterion_fd(prev_feature, cur_feature, torch.ones(prev_feature.size(0)).to(device)) # TODO: Don't know whether the code is right
                         # DISTILL ----------------------------
                         if args.distill_imp:
                             prev_feature_add = normalize(prev_feature_add.view(-1, prev_feature.shape[-1]), dim=-1)
