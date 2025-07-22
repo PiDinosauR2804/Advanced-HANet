@@ -18,7 +18,7 @@ def _select_important_tokens(atts,         # (N, dl, L, L)
         important = (top-k attention)  ∪  (trigger start & end token).
     """
     # ---------- (1) Attention-based scores ----------------------------
-    N, dl, L = atts.shape[0:1]
+    N, dl, L, _ = atts.shape
     score = atts.sum(dim=-1)         # (N, dl, L)
     score = score.masked_fill(~atts_mask.unsqueze(1).repeat(1, dl, 1).bool(), -1e6)
 
