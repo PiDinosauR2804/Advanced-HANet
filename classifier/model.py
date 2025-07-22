@@ -20,7 +20,7 @@ def _select_important_tokens(atts,         # (N, dl, L, L)
     # ---------- (1) Attention-based scores ----------------------------
     N, dl, L, _ = atts.shape
     score = atts.sum(dim=-1)         # (N, dl, L)
-    score = score.masked_fill(~atts_mask.unsqueze(1).repeat(1, dl, 1).bool(), -1e6)
+    score = score.masked_fill(~atts_mask.unsqueeze(1).repeat(1, dl, 1).bool(), -1e6)
 
     k = max(1, int(topk_ratio * L))
 
