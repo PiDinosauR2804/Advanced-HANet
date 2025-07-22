@@ -274,19 +274,22 @@ class BertED(nn.Module):
                 # ================== KHỐI MỚI: trích cur_feat_imp ======================
                 attn_expert = torch.stack([out.attentions[i] for i in self.distill_layers]).transpose(0,1).mean(dim=2)  # (N, dl, H, L, L) -> (N, dl, L, L)
                 hs_expert = torch.stack([out.hidden_states[i+1] for i in self.distill_layers]).transpose(0,1) # (N, dl, L, d_model)
-                if imp_masks is None:
-                    with torch.no_grad():
-                        imp_mask = _select_important_tokens(
-                            attn_expert,          # (N,dl,L,L) – lấy layer cuối
-                            masks[mask],               # (N,L)
-                            # span=span[mask], # (N, list(pair))
-                            span=None, # (N, list(pair))
-                            topk_ratio=self.topk_ratio
-                        ) # (N,dl,L) bool
+                try:
+                    if imp_masks is None:
+                        with torch.no_grad():
+                            imp_mask = _select_important_tokens(
+                                attn_expert,          # (N,dl,L,L) – lấy layer cuối
+                                masks[mask],               # (N,L)
+                                # span=span[mask], # (N, list(pair))
+                                span=None, # (N, list(pair))
+                                topk_ratio=self.topk_ratio
+                            ) # (N,dl,L) bool
 
-                    imp_mask = imp_mask.to(x.device)
-                    imp_masks_tmp[k][mask, :, :] = imp_mask
-                expert_outputs_hs[k][:][mask] = hs_expert * imp_mask.unsqueeze(-1)
+                        imp_mask = imp_mask.to(x.device)
+                        imp_masks_tmp[k][mask] = imp_mask
+                    expert_outputs_hs[k][mask] = hs_expert * imp_mask.unsqueeze(-1)
+                except:
+                    logger.error(f'imp_mask shape: {imp_mask.shape}; imp_mask_tmp[k][mask] shape: {imp_masks_tmp[k][mask].shape}')
                 
         # Tổng hợp top-k expert output
         x_out = sum(expert_outputs)
@@ -312,6 +315,8 @@ class BertED(nn.Module):
 
                 imp_mask = imp_mask.to(x.device)
                 imp_masks_tmp[self.top_k] = imp_mask
+            else:
+                imp_mask = imp_masks[self.top_k]
             expert_outputs_hs[self.top_k] = hs_expert * imp_mask.unsqueeze(-1)
 
   
