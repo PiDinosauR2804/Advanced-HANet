@@ -372,7 +372,7 @@ def train(local_rank, args, trial=None):
                 return_dict = model(train_x, train_masks, train_span)
                 outputs, context_feat, trig_feat = return_dict['outputs'], return_dict['context_feat'], return_dict['trig_feat']
                 # DISTILL ----------------------------
-                imp_mask, cur_feat_tokens_imp = return_dict['imp_mask'], return_dict['cur_feat_tokens_imp']
+                imp_mask, cur_feat_tokens_imp, topk_indices = return_dict['imp_mask'], return_dict['cur_feat_tokens_imp'], return_dict['topk_indices']
                 # DISTILL ----------------------------
                 if args.use_mole:
                     for i, num in enumerate(return_dict['num_choose']):
@@ -456,7 +456,7 @@ def train(local_rank, args, trial=None):
                     da_return_dict = model(da_x, da_masks, da_span)
                     da_outputs, da_reps, da_context_feat, da_trig_feat = da_return_dict['outputs'], da_return_dict['reps'], da_return_dict['context_feat'], da_return_dict['trig_feat']
                     # DISTILL ----------------------------
-                    da_imp_mask, da_cur_feat_tokens_imp = da_return_dict['imp_mask'], da_return_dict['cur_feat_tokens_imp']
+                    da_imp_mask, da_cur_feat_tokens_imp, da_topk_indices = da_return_dict['imp_mask'], da_return_dict['cur_feat_tokens_imp'], da_return_dict['topk_indices']
                     # DISTILL ----------------------------
                     # Contrastive loss cho sentence
                     if args.ucl:
@@ -672,7 +672,7 @@ def train(local_rank, args, trial=None):
                     with torch.no_grad():
                         # DISTILL ----------------------------
                         if args.distill_imp:
-                            prev_return_dict = prev_model(train_x, train_masks, train_span, None, True, imp_mask)
+                            prev_return_dict = prev_model(train_x, train_masks, train_span, None, True, imp_mask, topk_indices)
                         else:
                             prev_return_dict = prev_model(train_x, train_masks, train_span)
                         # DISTILL ----------------------------
@@ -695,7 +695,7 @@ def train(local_rank, args, trial=None):
                             
                             # DISTILL ----------------------------
                             if args.distill_imp:
-                                prev_return_dict_cl = prev_model(da_x, da_masks, da_span, None, True, da_imp_mask)
+                                prev_return_dict_cl = prev_model(da_x, da_masks, da_span, None, True, da_imp_mask, da_topk_indices)
                             else:
                                 prev_return_dict_cl = prev_model(da_x, da_masks, da_span)
                             # DISTILL ----------------------------

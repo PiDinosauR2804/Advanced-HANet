@@ -9,36 +9,36 @@ import torch.nn.functional as F
 def _l2_normalize(x, dim: int = -1):
     return F.normalize(x, p=2.0, dim=dim)
 
-def _select_important_tokens(att_last,         # (B, H, L, L)
-                             att_mask,         # (B, L)
+def _select_important_tokens(atts,         # (N, dl, L, L)
+                             atts_mask,         # (N, L)
                              span=None,
                              topk_ratio: float = 0.1):
     """
-    Trả về mask bool (B, L) :
+    Trả về mask bool (N, dl, L) :
         important = (top-k attention)  ∪  (trigger start & end token).
     """
     # ---------- (1) Attention-based scores ----------------------------
-    score = att_last.mean(dim=1).sum(dim=1)         # (B, L)
-    score = score.masked_fill(~att_mask.bool(), -1e4)
+    N, dl, L = atts.shape[0:1]
+    score = atts.sum(dim=-1)         # (N, dl, L)
+    score = score.masked_fill(~atts_mask.unsqueze(1).repeat(1, dl, 1).bool(), -1e6)
 
-    B, L = score.shape
     k = max(1, int(topk_ratio * L))
 
-    imp_mask = torch.zeros_like(att_mask, dtype=torch.bool)
-    topk_idx = score.topk(k, dim=1).indices         # (B, k)
-    imp_mask.scatter_(1, topk_idx, True)
+    imp_mask = torch.zeros(N, dl, L, dtype=torch.bool) # (N, dl, L)
+    topk_idx = score.topk(k, dim=-1).indices # (N, dl, k)
+    imp_mask = imp_mask.scatter(-1, topk_idx, True)
 
-    # ---------- (2) Add trigger tokens (start & end only) -------------
-    if span is not None:
-        for b, sp in enumerate(span):
-            if sp.numel() == 0:
-                continue
-            # sp shape (N_trig, 2): columns = [start, end]
-            starts = sp[:, 0]
-            ends   = sp[:, 1]
-            imp_mask[b, starts] = True
-            imp_mask[b, ends]   = True
-            # (Nếu muốn cả đoạn, dùng: for s,e in sp: imp_mask[b, s:e+1] = True)
+    # # ---------- (2) Add trigger tokens (start & end only) -------------
+    # if span is not None:
+    #     for b, sp in enumerate(span):
+    #         if sp.numel() == 0:
+    #             continue
+    #         # sp shape (N_trig, 2): columns = [start, end]
+    #         starts = sp[:, 0]
+    #         ends   = sp[:, 1]
+    #         imp_mask[b, starts] = True
+    #         imp_mask[b, ends]   = True
+    #         # (Nếu muốn cả đoạn, dùng: for s,e in sp: imp_mask[b, s:e+1] = True)
     return imp_mask
 
 class Classifier(nn.Module):
@@ -88,6 +88,7 @@ class BertED(nn.Module):
         self.general_expert_weight = args.general_expert_weight
         self.args = args
         self.topk_ratio = args.topk_ratio   # hoặc tham số hoá theo args
+        self.distill_layers = args.distill_layers
 
         # Load backbone
         if backbone_path is not None:
@@ -213,40 +214,48 @@ class BertED(nn.Module):
         self.backbone.set_adapter(name)
         self.unfreeze_lora()
         
-    def _forward_mole(self, x, masks, span=None, aug=None, train=True, imp_mask=None):
+    def _forward_mole(self, x, masks, span=None, aug=None, train=True, imp_masks=None, topk_indices=None):
         B, L = x.size(0), x.size(1)
-        num_heads = self.backbone.config.num_attention_heads
+        # num_heads = self.backbone.config.num_attention_heads
         return_dict = {}
+        if topk_indices is None:
+            if not self.uniform_expert:
+                with torch.no_grad():
+                    with self.backbone.disable_adapter():
+                        base_output = self.backbone(x, attention_mask=masks, return_dict=True)
+                        cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
 
-        if not self.uniform_expert:
-            with torch.no_grad():
-                with self.backbone.disable_adapter():
-                    base_output = self.backbone(x, attention_mask=masks, return_dict=True)
-                    cls_embedding = base_output.last_hidden_state[:, 0, :]  # (B, H)
-
-            # Gating
-            gating_logits = self.gating_layer(cls_embedding)  # (B, E)
-            gating_weights = self.softmax(gating_logits)
-            topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
-            if train:
-                avg_weights = gating_weights.mean(dim=0)
-                uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
-                return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
-                return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
+                # Gating
+                gating_logits = self.gating_layer(cls_embedding)  # (B, E)
+                gating_weights = self.softmax(gating_logits)
+                topk_weights, topk_indices = torch.topk(gating_weights, self.top_k, dim=-1)  # (B, k), (B, k)
+                if train:
+                    avg_weights = gating_weights.mean(dim=0)
+                    uniform = torch.full_like(avg_weights, 1.0 / self.num_experts)
+                    return_dict['load_balance_loss'] = torch.sum((avg_weights - uniform) ** 2)
+                    return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
+            else:
+                topk_weights = torch.full((B, self.top_k), 1.0 / self.top_k).to(x.device)
+                # randomly chọn k expert cho mỗi batch, topk của một sample phải khác nhau
+                topk_indices = torch.stack([torch.randperm(self.num_experts)[:self.top_k] for _ in range(B)], dim=0).to(x.device)
         else:
+            if len(x) != len(topk_indices):
+                raise Exception(f"Len x not match len topk_indices: {len(x)} != {len(topk_indices)}")
             topk_weights = torch.full((B, self.top_k), 1.0 / self.top_k).to(x.device)
-            # randomly chọn k expert cho mỗi batch, topk của một sample phải khác nhau
-            topk_indices = torch.stack([torch.randperm(self.num_experts)[:self.top_k] for _ in range(B)], dim=0).to(x.device)
-
+            
         # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
         expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
-        expert_outputs_attn = [torch.zeros(B, num_heads, L, L, device=x.device)
-                           for _ in range(self.top_k)]
+        expert_outputs_hs = [torch.zeros(B, len(self.distill_layers), self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k + 1)]
+        if imp_masks is None:
+            imp_masks_tmp = [torch.zeros(B, len(self.distill_layers), self.seqlen, self.input_dim, device=x.device, dtype=torch.bool) for _ in range(self.top_k + 1)]
         num_choose = [0] * self.num_experts
+        
         for k in range(self.top_k):
             expert_ids = topk_indices[:, k]  # (B,)
             weights = topk_weights[:, k]     # (B,)
-
+            if imp_masks is not None:
+                imp_mask = imp_masks[:, k, :, :] # (B,dl,L)
+            
             for expert_id in expert_ids.unique():
                 mask = (expert_ids == expert_id)
                 if mask.sum() == 0:
@@ -256,44 +265,54 @@ class BertED(nn.Module):
 
                 self.set_adapter(f"expert_{expert_id.item()}")
                 out = self.backbone(
-                    x[mask], attention_mask=masks[mask], output_attentions=True
+                    x[mask], attention_mask=masks[mask], output_attentions=True, output_hidden_states=True
                 )                
-                _ = out.last_hidden_state  # (N, T, H)
-                attn_expert = out.attentions[-1]  # (N, T, H)
-                
-
+                _ = out.last_hidden_state  # (N, L, d_model)
                 weighted = weights[mask].view(-1, 1, 1) * _
                 expert_outputs[k][mask] = weighted
                 
-                w_attn = weights[mask].view(-1, 1, 1, 1)         # (N,1,1,1)
-                expert_outputs_attn[k][mask] = w_attn * attn_expert
+                # ================== KHỐI MỚI: trích cur_feat_imp ======================
+                attn_expert = torch.stack(out.attentions[self.distill_layers]).transpose(0,1).mean(dim=2)  # (N, dl, H, L, L) -> (N, dl, L, L)
+                hs_expert = torch.stack(out.hidden_states[self.distill_layers]).transpose(0,1) # (N, dl, L, d_model)
+                if imp_masks is None:
+                    with torch.no_grad():
+                        imp_mask = _select_important_tokens(
+                            attn_expert,          # (N,dl,L,L) – lấy layer cuối
+                            masks[mask],               # (N,L)
+                            span=span[mask], # (N, list(pair))
+                            topk_ratio=self.topk_ratio
+                        ) # (N,dl,L) bool
 
+                    imp_mask = imp_mask.to(x.device)
+                    imp_masks_tmp[mask, k, :, :] = imp_mask
+                expert_outputs_hs[k][:][mask] = hs_expert * imp_mask.unsqueeze(-1)
+                
         # Tổng hợp top-k expert output
         x_out = sum(expert_outputs)
-        total_attention = sum(expert_outputs_attn)
 
         # Optional: add general expert
         if self.use_general_expert:
             self.set_adapter("general_expert")
-            general_out = self.backbone(x, attention_mask=masks, output_attentions=True)
+            general_out = self.backbone(x, attention_mask=masks, output_attentions=True, output_hidden_states=True)
             _1 = general_out.last_hidden_state
-            _2 = general_out.attentions[-1]
             x_out += self.general_expert_weight * _1
-            total_attention += self.general_expert_weight * _2
+            
+            # ================== KHỐI MỚI: trích cur_feat_imp ======================
+            attn_expert = torch.stack(general_out.attentions[self.distill_layers]).transpose(0,1).mean(dim=2)  # (N, dl, H, L, L) -> (N, dl, L, L)
+            hs_expert = torch.stack(general_out.hidden_states[self.distill_layers]).transpose(0,1) # (N, dl, L, d_model)
+            if imp_masks is None:
+                with torch.no_grad():
+                    imp_mask = _select_important_tokens(
+                        attn_expert,          # (N,dl,L,L) – lấy layer cuối
+                        masks,               # (N,L)
+                        span=span, # (N, list(pair))
+                        topk_ratio=self.topk_ratio
+                    ) # (N,dl,L) bool
 
-        # ================== KHỐI MỚI: trích cur_feat_imp ======================
-        if imp_mask is None:
-            with torch.no_grad():
-                imp_mask = _select_important_tokens(
-                    total_attention,          # (B,H,L,L) – lấy layer cuối
-                    masks,               # (B,L)
-                    span=span,
-                    topk_ratio=self.topk_ratio
-                )                        # (B,L) bool
+                imp_mask = imp_mask.to(x.device)
+                imp_masks_tmp[:, k, :, :] = imp_mask
+            expert_outputs_hs[self.top_k] = hs_expert * imp_mask.unsqueeze(-1)
 
-
-        imp_mask = imp_mask.to(x.device).bool()
-        assert imp_mask.shape == masks.shape, "imp_mask size mismatch"
   
         # (1) chuẩn hoá toàn tensor rồi (2) zero-out token không quan trọng
         # normed_out = _l2_normalize(x_out, dim=-1)             # (B,L,D)
@@ -308,7 +327,7 @@ class BertED(nn.Module):
         # 2) biểu diễn token quan trọng (đã normalize)  -> (N_imp, D)
         # normed_out           = _l2_normalize(x_out, dim=-1)  # (B, L, D)
         # cur_feat_tokens_imp  = normed_out[imp_mask]          # indexing theo mask bool
-        cur_feat_tokens_imp  = x_out[imp_mask]          # indexing theo mask bool
+        # cur_feat_tokens_imp  = x_out[imp_mask]          # indexing theo mask bool
 
         # 3) list per-batch cho logging/debug
         # imp_tokens_list = [imp_mask[b].nonzero(as_tuple=True)[0].tolist()
@@ -317,7 +336,8 @@ class BertED(nn.Module):
         # return_dict['cur_token_imp']      = cur_token_imp.detach()
         return_dict['imp_mask']    = imp_mask
         # return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp.detach()
-        return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp
+        return_dict['cur_feat_tokens_imp'] = expert_outputs_hs
+        return_dict['topk_indices'] = topk_indices
 
 
 
