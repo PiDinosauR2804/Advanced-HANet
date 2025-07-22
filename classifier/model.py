@@ -311,7 +311,7 @@ class BertED(nn.Module):
                     ) # (N,dl,L) bool
 
                 imp_mask = imp_mask.to(x.device)
-                imp_masks_tmp[k][mask, :, :] = imp_mask
+                imp_masks_tmp[self.top_k] = imp_mask
             expert_outputs_hs[self.top_k] = hs_expert * imp_mask.unsqueeze(-1)
 
   
