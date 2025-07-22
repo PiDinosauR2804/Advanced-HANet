@@ -343,7 +343,8 @@ class BertED(nn.Module):
                         # for b in range(B)]
 
         # return_dict['cur_token_imp']      = cur_token_imp.detach()
-        return_dict['imp_mask']    = imp_masks_tmp
+        if imp_masks is None:
+            return_dict['imp_mask']    = imp_masks_tmp
         # return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp.detach()
         return_dict['cur_feat_tokens_imp'] = torch.stack(expert_outputs_hs)
         return_dict['topk_indices'] = topk_indices
