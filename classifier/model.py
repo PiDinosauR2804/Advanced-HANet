@@ -254,7 +254,7 @@ class BertED(nn.Module):
             expert_ids = topk_indices[:, k]  # (B,)
             weights = topk_weights[:, k]     # (B,)
             if imp_masks is not None:
-                imp_mask = imp_masks[:, k, :, :] # (B,dl,L)
+                imp_mask = imp_masks[k] # (B,dl,L)
             
             for expert_id in expert_ids.unique():
                 mask = (expert_ids == expert_id)
@@ -285,7 +285,7 @@ class BertED(nn.Module):
                         ) # (N,dl,L) bool
 
                     imp_mask = imp_mask.to(x.device)
-                    imp_masks_tmp[mask, k, :, :] = imp_mask
+                    imp_masks_tmp[k][mask, :, :] = imp_mask
                 expert_outputs_hs[k][:][mask] = hs_expert * imp_mask.unsqueeze(-1)
                 
         # Tổng hợp top-k expert output
@@ -311,7 +311,7 @@ class BertED(nn.Module):
                     ) # (N,dl,L) bool
 
                 imp_mask = imp_mask.to(x.device)
-                imp_masks_tmp[:, k, :, :] = imp_mask
+                imp_masks_tmp[k][mask, :, :] = imp_mask
             expert_outputs_hs[self.top_k] = hs_expert * imp_mask.unsqueeze(-1)
 
   
