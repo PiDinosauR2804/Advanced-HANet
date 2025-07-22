@@ -184,9 +184,9 @@ class BertED(nn.Module):
             self.uniform_expert = turn_on
             logger.info(f"Uniform expert: {turn_on}")
 
-    def forward(self, x, masks, span=None, aug=None, train=True, imp_mask=None):
+    def forward(self, x, masks, span=None, aug=None, train=True, imp_mask=None, topk_indices=None):
         if self.use_mole:
-            return self._forward_mole(x, masks, span, aug, train, imp_mask)
+            return self._forward_mole(x, masks, span, aug, train, imp_mask, topk_indices)
         else:
             return self._forward_normal(x, masks, span, aug)
 
