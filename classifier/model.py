@@ -272,8 +272,8 @@ class BertED(nn.Module):
                 expert_outputs[k][mask] = weighted
                 
                 # ================== KHỐI MỚI: trích cur_feat_imp ======================
-                attn_expert = torch.stack(out.attentions[i] for i in self.distill_layers).transpose(0,1).mean(dim=2)  # (N, dl, H, L, L) -> (N, dl, L, L)
-                hs_expert = torch.stack(out.hidden_states[i] for i in self.distill_layers).transpose(0,1) # (N, dl, L, d_model)
+                attn_expert = torch.stack([out.attentions[i] for i in self.distill_layers]).transpose(0,1).mean(dim=2)  # (N, dl, H, L, L) -> (N, dl, L, L)
+                hs_expert = torch.stack([out.hidden_states[i] for i in self.distill_layers]).transpose(0,1) # (N, dl, L, d_model)
                 if imp_masks is None:
                     with torch.no_grad():
                         imp_mask = _select_important_tokens(
@@ -298,8 +298,8 @@ class BertED(nn.Module):
             x_out += self.general_expert_weight * _1
             
             # ================== KHỐI MỚI: trích cur_feat_imp ======================
-            attn_expert = torch.stack(general_out.attentions[i] for i in self.distill_layers).transpose(0,1).mean(dim=2)  # (N, dl, H, L, L) -> (N, dl, L, L)
-            hs_expert = torch.stack(general_out.hidden_states[i] for i in self.distill_layers).transpose(0,1) # (N, dl, L, d_model)
+            attn_expert = torch.stack([general_out.attentions[i] for i in self.distill_layers]).transpose(0,1).mean(dim=2)  # (N, dl, H, L, L) -> (N, dl, L, L)
+            hs_expert = torch.stack([general_out.hidden_states[i] for i in self.distill_layers]).transpose(0,1) # (N, dl, L, d_model)
             if imp_masks is None:
                 with torch.no_grad():
                     imp_mask = _select_important_tokens(
