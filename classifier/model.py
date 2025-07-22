@@ -288,8 +288,9 @@ class BertED(nn.Module):
                         imp_mask = imp_mask.to(x.device)
                         imp_masks_tmp[k][mask] = imp_mask
                     expert_outputs_hs[k][mask] = hs_expert * imp_mask.unsqueeze(-1)
-                except:
-                    logger.error(f'imp_mask shape: {imp_mask.shape}; imp_mask_tmp[k][mask] shape: {imp_masks_tmp[k][mask].shape}')
+                except Exception as e:
+                    logger.error(f'imp_mask shape: {imp_mask.shape} | expert_outputs_hs[k][mask] shape: {expert_outputs_hs[k][mask].shape}')
+                    raise e
                 
         # Tổng hợp top-k expert output
         x_out = sum(expert_outputs)
