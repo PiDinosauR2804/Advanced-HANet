@@ -36,9 +36,9 @@ from loguru import logger
 from tqdm.auto import tqdm
 import optuna
 
-wandb_api_key = "0806b2d5c00870a95f366d95c825d7680649abb7"
-os.environ['WANDB_API_KEY'] = wandb_api_key
-wandb.login()
+# wandb_api_key = "0806b2d5c00870a95f366d95c825d7680649abb7"
+# os.environ['WANDB_API_KEY'] = wandb_api_key
+# wandb.login()
 
 # PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
 # PERM_10 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]
