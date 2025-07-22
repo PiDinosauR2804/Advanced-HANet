@@ -24,7 +24,7 @@ def _select_important_tokens(atts,         # (N, dl, L, L)
 
     k = max(1, int(topk_ratio * L))
 
-    imp_mask = torch.zeros(N, dl, L, dtype=torch.bool) # (N, dl, L)
+    imp_mask = torch.zeros(N, dl, L, dtype=torch.bool, device=score.device) # (N, dl, L)
     topk_idx = score.topk(k, dim=-1).indices # (N, dl, k)
     imp_mask = imp_mask.scatter(-1, topk_idx, True)
 
