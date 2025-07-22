@@ -247,7 +247,7 @@ class BertED(nn.Module):
         expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
         expert_outputs_hs = [torch.zeros(B, len(self.distill_layers), self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k + 1)]
         if imp_masks is None:
-            imp_masks_tmp = [torch.zeros(B, len(self.distill_layers), self.seqlen, self.input_dim, device=x.device, dtype=torch.bool) for _ in range(self.top_k + 1)]
+            imp_masks_tmp = [torch.zeros(B, len(self.distill_layers), self.seqlen, device=x.device, dtype=torch.bool) for _ in range(self.top_k + 1)]
         num_choose = [0] * self.num_experts
         
         for k in range(self.top_k):
