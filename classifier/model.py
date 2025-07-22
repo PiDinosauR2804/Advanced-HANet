@@ -287,7 +287,9 @@ class BertED(nn.Module):
 
                         imp_mask = imp_mask.to(x.device)
                         imp_masks_tmp[k][mask] = imp_mask
-                    expert_outputs_hs[k][mask] = hs_expert * imp_mask.unsqueeze(-1)
+                        expert_outputs_hs[k][mask] = hs_expert * imp_mask.unsqueeze(-1)
+                    else:
+                        expert_outputs_hs[k][mask] = hs_expert * imp_mask[mask].unsqueeze(-1)
                 except Exception as e:
                     logger.error(f'imp_mask shape: {imp_mask.shape} | expert_outputs_hs[k][mask] shape: {expert_outputs_hs[k][mask].shape}')
                     raise e
