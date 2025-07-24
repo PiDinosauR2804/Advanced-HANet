@@ -385,7 +385,7 @@ def train(local_rank, args, trial=None):
                     invalid_mask_label = torch.BoolTensor([item not in learned_types for item in train_y[i]]).to(device)
                     train_y[i].masked_fill_(invalid_mask_label, 0)
                 # outputs[:, 0] = 0
-                loss, loss_ucl, loss_aug, loss_fd, loss_pd, loss_tlcl = 0, 0, 0, 0, 0, 0
+                loss, loss_ucl, loss_aug, loss_fd, loss_pd, loss_tlcl, loss_fd_layer = 0, 0, 0, 0, 0, 0, 0
                 ce_y = torch.cat(train_y) # (sum of len(label), )
                 ce_outputs = outputs
                 if (args.ucl or args.tlcl) and (stage > 0 or (args.skip_first_cl != "ucl+tlcl" and stage == 0)):                        
@@ -723,8 +723,8 @@ def train(local_rank, args, trial=None):
                         if args.distill_imp:
                             prev_feature_add = normalize(prev_feature_add.view(-1, prev_feature.shape[-1]), dim=-1)
                             cur_feature_add = normalize(cur_feat_tokens_imp.view(-1, prev_feature.shape[-1]), dim=-1)
-                            loss_fd_layer = criterion_fd(prev_feature_add, cur_feature_add, torch.ones(prev_feature_add.size(0)).to(device)) * args.ratio_loss_distill
-                            loss_fd += loss_fd_layer
+                            loss_fd_layer = criterion_fd(prev_feature_add, cur_feature_add, torch.ones(prev_feature_add.size(0)).to(device))
+                            loss_fd += loss_fd_layer * args.ratio_loss_distill
                         # DISTILL ----------------------------
                     else:
                         loss_fd = 0
