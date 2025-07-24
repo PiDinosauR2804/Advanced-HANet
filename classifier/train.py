@@ -716,14 +716,15 @@ def train(local_rank, args, trial=None):
                     # prev_invalid_mask_op = torch.BoolTensor([item not in prev_learned_types for item in range(args.class_num)]).to(device)
                     prev_valid_mask_op = torch.nonzero(torch.BoolTensor([item in prev_learned_types for item in range(args.class_num + 1)]).to(device))
                     if args.distill == "fd" or args.distill == "mul":
-                        # prev_feature = normalize(prev_feature.view(-1, prev_feature.shape[-1]), dim=-1)
-                        # cur_feature = normalize(context_feat.view(-1, prev_feature.shape[-1]), dim=-1)
-                        # loss_fd = criterion_fd(prev_feature, cur_feature, torch.ones(prev_feature.size(0)).to(device)) # TODO: Don't know whether the code is right
+                        prev_feature = normalize(prev_feature.view(-1, prev_feature.shape[-1]), dim=-1)
+                        cur_feature = normalize(context_feat.view(-1, prev_feature.shape[-1]), dim=-1)
+                        loss_fd = criterion_fd(prev_feature, cur_feature, torch.ones(prev_feature.size(0)).to(device)) # TODO: Don't know whether the code is right
                         # DISTILL ----------------------------
                         if args.distill_imp:
                             prev_feature_add = normalize(prev_feature_add.view(-1, prev_feature.shape[-1]), dim=-1)
                             cur_feature_add = normalize(cur_feat_tokens_imp.view(-1, prev_feature.shape[-1]), dim=-1)
-                            loss_fd += criterion_fd(prev_feature_add, cur_feature_add, torch.ones(prev_feature_add.size(0)).to(device)) * args.ratio_loss_distill
+                            loss_fd_layer = criterion_fd(prev_feature_add, cur_feature_add, torch.ones(prev_feature_add.size(0)).to(device)) * args.ratio_loss_distill
+                            loss_fd += loss_fd_layer
                         # DISTILL ----------------------------
                     else:
                         loss_fd = 0
@@ -802,15 +803,15 @@ def train(local_rank, args, trial=None):
                 optimizer.step() 
                 stats = torch.cuda.memory_stats()
                 wandb.log({
-                            f"loss_ce_task_{stage}": loss_ce,
-                            f"loss_ucl_{stage}": loss_ucl,
-                            f"loss_tlcl_{stage}": loss_tlcl,
-                            f"loss_des_cl_{stage}": loss_des_cl,
-                            f"loss_lgacl_{stage}": lgacl_loss,
-                            f"loss_aug_{stage}": loss_aug,
-                            f"loss_fd_{stage}": loss_fd,
-                            f"loss_pd_{stage}": loss_pd,
-                            f"loss_all_{stage}": loss,
+                            # f"loss_ce_task_{stage}": loss_ce,
+                            # f"loss_ucl_{stage}": loss_ucl,
+                            # f"loss_tlcl_{stage}": loss_tlcl,
+                            # f"loss_des_cl_{stage}": loss_des_cl,
+                            # f"loss_lgacl_{stage}": lgacl_loss,
+                            # f"loss_aug_{stage}": loss_aug,
+                            # f"loss_fd_{stage}": loss_fd,
+                            # f"loss_pd_{stage}": loss_pd,
+                            # f"loss_all_{stage}": loss,
                             
                             "loss_ce_task": loss_ce,
                             "entropy_loss": return_dict.get('entropy_loss', 0),
@@ -824,12 +825,13 @@ def train(local_rank, args, trial=None):
                             "memory/num_ooms": stats["num_ooms"],
                             "memory/alloc_retries": stats["num_alloc_retries"],
                             
-                            # "loss_ucl": loss_ucl,
-                            # "loss_tlcl": loss_tlcl,
-                            # "loss_des_cl": loss_des_cl,
-                            # "loss_aug": loss_aug,
-                            # "loss_fd": loss_fd,
-                            # "loss_pd": loss_pd,
+                            "loss_ucl": loss_ucl,
+                            "loss_tlcl": loss_tlcl,
+                            "loss_des_cl": loss_des_cl,
+                            "loss_aug": loss_aug,
+                            "loss_fd": loss_fd,
+                            "loss_fd_layer": loss_fd_layer,
+                            "loss_pd": loss_pd,
                             "loss_all": loss,
                             "learning_rate": optimizer.param_groups[0]['lr'],
                         })
