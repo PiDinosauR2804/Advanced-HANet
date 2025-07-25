@@ -216,8 +216,6 @@ class BertED(nn.Module):
         
     def _forward_mole(self, x, masks, span=None, aug=None, train=True, imp_masks=None, topk_indices=None):
         B, L = x.size(0), x.size(1)
-        if span is not None:
-            span=torch.tensor(span)
         # num_heads = self.backbone.config.num_attention_heads
         return_dict = {}
         if topk_indices is None:
@@ -283,7 +281,7 @@ class BertED(nn.Module):
                                 attn_expert,          # (N,dl,L,L) – lấy layer cuối
                                 masks[mask],               # (N,L)
                                 # span=span[mask], # (N, list(pair))
-                                span=span[mask], # (N, list(pair))
+                                span=[sp for i, sp in enumerate(span) if mask[i] == True], # (N, list(pair))
                                 topk_ratio=self.topk_ratio
                             ) # (N,dl,L) bool
 
