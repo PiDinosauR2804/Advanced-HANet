@@ -29,16 +29,16 @@ def _select_important_tokens(atts,         # (N, dl, L, L)
     imp_mask = imp_mask.scatter(-1, topk_idx, True)
 
     # # ---------- (2) Add trigger tokens (start & end only) -------------
-    # if span is not None:
-    #     for b, sp in enumerate(span):
-    #         if sp.numel() == 0:
-    #             continue
-    #         # sp shape (N_trig, 2): columns = [start, end]
-    #         starts = sp[:, 0]
-    #         ends   = sp[:, 1]
-    #         imp_mask[b, starts] = True
-    #         imp_mask[b, ends]   = True
-    #         # (Nếu muốn cả đoạn, dùng: for s,e in sp: imp_mask[b, s:e+1] = True)
+    if span is not None:
+        for b, sp in enumerate(span):
+            if sp.numel() == 0:
+                continue
+            # sp shape (N_trig, 2): columns = [start, end]
+            starts = sp[:, 0]
+            ends   = sp[:, 1]
+            imp_mask[b, :, starts] = True
+            imp_mask[b, :, ends]   = True
+            # (Nếu muốn cả đoạn, dùng: for s,e in sp: imp_mask[b, s:e+1] = True)
     return imp_mask
 
 class Classifier(nn.Module):
@@ -216,6 +216,8 @@ class BertED(nn.Module):
         
     def _forward_mole(self, x, masks, span=None, aug=None, train=True, imp_masks=None, topk_indices=None):
         B, L = x.size(0), x.size(1)
+        if span is not None:
+            span=torch.tensor(span)
         # num_heads = self.backbone.config.num_attention_heads
         return_dict = {}
         if topk_indices is None:
@@ -281,7 +283,7 @@ class BertED(nn.Module):
                                 attn_expert,          # (N,dl,L,L) – lấy layer cuối
                                 masks[mask],               # (N,L)
                                 # span=span[mask], # (N, list(pair))
-                                span=None, # (N, list(pair))
+                                span=span[mask], # (N, list(pair))
                                 topk_ratio=self.topk_ratio
                             ) # (N,dl,L) bool
 
