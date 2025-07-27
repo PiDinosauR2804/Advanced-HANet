@@ -12,14 +12,32 @@ def _l2_normalize(x, dim: int = -1):
 def _select_important_tokens(atts,         # (N, dl, L, L)
                              atts_mask,         # (N, L)
                              span=None,
-                             topk_ratio: float = 0.1):
+                             topk_ratio: float = 0.1,
+                             mode='sum'):
     """
     Trả về mask bool (N, dl, L) :
         important = (top-k attention)  ∪  (trigger start & end token).
     """
     # ---------- (1) Attention-based scores ----------------------------
     N, dl, L, _ = atts.shape
-    score = atts.sum(dim=-1)         # (N, dl, L)
+    if mode == 'sum':
+        score = atts.sum(dim=-2)  # (N, dl, L), tổng attention mà mỗi token *nhận được*
+    elif mode == 'trigger':
+        # span: List[List[List[int]]] → mỗi phần tử là một span các chỉ số (ví dụ: [[2,3], [5]])
+        # Flatten từng nhóm span trong batch thành 1 list các chỉ số
+        span_indices = [sum(sp, []) for sp in span]  # List[List[int]], chiều dài N
+
+        # Bắt đầu với zero tensor để tích lũy attention
+        score = torch.zeros_like(atts[:, 0, 0, :])  # (N, L)
+
+        for i, indices in enumerate(span_indices):
+            if len(indices) == 0:
+                continue  # bỏ qua nếu không có trigger token
+            # atts[i]: (dl, L, L)
+            # Chọn attention từ các query là trigger (query_idx in indices)
+            score[i] = atts[i, :, indices, :].sum(dim=1).sum(dim=0)  # (dl, len(indices), L) -> (L)
+
+    # shape trả về là (N, L)
     score = score.masked_fill(~atts_mask.unsqueeze(1).repeat(1, dl, 1).bool(), -1e6)
 
     k = max(1, int(topk_ratio * L))

@@ -49,6 +49,7 @@ def parse_arguments():
     parser.add_argument("--print_trainable_params", action="store_true", help="Print trainable parameters")
     parser.add_argument("--project_name", type=str, default="HANet_mole", help="Project name for Weights & Biases")
     parser.add_argument("--distill_layers", type=int, nargs='+', default=[12])
+    parser.add_argument("--distill_mode", type=str,default='sum', choices=['sum', 'trigger'])
     
     # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
