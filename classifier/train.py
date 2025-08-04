@@ -39,7 +39,7 @@ def train(local_rank, args):
     tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     # Configure logging
-    os.makedirs(args.logs_dir, exist_ok=True)
+    os.makedirs(args.log_dir, exist_ok=True)
     # --- delete default handle ---
     logger.remove()
     # --- add handle ---
