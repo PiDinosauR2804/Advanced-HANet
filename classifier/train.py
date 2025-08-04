@@ -34,17 +34,8 @@ from transformers import BertTokenizerFast
 import wandb
 from loguru import logger
 from tqdm.auto import tqdm
-import optuna
 
-wandb_api_key = "0806b2d5c00870a95f366d95c825d7680649abb7"
-os.environ['WANDB_API_KEY'] = wandb_api_key
-wandb.login()
-
-# PERM_5 = [[0, 1, 2, 3, 4], [4, 3, 2, 1, 0], [0, 3, 1, 4, 2], [1, 2, 0, 3, 4], [3, 4, 0, 1, 2]]
-# PERM_10 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]
-
-
-def train(local_rank, args, trial=None):    
+def train(local_rank, args):    
     tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     # Configure logging
@@ -302,27 +293,13 @@ def train(local_rank, args, trial=None):
             iter_cnt = 0
             for batch in stage_loader:
                 iter_cnt += 1
-                optimizer.zero_grad()
-                # if args.single_label:
-                #     train_x, train_y, train_masks, train_span = zip(*batch)
-                #     y = [[0] * len(train_x[0]) for _ in train_x]
-                #     for i in range(len(train_span)):
-                #         for j in range(len(train_span[i])):
-                #             y[i][train_span[i][j][0]] = train_y[i][j]
-                #     train_x = torch.LongTensor(train_x).to(device)
-                #     train_masks = torch.LongTensor(train_masks).to(device)
-                #     outputs, feature = model(train_x, train_masks)
-                #     logits = outputs[:, learned_types]
-                #     y = torch.LongTensor(y).to(device)
-                #     loss_ce = criterion_ce(logits, y.view(-1))
-                #     padded_train_span, span_len = None, None
-                # else:
+                optimizer.zero_grad()  
                 
                 train_x, train_y, train_masks, train_span, train_augment = zip(*batch)
                 train_x = torch.LongTensor(train_x).to(device)
                 train_masks = torch.LongTensor(train_masks).to(device)
                 train_y = [torch.LongTensor(item).to(device) for item in train_y]           
-                train_span = [torch.LongTensor(item).to(device) for item in train_span]     # Sử dụng để lưu vị trí bắt đầu và kết thúc 1 từ của các ids
+                train_span = [torch.LongTensor(item).to(device) for item in train_span]
                 augment_x = {}
                 augment_masks = {}
                 augment_y = {}
@@ -379,7 +356,7 @@ def train(local_rank, args, trial=None):
                 # invalid_mask_op = torch.BoolTensor([item not in learned_types for item in range(args.class_num)]).to(device)
                 # not from below's codes
                 
-                # Loại bỏ ra những sample có label không được học trong term này
+                # Remove label not in event type set
                 for i in range(len(train_y)):
                     invalid_mask_label = torch.BoolTensor([item not in learned_types for item in train_y[i]]).to(device)
                     train_y[i].masked_fill_(invalid_mask_label, 0)
@@ -388,46 +365,29 @@ def train(local_rank, args, trial=None):
                 ce_y = torch.cat(train_y) # (sum of len(label), )
                 ce_outputs = outputs
                 if (args.ucl or args.tlcl) and (stage > 0 or (args.skip_first_cl != "ucl+tlcl" and stage == 0)):                        
-                    # _, dpo_feature2 = model(train_x.clone(), train_masks, padded_train_span, span_len)
-                    # scl_idx = torch.cat(train_y).nonzero().squeeze(-1)
-                    # scl_y = torch.cat(train_y)[scl_idx]
-                    # Adj_mat2 = torch.eq(scl_y.unsqueeze(1), scl_y.unsqueeze(1).T).float() - torch.eye(len(scl_y)).to(device)
-                    # scl_feat = dpo_feature2[scl_idx, :]
-                    # scl_feat = normalize(scl_feat, dim=-1)
-                    # logits2 = torch.div(torch.matmul(scl_feat, scl_feat.T), args.cl_temp)
-                    # logits_max2, _ = torch.max(logits2, dim=1, keepdim=True)
-                    # logits2 = logits2 - logits_max2.detach()
-                    # exp_logits2 =  torch.exp(logits2)
-                    # denom2 = torch.sum(exp_logits2 * (1 - torch.eye(len(Adj_mat2)).to(device)), dim = -1)
-                    # log_prob2 = logits2 - torch.log(denom2)
-                    # pos_log_prob2 = torch.sum(Adj_mat2 * log_prob2, dim=-1) / (len(log_prob2) - 1)
-                    # loss_scl = -torch.sum(pos_log_prob2)
-                    # loss = 0.5 * loss + 0.5 * loss_scl
                     reps = return_dict['reps']
                     bs, hdim = reps.shape
                     aug_repeat_times = args.aug_repeat_times
-                    # Tạo data augment
+                    # Create dataset
                     da_x = train_x.clone().repeat((aug_repeat_times, 1))
                     da_y = train_y * aug_repeat_times
                     da_masks = train_masks.repeat((aug_repeat_times, 1))
                     da_span = train_span * aug_repeat_times
                     tk_len = torch.count_nonzero(da_masks, dim=-1) - 2
-                    # Thực hiện hoán vị random các vị trí cho các câu được augment
+                    # Random permutation
                     perm = [torch.randperm(item).to(device) + 1 for item in tk_len]
                     
-                    # Thực hiện augment cho câu
-                    
-                    # Thực hiện hoán đổi vị trí của từ trong câu theo perm
+                    # Permutation
                     if args.cl_aug == "shuffle":
                         for i in range(len(tk_len)):
                             da_span[i] = torch.where(da_span[i].unsqueeze(2) == perm[i].unsqueeze(0).unsqueeze(0))[2].view(-1, 2) + 1
                             da_x[i, 1: 1+tk_len[i]] = da_x[i, perm[i]]
-                    # Thực hiện như trên nhưng chỉ 25% số câu được augment
+                    # For 25%
                     elif args.cl_aug =="RTR":
                         rand_ratio = 0.25
                         rand_num = (rand_ratio * tk_len).int()
                         
-                        # Các token được chọn ra để không hoán đổi
+                        # Tokens that not change
                         special_ids = [103, 102, 101, 100, 0]
                         all_ids = torch.arange(model.backbone.config.vocab_size).to(device)
                         special_token_mask = torch.ones(model.backbone.config.vocab_size).to(device)
@@ -440,7 +400,7 @@ def train(local_rank, args, trial=None):
                                 span_pos = da_span[i][da_y[i].nonzero()].view(-1).unique() - 1
                             else:
                                 span_pos = da_span[i].view(-1).unique() - 1
-                            # Các token được chọn ra để không hoán đổi 
+                            # Tokens that not change
                             trig_mask[span_pos] = 0
                             token_idx_ntrig = token_idx.index_select(0, trig_mask.nonzero().squeeze())
                             replace_perm = torch.randperm(token_idx_ntrig.shape.numel())
@@ -451,13 +411,13 @@ def train(local_rank, args, trial=None):
                     #     da_return_dict = model(da_x, da_masks)
                     # else:
                     
-                    # Hidden representaion của data augment
+                    # Hidden representaion of data augment
                     da_return_dict = model(da_x, da_masks, da_span)
                     da_outputs, da_reps, da_context_feat, da_trig_feat = da_return_dict['outputs'], da_return_dict['reps'], da_return_dict['context_feat'], da_return_dict['trig_feat']
                     # DISTILL ----------------------------
                     da_imp_mask, da_cur_feat_tokens_imp = da_return_dict['imp_mask'], da_return_dict['cur_feat_tokens_imp']
                     # DISTILL ----------------------------
-                    # Contrastive loss cho sentence
+                    # Contrastive loss for sentence
                     if args.ucl:
                         if not ((args.skip_first_cl == "ucl" or args.skip_first_cl == "ucl+tlcl") and stage == 0):
                             ucl_reps = torch.cat([reps, da_reps])
@@ -468,7 +428,7 @@ def train(local_rank, args, trial=None):
                                 Adj_mask_ucl = torch.roll(Adj_mask_ucl, bs, -1)                    
                             loss_ucl = compute_CLLoss(Adj_mask_ucl, ucl_reps, bs * (1 + aug_repeat_times), args, device)
                             
-                    # Contrastive loss cho trigger
+                    # Contrastive loss for trigger
                     if args.tlcl:
                         if not ((args.skip_first_cl == "tlcl" or args.skip_first_cl == "ucl+tlcl") and stage == 0):
                             tlcl_feature = torch.cat([trig_feat, da_trig_feat])
@@ -572,7 +532,7 @@ def train(local_rank, args, trial=None):
                 
                 loss = loss + lgacl_loss*args.ratio_loss_gpt
                 
-                # Loss ce cho class ở task hiện tại
+                # Loss ce of current class
                 ce_outputs = ce_outputs[:, learned_types]
                 if args.use_weight_ce:
                     loss_ce = CrossEntropyLossWithWeight(ce_outputs, ce_y, alpha=args.alpha_ce)
@@ -581,7 +541,7 @@ def train(local_rank, args, trial=None):
                 loss = loss + loss_ce
                 w = len(prev_learned_types) / len(learned_types)
 
-                # Loss ce cho class ở task cũ
+                # Loss ce of old class
 
                 if args.rep_aug != "none" and stage > 0:
                     outputs_aug, aug_y = [], []
@@ -618,54 +578,6 @@ def train(local_rank, args, trial=None):
                     # loss = loss_ce * (1 - w) + loss_aug * w
                     loss = args.gamma * loss + args.theta * loss_aug
                     
-
-                    
-
-                # if stage > 0 and args.ecl != "none":
-                #     _, dpo_feature = model(train_x.clone(), train_masks, padded_train_span, span_len)
-                    
-                #     # dpo_feature = model.forward_cl(train_x.clone(), train_masks)
-                #     ecl_ys, ecl_features = [], []
-                #     for e_batch in e_loader:
-                #         ecl_x, ecl_y, ecl_masks, ecl_span = zip(*e_batch)
-                #         ecl_span_len = [len(item) for item in ecl_span]
-                #         ecl_x = torch.LongTensor(ecl_x).to(device)
-                #         ecl_masks = torch.LongTensor(ecl_masks).to(device)
-                #         ecl_y = [torch.LongTensor(item).to(device) for item in ecl_y]
-                #         ecl_span = [torch.LongTensor(item).to(device) for item in ecl_span]            
-                #         padded_ecl_span = pad_sequence(ecl_span, batch_first=True, padding_value=-1).to(device)
-                #         _, ecl_feature = model(ecl_x, ecl_masks, padded_ecl_span, ecl_span_len)
-                #         # ecl_feature = model.forward_cl(ecl_x, ecl_masks)
-
-                #         ecl_features.append(ecl_feature)
-                #         ecl_ys.extend(ecl_y)
-                #     ecl_ys = torch.cat(ecl_ys)
-                #     valid_idx = torch.cat(train_y).nonzero().squeeze(-1)
-                #     # feat_idx = [[i] * len(item.nonzero().squeeze(-1)) for (i, item) in enumerate(train_y)]
-                #     # s_feat = torch.cat([dpo_feature[i, :] for i in feat_idx])
-                #     s_feat = dpo_feature[valid_idx, :]
-                #     cl_y = torch.cat(train_y)[valid_idx]
-                #     m_index = torch.nonzero(torch.isin(cl_y, ecl_ys)).squeeze(-1)
-                #     ecl_index = torch.eq(cl_y.unsqueeze(1), ecl_ys.unsqueeze(1).T).float().argmax(-1)[m_index] # index of exemplars that correspond to the train instance' s label
-                #     r_feat = s_feat.clone()
-                #     ecl_feat = torch.cat(ecl_features)
-                #     r_feat[m_index, :] = ecl_feat[ecl_index, :]
-                #     h_feat = normalize(torch.cat((s_feat, r_feat)), dim=-1)
-                #     all_y = cl_y.repeat(2)
-                #     Adj_mat = torch.eq(all_y.unsqueeze(1), all_y.unsqueeze(1).T).float() - torch.eye(len(all_y)).to(device)
-                #     pos_num = torch.sum(Adj_mat, dim=-1)
-                #     logits = torch.div(torch.matmul(h_feat, h_feat.T), args.cl_temp)
-                #     logits_max, _ = torch.max(logits, dim=1, keepdim=True)
-                #     logits = logits - logits_max.detach()
-                #     exp_logits =  torch.exp(logits)
-                #     denom = torch.sum(exp_logits * (1 - torch.eye(len(Adj_mat)).to(device)), dim = -1)
-                #     log_prob = logits - torch.log(denom)
-                #     pos_log_prob = torch.sum(Adj_mat * log_prob, dim=-1) / pos_num
-                #     loss_scl = -torch.sum(pos_log_prob) / len(pos_log_prob)
-                #     loss = 0.5 * loss + 0.5 * loss_scl
-                    
-                    
-                # Loss distill của previous model cho current model nhằm giữ lại kiến thức cũ từ mô hình cũ. ( Không dùng đến trong bài )
                 if stage > 0 and args.distill != "none":
                     prev_model.eval()
                     with torch.no_grad():
@@ -743,51 +655,6 @@ def train(local_rank, args, trial=None):
                         loss = loss * (1 - w) + (loss_fd + loss_pd) * w
                     else:
                         loss = loss + args.alpha * loss_fd + args.beta * loss_pd
-                    # if args.replay and iter_cnt % args.period == 0:
-                    #     e_idx = (iter_cnt // args.period - 1) % len(e_loader) 
-                    #     ep_x, ep_y, ep_masks, ep_span = zip(*e_loader[e_idx])
-                    #     ep_span_len = [len(item) for item in ep_span]
-                    #     if np.count_nonzero(ep_span_len) == len(ep_span_len): 
-                    #         ep_x = torch.LongTensor(ep_x).to(device)
-                    #         ep_masks = torch.LongTensor(ep_masks).to(device)
-                    #         ep_y = [torch.LongTensor(item).to(device) for item in ep_y]
-                    #         ep_span = [torch.LongTensor(item).to(device) for item in ep_span]                
-                    #         padded_ep_span = pad_sequence(ep_span, batch_first=True, padding_value=-1).to(device) 
-                    #         e_outputs, e_features = model(ep_x, padded_ep_span, ep_masks, ep_span_len)
-                    #         # invalid_mask_op = torch.BoolTensor([item not in learned_types for item in range(args.class_num)]).to(device)
-                    #         # not from below's codes
-                    #         for i in range(len(ep_y)):
-                    #             invalid_mask_e = torch.BoolTensor([item not in learned_types for item in ep_y[i]]).to(device)
-                    #             ep_y[i].masked_fill_(invalid_mask_e, 0)
-                    #             # outputs[i].masked_fill_(invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
-                    #         prev_model.eval()
-                    #         with torch.no_grad():
-                    #             e_prev_outputs, e_prev_features = prev_model(ep_x, padded_ep_span, ep_masks, ep_span_len)
-                    #         e_outputs[:, 0] = 0
-                    #         e_c_outputs = e_outputs[:, learned_types].squeeze(-1)
-                    #         e_loss_ce = criterion_ce(e_c_outputs, torch.cat(ep_y))
-                    #         e_prev_features = normalize(e_prev_features, dim=-1)
-                    #         e_cur_features = normalize(e_features, dim=-1)
-                    #         e_loss_fd = criterion_fd(e_prev_features, e_cur_features, torch.ones(1).to(device)) 
-                    #         T = args.temperature
-                    #         e_prev_outputs[:, 0] = 0
-                    #         e_prev_outputs = e_prev_outputs[:, prev_valid_mask_op].squeeze(-1)
-                    #         e_cur_outputs = e_outputs[:, prev_valid_mask_op].squeeze(-1)
-                    #                 # prev_outputs[i].masked_fill_(prev_invalid_mask_op, torch.Tensor([float("-inf")]).squeeze(0))
-                    #         e_prev_p = torch.softmax(e_prev_outputs / T, dim= -1)
-                    #         e_p = torch.log_softmax(e_cur_outputs / T, dim = -1)
-                    #         e_loss_pd = -torch.mean(torch.sum(e_prev_p * e_p, dim = -1), dim = 0)
-                    #         if args.dweight_loss and stage > 0:
-                    #             e_loss = e_loss_ce * (1 - w) + (e_loss_fd + e_loss_pd) * w
-                    #         else:
-                    #             e_loss = e_loss_ce + args.alpha * e_loss_fd + args.beta * e_loss_pd
-                    #             loss = (len(learned_types) * loss + args.e_weight * e_loss) / (len(learned_types) + args.e_weight)
-                    
-
-                # if args.amp:
-                #     with amp.scale_loss(loss, optimizer) as scaled_loss:
-                #         scaled_loss.backward()
-                # else:
                 
                 if args.use_mole and not model.uniform_expert:
                     loss = loss + args.entropy_weight * return_dict['entropy_loss'] + args.load_balance_weight * return_dict['load_balance_loss']
@@ -799,37 +666,17 @@ def train(local_rank, args, trial=None):
                     model.print_trainable_parameters()
                 
                 optimizer.step() 
-                stats = torch.cuda.memory_stats()
+
                 wandb.log({
-                            f"loss_ce_task_{stage}": loss_ce,
-                            f"loss_ucl_{stage}": loss_ucl,
-                            f"loss_tlcl_{stage}": loss_tlcl,
-                            f"loss_des_cl_{stage}": loss_des_cl,
-                            f"loss_lgacl_{stage}": lgacl_loss,
-                            f"loss_aug_{stage}": loss_aug,
-                            f"loss_fd_{stage}": loss_fd,
-                            f"loss_pd_{stage}": loss_pd,
-                            f"loss_all_{stage}": loss,
-                            
                             "loss_ce_task": loss_ce,
                             "entropy_loss": return_dict.get('entropy_loss', 0),
                             "load_balance_loss": return_dict.get('load_balance_loss', 0),
-                            "total_norm": total_norm,
-                            "memory/allocated_MB": stats["allocated_bytes.all.current"] / 1024**2,
-                            "memory/allocated_peak_MB": stats["allocated_bytes.all.peak"] / 1024**2,
-                            "memory/reserved_MB": stats["reserved_bytes.all.current"] / 1024**2,
-                            "memory/reserved_peak_MB": stats["reserved_bytes.all.peak"] / 1024**2,
-                            "memory/active_MB": stats["active_bytes.all.current"] / 1024**2,
-                            "memory/num_ooms": stats["num_ooms"],
-                            "memory/alloc_retries": stats["num_alloc_retries"],
-                            
-                            # "loss_ucl": loss_ucl,
-                            # "loss_tlcl": loss_tlcl,
-                            # "loss_des_cl": loss_des_cl,
-                            # "loss_aug": loss_aug,
-                            # "loss_fd": loss_fd,
-                            # "loss_pd": loss_pd,
+                            "loss_des_cl": loss_des_cl,
+                            "loss_aug": loss_aug,
+                            "loss_fd": loss_fd,
+                            "loss_pd": loss_pd,
                             "loss_all": loss,
+                            "total_norm": total_norm,
                             "learning_rate": optimizer.param_groups[0]['lr'],
                         })
             scheduler.step()
@@ -879,46 +726,13 @@ def train(local_rank, args, trial=None):
                     
                     
                     logger.info(f'marco F1 {micro_F1}')
-                    # dev_scores_ls.append(micro_F1)
-                    # logger.info(f"Dev scores list: {dev_scores_ls}")
                     logger.info(f"bc:{bc}")
                     logger.info(f"Num choose: {num_choose}")
                     
-                    # report to optuna
-                    
-                    # if args.early_stop:
-                    #     if dev_score is None or dev_score < micro_F1:
-                    #         no_better = 0
-                    #         dev_score = micro_F1
-                    #         torch.save(model.state_dict(), e_pth)
-                    #         if stage == 0:
-                    #             torch.save(model.backbone.state_dict(), "outputs/best_model0.pth")
-                    #     else:
-                    #         no_better += 1
-                    #         logger.info(f'No better: {no_better}/{args.patience}')
-                    #     if no_better >= args.patience:
-                    #         logger.info("Early stopping with dev_score: " + str(dev_score))
-                    #         dev_scores_ls.append(dev_score)
-                    #         logger.info(f"Dev scores list: {dev_scores_ls}")
-                    #         break
-                    
                     if ep + 1 == num_epochs:
-                        # if args.early_stop:
-                        #     logger.info("Early stopping with dev_score: " + str(dev_score))
-                        #     dev_scores_ls.append(dev_score)
-                        #     logger.info(f"Dev scores list: {dev_scores_ls}")
-                        # else:
-                        #     logger.info("Final model with dev_score: " + str(micro_F1))
-                        #     dev_scores_ls.append(micro_F1)
-                        #     logger.info(f"Dev scores list: {dev_scores_ls}")
                         logger.info("Final model with dev_score: " + str(micro_F1))
                         dev_scores_ls.append(micro_F1)
                         logger.info(f"Dev scores list: {dev_scores_ls}")
-                    
-                    if trial is not None:
-                        trial.report(micro_F1, ep + 1 + args.epochs * stage)
-                        if trial.should_prune():
-                            raise optuna.TrialPruned()
                         
                         
         for tp in streams_indexed[stage]:
@@ -941,6 +755,3 @@ def train(local_rank, args, trial=None):
             
     
     wandb.finish()
-    
-    # return np.mean(dev_scores_ls)
-    return dev_scores_ls[-1]

@@ -7,7 +7,7 @@ import numpy as np
 
 class DescriptionDataset(Dataset):
     def __init__(self, args, tokenizer, learned_types):
-        file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"
+        file_path_description = f"{args.label_descriptions}/{args.dataset}/description_trigger_dict.json"
         with open(file_path_description, 'r', encoding='utf-8') as f:
             data_description = json.load(f)
         
