@@ -13,10 +13,6 @@ def _select_important_tokens(att_last,         # (B, H, L, L)
                              att_mask,         # (B, L)
                              span=None,
                              topk_ratio: float = 0.1):
-    """
-    Trả về mask bool (B, L) :
-        important = (top-k attention)  ∪  (trigger start & end token).
-    """
     # ---------- (1) Attention-based scores ----------------------------
     score = att_last.mean(dim=1).sum(dim=1)         # (B, L)
     score = score.masked_fill(~att_mask.bool(), -1e4)
@@ -38,7 +34,6 @@ def _select_important_tokens(att_last,         # (B, H, L, L)
             ends   = sp[:, 1]
             imp_mask[b, starts] = True
             imp_mask[b, ends]   = True
-            # (Nếu muốn cả đoạn, dùng: for s,e in sp: imp_mask[b, s:e+1] = True)
     return imp_mask
 
 class Classifier(nn.Module):
@@ -54,18 +49,15 @@ class Classifier(nn.Module):
         super().__init__()
         layers = []
 
-        # Lớp đầu tiên: input_dim -> hidden_dim
         layers.append(nn.Linear(input_dim, hidden_dim))
         layers.append(nn.ReLU())
         layers.append(nn.Dropout(dropout))
 
-        # Các lớp ẩn tiếp theo: hidden_dim -> hidden_dim
         for _ in range(num_layers - 1):
             layers.append(nn.Linear(hidden_dim, hidden_dim))
             layers.append(nn.ReLU())
             layers.append(nn.Dropout(dropout))
 
-        # Lớp output: hidden_dim -> class_num
         layers.append(nn.Linear(hidden_dim, class_num))
         self.network = nn.Sequential(*layers)
 
@@ -137,7 +129,6 @@ class BertED(nn.Module):
                 for i in range(self.num_experts):
                     self.backbone.add_adapter(f"expert_{i}", self.peft_config)
 
-                # Khai báo Linear layer (bao gồm cả weight và bias)
                 if args.gating == "softmax":
                     self.gating_layer = nn.Linear(self.input_dim, self.num_experts)
                     self.softmax = nn.Softmax(dim=-1)
@@ -235,10 +226,8 @@ class BertED(nn.Module):
                 return_dict['entropy_loss'] = -torch.sum(gating_weights * torch.log(gating_weights + 1e-8), dim=-1).mean()
         else:
             topk_weights = torch.full((B, self.top_k), 1.0 / self.top_k).to(x.device)
-            # randomly chọn k expert cho mỗi batch, topk của một sample phải khác nhau
             topk_indices = torch.stack([torch.randperm(self.num_experts)[:self.top_k] for _ in range(B)], dim=0).to(x.device)
 
-        # Mỗi phần tử trong batch có top-k expert khác nhau, ta cần gom theo expert
         expert_outputs = [torch.zeros(B, self.seqlen, self.input_dim, device=x.device) for _ in range(self.top_k)]
         expert_outputs_attn = [torch.zeros(B, num_heads, L, L, device=x.device)
                            for _ in range(self.top_k)]
@@ -268,7 +257,6 @@ class BertED(nn.Module):
                 w_attn = weights[mask].view(-1, 1, 1, 1)         # (N,1,1,1)
                 expert_outputs_attn[k][mask] = w_attn * attn_expert
 
-        # Tổng hợp top-k expert output
         x_out = sum(expert_outputs)
         total_attention = sum(expert_outputs_attn)
 
@@ -281,11 +269,10 @@ class BertED(nn.Module):
             x_out += self.general_expert_weight * _1
             total_attention += self.general_expert_weight * _2
 
-        # ================== KHỐI MỚI: trích cur_feat_imp ======================
         if imp_mask is None:
             with torch.no_grad():
                 imp_mask = _select_important_tokens(
-                    total_attention,          # (B,H,L,L) – lấy layer cuối
+                    total_attention,          # (B,H,L,L)
                     masks,               # (B,L)
                     span=span,
                     topk_ratio=self.topk_ratio
@@ -293,19 +280,8 @@ class BertED(nn.Module):
 
 
         imp_mask = imp_mask.to(x.device).bool()
-        assert imp_mask.shape == masks.shape, "imp_mask size mismatch"
+        assert imp_mask.shape == masks.shape, "imp_mask size mismatch"  
 
-        # (1) chuẩn hoá toàn tensor rồi (2) zero-out token không quan trọng
-        # normed_out = _l2_normalize(x_out, dim=-1)             # (B,L,D)
-        # cur_feat_imp = torch.zeros_like(normed_out)           # (B,L,D)
-        # cur_feat_imp[imp_mask] = normed_out[imp_mask]         # copy back only important
-        
-        # return_dict['imp_mask']     = imp_mask.detach()
-        # return_dict['cur_feat_imp'] = cur_feat_imp
-
-        # cur_token_imp = imp_mask.nonzero(as_tuple=False)     
-
-        # 2) biểu diễn token quan trọng (đã normalize)  -> (N_imp, D)
         normed_out           = _l2_normalize(x_out, dim=-1)  # (B, L, D)
         cur_feat_tokens_imp  = normed_out[imp_mask]          # indexing theo mask bool
 
@@ -317,14 +293,6 @@ class BertED(nn.Module):
         return_dict['imp_mask']    = imp_mask
         # return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp.detach()
         return_dict['cur_feat_tokens_imp'] = cur_feat_tokens_imp
-
-
-
-        # flat_out = x_out.view(-1, x_out.size(-1))                # (B*L, D)
-        # cur_feat_imp = _l2_normalize(flat_out[imp_mask.view(-1)])
-        # return_dict['imp_mask'] = imp_mask
-        # return_dict['cur_feat_imp'] = cur_feat_imp
-        
         # ======================================================================
 
         return_dict['reps'] = x_out[:, 0, :].clone()

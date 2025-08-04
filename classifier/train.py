@@ -40,12 +40,12 @@ def train(local_rank, args):
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     # Configure logging
     os.makedirs(args.logs_dir, exist_ok=True)
-    # --- Xoá handler mặc định ---
+    # --- delete default handle ---
     logger.remove()
-    # --- Thêm handler ghi log ra file ---
+    # --- add handle ---
     date_str = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
     
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Thêm timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Add timestamp
     args.run_name = f"{args.dataset}_{args.task_num}_{args.shot_num}_{args.class_num}_{args.epochs}_{args.task_ep_time}_{args.seed}_{args.alpha_ce}_{timestamp}"
 
     
@@ -60,13 +60,11 @@ def train(local_rank, args):
     
     logger.add(
         log_file_path,
-        rotation="1 MB",        # Tự động chia file khi >1MB
-        retention="10 days",    # Giữ lại log trong 10 ngày
-        enqueue=True,           # Hỗ trợ đa tiến trình
+        rotation="1 MB", 
+        retention="10 days",
+        enqueue=True,
         level="INFO"
     )
-    # --- Thêm handler ghi log qua tqdm.write ---
-    # Ghi log ra console qua tqdm.write + có màu
     
     logger.level("CRITICAL", color="<bg red><white>")
     logger.add(
@@ -105,7 +103,7 @@ def train(local_rank, args):
             mode="disabled"
         )
     
-    # Đọc dữ liệu
+    # Load data
     streams, _ = collect_from_json(args.dataset, args.data_root, 'stream', args)
     # streams = [streams[l] for l in PERM[int(args.perm_id)]] # permute the stream
     label2idx = {0:0}
@@ -121,7 +119,6 @@ def train(local_rank, args):
     
     streams_indexed = [[label2idx[l] for l in st] for st in streams]
     
-    # streams_indexed có dạng [[4, 5, 9, 11], [2, 1, 8, 33], ...] thể hiện thứ tự label class được học
     if args.backbone_path != "":
         model = BertED(args, args.backbone_path) # define model
     else:
@@ -130,16 +127,7 @@ def train(local_rank, args):
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.decay, eps=args.adamw_eps, betas=(0.9, 0.999)) #TODO: Hyper parameters
     
     scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gammalr) # TODO: Hyper parameters
-
-    # if args.amp:
-        # model, optimizer = amp.initialize(model, optimizer, opt_level="O1") 
-        
-    # # Get description
-    # file_path_description = f"description_data/{args.dataset}/description_trigger_dict.json"   
-    # with open(file_path_description, 'r', encoding='utf-8') as f:
-    #     data_description = json.load(f)
                   
-                
     if args.parallel == 'DDP':
         torch.cuda.set_device(local_rank)
         dist.init_process_group("nccl", rank=local_rank, world_size=args.world_size)
@@ -148,9 +136,6 @@ def train(local_rank, args):
     elif args.parallel == 'DP':
         os.environ["CUDA_VISIBLE_DEVICES"] = '0, 1, 2, 3, 4, 5, 6, 7' 
         model = nn.DataParallel(model, device_ids=[int(it) for it in args.device_ids.split(" ")])
-
-
-    # optimizer = SGD(model.parameters(), lr=args.lr) # TODO: Use AdamW, GPU out of memory
 
     criterion_ce = nn.CrossEntropyLoss()
     criterion_fd = nn.CosineEmbeddingLoss()
@@ -164,7 +149,6 @@ def train(local_rank, args):
     prev_learned_types = [0]
     dev_scores_ls = []
     
-    # Tạo class dùng để lưu old sample từ task trước
     exemplars = Exemplars(args) # TODO: 
     if args.cresume:
         logger.info(f"Resuming from {args.cresume}")
@@ -181,7 +165,6 @@ def train(local_rank, args):
     e_pth = "./outputs/early_stop/" + args.log_name + ".pth"
     os.makedirs(os.path.dirname(e_pth), exist_ok=True)
     
-    # Xét từng task 
     for stage in task_idx:
         # if stage > 0:
         #     break
@@ -223,19 +206,13 @@ def train(local_rank, args):
             # exclude_none_labels = [t for t in streams_indexed[stage - 1] if t != 0]
             logger.info(f'Loading train instances without negative instances for stage {stage}')
             
-            # Lấy ra các sample để học cho task hiện tại
             exemplar_dataset = collect_exemplar_dataset(args.dataset, args.data_root, 'train', label2idx, stage-1, streams[stage-1], args)
             exemplar_loader = DataLoader(
                 dataset=exemplar_dataset,
                 batch_size=64,
                 shuffle=True,
                 collate_fn=lambda x:x)
-            
-            # exclude_none_loader = train_ecn_loaders[stage - 1]
-            # TODO: test use
-            # exemplars.set_exemplars(prev_model.to('cpu'), exclude_none_loader, len(learned_types), device)
-            
-            # Thực hiện lấy ra các sample từ class trước
+
             exemplars.set_exemplars(prev_model, exemplar_loader, len(learned_types), device)
             # if not args.replay:
             if not args.no_replay:

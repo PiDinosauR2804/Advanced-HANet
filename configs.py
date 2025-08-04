@@ -2,22 +2,7 @@ import argparse
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    # Args for Extractor
-    parser.add_argument('--input_root', default='./data/data_text', type=str)
-    parser.add_argument('--output_root', default='./output', type=str)
-    parser.add_argument('--datasets', default=['MAVEN'], type=str, nargs='+')
-    parser.add_argument('--perms', type=int, nargs='+', default=[0, 1, 2, 3, 4])
-    parser.add_argument('--model', default='gemini_2.0_flash', type=str)
-    parser.add_argument('--candidate', default=1, type=int)
-    parser.add_argument('--num_try', default=3, type=int)
-    parser.add_argument('--max_consecutive_429_error', default=3, type=int)
-    parser.add_argument('--max_num_threads', default=10, type=int)
-    parser.add_argument('--logs_dir', default='./logs/extractor', type=str)
-    parser.add_argument('--eresume', action='store_true')
-    parser.add_argument('--convert_test', action='store_true')
-    parser.add_argument('--gen_des', action='store_true')
-    
-    # Args of QuangNM
+
     parser.add_argument('--task_ep_time', default=1, type=int, help="Number of time of epoch for each task compared to base task")
     parser.add_argument('--freeze_embedding_layer', action='store_true')
     parser.add_argument('--freeze_encoder_layers', default=0, type=int, help="Number of encoder layers to freeze")
@@ -50,7 +35,6 @@ def parse_arguments():
     parser.add_argument("--project_name", type=str, default="HANet_mole", help="Project name for Weights & Biases")
     parser.add_argument("--label_descriptions", type=str, default='data/label_descriptions')
     
-    # Args for Classifier
     parser.add_argument('--seed', default=42, type=int)
     parser.add_argument('--skip_first', action='store_true')
     parser.add_argument('--log_dir', default='./outputs/log_terminal/02_10_nomap_clreps')
@@ -99,7 +83,6 @@ def parse_arguments():
     parser.add_argument('--rep_aug', default='mean', choices=["none", "mean", "relative"])
     parser.add_argument('--gamma', type=float, default=1)
     parser.add_argument('--theta',type=float, default=6)
-    # parser.add_argument('--ecl', required=True, choices=["dropout", "shuffle", "RTR", "none"])
     parser.add_argument('--cl_temp', type=float, default=0.07)
     parser.add_argument('--ucl', type=bool, default=True)
     parser.add_argument('--cl_aug', default='shuffle', choices=["dropout", "shuffle", "RTR", "none"])

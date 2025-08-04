@@ -13,11 +13,10 @@ def compute_CLLoss(Adj_mask, reprs, matsize, args, device): # compute InfoNCELos
 
 def CrossEntropyLossWithWeight(ce_outputs, ce_y, alpha = 0.3):
     per_sample_loss = F.cross_entropy(ce_outputs, ce_y, reduction='none')  # [batch_size]
-    # 2) Tách mask cho hai nhóm
-    mask0      = (ce_y == 0)    # nhóm label 0
-    mask_other = (ce_y != 0)    # nhóm label != 0
 
-    # 3) Tính mean loss từng nhóm (nếu không có sample thì về 0)
+    mask0      = (ce_y == 0)    # label 0
+    mask_other = (ce_y != 0)    # label != 0
+
     if mask0.any():
         loss_group0 = per_sample_loss[mask0].mean()
     else:

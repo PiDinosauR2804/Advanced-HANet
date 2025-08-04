@@ -6,39 +6,19 @@ def balance_zero_with_nonzero(
     tlcl_lbs: torch.Tensor,
     args
 ) -> tuple[torch.Tensor, torch.Tensor]:
-    """
-    Giữ lại tất cả các nhãn != 0, và chỉ giữ lại một số nhãn 0 sao cho
-    count(0) == count(non_zero) / (class_num / task_num)
 
-    Sau đó flatten feature thành [N*D], label thành [N]
-
-    Args:
-        tlcl_feature: Tensor [N, D]
-        tlcl_lbs:     Tensor [N]
-        args:         Đối tượng chứa class_num và task_num
-
-    Returns:
-        flattened_feature: Tensor [N*D]
-        flattened_lbs:     Tensor [N]
-    """
-    # vị trí các nhãn 0
     zero_idx = (tlcl_lbs == 0).nonzero(as_tuple=False).flatten()
-
-    # số lượng nhãn 0 cần giữ lại để cân bằng
     scale_factor = args.class_num // args.task_num
     keep_zero_count = len(zero_idx) // scale_factor
     num_non_zero = tlcl_lbs.size(0) - len(zero_idx)
 
-    # nếu không cần xóa gì thì giữ nguyên
     if len(zero_idx) <= keep_zero_count:
         filtered_feature = tlcl_feature
         filtered_lbs = tlcl_lbs
     else:
-        # chọn ngẫu nhiên phần cần drop
         perm = torch.randperm(len(zero_idx), device=tlcl_lbs.device)
         drop_idx = zero_idx[perm[:len(zero_idx) - keep_zero_count]]
 
-        # tạo mask
         mask = torch.ones(tlcl_lbs.size(0), dtype=torch.bool, device=tlcl_lbs.device)
         mask[drop_idx] = False
 
@@ -54,23 +34,10 @@ def collate_description(batch):
     return list(tokens), list(masks), list(keys)
 
 def contrastive_loss_des(reps, targets, descriptions, negative_dict, temperature=5):
-    """
-    Tính loss kiểu -log(sim(x, des(x)) / sim(x, des))
-    
-    - reps: Tensor (N, D), biểu diễn đặc trưng của các mẫu
-    - targets: Tensor (N,), nhãn tương ứng của reps
-    - descriptions: Dict[int, Tensor], ánh xạ nhãn đến mô tả (M, D)
-    - temperature: Hệ số nhiệt độ để điều chỉnh độ sắc nét của phân phối
-    
-    Trả về:
-    - loss: Giá trị tổn thất trung bình
-    """
     device = reps.device
         
-    # Tạo batch descriptions tương ứng với từng mẫu trong reps
     desc_list = torch.stack([descriptions[int(label)] for label in targets]).to(device)  # (N, D)
     
-    # Tạo batch tất cả descriptions
     idx2idmatrix = {}
     all_descriptions = []
     for idx, (id_rel, embed) in enumerate(descriptions.items()):
@@ -78,26 +45,21 @@ def contrastive_loss_des(reps, targets, descriptions, negative_dict, temperature
         idx2idmatrix[id_rel] = idx
     all_descriptions = torch.stack(all_descriptions, dim=0).to(device)
     
-    # Tính cosine similarity giữa reps và descriptions
     similarities = sim(reps, all_descriptions) / temperature  # (N, M)
     
-    # Lấy similarity giữa reps và mô tả tương ứng
     pos_sim = sim(reps, desc_list).diag()  # (N,)
     
     expanded_negs = []
     for label in targets:
         neg_indices = []
-        for neg_label in negative_dict[int(label)]:  # Duyệt qua negative labels
-            neg_indices.append(idx2idmatrix[neg_label])  # Lấy tất cả index của negative label
+        for neg_label in negative_dict[int(label)]:
+            neg_indices.append(idx2idmatrix[neg_label])
         expanded_negs.append(neg_indices)
 
-    # Chuyển thành tensor
     negs = torch.tensor(expanded_negs, device=device)
     
-    # Lấy similarity giữa reps và mô tả ngẫu nhiên
     neg_sims = similarities[torch.arange(len(targets)).unsqueeze(1), negs] # (N, num_negs)
     
-    # Tính loss theo công thức -log(sim(x, des(x)) / (sim(x, des(x) + sim(x, neg_des)))
     loss = -torch.log(torch.sigmoid(pos_sim.unsqueeze(1) - neg_sims).mean(dim=1)).mean()
     
     return loss.mean()
@@ -139,15 +101,6 @@ def collect_from_json(dataset, root, split, args):
     return data, key
 
 def sim(x, y):
-    """
-    Tính độ tương đồng giữa hai vectơ x, y
-    
-    - x: Tensor (N, D), batch của N vectơ đầu vào
-    - y: Tensor (M, D), batch của M vectơ so sánh
-    
-    Trả về:
-    - sim: Tensor (N, M), ma trận độ tương đồng giữa x và y
-    """
     x = F.normalize(x, p=2, dim=1)
     y = F.normalize(y, p=2, dim=1)
     
@@ -156,7 +109,6 @@ def sim(x, y):
 @torch.no_grad()
 def find_negative_labels(description_res, k=2):
     negative_dict = dict()
-    description_out = {}
     description_matrix = []
     
     rel2id = dict()
@@ -168,14 +120,11 @@ def find_negative_labels(description_res, k=2):
         
     description_matrix = torch.stack(description_matrix, dim=0)
 
-    # Tính cosine similarity giữa reps và descriptions
     similarities = sim(description_matrix, description_matrix) / 5  # (N, M)
-    
-    # Sắp xếp theo giá trị giảm dần (dim=1 để sắp theo hàng)
-    _, topk_indices = torch.topk(similarities, k=min(k+1,description_matrix.shape[0]), dim=1)  # k+1 để bỏ chính nó
-    
-    # Bỏ chính nó (index đầu tiên)
-    topk_indices = topk_indices[:, 1:].tolist()  # Chuyển thành list để dễ dùng
+
+    _, topk_indices = torch.topk(similarities, k=min(k+1,description_matrix.shape[0]), dim=1)
+
+    topk_indices = topk_indices[:, 1:].tolist()
     
     for i in range(len(topk_indices)):
         new_topk_indices = [rel2id[j] for j in topk_indices[i]]
