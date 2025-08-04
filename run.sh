@@ -32,6 +32,7 @@ do
                 --task_ep_time 6 \
                 --use_weight_ce \
                 --alpha_ce 0.3 \
+                --aug_repeat_times 10 \
                 --use_description \
                 --num_description 3 \
                 --ratio_loss_des_cl 0.1 \
