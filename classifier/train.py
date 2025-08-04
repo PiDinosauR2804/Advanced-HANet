@@ -106,7 +106,7 @@ def train(local_rank, args):
         )
     
     # Đọc dữ liệu
-    streams, _ = collect_from_json(args.dataset, args.stream_root, 'stream', args)
+    streams, _ = collect_from_json(args.dataset, args.data_root, 'stream', args)
     # streams = [streams[l] for l in PERM[int(args.perm_id)]] # permute the stream
     label2idx = {0:0}
     idx2label = {}
