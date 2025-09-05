@@ -1,0 +1,651 @@
+2025-04-25 20:51:44.423 | INFO     | __main__:<module>:168 - [INFO] Arguments:
+2025-04-25 20:51:44.423 | INFO     | __main__:<module>:169 - Input root: data/data_text
+2025-04-25 20:51:44.424 | INFO     | __main__:<module>:170 - Output root: output/des4
+2025-04-25 20:51:44.424 | INFO     | __main__:<module>:171 - Datasets: ['MAVEN']
+2025-04-25 20:51:44.425 | INFO     | __main__:<module>:172 - Perms: [0]
+2025-04-25 20:51:44.426 | INFO     | __main__:<module>:173 - Model: gemini-2.0-flash-lite
+2025-04-25 20:51:44.426 | INFO     | __main__:<module>:174 - Candidate: 5
+2025-04-25 20:51:44.427 | INFO     | __main__:<module>:175 - Num try: 3
+2025-04-25 20:51:44.428 | INFO     | __main__:<module>:176 - Max consecutive 429 error: 5
+2025-04-25 20:51:44.429 | INFO     | __main__:<module>:177 - Max num threads: 2
+2025-04-25 20:51:44.429 | INFO     | __main__:<module>:178 - Resume: False
+2025-04-25 20:51:44.430 | INFO     | __main__:<module>:179 - Convert test: False
+2025-04-25 20:51:44.431 | INFO     | __main__:<module>:180 - Logs dir: logs/extractor
+2025-04-25 20:51:44.431 | INFO     | __main__:<module>:181 - Gen des: True
+2025-04-25 20:51:44.432 | INFO     | __main__:<module>:182 - [INFO] Start processing...
+2025-04-25 20:51:53.366 | INFO     | extractor.consumer:__init__:48 - [INFO] Found 2 valid extractors
+2025-04-25 20:51:55.372 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-25 20:51:55.373 | INFO     | extractor.consumer:__init__:55 - [START] Start 2 threads
+2025-04-25 20:51:55.374 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-25 20:51:55.375 | INFO     | __main__:run:67 - Start processing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-25 20:51:55.375 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-25 20:51:55.376 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-25 20:51:55.391 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-25 20:51:55.393 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-25 20:51:55.396 | INFO     | extractor.consumer:consume:185 - [CONSUMING] Start consuming.
+2025-04-25 20:51:55.397 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-25 20:52:01.059 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+{
+    "killings": {
+        "trigger_word": "killings",
+        "event_type": "killing",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'killings' refers to the act of causing the death of one or more people.",
+            "The event 'killings' describes the deliberate taking of lives, specifically targeting six catholic civilians.",
+            "The 'killings' took place on March 24, 1922, at the McMahon family home in Belfast, Northern Ireland."
+        ]
+    },
+    "murders": {
+        "trigger_word": "murders",
+        "event_type": "killing",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'murders' implies unlawful killings, suggesting intent or malice.",
+            "The event 'murders' indicates the intentional and unlawful killing of six catholic civilians.",
+            "The 'murders' happened on March 24, 1922, at the residence of the McMahon family in Belfast, Northern Ireland."
+        ]
+    },
+    "shot": {
+        "trigger_word": "shot",
+        "event_type": "shooting",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'shot' signifies the act of firing a weapon at someone.",
+            "The event 'shot' refers to the act of firing a weapon, resulting in the death of six catholic civilians.",
+            "The 'shot' event, resulting in the death of six people, took place in the McMahon family home in Belfast on March 24, 1922."
+        ]
+    },
+    "dead": {
+        "trigger_word": "dead",
+        "event_type": "death",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'dead' describes the state of being no longer alive.",
+            "The event 'dead' indicates the outcome of the shootings, referring to the state of six catholic civilians.",
+            "The 'dead' state of the victims occurred at the McMahon family home in Belfast, Northern Ireland, on March 24, 1922."
+        ]
+    },
+    "occurred": {
+        "trigger_word": "occurred",
+        "event_type": "happening",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'occurred' indicates that an event took place.",
+            "The event 'occurred' signifies the happening of the killings or murders.",
+            "The event described as 'occurred' happened on March 24, 1922, at the home of the McMahon family in Belfast, Northern Ireland."
+        ]
+    }
+}
+```
+2025-04-25 20:52:01.079 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```python
+{
+    "killings": {
+        "trigger_word": "killings",
+        "event_type": "killing",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'killings' refers to the act of causing the death of one or more people.",
+            "The event 'killings' describes the deliberate taking of lives, specifically targeting six catholic civilians.",
+            "The 'killings' took place on March 24, 1922, at the McMahon family home in Belfast, Northern Ireland."
+        ]
+    },
+    "murders": {
+        "trigger_word": "murders",
+        "event_type": "killing",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'murders' implies unlawful killings, suggesting intent or malice.",
+            "The event 'murders' indicates the intentional and unlawful killing of six catholic civilians.",
+            "The 'murders' happened on March 24, 1922, at the residence of the McMahon family in Belfast, Northern Ireland."
+        ]
+    },
+    "shot": {
+        "trigger_word": "shot",
+        "event_type": "shooting",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'shot' signifies the act of firing a weapon at someone.",
+            "The event 'shot' refers to the act of firing a weapon, resulting in the death of six catholic civilians.",
+            "The 'shot' event, resulting in the death of six people, took place in the McMahon family home in Belfast on March 24, 1922."
+        ]
+    },
+    "dead": {
+        "trigger_word": "dead",
+        "event_type": "death",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'dead' describes the state of being no longer alive.",
+            "The event 'dead' indicates the outcome of the shootings, referring to the state of six catholic civilians.",
+            "The 'dead' state of the victims occurred at the McMahon family home in Belfast, Northern Ireland, on March 24, 1922."
+        ]
+    },
+    "occurred": {
+        "trigger_word": "occurred",
+        "event_type": "happening",
+        "event_time": "24 march 1922",
+        "event_location": "the home of the mcmahon family in belfast , northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'occurred' indicates that an event took place.",
+            "The event 'occurred' signifies the happening of the killings or murders.",
+            "The event described as 'occurred' happened on March 24, 1922, at the home of the McMahon family in Belfast, Northern Ireland."
+        ]
+    }
+}
+``` | Text: the mcmahon killings or the mcmahon murders occurred on 24 march 1922 when six catholic civilians were shot dead at the home of the mcmahon family in belfast , northern ireland .
+2025-04-25 20:52:01.096 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+{
+    "killings": {
+        "trigger_word": "killings",
+        "event_type": "killing",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'killings' refers to the act of deliberately causing the death of another person or people.",
+            "The event 'killings' in this context describes the violent deaths of six Catholic civilians.",
+            "The term 'killings' highlights the intentional and unlawful nature of the deaths that took place on March 24, 1922."
+        ]
+    },
+    "murders": {
+        "trigger_word": "murders",
+        "event_type": "killing",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'murders' signifies an instance of unlawful and intentional killing of a person or people.",
+            "The event 'murders' indicates that the deaths of the six Catholic civilians were a result of premeditated actions.",
+            "The use of 'murders' emphasizes the criminal aspect and illegal nature of the incident that occurred in Belfast."
+        ]
+    },
+    "shot": {
+        "trigger_word": "shot",
+        "event_type": "attack",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'shot' refers to the act of firing a bullet from a gun.",
+            "The event 'shot' indicates that the six Catholic civilians were killed using firearms.",
+            "The word 'shot' provides a specific detail about the method of violence used in the incident."
+        ]
+    },
+    "dead": {
+        "trigger_word": "dead",
+        "event_type": "death",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'dead' denotes the state of being no longer alive.",
+            "The event 'dead' indicates the final outcome of the shooting, resulting in the loss of life for six individuals.",
+            "The use of 'dead' provides a stark description of the tragic consequence of the violence."
+        ]
+    },
+    "occurred": {
+        "trigger_word": "occurred",
+        "event_type": "happening",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": None,
+        "description": [
+            "The trigger word 'occurred' simply means something happened.",
+            "The event 'occurred' signifies that the mcmahon killings or murders took place at a specific time and location.",
+            "The use of 'occurred' introduces the event that involved the killing of six people."
+        ]
+    }
+}
+```
+2025-04-25 20:52:01.120 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```python
+{
+    "killings": {
+        "trigger_word": "killings",
+        "event_type": "killing",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'killings' refers to the act of deliberately causing the death of another person or people.",
+            "The event 'killings' in this context describes the violent deaths of six Catholic civilians.",
+            "The term 'killings' highlights the intentional and unlawful nature of the deaths that took place on March 24, 1922."
+        ]
+    },
+    "murders": {
+        "trigger_word": "murders",
+        "event_type": "killing",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'murders' signifies an instance of unlawful and intentional killing of a person or people.",
+            "The event 'murders' indicates that the deaths of the six Catholic civilians were a result of premeditated actions.",
+            "The use of 'murders' emphasizes the criminal aspect and illegal nature of the incident that occurred in Belfast."
+        ]
+    },
+    "shot": {
+        "trigger_word": "shot",
+        "event_type": "attack",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'shot' refers to the act of firing a bullet from a gun.",
+            "The event 'shot' indicates that the six Catholic civilians were killed using firearms.",
+            "The word 'shot' provides a specific detail about the method of violence used in the incident."
+        ]
+    },
+    "dead": {
+        "trigger_word": "dead",
+        "event_type": "death",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": ["six catholic civilians"],
+        "description": [
+            "The trigger word 'dead' denotes the state of being no longer alive.",
+            "The event 'dead' indicates the final outcome of the shooting, resulting in the loss of life for six individuals.",
+            "The use of 'dead' provides a stark description of the tragic consequence of the violence."
+        ]
+    },
+    "occurred": {
+        "trigger_word": "occurred",
+        "event_type": "happening",
+        "event_time": "24 march 1922",
+        "event_location": "home of the mcmahon family in belfast, northern ireland",
+        "event_participants": None,
+        "description": [
+            "The trigger word 'occurred' simply means something happened.",
+            "The event 'occurred' signifies that the mcmahon killings or murders took place at a specific time and location.",
+            "The use of 'occurred' introduces the event that involved the killing of six people."
+        ]
+    }
+}
+``` | Text: the mcmahon killings or the mcmahon murders occurred on 24 march 1922 when six catholic civilians were shot dead at the home of the mcmahon family in belfast , northern ireland .
+2025-04-25 20:52:01.147 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+def extract_event_information(text, trigger_words):
+    """
+    Extracts event information from a sentence given a list of trigger words.
+
+    Args:
+        text: The input sentence.
+        trigger_words: A list of trigger words in the sentence.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an event.
+    """
+
+    events = []
+    for trigger_word in trigger_words:
+        event = {
+            "trigger_word": trigger_word,
+            "event_type": None,
+            "event_time": None,
+            "event_location": None,
+            "event_participants": None,
+            "description": []
+        }
+
+        if trigger_word in ["killings", "murders"]:
+            event["event_type"] = "killing"  # Assuming "killings" and "murders" implies a killing event.
+            event["event_time"] = "24 march 1922"
+            event["event_location"] = "belfast , northern ireland"
+            event["event_participants"] = ["six catholic civilians", "the mcmahon family"] # victim and location of killing, hard to assign perpetrators, and more context needed
+
+            event["description"].extend([
+                f"The trigger word '{trigger_word}' signifies a violent act resulting in death.",
+                f"The event described involves the killing of individuals, specifically six catholic civilians, during a specific timeframe and geographical location.",
+                f"The use of '{trigger_word}' highlights an intentional act of taking a life, characterized by the details of location and time provided."
+            ])
+
+
+        elif trigger_word == "shot":
+            event["event_type"] = "shooting"  # Based on trigger word "shot"
+            event["event_time"] = "24 march 1922"
+            event["event_location"] = "the home of the mcmahon family in belfast , northern ireland"
+            event["event_participants"] = ["six catholic civilians"] # victims
+
+            event["description"].extend([
+                "The trigger word 'shot' refers to the act of firing a weapon at someone.",
+                "The event is a shooting incident where victims were shot at a specific location and time.",
+                "The term 'shot' illustrates the use of firearms as the method of causing death to the victims."
+            ])
+
+
+        elif trigger_word == "dead":
+            event["event_type"] = "death"  # Implies a death event.
+            event["event_time"] = "24 march 1922"
+            event["event_location"] = "the home of the mcmahon family in belfast , northern ireland"
+            event["event_participants"] = ["six catholic civilians"]  # implied victims
+
+            event["description"].extend([
+                "The word 'dead' indicates that a death event occurred.",
+                "This event is characterized by the loss of life of several civilians at a specific location and time.",
+                "The term 'dead' serves as a direct indicator of a fatal outcome in this event."
+            ])
+
+        elif trigger_word == "occurred":
+            event["event_type"] = "occurrence"  # generic term, represents an incident
+            event["event_time"] = "24 march 1922"
+            event["event_location"] = "belfast , northern ireland"
+            event["event_participants"] = ["six catholic civilians"] # can derive from context
+
+            event["description"].extend([
+                "The trigger word 'occurred' indicates that something happened at a given time and location.",
+                "The event that 'occurred' is related to the 'killings' and 'murders', referring to a significant incident in the past.",
+                "The use of 'occurred' provides a temporal reference to the events and establishes its place in history."
+            ])
+
+        events.append(event)
+
+    return events
+```
+
+2025-04-25 20:52:01.169 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```python
+def extract_event_information(text, trigger_words):
+    """
+    Extracts event information from a sentence given a list of trigger words.
+
+    Args:
+        text: The input sentence.
+        trigger_words: A list of trigger words in the sentence.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an event.
+    """
+
+    events = []
+    for trigger_word in trigger_words:
+        event = {
+            "trigger_word": trigger_word,
+            "event_type": None,
+            "event_time": None,
+            "event_location": None,
+            "event_participants": None,
+            "description": []
+        }
+
+        if trigger_word in ["killings", "murders"]:
+            event["event_type"] = "killing"  # Assuming "killings" and "murders" implies a killing event.
+            event["event_time"] = "24 march 1922"
+            event["event_location"] = "belfast , northern ireland"
+            event["event_participants"] = ["six catholic civilians", "the mcmahon family"] # victim and location of killing, hard to assign perpetrators, and more context needed
+
+            event["description"].extend([
+                f"The trigger word '{trigger_word}' signifies a violent act resulting in death.",
+                f"The event described involves the killing of individuals, specifically six catholic civilians, during a specific timeframe and geographical location.",
+                f"The use of '{trigger_word}' highlights an intentional act of taking a life, characterized by the details of location and time provided."
+            ])
+
+
+        elif trigger_word == "shot":
+            event["event_type"] = "shooting"  # Based on trigger word "shot"
+            event["event_time"] = "24 march 1922"
+            event["event_location"] = "the home of the mcmahon family in belfast , northern ireland"
+            event["event_participants"] = ["six catholic civilians"] # victims
+
+            event["description"].extend([
+                "The trigger word 'shot' refers to the act of firing a weapon at someone.",
+                "The event is a shooting incident where victims were shot at a specific location and time.",
+                "The term 'shot' illustrates the use of firearms as the method of causing death to the victims."
+            ])
+
+
+        elif trigger_word == "dead":
+            event["event_type"] = "death"  # Implies a death event.
+            event["event_time"] = "24 march 1922"
+            event["event_location"] = "the home of the mcmahon family in belfast , northern ireland"
+            event["event_participants"] = ["six catholic civilians"]  # implied victims
+
+            event["description"].extend([
+                "The word 'dead' indicates that a death event occurred.",
+                "This event is characterized by the loss of life of several civilians at a specific location and time.",
+                "The term 'dead' serves as a direct indicator of a fatal outcome in this event."
+            ])
+
+        elif trigger_word == "occurred":
+            event["event_type"] = "occurrence"  # generic term, represents an incident
+            event["event_time"] = "24 march 1922"
+            event["event_location"] = "belfast , northern ireland"
+            event["event_participants"] = ["six catholic civilians"] # can derive from context
+
+            event["description"].extend([
+                "The trigger word 'occurred' indicates that something happened at a given time and location.",
+                "The event that 'occurred' is related to the 'killings' and 'murders', referring to a significant incident in the past.",
+                "The use of 'occurred' provides a temporal reference to the events and establishes its place in history."
+            ])
+
+        events.append(event)
+
+    return events
+```
+ | Text: the mcmahon killings or the mcmahon murders occurred on 24 march 1922 when six catholic civilians were shot dead at the home of the mcmahon family in belfast , northern ireland .
+2025-04-25 20:52:08.034 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```python
+def extract_events(text, trigger_words):
+    """
+    Extracts events and generates descriptions for each trigger word.
+
+    Args:
+        text: The input text string.
+        trigger_words: A list of trigger words in the text.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an event.
+    """
+
+    events = []
+    for trigger_word in trigger_words:
+        event = {
+            "trigger_word": trigger_word,
+            "event_type": None,
+            "event_time": None,
+            "event_location": None,
+            "event_participants": [],
+            "description": []
+        }
+
+        if trigger_word == "deaths":
+            event["event_type"] = "death"
+            event["event_participants"] = ["victims"]
+            event["description"] = [
+                "The trigger word 'deaths' signifies the occurrence of fatalities.",
+                "The event relates to the deaths of people, a tragic outcome.",
+                "The text mentions a proportion of deaths, indicating a subset of a larger group, possibly due to violence."
+            ]
+
+        elif trigger_word == "used":
+            event["event_type"] = "use"
+            event["event_participants"] = ["artillery and tank rounds"]
+            event["event_location"] = "against taldou"
+            event["description"] = [
+                "The trigger word 'used' indicates the application or employment of something for a specific purpose.",
+                "The event is about the use of artillery and tank rounds, suggesting a military or conflict context.",
+                "The text details how the rounds were deployed against a location, indicating a direct targeting."
+            ]
+
+        elif trigger_word == "announced":
+            event["event_type"] = "announcement"
+            event["event_participants"] = ["u.n."]
+            event["description"] = [
+                "The trigger word 'announced' means to make a formal statement.",
+                "The event involves the U.N. making a statement or declaration.",
+                "The announcement likely regards the findings of their investigation."
+            ]
+
+        elif trigger_word == "massacre":
+            event["event_type"] = "massacre"
+            event["event_participants"] = ["victims"]
+            event["event_location"] = "taldou" #Implied from "against taldou"
+            event["description"] = [
+                "The trigger word 'massacre' refers to a large-scale killing of people.",
+                "The event describes a brutal incident where a large number of people were killed.",
+                "The description indicates a deliberate act of violence, suggesting a serious crime."
+            ]
+
+        elif trigger_word == "resulted":
+            event["event_type"] = "causation"
+            event["event_participants"] = ["artillery and tank rounds"]
+            event["event_location"] = "against taldou"
+            event["description"] = [
+                "The trigger word 'resulted' indicates that something happened as a consequence of something else.",
+                "The event implies that 'deaths' are due to 'artillery and tank rounds'.",
+                "The text explains a cause-and-effect relationship between the use of weaponry and fatalities."
+            ]
+
+        elif trigger_word == "executed":
+            event["event_type"] = "execution"
+            event["event_participants"] = ["victims"]
+            event["description"] = [
+                "The trigger word 'executed' refers to the killing of someone, usually as a punishment.",
+                "The event describes how victims in the massacre were summarily killed.",
+                "The term indicates an act of deliberate killing carried out without due process."
+            ]
+        elif trigger_word == "incidents":
+            event["event_type"] = "occurrence"
+            event["event_location"] = None
+            event["description"] = [
+                "The trigger word 'incidents' indicates that something happened or occurred",
+                "The event describes that there were two separate occurrences.",
+                "The text indicates that the executions happened in two different sets of incidents."
+            ]
+
+
+        events.append(event)
+
+    return events
+```
+
+```python
+text = "while a small proportion of the deaths appeared to have resulted from artillery and tank rounds used against taldou , the u . n . later announced that most of the massacre's victims had been ` ` summarily executed in two separate incidents'' .;"
+trigger_words = ['deaths', 'used', 'announced', 'massacre', 'resulted', 'executed', 'incidents']
+extracted_events = extract_events(text, trigger_words)
+for event in extracted_events:
+    print(event)
+```
+
+2025-04-25 20:52:08.041 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```python
+def extract_events(text, trigger_words):
+    """
+    Extracts events and generates descriptions for each trigger word.
+
+    Args:
+        text: The input text string.
+        trigger_words: A list of trigger words in the text.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an event.
+    """
+
+    events = []
+    for trigger_word in trigger_words:
+        event = {
+            "trigger_word": trigger_word,
+            "event_type": None,
+            "event_time": None,
+            "event_location": None,
+            "event_participants": [],
+            "description": []
+        }
+
+        if trigger_word == "deaths":
+            event["event_type"] = "death"
+            event["event_participants"] = ["victims"]
+            event["description"] = [
+                "The trigger word 'deaths' signifies the occurrence of fatalities.",
+                "The event relates to the deaths of people, a tragic outcome.",
+                "The text mentions a proportion of deaths, indicating a subset of a larger group, possibly due to violence."
+            ]
+
+        elif trigger_word == "used":
+            event["event_type"] = "use"
+            event["event_participants"] = ["artillery and tank rounds"]
+            event["event_location"] = "against taldou"
+            event["description"] = [
+                "The trigger word 'used' indicates the application or employment of something for a specific purpose.",
+                "The event is about the use of artillery and tank rounds, suggesting a military or conflict context.",
+                "The text details how the rounds were deployed against a location, indicating a direct targeting."
+            ]
+
+        elif trigger_word == "announced":
+            event["event_type"] = "announcement"
+            event["event_participants"] = ["u.n."]
+            event["description"] = [
+                "The trigger word 'announced' means to make a formal statement.",
+                "The event involves the U.N. making a statement or declaration.",
+                "The announcement likely regards the findings of their investigation."
+            ]
+
+        elif trigger_word == "massacre":
+            event["event_type"] = "massacre"
+            event["event_participants"] = ["victims"]
+            event["event_location"] = "taldou" #Implied from "against taldou"
+            event["description"] = [
+                "The trigger word 'massacre' refers to a large-scale killing of people.",
+                "The event describes a brutal incident where a large number of people were killed.",
+                "The description indicates a deliberate act of violence, suggesting a serious crime."
+            ]
+
+        elif trigger_word == "resulted":
+            event["event_type"] = "causation"
+            event["event_participants"] = ["artillery and tank rounds"]
+            event["event_location"] = "against taldou"
+            event["description"] = [
+                "The trigger word 'resulted' indicates that something happened as a consequence of something else.",
+                "The event implies that 'deaths' are due to 'artillery and tank rounds'.",
+                "The text explains a cause-and-effect relationship between the use of weaponry and fatalities."
+            ]
+
+        elif trigger_word == "executed":
+            event["event_type"] = "execution"
+            event["event_participants"] = ["victims"]
+            event["description"] = [
+                "The trigger word 'executed' refers to the killing of someone, usually as a punishment.",
+                "The event describes how victims in the massacre were summarily killed.",
+                "The term indicates an act of deliberate killing carried out without due process."
+            ]
+        elif trigger_word == "incidents":
+            event["event_type"] = "occurrence"
+            event["event_location"] = None
+            event["description"] = [
+                "The trigger word 'incidents' indicates that something happened or occurred",
+                "The event describes that there were two separate occurrences.",
+                "The text indicates that the executions happened in two different sets of incidents."
+            ]
+
+
+        events.append(event)
+
+    return events
+```
+
+```python
+text = "while a small proportion of the deaths appeared to have resulted from artillery and tank rounds used against taldou , the u . n . later announced that most of the massacre's victims had been ` ` summarily executed in two separate incidents'' .;"
+trigger_words = ['deaths', 'used', 'announced', 'massacre', 'resulted', 'executed', 'incidents']
+extracted_events = extract_events(text, trigger_words)
+for event in extracted_events:
+    print(event)
+```
+ | Text: while a small proportion of the deaths appeared to have resulted from artillery and tank rounds used against taldou , the u . n . later announced that most of the massacre's victims had been ` ` summarily executed in two separate incidents'' .
+2025-04-25 20:52:09.652 | CRITICAL | extractor.consumer:consume:200 - [FALTAL] Consuming interrupted by user. Stopping safely...
+2025-04-25 20:52:09.654 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-25 20:52:12.999 | INFO     | extractor.consumer:stop_threads:63 - [STOP] All threads stopped
+2025-04-25 20:52:13.007 | INFO     | extractor.consumer:consume:206 - [FINISHED] Finished consuming 7/280 items with 273/280 remained items.
+2025-04-25 20:52:13.008 | INFO     | extractor.consumer:consume:217 - [FINISHED] Really processed 7/280 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 15.14

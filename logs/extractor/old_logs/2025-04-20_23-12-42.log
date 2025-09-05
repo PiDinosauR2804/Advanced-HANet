@@ -1,0 +1,560 @@
+2025-04-20 23:12:42.489 | INFO     | __main__:<module>:163 - [INFO] Arguments:
+2025-04-20 23:12:42.490 | INFO     | __main__:<module>:164 - Input root: data/data_text
+2025-04-20 23:12:42.491 | INFO     | __main__:<module>:165 - Output root: output/des2
+2025-04-20 23:12:42.492 | INFO     | __main__:<module>:166 - Datasets: ['ACE']
+2025-04-20 23:12:42.492 | INFO     | __main__:<module>:167 - Model: gemini-2.0-flash-lite
+2025-04-20 23:12:42.493 | INFO     | __main__:<module>:168 - Candidate: 1
+2025-04-20 23:12:42.493 | INFO     | __main__:<module>:169 - Num try: 3
+2025-04-20 23:12:42.494 | INFO     | __main__:<module>:170 - Max consecutive 429 error: 4
+2025-04-20 23:12:42.494 | INFO     | __main__:<module>:171 - Max num threads: 12
+2025-04-20 23:12:42.495 | INFO     | __main__:<module>:172 - Resume: True
+2025-04-20 23:12:42.496 | INFO     | __main__:<module>:173 - Convert test: False
+2025-04-20 23:12:42.497 | INFO     | __main__:<module>:174 - [INFO] Start processing...
+2025-04-20 23:12:51.406 | INFO     | extractor.consumer:__init__:41 - [INFO] Found 3 valid extractors
+2025-04-20 23:12:53.412 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 23:12:53.420 | INFO     | extractor.consumer:__init__:48 - [START] Start 3 threads
+2025-04-20 23:12:53.421 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-20 23:12:53.422 | INFO     | __main__:run:67 - ====================================================================================================
+2025-04-20 23:12:53.423 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm0\ACE_5task_2way_10shot.train.jsonl...
+2025-04-20 23:12:53.538 | INFO     | extractor.producer:produce:42 - [PRODUCING] Finished producing output/des2\ACE\perm0\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 23:12:53.544 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 23:12:53.546 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 23:12:53.547 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 23:13:54.668 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: former prosecutor and about the last person on the planet that you would ever call ablying liberal .
+2025-04-20 23:13:57.129 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 23:13:57.131 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 23:13:57.138 | INFO     | __main__:run:88 - [FINISHED] Processing 279/280 item, remaning 1/280 in 63.72 seconds
+2025-04-20 23:13:57.139 | INFO     | __main__:run:89 - [SAVE FILE] All item saved to output/des2\ACE\perm0\ACE_5task_2way_10shot.train.jsonl
+2025-04-20 23:13:57.141 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-20 23:13:57.148 | INFO     | __main__:run:67 - ====================================================================================================
+2025-04-20 23:13:57.149 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm0\ACE_5task_2way_5shot.train.jsonl...
+2025-04-20 23:13:57.204 | INFO     | extractor.producer:produce:42 - [PRODUCING] Finished producing output/des2\ACE\perm0\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 23:13:57.209 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 23:13:57.213 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 23:13:57.216 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 23:14:41.152 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: former prosecutor and about the last person on the planet that you would ever call ablying liberal .
+2025-04-20 23:14:41.153 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 1 got error: list index out of range | Text: former prosecutor and about the last person on the planet that you would ever call ablying liberal .
+2025-04-20 23:14:41.154 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: former prosecutor and about the last person on the planet that you would ever call ablying liberal .
+2025-04-20 23:14:43.625 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 23:14:43.627 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 23:14:43.633 | INFO     | __main__:run:88 - [FINISHED] Processing 239/240 item, remaning 1/240 in 46.49 seconds
+2025-04-20 23:14:43.634 | INFO     | __main__:run:89 - [SAVE FILE] All item saved to output/des2\ACE\perm0\ACE_5task_2way_5shot.train.jsonl
+2025-04-20 23:14:43.636 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-20 23:14:43.639 | INFO     | __main__:run:67 - ====================================================================================================
+2025-04-20 23:14:43.640 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm0\ACE_5task_4way_10shot.train.jsonl...
+2025-04-20 23:14:43.797 | INFO     | extractor.producer:produce:42 - [PRODUCING] Finished producing output/des2\ACE\perm0\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-20 23:14:43.799 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 23:14:43.800 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 23:14:43.801 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 23:14:44.507 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:14:44.509 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:06.694 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:15:06.695 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:15:07.718 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:07.719 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:08.198 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: Here's the breakdown of the events and the final output:
+
+The events are: []
+ | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:15:08.199 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:15:08.200 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:15:09.206 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:09.208 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:09.670 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:15:09.671 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:15:10.659 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:10.661 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:10.665 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:11.230 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:15:11.231 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:15:12.689 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:15:12.691 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:15:12.693 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:15:23.778 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you might want to mention that in your letter as well .
+2025-04-20 23:15:23.780 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: you might want to mention that in your letter as well .
+2025-04-20 23:15:23.937 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 1 got error: Trigger word 'got a phone call' not found | Text: he got on a flight to an undisclosed location , when jamie got a second phone call from a flight attendant .. | Text: he got on a flight to an undisclosed location , when jamie got a second phone call from a flight attendant .
+2025-04-20 23:15:25.201 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you might want to mention that in your letter as well .
+2025-04-20 23:15:25.203 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: you might want to mention that in your letter as well .
+2025-04-20 23:15:26.639 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you might want to mention that in your letter as well .
+2025-04-20 23:15:26.640 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: you might want to mention that in your letter as well .
+2025-04-20 23:15:26.641 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: you might want to mention that in your letter as well .
+2025-04-20 23:15:27.627 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:27.630 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:29.096 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:29.098 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:37.454 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:37.455 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:38.930 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:38.931 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:40.447 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:40.448 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:15:40.449 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:16:46.628 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: i-- i'm calling you from new york city , paul , it's a pleasure to meet you .
+2025-04-20 23:17:31.464 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-20 23:17:42.981 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: there will be more letters on the way .
+2025-04-20 23:17:45.709 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us-- this done count , sorry .
+2025-04-20 23:17:45.711 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: you can e-mail us-- this done count , sorry .
+2025-04-20 23:17:47.875 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: karl penhaul is joining us life on the phone with more .
+2025-04-20 23:17:47.941 | CRITICAL | extractor.consumer:worker:100 - [FATAL] Worker 1 got error 429 more than 4 times. Stoping ...
+2025-04-20 23:17:55.469 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:17:55.471 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:17:56.972 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:17:56.973 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:17:58.393 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:17:58.395 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:17:58.396 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:18:11.166 | ERROR    | extractor.llm:extract_response:96 - [EXTRACT RESPONSE] No events found in the response.
+2025-04-20 23:18:11.169 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+    import re
+
+    # Event 1:
+    if "engaged in smuggling" in text:
+        event = {
+            "event_type": "smuggling",
+            "trigger_word": "engaged",
+            "event_time": None,
+            "event_location": "mosul",
+            "event_participants": ["local kurds"],
+            "description": "The trigger word engaged indicates the start or involvement in the activity of smuggling.",
+        }
+        events.append(event)
+    
+    return events
+
+text = "in addition to that , we know that further back behind those lines in the direction of mosul there is heavy artillery and tanks as well , this according to the people here in this area , the local kurds who have been going across the lines for many years basically engaged in smuggling ."
+events = extract_events(text)
+print(f"The events are: {events}")
+``` | Text: in addition to that , we know that further back behind those lines in the direction of mosul there is heavy artillery and tanks as well , this according to the people here in this area , the local kurds who have been going across the lines for many years basically engaged in smuggling .
+2025-04-20 23:18:11.175 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: in addition to that , we know that further back behind those lines in the direction of mosul there is heavy artillery and tanks as well , this according to the people here in this area , the local kurds who have been going across the lines for many years basically engaged in smuggling .
+2025-04-20 23:18:44.135 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:18:44.137 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:18:45.541 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:18:45.543 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:18:46.285 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:18:46.287 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:18:46.289 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:19:15.021 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: future elections who do you think should run for president / vice president in 2008 , and why ?
+2025-04-20 23:19:15.022 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: future elections who do you think should run for president / vice president in 2008 , and why ?
+2025-04-20 23:19:16.506 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: future elections who do you think should run for president / vice president in 2008 , and why ?
+2025-04-20 23:19:16.507 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: future elections who do you think should run for president / vice president in 2008 , and why ?
+2025-04-20 23:19:18.876 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ever , i usually try to stay out of the main party , because i think , and this last election showed that both are very brutal .
+2025-04-20 23:19:18.878 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: ever , i usually try to stay out of the main party , because i think , and this last election showed that both are very brutal .
+2025-04-20 23:19:19.510 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ever , i usually try to stay out of the main party , because i think , and this last election showed that both are very brutal .
+2025-04-20 23:19:19.511 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: ever , i usually try to stay out of the main party , because i think , and this last election showed that both are very brutal .
+2025-04-20 23:19:20.927 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ever , i usually try to stay out of the main party , because i think , and this last election showed that both are very brutal .
+2025-04-20 23:19:20.928 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: ever , i usually try to stay out of the main party , because i think , and this last election showed that both are very brutal .
+2025-04-20 23:19:20.930 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: ever , i usually try to stay out of the main party , because i think , and this last election showed that both are very brutal .
+2025-04-20 23:19:47.837 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:19:47.839 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:19:48.811 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:19:48.812 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:19:50.230 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:19:50.232 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:19:50.233 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:20:12.103 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: Here's the analysis of the provided text and the extracted event dictionary:
+
+The events are: []
+ | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:20:12.105 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:20:12.837 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:20:12.838 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:20:14.450 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:20:14.452 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:20:14.454 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:20:17.846 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:20:17.847 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:20:18.504 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:20:18.505 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:20:19.993 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:20:19.994 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:20:19.995 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:20:21.651 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: oh , so the topic is elections .
+2025-04-20 23:20:21.653 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: oh , so the topic is elections .
+2025-04-20 23:20:22.429 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: oh , so the topic is elections .
+2025-04-20 23:20:22.430 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: oh , so the topic is elections .
+2025-04-20 23:20:23.946 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: oh , so the topic is elections .
+2025-04-20 23:20:23.948 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: oh , so the topic is elections .
+2025-04-20 23:20:23.949 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: oh , so the topic is elections .
+2025-04-20 23:20:37.220 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: and it still does .
+2025-04-20 23:20:37.221 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: and it still does .
+2025-04-20 23:20:38.015 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: and it still does .
+2025-04-20 23:20:38.017 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: and it still does .
+2025-04-20 23:20:58.337 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: and it still does .
+2025-04-20 23:21:22.712 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:22.713 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:23.692 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: Here's the analysis of the provided text and the extracted event dictionaries:
+
+The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:23.694 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:24.429 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:24.431 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:24.433 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:25.935 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:25.936 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:26.469 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:21:26.471 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:21:27.334 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:27.336 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:27.520 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:21:27.521 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:21:28.860 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:28.862 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:28.863 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:29.097 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: Here's the analysis of the provided text:
+
+The events are: []
+ | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:21:29.099 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:21:29.100 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:21:32.822 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:32.824 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:33.556 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:33.558 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:35.013 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:35.014 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:21:35.016 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:22:07.046 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: is that where he's headed ?
+2025-04-20 23:22:07.047 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: is that where he's headed ?
+2025-04-20 23:22:07.796 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: is that where he's headed ?
+2025-04-20 23:22:07.798 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: is that where he's headed ?
+2025-04-20 23:22:09.645 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: who would you like to see appointed to his cabinet next term ?
+2025-04-20 23:22:09.646 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: who would you like to see appointed to his cabinet next term ?
+2025-04-20 23:22:11.069 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: who would you like to see appointed to his cabinet next term ?
+2025-04-20 23:22:11.071 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: who would you like to see appointed to his cabinet next term ?
+2025-04-20 23:22:12.505 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: who would you like to see appointed to his cabinet next term ?
+2025-04-20 23:22:12.506 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: who would you like to see appointed to his cabinet next term ?
+2025-04-20 23:22:12.508 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: who would you like to see appointed to his cabinet next term ?
+2025-04-20 23:23:03.368 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:23:03.370 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:23:04.999 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:23:05.006 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:23:06.455 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:23:06.459 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:23:06.460 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:23:32.377 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i want to know where the federal criminal charges against all parties involved are .
+2025-04-20 23:23:32.379 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: i want to know where the federal criminal charges against all parties involved are .
+2025-04-20 23:23:33.801 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i want to know where the federal criminal charges against all parties involved are .
+2025-04-20 23:23:33.817 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: i want to know where the federal criminal charges against all parties involved are .
+2025-04-20 23:23:34.451 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i want to know where the federal criminal charges against all parties involved are .
+2025-04-20 23:23:34.453 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: i want to know where the federal criminal charges against all parties involved are .
+2025-04-20 23:23:34.454 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: i want to know where the federal criminal charges against all parties involved are .
+2025-04-20 23:23:48.414 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 23:23:48.417 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 23:23:48.432 | INFO     | __main__:run:88 - [FINISHED] Processing 536/560 item, remaning 24/560 in 544.80 seconds
+2025-04-20 23:23:48.433 | INFO     | __main__:run:89 - [SAVE FILE] All item saved to output/des2\ACE\perm0\ACE_5task_4way_10shot.train.jsonl
+2025-04-20 23:23:48.434 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-20 23:23:48.435 | INFO     | __main__:run:67 - ====================================================================================================
+2025-04-20 23:23:48.436 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm0\ACE_5task_4way_5shot.train.jsonl...
+2025-04-20 23:23:48.493 | INFO     | extractor.producer:produce:42 - [PRODUCING] Finished producing output/des2\ACE\perm0\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-20 23:23:48.495 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 23:23:48.497 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 23:23:48.498 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 23:24:10.618 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: those letters important at both ends .
+2025-04-20 23:24:10.620 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: those letters important at both ends .
+2025-04-20 23:24:12.054 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: those letters important at both ends .
+2025-04-20 23:24:12.055 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: those letters important at both ends .
+2025-04-20 23:24:12.057 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: those letters important at both ends .
+2025-04-20 23:24:16.055 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:16.056 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:17.527 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:17.529 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:26.006 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:24:26.008 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:24:26.738 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:24:26.740 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:24:28.184 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:24:28.186 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:24:28.188 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: i don't think that's quite accurate as to what he wrote me about .
+2025-04-20 23:24:34.219 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:34.220 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:35.663 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:35.665 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:37.303 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:37.305 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:37.306 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:24:42.829 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:24:42.830 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:24:44.421 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: Here's the breakdown of events from the provided text:
+
+The events are: []
+ | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:24:44.423 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:24:45.184 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:24:45.185 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:24:45.186 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: that's sort of unusual in these calls , in my experience so far .
+2025-04-20 23:25:04.608 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you might want to mention that in your letter as well .
+2025-04-20 23:25:04.609 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: you might want to mention that in your letter as well .
+2025-04-20 23:25:06.013 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you might want to mention that in your letter as well .
+2025-04-20 23:25:06.014 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: you might want to mention that in your letter as well .
+2025-04-20 23:25:07.556 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: Here's the event extraction from the text:
+
+The events are: []
+ | Text: you might want to mention that in your letter as well .
+2025-04-20 23:25:07.557 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: you might want to mention that in your letter as well .
+2025-04-20 23:25:07.558 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: you might want to mention that in your letter as well .
+2025-04-20 23:25:34.276 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:25:34.278 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: you can e-mail us at am @ cnn . com .
+2025-04-20 23:26:17.906 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:26:17.907 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:26:18.727 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:26:18.728 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:26:20.157 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:26:20.159 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:26:20.160 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-20 23:27:25.164 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: however , these techniques by themselves can not completely mitigate the risk of domestic attacks and would not protect u . s . airliners flying to and from foreign airports .
+2025-04-20 23:27:25.165 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: however , these techniques by themselves can not completely mitigate the risk of domestic attacks and would not protect u . s . airliners flying to and from foreign airports .
+2025-04-20 23:27:41.723 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: or what if i were in a bar with the car outside , keys in my pocket , but i've decided i'll take the train home later ?
+2025-04-20 23:27:41.724 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: or what if i were in a bar with the car outside , keys in my pocket , but i've decided i'll take the train home later ?
+2025-04-20 23:28:11.764 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:28:11.766 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:28:13.618 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:28:13.619 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-20 23:28:33.792 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+The events are: []
+``` | Text: so , uh the election , um-- the , um-- let's see , overall i felt-- ju-just give you a brief-- summary , i felt-- that-- john kerry and edwards were were pretty strong candidates and-- uh-- mm , i don't know , i guess just in terms of policy i didn't-- i didn't , uh , find-- that as compelling as just-- the personality of-- the different candidates .
+2025-04-20 23:28:33.794 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: so , uh the election , um-- the , um-- let's see , overall i felt-- ju-just give you a brief-- summary , i felt-- that-- john kerry and edwards were were pretty strong candidates and-- uh-- mm , i don't know , i guess just in terms of policy i didn't-- i didn't , uh , find-- that as compelling as just-- the personality of-- the different candidates .
+2025-04-20 23:29:09.189 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:29:09.190 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:29:10.651 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:29:10.653 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:29:12.118 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:29:12.119 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:29:12.120 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: are there minimal requirements before an election can be considered an legitimate election ?
+2025-04-20 23:29:33.210 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:29:33.212 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:29:34.001 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:29:34.002 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:29:35.424 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:29:35.425 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:29:35.426 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-20 23:29:37.152 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:29:37.153 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:29:38.624 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:29:38.628 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:29:39.245 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:29:39.246 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:29:39.248 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: if so , should that affect the legitimacy of the election ?
+2025-04-20 23:29:41.579 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: oh , so the topic is elections .
+2025-04-20 23:29:41.581 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: oh , so the topic is elections .
+2025-04-20 23:29:42.961 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: oh , so the topic is elections .
+2025-04-20 23:29:42.963 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: oh , so the topic is elections .
+2025-04-20 23:29:44.440 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: oh , so the topic is elections .
+2025-04-20 23:29:44.442 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: oh , so the topic is elections .
+2025-04-20 23:29:44.443 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: oh , so the topic is elections .
+2025-04-20 23:29:45.346 | ERROR    | extractor.llm:extract_response:93 - [EXTRACT RESPONSE] Error parsing events: malformed node or string on line 1: <ast.Name object at 0x000001BBD8A5FEB0>
+2025-04-20 23:29:45.350 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: [{"event_type": "nomination", "trigger_word": "president", "event_time": null, "event_location": null, "event_participants": ["guy"], "description": "The trigger word president refers to the event of a person being nominated for the position of the president."}]
+ | Text: and i said , that guy could be president .
+2025-04-20 23:29:45.357 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: and i said , that guy could be president .
+2025-04-20 23:29:55.062 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:29:55.064 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:29:56.503 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:29:56.505 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:30:59.083 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:30:59.084 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:31:00.798 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: Here's the analysis of the text and the extracted event dictionaries:
+
+The events are: []
+ | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:31:00.800 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:31:01.394 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:31:01.396 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:31:01.397 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: this was not one of the staged stiff-armed clotheslines you see in professional wrestling broadcasts .
+2025-04-20 23:31:11.923 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: we don't need war .
+2025-04-20 23:31:11.924 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: we don't need war .
+2025-04-20 23:31:27.436 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+The events are: []
+``` | Text: um , yeah , ok-um , eh , uh , it was talking something about , uh , the war in iraq , um , i guess , yeah , it's a good thing-- about the elections that are going on .
+2025-04-20 23:31:27.437 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: um , yeah , ok-um , eh , uh , it was talking something about , uh , the war in iraq , um , i guess , yeah , it's a good thing-- about the elections that are going on .
+2025-04-20 23:31:51.202 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: and it still does .
+2025-04-20 23:31:51.204 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: and it still does .
+2025-04-20 23:31:52.621 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: and it still does .
+2025-04-20 23:31:52.622 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: and it still does .
+2025-04-20 23:31:54.026 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: and it still does .
+2025-04-20 23:31:54.028 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: and it still does .
+2025-04-20 23:31:54.029 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: and it still does .
+2025-04-20 23:32:05.322 | ERROR    | extractor.llm:extract_response:93 - [EXTRACT RESPONSE] Error parsing events: malformed node or string on line 1: <ast.Name object at 0x000001BBD9808130>
+2025-04-20 23:32:05.324 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: Here's the breakdown of the events from the text:
+
+The events are: [{"event_type": "meeting", "trigger_word": "meeting", "event_time": "20 years after", "event_location": "baghdad", "event_participants": ["saddam hussein", "donald rumsfeld"], "description": "The trigger word meeting refers to the event where two or more parties encountered each other, marking the occurrence of a meeting or interaction"}, {"event_type": "travel", "trigger_word": "is back", "event_time": null, "event_location": "iraqi capital", "event_participants": ["donald rumsfeld", "u . s . troops"], "description": "The trigger word is back refers to the event of returning to a location"}]
+ | Text: that was then , this is now , 20 years after meeting saddam hussein in baghdad , defense secretary donald rumsfeld is back in the iraqi capital with victorious u . s . troops .
+2025-04-20 23:32:05.326 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: that was then , this is now , 20 years after meeting saddam hussein in baghdad , defense secretary donald rumsfeld is back in the iraqi capital with victorious u . s . troops .
+2025-04-20 23:32:09.573 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:09.574 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:10.294 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:10.295 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:10.869 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:10.871 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:10.872 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:12.617 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:12.619 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:13.216 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: Here's the event extraction from the text:
+
+The events are: []
+ | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:32:13.218 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:32:13.222 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:13.224 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:13.818 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:32:13.819 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:13.820 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:32:13.822 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:13.828 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-20 23:32:14.455 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:32:14.456 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:32:14.458 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: yeah , because i was really-- i wasn't really following it that much because i was-
+2025-04-20 23:32:15.051 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: here are some of the fine achievements of the terrorist marwan barghouti marwan barghouti-lrb-born june 6 , 1958-rrb-is a palestinian leader from the west bank and a leader of the fatah movement that forms the backbone of the palestinian authority and the palestine liberation organization-lrb-plo-rrb-.
+2025-04-20 23:32:15.053 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: list index out of range | Text: here are some of the fine achievements of the terrorist marwan barghouti marwan barghouti-lrb-born june 6 , 1958-rrb-is a palestinian leader from the west bank and a leader of the fatah movement that forms the backbone of the palestinian authority and the palestine liberation organization-lrb-plo-rrb-.
+2025-04-20 23:32:15.614 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: here are some of the fine achievements of the terrorist marwan barghouti marwan barghouti-lrb-born june 6 , 1958-rrb-is a palestinian leader from the west bank and a leader of the fatah movement that forms the backbone of the palestinian authority and the palestine liberation organization-lrb-plo-rrb-.
+2025-04-20 23:32:15.616 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: here are some of the fine achievements of the terrorist marwan barghouti marwan barghouti-lrb-born june 6 , 1958-rrb-is a palestinian leader from the west bank and a leader of the fatah movement that forms the backbone of the palestinian authority and the palestine liberation organization-lrb-plo-rrb-.
+2025-04-20 23:32:16.504 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: here are some of the fine achievements of the terrorist marwan barghouti marwan barghouti-lrb-born june 6 , 1958-rrb-is a palestinian leader from the west bank and a leader of the fatah movement that forms the backbone of the palestinian authority and the palestine liberation organization-lrb-plo-rrb-.
+2025-04-20 23:32:16.506 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: here are some of the fine achievements of the terrorist marwan barghouti marwan barghouti-lrb-born june 6 , 1958-rrb-is a palestinian leader from the west bank and a leader of the fatah movement that forms the backbone of the palestinian authority and the palestine liberation organization-lrb-plo-rrb-.
+2025-04-20 23:32:16.507 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: here are some of the fine achievements of the terrorist marwan barghouti marwan barghouti-lrb-born june 6 , 1958-rrb-is a palestinian leader from the west bank and a leader of the fatah movement that forms the backbone of the palestinian authority and the palestine liberation organization-lrb-plo-rrb-.
+2025-04-20 23:33:13.711 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:13.712 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 0 got error: list index out of range | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:14.766 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:14.768 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: list index out of range | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:15.201 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:15.203 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 0 got error: list index out of range | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:15.204 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:16.269 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:16.270 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: list index out of range | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:16.272 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: ` ` that's not the sort of thing you pick up at a military surplus store .''
+2025-04-20 23:33:36.915 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 23:33:36.917 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 23:33:36.935 | INFO     | __main__:run:88 - [FINISHED] Processing 462/480 item, remaning 18/480 in 588.50 seconds
+2025-04-20 23:33:36.938 | INFO     | __main__:run:89 - [SAVE FILE] All item saved to output/des2\ACE\perm0\ACE_5task_4way_5shot.train.jsonl
+2025-04-20 23:33:36.943 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 23:33:38.070 | INFO     | extractor.consumer:stop_threads:56 - [STOP] All threads stopped
+2025-04-20 23:33:38.071 | INFO     | __main__:run:129 - [FINISHED] All items processed and saved to output/des2

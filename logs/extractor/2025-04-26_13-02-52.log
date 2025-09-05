@@ -1,0 +1,1693 @@
+2025-04-26 13:02:52.960 | INFO     | __main__:<module>:168 - [INFO] Arguments:
+2025-04-26 13:02:52.961 | INFO     | __main__:<module>:169 - Input root: data/data_text
+2025-04-26 13:02:52.961 | INFO     | __main__:<module>:170 - Output root: output/des4
+2025-04-26 13:02:52.962 | INFO     | __main__:<module>:171 - Datasets: ['ACE']
+2025-04-26 13:02:52.962 | INFO     | __main__:<module>:172 - Perms: [0, 1, 2, 3, 4]
+2025-04-26 13:02:52.963 | INFO     | __main__:<module>:173 - Model: gemini-2.0-flash-lite
+2025-04-26 13:02:52.963 | INFO     | __main__:<module>:174 - Candidate: 5
+2025-04-26 13:02:52.963 | INFO     | __main__:<module>:175 - Num try: 3
+2025-04-26 13:02:52.964 | INFO     | __main__:<module>:176 - Max consecutive 429 error: 6
+2025-04-26 13:02:52.964 | INFO     | __main__:<module>:177 - Max num threads: 5
+2025-04-26 13:02:52.965 | INFO     | __main__:<module>:178 - Resume: False
+2025-04-26 13:02:52.965 | INFO     | __main__:<module>:179 - Convert test: False
+2025-04-26 13:02:52.965 | INFO     | __main__:<module>:180 - Logs dir: logs/extractor
+2025-04-26 13:02:52.966 | INFO     | __main__:<module>:181 - Gen des: True
+2025-04-26 13:02:52.966 | INFO     | __main__:<module>:182 - [INFO] Start processing...
+2025-04-26 13:03:10.868 | INFO     | extractor.consumer:__init__:48 - [INFO] Found 5 valid extractors
+2025-04-26 13:03:12.874 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:03:12.877 | INFO     | extractor.consumer:__init__:55 - [START] Start 5 threads
+2025-04-26 13:03:12.879 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:03:12.879 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm0\ACE_5task_2way_10shot.train.jsonl to output/des4\ACE\perm0\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:03:12.880 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:03:12.881 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_2way_10shot.train.jsonl...
+2025-04-26 13:03:12.902 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 13:03:12.905 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:03:12.907 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:03:12.909 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:03:17.941 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "letter",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["saddam hussein", "his niece"],
+    "description": [
+        "The trigger word 'letter' indicates a written form of communication exchanged between two parties.",
+        "The event 'letter' signifies the sending or receiving of a written message, potentially containing information, requests, or expressions.",
+        "The context implies that the 'letter' was a message from Saddam Hussein's niece to him, and his response was a reaction to it."
+    ]
+}
+```
+2025-04-26 13:03:17.944 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "letter",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["saddam hussein", "his niece"],
+    "description": [
+        "The trigger word 'letter' indicates a written form of communication exchanged between two parties.",
+        "The event 'letter' signifies the sending or receiving of a written message, potentially containing information, requests, or expressions.",
+        "The context implies that the 'letter' was a message from Saddam Hussein's niece to him, and his response was a reaction to it."
+    ]
+}
+``` | Text: it was said to be saddam hussein's response to a letter from his niece .
+2025-04-26 13:03:59.766 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "letters": "None",
+    "event_type": "None",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": "None",
+    "description": [
+        "The word 'letters' refers to written or printed messages.",
+        "Letters can be used to convey information or communicate.",
+        "In this context, 'letters' could imply importance, potentially related to the content or origin of the messages."
+    ]
+}
+```
+2025-04-26 13:03:59.768 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "letters": "None",
+    "event_type": "None",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": "None",
+    "description": [
+        "The word 'letters' refers to written or printed messages.",
+        "Letters can be used to convey information or communicate.",
+        "In this context, 'letters' could imply importance, potentially related to the content or origin of the messages."
+    ]
+}
+``` | Text: those letters important at both ends .
+2025-04-26 13:06:38.898 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' indicates the process by which people choose individuals to hold public office.",
+        "The event 'elections' refers to a formal process for making decisions, typically by voting.",
+        "Elections are a crucial part of a democratic society, allowing citizens to participate in the governance of their country."
+    ]
+}
+```
+2025-04-26 13:06:38.901 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' indicates the process by which people choose individuals to hold public office.",
+        "The event 'elections' refers to a formal process for making decisions, typically by voting.",
+        "Elections are a crucial part of a democratic society, allowing citizens to participate in the governance of their country."
+    ]
+}
+``` | Text: oh , so the topic is elections .
+2025-04-26 13:06:55.606 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "former",
+    "event_type": "role_change",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["prosecutor"],
+    "description": [
+        "The trigger word 'former' indicates a past role or position held by a person or entity.",
+        "The event 'former' signifies a change in status, implying that the individual no longer holds the specified role.",
+        "The use of 'former' highlights a transition from one professional identity (prosecutor) to potentially another, or to no longer be in the role."
+    ]
+}
+```
+2025-04-26 13:06:55.609 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "former",
+    "event_type": "role_change",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["prosecutor"],
+    "description": [
+        "The trigger word 'former' indicates a past role or position held by a person or entity.",
+        "The event 'former' signifies a change in status, implying that the individual no longer holds the specified role.",
+        "The use of 'former' highlights a transition from one professional identity (prosecutor) to potentially another, or to no longer be in the role."
+    ]
+}
+``` | Text: former prosecutor and about the last person on the planet that you would ever call ablying liberal .
+2025-04-26 13:06:57.278 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "former",
+    "event_type": "role_change",
+    "event_time": "recently",
+    "event_location": null,
+    "event_participants": ["carol moseley-braun"],
+    "description": [
+        "The trigger word 'former' indicates a previous role or position held by a person, signifying a change in status.",
+        "The event 'former' refers to a state where a person, Carol Moseley-Braun, held a specific role (Senator) in the past.",
+        "The word 'former' describes a transition or a past affiliation, setting the stage for a new phase such as running for president."
+    ]
+}
+```
+
+2025-04-26 13:06:57.281 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "former",
+    "event_type": "role_change",
+    "event_time": "recently",
+    "event_location": null,
+    "event_participants": ["carol moseley-braun"],
+    "description": [
+        "The trigger word 'former' indicates a previous role or position held by a person, signifying a change in status.",
+        "The event 'former' refers to a state where a person, Carol Moseley-Braun, held a specific role (Senator) in the past.",
+        "The word 'former' describes a transition or a past affiliation, setting the stage for a new phase such as running for president."
+    ]
+}
+```
+ | Text: former illinois senator carol moseley-braun recently decided to run for president .
+2025-04-26 13:07:31.216 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "slices",
+    "event_type": "cutting",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["one"],
+    "description": [
+        "The trigger word 'slices' indicates an act of cutting, in this context, referring to self-harm or inflicting damage upon oneself.",
+        "The event 'slices' illustrates a scenario of self-destructive behavior driven by spite or anger, highlighting a decision to harm oneself despite potential negative consequences.",
+        "The action of 'slices' suggests a deliberate choice to engage in an action that is detrimental, implying a lack of foresight or a focus on immediate emotional reactions."
+    ]
+}
+```
+
+2025-04-26 13:07:31.219 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "slices",
+    "event_type": "cutting",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["one"],
+    "description": [
+        "The trigger word 'slices' indicates an act of cutting, in this context, referring to self-harm or inflicting damage upon oneself.",
+        "The event 'slices' illustrates a scenario of self-destructive behavior driven by spite or anger, highlighting a decision to harm oneself despite potential negative consequences.",
+        "The action of 'slices' suggests a deliberate choice to engage in an action that is detrimental, implying a lack of foresight or a focus on immediate emotional reactions."
+    ]
+}
+```
+ | Text: if one slices off one's nose to spite their face , then nobody should be surprised about their complaints of bleeding .
+2025-04-26 13:07:40.927 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "meeting",
+    "event_type": "meeting",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'meeting' signifies a gathering where individuals come together, often to discuss matters of importance.",
+        "The event 'meeting' in this context implies that a discussion or event took place with participants.",
+        "The presence of 'controversy' suggests that the 'meeting' involved differing opinions or disagreements."
+    ]
+}
+```
+2025-04-26 13:07:40.931 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "meeting",
+    "event_type": "meeting",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'meeting' signifies a gathering where individuals come together, often to discuss matters of importance.",
+        "The event 'meeting' in this context implies that a discussion or event took place with participants.",
+        "The presence of 'controversy' suggests that the 'meeting' involved differing opinions or disagreements."
+    ]
+}
+``` | Text: we've got controversy at this meeting .
+2025-04-26 13:07:49.328 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:07:49.329 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 280/280 items with 0/280 remained items.
+2025-04-26 13:07:49.330 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 280/280 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 6.63
+2025-04-26 13:07:49.685 | INFO     | __main__:run:90 - [FINISHED] Processing 280/280 item, remaning 0/280 in 276.47 seconds
+2025-04-26 13:07:49.686 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9995 | Precision: 0.9119 | Recall: 0.9119 | F1: 0.9119
+2025-04-26 13:07:49.687 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm0\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:07:49.688 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:07:49.689 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm0\ACE_5task_2way_5shot.train.jsonl to output/des4\ACE\perm0\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:07:49.690 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:07:49.690 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_2way_5shot.train.jsonl...
+2025-04-26 13:07:49.707 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-26 13:07:49.711 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:07:49.713 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:07:49.714 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:11:44.606 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "former",
+    "event_type": "occupation_change",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["prosecutor"],
+    "description": [
+        "The trigger word 'former' indicates a previous role or position held by an individual.",
+        "The event 'former' signifies a change in profession or status, suggesting that the individual no longer holds the position of a prosecutor.",
+        "The word 'former' describes a state of having been something in the past, but no longer being it now."
+    ]
+}
+```
+2025-04-26 13:11:44.608 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "former",
+    "event_type": "occupation_change",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["prosecutor"],
+    "description": [
+        "The trigger word 'former' indicates a previous role or position held by an individual.",
+        "The event 'former' signifies a change in profession or status, suggesting that the individual no longer holds the position of a prosecutor.",
+        "The word 'former' describes a state of having been something in the past, but no longer being it now."
+    ]
+}
+``` | Text: former prosecutor and about the last person on the planet that you would ever call ablying liberal .
+2025-04-26 13:12:11.976 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:12:11.978 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 240/240 items with 0/240 remained items.
+2025-04-26 13:12:11.979 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 240/240 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 6.33
+2025-04-26 13:12:12.269 | INFO     | __main__:run:90 - [FINISHED] Processing 240/240 item, remaning 0/240 in 262.31 seconds
+2025-04-26 13:12:12.270 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9994 | Precision: 0.9243 | Recall: 0.9243 | F1: 0.9243
+2025-04-26 13:12:12.271 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm0\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:12:12.272 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:12:12.273 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm0\ACE_5task_4way_10shot.train.jsonl to output/des4\ACE\perm0\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:12:12.273 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:12:12.274 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_4way_10shot.train.jsonl...
+2025-04-26 13:12:12.316 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-26 13:12:12.318 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:12:12.320 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:12:12.321 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:12:35.391 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "call",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["mother"],
+    "description": [
+        "The trigger word 'call' in this context refers to the act of making a phone call or contacting someone.",
+        "The event 'call' indicates that the mother is the first person to initiate communication.",
+        "The word 'call' highlights an action, likely involving a conversation or message exchange initiated by the mother."
+    ]
+}
+```
+
+2025-04-26 13:12:35.394 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "call",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["mother"],
+    "description": [
+        "The trigger word 'call' in this context refers to the act of making a phone call or contacting someone.",
+        "The event 'call' indicates that the mother is the first person to initiate communication.",
+        "The word 'call' highlights an action, likely involving a conversation or message exchange initiated by the mother."
+    ]
+}
+```
+ | Text: and the first to call is the mother .
+2025-04-26 13:12:57.898 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "drop",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["her"],
+    "description": [
+        "The trigger word 'drop' in this context means to send or deliver a note to someone, indicating an act of communication.",
+        "The event 'drop' describes the action of conveying a message or information to a specific person, likely through a written medium.",
+        "The event 'drop' implies a personal communication, where the sender intends for the recipient to receive and read a note."
+    ]
+}
+```
+2025-04-26 13:12:57.901 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "drop",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["her"],
+    "description": [
+        "The trigger word 'drop' in this context means to send or deliver a note to someone, indicating an act of communication.",
+        "The event 'drop' describes the action of conveying a message or information to a specific person, likely through a written medium.",
+        "The event 'drop' implies a personal communication, where the sender intends for the recipient to receive and read a note."
+    ]
+}
+``` | Text: please take a few moments to drop her a note-lrb-i do not have an email address for her .
+2025-04-26 13:12:58.637 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "contacted",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["i", "the uacc"],
+    "description": [
+        "The trigger word 'contacted' indicates an act of communication or reaching out to someone or some organization.",
+        "The event 'contacted' implies an initial communication initiated by the speaker to the uacc to provide information and request action regarding the auctions.",
+        "In this context, 'contacted' signifies that the speaker informed the UACC about potentially fraudulent activities or rule violations related to the auctions."
+    ]
+}
+```
+
+2025-04-26 13:12:58.640 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "contacted",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["i", "the uacc"],
+    "description": [
+        "The trigger word 'contacted' indicates an act of communication or reaching out to someone or some organization.",
+        "The event 'contacted' implies an initial communication initiated by the speaker to the uacc to provide information and request action regarding the auctions.",
+        "In this context, 'contacted' signifies that the speaker informed the UACC about potentially fraudulent activities or rule violations related to the auctions."
+    ]
+}
+```
+ | Text: i have contacted the uacc and told them about it so they can check the auctions-lrb-she's been doing this a long time-rrb-and to tell me if she's actually a registered member .
+2025-04-26 13:13:15.922 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "writes": {
+        "trigger_word": "writes",
+        "event_type": "reporting",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["chad hensley"],
+        "description": [
+            "The trigger word 'writes' indicates the act of producing written content, such as a report, letter, or article, by a person.",
+            "The event 'writes' signifies the communication of information, in this case, by Chad Hensley, often to convey facts, opinions, or narratives.",
+            "The use of 'writes' suggests the author is presenting information or an opinion on the oil deals involving Iraq and other nations, potentially as part of a commentary or news piece."
+        ]
+    }
+}
+```
+2025-04-26 13:13:15.925 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "writes": {
+        "trigger_word": "writes",
+        "event_type": "reporting",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["chad hensley"],
+        "description": [
+            "The trigger word 'writes' indicates the act of producing written content, such as a report, letter, or article, by a person.",
+            "The event 'writes' signifies the communication of information, in this case, by Chad Hensley, often to convey facts, opinions, or narratives.",
+            "The use of 'writes' suggests the author is presenting information or an opinion on the oil deals involving Iraq and other nations, potentially as part of a commentary or news piece."
+        ]
+    }
+}
+``` | Text: chad hensley , from fairfax , virginia , writes , ` ` france , russia and german have all multi-billion dollar oil deals with saddam in iraq .
+2025-04-26 13:13:37.630 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "phone",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["national security advisor", "more than three dozen world leaders"],
+    "description": [
+        "The trigger word 'phone' signifies communication, specifically a phone call, between the national security advisor and numerous world leaders.",
+        "The event 'phone' represents a telephonic exchange where information and updates were conveyed from the national security advisor to more than three dozen world leaders.",
+        "The context indicates a series of 'phone' calls were used to disseminate information regarding ongoing events to a large group of global leaders."
+    ]
+}
+```
+2025-04-26 13:13:37.633 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "phone",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["national security advisor", "more than three dozen world leaders"],
+    "description": [
+        "The trigger word 'phone' signifies communication, specifically a phone call, between the national security advisor and numerous world leaders.",
+        "The event 'phone' represents a telephonic exchange where information and updates were conveyed from the national security advisor to more than three dozen world leaders.",
+        "The context indicates a series of 'phone' calls were used to disseminate information regarding ongoing events to a large group of global leaders."
+    ]
+}
+``` | Text: the national security advisor fanning out , we're told in phone calls to more than three dozen world leaders offering them an update on what is going on .
+2025-04-26 13:13:37.635 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "phone",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["national security advisor", "more than three dozen world leaders"],
+    "description": [
+        "The trigger word 'phone' indicates an act of telecommunication, specifically via telephone.",
+        "The event 'phone calls' describes a situation where the national security advisor is contacting various world leaders.",
+        "The event 'phone calls' suggests a method of information exchange and updates among the participants, emphasizing the use of phone as a communication channel."
+    ]
+}
+```
+2025-04-26 13:13:37.637 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "phone",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["national security advisor", "more than three dozen world leaders"],
+    "description": [
+        "The trigger word 'phone' indicates an act of telecommunication, specifically via telephone.",
+        "The event 'phone calls' describes a situation where the national security advisor is contacting various world leaders.",
+        "The event 'phone calls' suggests a method of information exchange and updates among the participants, emphasizing the use of phone as a communication channel."
+    ]
+}
+``` | Text: the national security advisor fanning out , we're told in phone calls to more than three dozen world leaders offering them an update on what is going on .
+2025-04-26 13:15:20.818 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "went",
+    "event_type": "movement",
+    "event_time": None,
+    "event_location": "stump town",
+    "event_participants": ["i"],
+    "description": [
+        "The trigger word 'went' signifies the action of moving from one place to another.",
+        "The event 'went' describes the subject's journey or travel to a specific destination.",
+        "The action 'went' implies a change in the subject's location, initiating from a starting point (implied) and arriving at 'stump town'."
+    ]
+}
+```
+2025-04-26 13:15:20.821 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "went",
+    "event_type": "movement",
+    "event_time": None,
+    "event_location": "stump town",
+    "event_participants": ["i"],
+    "description": [
+        "The trigger word 'went' signifies the action of moving from one place to another.",
+        "The event 'went' describes the subject's journey or travel to a specific destination.",
+        "The action 'went' implies a change in the subject's location, initiating from a starting point (implied) and arriving at 'stump town'."
+    ]
+}
+``` | Text: -i went to a place ca-- i want to say it was called stump town ,
+2025-04-26 13:16:06.134 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process of selecting individuals for political office through voting.",
+        "The event 'elections' implies a formal process where citizens choose their representatives.",
+        "The word 'elections' indicates the potential occurrence of a democratic or political exercise."
+    ]
+}
+```
+
+2025-04-26 13:16:06.136 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process of selecting individuals for political office through voting.",
+        "The event 'elections' implies a formal process where citizens choose their representatives.",
+        "The word 'elections' indicates the potential occurrence of a democratic or political exercise."
+    ]
+}
+```
+ | Text: do you think the elections are going to happen ?
+2025-04-26 13:16:06.138 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process by which people choose individuals to hold public office.",
+        "The event 'elections' implies a decision-making process based on voting, with potential for specific dates or locations.",
+        "The term 'elections' signifies a formal process of selecting representatives, often involving campaigns and voting."
+    ]
+}
+```
+
+2025-04-26 13:16:06.141 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process by which people choose individuals to hold public office.",
+        "The event 'elections' implies a decision-making process based on voting, with potential for specific dates or locations.",
+        "The term 'elections' signifies a formal process of selecting representatives, often involving campaigns and voting."
+    ]
+}
+```
+ | Text: do you think the elections are going to happen ?
+2025-04-26 13:16:13.819 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'election' refers to the formal process by which a population chooses individuals for public office.",
+        "The event 'election' in this context highlights a political process where outcomes are anticipated to be problematic, suggesting potential issues like fraud or manipulation.",
+        "This 'election' is described as problematic, implying a lack of trust in the fairness or legitimacy of its outcome."
+    ]
+}
+```
+2025-04-26 13:16:13.822 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'election' refers to the formal process by which a population chooses individuals for public office.",
+        "The event 'election' in this context highlights a political process where outcomes are anticipated to be problematic, suggesting potential issues like fraud or manipulation.",
+        "This 'election' is described as problematic, implying a lack of trust in the fairness or legitimacy of its outcome."
+    ]
+}
+``` | Text: the problem with this election is that no matter what happens the results are going to be tainted and questionable .
+2025-04-26 13:16:31.318 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": ["they"],
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a position or for membership of a group.",
+        "The event 'election' suggests a formal process where people vote to choose representatives or leaders.",
+        "The term 'election' here highlights a key aspect of a democratic process, specifically concerning the setting of a date and the distribution of seats based on votes."
+    ]
+}
+```
+2025-04-26 13:16:31.321 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": ["they"],
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a position or for membership of a group.",
+        "The event 'election' suggests a formal process where people vote to choose representatives or leaders.",
+        "The term 'election' here highlights a key aspect of a democratic process, specifically concerning the setting of a date and the distribution of seats based on votes."
+    ]
+}
+``` | Text: were they consulted on setting the date of election and how to distribute seats from the votes gain ?
+2025-04-26 13:17:19.415 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'election' refers to a formal process of selecting a person for a political office or other position by voting.",
+        "The event 'election' in this context appears to be associated with a particular topic or perspective ('religious side'), suggesting it's a politically charged event.",
+        "The sentence implies a negative sentiment towards the 'election,' likely stemming from the 'tone' taken regarding its 'religious side'."
+    ]
+}
+```
+
+2025-04-26 13:17:19.418 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'election' refers to a formal process of selecting a person for a political office or other position by voting.",
+        "The event 'election' in this context appears to be associated with a particular topic or perspective ('religious side'), suggesting it's a politically charged event.",
+        "The sentence implies a negative sentiment towards the 'election,' likely stemming from the 'tone' taken regarding its 'religious side'."
+    ]
+}
+```
+ | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-26 13:17:21.523 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": null,
+    "event_location": null,
+    "event_participants": null,
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting individuals for political office or other positions.",
+        "The event 'elections' signifies a time when people vote to choose their leaders or representatives.",
+        "The term 'elections' suggests a process where candidates compete for votes and the public makes their choices."
+    ]
+}
+```
+2025-04-26 13:17:21.525 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": null,
+    "event_location": null,
+    "event_participants": null,
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting individuals for political office or other positions.",
+        "The event 'elections' signifies a time when people vote to choose their leaders or representatives.",
+        "The term 'elections' suggests a process where candidates compete for votes and the public makes their choices."
+    ]
+}
+``` | Text: oh , so the topic is elections .
+2025-04-26 13:17:21.527 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "political_event",
+    "event_time": null,
+    "event_location": null,
+    "event_participants": null,
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting individuals for political office or other positions.",
+        "The event 'elections' suggests a context of voting, campaigning, and possibly debate.",
+        "The term 'elections' implies a process where people choose their representatives, and it is a key component of a democratic system."
+    ]
+}
+```
+
+2025-04-26 13:17:21.530 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "political_event",
+    "event_time": null,
+    "event_location": null,
+    "event_participants": null,
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting individuals for political office or other positions.",
+        "The event 'elections' suggests a context of voting, campaigning, and possibly debate.",
+        "The term 'elections' implies a process where people choose their representatives, and it is a key component of a democratic system."
+    ]
+}
+```
+ | Text: oh , so the topic is elections .
+2025-04-26 13:17:34.348 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: war | Event List: [{'trigger_word': 'break out', 'event_type': 'conflict', 'event_time': 'any moment', 'event_location': 'korean peninsula', 'event_participants': ['north korea', 'u . s .', 'u.s.'], 'description': ["the trigger word 'break out' signifies the initiation or beginning of a war or conflict.", "the trigger word 'break out' describes the potential for a war to begin imminently, fueled by the actions of the u.s. on the korean peninsula.", "the event 'break out' suggests a potential escalation of existing tensions on the korean peninsula into a full-scale war, possibly involving the u.s.", "the phrase 'break out' implies a potential escalation of tensions on the korean peninsula, possibly triggered by the actions of the us.", "the event 'break out' highlights the volatile nature of the situation, implying the immediate risk of a violent conflict due to the actions of the united states.", "the event 'break out' signifies the potential initiation of a war on the korean peninsula.", "the trigger word 'break out' implies a sudden escalation of tensions leading to conflict, potentially involving the u.s.", "the context indicates that the 'break out' event is highly probable and could occur at any time, highlighting the volatile situation.", "the phrase 'break out' suggests the sudden emergence or beginning of a war, indicating a state of armed conflict.", "the phrase 'break out' in this context indicates the imminence of a war, triggered by the actions of the u.s. on the korean peninsula.", "the event 'break out' suggests the potential for armed conflict on the korean peninsula, fueled by tensions and actions of the u.s..", "the phrase 'break out' suggests a sudden and unexpected emergence of a conflict, implying a state of escalating tension.", "the event 'break out' signifies the commencement of hostilities or a conflict, in this context, referring to a potential war.", "the event 'break out' suggests a state of conflict is likely to erupt imminently, fueled by the actions of the us.", "the trigger word 'break out' in this context refers to the sudden and imminent commencement of a war."]}]
+2025-04-26 13:17:34.350 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (1) | Text: ` ` the situation on the korean peninsula is so tense that a war may break out any moment due to the u . s . moves ,'' the kcna statement said .
+2025-04-26 13:17:35.890 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: war | Event List: [{'trigger_word': 'break out', 'event_type': 'conflict', 'event_time': 'any moment', 'event_location': 'korean peninsula', 'event_participants': ['u . s .', 'u.s.'], 'description': ["the phrase 'break out' highlights the tense situation, suggesting a sudden and possibly unexpected eruption of war on the korean peninsula influenced by the u.s.'s actions.", "the tense situation on the korean peninsula creates an environment where war may 'break out' due to specific geopolitical factors.", "the trigger word 'break out' here refers to the commencement or eruption of a war, suggesting the beginning of hostilities.", "the event 'break out' implies a sudden and unplanned onset of conflict, potentially involving the actions of the u.s. on the korean peninsula.", "the trigger word 'break out' indicates the sudden start of a conflict or war.", "the event 'break out' implies a potential for immediate military engagement or hostilities, influenced by the actions of the united states on the korean peninsula.", "the phrase 'break out any moment' underscores the immediate and volatile nature of the situation, highlighting the potential for an escalation into war due to the u.s. moves.", "the event 'break out' suggests a potential for armed conflict on the korean peninsula, fueled by the actions of the u.s.", "the trigger word 'break out' suggests a sudden escalation of conflict, highlighting the precariousness of the situation.", "the phrase 'break out' signifies the initiation of a conflict or war, implying a sudden and potentially violent escalation of tensions.", "the event 'break out' indicates the potential for a war to begin imminently, fueled by the actions of the u.s. on the korean peninsula.", "the trigger word 'break out' signifies the commencement of a violent conflict or war.", "the event 'break out' indicates the potential initiation or start of a war, stemming from the current tense situation on the korean peninsula.", "the trigger word 'break out' here highlights the precariousness of the situation, emphasizing the imminent possibility of a war due to the u.s. moves.", "the event 'break out' suggests the potential for a war to begin imminently, influenced by external actions."]}]
+2025-04-26 13:17:35.892 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (1) | Text: ` ` the situation on the korean peninsula is so tense that a war may break out any moment due to the u . s . moves ,'' the kcna statement said .
+2025-04-26 13:17:37.456 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: war | Event List: [{'trigger_word': 'break out', 'event_type': 'conflict', 'event_time': 'any moment', 'event_location': 'korean peninsula', 'event_participants': ['korea (implied)', 'u.s.', 'u . s .', 'korean peninsula'], 'description': ["the event 'break out' signifies the beginning of hostilities, potentially involving multiple parties and causing significant consequences.", "the event 'break out' describes the potential for a war to begin imminently on the korean peninsula.", "the phrase 'break out' implies a rapid onset of conflict, suggesting the situation on the korean peninsula is volatile and prone to immediate escalation.", "this 'break out' event suggests a negative consequence, highlighting the fragility of peace on the korean peninsula driven by the actions of the u . s . .", "the event 'break out' signifies the potential commencement of a war, indicating a sudden and uncontrolled escalation of hostilities.", "the event 'break out' highlights the potential for military conflict due to the actions of the united states, raising concerns about regional stability.", "the phrase 'break out' suggests the sudden emergence or beginning of a war, implying a rapid escalation of tensions.", "the phrase 'break out' in this context suggests a dangerous escalation of the current tense situation, implying a rapid and unwanted descent into armed conflict.", "the phrase 'break out' indicates the potential initiation of a war, suggesting a sudden and possibly unexpected eruption of conflict.", "the trigger word 'break out' describes the escalation of tensions on the korean peninsula to the point where armed conflict is imminent, influenced by external actions.", "the trigger word 'break out' serves as a warning of an impending war, triggered by the us's behaviors.", "the trigger word 'break out' signifies the sudden beginning or occurrence of a war.", "the trigger word 'break out' highlights the precariousness of the situation, emphasizing the possibility of a war at any given instant.", "the trigger word 'break out' in this context signifies the potential for a war to commence imminently due to external actions.", "the event 'break out' refers to the sudden beginning or occurrence of a war, implying a state of conflict."]}]
+2025-04-26 13:17:37.458 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (1) | Text: ` ` the situation on the korean peninsula is so tense that a war may break out any moment due to the u . s . moves ,'' the kcna statement said .
+2025-04-26 13:17:37.460 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: ` ` the situation on the korean peninsula is so tense that a war may break out any moment due to the u . s . moves ,'' the kcna statement said . | Trigger: ['war']
+2025-04-26 13:17:39.206 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process of selecting people for positions of authority or making decisions.",
+        "The event 'elections' implies a democratic process where citizens exercise their right to vote.",
+        "The word 'elections' suggests a future event, raising questions about its occurrence or timing."
+    ]
+}
+```
+2025-04-26 13:17:39.208 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process of selecting people for positions of authority or making decisions.",
+        "The event 'elections' implies a democratic process where citizens exercise their right to vote.",
+        "The word 'elections' suggests a future event, raising questions about its occurrence or timing."
+    ]
+}
+``` | Text: do you think the elections are going to happen ?
+2025-04-26 13:20:04.372 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "unborn": "procreation",
+    "event_type": "procreation",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["laci peterson", "her unborn child"],
+    "description": [
+        "The trigger word 'unborn' refers to a fetus or developing offspring inside the mother's womb.",
+        "The event 'unborn' in this context relates to the remains of the fetus, suggesting a tragic situation.",
+        "The term 'unborn' highlights the developmental stage of the child, emphasizing the loss of potential life."
+    ]
+}
+```
+2025-04-26 13:20:04.374 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "unborn": "procreation",
+    "event_type": "procreation",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["laci peterson", "her unborn child"],
+    "description": [
+        "The trigger word 'unborn' refers to a fetus or developing offspring inside the mother's womb.",
+        "The event 'unborn' in this context relates to the remains of the fetus, suggesting a tragic situation.",
+        "The term 'unborn' highlights the developmental stage of the child, emphasizing the loss of potential life."
+    ]
+}
+``` | Text: police are now considering the possibility that the remains are those of laci peterson and her unborn child .
+2025-04-26 13:21:16.075 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "convicted",
+    "event_type": "legal",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["toefting"],
+    "description": [
+        "The trigger word 'convicted' signifies a legal process where a person is found guilty of a crime.",
+        "The event 'convicted' indicates that toefting has been found guilty of a crime based on available evidence.",
+        "The event of being 'convicted' implies that a judgment or verdict has been reached against toefting in a legal setting, likely following a trial or plea."
+    ]
+}
+```
+2025-04-26 13:21:16.078 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "convicted",
+    "event_type": "legal",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["toefting"],
+    "description": [
+        "The trigger word 'convicted' signifies a legal process where a person is found guilty of a crime.",
+        "The event 'convicted' indicates that toefting has been found guilty of a crime based on available evidence.",
+        "The event of being 'convicted' implies that a judgment or verdict has been reached against toefting in a legal setting, likely following a trial or plea."
+    ]
+}
+``` | Text: toefting has been convicted before .
+2025-04-26 13:22:02.155 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:22:02.156 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 559/560 items with 1/560 remained items.
+2025-04-26 13:22:02.157 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 559/560 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 6.90
+2025-04-26 13:22:02.953 | INFO     | __main__:run:90 - [FINISHED] Processing 559/560 item, remaning 1/560 in 589.92 seconds
+2025-04-26 13:22:02.954 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9994 | Precision: 0.9187 | Recall: 0.9204 | F1: 0.9187
+2025-04-26 13:22:02.955 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm0\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:22:02.955 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:22:02.956 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm0\ACE_5task_4way_5shot.train.jsonl to output/des4\ACE\perm0\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:22:02.957 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:22:02.957 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_4way_5shot.train.jsonl...
+2025-04-26 13:22:03.106 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-26 13:22:03.110 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:22:03.111 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:22:03.112 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:22:28.042 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "hear from",
+    "event_type": "communication",
+    "event_time": "later",
+    "event_location": null,
+    "event_participants": ["many of you", "we"],
+    "description": [
+        "The event 'hear from' signifies the receipt of communication, such as information or feedback, from a source.",
+        "In this context, 'hear from' indicates that the speaker anticipates receiving responses or input from the audience.",
+        "The trigger word 'hear from' implies a future point in time where the speaker will become aware of the audience's responses."
+    ]
+}
+```
+2025-04-26 13:22:28.045 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "hear from",
+    "event_type": "communication",
+    "event_time": "later",
+    "event_location": null,
+    "event_participants": ["many of you", "we"],
+    "description": [
+        "The event 'hear from' signifies the receipt of communication, such as information or feedback, from a source.",
+        "In this context, 'hear from' indicates that the speaker anticipates receiving responses or input from the audience.",
+        "The trigger word 'hear from' implies a future point in time where the speaker will become aware of the audience's responses."
+    ]
+}
+``` | Text: and i'm sure we'll hear from many of you and we will select some of the responses and share them with you a bit later .
+2025-04-26 13:23:30.596 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "phone",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["national security advisor", "world leaders"],
+    "description": [
+        "The trigger word 'phone' indicates an act of communication via telephone.",
+        "The event 'phone' signifies a conversation or exchange of information between the national security advisor and multiple world leaders.",
+        "The use of 'phone' suggests the national security advisor is using telephones to connect with more than three dozen world leaders, to inform them about current affairs."
+    ]
+}
+```
+2025-04-26 13:23:30.601 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "phone",
+    "event_type": "communication",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["national security advisor", "world leaders"],
+    "description": [
+        "The trigger word 'phone' indicates an act of communication via telephone.",
+        "The event 'phone' signifies a conversation or exchange of information between the national security advisor and multiple world leaders.",
+        "The use of 'phone' suggests the national security advisor is using telephones to connect with more than three dozen world leaders, to inform them about current affairs."
+    ]
+}
+``` | Text: the national security advisor fanning out , we're told in phone calls to more than three dozen world leaders offering them an update on what is going on .
+2025-04-26 13:24:58.331 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "withdrawal": "withdrawal",
+    "event_type": "military_withdrawal",
+    "event_time": "immediate",
+    "event_location": "anbar governorate",
+    "event_participants": [
+        "us forces",
+        "iraqi security forces"
+    ],
+    "description": [
+        "The trigger word 'withdrawal' signifies the act of military forces pulling back or retreating from a specific area or region.",
+        "The event 'withdrawal' describes the process of removing US and Iraqi security forces from Anbar governorate.",
+        "The context indicates a swift and sudden 'withdrawal' of forces, likely implying a strategic decision or a response to changing circumstances in Anbar."
+    ]
+}
+```
+2025-04-26 13:24:58.333 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "withdrawal": "withdrawal",
+    "event_type": "military_withdrawal",
+    "event_time": "immediate",
+    "event_location": "anbar governorate",
+    "event_participants": [
+        "us forces",
+        "iraqi security forces"
+    ],
+    "description": [
+        "The trigger word 'withdrawal' signifies the act of military forces pulling back or retreating from a specific area or region.",
+        "The event 'withdrawal' describes the process of removing US and Iraqi security forces from Anbar governorate.",
+        "The context indicates a swift and sudden 'withdrawal' of forces, likely implying a strategic decision or a response to changing circumstances in Anbar."
+    ]
+}
+``` | Text: -immediate withdrawal of us and iraqi security forces from the anbar governorate and the handover of security responsibilities to former army officers from anbar .
+2025-04-26 13:25:35.330 | ERROR    | extractor.llm:extract_response:183 - [EXTRACT RESPONSE] Error parsing events: malformed node or string on line 6: <ast.BoolOp object at 0x0000020A746A1B40> | Text: ```json
+[
+  {
+    "trigger_word": "go back",
+    "event_type": "return",
+    "event_time": None,
+    "event_location": "Iraq" or "Afghanistan",
+    "event_participants": ["he"],
+    "description": [
+      "The phrase 'go back' indicates a return to a previous location, in this context, likely related to a military or work deployment.",
+      "The event 'go back' implies a change of location, from upstate New York to either Iraq or Afghanistan, suggesting a potential change in work or living situation.",
+      "The trigger word 'go back' signifies a reversal of the current location, implying a move away from upstate New York and towards either Iraq or Afghanistan."
+    ]
+  }
+]
+```
+2025-04-26 13:25:35.333 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+[
+  {
+    "trigger_word": "go back",
+    "event_type": "return",
+    "event_time": None,
+    "event_location": "Iraq" or "Afghanistan",
+    "event_participants": ["he"],
+    "description": [
+      "The phrase 'go back' indicates a return to a previous location, in this context, likely related to a military or work deployment.",
+      "The event 'go back' implies a change of location, from upstate New York to either Iraq or Afghanistan, suggesting a potential change in work or living situation.",
+      "The trigger word 'go back' signifies a reversal of the current location, implying a move away from upstate New York and towards either Iraq or Afghanistan."
+    ]
+  }
+]
+``` | Text: he didn't get his papers where he's going to be c---he's in upstate new york right now but he's going to-- have to probably go back to-to either iraq or af-afghanistan .
+2025-04-26 13:25:45.427 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": "January",
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting a person for political office or accepting or rejecting a proposal by voting.",
+        "The event 'elections' is a planned event, in this case 'scheduled for January', implying a specific timeframe for the voting process.",
+        "The sentence questions the occurrence of the 'elections', indicating uncertainty about whether the voting event will actually happen as planned."
+    ]
+}
+```
+2025-04-26 13:25:45.430 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": "January",
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting a person for political office or accepting or rejecting a proposal by voting.",
+        "The event 'elections' is a planned event, in this case 'scheduled for January', implying a specific timeframe for the voting process.",
+        "The sentence questions the occurrence of the 'elections', indicating uncertainty about whether the voting event will actually happen as planned."
+    ]
+}
+``` | Text: do you think the elections scheduled for january will take place , and if not , then what ?
+2025-04-26 13:25:45.432 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": "January",
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process of selecting individuals for public office through voting.",
+        "The event 'elections' in January implies a scheduled period for citizens to cast votes and determine the future leadership.",
+        "The sentence raises a question of whether the scheduled 'elections' will occur, indicating potential concerns or uncertainties regarding the electoral process."
+    ]
+}
+```
+
+2025-04-26 13:25:45.435 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "election",
+    "event_time": "January",
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process of selecting individuals for public office through voting.",
+        "The event 'elections' in January implies a scheduled period for citizens to cast votes and determine the future leadership.",
+        "The sentence raises a question of whether the scheduled 'elections' will occur, indicating potential concerns or uncertainties regarding the electoral process."
+    ]
+}
+```
+ | Text: do you think the elections scheduled for january will take place , and if not , then what ?
+2025-04-26 13:25:51.090 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a position through voting.",
+        "This 'election' event is described as having potential issues regarding the validity and trustworthiness of the outcome.",
+        "The sentence highlights concerns about the 'election', specifically that the results are likely to be viewed negatively regardless of the actual process."
+    ]
+}
+```
+2025-04-26 13:25:51.093 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a position through voting.",
+        "This 'election' event is described as having potential issues regarding the validity and trustworthiness of the outcome.",
+        "The sentence highlights concerns about the 'election', specifically that the results are likely to be viewed negatively regardless of the actual process."
+    ]
+}
+``` | Text: the problem with this election is that no matter what happens the results are going to be tainted and questionable .
+2025-04-26 13:26:11.159 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": ["they"],
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a position by voting.",
+        "The event 'election' in this context involves setting a date and distributing seats based on votes.",
+        "The term 'election' implies a process where individuals are consulted and potentially involved in decisions related to the event."
+    ]
+}
+```
+2025-04-26 13:26:11.161 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": ["they"],
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a position by voting.",
+        "The event 'election' in this context involves setting a date and distributing seats based on votes.",
+        "The term 'election' implies a process where individuals are consulted and potentially involved in decisions related to the event."
+    ]
+}
+``` | Text: were they consulted on setting the date of election and how to distribute seats from the votes gain ?
+2025-04-26 13:26:28.118 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["John Kerry", "Edwards"],
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a political office or other position by voting.",
+        "The event 'election' is mentioned in the context of the speaker's assessment of political candidates, specifically John Kerry and Edwards.",
+        "The mention of 'election' implies a broader political context and the evaluation of individuals within that system."
+    ]
+}
+```
+2025-04-26 13:26:28.121 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["John Kerry", "Edwards"],
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a political office or other position by voting.",
+        "The event 'election' is mentioned in the context of the speaker's assessment of political candidates, specifically John Kerry and Edwards.",
+        "The mention of 'election' implies a broader political context and the evaluation of individuals within that system."
+    ]
+}
+``` | Text: so , uh the election , um-- the , um-- let's see , overall i felt-- ju-just give you a brief-- summary , i felt-- that-- john kerry and edwards were were pretty strong candidates and-- uh-- mm , i don't know , i guess just in terms of policy i didn't-- i didn't , uh , find-- that as compelling as just-- the personality of-- the different candidates .
+2025-04-26 13:26:51.642 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "political_event",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": ["voters", "candidates", "political parties"],
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting individuals for political office or other positions.",
+        "The event 'elections' involves voters casting ballots to choose representatives or leaders.",
+        "The event 'elections' is a crucial process in democracies, ensuring representation and participation of the people in governance."
+    ]
+}
+```
+2025-04-26 13:26:51.644 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "political_event",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": ["voters", "candidates", "political parties"],
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting individuals for political office or other positions.",
+        "The event 'elections' involves voters casting ballots to choose representatives or leaders.",
+        "The event 'elections' is a crucial process in democracies, ensuring representation and participation of the people in governance."
+    ]
+}
+``` | Text: do you think the elections are going to happen ?
+2025-04-26 13:26:56.286 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "election": {
+        "trigger_word": "election",
+        "event_type": "election",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": [],
+        "description": [
+            "The trigger word 'election' refers to a formal process by which people choose individuals to hold public office.",
+            "The context suggests the election is related to a discussion about its religious aspects.",
+            "The event 'election' here is discussed in the context of the speaker's negative feelings towards its tone, particularly concerning the religious aspects."
+        ]
+    }
+}
+```
+2025-04-26 13:26:56.288 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "election": {
+        "trigger_word": "election",
+        "event_type": "election",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": [],
+        "description": [
+            "The trigger word 'election' refers to a formal process by which people choose individuals to hold public office.",
+            "The context suggests the election is related to a discussion about its religious aspects.",
+            "The event 'election' here is discussed in the context of the speaker's negative feelings towards its tone, particularly concerning the religious aspects."
+        ]
+    }
+}
+``` | Text: i didn't particularly like the the tone about the the religious uh-- side of-- the that election .
+2025-04-26 13:27:05.369 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "elections",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process of selecting individuals for public office through voting.",
+        "The event 'elections' implies a democratic process where citizens choose their representatives.",
+        "The question 'do you think the elections are going to happen?' is a speculative question about the occurrence of elections."
+    ]
+}
+```
+2025-04-26 13:27:05.371 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "elections",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'elections' refers to the process of selecting individuals for public office through voting.",
+        "The event 'elections' implies a democratic process where citizens choose their representatives.",
+        "The question 'do you think the elections are going to happen?' is a speculative question about the occurrence of elections."
+    ]
+}
+``` | Text: do you think the elections are going to happen ?
+2025-04-26 13:27:05.373 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "political_event",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": "None",
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting individuals for public office or other positions of authority.",
+        "The event 'elections' signifies a pivotal moment in a political system where citizens exercise their right to choose their leaders.",
+        "The word 'elections' implies a structured process, often involving registration, campaigning, voting, and the announcement of results, all aimed at transferring political power."
+    ]
+}
+```
+
+2025-04-26 13:27:05.375 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "elections",
+    "event_type": "political_event",
+    "event_time": "None",
+    "event_location": "None",
+    "event_participants": "None",
+    "description": [
+        "The trigger word 'elections' refers to a formal process of selecting individuals for public office or other positions of authority.",
+        "The event 'elections' signifies a pivotal moment in a political system where citizens exercise their right to choose their leaders.",
+        "The word 'elections' implies a structured process, often involving registration, campaigning, voting, and the announcement of results, all aimed at transferring political power."
+    ]
+}
+```
+ | Text: do you think the elections are going to happen ?
+2025-04-26 13:27:20.955 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: war | Event List: [{'trigger_word': 'break out', 'event_type': 'conflict', 'event_time': 'any moment', 'event_location': 'korean peninsula', 'event_participants': ['u . s .', 'u. s.'], 'description': ["the phrase 'break out' implies a sudden and potentially uncontrolled occurrence of a war, influenced by the actions of the u.s., according to the kcna statement.", "the trigger word 'break out' signifies the sudden beginning or occurrence of a war, indicating the escalation of tension into open conflict.", "the event 'break out' suggests the potential commencement of hostilities, emphasizing the precariousness of the situation on the korean peninsula.", "the trigger phrase 'break out' signifies the commencement or eruption of a conflict, in this instance, potentially a war.", "the event 'break out' indicates the potential escalation of tensions into a state of armed conflict, referencing a specific location.", "the sentence implies that the conflict could 'break out' very quickly, highlighting the immediacy of the situation and the potential for rapid escalation.", "the phrase 'break out' signifies the initiation of a conflict, specifically a war, implying a sudden and unexpected escalation of tensions.", "the phrase 'break out' describes the possible commencement of hostilities, highlighting the precariousness of the situation on the korean peninsula.", "the event 'break out' suggests the imminent escalation of tensions on the korean peninsula, possibly resulting in military action influenced by the u.s.", "the trigger word 'break out' relates to the sudden start of a war, adding a sense of immediacy and danger to the situation, driven by external factors.", "the event 'break out' suggests a potential for military action or widespread violence, triggered by external factors.", "the trigger word 'break out' signifies the commencement or eruption of a negative event, in this instance, war.", "the trigger word 'break out' signifies the commencement or escalation of a violent conflict, specifically referring to a war in this context.", "the phrase 'break out' suggests the potential for hostilities on the korean peninsula, possibly initiated by the actions of the u.s.", "the event 'break out' suggests a potential military conflict on the korean peninsula, possibly triggered by the actions of the u.s."]}]
+2025-04-26 13:27:20.958 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (1) | Text: ` ` the situation on the korean peninsula is so tense that a war may break out any moment due to the u . s . moves ,'' the kcna statement said .
+2025-04-26 13:27:22.701 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: war | Event List: [{'trigger_word': 'break out', 'event_type': 'conflict', 'event_time': 'any moment', 'event_location': 'korean peninsula', 'event_participants': ['north korea (implied)', 'u . s .'], 'description': ["the event 'break out' implies the beginning of hostilities or a state of war, which is imminent based on the context.", "the situation is described as tense, emphasizing the likelihood of a war to 'break out' at any time, linking it to the actions of the u.s.", "the event 'break out' suggests the potential for a war to commence imminently, driven by the actions or maneuvers of the united states in the context of the korean peninsula.", "the event 'break out' indicates the sudden commencement of a war due to external actions in the korean peninsula.", "the trigger word 'break out' signifies the initiation or beginning of a conflict, implying a sudden and possibly violent escalation of tensions.", "the phrase 'break out' emphasizes the immediacy and severity of the situation, portraying a state of high alert and the possibility of military action.", "the phrase 'break out' indicates the commencement of a conflict, in this context, referring to a potential war.", "the phrase 'break out' implies a transition from a state of peace or stability to one of active hostilities, emphasizing the gravity of the situation.", "the event 'break out' suggests a sudden escalation of tensions into active hostilities, possibly involving the 'u . s .' and the korean peninsula.", "the trigger word 'break out' signifies the commencement of a conflict or war, suggesting a sudden and often unexpected escalation of tensions.", "the trigger word 'break out' indicates the potential for a war to erupt imminently on the korean peninsula, potentially influenced by external actions.", "the phrase 'break out' signifies the commencement of a war, suggesting a sudden and potentially violent escalation of conflict.", "the event 'break out' describes the potential for a war to begin on the korean peninsula, linked to actions of the u . s . and the current tense situation.", "the trigger 'break out' implies a state of conflict erupting imminently due to external actions.", "the trigger word 'break out' signifies the initiation or eruption of a conflict, potentially a war, in this context."]}]
+2025-04-26 13:27:22.705 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (1) | Text: ` ` the situation on the korean peninsula is so tense that a war may break out any moment due to the u . s . moves ,'' the kcna statement said .
+2025-04-26 13:27:24.391 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: war | Event List: [{'trigger_word': 'break out', 'event_type': 'conflict', 'event_time': 'any moment', 'event_location': 'korean peninsula', 'event_participants': ['kcna', 'korea', 'u . s .', 'u.s.'], 'description': ["the trigger word 'break out' signifies the initiation or eruption of a conflict, potentially war, in this context.", "the trigger word 'break out' suggests an immediate and sudden escalation of the existing tensions, with the potential for violence on the korean peninsula.", "the trigger phrase 'break out' signifies the commencement or eruption of a conflict, such as war.", "the phrase 'break out' indicates a high-risk scenario in which a war may begin due to the actions of the u.s.", "the event 'break out' indicates the potential beginning of a war, signifying a shift from a tense situation to active conflict.", "the event 'break out' suggests a potential escalation of tensions leading to an outbreak of hostilities, which may occur anytime in the korean peninsula.", "the phrase 'break out' describes the commencement of war as a result of heightened tensions driven by the actions of the u.s. in the korean peninsula.", "the event 'break out' suggests a potential escalation of tensions on the korean peninsula, implying a sudden and possibly unplanned beginning to a war.", "the trigger word 'break out' indicates the commencement or eruption of a conflict, specifically referring to a potential war in this context.", "the event 'break out' describes the possibility of war escalating due to the actions of the united states on the korean peninsula.", "the phrase 'break out' emphasizes the sudden and potentially uncontrolled nature of the potential war.", "the event 'break out' suggests an imminent escalation of tensions, potentially leading to hostilities on the korean peninsula.", "this event 'break out' implies that the conflict will erupt soon because of the influence of the u.s. moves, as stated by the kcna statement.", "the sentence highlights the tense situation, suggesting that a war could 'break out' imminently, implying a high risk of armed conflict.", "the trigger word 'break out' signifies the initiation or beginning of a conflict, specifically a war in this context."]}]
+2025-04-26 13:27:24.394 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (1) | Text: ` ` the situation on the korean peninsula is so tense that a war may break out any moment due to the u . s . moves ,'' the kcna statement said .
+2025-04-26 13:27:24.395 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: ` ` the situation on the korean peninsula is so tense that a war may break out any moment due to the u . s . moves ,'' the kcna statement said . | Trigger: ['war']
+2025-04-26 13:27:49.466 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "conflict",
+    "event_type": "conflict",
+    "event_time": "None",
+    "event_location": "northwest of baghdad",
+    "event_participants": ["republican guards"],
+    "description": [
+        "The trigger word 'conflict' signifies a struggle or disagreement, potentially involving the republican guards and possibly the speaker.",
+        "The event 'conflict' occurred northwest of Baghdad and involved republican guards, according to the text.",
+        "The phrase 'during this conflict' indicates that the speaker was present and had visual documentation related to the republican guards during the conflict, suggesting a period of tension or fighting."
+    ]
+}
+```
+
+2025-04-26 13:27:49.469 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "conflict",
+    "event_type": "conflict",
+    "event_time": "None",
+    "event_location": "northwest of baghdad",
+    "event_participants": ["republican guards"],
+    "description": [
+        "The trigger word 'conflict' signifies a struggle or disagreement, potentially involving the republican guards and possibly the speaker.",
+        "The event 'conflict' occurred northwest of Baghdad and involved republican guards, according to the text.",
+        "The phrase 'during this conflict' indicates that the speaker was present and had visual documentation related to the republican guards during the conflict, suggesting a period of tension or fighting."
+    ]
+}
+```
+ | Text: i was the only one during this conflict who had pictures of republican guards and it's true luck because i was driving northwest of baghdad and i bumped into these guys going around the capital .
+2025-04-26 13:27:49.472 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "conflict": "conflict",
+    "event_type": "conflict",
+    "event_time": "None",
+    "event_location": "northwest of baghdad",
+    "event_participants": ["republican guards"],
+    "description": [
+        "The trigger word 'conflict' signifies a state of disagreement or opposition, potentially involving armed forces.",
+        "This instance of 'conflict' occurred near Baghdad, possibly involving an encounter between the speaker and the republican guards.",
+        "The speaker's presence during the 'conflict' implies they were a witness or participant."
+    ]
+}
+```
+
+2025-04-26 13:27:49.476 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "conflict": "conflict",
+    "event_type": "conflict",
+    "event_time": "None",
+    "event_location": "northwest of baghdad",
+    "event_participants": ["republican guards"],
+    "description": [
+        "The trigger word 'conflict' signifies a state of disagreement or opposition, potentially involving armed forces.",
+        "This instance of 'conflict' occurred near Baghdad, possibly involving an encounter between the speaker and the republican guards.",
+        "The speaker's presence during the 'conflict' implies they were a witness or participant."
+    ]
+}
+```
+ | Text: i was the only one during this conflict who had pictures of republican guards and it's true luck because i was driving northwest of baghdad and i bumped into these guys going around the capital .
+2025-04-26 13:27:52.467 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "explosion",
+    "event_type": "explosion",
+    "event_time": "morning rush hour",
+    "event_location": "restroom of the multistory crocodile cafe in the commercial district of kizilay",
+    "event_participants": ["police"],
+    "description": [
+        "The trigger word 'explosion' refers to a sudden and violent release of energy, typically accompanied by a loud noise and the potential for damage.",
+        "The event 'explosion' in this context suggests a dangerous situation investigated by the police, occurring in a specific location during a particular time.",
+        "The description of the event emphasizes the location (restroom of a cafe) and the time (morning rush hour), providing context for understanding the potential impact and investigation focus related to the 'explosion'."
+    ]
+}
+```
+2025-04-26 13:27:52.470 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "explosion",
+    "event_type": "explosion",
+    "event_time": "morning rush hour",
+    "event_location": "restroom of the multistory crocodile cafe in the commercial district of kizilay",
+    "event_participants": ["police"],
+    "description": [
+        "The trigger word 'explosion' refers to a sudden and violent release of energy, typically accompanied by a loud noise and the potential for damage.",
+        "The event 'explosion' in this context suggests a dangerous situation investigated by the police, occurring in a specific location during a particular time.",
+        "The description of the event emphasizes the location (restroom of a cafe) and the time (morning rush hour), providing context for understanding the potential impact and investigation focus related to the 'explosion'."
+    ]
+}
+``` | Text: police were investigating the cause of the explosion in the restroom of the multistory crocodile cafe in the commercial district of kizilay during the morning rush hour .
+2025-04-26 13:29:06.087 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "conference",
+    "event_type": "meeting",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["george w . bush", "tony blair"],
+    "description": [
+        "The trigger word 'conference' signifies a formal meeting, typically involving discussion and the exchange of information, in this context, between two political figures.",
+        "The event 'conference' indicates a joint news conference, suggesting a coordinated effort to communicate information to the public.",
+        "The 'conference' involved U.S. President George W. Bush and British Prime Minister Tony Blair, highlighting a collaborative communication event."
+    ]
+}
+```
+2025-04-26 13:29:06.089 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "conference",
+    "event_type": "meeting",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["george w . bush", "tony blair"],
+    "description": [
+        "The trigger word 'conference' signifies a formal meeting, typically involving discussion and the exchange of information, in this context, between two political figures.",
+        "The event 'conference' indicates a joint news conference, suggesting a coordinated effort to communicate information to the public.",
+        "The 'conference' involved U.S. President George W. Bush and British Prime Minister Tony Blair, highlighting a collaborative communication event."
+    ]
+}
+``` | Text: ` ` i don't know whether he survived ,'' u . s president george w . bush said of saddam at a joint news conference with british prime minister tony blair .
+2025-04-26 13:30:03.175 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: i know they're also-- i've been reading some articles lately about they're-- thinking about , uh , uh , why should only a native born person be allowed to , uh , be president . | Trigger: ['born']
+2025-04-26 13:30:05.348 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:30:05.350 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 478/480 items with 2/480 remained items.
+2025-04-26 13:30:05.350 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 478/480 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 6.62
+2025-04-26 13:30:05.986 | INFO     | __main__:run:90 - [FINISHED] Processing 478/480 item, remaning 2/480 in 482.43 seconds
+2025-04-26 13:30:05.987 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9993 | Precision: 0.9176 | Recall: 0.9217 | F1: 0.9177
+2025-04-26 13:30:05.988 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm0\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:30:05.989 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:30:05.990 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm1\ACE_5task_2way_10shot.train.jsonl to output/des4\ACE\perm1\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:30:05.991 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:30:05.991 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_2way_10shot.train.jsonl...
+2025-04-26 13:30:06.016 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 13:30:06.020 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:30:06.021 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:30:06.023 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:30:54.689 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: his last hope for survival might be that the united states loses its taste for such losses and forces president bush to negotiate a compromise that would allow hussein and his family to keep power in baghdad . | Trigger: ['losses']
+2025-04-26 13:30:54.691 | CRITICAL | extractor.consumer:worker:109 - [FATAL] Worker 1 got error 429 more than 6 times and stoping. 4 threads are still running.
+2025-04-26 13:31:18.170 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "casualties",
+    "event_type": "suffering",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'casualties' refers to people who are killed or injured in a war or accident.",
+        "The event 'casualties' signifies the negative impact of a tragic event, often implying loss of life or serious injury.",
+        "The term 'casualties' highlights the human cost associated with conflict or disaster, emphasizing the need for measures to reduce harm."
+    ]
+}
+```
+2025-04-26 13:31:18.173 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "casualties",
+    "event_type": "suffering",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": None,
+    "description": [
+        "The trigger word 'casualties' refers to people who are killed or injured in a war or accident.",
+        "The event 'casualties' signifies the negative impact of a tragic event, often implying loss of life or serious injury.",
+        "The term 'casualties' highlights the human cost associated with conflict or disaster, emphasizing the need for measures to reduce harm."
+    ]
+}
+``` | Text: and obviously we're going to pray that there's fewer casualties . . .
+2025-04-26 13:31:42.639 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "tortured",
+    "event_type": "torture",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["prisoners"],
+    "description": [
+        "The trigger word 'tortured' signifies the infliction of severe physical or psychological suffering on someone.",
+        "The event 'tortured' implies that someone was subjected to cruel and inhumane treatment.",
+        "The event 'tortured' indicates a violation of human rights and a deliberate act of causing pain or suffering to the victims."
+    ]
+}
+```
+2025-04-26 13:31:42.641 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "tortured",
+    "event_type": "torture",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["prisoners"],
+    "description": [
+        "The trigger word 'tortured' signifies the infliction of severe physical or psychological suffering on someone.",
+        "The event 'tortured' implies that someone was subjected to cruel and inhumane treatment.",
+        "The event 'tortured' indicates a violation of human rights and a deliberate act of causing pain or suffering to the victims."
+    ]
+}
+``` | Text: here , prisoners were tortured .
+2025-04-26 13:32:01.366 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: officials at the hospital say the sev reason in good shape and their prognosis is excellent , even though three have gunshot wounds . | Trigger: ['wounds']
+2025-04-26 13:32:30.123 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "meetings",
+    "event_type": "meeting",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["prime minister", "president", "reporters"],
+    "description": [
+        "The trigger word 'meetings' refers to a gathering or series of gatherings between the prime minister and president, involving reporters.",
+        "The event 'meetings' suggests a formal or informal discussion or exchange of information took place between the prime minister, the president, and reporters.",
+        "The 'meetings' likely involved the sharing of information, as indicated by the phrase 'shared with reporters,' which can imply important political or diplomatic activity."
+    ]
+}
+```
+2025-04-26 13:32:30.126 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "meetings",
+    "event_type": "meeting",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["prime minister", "president", "reporters"],
+    "description": [
+        "The trigger word 'meetings' refers to a gathering or series of gatherings between the prime minister and president, involving reporters.",
+        "The event 'meetings' suggests a formal or informal discussion or exchange of information took place between the prime minister, the president, and reporters.",
+        "The 'meetings' likely involved the sharing of information, as indicated by the phrase 'shared with reporters,' which can imply important political or diplomatic activity."
+    ]
+}
+``` | Text: that some of what the prime minister and president shared with reporters at news conference following their meetings .
+2025-04-26 13:32:49.181 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: ambassador mohammed al-douri , the first iraqi official to concede defeat in the u . s .-led war , met privately with secretary-general kofi annan , but refused to talk about rumors that he was planning to leave new york . | Trigger: ['met', 'war', 'leave']
+2025-04-26 13:32:49.183 | CRITICAL | extractor.consumer:worker:109 - [FATAL] Worker 0 got error 429 more than 6 times and stoping. 3 threads are still running.
+2025-04-26 13:33:33.956 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "discuss": {
+        "trigger_word": "discuss",
+        "event_type": "meeting",
+        "event_time": "sunday",
+        "event_location": "u . n . security council",
+        "event_participants": ["north korea", "u . n . security council's plan"],
+        "description": [
+            "The trigger word 'discuss' refers to the act of talking about a subject with others to reach a decision or exchange ideas.",
+            "The event 'discuss' in this context suggests a meeting or session where North Korea's suspected nuclear weapons development was to be the central topic.",
+            "The event 'discuss' implies an attempt to address the standoff related to North Korea's nuclear weapons through dialogue within the U.N. Security Council."
+        ]
+    }
+}
+```
+2025-04-26 13:33:33.958 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "discuss": {
+        "trigger_word": "discuss",
+        "event_type": "meeting",
+        "event_time": "sunday",
+        "event_location": "u . n . security council",
+        "event_participants": ["north korea", "u . n . security council's plan"],
+        "description": [
+            "The trigger word 'discuss' refers to the act of talking about a subject with others to reach a decision or exchange ideas.",
+            "The event 'discuss' in this context suggests a meeting or session where North Korea's suspected nuclear weapons development was to be the central topic.",
+            "The event 'discuss' implies an attempt to address the standoff related to North Korea's nuclear weapons through dialogue within the U.N. Security Council."
+        ]
+    }
+}
+``` | Text: north korea on sunday rejected the u . n . security council's plan to discuss the standoff over its suspected nuclear weapons development , calling it ` ` a prelude to war .''
+2025-04-26 13:34:27.551 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": "next",
+    "event_location": null,
+    "event_participants": [],
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a position.",
+        "The event 'election' indicates the future occurrence of a political or organizational event.",
+        "The term 'election' suggests the potential for changes in leadership or policy."
+    ]
+}
+```
+2025-04-26 13:34:27.554 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "election",
+    "event_type": "election",
+    "event_time": "next",
+    "event_location": null,
+    "event_participants": [],
+    "description": [
+        "The trigger word 'election' refers to the process of selecting someone for a position.",
+        "The event 'election' indicates the future occurrence of a political or organizational event.",
+        "The term 'election' suggests the potential for changes in leadership or policy."
+    ]
+}
+``` | Text: uh , do you think there is uh-- some other , uh like-- positions has to be has been-- has to be created , like uh-- for the next election .
+2025-04-26 13:35:04.511 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: howard dean , who supports abortion rights , and former indiana rep . tim roemer , an abortion foe who argues that the party can not rebound from its losses in the november election unless it shows more tolerance on one of society's most emotional conflicts . | Trigger: ['former', 'election']
+2025-04-26 13:35:17.460 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: the ukrainian election-- complete with its kgb-style poisoning of the opposition leader and heavy-handed electoral fraud-- has reminded european diplomats of vladimir v . putin's determination to control his ` ` near abroad .'' | Trigger: ['poisoning', 'election']
+2025-04-26 13:35:50.578 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 4 cannot extract event list after 3 attempts. | Text: and i'm sure we'll hear from many of you and we will select some of the responses and share them with you a bit later . | Trigger: ['hear from']
+2025-04-26 13:35:50.580 | CRITICAL | extractor.consumer:worker:109 - [FATAL] Worker 4 got error 429 more than 6 times and stoping. 2 threads are still running.
+2025-04-26 13:36:04.475 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 2 cannot extract event list after 3 attempts. | Text: we go to my niece's house and | Trigger: ['go']
+2025-04-26 13:36:04.478 | CRITICAL | extractor.consumer:worker:109 - [FATAL] Worker 2 got error 429 more than 6 times and stoping. 1 threads are still running.
+2025-04-26 13:36:07.194 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:36:07.197 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 273/280 items with 7/280 remained items.
+2025-04-26 13:36:07.197 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 273/280 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 7.80
+2025-04-26 13:36:07.614 | INFO     | __main__:run:90 - [FINISHED] Processing 273/280 item, remaning 7/280 in 361.23 seconds
+2025-04-26 13:36:07.615 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9997 | Precision: 0.9060 | Recall: 0.9298 | F1: 0.9071
+2025-04-26 13:36:07.616 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm1\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:36:07.616 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:36:07.617 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm1\ACE_5task_2way_5shot.train.jsonl to output/des4\ACE\perm1\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:36:07.618 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:36:07.618 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_2way_5shot.train.jsonl...
+2025-04-26 13:36:07.635 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-26 13:36:07.638 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:36:07.639 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:36:07.641 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:37:19.859 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: his last hope for survival might be that the united states loses its taste for such losses and forces president bush to negotiate a compromise that would allow hussein and his family to keep power in baghdad . | Trigger: ['losses']
+2025-04-26 13:38:05.975 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 3 cannot extract event list after 3 attempts. | Text: darius'intent was to dismember , injure or even kill ferguson . | Trigger: ['injure', 'dismember', 'kill']
+2025-04-26 13:38:05.977 | CRITICAL | extractor.consumer:worker:109 - [FATAL] Worker 3 got error 429 more than 6 times and stoping. 0 threads are still running.
+2025-04-26 13:38:06.703 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 230 items ...
+2025-04-26 13:38:08.720 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:08.721 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 8/240 items with 232/240 remained items.
+2025-04-26 13:38:08.722 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 8/240 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 12.00
+2025-04-26 13:38:09.054 | INFO     | __main__:run:90 - [FINISHED] Processing 8/240 item, remaning 232/240 in 121.12 seconds
+2025-04-26 13:38:09.054 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9999 | Precision: 0.0998 | Recall: 0.9944 | F1: 0.1586
+2025-04-26 13:38:09.055 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm1\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:38:09.056 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:09.057 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm1\ACE_5task_4way_10shot.train.jsonl to output/des4\ACE\perm1\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:38:09.057 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:09.058 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_4way_10shot.train.jsonl...
+2025-04-26 13:38:09.189 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-26 13:38:09.192 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:09.193 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:09.195 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:09.196 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-26 13:38:11.207 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:11.209 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/560 items with 560/560 remained items.
+2025-04-26 13:38:11.931 | INFO     | __main__:run:90 - [FINISHED] Processing 0/560 item, remaning 560/560 in 2.17 seconds
+2025-04-26 13:38:11.931 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9998 | Precision: 0.0693 | Recall: 1.0000 | F1: 0.1270
+2025-04-26 13:38:11.932 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm1\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:38:11.933 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:11.934 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm1\ACE_5task_4way_5shot.train.jsonl to output/des4\ACE\perm1\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:38:11.934 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:11.935 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_4way_5shot.train.jsonl...
+2025-04-26 13:38:11.967 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-26 13:38:11.971 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:11.972 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:11.973 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:11.975 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-26 13:38:13.981 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:13.982 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/480 items with 480/480 remained items.
+2025-04-26 13:38:14.598 | INFO     | __main__:run:90 - [FINISHED] Processing 0/480 item, remaning 480/480 in 2.07 seconds
+2025-04-26 13:38:14.599 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9998 | Precision: 0.0695 | Recall: 1.0000 | F1: 0.1273
+2025-04-26 13:38:14.599 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm1\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:38:14.601 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:14.602 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm2\ACE_5task_2way_10shot.train.jsonl to output/des4\ACE\perm2\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:38:14.602 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:14.602 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_2way_10shot.train.jsonl...
+2025-04-26 13:38:14.624 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 13:38:14.626 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:14.628 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:14.629 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:14.631 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-26 13:38:16.636 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:16.638 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-26 13:38:16.997 | INFO     | __main__:run:90 - [FINISHED] Processing 0/280 item, remaning 280/280 in 2.05 seconds
+2025-04-26 13:38:16.997 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9992 | Precision: 0.0641 | Recall: 1.0000 | F1: 0.1183
+2025-04-26 13:38:16.998 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm2\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:38:16.999 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:16.999 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm2\ACE_5task_2way_5shot.train.jsonl to output/des4\ACE\perm2\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:38:17.000 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:17.001 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_2way_5shot.train.jsonl...
+2025-04-26 13:38:17.023 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-26 13:38:17.025 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:17.027 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:17.028 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:17.029 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-26 13:38:19.047 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:19.049 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-26 13:38:19.469 | INFO     | __main__:run:90 - [FINISHED] Processing 0/240 item, remaning 240/240 in 2.19 seconds
+2025-04-26 13:38:19.471 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9992 | Precision: 0.0628 | Recall: 1.0000 | F1: 0.1162
+2025-04-26 13:38:19.471 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm2\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:38:19.472 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:19.472 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm2\ACE_5task_4way_10shot.train.jsonl to output/des4\ACE\perm2\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:38:19.474 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:19.475 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_4way_10shot.train.jsonl...
+2025-04-26 13:38:19.606 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-26 13:38:19.608 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:19.610 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:19.611 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:19.612 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-26 13:38:21.628 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:21.630 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/560 items with 560/560 remained items.
+2025-04-26 13:38:22.342 | INFO     | __main__:run:90 - [FINISHED] Processing 0/560 item, remaning 560/560 in 2.18 seconds
+2025-04-26 13:38:22.342 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9993 | Precision: 0.0661 | Recall: 0.9982 | F1: 0.1217
+2025-04-26 13:38:22.343 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm2\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:38:22.344 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:22.345 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm2\ACE_5task_4way_5shot.train.jsonl to output/des4\ACE\perm2\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:38:22.345 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:22.346 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_4way_5shot.train.jsonl...
+2025-04-26 13:38:22.377 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-26 13:38:22.380 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:22.382 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:22.384 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:22.385 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-26 13:38:24.411 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:24.422 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/480 items with 480/480 remained items.
+2025-04-26 13:38:25.020 | INFO     | __main__:run:90 - [FINISHED] Processing 0/480 item, remaning 480/480 in 2.10 seconds
+2025-04-26 13:38:25.021 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9992 | Precision: 0.0659 | Recall: 0.9979 | F1: 0.1214
+2025-04-26 13:38:25.022 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm2\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:38:25.023 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:25.024 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm3\ACE_5task_2way_10shot.train.jsonl to output/des4\ACE\perm3\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:38:25.025 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:25.026 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_2way_10shot.train.jsonl...
+2025-04-26 13:38:25.048 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 13:38:25.051 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:25.052 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:25.053 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:25.055 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-26 13:38:27.067 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:27.069 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-26 13:38:27.525 | INFO     | __main__:run:90 - [FINISHED] Processing 0/280 item, remaning 280/280 in 2.17 seconds
+2025-04-26 13:38:27.526 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9993 | Precision: 0.0668 | Recall: 0.9982 | F1: 0.1219
+2025-04-26 13:38:27.527 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm3\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:38:27.528 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:27.528 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm3\ACE_5task_2way_5shot.train.jsonl to output/des4\ACE\perm3\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:38:27.529 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:27.530 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_2way_5shot.train.jsonl...
+2025-04-26 13:38:27.548 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-26 13:38:27.552 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:27.554 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:27.555 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:27.557 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-26 13:38:29.567 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:29.569 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-26 13:38:29.866 | INFO     | __main__:run:90 - [FINISHED] Processing 0/240 item, remaning 240/240 in 2.05 seconds
+2025-04-26 13:38:29.866 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9992 | Precision: 0.0682 | Recall: 0.9979 | F1: 0.1243
+2025-04-26 13:38:29.867 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm3\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:38:29.868 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:29.869 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm3\ACE_5task_4way_10shot.train.jsonl to output/des4\ACE\perm3\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:38:29.870 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:29.870 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_4way_10shot.train.jsonl...
+2025-04-26 13:38:30.003 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-26 13:38:30.005 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:30.007 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:30.008 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:30.010 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-26 13:38:32.028 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:32.030 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/560 items with 560/560 remained items.
+2025-04-26 13:38:32.808 | INFO     | __main__:run:90 - [FINISHED] Processing 0/560 item, remaning 560/560 in 2.18 seconds
+2025-04-26 13:38:32.809 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9995 | Precision: 0.0655 | Recall: 1.0000 | F1: 0.1208
+2025-04-26 13:38:32.809 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm3\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:38:32.810 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:32.811 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm3\ACE_5task_4way_5shot.train.jsonl to output/des4\ACE\perm3\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:38:32.811 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:32.812 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_4way_5shot.train.jsonl...
+2025-04-26 13:38:32.849 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-26 13:38:32.851 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:32.854 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:32.856 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:32.857 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-26 13:38:34.872 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:34.874 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/480 items with 480/480 remained items.
+2025-04-26 13:38:35.546 | INFO     | __main__:run:90 - [FINISHED] Processing 0/480 item, remaning 480/480 in 2.08 seconds
+2025-04-26 13:38:35.548 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9994 | Precision: 0.0652 | Recall: 1.0000 | F1: 0.1201
+2025-04-26 13:38:35.548 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm3\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:38:35.549 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:35.549 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm4\ACE_5task_2way_10shot.train.jsonl to output/des4\ACE\perm4\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:38:35.550 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:35.551 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_2way_10shot.train.jsonl...
+2025-04-26 13:38:35.571 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-26 13:38:35.574 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:35.576 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:35.577 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:35.578 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-26 13:38:37.589 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:37.590 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.
+2025-04-26 13:38:38.015 | INFO     | __main__:run:90 - [FINISHED] Processing 0/280 item, remaning 280/280 in 2.06 seconds
+2025-04-26 13:38:38.015 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9989 | Precision: 0.0654 | Recall: 1.0000 | F1: 0.1197
+2025-04-26 13:38:38.016 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm4\ACE_5task_2way_10shot.train.jsonl
+2025-04-26 13:38:38.016 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:38.017 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm4\ACE_5task_2way_5shot.train.jsonl to output/des4\ACE\perm4\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:38:38.017 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:38.018 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_2way_5shot.train.jsonl...
+2025-04-26 13:38:38.129 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-26 13:38:38.131 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:38.132 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:38.134 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:38.135 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-26 13:38:40.139 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:40.141 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/240 items with 240/240 remained items.
+2025-04-26 13:38:40.482 | INFO     | __main__:run:90 - [FINISHED] Processing 0/240 item, remaning 240/240 in 2.13 seconds
+2025-04-26 13:38:40.483 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9989 | Precision: 0.0634 | Recall: 1.0000 | F1: 0.1168
+2025-04-26 13:38:40.484 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm4\ACE_5task_2way_5shot.train.jsonl
+2025-04-26 13:38:40.484 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:40.485 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm4\ACE_5task_4way_10shot.train.jsonl to output/des4\ACE\perm4\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:38:40.486 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:40.486 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_4way_10shot.train.jsonl...
+2025-04-26 13:38:40.523 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-26 13:38:40.527 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:40.527 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:40.530 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:40.530 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-26 13:38:42.549 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:42.551 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/560 items with 560/560 remained items.
+2025-04-26 13:38:43.425 | INFO     | __main__:run:90 - [FINISHED] Processing 0/560 item, remaning 560/560 in 2.09 seconds
+2025-04-26 13:38:43.426 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9997 | Precision: 0.0653 | Recall: 1.0000 | F1: 0.1200
+2025-04-26 13:38:43.426 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm4\ACE_5task_4way_10shot.train.jsonl
+2025-04-26 13:38:43.427 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-26 13:38:43.428 | INFO     | __main__:run:67 - Start processing data/data_text\ACE\perm4\ACE_5task_4way_5shot.train.jsonl to output/des4\ACE\perm4\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:38:43.430 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-26 13:38:43.431 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_4way_5shot.train.jsonl...
+2025-04-26 13:38:43.468 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-26 13:38:43.471 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-26 13:38:43.472 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-26 13:38:43.473 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:43.474 | CRITICAL | extractor.consumer:consume:188 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-26 13:38:45.487 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-26 13:38:45.489 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 0/480 items with 480/480 remained items.
+2025-04-26 13:38:46.170 | INFO     | __main__:run:90 - [FINISHED] Processing 0/480 item, remaning 480/480 in 2.08 seconds
+2025-04-26 13:38:46.171 | INFO     | __main__:run:91 - [FINISHED] BLEU: 0.9997 | Precision: 0.0669 | Recall: 1.0000 | F1: 0.1226
+2025-04-26 13:38:46.172 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\ACE\perm4\ACE_5task_4way_5shot.train.jsonl
+2025-04-26 13:38:46.172 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-26 13:38:46.173 | INFO     | extractor.consumer:stop_threads:63 - [STOP] All threads stopped
+2025-04-26 13:38:46.173 | INFO     | __main__:run:132 - [FINISHED] All items processed and saved to output/des4

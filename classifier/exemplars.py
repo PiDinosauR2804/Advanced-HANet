@@ -125,8 +125,3 @@ class Exemplars():
         span = [item for t in self.exemplars_span for item in t]    
         dataset.extend(x, y, mask, span)
         return DataLoader(dataset=dataset, batch_size=args.batch_size, shuffle=True, collate_fn=collate_fn, drop_last=False)
-        
-        
-
-
-

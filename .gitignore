@@ -4,7 +4,9 @@ test/
 .env
 *.ipynb
 **/api_key.py
-/logs
 output/MAVEN
-data/
+<<<<<<< HEAD
+output/ACE
+=======
+>>>>>>> luyennd
 /match.py

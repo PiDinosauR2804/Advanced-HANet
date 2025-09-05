@@ -1,0 +1,190 @@
+2025-04-25 16:38:52.249 | INFO     | __main__:<module>:168 - [INFO] Arguments:
+2025-04-25 16:38:52.250 | INFO     | __main__:<module>:169 - Input root: data/data_text
+2025-04-25 16:38:52.250 | INFO     | __main__:<module>:170 - Output root: output/des4
+2025-04-25 16:38:52.251 | INFO     | __main__:<module>:171 - Datasets: ['MAVEN']
+2025-04-25 16:38:52.251 | INFO     | __main__:<module>:172 - Perms: [0]
+2025-04-25 16:38:52.251 | INFO     | __main__:<module>:173 - Model: gemini-2.0-flash-lite
+2025-04-25 16:38:52.252 | INFO     | __main__:<module>:174 - Candidate: 5
+2025-04-25 16:38:52.252 | INFO     | __main__:<module>:175 - Num try: 3
+2025-04-25 16:38:52.253 | INFO     | __main__:<module>:176 - Max consecutive 429 error: 5
+2025-04-25 16:38:52.254 | INFO     | __main__:<module>:177 - Max num threads: 2
+2025-04-25 16:38:52.254 | INFO     | __main__:<module>:178 - Resume: False
+2025-04-25 16:38:52.255 | INFO     | __main__:<module>:179 - Convert test: False
+2025-04-25 16:38:52.255 | INFO     | __main__:<module>:180 - Logs dir: logs/extractor
+2025-04-25 16:38:52.256 | INFO     | __main__:<module>:181 - Gen des: True
+2025-04-25 16:38:52.256 | INFO     | __main__:<module>:182 - [INFO] Start processing...
+2025-04-25 16:38:53.727 | ERROR    | extractor.llm:extract_response:182 - [EXTRACT RESPONSE] Error parsing events: Expecting value: line 5 column 23 (char 94) | Text: The events are: [
+    {
+        "event_type": "winning",
+        "trigger_word": "won",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia"],
+        "description": "The trigger word 'won' indicates that Australia was victorious in a tournament."
+    },
+    {
+        "event_type": "defeat",
+        "trigger_word": "beating",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["pakistan", "australia"],
+        "description": "The trigger word 'beating' refers to Australia defeating Pakistan in the final."
+    }
+]
+
+2025-04-25 16:38:53.732 | ERROR    | extractor.llm:extract_event:281 - [EXTRACT EVENT] Failed to extract event list from response: The events are: [
+    {
+        "event_type": "winning",
+        "trigger_word": "won",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia"],
+        "description": "The trigger word 'won' indicates that Australia was victorious in a tournament."
+    },
+    {
+        "event_type": "defeat",
+        "trigger_word": "beating",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["pakistan", "australia"],
+        "description": "The trigger word 'beating' refers to Australia defeating Pakistan in the final."
+    }
+]
+ | Text: australia won the tournament, beating pakistan in the final by 25 runs.
+2025-04-25 16:38:55.967 | ERROR    | extractor.llm:extract_response:182 - [EXTRACT RESPONSE] Error parsing events: Expecting value: line 5 column 23 (char 98) | Text: The events are: [
+    {
+        "event_type": "competition",
+        "trigger_word": "won",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia"],
+        "description": "The trigger word 'won' describes a victory of Australia in a competition."
+    },
+    {
+        "event_type": "competition",
+        "trigger_word": "beating",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia", "pakistan"],
+        "description": "The trigger word 'beating' refers to Australia winning over Pakistan in the final."
+    }
+]
+
+2025-04-25 16:38:55.969 | ERROR    | extractor.llm:extract_event:281 - [EXTRACT EVENT] Failed to extract event list from response: The events are: [
+    {
+        "event_type": "competition",
+        "trigger_word": "won",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia"],
+        "description": "The trigger word 'won' describes a victory of Australia in a competition."
+    },
+    {
+        "event_type": "competition",
+        "trigger_word": "beating",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia", "pakistan"],
+        "description": "The trigger word 'beating' refers to Australia winning over Pakistan in the final."
+    }
+]
+ | Text: australia won the tournament, beating pakistan in the final by 25 runs.
+2025-04-25 16:38:58.215 | ERROR    | extractor.llm:extract_response:182 - [EXTRACT RESPONSE] Error parsing events: Expecting value: line 5 column 23 (char 93) | Text: The events are: [
+    {
+        "event_type": "sports",
+        "trigger_word": "won",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia"],
+        "description": "The trigger word 'won' indicates Australia's victory in the tournament."
+    },
+    {
+        "event_type": "sports",
+        "trigger_word": "beating",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["pakistan", "australia"],
+        "description": "The trigger word 'beating' refers to Australia defeating Pakistan in the final."
+    }
+]
+
+2025-04-25 16:38:58.217 | ERROR    | extractor.llm:extract_event:281 - [EXTRACT EVENT] Failed to extract event list from response: The events are: [
+    {
+        "event_type": "sports",
+        "trigger_word": "won",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia"],
+        "description": "The trigger word 'won' indicates Australia's victory in the tournament."
+    },
+    {
+        "event_type": "sports",
+        "trigger_word": "beating",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["pakistan", "australia"],
+        "description": "The trigger word 'beating' refers to Australia defeating Pakistan in the final."
+    }
+]
+ | Text: australia won the tournament, beating pakistan in the final by 25 runs.
+2025-04-25 16:38:59.636 | ERROR    | extractor.llm:extract_response:182 - [EXTRACT RESPONSE] Error parsing events: Expecting value: line 5 column 23 (char 101) | Text: The events are: [
+    {
+        "event_type": "sporting event",
+        "trigger_word": "won",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia"],
+        "description": "The trigger word 'won' indicates that Australia was victorious in the tournament."
+    },
+    {
+        "event_type": "sporting event",
+        "trigger_word": "beating",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia", "pakistan"],
+        "description": "The trigger word 'beating' refers to Australia defeating Pakistan in the final."
+    }
+]
+
+2025-04-25 16:38:59.638 | ERROR    | extractor.llm:extract_event:281 - [EXTRACT EVENT] Failed to extract event list from response: The events are: [
+    {
+        "event_type": "sporting event",
+        "trigger_word": "won",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia"],
+        "description": "The trigger word 'won' indicates that Australia was victorious in the tournament."
+    },
+    {
+        "event_type": "sporting event",
+        "trigger_word": "beating",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["australia", "pakistan"],
+        "description": "The trigger word 'beating' refers to Australia defeating Pakistan in the final."
+    }
+]
+ | Text: australia won the tournament, beating pakistan in the final by 25 runs.
+2025-04-25 16:38:59.640 | INFO     | extractor.consumer:__init__:48 - [INFO] Found 2 valid extractors
+2025-04-25 16:39:01.649 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-25 16:39:01.651 | INFO     | extractor.consumer:__init__:55 - [START] Start 2 threads
+2025-04-25 16:39:01.652 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-25 16:39:01.652 | INFO     | __main__:run:67 - Start processing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-25 16:39:01.653 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-25 16:39:01.653 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-25 16:39:01.673 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-25 16:39:01.677 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-25 16:39:01.679 | INFO     | extractor.consumer:consume:184 - [CONSUMING] Start consuming.
+2025-04-25 16:39:01.682 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-25 16:39:07.470 | ERROR    | extractor.consumer:worker:170 - [ERROR at ATTEMPT 1/3] Worker 0 got error: argument of type 'NoneType' is not iterable | Text: the mcmahon killings or the mcmahon murders occurred on 24 march 1922 when six catholic civilians were shot dead at the home of the mcmahon family in belfast , northern ireland .
+2025-04-25 16:39:08.804 | ERROR    | extractor.consumer:worker:170 - [ERROR at ATTEMPT 1/3] Worker 1 got error: argument of type 'NoneType' is not iterable | Text: the offensive , and in particular the degree of turkish involvement in it , has been widely attributed with the deportation of the native ethnic armenians of the town of kessab , who make up 70 % of its population , and has been compared with the past turkish killings of armenians during the hamidian massacres and armenian genocide .
+2025-04-25 16:39:14.045 | ERROR    | extractor.consumer:worker:170 - [ERROR at ATTEMPT 2/3] Worker 0 got error: argument of type 'NoneType' is not iterable | Text: the mcmahon killings or the mcmahon murders occurred on 24 march 1922 when six catholic civilians were shot dead at the home of the mcmahon family in belfast , northern ireland .
+2025-04-25 16:39:16.624 | ERROR    | extractor.consumer:worker:170 - [ERROR at ATTEMPT 2/3] Worker 1 got error: argument of type 'NoneType' is not iterable | Text: the offensive , and in particular the degree of turkish involvement in it , has been widely attributed with the deportation of the native ethnic armenians of the town of kessab , who make up 70 % of its population , and has been compared with the past turkish killings of armenians during the hamidian massacres and armenian genocide .
+2025-04-25 16:39:16.792 | CRITICAL | extractor.consumer:consume:199 - [FALTAL] Consuming interrupted by user. Stopping safely...
+2025-04-25 16:39:16.801 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-25 16:39:20.009 | ERROR    | extractor.consumer:worker:170 - [ERROR at ATTEMPT 3/3] Worker 0 got error: argument of type 'NoneType' is not iterable | Text: the mcmahon killings or the mcmahon murders occurred on 24 march 1922 when six catholic civilians were shot dead at the home of the mcmahon family in belfast , northern ireland .
+2025-04-25 16:39:20.010 | ERROR    | extractor.consumer:worker:173 - [FAIL] Worker 0 cannot extract event list after 3 attempts. | Text: the mcmahon killings or the mcmahon murders occurred on 24 march 1922 when six catholic civilians were shot dead at the home of the mcmahon family in belfast , northern ireland .
+2025-04-25 16:39:24.894 | ERROR    | extractor.consumer:worker:170 - [ERROR at ATTEMPT 3/3] Worker 1 got error: argument of type 'NoneType' is not iterable | Text: the offensive , and in particular the degree of turkish involvement in it , has been widely attributed with the deportation of the native ethnic armenians of the town of kessab , who make up 70 % of its population , and has been compared with the past turkish killings of armenians during the hamidian massacres and armenian genocide .
+2025-04-25 16:39:24.896 | ERROR    | extractor.consumer:worker:173 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: the offensive , and in particular the degree of turkish involvement in it , has been widely attributed with the deportation of the native ethnic armenians of the town of kessab , who make up 70 % of its population , and has been compared with the past turkish killings of armenians during the hamidian massacres and armenian genocide .
+2025-04-25 16:39:24.898 | INFO     | extractor.consumer:stop_threads:63 - [STOP] All threads stopped
+2025-04-25 16:39:24.904 | INFO     | extractor.consumer:consume:205 - [FINISHED] Finished consuming 0/280 items with 280/280 remained items.

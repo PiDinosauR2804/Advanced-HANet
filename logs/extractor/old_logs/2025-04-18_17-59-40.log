@@ -1,0 +1,50 @@
+2025-04-18 17:59:40.581 | INFO     | __main__:<module>:159 - [INFO] Arguments:
+2025-04-18 17:59:40.584 | INFO     | __main__:<module>:160 - Input root: data/data_text
+2025-04-18 17:59:40.586 | INFO     | __main__:<module>:161 - Output root: test/output
+2025-04-18 17:59:40.586 | INFO     | __main__:<module>:162 - Datasets: ['MAVEN']
+2025-04-18 17:59:40.588 | INFO     | __main__:<module>:163 - Model: gemini-2.0-flash-lite
+2025-04-18 17:59:40.590 | INFO     | __main__:<module>:164 - Candidate: 1
+2025-04-18 17:59:40.592 | INFO     | __main__:<module>:165 - Num try: 4
+2025-04-18 17:59:40.597 | INFO     | __main__:<module>:166 - Max consecutive 429 error: 4
+2025-04-18 17:59:40.601 | INFO     | __main__:<module>:167 - Max num threads: 12
+2025-04-18 17:59:40.603 | INFO     | __main__:<module>:168 - Resume: False
+2025-04-18 17:59:40.605 | INFO     | __main__:<module>:169 - Convert test: False
+2025-04-18 17:59:40.606 | INFO     | __main__:<module>:170 - [INFO] Start processing...
+2025-04-18 17:59:40.613 | INFO     | extractor.consumer:__init__:39 - [INFO] Found 3 valid extractors
+2025-04-18 17:59:40.618 | INFO     | extractor.consumer:pause_threads:59 - [PAUSE] All threads paused
+2025-04-18 17:59:40.635 | INFO     | extractor.consumer:__init__:46 - [START] Start 3 threads
+2025-04-18 17:59:40.638 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 17:59:40.641 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 17:59:40.643 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-18 17:59:40.676 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-18 17:59:40.682 | INFO     | extractor.consumer:clear_results:71 - [CLEAR] All results cleared
+2025-04-18 17:59:40.689 | INFO     | extractor.consumer:resume_threads:64 - [RESUME] All threads resumed
+2025-04-18 17:59:40.708 | INFO     | extractor.consumer:consume:157 - [CONSUMING] Start consuming.
+2025-04-18 17:59:40.982 | ERROR    | extractor.consumer:worker:142 - [ERROR] Worker 1 | Text: all 258 passengers and 13 crew on board were killed, along with two people on the ground. | Cannot extract event list after 4 attempts.
+2025-04-18 17:59:40.993 | CRITICAL | extractor.consumer:worker:97 - [FATAL] Worker 1 got error 429 more than 4 times. Stoping ...
+2025-04-18 17:59:41.215 | ERROR    | extractor.consumer:worker:142 - [ERROR] Worker 0 | Text: the infant was decapitated. | Cannot extract event list after 4 attempts.
+2025-04-18 17:59:41.219 | CRITICAL | extractor.consumer:worker:97 - [FATAL] Worker 0 got error 429 more than 4 times. Stoping ...
+2025-04-18 17:59:41.540 | ERROR    | extractor.consumer:worker:142 - [ERROR] Worker 2 | Text: stirred largely due to the inaction of the european powers in regard to hamidian massacres, a series of mass - pogroms and massacres of armenians instigated by the sultan abdul - hamid ii in reaction to a series of rebellions by armenians against the state. | Cannot extract event list after 4 attempts.
+2025-04-18 17:59:41.543 | CRITICAL | extractor.consumer:worker:97 - [FATAL] Worker 2 got error 429 more than 4 times. Stoping ...
+2025-04-18 17:59:41.729 | ERROR    | extractor.consumer:consume:162 - [ERROR] No threads are running. Stopping ...
+2025-04-18 17:59:41.732 | ERROR    | extractor.consumer:consume_left_items:78 - [ERROR] Task queue is not empty after consuming. Remaining items: 192
+2025-04-18 17:59:41.762 | INFO     | extractor.consumer:pause_threads:59 - [PAUSE] All threads paused
+2025-04-18 17:59:41.766 | INFO     | extractor.consumer:consume:169 - [CONSUMING] Finished consuming.
+2025-04-18 17:59:41.804 | INFO     | __main__:run:85 - [FINISHED] Processing 85/280 item, remaning 195/280 in 1.17 seconds
+2025-04-18 17:59:41.808 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-18 17:59:41.813 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-18 17:59:41.815 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-18 17:59:41.818 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-18 17:59:41.848 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-18 17:59:41.854 | INFO     | extractor.consumer:clear_results:71 - [CLEAR] All results cleared
+2025-04-18 17:59:41.856 | INFO     | extractor.consumer:resume_threads:64 - [RESUME] All threads resumed
+2025-04-18 17:59:41.859 | INFO     | extractor.consumer:consume:157 - [CONSUMING] Start consuming.
+2025-04-18 17:59:41.861 | ERROR    | extractor.consumer:consume:162 - [ERROR] No threads are running. Stopping ...
+2025-04-18 17:59:41.863 | ERROR    | extractor.consumer:consume_left_items:78 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-18 17:59:41.873 | INFO     | extractor.consumer:pause_threads:59 - [PAUSE] All threads paused
+2025-04-18 17:59:41.874 | INFO     | extractor.consumer:consume:169 - [CONSUMING] Finished consuming.
+2025-04-18 17:59:41.887 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.07 seconds
+2025-04-18 17:59:41.888 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to test/output\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-18 17:59:41.889 | INFO     | extractor.consumer:resume_threads:64 - [RESUME] All threads resumed
+2025-04-18 17:59:41.890 | INFO     | extractor.consumer:stop_threads:54 - [STOP] All threads stopped
+2025-04-18 17:59:41.890 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to test/output

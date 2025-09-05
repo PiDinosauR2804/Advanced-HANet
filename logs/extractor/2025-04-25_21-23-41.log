@@ -1,0 +1,940 @@
+2025-04-25 21:23:41.363 | INFO     | __main__:<module>:168 - [INFO] Arguments:
+2025-04-25 21:23:41.364 | INFO     | __main__:<module>:169 - Input root: data/data_text
+2025-04-25 21:23:41.366 | INFO     | __main__:<module>:170 - Output root: output/des4
+2025-04-25 21:23:41.366 | INFO     | __main__:<module>:171 - Datasets: ['MAVEN']
+2025-04-25 21:23:41.367 | INFO     | __main__:<module>:172 - Perms: [0]
+2025-04-25 21:23:41.367 | INFO     | __main__:<module>:173 - Model: gemini-2.0-flash-lite
+2025-04-25 21:23:41.368 | INFO     | __main__:<module>:174 - Candidate: 5
+2025-04-25 21:23:41.368 | INFO     | __main__:<module>:175 - Num try: 3
+2025-04-25 21:23:41.369 | INFO     | __main__:<module>:176 - Max consecutive 429 error: 5
+2025-04-25 21:23:41.370 | INFO     | __main__:<module>:177 - Max num threads: 5
+2025-04-25 21:23:41.375 | INFO     | __main__:<module>:178 - Resume: True
+2025-04-25 21:23:41.378 | INFO     | __main__:<module>:179 - Convert test: False
+2025-04-25 21:23:41.379 | INFO     | __main__:<module>:180 - Logs dir: logs/extractor
+2025-04-25 21:23:41.379 | INFO     | __main__:<module>:181 - Gen des: True
+2025-04-25 21:23:41.380 | INFO     | __main__:<module>:182 - [INFO] Start processing...
+2025-04-25 21:24:03.114 | INFO     | extractor.consumer:__init__:48 - [INFO] Found 5 valid extractors
+2025-04-25 21:24:05.118 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-25 21:24:05.121 | INFO     | extractor.consumer:__init__:55 - [START] Start 5 threads
+2025-04-25 21:24:05.123 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-25 21:24:05.124 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-25 21:24:05.124 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-25 21:24:05.125 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-25 21:24:05.146 | INFO     | extractor.producer:produce:65 - [PRODUCING] Finished producing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-25 21:24:05.149 | INFO     | extractor.consumer:clear_results:83 - [CLEAR] All results cleared
+2025-04-25 21:24:05.246 | INFO     | extractor.consumer:consume:182 - [CONSUMING] Start consuming.
+2025-04-25 21:24:05.248 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-25 21:24:21.841 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 'counter - attacks' not found | Text: troops of the 36th ( ulster ) division captured the redoubt on 1 july 1916 , until forced out by german bombardments and counter-attacks after night had fallen . | Trigger: ['captured', 'bombardments', 'counter - attacks']
+2025-04-25 21:24:25.965 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 'counter - attacks' not found | Text: troops of the 36th ( ulster ) division captured the redoubt on 1 july 1916 , until forced out by german bombardments and counter-attacks after night had fallen . | Trigger: ['captured', 'bombardments', 'counter - attacks']
+2025-04-25 21:24:30.659 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 3/3] Worker 3 got error: Trigger word 'counter - attacks' not found | Text: troops of the 36th ( ulster ) division captured the redoubt on 1 july 1916 , until forced out by german bombardments and counter-attacks after night had fallen . | Trigger: ['captured', 'bombardments', 'counter - attacks']
+2025-04-25 21:24:30.661 | ERROR    | extractor.consumer:worker:173 - [FAIL] Worker 3 fail to process event list: [{'trigger_word': 'captured', 'event_type': 'capture', 'event_time': '1 july 1916', 'event_location': 'the redoubt', 'event_participants': ['troops of the 36th ( ulster ) division'], 'description': ["the event 'captured' denotes the successful seizure of the redoubt by the troops on a specific date.", "on 1 july 1916, the 'captured' event marks the successful acquisition of the redoubt by the ulster division.", "the trigger word 'captured' indicates the act of seizing and taking control of a location by a military force.", "the word 'captured' describes a military action where the troops gained control of a strategic point, the redoubt, at a specific date.", 'the capture of the redoubt marks a point of territorial control achieved by the troops in a military context.', "the act of 'captured' signifies a military action where the 36th (ulster) division gained control of the redoubt during a specific time frame.", "the event 'captured' signifies the successful offensive action by the 'troops of the 36th ( ulster ) division' on '1 july 1916' at 'the redoubt'.", "the trigger word 'captured' signifies the seizure of a location or object by military forces.", "the event 'captured' describes the action of the troops taking control of the redoubt on a specific date.", "the trigger word 'captured' indicates a military action where troops seized control of a location.", 'this event describes the initial success of the troops in gaining control of a strategic defensive position, setting the stage for further conflict.', "the event 'captured' signifies a military operation where the troops of the 36th (ulster) division seized control of the redoubt.", "the trigger word 'captured' describes the act of taking possession of the redoubt, implying a preceding conflict.", "the trigger word 'captured' signifies the taking of control of a place or object by force.", "the event 'captured' signifies the successful taking of the redoubt by the 36th (ulster) division on july 1, 1916."]}, {'trigger_word': 'bombardments', 'event_type': 'bombardment', 'event_time': 'after night had fallen', 'event_location': 'the redoubt', 'event_participants': ['german'], 'description': ["the trigger word 'bombardments' refers to the act of attacking a place with bombs or artillery.", "the event 'bombardments' describes a sustained attack carried out by the german forces on 'the redoubt'.", "the trigger word 'bombardments' indicates the use of artillery or similar weapons to attack a location, in this case, the redoubt.", 'the bombardment by the germans represents a strategic attempt to reclaim or destroy the redoubt.', "the event 'bombardments' indicates a military action involving the use of explosives to target the redoubt.", "the event 'bombardments' suggests a strategic military action, employed by the german to weaken the redoubt", "the event 'bombardments' happened at the redoubt when it was dark to try to force the troops out.", "the trigger word 'bombardments' refers to the act of attacking a place with bombs or large guns.", "the event 'bombardments' refers to the act of the german forces launching a sustained attack with artillery or other explosive weapons against the redoubt.", "the trigger word 'bombardments' refers to the act of attacking a place with bombs or other heavy weapons.", "after night had fallen, german 'bombardments' forced the troops out of the redoubt.", "this event is a counter-offensive by the germans, employing the tactic of bombardment to weaken the enemy's position.", "the word 'bombardments' signifies an attack with explosives, part of a military strategy to dislodge the enemy.", "the trigger word 'bombardments' refers to a sustained attack using artillery or other heavy weaponry.", "the event 'bombardments' describes the german military's use of artillery fire to dislodge the troops from the redoubt after nightfall."]}, {'trigger_word': 'counter - attacks', 'event_type': 'counter-attack', 'event_time': 'after night had fallen', 'event_location': 'the redoubt', 'event_participants': ['german', 'troops of the 36th ( ulster ) division'], 'description': ['the counter-attacks after the bombardment are a key element of the military conflict over the control of the redoubt.', "the trigger word 'counter-attacks' signifies a military offensive in response to an attack.", "the trigger word 'counter-attacks' refers to a military offensive launched in response to an attack.", "the event 'counter-attacks' depicts the 'german' forces attempting to regain control.", "the 'counter-attacks' happened after the night had fallen, indicating a strategic military action.", "the event 'counter-attacks' represents the german military's subsequent ground assault following the bombardments, aimed at reclaiming the redoubt.", "the event 'counter-attacks' represents the german forces' attempt to regain the redoubt.", "the trigger word 'counter-attacks' indicates a retaliatory military action.", "the event 'counter - attacks' describes the actions of the german forces, who launched an offensive against the troops of the 36th (ulster) division in the redoubt.", "the word 'counter-attacks' shows an offensive military strategy in response to an enemy's capture of a location.", "the trigger word 'counter-attacks' signifies a military offensive launched in response to an attack.", 'this event highlights the intensity of the battle and the dynamic shifting of control, with both sides engaging in offensive actions.', "the 'counter-attacks' after nightfall shows the german forces' attempts to regain control of the redoubt after it was captured by the opposing troops.", "the trigger word 'counter-attacks' represents a military action taken in response to an attack.", "the event 'counter-attacks' signifies german forces initiating an attack to regain control of the redoubt."]}] | Text: troops of the 36th ( ulster ) division captured the redoubt on 1 july 1916 , until forced out by german bombardments and counter-attacks after night had fallen . | Trigger: ['captured', 'bombardments', 'counter - attacks']
+2025-04-25 21:24:34.339 | ERROR    | extractor.llm:extract_response:183 - [EXTRACT RESPONSE] Error parsing events: Expecting value: line 72 column 5 (char 3669) | Text: ```json
+[
+  {
+    "trigger_word": "began",
+    "event_type": "initiation",
+    "event_time": "1944",
+    "event_location": None,
+    "event_participants": ["strategic bombing", "urban area bombing"],
+    "description": [
+      "The trigger word 'began' signifies the start of an action or process, in this case, strategic and urban area bombing.",
+      "The event 'began' marks the commencement of bombing operations, likely indicating a shift in military strategy or escalation of conflict.",
+      "The event 'began' points to the initiation of sustained aerial attacks, targeting both strategic and urban areas, a significant development in the war."
+    ]
+  },
+  {
+    "trigger_word": "deployed",
+    "event_type": "deployment",
+    "event_time": None,
+    "event_location": ["china", "the mariana islands"],
+    "event_participants": ["the long-range b-29 superfortress bomber"],
+    "description": [
+      "The trigger word 'deployed' indicates the movement of military assets to a specific location for operational purposes.",
+      "The event 'deployed' refers to the placement of the B-29 bomber in operational theaters, facilitating long-range bombing missions.",
+      "The event 'deployed' describes how the bomber was positioned in both China and the Mariana Islands, showcasing the strategic importance of these locations for aerial operations."
+    ]
+  },
+  {
+    "trigger_word": "bombing",
+    "event_type": "attack",
+    "event_time": "1944",
+    "event_location": ["urban area"],
+    "event_participants": ["strategic bombing"],
+    "description": [
+      "The trigger word 'bombing' represents the act of attacking a target using bombs dropped from aircraft.",
+      "The event 'bombing' denotes aerial attacks against urban and strategic areas, highlighting the destructive nature of warfare.",
+      "The event 'bombing' describes the application of air power to strike targets, signifying a shift in military strategy."
+    ]
+  },
+    {
+    "trigger_word": "bombing",
+    "event_type": "attack",
+    "event_time": "1944",
+    "event_location": ["urban area"],
+    "event_participants": ["urban area bombing"],
+    "description": [
+      "The trigger word 'bombing' represents the act of attacking a target using bombs dropped from aircraft.",
+      "The event 'bombing' denotes aerial attacks against urban and strategic areas, highlighting the destructive nature of warfare.",
+      "The event 'bombing' describes the application of air power to strike targets, signifying a shift in military strategy."
+    ]
+  },
+  {
+    "trigger_word": "service",
+    "event_type": "introduction",
+    "event_time": "1944",
+    "event_location": None,
+    "event_participants": ["the long-range b-29 superfortress bomber"],
+    "description": [
+      "The trigger word 'service' indicates the entry of a new piece of equipment into active use.",
+      "The event 'service' marks the point when the B-29 bomber became operationally available for use in strategic bombing.",
+      "The event 'service' describes when the long-range b-29 superfortress bomber began to be utilized in military operations."
+    ]
+  },
+  {
+    "trigger_word": "bomber",
+    "event_type": "aircraft_design",
+    "event_time": "1944",
+    "event_location": None,
+    "event_participants": ["the long-range b-29 superfortress bomber"],
+    "description": [
+      "The trigger word 'bomber' refers to a military aircraft designed to carry and drop bombs.",
+      "The event 'bomber' refers to the specific B-29 Superfortress, and emphasizes the type of the aircraft used for the bombing campaign.",
+      "The event 'bomber' emphasizes the important role that the B-29 played in the war.",
+    ]
+  },
+    {
+    "trigger_word": "entered",
+    "event_type": "introduction",
+    "event_time": "1944",
+    "event_location": None,
+    "event_participants": ["the long-range b-29 superfortress bomber"],
+    "description": [
+      "The trigger word 'entered' indicates the point when a new system became available.",
+      "The event 'entered' describes that the B-29 became available in 1944.",
+      "The event 'entered' indicates that the new bomber began its role in the bombing campaign."
+    ]
+  }
+]
+```
+2025-04-25 21:24:34.345 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+[
+  {
+    "trigger_word": "began",
+    "event_type": "initiation",
+    "event_time": "1944",
+    "event_location": None,
+    "event_participants": ["strategic bombing", "urban area bombing"],
+    "description": [
+      "The trigger word 'began' signifies the start of an action or process, in this case, strategic and urban area bombing.",
+      "The event 'began' marks the commencement of bombing operations, likely indicating a shift in military strategy or escalation of conflict.",
+      "The event 'began' points to the initiation of sustained aerial attacks, targeting both strategic and urban areas, a significant development in the war."
+    ]
+  },
+  {
+    "trigger_word": "deployed",
+    "event_type": "deployment",
+    "event_time": None,
+    "event_location": ["china", "the mariana islands"],
+    "event_participants": ["the long-range b-29 superfortress bomber"],
+    "description": [
+      "The trigger word 'deployed' indicates the movement of military assets to a specific location for operational purposes.",
+      "The event 'deployed' refers to the placement of the B-29 bomber in operational theaters, facilitating long-range bombing missions.",
+      "The event 'deployed' describes how the bomber was positioned in both China and the Mariana Islands, showcasing the strategic importance of these locations for aerial operations."
+    ]
+  },
+  {
+    "trigger_word": "bombing",
+    "event_type": "attack",
+    "event_time": "1944",
+    "event_location": ["urban area"],
+    "event_participants": ["strategic bombing"],
+    "description": [
+      "The trigger word 'bombing' represents the act of attacking a target using bombs dropped from aircraft.",
+      "The event 'bombing' denotes aerial attacks against urban and strategic areas, highlighting the destructive nature of warfare.",
+      "The event 'bombing' describes the application of air power to strike targets, signifying a shift in military strategy."
+    ]
+  },
+    {
+    "trigger_word": "bombing",
+    "event_type": "attack",
+    "event_time": "1944",
+    "event_location": ["urban area"],
+    "event_participants": ["urban area bombing"],
+    "description": [
+      "The trigger word 'bombing' represents the act of attacking a target using bombs dropped from aircraft.",
+      "The event 'bombing' denotes aerial attacks against urban and strategic areas, highlighting the destructive nature of warfare.",
+      "The event 'bombing' describes the application of air power to strike targets, signifying a shift in military strategy."
+    ]
+  },
+  {
+    "trigger_word": "service",
+    "event_type": "introduction",
+    "event_time": "1944",
+    "event_location": None,
+    "event_participants": ["the long-range b-29 superfortress bomber"],
+    "description": [
+      "The trigger word 'service' indicates the entry of a new piece of equipment into active use.",
+      "The event 'service' marks the point when the B-29 bomber became operationally available for use in strategic bombing.",
+      "The event 'service' describes when the long-range b-29 superfortress bomber began to be utilized in military operations."
+    ]
+  },
+  {
+    "trigger_word": "bomber",
+    "event_type": "aircraft_design",
+    "event_time": "1944",
+    "event_location": None,
+    "event_participants": ["the long-range b-29 superfortress bomber"],
+    "description": [
+      "The trigger word 'bomber' refers to a military aircraft designed to carry and drop bombs.",
+      "The event 'bomber' refers to the specific B-29 Superfortress, and emphasizes the type of the aircraft used for the bombing campaign.",
+      "The event 'bomber' emphasizes the important role that the B-29 played in the war.",
+    ]
+  },
+    {
+    "trigger_word": "entered",
+    "event_type": "introduction",
+    "event_time": "1944",
+    "event_location": None,
+    "event_participants": ["the long-range b-29 superfortress bomber"],
+    "description": [
+      "The trigger word 'entered' indicates the point when a new system became available.",
+      "The event 'entered' describes that the B-29 became available in 1944.",
+      "The event 'entered' indicates that the new bomber began its role in the bombing campaign."
+    ]
+  }
+]
+``` | Text: strategic bombing and urban area bombing began in 1944 after the long-range b-29 superfortress bomber entered service , first deployed from china and thereafter the mariana islands .
+2025-04-25 21:24:47.866 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 're - captured' not found | Text: the resulting military expedition of primarily frankish nobles , known as the princes'crusade , not only re-captured much of anatolia but went on to conquer the holy land ( the levant ) , which had fallen to islamic expansion as early as the 7th century , and culminated in july 1099 in the re-conquest of jerusalem and the establishment of the kingdom of jerusalem . | Trigger: ['conquer', 'expedition', 'establishment', 'resulting', 're - captured', 'fallen', 'expansion', 'culminated', 're - conquest']
+2025-04-25 21:24:56.459 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 're - captured' not found | Text: the resulting military expedition of primarily frankish nobles , known as the princes'crusade , not only re-captured much of anatolia but went on to conquer the holy land ( the levant ) , which had fallen to islamic expansion as early as the 7th century , and culminated in july 1099 in the re-conquest of jerusalem and the establishment of the kingdom of jerusalem . | Trigger: ['conquer', 'expedition', 'establishment', 'resulting', 're - captured', 'fallen', 'expansion', 'culminated', 're - conquest']
+2025-04-25 21:25:05.120 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 3/3] Worker 3 got error: Trigger word 're - captured' not found | Text: the resulting military expedition of primarily frankish nobles , known as the princes'crusade , not only re-captured much of anatolia but went on to conquer the holy land ( the levant ) , which had fallen to islamic expansion as early as the 7th century , and culminated in july 1099 in the re-conquest of jerusalem and the establishment of the kingdom of jerusalem . | Trigger: ['conquer', 'expedition', 'establishment', 'resulting', 're - captured', 'fallen', 'expansion', 'culminated', 're - conquest']
+2025-04-25 21:25:05.123 | ERROR    | extractor.consumer:worker:173 - [FAIL] Worker 3 fail to process event list: [{'trigger_word': 'conquer', 'event_type': 'military action', 'event_time': 'july 1099', 'event_location': 'the holy land ( the levant )', 'event_participants': ["the princes' crusade", "the princes'crusade"], 'description': ["the event 'conquer' implies a shift in control and governance, with the princes' crusade overcoming the existing power structure in the holy land.", "the trigger word 'conquer' in this context signifies the military success of the princes' crusade in the holy land.", "the event 'conquer' signifies a military campaign resulting in the subjugation of a territory, in this case, the holy land.", "the event 'conquer' describes the military action of taking control of a territory by force.", "this 'conquer' event led to the establishment of the kingdom of jerusalem.", "the trigger word 'conquer' describes the act of the princes'crusade taking control of the holy land.", "the event 'conquer' describes the action taken by the princes' crusade to gain control over the holy land, as a result of islamic expansion.", 'the conquest of the holy land was a significant event in the context, marking a turning point in the conflict between different religious groups.', "conquering involves overcoming opposition and establishing dominance over a territory or people, as demonstrated by the princes'crusade's actions in the holy land.", 'conquest often involves military campaigns, battles, and the displacement or subjugation of the previous inhabitants.', "the term 'conquer' describes the act of taking control of a place or people by military force, as performed by the princes' crusade.", "the trigger word 'conquer' indicates that the holy land, specifically the levant, was seized by the princes'crusade.", "the event 'conquer' signifies the act of taking control of a place or people by military force.", "the event 'conquer' refers to the act of taking control of a place or people by military force."]}, {'trigger_word': 'expedition', 'event_type': 'military campaign', 'event_time': 'null', 'event_location': 'anatolia', 'event_participants': ['primarily frankish nobles', 'frankish nobles', "the princes'crusade"], 'description': ["this 'expedition' involved frankish nobles in a military venture, as stated in the given text.", 'the expedition was a key event that resulted in the re-capturing of anatolia and the conquest of the holy land.', "the term 'expedition' describes a journey that led to the re-capturing of anatolia and the conquest of the holy land.", 'military expeditions typically involve planning, logistics, and the deployment of troops to achieve strategic objectives.', "the word 'expedition' refers to an organized journey undertaken for a specific purpose, particularly a military one.", "the event 'expedition' is the military undertaking by the frankish nobles.", "the 'expedition' was undertaken by primarily frankish nobles and is described as the princes' crusade.", "the event 'expedition' denotes a military campaign initiated by primarily frankish nobles.", "the military expedition, also known as the princes' crusade, involved frankish nobles and was aimed at retaking control of territories.", "this 'expedition' was successful in re-capturing much of anatolia.", "the word 'expedition' denotes a journey undertaken for a specific purpose, often of a military nature.", "the term 'expedition' refers to a journey undertaken by a group of people with a particular purpose, especially for exploration, research, or a military action.", "the trigger word 'expedition' refers to a journey undertaken by a group for a specific purpose, in this case, a military one.", "the event 'expedition' represents a military campaign undertaken by frankish nobles, known as the princes' crusade.", "the trigger word 'expedition' represents a journey undertaken by a group of people for a specific purpose, particularly a military one."]}, {'trigger_word': 'establishment', 'event_type': 'founding', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ["the princes' crusade", "the princes'crusade"], 'description': ["the establishment of the kingdom of jerusalem was a direct consequence of the re-conquest of the city by the princes' crusade.", "the event 'establishment' signifies the formal creation or foundation of something, here, the kingdom of jerusalem.", "this 'establishment' was the outcome of the princes' crusade's military actions.", "the event 'establishment' marks the beginning of a new political entity in the holy land after the conquest.", "the trigger word 'establishment' refers to the act of founding the kingdom of jerusalem.", 'the establishment of the kingdom of jerusalem followed the re-conquest of the city.', "the 'establishment' of the kingdom of jerusalem was a direct result of the re-conquest of jerusalem by the princes'crusade.", "the term 'establishment' describes the act of formally creating a new political entity in jerusalem by the princes' crusade.", "the event 'establishment' refers to the act of creating or founding something.", "the event 'establishment' refers to the founding of the kingdom of jerusalem after the re-conquest.", 'establishment often follows the successful completion of a specific goal, such as a military victory.', "the trigger word 'establishment' describes the foundation of the kingdom of jerusalem.", "the word 'establishment' indicates the creation or founding of something new.", "the word 'establishment' represents the act of creating or founding something, in this case, a kingdom.", "the event 'establishment' refers to the creation or setting up of something, in this case, the kingdom of jerusalem."]}, {'trigger_word': 'resulting', 'event_type': 'outcome', 'event_time': 'null', 'event_location': 'null', 'event_participants': ["the princes' crusade", "the princes'crusade"], 'description': ["the 'resulting' actions included re-capturing anatolia, conquering the holy land, and establishing the kingdom of jerusalem.", "the 'resulting' actions of the military expedition were re-capturing anatolia and conquering the holy land.", "the event 'resulting' describes the effect of the military expedition of frankish nobles.", "the event 'resulting' shows the impacts of the military expedition undertaken by the princes' crusade, particularly in the re-capture of anatolia and conquest of the holy land.", "the princes' crusade 'resulting' in major territorial gains and the establishment of a kingdom in jerusalem.", "the use of 'resulting' indicates a causal relationship: the expedition caused the re-capture and conquest.", "the word 'resulting' indicates a consequence or outcome.", "the trigger word 'resulting' shows that the military expedition led to specific outcomes.", "the word 'resulting' signifies a consequence or outcome.", "the event 'resulting' indicates an outcome or consequence.", "the trigger word 'resulting' points to the outcomes or consequences of an action.", "the term 'resulting' clarifies that the expedition by primarily frankish nobles led to re-capturing much of anatolia.", "the event 'resulting' introduces the consequences of the military action of the princes' crusade.", "the 'resulting' event of the military expedition was the re-capturing of anatolia and conquest of the holy land."]}, {'trigger_word': 're - captured', 'event_type': 'military action', 'event_time': 'null', 'event_location': 'anatolia', 'event_participants': ["the princes' crusade", "the princes'crusade"], 'description': ["the princes' crusade 're-captured' much of anatolia, which had previously been under different control.", "the event 're-captured' refers to the act of taking control of a place again.", "the event 're-captured' refers to the military act of taking back territory.", "the phrase 're-captured' describes the act of regaining control of a place or territory.", 're-capturing often involves military force and implies a previous loss of control.', "the trigger word 're-captured' shows that the princes'crusade regained control of anatolia.", "the trigger word 're-captured' indicates that the princes'crusade seized anatolia.", "the event 're-captured' indicates the act of regaining control of a place or territory previously held by others.", "the term 're-captured' describes the princes' crusade's act of recovering the land in anatolia.", "the event 're-captured' was a key military achievement of the expedition.", "the phrase 're-captured' implies regaining control of a place or territory previously held.", "this 're-captured' event was one of the initial military successes of the expedition.", "the trigger word 're-captured' means to take possession of something again, typically by military action.", "the event 're-captured' refers to the princes' crusade regaining control of anatolia.", "the phrase 're-captured' emphasizes that anatolia was once held, and was then retaken by the princes'crusade."]}, {'trigger_word': 'fallen', 'event_type': 'decline/loss of control', 'event_time': '7th century', 'event_location': 'the holy land ( the levant )', 'event_participants': ['the holy land ( the levant )', 'null', 'islamic expansion'], 'description': ["the trigger word 'fallen' indicates a loss of control or the capture of the area by another group.", "the word 'fallen' describes the loss of control or decline of something.", "the event 'fallen' indicates that the holy land had previously been controlled by someone before the princes' crusade.", 'the context suggests a change of hands, with the holy land coming under islamic control.', "the timeframe for the 'fallen' event is mentioned as early as the 7th century, suggesting a long period of islamic influence.", "the word 'fallen' signifies a state of being under the control of a different entity.", "the event 'fallen' defines the historical context for the princes' crusade.", "the term 'fallen' describes the loss of control of the holy land due to islamic expansion.", "the event 'fallen' signifies a state of losing control or being defeated.", "the word 'fallen' indicates that something was lost or taken over.", "the event 'fallen' refers to the holy land coming under the control of islamic expansion.", "the event 'fallen' describes the holy land's (the levant's) loss of control to the islamic expansion.", "the holy land 'fallen' to islamic expansion, indicating a shift in control.", "the trigger word 'fallen' describes the situation of the holy land's control by islamic expansion.", "the phrase 'fallen' indicates the holy land had previously been under different control before being overtaken by islamic forces."]}, {'trigger_word': 'expansion', 'event_type': 'growth/spread', 'event_time': '7th century', 'event_location': 'the holy land ( the levant )', 'event_participants': ['islamic', 'islamic expansion'], 'description': ["the phrase 'expansion' specifies the historical advance and increasing influence of islam within the given timeframe and location.", "the word 'expansion' refers to the act of increasing the size or scope of something.", "the event 'expansion' signifies the process of a group's growth and the extension of its influence or territory.", "the event 'expansion' refers to the act of spreading or increasing in size or scope.", 'the expansion of islamic influence led to the loss of control over the holy land.', "the trigger word 'expansion' describes the expansion of islamic influence into the holy land.", 'expansion often involves conquest, colonization, or the spread of ideas and culture.', "this 'expansion' resulted in the holy land 'falling' under islamic control early in the 7th century.", "the event 'expansion' refers to the spread of islamic influence in the holy land.", "the word 'expansion' means the act of becoming larger or more extensive.", "the trigger word 'expansion' describes the advance of islamic influence.", "the event 'expansion' represents a crucial historical process that influenced the events of the crusades.", "the term 'expansion' explains the reason for the falling of the holy land to islamic forces.", "the event 'expansion' refers to the territorial growth of the islamic forces."]}, {'trigger_word': 'culminated', 'event_type': 'conclusion', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ["the princes' crusade", "the princes'crusade"], 'description': ["the word 'culminated' denotes reaching the highest point or final stage.", "the trigger word 'culminated' refers to the re-conquest of jerusalem and establishment of the kingdom.", "the event 'culminated' means to reach a climax or point of highest development.", "the 'culminated' event occurred in july 1099 and led to the establishment of the kingdom of jerusalem.", "the event 'culminated' shows the final action was the re-conquest of jerusalem and the establishment of the kingdom of jerusalem.", "the trigger word 'culminated' describes the end result of the military expedition's actions.", "the event 'culminated' refers to the final stage of the military campaign.", "the event 'culminated' points to the end result of a process or series of actions.", "the event 'culminated' refers to the re-conquest of jerusalem, which was the peak of the princes' crusade.", "the word 'culminated' means to reach a climax or point of highest development.", 'culmination suggests a final, decisive outcome after a preceding series of actions or events.', "the term 'culminated' describes that the events reached their highest point when the city was re-conquered and the kingdom was established.", "the event 'culminated' represents the decisive phase of the campaign.", "the trigger word 'culminated' indicates a final or climactic event.", "the efforts of the princes' crusade 'culminated' in the re-conquest of jerusalem."]}, {'trigger_word': 're - conquest', 'event_type': 'military action', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ["the princes' crusade", "the princes'crusade"], 'description': ["the event 're-conquest' signifies the retaking of a place by military force.", "the term 're-conquest' refers to retaking control of a place by military means.", "the phrase 're-conquest' means the act of retaking a place that was previously controlled by others.", "the princes' crusade achieved the 're-conquest' of jerusalem.", "the word 're-conquest' means to take control of a place, in this case, the city of jerusalem, that was under the control of someone else.", "the trigger word 're-conquest' describes the military action that took place in jerusalem.", "the 're-conquest' of jerusalem was the final goal of the military campaign.", "the 're-conquest' of jerusalem happened in july 1099 and was a crucial part of the expedition's success.", "the re-conquest of jerusalem was a significant achievement of the princes' crusade, marking the end of one era and the beginning of another.", "the term 're-conquest' refers to the princes' crusade's act to conquer the city of jerusalem.", 're-conquest implies a previous loss of control and a subsequent military action to regain it.', "the event 're-conquest' signifies the princes' crusade taking control of jerusalem.", "the event 're-conquest' refers to the act of conquering something again.", "the trigger word 're-conquest' denotes the princes'crusade regaining control of jerusalem.", "the event 're-conquest' describes the act of retaking a territory or area through military means."]}] | Text: the resulting military expedition of primarily frankish nobles , known as the princes'crusade , not only re-captured much of anatolia but went on to conquer the holy land ( the levant ) , which had fallen to islamic expansion as early as the 7th century , and culminated in july 1099 in the re-conquest of jerusalem and the establishment of the kingdom of jerusalem . | Trigger: ['conquer', 'expedition', 'establishment', 'resulting', 're - captured', 'fallen', 'expansion', 'culminated', 're - conquest']
+2025-04-25 21:25:11.375 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 1/3] Worker 2 got error: Trigger word 'counter - attack' not found | Text: new german defensive tactics adopted after the battle of the somme of defence in depth and rapid counter-attack , had been enforced on the german 6th army after the disaster of 9 april . | Trigger: ['enforced', 'battle', 'adopted', 'defensive', 'defence', 'counter - attack', 'disaster']
+2025-04-25 21:25:18.704 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 2/3] Worker 2 got error: Trigger word 'counter - attack' not found | Text: new german defensive tactics adopted after the battle of the somme of defence in depth and rapid counter-attack , had been enforced on the german 6th army after the disaster of 9 april . | Trigger: ['enforced', 'battle', 'adopted', 'defensive', 'defence', 'counter - attack', 'disaster']
+2025-04-25 21:25:26.383 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 3/3] Worker 2 got error: Trigger word 'counter - attack' not found | Text: new german defensive tactics adopted after the battle of the somme of defence in depth and rapid counter-attack , had been enforced on the german 6th army after the disaster of 9 april . | Trigger: ['enforced', 'battle', 'adopted', 'defensive', 'defence', 'counter - attack', 'disaster']
+2025-04-25 21:25:26.385 | ERROR    | extractor.consumer:worker:173 - [FAIL] Worker 2 fail to process event list: [{'trigger_word': 'enforced', 'event_type': 'policy enforcement', 'event_time': '9 april', 'event_location': None, 'event_participants': ['german 6th army'], 'description': ["the event 'enforced' highlights the consequence of the disaster on april 9th, leading to the imposition of new strategies.", "the trigger word 'enforced' means to cause something to be implemented or carried out.", "the event 'enforced' suggests that the new tactics were made compulsory for the german 6th army.", "the trigger word 'enforced' signifies the implementation of a policy or strategy.", "the event 'enforced' suggests that the new tactics were compulsorily implemented on the german 6th army after the disaster.", "the event 'enforced' suggests that something new, like defensive tactics, was applied to the german 6th army.", "the trigger word 'enforced' signifies the implementation of a policy or rule, in this case, the new defensive tactics.", "the event 'enforced' implies that a new set of defensive tactics were imposed on the german 6th army following a negative outcome.", "the trigger word 'enforced' indicates the implementation of a rule or system upon a group.", "the trigger word 'enforced' signifies the act of making a rule, law, or practice be observed.", "the event 'enforced' suggests that the defensive tactics were made mandatory for the german 6th army, likely through orders or directives.", "the implementation of these tactics, marked by the term 'enforced,' indicates a shift in military strategy, likely due to the experiences of the somme battle.", 'the implementation of the new tactics was a direct result of the disaster that the german 6th army faced.', "the action 'enforced' suggests the german 6th army was mandated to follow new defensive strategies after the disaster.", 'the enforcement of the new tactics occurred after a disastrous event, implying that the german military leadership sought to improve their defensive capabilities.']}, {'trigger_word': 'battle', 'event_type': 'military conflict', 'event_time': 'the battle of the somme', 'event_location': 'the somme', 'event_participants': ['german', 'the somme', 'other opposing forces (implied)', 'germans', 'army'], 'description': ["the trigger word 'battle' refers to a sustained military engagement.", 'the battle of the somme serves as a reference point for the adoption of the new defensive tactics.', 'the battle of the somme was a major turning point, the experience of which resulted in the adoption of new defensive tactics.', "the event 'battle' refers to a significant military engagement at the somme.", "the event 'battle' is used to identify where and when specific military actions took place, such as the battle of the somme.", "the event 'battle' serves as a chronological marker, setting the stage for changes in military strategy due to the disastrous consequences of the battle.", "the term 'battle of the somme' indicates a major conflict that influenced subsequent defensive strategies.", "the trigger word 'battle' denotes a sustained fight between armed forces.", "the trigger word 'battle' refers to a military engagement between opposing forces.", "the event 'battle of the somme' refers to a significant historical military engagement that likely involved widespread casualties.", "the context around 'battle' highlights a pivotal military engagement that significantly influenced the adoption of new defensive strategies by the germans.", "the trigger word 'battle' signifies a major armed conflict or engagement.", "the event 'battle' signifies a major clash of forces at a specific location, in this case, the somme.", "the event 'battle' refers to the battle of the somme, which caused the germans to change their tactics."]}, {'trigger_word': 'adopted', 'event_type': 'change in strategy', 'event_time': 'after the battle of the somme', 'event_location': None, 'event_participants': ['german', 'new german defensive tactics', 'germans'], 'description': ["the trigger word 'adopted' indicates the acceptance and implementation of something new.", 'the adoption of new tactics came about because of their performance or the failure of older methods.', 'this term suggests a strategic shift by the german army to implement new military methodologies in response to the setbacks of the somme battle.', "the event 'adopted' signals a change in the german army's military approach, influenced by the outcome of the battle.", 'the adoption of new tactics implies a shift in military strategy influenced by the experiences of the battle of the somme.', "the event 'adopted' refers to the selection and implementation of new german defensive strategies.", "the trigger word 'adopted' suggests a conscious decision to implement something new.", "the trigger word 'adopted' indicates the act of taking up or beginning to use or follow something.", 'adoption of new tactics indicates the germans learned from their previous military engagement and adapted their strategy.', "the event 'adopted' refers to the introduction or selection of 'new german defensive tactics'.", "the trigger word 'adopted' indicates the taking up or acceptance of something, in this case, new german defensive tactics.", "the event 'adopted' suggests a conscious decision by the germans to implement changes to their defensive strategy.", "the event 'adopted' signifies the germans chose to use new defensive tactics after the battle of the somme.", "the trigger word 'adopted' means that something new was taken up and put into practice.", "the event 'adopted' suggests that the german military accepted and began to use the new defensive tactics."]}, {'trigger_word': 'defensive', 'event_type': 'military strategy', 'event_time': 'after the battle of the somme', 'event_location': None, 'event_participants': ['german', 'new german tactics', 'germans'], 'description': ["the trigger word 'defensive' describes the nature of the tactics themselves - protecting against an attack.", "the event 'defensive' indicates a shift in strategic thinking or a way of fighting.", "the trigger word 'defensive' describes actions aimed at protecting against attack.", "the trigger word 'defensive' characterizes a strategy or tactic aimed at protecting a position or preventing an attack.", "the event 'defensive' underscores a shift towards more protective and reactive military strategies.", 'defensive tactics represent a shift in the german military approach post-battle of the somme.', "defensive tactics, as used here, describes the means by which the german army sought to improve its security in the face of the enemy's offensive capabilities.", "the event 'defensive' focuses on the shift toward defense-oriented strategies.", "the event described by 'defensive' is about the german's new tactics intended to defend.", "the trigger word 'defensive' describes actions intended to protect against attack or harm.", 'the new defensive tactics highlight a focus on preventing enemy advances and minimizing losses.', "the event 'defensive' highlights the type of tactics employed to protect the army, specifically strategies like defense in depth.", "the trigger word 'defensive' specifies the type of military tactics being employed.", 'this event signifies a transition by the germans towards strategies focused on resistance and fortification, reflecting their evolving military approach.', "the event 'defensive' highlights changes in the german military's approach to warfare, emphasizing strategies like defense in depth."]}, {'trigger_word': 'defence', 'event_type': 'military strategy', 'event_time': 'after the battle of the somme', 'event_location': None, 'event_participants': ['german', 'germans'], 'description': ["the event 'defence' describes a method in military strategy.", 'defence in depth is one of the strategies the germans used.', "the event 'defence' characterizes one aspect of the adopted german defensive tactics.", "the trigger word 'defence' highlights a strategy aimed at preventing attack.", "the event 'defence' represents the core principle of the new military tactics.", "the event 'defence in depth' signifies a strategy to absorb enemy attacks and use multiple layers of defense.", "the trigger word 'defence' signifies the action of defending from or resisting attack.", "the phrase 'defence in depth' points to a particular defensive strategy adopted by the germans.", "the event 'defence' describes a key component of the german's tactical shift, focusing on in-depth protection.", "the trigger word 'defence' refers to the act of protecting something from attack.", "the trigger word 'defence' describes an action to protect someone or something from attack.", "the presence of 'defence' highlights a strategic move to protect forces, possibly incorporating measures like depth and fortified positions.", "the reference to 'defence in depth' reveals a specific component of the adopted tactics, suggesting a multi-layered approach to protection.", "the event 'defence' highlights the core objective of the new tactics; a strategy to protect against attack.", "the trigger word 'defence' refers to the act of protecting against or resisting attack."]}, {'trigger_word': 'counter - attack', 'event_type': 'military maneuver', 'event_time': 'after the battle of the somme', 'event_location': None, 'event_participants': ['german', 'opposing forces (implied)', 'germans'], 'description': ["the inclusion of 'counter-attack' suggests that the new tactics involved not only defense but also a plan to launch attacks against the enemy.", "the concept of 'counter - attack' suggests a german strategy involving striking back in response to an enemy assault.", 'the use of rapid counter-attack was a key element of the new german defensive tactics.', "the trigger word 'counter-attack' describes an offensive military action in response to an attack.", "the trigger word 'counter-attack' is a military maneuver where a defending force attacks an attacking force.", "the trigger word 'counter-attack' describes a military action taken in response to an attack.", "the mention of 'rapid counter-attack' suggests the germans used quick reaction to enemy incursions.", "the event 'counter-attack' refers to a rapid offensive maneuver utilized by the germans.", "the event 'counter-attack' signifies an element of the new defensive strategy.", "the event 'counter - attack' describes a tactic incorporated in the german strategy.", "the event 'counter - attack' describes a part of the german army's defensive strategy, implemented with the help of the 'defence in depth' concept.", "the trigger word 'counter - attack' denotes an offensive action taken to retaliate against an attack.", "the event 'counter-attack' details a specific type of action within the overall strategy and likely aimed to regain lost ground.", "the trigger word 'counter - attack' refers to the action of attacking in response to an enemy's attack.", "the event 'counter-attack' indicates an aggressive response to an enemy attack, possibly a key part of the new tactics."]}, {'trigger_word': 'disaster', 'event_type': 'negative outcome', 'event_time': '9 april', 'event_location': None, 'event_participants': ['german 6th army'], 'description': ["the event 'disaster' is used to describe the failure of the german 6th army on 9 april.", "the event 'disaster' points to a severely damaging event for the german 6th army.", "the event 'disaster' serves as a causal factor, precipitating the adoption of new defensive tactics.", "the trigger word 'disaster' indicates a catastrophic or highly unsuccessful event.", "the event 'disaster' marks the outcome of the offensive of april 9, which caused the german 6th army to suffer.", "the trigger word 'disaster' signifies a sudden event that causes great damage or suffering.", "the trigger word 'disaster' indicates a catastrophic event, usually resulting in significant loss or suffering.", "the reference to the 'disaster of 9 april' clarifies the context within which the new tactics were enforced.", "the event 'disaster' describes the 9th april event's impact on the german 6th army's operations.", "the trigger word 'disaster' refers to an event causing great damage, loss, or suffering.", "the occurrence of 'disaster' suggests a catastrophic experience influencing changes in military strategy.", "the term 'disaster' strongly suggests a significant loss of life, resources, or strategic position for the german 6th army, thus leading to the adoption of new tactics.", "the trigger word 'disaster' indicates a catastrophic or highly unfavorable event.", 'the disaster of 9 april was the reason that the new tactics had been enforced on the german 6th army.', "the event 'disaster' describes the catastrophic outcome that impacted the german 6th army."]}] | Text: new german defensive tactics adopted after the battle of the somme of defence in depth and rapid counter-attack , had been enforced on the german 6th army after the disaster of 9 april . | Trigger: ['enforced', 'battle', 'adopted', 'defensive', 'defence', 'counter - attack', 'disaster']
+2025-04-25 21:25:41.194 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: bombs | Event List: [{'trigger_word': 'exploded', 'event_type': 'explosion', 'event_time': '7 july 2013', 'event_location': 'mahabodhi temple complex', 'event_participants': ['bombs', 'ten bombs'], 'description': ["the trigger word 'exploded' signifies a sudden and violent release of energy, typically associated with a bomb.", "the event 'exploded' in this context describes the detonation of bombs at a specific location and time, likely causing damage or destruction.", "the trigger word 'exploded' signifies a sudden and violent release of energy, often associated with destruction.", "the event of 'exploded' suggests the occurrence of an explosion, likely involving bombs, which took place on a specific date and location, impacting the mahabodhi temple complex.", "the event 'exploded' implies a dangerous situation, as multiple bombs detonated within a sensitive and historically significant area, potentially causing damage and endangering lives.", "the event 'exploded' describes the detonation of bombs, causing a significant disruption at the specified location and time.", "the event 'exploded' describes the detonation of bombs within a specific location, namely the mahabodhi temple complex, indicating a destructive act at a particular point in time.", "the trigger word 'exploded' describes a sudden and violent release of energy, often accompanied by a loud noise.", "the event 'exploded' indicates the detonation of something, likely bombs, causing significant damage or disruption at a specific location and time.", "the event 'exploded' highlights the destructive nature of the bombs within the complex, suggesting a potential act of violence or terrorism.", "the event 'exploded' signifies a destructive event, with 'ten bombs' being the agent and the location being the mahabodhi temple complex.", "the trigger word 'exploded' signifies a sudden and violent release of energy, typically from a bomb.", "the trigger word 'exploded' describes the forceful and sudden burst of something, typically bombs in this context.", "the event 'exploded' happened at a specific time and location, indicating a significant act of violence or destruction in the mentioned place.", 'the explosion occurred at the mahabodhi temple complex, a unesco world heritage site, implying the event targeted a significant cultural landmark.']}]
+2025-04-25 21:25:41.197 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (2) | Text: on 7 july 2013 a series of ten bombs exploded in and around the mahabodhi temple complex , a unesco world heritage site in bodh gaya , india .
+2025-04-25 21:25:43.878 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: bombs | Event List: [{'trigger_word': 'exploded', 'event_type': 'explosion', 'event_time': '7 july 2013', 'event_location': 'mahabodhi temple complex', 'event_participants': ['bombs', 'ten bombs'], 'description': ["the trigger word 'exploded' describes the action of the bombs, indicating a destructive event that occurred at a specific location and time.", "the event 'exploded' suggests a deliberate act of violence, targeting the mahabodhi temple complex.", "the trigger word 'exploded' indicates a sudden and violent release of energy, typically with a loud noise and destructive force.", "the event 'exploded' describes the detonation of bombs at a specific time and location, causing potential damage and harm.", "the trigger word 'exploded' describes the sudden and violent release of energy, typically caused by the detonation of a bomb.", "the word 'exploded' signifies a destructive event that caused damage in and around a significant religious site.", "the trigger word 'exploded' signifies a sudden and violent burst, in this case, related to the bombs.", "the event 'exploded' describes the action of the bombs, resulting in a blast within the temple complex.", "the event 'exploded' indicates a destructive event that occurred on a specific date within a particular location.", "the event 'exploded' indicates the occurrence of an explosion, in this case involving multiple bombs, at a specific location and date.", 'the explosion, triggered by the bombs, is a destructive event within the context of the sentence, impacting a significant religious site.', "the trigger word 'exploded' signifies a sudden and violent release of energy, often associated with bombs or other explosive devices.", "the use of 'exploded' indicates a destructive event within the vicinity of a significant cultural landmark, the mahabodhi temple complex.", "the event 'exploded' describes the detonation of bombs, likely causing significant damage or disruption at the specified location and time.", "the event 'exploded' signifies a sudden and violent release of energy, often associated with the detonation of explosive devices."]}]
+2025-04-25 21:25:43.881 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (2) | Text: on 7 july 2013 a series of ten bombs exploded in and around the mahabodhi temple complex , a unesco world heritage site in bodh gaya , india .
+2025-04-25 21:25:45.958 | ERROR    | extractor.llm:rearrange_event_list:302 - [REARRANGE EVENT LIST] Trigger word not found in event list: bombs | Event List: [{'trigger_word': 'exploded', 'event_type': 'explosion', 'event_time': '7 july 2013', 'event_location': 'in and around the mahabodhi temple complex , a unesco world heritage site in bodh gaya , india', 'event_participants': ['ten bombs'], 'description': ["the event 'exploded' signifies the detonation of explosive devices within a specific area, causing damage or disruption.", "the act of 'exploded' caused damage at the mahabodhi temple complex, a unesco world heritage site.", "the trigger word 'exploded' signifies a sudden and violent release of energy, in this case, from 'ten bombs'.", "the trigger word 'exploded' signifies a sudden and violent release of energy, often accompanied by a loud noise and the scattering of fragments.", "the event 'exploded' describes the detonation of 'ten bombs' at the 'mahabodhi temple complex'.", "the trigger word 'exploded' signifies a sudden and violent release of energy, often associated with destruction.", "the event 'exploded' describes the detonation of explosive devices, occurring on a specific date and at a particular location.", "the use of 'exploded' indicates a dangerous and destructive event that caused damage in the vicinity of the temple complex.", "the event of 'exploded' refers to the action of bombs detonating, specifically in this case, the explosions occurred at a unesco world heritage site, the mahabodhi temple complex.", "the trigger word 'exploded' denotes a sudden and violent release of energy, often with a loud noise and the potential for destruction.", "the event 'exploded' describes the detonation of the bombs, causing destruction and potential harm.", "the trigger word 'exploded' indicates a sudden and violent burst, often caused by a bomb or similar device.", "the context indicates the event occurred on '7 july 2013' at the 'mahabodhi temple complex', which is a 'unesco world heritage site in bodh gaya, india'.", "the event 'exploded' occurred on a specific date and at a specific location, highlighting the impact on the mahabodhi temple complex.", "the event 'exploded' in this context denotes the detonation of bombs at a specific location and time."]}]
+2025-04-25 21:25:45.961 | ERROR    | extractor.llm:extract_event2:342 - [EXTRACT EVENT 2] Number of events extracted (1) does not match number of trigger words (2) | Text: on 7 july 2013 a series of ten bombs exploded in and around the mahabodhi temple complex , a unesco world heritage site in bodh gaya , india .
+2025-04-25 21:25:45.962 | ERROR    | extractor.consumer:worker:171 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: on 7 july 2013 a series of ten bombs exploded in and around the mahabodhi temple complex , a unesco world heritage site in bodh gaya , india . | Trigger: ['bombs', 'exploded']
+2025-04-25 21:26:23.866 | ERROR    | extractor.consumer:worker:167 - [ERROR at ATTEMPT 2/3] Worker 0 got error: Trigger word 'take - off' not found | Text: on 6 february 1996 , the 757-200 operating the route crashed shortly after take-off from puerto plata's gregorio luperon international airport . | Trigger: ['operating', 'crashed', 'take - off']
+2025-04-25 21:26:40.095 | ERROR    | extractor.consumer:worker:173 - [FAIL] Worker 0 fail to process event list: [{'trigger_word': 'operating', 'event_type': 'operation', 'event_time': '6 february 1996', 'event_location': 'route', 'event_participants': ['757-200', 'the 757-200'], 'description': ["the event 'operating' indicates the plane was actively in service following a defined path.", "the term 'operating' suggests the aircraft was in active service and carrying out its intended purpose of transporting passengers or cargo on the route.", "the trigger word 'operating' describes the active function or service of the 757-200 on a specific route.", "the trigger word 'operating' describes the action of a vehicle, specifically a 757-200, being in service or running a particular route.", 'operating here means the plane was functioning and performing its scheduled flight path.', "the event 'operating' describes the active use of the 757-200 on the route at a particular time.", "the event 'operating' indicates the routine function of the 757-200 on a specific route during a certain time.", 'operating indicates the plane was actively providing transportation services on february 6, 1996.', "the event 'operating' highlights the scheduled activity of the aircraft, implying its regular service along the designated route.", 'operating a route implies the plane was actively providing transportation services along a pre-defined path on february 6, 1996.', "the trigger word 'operating' refers to the action of a 757-200 aircraft being in service on a specific route.", "the event 'operating' suggests the aircraft was following a designated path or schedule, implying regular activity.", "the trigger word 'operating' describes the activity of a plane on a specific route.", "the trigger word 'operating' signifies the action of a vehicle, in this case, the 757-200, being in service or running a specific route.", "the 'operating' event signifies the 757-200 was functioning and undertaking the flight path."]}, {'trigger_word': 'crashed', 'event_type': 'crash', 'event_time': '6 february 1996', 'event_location': 'gregorio luperon international airport', 'event_participants': ['757-200', 'the 757-200'], 'description': ["the trigger word 'crashed' signifies a catastrophic event where the 757-200 suffered a severe accident.", "the event 'crashed' indicates a sudden and destructive impact involving the aircraft after taking off.", "the word 'crashed' indicates a tragic event involving the aircraft and its potential impact on those onboard and on the ground.", "the event 'crashed' suggests the 757-200 was involved in a disaster at a particular airport and date.", "the event 'crashed' implies a catastrophic failure of the 757-200 shortly after take-off.", "the word 'crashed' describes a catastrophic event where an aircraft experienced a sudden and uncontrolled descent, resulting in damage or destruction.", "the trigger word 'crashed' denotes a catastrophic event involving the aircraft.", 'the crash occurred shortly after take-off, implying a very short duration of flight before the incident near the airport.', "the event 'crashed' implies a significant loss of life and/or damage to property related to the 757-200", "the event 'crashed' describes a catastrophic failure of the 757-200, resulting in significant damage or destruction shortly after takeoff.", "the event 'crashed' specifies the aircraft experienced a sudden and uncontrolled descent resulting in a collision.", "the event 'crashed' signifies a severe aviation accident at the specified location and time, indicating a major event with significant consequences.", "the event 'crashed' means the plane was involved in an accident shortly after takeoff from the airport", "the trigger word 'crashed' signifies a severe aviation accident where the aircraft impacted the ground.", "the trigger word 'crashed' denotes a sudden and uncontrolled descent of an aircraft, resulting in damage or destruction."]}, {'trigger_word': 'take - off', 'event_type': 'takeoff', 'event_time': '6 february 1996', 'event_location': 'gregorio luperon international airport', 'event_participants': ['757-200', 'the 757-200'], 'description': ["the trigger word 'take-off' denotes the crucial phase of flight when the aircraft leaves the ground.", "the event 'take-off' marks the beginning of the flight, and its proximity to the crash highlights the critical nature of this phase.", "the event 'take - off' signifies the initiation of the plane's flight from the airport.", "the event 'take-off' marks the initial phase of the flight from puerto plata on february 6, 1996.", "the event 'take-off' is the start of the flight from gregorio luperon international airport.", "the trigger word 'take - off' indicates the start of a flight from the airport.", "the event 'take-off' describes the moment the 757-200 began its flight from the airport.", "the term 'take-off' specifies the point in time and the location from which the aircraft attempted to initiate its journey.", 'take-off is the initial phase of a flight, where the plane gains altitude from gregorio luperon international airport.', "the trigger word 'take-off' refers to the initial phase of a flight where an aircraft leaves the ground.", "the 'take - off' event explains how the airplane started its flight.", "the term 'take-off' refers to the point at which an aircraft leaves the ground and begins its flight.", "the event 'take-off' is the crucial starting point of the flight, and in this case, the context shows it was shortly followed by a crash.", "the event 'take-off' describes the aircraft departing from the airport on february 6, 1996.", "the trigger word 'take-off' marks the beginning phase of a flight where the aircraft leaves the ground."]}] | Text: on 6 february 1996 , the 757-200 operating the route crashed shortly after take-off from puerto plata's gregorio luperon international airport . | Trigger: ['operating', 'crashed', 'take - off']
+2025-04-25 21:26:49.684 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "event",
+    "event_type": "musical event",
+    "event_time": None,
+    "event_location": "Albania",
+    "event_participants": [],
+    "description": [
+        "The trigger word 'event' in this context refers to a significant occurrence or happening, specifically a 'major musical event'.",
+        "The event 'kenga magjike' is described as a prominent musical happening, implying it involves performance, potentially competition, and an audience.",
+        "This sentence highlights 'kenga magjike' as a key cultural element, indicating that Albania hosts a notable musical event."
+    ]
+}
+```
+2025-04-25 21:26:49.687 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "event",
+    "event_type": "musical event",
+    "event_time": None,
+    "event_location": "Albania",
+    "event_participants": [],
+    "description": [
+        "The trigger word 'event' in this context refers to a significant occurrence or happening, specifically a 'major musical event'.",
+        "The event 'kenga magjike' is described as a prominent musical happening, implying it involves performance, potentially competition, and an audience.",
+        "This sentence highlights 'kenga magjike' as a key cultural element, indicating that Albania hosts a notable musical event."
+    ]
+}
+``` | Text: kenga magjike ( ` ` magical song'' in english ) is a major musical event in albania .
+2025-04-25 21:26:49.689 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "event",
+    "event_type": "musical event",
+    "event_time": None,
+    "event_location": "Albania",
+    "event_participants": [],
+    "description": [
+        "The trigger word 'event' signifies a planned or organized occasion, in this case a musical one.",
+        "The event 'event' refers to a significant musical happening, likely involving performances and possibly an audience.",
+        "The event 'event' is specified as being a major one, indicating it's of considerable importance within Albania's musical landscape."
+    ]
+}
+```
+2025-04-25 21:26:49.692 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "event",
+    "event_type": "musical event",
+    "event_time": None,
+    "event_location": "Albania",
+    "event_participants": [],
+    "description": [
+        "The trigger word 'event' signifies a planned or organized occasion, in this case a musical one.",
+        "The event 'event' refers to a significant musical happening, likely involving performances and possibly an audience.",
+        "The event 'event' is specified as being a major one, indicating it's of considerable importance within Albania's musical landscape."
+    ]
+}
+``` | Text: kenga magjike ( ` ` magical song'' in english ) is a major musical event in albania .
+2025-04-25 21:27:25.370 | ERROR    | extractor.llm:extract_response:183 - [EXTRACT RESPONSE] Error parsing events: Expecting value: line 36 column 9 (char 1765) | Text: ```json
+[
+    {
+        "trigger_word": "battle",
+        "event_type": "conflict",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["Bulgarians", "Varangian Guard"],
+        "description": [
+            "The trigger word 'battle' refers to a significant armed conflict.",
+            "The event 'battle' denotes a military engagement, with the Bulgarians and the Varangian Guard as involved parties.",
+            "The sentence suggests uncertainty surrounding the details of the 'battle' itself, indicating a lack of clarity on the specifics."
+        ]
+    },
+    {
+        "trigger_word": "help",
+        "event_type": "assistance",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["Varangian Guard", "Bulgarians"],
+        "description": [
+            "The trigger word 'help' refers to the act of providing assistance or support.",
+            "The event 'help' in this context indicates the Varangian Guard provided assistance, or aid, to defeat the Bulgarians.",
+            "The sentence identifies the Varangian Guard, led by Harald Hardrada, as the primary source of assistance in the battle."
+        ]
+    },
+    {
+        "trigger_word": "defeated",
+        "event_type": "victory",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["Bulgarians", "Varangian Guard"],
+        "description": [
+            "The trigger word 'defeated' signifies a loss or failure in a conflict.",
+            "The event 'defeated' indicates that the Bulgarians were overcome, with the Varangian Guard playing a key role.",
+            "The sentence highlights the defeat of the Bulgarians as the outcome, with the help of the Varangian Guard.",
+        ]
+    }
+]
+```
+2025-04-25 21:27:25.377 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+[
+    {
+        "trigger_word": "battle",
+        "event_type": "conflict",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["Bulgarians", "Varangian Guard"],
+        "description": [
+            "The trigger word 'battle' refers to a significant armed conflict.",
+            "The event 'battle' denotes a military engagement, with the Bulgarians and the Varangian Guard as involved parties.",
+            "The sentence suggests uncertainty surrounding the details of the 'battle' itself, indicating a lack of clarity on the specifics."
+        ]
+    },
+    {
+        "trigger_word": "help",
+        "event_type": "assistance",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["Varangian Guard", "Bulgarians"],
+        "description": [
+            "The trigger word 'help' refers to the act of providing assistance or support.",
+            "The event 'help' in this context indicates the Varangian Guard provided assistance, or aid, to defeat the Bulgarians.",
+            "The sentence identifies the Varangian Guard, led by Harald Hardrada, as the primary source of assistance in the battle."
+        ]
+    },
+    {
+        "trigger_word": "defeated",
+        "event_type": "victory",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["Bulgarians", "Varangian Guard"],
+        "description": [
+            "The trigger word 'defeated' signifies a loss or failure in a conflict.",
+            "The event 'defeated' indicates that the Bulgarians were overcome, with the Varangian Guard playing a key role.",
+            "The sentence highlights the defeat of the Bulgarians as the outcome, with the help of the Varangian Guard.",
+        ]
+    }
+]
+``` | Text: the battle itself is unclear but the bulgarians were defeated mainly with the help of the varangian guard , led by harald hardrada .
+2025-04-25 21:27:47.679 | ERROR    | extractor.llm:extract_response:183 - [EXTRACT RESPONSE] Error parsing events: Expecting value: line 84 column 13 (char 3630) | Text: ```json
+[
+    {
+        "trigger_word": "arguing",
+        "event_type": "dispute",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["residents"],
+        "description": [
+            "The trigger word 'arguing' indicates a disagreement or debate, in this case, by the residents.",
+            "The event 'arguing' highlights the residents' opposition to the plan, emphasizing their viewpoint.",
+            "The event of arguing shows the residents' active involvement in expressing their concerns."
+        ]
+    },
+    {
+        "trigger_word": "caused",
+        "event_type": "causation",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["existing coal-fired plants", "environmental and health damage"],
+        "description": [
+            "The trigger word 'caused' establishes a cause-and-effect relationship between existing plants and damage.",
+            "The event 'caused' points out the plants are the source of environmental and health problems.",
+            "The event of causing connects the actions of the plant to specific negative outcomes."
+        ]
+    },
+    {
+        "trigger_word": "damage",
+        "event_type": "harm",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["environmental", "health"],
+        "description": [
+            "The trigger word 'damage' signifies the negative consequences suffered.",
+            "The event 'damage' denotes harm, specifically to the environment and health.",
+            "The event of damage describes the negative impact caused by the existing plants."
+        ]
+    },
+    {
+        "trigger_word": "existing",
+        "event_type": "existence",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["coal-fired plants"],
+        "description": [
+            "The trigger word 'existing' describes the current state of something.",
+            "The event 'existing' refers to the presence of coal-fired plants.",
+            "The event of existing highlights the presence of already established coal-fired plants."
+        ]
+    },
+    {
+        "trigger_word": "plans",
+        "event_type": "planning",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'plans' represents a set of intended actions or proposals.",
+            "The event 'plans' is about the proposal to expand the plant.",
+            "The event of plans outlines the proposal to expand the coal-fired power plant."
+        ]
+    },
+    {
+        "trigger_word": "plan",
+        "event_type": "planning",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified", "residents"],
+        "description": [
+            "The trigger word 'plan' is synonymous with plans, referring to a specific course of action.",
+            "The event 'plan' is used to clarify the proposed expansion within the context of the residents' opposition.",
+            "The event of plan shows that the plan is opposed by the residents."
+        ]
+    },
+    {
+        "trigger_word": "plant",
+        "event_type": "construction",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'plant' refers to the facility in the town.",
+            "The event 'plant' identifies the site in question.",
+            "The event of plant concerns the coal-fired power plant.",
+            ]
+    },
+    {
+        "trigger_word": "protests",
+        "event_type": "protesting",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'protests' indicates public demonstrations or expressions of disapproval.",
+            "The event 'protests' represents the public's reactions to the plans.",
+            "The event of protests involves the public's disapproval of the planned expansion."
+        ]
+    },
+    {
+        "trigger_word": "ignited",
+        "event_type": "inciting",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'ignited' means to trigger or start something.",
+            "The event 'ignited' describes how the plans spurred the protests.",
+            "The event of ignited refers to the start of public protests due to the plans."
+        ]
+    },
+    {
+        "trigger_word": "expand",
+        "event_type": "expansion",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'expand' means to increase in size or scope.",
+            "The event 'expand' refers to the planned growth of the plant.",
+            "The event of expand describes the specific action of enlarging the coal-fired power plant."
+        ]
+    },
+    {
+        "trigger_word": "opposed",
+        "event_type": "opposition",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["residents", "plan"],
+        "description": [
+            "The trigger word 'opposed' indicates disagreement or resistance to something.",
+            "The event 'opposed' describes the residents' disapproval of the plan.",
+            "The event of opposed emphasizes the direct resistance to the coal-fired power plant's expansion."
+        ]
+    }
+]
+```
+2025-04-25 21:27:47.701 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+[
+    {
+        "trigger_word": "arguing",
+        "event_type": "dispute",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["residents"],
+        "description": [
+            "The trigger word 'arguing' indicates a disagreement or debate, in this case, by the residents.",
+            "The event 'arguing' highlights the residents' opposition to the plan, emphasizing their viewpoint.",
+            "The event of arguing shows the residents' active involvement in expressing their concerns."
+        ]
+    },
+    {
+        "trigger_word": "caused",
+        "event_type": "causation",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["existing coal-fired plants", "environmental and health damage"],
+        "description": [
+            "The trigger word 'caused' establishes a cause-and-effect relationship between existing plants and damage.",
+            "The event 'caused' points out the plants are the source of environmental and health problems.",
+            "The event of causing connects the actions of the plant to specific negative outcomes."
+        ]
+    },
+    {
+        "trigger_word": "damage",
+        "event_type": "harm",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["environmental", "health"],
+        "description": [
+            "The trigger word 'damage' signifies the negative consequences suffered.",
+            "The event 'damage' denotes harm, specifically to the environment and health.",
+            "The event of damage describes the negative impact caused by the existing plants."
+        ]
+    },
+    {
+        "trigger_word": "existing",
+        "event_type": "existence",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["coal-fired plants"],
+        "description": [
+            "The trigger word 'existing' describes the current state of something.",
+            "The event 'existing' refers to the presence of coal-fired plants.",
+            "The event of existing highlights the presence of already established coal-fired plants."
+        ]
+    },
+    {
+        "trigger_word": "plans",
+        "event_type": "planning",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'plans' represents a set of intended actions or proposals.",
+            "The event 'plans' is about the proposal to expand the plant.",
+            "The event of plans outlines the proposal to expand the coal-fired power plant."
+        ]
+    },
+    {
+        "trigger_word": "plan",
+        "event_type": "planning",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified", "residents"],
+        "description": [
+            "The trigger word 'plan' is synonymous with plans, referring to a specific course of action.",
+            "The event 'plan' is used to clarify the proposed expansion within the context of the residents' opposition.",
+            "The event of plan shows that the plan is opposed by the residents."
+        ]
+    },
+    {
+        "trigger_word": "plant",
+        "event_type": "construction",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'plant' refers to the facility in the town.",
+            "The event 'plant' identifies the site in question.",
+            "The event of plant concerns the coal-fired power plant.",
+            ]
+    },
+    {
+        "trigger_word": "protests",
+        "event_type": "protesting",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'protests' indicates public demonstrations or expressions of disapproval.",
+            "The event 'protests' represents the public's reactions to the plans.",
+            "The event of protests involves the public's disapproval of the planned expansion."
+        ]
+    },
+    {
+        "trigger_word": "ignited",
+        "event_type": "inciting",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'ignited' means to trigger or start something.",
+            "The event 'ignited' describes how the plans spurred the protests.",
+            "The event of ignited refers to the start of public protests due to the plans."
+        ]
+    },
+    {
+        "trigger_word": "expand",
+        "event_type": "expansion",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["unspecified"],
+        "description": [
+            "The trigger word 'expand' means to increase in size or scope.",
+            "The event 'expand' refers to the planned growth of the plant.",
+            "The event of expand describes the specific action of enlarging the coal-fired power plant."
+        ]
+    },
+    {
+        "trigger_word": "opposed",
+        "event_type": "opposition",
+        "event_time": None,
+        "event_location": "town",
+        "event_participants": ["residents", "plan"],
+        "description": [
+            "The trigger word 'opposed' indicates disagreement or resistance to something.",
+            "The event 'opposed' describes the residents' disapproval of the plan.",
+            "The event of opposed emphasizes the direct resistance to the coal-fired power plant's expansion."
+        ]
+    }
+]
+``` | Text: protests were ignited over plans to expand a coal-fired power plant in the town — a plan that residents opposed , arguing that existing coal-fired plants had caused environmental and health damage .
+2025-04-25 21:27:47.730 | ERROR    | extractor.llm:extract_response:183 - [EXTRACT RESPONSE] Error parsing events: Expecting value: line 12 column 5 (char 579) | Text: ```json
+[
+  {
+    "trigger_word": "arguing",
+    "event_type": "dispute",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents"],
+    "description": [
+      "The trigger word 'arguing' signifies a disagreement or debate, in this case, the residents are contesting the expansion of the power plant.",
+      "The event 'arguing' highlights the residents' perspective and their reasons for opposing the expansion.",
+      "The use of 'arguing' indicates a verbal dispute centered on the environmental and health consequences of the power plant.",
+    ]
+  },
+  {
+    "trigger_word": "caused",
+    "event_type": "causation",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["existing coal-fired plants", "environmental and health damage"],
+    "description": [
+      "The trigger word 'caused' denotes a cause-and-effect relationship, specifically linking the power plants to the damage.",
+      "The event 'caused' is the core of the residents' argument, showing the direct impact of the plants on the environment and health.",
+      "The verb 'caused' illustrates the negative consequences of coal-fired plants, forming the basis for the residents' opposition.",
+    ]
+  },
+  {
+    "trigger_word": "damage",
+    "event_type": "harm",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["existing coal-fired plants"],
+    "description": [
+      "The trigger word 'damage' points to the negative impacts, likely referring to the environmental and health harms caused by existing coal-fired plants.",
+      "The event 'damage' represents the outcome or effect of the power plant's operation, providing the residents’ justification for resistance.",
+      "The term 'damage' suggests the degradation of environmental and health conditions due to the operation of the plant.",
+    ]
+  },
+  {
+    "trigger_word": "existing",
+    "event_type": "state",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["coal-fired plants"],
+    "description": [
+      "The trigger word 'existing' describes the current status of the coal-fired plants mentioned in the text.",
+      "The event 'existing' provides context, focusing on current state of the plants that are causing environmental and health damage.",
+      "The term 'existing' sets the stage by highlighting the plants that have caused the damage cited by residents, framing the situation.",
+    ]
+  },
+  {
+    "trigger_word": "plans",
+    "event_type": "intention",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["someone"],
+    "description": [
+      "The trigger word 'plans' is related to the proposals which involve the expansion of the plant.",
+      "The event 'plans' indicates the intention to increase the capacity of the coal-fired power plant.",
+      "The word 'plans' signals a proactive step that will likely change the status of the coal-fired power plant, and is also the spark of the protest.",
+    ]
+  },
+  {
+    "trigger_word": "plan",
+    "event_type": "intention",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents"],
+    "description": [
+      "The trigger word 'plan' refers to the proposal for expansion which generated a negative response from residents.",
+      "The event 'plan' is the subject of the residents' opposition.",
+      "The term 'plan' is synonymous with the plans to expand the power plant.",
+    ]
+  },
+  {
+    "trigger_word": "plant",
+    "event_type": "construction",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["coal-fired power"],
+    "description": [
+      "The trigger word 'plant' indicates the location of the construction.",
+      "The event 'plant' is related to the place in which expansion is discussed.",
+      "The word 'plant' refers to the object which is the center of conflict.",
+    ]
+  },
+  {
+    "trigger_word": "protests",
+    "event_type": "demonstration",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents"],
+    "description": [
+      "The trigger word 'protests' identifies the public actions taken in response to the plans for expansion.",
+      "The event 'protests' illustrates the community's collective opposition to the power plant expansion.",
+      "The term 'protests' denotes a form of public expression that challenges or resists the plans for the plant's expansion.",
+    ]
+  },
+  {
+    "trigger_word": "ignited",
+    "event_type": "initiation",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents"],
+    "description": [
+      "The trigger word 'ignited' signifies the start or triggering of the protests.",
+      "The event 'ignited' emphasizes the role of the expansion plans in triggering the community's demonstrations.",
+      "The verb 'ignited' emphasizes the speed and intensity with which the plan started the protest.",
+    ]
+  },
+  {
+    "trigger_word": "expand",
+    "event_type": "increase",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["coal-fired power plant"],
+    "description": [
+      "The trigger word 'expand' highlights the change in size or capacity being proposed.",
+      "The event 'expand' is the core of the plans in the town.",
+      "The word 'expand' is the key to describe the plan in the town.",
+    ]
+  },
+  {
+    "trigger_word": "opposed",
+    "event_type": "opposition",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents", "plans"],
+    "description": [
+      "The trigger word 'opposed' signifies the resistance of residents to the expansion plan.",
+      "The event 'opposed' highlights the residents' disagreement with the plans.",
+      "The verb 'opposed' indicates the residents' negative view regarding the expansion of the power plant.",
+    ]
+  }
+]
+```
+2025-04-25 21:27:47.757 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+[
+  {
+    "trigger_word": "arguing",
+    "event_type": "dispute",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents"],
+    "description": [
+      "The trigger word 'arguing' signifies a disagreement or debate, in this case, the residents are contesting the expansion of the power plant.",
+      "The event 'arguing' highlights the residents' perspective and their reasons for opposing the expansion.",
+      "The use of 'arguing' indicates a verbal dispute centered on the environmental and health consequences of the power plant.",
+    ]
+  },
+  {
+    "trigger_word": "caused",
+    "event_type": "causation",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["existing coal-fired plants", "environmental and health damage"],
+    "description": [
+      "The trigger word 'caused' denotes a cause-and-effect relationship, specifically linking the power plants to the damage.",
+      "The event 'caused' is the core of the residents' argument, showing the direct impact of the plants on the environment and health.",
+      "The verb 'caused' illustrates the negative consequences of coal-fired plants, forming the basis for the residents' opposition.",
+    ]
+  },
+  {
+    "trigger_word": "damage",
+    "event_type": "harm",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["existing coal-fired plants"],
+    "description": [
+      "The trigger word 'damage' points to the negative impacts, likely referring to the environmental and health harms caused by existing coal-fired plants.",
+      "The event 'damage' represents the outcome or effect of the power plant's operation, providing the residents’ justification for resistance.",
+      "The term 'damage' suggests the degradation of environmental and health conditions due to the operation of the plant.",
+    ]
+  },
+  {
+    "trigger_word": "existing",
+    "event_type": "state",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["coal-fired plants"],
+    "description": [
+      "The trigger word 'existing' describes the current status of the coal-fired plants mentioned in the text.",
+      "The event 'existing' provides context, focusing on current state of the plants that are causing environmental and health damage.",
+      "The term 'existing' sets the stage by highlighting the plants that have caused the damage cited by residents, framing the situation.",
+    ]
+  },
+  {
+    "trigger_word": "plans",
+    "event_type": "intention",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["someone"],
+    "description": [
+      "The trigger word 'plans' is related to the proposals which involve the expansion of the plant.",
+      "The event 'plans' indicates the intention to increase the capacity of the coal-fired power plant.",
+      "The word 'plans' signals a proactive step that will likely change the status of the coal-fired power plant, and is also the spark of the protest.",
+    ]
+  },
+  {
+    "trigger_word": "plan",
+    "event_type": "intention",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents"],
+    "description": [
+      "The trigger word 'plan' refers to the proposal for expansion which generated a negative response from residents.",
+      "The event 'plan' is the subject of the residents' opposition.",
+      "The term 'plan' is synonymous with the plans to expand the power plant.",
+    ]
+  },
+  {
+    "trigger_word": "plant",
+    "event_type": "construction",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["coal-fired power"],
+    "description": [
+      "The trigger word 'plant' indicates the location of the construction.",
+      "The event 'plant' is related to the place in which expansion is discussed.",
+      "The word 'plant' refers to the object which is the center of conflict.",
+    ]
+  },
+  {
+    "trigger_word": "protests",
+    "event_type": "demonstration",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents"],
+    "description": [
+      "The trigger word 'protests' identifies the public actions taken in response to the plans for expansion.",
+      "The event 'protests' illustrates the community's collective opposition to the power plant expansion.",
+      "The term 'protests' denotes a form of public expression that challenges or resists the plans for the plant's expansion.",
+    ]
+  },
+  {
+    "trigger_word": "ignited",
+    "event_type": "initiation",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents"],
+    "description": [
+      "The trigger word 'ignited' signifies the start or triggering of the protests.",
+      "The event 'ignited' emphasizes the role of the expansion plans in triggering the community's demonstrations.",
+      "The verb 'ignited' emphasizes the speed and intensity with which the plan started the protest.",
+    ]
+  },
+  {
+    "trigger_word": "expand",
+    "event_type": "increase",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["coal-fired power plant"],
+    "description": [
+      "The trigger word 'expand' highlights the change in size or capacity being proposed.",
+      "The event 'expand' is the core of the plans in the town.",
+      "The word 'expand' is the key to describe the plan in the town.",
+    ]
+  },
+  {
+    "trigger_word": "opposed",
+    "event_type": "opposition",
+    "event_time": None,
+    "event_location": "town",
+    "event_participants": ["residents", "plans"],
+    "description": [
+      "The trigger word 'opposed' signifies the resistance of residents to the expansion plan.",
+      "The event 'opposed' highlights the residents' disagreement with the plans.",
+      "The verb 'opposed' indicates the residents' negative view regarding the expansion of the power plant.",
+    ]
+  }
+]
+``` | Text: protests were ignited over plans to expand a coal-fired power plant in the town — a plan that residents opposed , arguing that existing coal-fired plants had caused environmental and health damage .
+2025-04-25 21:27:58.907 | ERROR    | extractor.llm:extract_response:186 - [EXTRACT RESPONSE] No events found in the response | Text: ```json
+{
+    "trigger_word": "events",
+    "event_type": "competition",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["professional players"],
+    "description": [
+        "The trigger word 'events' refers to a series of competitions or matches that are scheduled to take place.",
+        "The event 'events' in the context indicates the organized matches of different categories like singles, doubles, and mixed doubles.",
+        "The event 'events' involves professional players participating in different formats of the game."
+    ]
+}
+```
+2025-04-25 21:27:58.910 | ERROR    | extractor.llm:extract_event2:334 - [EXTRACT EVENT 2] Failed to extract event list from response: ```json
+{
+    "trigger_word": "events",
+    "event_type": "competition",
+    "event_time": None,
+    "event_location": None,
+    "event_participants": ["professional players"],
+    "description": [
+        "The trigger word 'events' refers to a series of competitions or matches that are scheduled to take place.",
+        "The event 'events' in the context indicates the organized matches of different categories like singles, doubles, and mixed doubles.",
+        "The event 'events' involves professional players participating in different formats of the game."
+    ]
+}
+``` | Text: it consisted of events for professional players in singles , doubles and mixed doubles play .
+2025-04-25 21:28:22.441 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-25 21:28:22.443 | INFO     | extractor.consumer:consume:203 - [FINISHED] Finished consuming 275/280 items with 5/280 remained items.
+2025-04-25 21:28:22.443 | INFO     | extractor.consumer:consume:214 - [FINISHED] Really processed 171/280 items with 0.00% event list are added | AVG added events: 0.00 | AVG added attributes: 17.73
+2025-04-25 21:28:23.186 | INFO     | __main__:run:90 - [FINISHED] Processing 275/280 item, remaning 5/280 in 257.46 seconds
+2025-04-25 21:28:23.187 | INFO     | __main__:run:91 - [FINISHED] BLEU: 1.0000 | Precision: 0.9545 | Recall: 0.9675 | F1: 0.9571
+2025-04-25 21:28:23.188 | INFO     | __main__:run:92 - [SAVE FILE] All item saved to output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-25 21:28:23.189 | INFO     | extractor.consumer:resume_threads:74 - [RESUME] All threads resumed
+2025-04-25 21:28:24.204 | INFO     | extractor.consumer:stop_threads:63 - [STOP] All threads stopped
+2025-04-25 21:28:24.205 | INFO     | __main__:run:132 - [FINISHED] All items processed and saved to output/des4

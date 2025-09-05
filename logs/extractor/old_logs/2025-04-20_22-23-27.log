@@ -1,0 +1,856 @@
+2025-04-20 22:23:27.946 | INFO     | __main__:<module>:159 - [INFO] Arguments:
+2025-04-20 22:23:27.946 | INFO     | __main__:<module>:160 - Input root: data/data_text
+2025-04-20 22:23:27.947 | INFO     | __main__:<module>:161 - Output root: output/des2
+2025-04-20 22:23:27.947 | INFO     | __main__:<module>:162 - Datasets: ['MAVEN', 'ACE']
+2025-04-20 22:23:27.948 | INFO     | __main__:<module>:163 - Model: gemini-2.0-flash-lite
+2025-04-20 22:23:27.948 | INFO     | __main__:<module>:164 - Candidate: 1
+2025-04-20 22:23:27.948 | INFO     | __main__:<module>:165 - Num try: 3
+2025-04-20 22:23:27.949 | INFO     | __main__:<module>:166 - Max consecutive 429 error: 4
+2025-04-20 22:23:27.949 | INFO     | __main__:<module>:167 - Max num threads: 12
+2025-04-20 22:23:27.950 | INFO     | __main__:<module>:168 - Resume: True
+2025-04-20 22:23:27.950 | INFO     | __main__:<module>:169 - Convert test: False
+2025-04-20 22:23:27.950 | INFO     | __main__:<module>:170 - [INFO] Start processing...
+2025-04-20 22:23:47.417 | INFO     | extractor.consumer:__init__:41 - [INFO] Found 5 valid extractors
+2025-04-20 22:23:49.422 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:23:49.425 | INFO     | extractor.consumer:__init__:48 - [START] Start 5 threads
+2025-04-20 22:23:49.426 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:23:49.427 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:23:49.428 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-20 22:23:49.499 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:23:49.502 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:23:49.503 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:23:49.505 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:23:52.924 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.. | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-20 22:23:53.458 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 're-captured' not found | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.. | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:23:55.418 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 're-conquest' not found | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.. | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:23:59.672 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 3 got error: Trigger word 're-captured' not found | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.. | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:23:59.675 | ERROR    | extractor.consumer:worker:143 - [FAIL] Worker 3 fail to process event list: [{'event_type': 'military action', 'trigger_word': 'expedition', 'event_time': 'july 1099', 'event_location': 'holy land', 'event_participants': ['frankish nobles'], 'description': 'the trigger word expedition refers to a journey or voyage undertaken by a group of people with a particular purpose, in this case, military action'}, {'event_type': 'military action', 'trigger_word': 're-captured', 'event_time': None, 'event_location': 'anatolia', 'event_participants': ['frankish nobles'], 'description': 'the trigger word re-captured refers to the event of retaking control of a place or person'}, {'event_type': 'military action', 'trigger_word': 'conquer', 'event_time': None, 'event_location': 'holy land', 'event_participants': ['frankish nobles'], 'description': 'the trigger word conquer refers to the event of taking control of a place or people through military force.'}, {'event_type': 'military action', 'trigger_word': 'fallen', 'event_time': '7th century', 'event_location': 'holy land', 'event_participants': ['islamic expansion'], 'description': 'the trigger word fallen refers to the event of losing control of a place or person'}, {'event_type': 'military action', 'trigger_word': 're-conquest', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ['frankish nobles'], 'description': 'the trigger word re-conquest refers to the event of retaking control of a place by military force'}, {'event_type': 'establishment', 'trigger_word': 'establishment', 'event_time': 'july 1099', 'event_location': 'kingdom of jerusalem', 'event_participants': ['frankish nobles'], 'description': 'the trigger word establishment refers to the event of creating something new, in this case, the kingdom of jerusalem'}] | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:24:02.599 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:24:02.602 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:24:02.611 | INFO     | __main__:run:85 - [FINISHED] Processing 279/280 item, remaning 1/280 in 13.19 seconds
+2025-04-20 22:24:02.612 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-20 22:24:02.613 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:24:02.614 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:24:02.615 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-20 22:24:02.647 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:24:02.649 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:24:02.650 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:24:02.652 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:24:54.718 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 're-established' not found | Text: the unexpected fighting ability of the newly re - established u. s. navy, which concentrated on attacking the french west indian privateers, together with the growing weaknesses and final overthrow of the ruling french directory, led foreign minister charles maurice de talleyrand - perigord ( better known as talleyrand ) to reopen negotiations with the us.. | Text: the unexpected fighting ability of the newly re - established u. s. navy, which concentrated on attacking the french west indian privateers, together with the growing weaknesses and final overthrow of the ruling french directory, led foreign minister charles maurice de talleyrand - perigord ( better known as talleyrand ) to reopen negotiations with the us.
+2025-04-20 22:24:57.697 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: Trigger word 're-captured' not found | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.. | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:25:01.704 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: Trigger word 're-captured' not found | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.. | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:25:22.130 | ERROR    | extractor.consumer:worker:143 - [FAIL] Worker 2 fail to process event list: [{'event_type': 'military_action', 'trigger_word': 'expedition', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ['frankish nobles'], 'description': 'the trigger word expedition refers to a journey undertaken by a group of people with a specific purpose, often military in nature.'}, {'event_type': 'military_action', 'trigger_word': 're-captured', 'event_time': None, 'event_location': 'anatolia', 'event_participants': ['frankish nobles'], 'description': 'the trigger word re-captured signifies the act of retaking control of a place or person.'}, {'event_type': 'military_action', 'trigger_word': 'conquer', 'event_time': None, 'event_location': 'holy land ( the levant )', 'event_participants': ['frankish nobles'], 'description': 'the trigger word conquer describes the action of taking control of a country or territory through military force.'}, {'event_type': 'military_action', 'trigger_word': 'fallen', 'event_time': '7th century', 'event_location': 'holy land ( the levant )', 'event_participants': ['islamic expansion'], 'description': 'the trigger word fallen signifies a loss of control or possession.'}, {'event_type': 'military_action', 'trigger_word': 'culminated', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ['frankish nobles'], 'description': 'the trigger word culminated indicates the climax or the highest point of the events.'}, {'event_type': 'military_action', 'trigger_word': 're-conquest', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ['frankish nobles'], 'description': 'the trigger word re-conquest signifies the act of taking back control of an area by military force.'}, {'event_type': 'establishment', 'trigger_word': 'establishment', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ['frankish nobles'], 'description': 'the trigger word establishment refers to the act of creating or setting up something.'}, {'event_type': 'kingdom creation', 'trigger_word': 'establishment', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ['frankish nobles'], 'description': 'the trigger word establishment refers to the act of creating or setting up something.'}] | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:25:29.945 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 4 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.. | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-20 22:25:32.367 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 4 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.. | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-20 22:25:34.921 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 4 got error: Trigger word 'blow up' not found | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.. | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-20 22:25:34.923 | ERROR    | extractor.consumer:worker:143 - [FAIL] Worker 4 fail to process event list: [{'event_type': 'motion', 'trigger_word': 'floating', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word floating refers to the event where an object is moving upwards through the air, not touching the ground.'}, {'event_type': 'appearance', 'trigger_word': 'appear', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word appear refers to the event of becoming visible or noticeable.'}, {'event_type': 'motion', 'trigger_word': 'aim', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word aim refers to the event of directing a weapon at a target.'}, {'event_type': 'motion', 'trigger_word': 'shoot', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'rockets', 'guitar'], 'description': 'the trigger word shoot refers to the event of propelling something at a target.'}, {'event_type': 'destruction', 'trigger_word': 'blow up', 'event_time': None, 'event_location': None, 'event_participants': ['he', 'guitar'], 'description': 'the trigger word blow up refers to the event of causing an object to explode and be destroyed.'}] | Text: as it was floating upward, he would appear with another guitar, aim the neck at the floating guitar, shoot the rockets, and blow it up.
+2025-04-20 22:25:37.551 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:25:37.553 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:25:37.562 | INFO     | __main__:run:85 - [FINISHED] Processing 238/240 item, remaning 2/240 in 94.95 seconds
+2025-04-20 22:25:37.564 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-20 22:25:37.572 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:25:37.573 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:25:37.574 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-20 22:25:37.658 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:25:37.662 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:25:37.663 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:25:37.664 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:26:08.961 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:26:08.963 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:26:08.971 | INFO     | __main__:run:85 - [FINISHED] Processing 280/280 item, remaning 0/280 in 31.40 seconds
+2025-04-20 22:26:08.973 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-20 22:26:08.974 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:26:08.976 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:26:08.978 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-20 22:26:09.006 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:26:09.008 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:26:09.011 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:26:09.012 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:26:18.491 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 4 got error: Trigger word 're-location' not found | Text: the lead - up to these paralympics were met with financial shortcomings attributed to tepid sponsor interest and ticket sales, which resulted in cuts to volunteer staffing and transport, the re - location of events and the partial deconstruction of the deodoro venue cluster.. | Text: the lead - up to these paralympics were met with financial shortcomings attributed to tepid sponsor interest and ticket sales, which resulted in cuts to volunteer staffing and transport, the re - location of events and the partial deconstruction of the deodoro venue cluster.
+2025-04-20 22:26:21.449 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 4 got error: Trigger word 're-location' not found | Text: the lead - up to these paralympics were met with financial shortcomings attributed to tepid sponsor interest and ticket sales, which resulted in cuts to volunteer staffing and transport, the re - location of events and the partial deconstruction of the deodoro venue cluster.. | Text: the lead - up to these paralympics were met with financial shortcomings attributed to tepid sponsor interest and ticket sales, which resulted in cuts to volunteer staffing and transport, the re - location of events and the partial deconstruction of the deodoro venue cluster.
+2025-04-20 22:26:24.168 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 4 got error: Trigger word 're-location' not found | Text: the lead - up to these paralympics were met with financial shortcomings attributed to tepid sponsor interest and ticket sales, which resulted in cuts to volunteer staffing and transport, the re - location of events and the partial deconstruction of the deodoro venue cluster.. | Text: the lead - up to these paralympics were met with financial shortcomings attributed to tepid sponsor interest and ticket sales, which resulted in cuts to volunteer staffing and transport, the re - location of events and the partial deconstruction of the deodoro venue cluster.
+2025-04-20 22:26:24.170 | ERROR    | extractor.consumer:worker:143 - [FAIL] Worker 4 fail to process event list: [{'event_type': 'meeting', 'trigger_word': 'met', 'event_time': None, 'event_location': None, 'event_participants': None, 'description': 'the trigger word met refers to the event where something or someone was encountered, marking the occurrence of a situation or interaction'}, {'event_type': 'cutting', 'trigger_word': 'cuts', 'event_time': None, 'event_location': None, 'event_participants': None, 'description': 'the trigger word cuts refers to the event of reducing something'}, {'event_type': 'relocation', 'trigger_word': 're-location', 'event_time': None, 'event_location': None, 'event_participants': None, 'description': 'the trigger word re-location refers to the event of moving events to another place'}, {'event_type': 'deconstruction', 'trigger_word': 'deconstruction', 'event_time': None, 'event_location': 'deodoro venue cluster', 'event_participants': None, 'description': 'the trigger word deconstruction refers to the event of dismantling or taking something apart'}] | Text: the lead - up to these paralympics were met with financial shortcomings attributed to tepid sponsor interest and ticket sales, which resulted in cuts to volunteer staffing and transport, the re - location of events and the partial deconstruction of the deodoro venue cluster.
+2025-04-20 22:26:38.259 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:26:38.261 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:26:38.269 | INFO     | __main__:run:85 - [FINISHED] Processing 239/240 item, remaning 1/240 in 29.30 seconds
+2025-04-20 22:26:38.270 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-20 22:26:38.271 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:26:38.272 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:26:38.272 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-20 22:26:38.323 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:26:38.341 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:26:38.344 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:26:38.349 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:28:51.589 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 1 got error: Trigger word 're-intensified' not found | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.. | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.
+2025-04-20 22:29:14.200 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 1 got error: Trigger word 're-intensified' not found | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.. | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.
+2025-04-20 22:29:14.202 | ERROR    | extractor.consumer:worker:143 - [FAIL] Worker 1 fail to process event list: [{'event_type': 'development', 'trigger_word': 'developed', 'event_time': 'may 9', 'event_location': None, 'event_participants': ['kesiny'], 'description': 'the trigger word developed indicates the process of something coming into existence or growing.'}, {'event_type': 'intensification', 'trigger_word': 're-intensified', 'event_time': 'may 9', 'event_location': None, 'event_participants': ['kesiny'], 'description': 'the trigger word re-intensified refers to the increase in the intensity of something, in this case, the tropical cyclone.'}, {'event_type': 'striking', 'trigger_word': 'striking', 'event_time': None, 'event_location': 'madagascar', 'event_participants': ['kesiny'], 'description': 'the trigger word striking indicates the action of the cyclone hitting or impacting madagascar.'}] | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.
+2025-04-20 22:29:14.988 | ERROR    | extractor.llm:extract_response:96 - [EXTRACT RESPONSE] No events found in the response.
+2025-04-20 22:29:14.992 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+    # Event 1
+    event1 = {
+        "event_type": "attack",
+        "trigger_word": "attacking",
+        "event_time": "that evening",
+        "event_location": "australian southern flank",
+        "event_participants": ["kpa", "d company 3 rar"],
+        "description": "The trigger word 'attacking' indicates a military action where one force initiates an offensive against another."
+    }
+    events.append(event1)
+
+    # Event 2
+    event2 = {
+        "event_type": "reinforcement",
+        "trigger_word": "reinforced",
+        "event_time": "that evening",
+        "event_location": None,
+        "event_participants": ["kpa"],
+        "description": "The trigger word 'reinforced' indicates that the kpa were strengthened, possibly by additional troops or resources."
+    }
+    events.append(event2)
+
+    # Event 3
+    event3 = {
+        "event_type": "penetration",
+        "trigger_word": "penetrating",
+        "event_time": "that evening",
+        "event_location": "perimeter",
+        "event_participants": ["kpa", "d company 3 rar"],
+        "description": "The trigger word 'penetrating' suggests the kpa breached the defensive perimeter of the australian forces."
+    }
+    events.append(event3)
+
+    return events
+
+text = "that evening the kpa were strongly reinforced, attacking the australian southern flank manned by d company 3 rar, and partially penetrating their perimeter."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+ | Text: that evening the kpa were strongly reinforced, attacking the australian southern flank manned by d company 3 rar, and partially penetrating their perimeter.
+2025-04-20 22:29:15.009 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range | Text: that evening the kpa were strongly reinforced, attacking the australian southern flank manned by d company 3 rar, and partially penetrating their perimeter.
+2025-04-20 22:29:44.986 | ERROR    | extractor.llm:extract_response:96 - [EXTRACT RESPONSE] No events found in the response.
+2025-04-20 22:29:44.987 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: "led" - Leadership change
+    if "led" in text.lower():
+        trigger_index = text.lower().find("led")
+        event_participants = []
+        event_location = None
+        event_time = None
+        description = "The trigger word led refers to the event of guiding or directing a team or organization."
+
+        # Extract event participants: Identifying the teams
+        parts = text[:trigger_index].split()
+        if "monaco" in text.lower():
+            event_participants.append("monaco")
+        if "porto" in text.lower():
+            event_participants.append("porto")
+
+        event = {
+            "event_type": "leadership change",
+            "trigger_word": "led",
+            "event_time": event_time,
+            "event_location": event_location,
+            "event_participants": event_participants,
+            "description": description,
+        }
+        events.append(event)
+
+    # Event 2: "left" - Departure
+    if "left" in text.lower():
+        trigger_index = text.lower().find("left")
+        event_participants = ["Jose Mourinho"]
+        event_location = "Porto" # Assuming where Jose Mourinho left from.
+        event_time = "After the final" #When did the event take place?
+        description = "The trigger word left refers to the event of departing from a place or position."
+        event = {
+            "event_type": "departure",
+            "trigger_word": "left",
+            "event_time": event_time,
+            "event_location": event_location,
+            "event_participants": event_participants,
+            "description": description,
+        }
+        events.append(event)
+
+    return events
+
+text = "both teams were considered underdogs in the competition before the final stages and were led by young managers : monaco had former france national football team star didier deschamps and porto were led by rising star jose mourinho, who left the team for chelsea after the final."
+events = extract_events(text)
+print(f"The events are: {events}")
+``` | Text: both teams were considered underdogs in the competition before the final stages and were led by young managers : monaco had former france national football team star didier deschamps and porto were led by rising star jose mourinho, who left the team for chelsea after the final.
+2025-04-20 22:29:44.998 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 3 got error: list index out of range | Text: both teams were considered underdogs in the competition before the final stages and were led by young managers : monaco had former france national football team star didier deschamps and porto were led by rising star jose mourinho, who left the team for chelsea after the final.
+2025-04-20 22:31:10.701 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:31:10.703 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:31:10.713 | INFO     | __main__:run:85 - [FINISHED] Processing 279/280 item, remaning 1/280 in 272.44 seconds
+2025-04-20 22:31:10.714 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-20 22:31:10.717 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:31:10.717 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:31:10.718 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-20 22:31:10.753 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:31:10.755 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:31:10.758 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:31:10.759 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:31:47.145 | ERROR    | extractor.llm:extract_response:96 - [EXTRACT RESPONSE] No events found in the response.
+2025-04-20 22:31:47.148 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+    
+    # Event 1: Deportation
+    if "deported" in text:
+        event = {
+            "event_type": "deportation",
+            "trigger_word": "deported",
+            "event_time": "summer 1942",
+            "event_location": "Warsaw ghetto",
+            "event_participants": ["jews"],
+            "description": "The trigger word deported refers to the forced removal of people from a place."
+        }
+        events.append(event)
+
+    # Event 2: Murder
+    if "murdered" in text:
+        event = {
+            "event_type": "murder",
+            "trigger_word": "murdered",
+            "event_time": "summer 1942",
+            "event_location": "Treblinka",
+            "event_participants": ["jews"],
+            "description": "The trigger word murdered refers to the event where someone is killed unlawfully."
+        }
+        events.append(event)
+        
+    # Event 3: Building
+    if "build" in text:
+        event = {
+            "event_type": "building",
+            "trigger_word": "build",
+            "event_time": None,
+            "event_location": "ghetto",
+            "event_participants": ["jews"],
+            "description": "The trigger word build refers to the event of constructing bunkers."
+        }
+        events.append(event)
+
+    # Event 4: Smuggling
+    if "smuggle" in text:
+        event = {
+            "event_type": "smuggling",
+            "trigger_word": "smuggle",
+            "event_time": None,
+            "event_location": "ghetto",
+            "event_participants": ["jews"],
+            "description": "The trigger word smuggle refers to the act of illegally bringing weapons and explosives into the ghetto."
+        }
+        events.append(event)
+
+    return events
+    
+text = "after the grossaktion warsaw of summer 1942, in which more than a quarter of a million jews were deported from the ghetto to treblinka and murdered, the remaining jews began to build bunkers and smuggle weapons and explosives into the ghetto."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+ | Text: after the grossaktion warsaw of summer 1942, in which more than a quarter of a million jews were deported from the ghetto to treblinka and murdered, the remaining jews began to build bunkers and smuggle weapons and explosives into the ghetto.
+2025-04-20 22:31:47.162 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range | Text: after the grossaktion warsaw of summer 1942, in which more than a quarter of a million jews were deported from the ghetto to treblinka and murdered, the remaining jews began to build bunkers and smuggle weapons and explosives into the ghetto.
+2025-04-20 22:33:17.387 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 'attacked' not found | Text: after negotiations broke down in 1904, the japanese navy opened hostilities by attacking the russian eastern fleet at port arthur, china, in a surprise attack.. | Text: after negotiations broke down in 1904, the japanese navy opened hostilities by attacking the russian eastern fleet at port arthur, china, in a surprise attack.
+2025-04-20 22:33:23.524 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 4 got error: Trigger word 'became' not found | Text: after the attack at mers - el - kebir and the battle of dakar, french aircraft raided gibraltar in retaliation and marshal philippe petain, who had become the prime minister of france on 16 june, severed diplomatic relations with the united kingdom.. | Text: after the attack at mers - el - kebir and the battle of dakar, french aircraft raided gibraltar in retaliation and marshal philippe petain, who had become the prime minister of france on 16 june, severed diplomatic relations with the united kingdom.
+2025-04-20 22:33:47.934 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 4 got error: Trigger word 'became' not found | Text: after the attack at mers - el - kebir and the battle of dakar, french aircraft raided gibraltar in retaliation and marshal philippe petain, who had become the prime minister of france on 16 june, severed diplomatic relations with the united kingdom.. | Text: after the attack at mers - el - kebir and the battle of dakar, french aircraft raided gibraltar in retaliation and marshal philippe petain, who had become the prime minister of france on 16 june, severed diplomatic relations with the united kingdom.
+2025-04-20 22:33:47.935 | ERROR    | extractor.consumer:worker:143 - [FAIL] Worker 4 fail to process event list: [{'event_type': 'attack', 'trigger_word': 'attack', 'event_time': None, 'event_location': 'mers - el - kebir', 'event_participants': None, 'description': 'the trigger word attack refers to a violent act intended to cause damage or injury'}, {'event_type': 'battle', 'trigger_word': 'battle', 'event_time': None, 'event_location': 'dakar', 'event_participants': None, 'description': 'the trigger word battle refers to a sustained fight between armed forces'}, {'event_type': 'raid', 'trigger_word': 'raided', 'event_time': None, 'event_location': 'gibraltar', 'event_participants': ['french aircraft'], 'description': 'the trigger word raided refers to a sudden attack on a place or organization'}, {'event_type': 'becoming', 'trigger_word': 'became', 'event_time': '16 june', 'event_location': None, 'event_participants': ['marshal philippe petain'], 'description': 'the trigger word became indicates the transformation or change in the state of a person.'}, {'event_type': 'severing', 'trigger_word': 'severed', 'event_time': '16 june', 'event_location': None, 'event_participants': ['marshal philippe petain', 'the united kingdom'], 'description': 'the trigger word severed refers to the termination of a relationship or connection.'}] | Text: after the attack at mers - el - kebir and the battle of dakar, french aircraft raided gibraltar in retaliation and marshal philippe petain, who had become the prime minister of france on 16 june, severed diplomatic relations with the united kingdom.
+2025-04-20 22:34:27.263 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 4 got error: Trigger word 're-intensified' not found | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.. | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.
+2025-04-20 22:34:30.030 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 4 got error: Trigger word 're-intensified' not found | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.. | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.
+2025-04-20 22:34:30.032 | ERROR    | extractor.consumer:worker:143 - [FAIL] Worker 4 fail to process event list: [{'event_type': 'development', 'trigger_word': 'developed', 'event_time': 'may 9', 'event_location': None, 'event_participants': ['kesiny'], 'description': 'the trigger word developed indicates the formation or evolution of something, in this case, an eye.'}, {'event_type': 'intensification', 'trigger_word': 're-intensified', 'event_time': 'may 9', 'event_location': None, 'event_participants': ['kesiny'], 'description': 'the trigger word re-intensified refers to the event of becoming more intense again.'}, {'event_type': 'striking', 'trigger_word': 'striking', 'event_time': None, 'event_location': 'madagascar', 'event_participants': ['kesiny', 'madagascar'], 'description': 'the trigger word striking refers to the event of hitting or impacting something or someone'}] | Text: however, kesiny developed an eye and re - intensified into a tropical cyclone on may 9, reaching peak winds of before striking madagascar about southeast of antsiranana.
+2025-04-20 22:35:19.191 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:35:19.194 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:35:19.204 | INFO     | __main__:run:85 - [FINISHED] Processing 238/240 item, remaning 2/240 in 248.49 seconds
+2025-04-20 22:35:19.206 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-20 22:35:19.207 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:35:19.208 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:35:19.210 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-20 22:35:19.297 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:35:19.306 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:35:19.315 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:35:19.317 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:35:24.663 | ERROR    | extractor.llm:extract_response:96 - [EXTRACT RESPONSE] No events found in the response.
+2025-04-20 22:35:24.665 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+    # Event 1
+    event1 = {
+        "event_type": "transport",
+        "trigger_word": "brought",
+        "event_time": None,
+        "event_location": "ile de france",
+        "event_participants": ["indiamen"],
+        "description": "The trigger word brought refers to the event of transporting something to a place."
+    }
+    events.append(event1)
+    # Event 2
+    event2 = {
+        "event_type": "catastrophe",
+        "trigger_word": "destroyed",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["venus"],
+        "description": "The trigger word destroyed refers to the event of something being ruined or damaged."
+    }
+    events.append(event2)
+    # Event 3
+    event3 = {
+        "event_type": "scattering",
+        "trigger_word": "scattered",
+        "event_time": None,
+        "event_location": None,
+        "event_participants": ["the squadron", "its prizes"],
+        "description": "The trigger word scattered refers to the event of dispersing something in different directions."
+    }
+    events.append(event3)
+    # Event 4
+    event4 = {
+        "event_type": "recapture",
+        "trigger_word": "recapture",
+        "event_time": None,
+        "event_location": "french island",
+        "event_participants": ["british frigate", "windham"],
+        "description": "The trigger word recapture refers to the event of taking possession of something again, especially by force."
+    }
+    events.append(event4)
+
+    return events
+
+text = "only two of the captured indiamen were successfully brought to ile de france : the same storm that nearly destroyed ` ` venus ' ' scattered the squadron and its prizes, allowing a patrolling british frigate to recapture ` ` windham ' ' just a few miles from the french island."
+extracted_events = extract_events(text)
+print(f"The events are: {extracted_events}")
+```
+ | Text: only two of the captured indiamen were successfully brought to ile de france : the same storm that nearly destroyed ` ` venus ' ' scattered the squadron and its prizes, allowing a patrolling british frigate to recapture ` ` windham ' ' just a few miles from the french island.
+2025-04-20 22:35:24.671 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: only two of the captured indiamen were successfully brought to ile de france : the same storm that nearly destroyed ` ` venus ' ' scattered the squadron and its prizes, allowing a patrolling british frigate to recapture ` ` windham ' ' just a few miles from the french island.
+2025-04-20 22:38:55.166 | ERROR    | extractor.llm:extract_response:96 - [EXTRACT RESPONSE] No events found in the response.
+2025-04-20 22:38:55.167 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+    # Event 1
+    event1 = {
+        "event_type": "celebration",
+        "trigger_word": "celebrated",
+        "event_time": "2015",
+        "event_location": "Toronto",
+        "event_participants": ["pan american games"],
+        "description": "The trigger word 'celebrated' indicates the occurrence of a festive event, such as a ceremony or a celebration. It refers to the pan american games."
+    }
+    events.append(event1)
+
+    return events
+
+text = "the 2015 pan american games ( ), officially the xvii pan american games and commonly known as the toronto 2015 pan - am games ( ), were a major international multi - sport event celebrated in the tradition of the pan american games, as governed by pan american sports organization ( paso )."
+events = extract_events(text)
+print(f"The events are: {events}")
+``` | Text: the 2015 pan american games ( ), officially the xvii pan american games and commonly known as the toronto 2015 pan - am games ( ), were a major international multi - sport event celebrated in the tradition of the pan american games, as governed by pan american sports organization ( paso ).
+2025-04-20 22:38:55.171 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: the 2015 pan american games ( ), officially the xvii pan american games and commonly known as the toronto 2015 pan - am games ( ), were a major international multi - sport event celebrated in the tradition of the pan american games, as governed by pan american sports organization ( paso ).
+2025-04-20 22:39:43.368 | ERROR    | extractor.llm:extract_response:96 - [EXTRACT RESPONSE] No events found in the response.
+2025-04-20 22:39:43.370 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+    import re
+    # Event 1: fighting
+    if "fighting" in text:
+        event = {
+            "event_type": "conflict",
+            "trigger_word": "fighting",
+            "event_time": None,
+            "event_location": None,
+            "event_participants": ["anti - government rebels", "comrades"],
+            "description": "The trigger word 'fighting' indicates an act of armed conflict or engagement."
+        }
+        events.append(event)
+
+    # Event 2: pounced
+    if "pounced" in text:
+        event = {
+            "event_type": "attack",
+            "trigger_word": "pounced",
+            "event_time": None,
+            "event_location": "homes",
+            "event_participants": ["anti - government rebels", "comrades"],
+            "description": "The trigger word 'pounced' suggests a sudden attack."
+        }
+        events.append(event)
+
+    # Event 3: killed
+    if "killed" in text:
+        event = {
+            "event_type": "killing",
+            "trigger_word": "killed",
+            "event_time": None,
+            "event_location": None,
+            "event_participants": ["anti - government rebels", "women", "children"],
+            "description": "The trigger word 'killed' denotes the act of taking someone's life."
+        }
+        events.append(event)
+    
+    # Event 4: mutilating
+    if "mutilating" in text:
+        event = {
+            "event_type": "violence",
+            "trigger_word": "mutilating",
+            "event_time": None,
+            "event_location": "streets",
+            "event_participants": ["anti - government rebels", "bodies of the martyrs"],
+            "description": "The trigger word 'mutilating' suggests the act of inflicting severe damage or injury to someone's body."
+        }
+        events.append(event)
+    
+    return events
+
+text = "according to syrian media, anti - government rebels initiated the fighting when they ` ` pounced on our comrades while sleeping in their homes and killed whomever they could kill of women and children, mutilating the bodies of the martyrs in the streets, driven, like mad dogs, by their black hatred. ' '"
+events = extract_events(text)
+print(f"The events are: {events}")
+``` | Text: according to syrian media, anti - government rebels initiated the fighting when they ` ` pounced on our comrades while sleeping in their homes and killed whomever they could kill of women and children, mutilating the bodies of the martyrs in the streets, driven, like mad dogs, by their black hatred. ' '
+2025-04-20 22:39:43.374 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range | Text: according to syrian media, anti - government rebels initiated the fighting when they ` ` pounced on our comrades while sleeping in their homes and killed whomever they could kill of women and children, mutilating the bodies of the martyrs in the streets, driven, like mad dogs, by their black hatred. ' '
+2025-04-20 22:40:17.264 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:40:17.267 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:40:17.276 | INFO     | __main__:run:85 - [FINISHED] Processing 280/280 item, remaning 0/280 in 298.07 seconds
+2025-04-20 22:40:17.277 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-20 22:40:17.278 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:40:17.279 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:40:17.280 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-20 22:40:17.482 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:40:17.484 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:40:17.485 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:40:17.487 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:41:21.162 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 4 got error: 'NoneType' object is not iterable | Text: this crash killed all 346 people on board, making it the deadliest in aviation history until the 1977 tenerife airport disaster and the deadliest single - aircraft crash until the 1985 crash of japan airlines flight 123.
+2025-04-20 22:42:31.671 | ERROR    | extractor.llm:extract_response:96 - [EXTRACT RESPONSE] No events found in the response.
+2025-04-20 22:42:31.673 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: Ownership Acquisition
+    if "attained full ownership" in text:
+        event = {
+            "event_type": "ownership acquisition",
+            "trigger_word": "attained",
+            "event_time": "early june 2014",
+            "event_location": None,
+            "event_participants": ["c3", "the big day out festival"],
+            "description": "c3 acquired complete control over the big day out festival."
+        }
+        events.append(event)
+
+    # Event 2: Announcement of Cancellation
+    if "announced the cancellation" in text:
+        event = {
+            "event_type": "cancellation",
+            "trigger_word": "announced",
+            "event_time": "26 june 2014",
+            "event_location": None,
+            "event_participants": ["c3"],
+            "description": "c3 declared the cancellation of the 2015 event."
+        }
+        events.append(event)
+
+    return events
+text = "in early june 2014, c3 attained full ownership of the big day out festival and announced the cancellation of the 2015 event on 26 june 2014 with the option for the festival to return in the future left open."
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+ | Text: in early june 2014, c3 attained full ownership of the big day out festival and announced the cancellation of the 2015 event on 26 june 2014 with the option for the festival to return in the future left open.
+2025-04-20 22:42:31.678 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 4 got error: list index out of range | Text: in early june 2014, c3 attained full ownership of the big day out festival and announced the cancellation of the 2015 event on 26 june 2014 with the option for the festival to return in the future left open.
+2025-04-20 22:43:39.770 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 2 got error: Trigger word 're-intensified' not found | Text: after turning to the northeast, it re - intensified and made landfall on august 31 on the north carolina coast just below hurricane status.. | Text: after turning to the northeast, it re - intensified and made landfall on august 31 on the north carolina coast just below hurricane status.
+2025-04-20 22:43:42.052 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 2 got error: Trigger word 're-intensified' not found | Text: after turning to the northeast, it re - intensified and made landfall on august 31 on the north carolina coast just below hurricane status.. | Text: after turning to the northeast, it re - intensified and made landfall on august 31 on the north carolina coast just below hurricane status.
+2025-04-20 22:43:44.042 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 2 got error: Trigger word 're-intensified' not found | Text: after turning to the northeast, it re - intensified and made landfall on august 31 on the north carolina coast just below hurricane status.. | Text: after turning to the northeast, it re - intensified and made landfall on august 31 on the north carolina coast just below hurricane status.
+2025-04-20 22:43:44.044 | ERROR    | extractor.consumer:worker:143 - [FAIL] Worker 2 fail to process event list: [{'event_type': 'meteorology', 'trigger_word': 're-intensified', 'event_time': 'august 31', 'event_location': 'north carolina coast', 'event_participants': None, 'description': 'the trigger word re-intensified refers to the event of increasing in intensity, referring to a weather event'}] | Text: after turning to the northeast, it re - intensified and made landfall on august 31 on the north carolina coast just below hurricane status.
+2025-04-20 22:44:03.662 | ERROR    | extractor.llm:extract_response:96 - [EXTRACT RESPONSE] No events found in the response.
+2025-04-20 22:44:03.669 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: ```python
+def extract_events(text):
+    """
+    Extracts events from the given text.
+
+    Args:
+        text: The input text.
+
+    Returns:
+        A list of event dictionaries.
+    """
+    events = []
+
+    # Event 1: endorsement
+    if "endorsed" in text:
+        event = {
+            "event_type": "endorsement",
+            "trigger_word": "endorsed",
+            "event_time": "2007 – 2008",
+            "event_location": None,
+            "event_participants": ["gregory stanton", "genocide scholars"],
+            "description": "The trigger word 'endorsed' signifies approval and support for the repudiation of the Turkish government's denial of genocides."
+        }
+        events.append(event)
+
+    # Event 2: denial
+    if "denial" in text:
+        event = {
+            "event_type": "denial",
+            "trigger_word": "denial",
+            "event_time": "ninety - year",
+            "event_location": "ottoman empire",
+            "event_participants": ["turkish government"],
+            "description": "The trigger word 'denial' refers to the act of the Turkish government refusing to acknowledge the genocides committed."
+        }
+        events.append(event)
+
+    return events
+
+text = "gregory stanton, the president of the iags in 2007 – 2008 and the founder of genocide watch, endorsed the ` ` repudiation by the world ' s leading genocide scholars of the turkish government ' s ninety - year denial of the ottoman empire ' s genocides against its christian populations, including assyrians, greeks, and armenians. ' '"
+events = extract_events(text)
+print(f"The events are: {events}")
+```
+ | Text: gregory stanton, the president of the iags in 2007 – 2008 and the founder of genocide watch, endorsed the ` ` repudiation by the world ' s leading genocide scholars of the turkish government ' s ninety - year denial of the ottoman empire ' s genocides against its christian populations, including assyrians, greeks, and armenians. ' '
+2025-04-20 22:44:03.679 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 0 got error: list index out of range | Text: gregory stanton, the president of the iags in 2007 – 2008 and the founder of genocide watch, endorsed the ` ` repudiation by the world ' s leading genocide scholars of the turkish government ' s ninety - year denial of the ottoman empire ' s genocides against its christian populations, including assyrians, greeks, and armenians. ' '
+2025-04-20 22:44:05.986 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: the 2014 israel – gaza conflict also known as operation protective edge (, ` ` miv ' tza tzuk eitan ' ', lit.
+2025-04-20 22:44:05.987 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 4 got error: list index out of range | Text: the 2014 israel – gaza conflict also known as operation protective edge (, ` ` miv ' tza tzuk eitan ' ', lit.
+2025-04-20 22:44:36.742 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:44:36.744 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:44:36.753 | INFO     | __main__:run:85 - [FINISHED] Processing 239/240 item, remaning 1/240 in 259.47 seconds
+2025-04-20 22:44:36.754 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-20 22:44:36.755 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:44:36.756 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:44:36.757 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-20 22:44:36.809 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:44:36.810 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:44:36.813 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:44:36.814 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:44:40.194 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: it was the third of the four french and indian wars.
+2025-04-20 22:44:40.196 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 1/3] Worker 1 got error: list index out of range | Text: it was the third of the four french and indian wars.
+2025-04-20 22:44:40.741 | ERROR    | extractor.llm:extract_event:155 - [EXTRACT EVENT] Failed to extract event list from response: The events are: []
+ | Text: it was the third of the four french and indian wars.
+2025-04-20 22:44:40.742 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 1 got error: list index out of range | Text: it was the third of the four french and indian wars.
+2025-04-20 22:45:01.927 | ERROR    | extractor.consumer:worker:141 - [FAIL] Worker 1 cannot extract event list after 3 attempts. | Text: it was the third of the four french and indian wars.
+2025-04-20 22:47:43.178 | CRITICAL | extractor.consumer:consume:169 - [FALTAL] Consuming interrupted by user. Stopping safely...
+2025-04-20 22:47:43.179 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:02.823 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 2/3] Worker 1 got error: Trigger word 're-captured' not found | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.. | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:48:05.954 | ERROR    | extractor.consumer:worker:138 - [ERROR at ATTEMPT 3/3] Worker 1 got error: Trigger word 're-captured' not found | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.. | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:48:05.956 | ERROR    | extractor.consumer:worker:143 - [FAIL] Worker 1 fail to process event list: [{'event_type': 'military_action', 'trigger_word': 'expedition', 'event_time': 'july 1099', 'event_location': 'holy land', 'event_participants': ['frankish nobles'], 'description': 'the trigger word expedition refers to a journey or voyage undertaken by a group of people with a particular purpose, in this case, military.'}, {'event_type': 'military_action', 'trigger_word': 're-captured', 'event_time': None, 'event_location': 'anatolia', 'event_participants': ['frankish nobles'], 'description': 'the trigger word re-captured refers to the act of taking possession of something again, specifically anatolia'}, {'event_type': 'military_action', 'trigger_word': 'conquer', 'event_time': None, 'event_location': 'holy land', 'event_participants': ['frankish nobles'], 'description': 'the trigger word conquer refers to the event of taking control of a place or people by military force.'}, {'event_type': 'military_action', 'trigger_word': 'fallen', 'event_time': '7th century', 'event_location': 'holy land', 'event_participants': ['islamic expansion'], 'description': 'the trigger word fallen refers to the event where holy land was captured by islamic expansion.'}, {'event_type': 'military_action', 'trigger_word': 're-conquest', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ['frankish nobles'], 'description': 'the trigger word re-conquest refers to the event of taking control of something again, specifically jerusalem.'}, {'event_type': 'establishment', 'trigger_word': 'establishment', 'event_time': 'july 1099', 'event_location': 'jerusalem', 'event_participants': ['frankish nobles'], 'description': 'the trigger word establishment refers to the event of the creation of kingdom of jerusalem.'}] | Text: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-20 22:48:05.958 | INFO     | extractor.consumer:stop_threads:56 - [STOP] All threads stopped
+2025-04-20 22:48:05.960 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:05.969 | INFO     | __main__:run:85 - [FINISHED] Processing 159/280 item, remaning 121/280 in 209.21 seconds
+2025-04-20 22:48:05.969 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-20 22:48:05.970 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:05.971 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:05.971 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-20 22:48:06.019 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:48:06.029 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:06.044 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:06.050 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:06.052 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-20 22:48:08.060 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:08.062 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:08.070 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 2.10 seconds
+2025-04-20 22:48:08.072 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-20 22:48:08.079 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:08.082 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:08.083 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm0\ACE_5task_2way_10shot.train.jsonl...
+2025-04-20 22:48:08.158 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm0\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:48:08.165 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:08.166 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:08.168 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:08.173 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-20 22:48:10.187 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:10.189 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:10.198 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 2.12 seconds
+2025-04-20 22:48:10.200 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm0\ACE_5task_2way_10shot.train.jsonl
+2025-04-20 22:48:10.207 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:10.211 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:10.212 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm0\ACE_5task_2way_5shot.train.jsonl...
+2025-04-20 22:48:10.265 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm0\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:48:10.268 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:10.269 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:10.271 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:10.273 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-20 22:48:12.293 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:12.295 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:12.302 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 2.09 seconds
+2025-04-20 22:48:12.304 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm0\ACE_5task_2way_5shot.train.jsonl
+2025-04-20 22:48:12.307 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:12.308 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:12.314 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm0\ACE_5task_4way_10shot.train.jsonl...
+2025-04-20 22:48:12.383 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm0\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-20 22:48:12.403 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:12.419 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:12.435 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:12.445 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-20 22:48:14.473 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:14.478 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:14.555 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 2.25 seconds
+2025-04-20 22:48:14.602 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm0\ACE_5task_4way_10shot.train.jsonl
+2025-04-20 22:48:14.603 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:14.604 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:14.605 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm0\ACE_5task_4way_5shot.train.jsonl...
+2025-04-20 22:48:14.665 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm0\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-20 22:48:14.667 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:14.669 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:14.670 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:14.671 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-20 22:48:16.680 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:16.682 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:16.706 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 2.10 seconds
+2025-04-20 22:48:16.707 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm0\ACE_5task_4way_5shot.train.jsonl
+2025-04-20 22:48:16.710 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:16.711 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:16.714 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm1\ACE_5task_2way_10shot.train.jsonl...
+2025-04-20 22:48:16.786 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm1\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:48:16.787 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:16.788 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:16.789 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:16.790 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-20 22:48:18.797 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:18.799 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:18.812 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 2.10 seconds
+2025-04-20 22:48:18.814 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm1\ACE_5task_2way_10shot.train.jsonl
+2025-04-20 22:48:18.816 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:18.816 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:18.818 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm1\ACE_5task_2way_5shot.train.jsonl...
+2025-04-20 22:48:18.890 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm1\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:48:18.891 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:18.893 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:18.894 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:18.896 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-20 22:48:20.899 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:20.905 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:20.930 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 2.11 seconds
+2025-04-20 22:48:20.931 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm1\ACE_5task_2way_5shot.train.jsonl
+2025-04-20 22:48:20.931 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:20.932 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:20.932 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm1\ACE_5task_4way_10shot.train.jsonl...
+2025-04-20 22:48:21.019 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm1\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-20 22:48:21.021 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:21.022 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:21.023 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:21.024 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-20 22:48:23.035 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:23.036 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:23.063 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 2.13 seconds
+2025-04-20 22:48:23.065 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm1\ACE_5task_4way_10shot.train.jsonl
+2025-04-20 22:48:23.066 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:23.067 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:23.067 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm1\ACE_5task_4way_5shot.train.jsonl...
+2025-04-20 22:48:23.235 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm1\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-20 22:48:23.237 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:23.238 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:23.239 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:23.249 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-20 22:48:25.265 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:25.265 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:25.288 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 2.22 seconds
+2025-04-20 22:48:25.289 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm1\ACE_5task_4way_5shot.train.jsonl
+2025-04-20 22:48:25.291 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:25.294 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:25.296 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm2\ACE_5task_2way_10shot.train.jsonl...
+2025-04-20 22:48:25.338 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm2\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:48:25.340 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:25.342 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:25.345 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:25.346 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-20 22:48:27.358 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:27.361 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:27.377 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 2.09 seconds
+2025-04-20 22:48:27.379 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm2\ACE_5task_2way_10shot.train.jsonl
+2025-04-20 22:48:27.382 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:27.382 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:27.383 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm2\ACE_5task_2way_5shot.train.jsonl...
+2025-04-20 22:48:27.464 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm2\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:48:27.465 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:27.466 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:27.467 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:27.468 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-20 22:48:29.477 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:29.479 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:29.491 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 2.11 seconds
+2025-04-20 22:48:29.492 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm2\ACE_5task_2way_5shot.train.jsonl
+2025-04-20 22:48:29.493 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:29.497 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:29.501 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm2\ACE_5task_4way_10shot.train.jsonl...
+2025-04-20 22:48:29.588 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm2\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-20 22:48:29.595 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:29.597 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:29.598 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:29.617 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-20 22:48:31.621 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:31.622 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:31.649 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 2.16 seconds
+2025-04-20 22:48:31.650 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm2\ACE_5task_4way_10shot.train.jsonl
+2025-04-20 22:48:31.652 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:31.652 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:31.654 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm2\ACE_5task_4way_5shot.train.jsonl...
+2025-04-20 22:48:31.703 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm2\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-20 22:48:31.704 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:31.705 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:31.706 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:31.707 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-20 22:48:33.714 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:33.719 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:33.743 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 2.09 seconds
+2025-04-20 22:48:33.745 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm2\ACE_5task_4way_5shot.train.jsonl
+2025-04-20 22:48:33.747 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:33.748 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:33.749 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm3\ACE_5task_2way_10shot.train.jsonl...
+2025-04-20 22:48:33.807 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm3\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:48:33.817 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:33.821 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:33.832 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:33.839 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-20 22:48:35.865 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:35.867 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:35.880 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 2.13 seconds
+2025-04-20 22:48:35.881 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm3\ACE_5task_2way_10shot.train.jsonl
+2025-04-20 22:48:35.882 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:35.884 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:35.885 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm3\ACE_5task_2way_5shot.train.jsonl...
+2025-04-20 22:48:36.008 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm3\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:48:36.009 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:36.010 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:36.011 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:36.013 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-20 22:48:38.027 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:38.029 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:38.041 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 2.16 seconds
+2025-04-20 22:48:38.041 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm3\ACE_5task_2way_5shot.train.jsonl
+2025-04-20 22:48:38.043 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:38.044 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:38.045 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm3\ACE_5task_4way_10shot.train.jsonl...
+2025-04-20 22:48:38.407 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm3\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-20 22:48:38.409 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:38.410 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:38.412 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:38.413 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-20 22:48:40.423 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:40.425 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:40.453 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 2.41 seconds
+2025-04-20 22:48:40.454 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm3\ACE_5task_4way_10shot.train.jsonl
+2025-04-20 22:48:40.455 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:40.456 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:40.457 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm3\ACE_5task_4way_5shot.train.jsonl...
+2025-04-20 22:48:40.556 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm3\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-20 22:48:40.560 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:40.561 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:40.563 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:40.564 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-20 22:48:42.573 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:42.588 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:42.619 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 2.16 seconds
+2025-04-20 22:48:42.623 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm3\ACE_5task_4way_5shot.train.jsonl
+2025-04-20 22:48:42.629 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:42.632 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:42.633 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm4\ACE_5task_2way_10shot.train.jsonl...
+2025-04-20 22:48:42.893 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm4\ACE_5task_2way_10shot.train.jsonl with 280 item in 5 lines
+2025-04-20 22:48:42.894 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:42.895 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:42.896 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:42.897 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 280 items ...
+2025-04-20 22:48:44.909 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:44.910 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:44.924 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 2.29 seconds
+2025-04-20 22:48:44.926 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm4\ACE_5task_2way_10shot.train.jsonl
+2025-04-20 22:48:44.927 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:44.927 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:44.928 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm4\ACE_5task_2way_5shot.train.jsonl...
+2025-04-20 22:48:44.971 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm4\ACE_5task_2way_5shot.train.jsonl with 240 item in 5 lines
+2025-04-20 22:48:44.974 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:44.979 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:44.982 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:44.983 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 240 items ...
+2025-04-20 22:48:46.990 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:46.992 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:47.014 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 2.09 seconds
+2025-04-20 22:48:47.016 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm4\ACE_5task_2way_5shot.train.jsonl
+2025-04-20 22:48:47.018 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:47.020 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:47.024 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm4\ACE_5task_4way_10shot.train.jsonl...
+2025-04-20 22:48:47.094 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm4\ACE_5task_4way_10shot.train.jsonl with 560 item in 5 lines
+2025-04-20 22:48:47.095 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:47.096 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:47.098 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:47.099 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 560 items ...
+2025-04-20 22:48:49.109 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:49.111 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:49.139 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 2.12 seconds
+2025-04-20 22:48:49.140 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm4\ACE_5task_4way_10shot.train.jsonl
+2025-04-20 22:48:49.145 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-20 22:48:49.145 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-20 22:48:49.146 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm4\ACE_5task_4way_5shot.train.jsonl...
+2025-04-20 22:48:49.200 | INFO     | extractor.producer:produce:38 - [PRODUCING] Finished producing output/des2\ACE\perm4\ACE_5task_4way_5shot.train.jsonl with 480 item in 5 lines
+2025-04-20 22:48:49.201 | INFO     | extractor.consumer:clear_results:74 - [CLEAR] All results cleared
+2025-04-20 22:48:49.202 | INFO     | extractor.consumer:consume:154 - [CONSUMING] Start consuming.
+2025-04-20 22:48:49.204 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:49.205 | CRITICAL | extractor.consumer:consume:160 - [FATAL] No threads are running. Consuming remained 480 items ...
+2025-04-20 22:48:51.211 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 22:48:51.213 | INFO     | extractor.consumer:consume:175 - [CONSUMING] Finished consuming.
+2025-04-20 22:48:51.236 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 2.09 seconds
+2025-04-20 22:48:51.236 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des2\ACE\perm4\ACE_5task_4way_5shot.train.jsonl
+2025-04-20 22:48:51.237 | INFO     | extractor.consumer:resume_threads:67 - [RESUME] All threads resumed
+2025-04-20 22:48:51.238 | INFO     | extractor.consumer:stop_threads:56 - [STOP] All threads stopped
+2025-04-20 22:48:51.238 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to output/des2

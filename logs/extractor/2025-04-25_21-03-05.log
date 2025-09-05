@@ -1,0 +1,22 @@
+2025-04-25 21:03:05.572 | INFO     | __main__:<module>:168 - [INFO] Arguments:
+2025-04-25 21:03:05.573 | INFO     | __main__:<module>:169 - Input root: data/data_text
+2025-04-25 21:03:05.574 | INFO     | __main__:<module>:170 - Output root: output/des4
+2025-04-25 21:03:05.575 | INFO     | __main__:<module>:171 - Datasets: ['MAVEN']
+2025-04-25 21:03:05.575 | INFO     | __main__:<module>:172 - Perms: [0]
+2025-04-25 21:03:05.576 | INFO     | __main__:<module>:173 - Model: gemini-2.0-flash-lite
+2025-04-25 21:03:05.576 | INFO     | __main__:<module>:174 - Candidate: 5
+2025-04-25 21:03:05.577 | INFO     | __main__:<module>:175 - Num try: 3
+2025-04-25 21:03:05.578 | INFO     | __main__:<module>:176 - Max consecutive 429 error: 5
+2025-04-25 21:03:05.578 | INFO     | __main__:<module>:177 - Max num threads: 12
+2025-04-25 21:03:05.579 | INFO     | __main__:<module>:178 - Resume: True
+2025-04-25 21:03:05.580 | INFO     | __main__:<module>:179 - Convert test: False
+2025-04-25 21:03:05.580 | INFO     | __main__:<module>:180 - Logs dir: logs/extractor
+2025-04-25 21:03:05.581 | INFO     | __main__:<module>:181 - Gen des: True
+2025-04-25 21:03:05.582 | INFO     | __main__:<module>:182 - [INFO] Start processing...
+2025-04-25 21:03:44.702 | INFO     | extractor.consumer:__init__:48 - [INFO] Found 9 valid extractors
+2025-04-25 21:03:46.717 | INFO     | extractor.consumer:pause_threads:69 - [PAUSE] All threads paused
+2025-04-25 21:03:46.722 | INFO     | extractor.consumer:__init__:55 - [START] Start 9 threads
+2025-04-25 21:03:46.723 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-25 21:03:46.724 | INFO     | __main__:run:67 - Start processing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl to output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-25 21:03:46.725 | INFO     | __main__:run:68 - ====================================================================================================
+2025-04-25 21:03:46.726 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des4\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...

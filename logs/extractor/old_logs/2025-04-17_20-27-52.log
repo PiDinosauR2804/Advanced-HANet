@@ -1,0 +1,719 @@
+2025-04-17 20:27:52.706 | INFO     | __main__:<module>:159 - [INFO] Arguments:
+2025-04-17 20:27:52.707 | INFO     | __main__:<module>:160 - Input root: data/data_text
+2025-04-17 20:27:52.707 | INFO     | __main__:<module>:161 - Output root: output/des
+2025-04-17 20:27:52.708 | INFO     | __main__:<module>:162 - Datasets: ['MAVEN', 'ACE']
+2025-04-17 20:27:52.708 | INFO     | __main__:<module>:163 - Model: gemini-2.0-flash-lite
+2025-04-17 20:27:52.709 | INFO     | __main__:<module>:164 - Candidate: 1
+2025-04-17 20:27:52.709 | INFO     | __main__:<module>:165 - Num try: 3
+2025-04-17 20:27:52.710 | INFO     | __main__:<module>:166 - Max consecutive 429 error: 3
+2025-04-17 20:27:52.711 | INFO     | __main__:<module>:167 - Max num threads: 12
+2025-04-17 20:27:52.711 | INFO     | __main__:<module>:168 - Resume: True
+2025-04-17 20:27:52.712 | INFO     | __main__:<module>:169 - Convert test: False
+2025-04-17 20:27:52.712 | INFO     | __main__:<module>:170 - [INFO] Start processing...
+2025-04-17 20:28:23.966 | INFO     | extractor.consumer:log:53 - [INFO] Found 10 valid extractors
+2025-04-17 20:28:23.967 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:28:23.972 | INFO     | extractor.consumer:log:53 - [START] Start 10 threads
+2025-04-17 20:28:23.974 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:28:23.975 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:28:23.976 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 20:28:23.999 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 20:28:24.001 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:28:24.003 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:28:24.030 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:28:45.662 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: islamist responsibility would have had the opposite political effect, as it would have been seen as a consequence of the pp government taking spain into the iraq war, a policy extremely unpopular among spaniards.
+2025-04-17 20:28:46.473 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: this was the result of a new television deal between sanzar, the consortium of the three countries ' rugby federations that organises the tournament, and broadcasters in the sanzar countries and the united kingdom.
+2025-04-17 20:28:46.477 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 failed to process item: it is believed by many scholars that the poem, while based upon actual events and people, was created to be less of a historical account and more of a means of enshrining and lifting up the memories of the men who fought and lost their lives on the battlefield protecting their homeland, especially in the case of the english commander of the battle, byrhtnoth.
+2025-04-17 20:28:47.155 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 failed to process item: 2007 america ' s cup program and results.
+2025-04-17 20:28:47.436 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 failed to process item: it was mainly caused by disagreement on whether men should be conscripted to fight in the war, but also brought out many issues regarding relations between french canadians and english canadians.
+2025-04-17 20:28:47.663 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 failed to process item: all matches were played in malmo, lund, kristianstad, gothenburg, skovde, jonkoping, linkoping and norrkoping.
+2025-04-17 20:28:50.255 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:28:50.256 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 20:28:50.264 | INFO     | __main__:run:85 - [FINISHED] Processing 264/270 item, remaning 6/270 in 26.29 seconds
+2025-04-17 20:28:50.265 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 20:28:50.266 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:28:50.267 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:28:50.268 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 20:28:50.289 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 20:28:50.291 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:28:50.293 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:28:50.295 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:29:09.123 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 failed to process item: the venues for one day tournament were kailali and kanchanpur.
+2025-04-17 20:29:09.132 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 failed to process item: ` ` for main top 5 division, see : 2009 asian five nations ' ' the 2009 asian five nations division tournaments, known as the 2009 hsbc asian 5 nations due to the tournament ' s sponsorship by the hsbc, refer to the asian five nations divisions played within the tournament.
+2025-04-17 20:29:09.711 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 failed to process item: ireland had not participated in any equivalent conferences since 1932.
+2025-04-17 20:29:09.737 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: it is run by a group of volunteers as a non - profit organization and a registered charity.
+2025-04-17 20:29:09.995 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the arbih and hvo in jajce were not only outnumbered and outgunned, but their units were also plagued by inadequate staff work, compounded by lack of coordination between separate command and control structures maintained by the two forces throughout the battle.
+2025-04-17 20:29:10.186 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 failed to process item: the symbolic importance of this battle has made it one of the best - known battles in the history of the british isles and a key part of the folklore of the orange order.
+2025-04-17 20:29:30.077 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: the purpose of the show is to highlight up and coming mma fighters.
+2025-04-17 20:29:30.811 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: other scholars, such as hilmar kaiser, donald bloxham and taner akcam have differing opinions with regards to the extent of governmental involvement and systematic nature in the killings, asserting a less systematic policy and different treatment in comparison to the armenians.
+2025-04-17 20:29:30.823 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 failed to process item: ` ` for main top 5 division, see : 2010 asian five nations ' ' the 2010 asian five nations division tournaments, known as the 2010 hsbc asian 5 nations due to the tournament ' s sponsorship by the hsbc, refer to the asian five nations divisions played within the tournament.
+2025-04-17 20:29:31.763 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: 2007 america ' s cup program and results.
+2025-04-17 20:29:31.782 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: islamist responsibility would have had the opposite political effect, as it would have been seen as a consequence of the pp government taking spain into the iraq war, a policy extremely unpopular among spaniards.
+2025-04-17 20:29:32.036 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 failed to process item: most of the evacuees went to hotels or stayed with friends or relatives, causing an increase in business across southeastern virginia, where effects were minimal.
+2025-04-17 20:29:33.587 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: the match was contested by the two winning finals series semi - finalists, brisbane roar and western sydney wanderers, who finished first and second respectively in the 2013 – 14 a - league regular season.
+2025-04-17 20:29:33.595 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 failed to process item: this was the result of a new television deal between sanzar, the consortium of the three countries ' rugby federations that organises the tournament, and broadcasters in the sanzar countries and the united kingdom.
+2025-04-17 20:29:34.524 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: the poor state of the roads and rail lines in algeria meant that allied forces faced difficult logistic challenges which enabled the axis to prolong a defence.
+2025-04-17 20:29:34.730 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:29:34.730 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 20:29:34.738 | INFO     | __main__:run:85 - [FINISHED] Processing 225/240 item, remaning 15/240 in 44.47 seconds
+2025-04-17 20:29:34.739 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 20:29:34.740 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:29:34.741 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:29:34.742 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 20:29:34.767 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 20:29:34.768 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:29:34.770 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:29:34.772 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:29:52.484 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 failed to process item: all matches were played in malmo, lund, kristianstad, gothenburg, skovde, jonkoping, linkoping and norrkoping.
+2025-04-17 20:29:54.215 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the venues for one day tournament were kailali and kanchanpur.
+2025-04-17 20:29:54.470 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 failed to process item: all matches were played in woodlands, singapore.
+2025-04-17 20:29:54.953 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:29:54.954 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 20:29:54.963 | INFO     | __main__:run:85 - [FINISHED] Processing 278/281 item, remaning 3/281 in 20.22 seconds
+2025-04-17 20:29:54.964 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 20:29:54.965 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:29:54.966 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:29:54.967 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 20:29:54.985 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 20:29:54.988 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:29:54.992 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:29:54.994 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:29:55.293 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 failed to process item: the purpose of the show is to highlight up and coming mma fighters.
+2025-04-17 20:29:55.638 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: ireland had not participated in any equivalent conferences since 1932.
+2025-04-17 20:29:55.905 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: the polish - russian war of 1792 ( also, war of the second partition, and in polish sources, war in defence of the constitution ( ) ) was fought between the polish – lithuanian commonwealth on one side, and the targowica confederation ( conservative nobility of the commonwealth opposed to the new constitution of 3 may 1791 ) and the russian empire under catherine the great on the other.
+2025-04-17 20:29:56.008 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:29:56.009 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 20:29:56.012 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 failed to process item: the programme featured interviews with unemployed greeks, unpaid workers, striking workers of the greek steel industry, unpaid employees of newspaper eleftherotypia, economist dimitris kazakis ( who referred to the imposition of new measures by the government papademos ), the chairman of power company union genop, nikos fotopoulos, and former broadcast journalist john kanelakis.
+2025-04-17 20:29:56.019 | INFO     | __main__:run:85 - [FINISHED] Processing 236/240 item, remaning 3/240 in 1.05 seconds
+2025-04-17 20:29:56.021 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 20:29:56.023 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:29:56.026 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:29:56.027 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 20:29:56.051 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 20:29:56.052 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:29:56.058 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:29:56.063 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:29:56.160 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: the arbih and hvo in jajce were not only outnumbered and outgunned, but their units were also plagued by inadequate staff work, compounded by lack of coordination between separate command and control structures maintained by the two forces throughout the battle.
+2025-04-17 20:29:56.237 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 failed to process item: ` ` for main top 5 division, see : 2009 asian five nations ' ' the 2009 asian five nations division tournaments, known as the 2009 hsbc asian 5 nations due to the tournament ' s sponsorship by the hsbc, refer to the asian five nations divisions played within the tournament.
+2025-04-17 20:30:11.028 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 5 failed to process item: it is believed by many scholars that the poem, while based upon actual events and people, was created to be less of a historical account and more of a means of enshrining and lifting up the memories of the men who fought and lost their lives on the battlefield protecting their homeland, especially in the case of the english commander of the battle, byrhtnoth.
+2025-04-17 20:30:11.030 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 5 got error 429 more than 3 times. Stoping ...
+2025-04-17 20:30:17.259 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the tour consisted of seven preview concerts in february in europe, followed by four legs :
+2025-04-17 20:30:37.732 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: it was one of the biggest offensives of world war ii, stretching over a 1, 000 km ( 620 mi ) front and involving almost 3, 500, 000 troops from both sides.
+2025-04-17 20:30:37.733 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 4 got error 429 more than 3 times. Stoping ...
+2025-04-17 20:30:38.671 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the programme featured interviews with unemployed greeks, unpaid workers, striking workers of the greek steel industry, unpaid employees of newspaper eleftherotypia, economist dimitris kazakis ( who referred to the imposition of new measures by the government papademos ), the chairman of power company union genop, nikos fotopoulos, and former broadcast journalist john kanelakis.
+2025-04-17 20:30:58.177 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 7 failed to process item: to this day, it is the fourth worst railway accident in the united kingdom.
+2025-04-17 20:30:58.179 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 7 got error 429 more than 3 times. Stoping ...
+2025-04-17 20:30:58.320 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: the apple worldwide developers conference ( wwdc, also known as dub dub ) is a conference held annually by apple inc. in san jose, california.
+2025-04-17 20:30:58.322 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 1 got error 429 more than 3 times. Stoping ...
+2025-04-17 20:30:58.429 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 6 failed to process item: the festival is now one of the top five gay and lesbian arts and cultural celebrations, along with new york, san francisco, vancouver and sydney.
+2025-04-17 20:30:58.430 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 6 got error 429 more than 3 times. Stoping ...
+2025-04-17 20:30:58.556 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 9 failed to process item: the festival has been praised for the diversity of music it has brought to the public, providing a great mixture of singers and bands from albania with those from neighboring countries, a large portion coming from kosovo, macedonia, montenegro and other areas.
+2025-04-17 20:30:58.558 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 9 got error 429 more than 3 times. Stoping ...
+2025-04-17 20:30:58.995 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the ilosaarirock festival is organised by joensuu pop musicians ' association, which is a non - profit organisation.
+2025-04-17 20:30:59.304 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: mysteryland is a series of electronic dance music festivals organized by the netherlands - based promoter id & t.
+2025-04-17 20:30:59.306 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 2 got error 429 more than 3 times. Stoping ...
+2025-04-17 20:30:59.382 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 8 failed to process item: they were led or supported by left - wing groups such as some factions of the socialist revolutionary party, left socialist - revolutionaries, mensheviks, and anarchists.
+2025-04-17 20:30:59.383 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 8 got error 429 more than 3 times. Stoping ...
+2025-04-17 20:31:21.888 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the target group for the festival is mainly young adults and adults.
+2025-04-17 20:31:25.485 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the 2014 israel – gaza conflict also known as operation protective edge (, ` ` miv ' tza tzuk eitan ' ', lit.
+2025-04-17 20:31:27.615 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and while byzantium took large parts of palestine, jerusalem was left untouched and the ideological victory from the campaign was not as great as it could have been had byzantium recaptured this fourth patriarchal seat of christendom.
+2025-04-17 20:31:27.876 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:31:27.877 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 20:31:27.887 | INFO     | __main__:run:85 - [FINISHED] Processing 271/287 item, remaning 16/287 in 91.86 seconds
+2025-04-17 20:31:27.889 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 20:31:27.891 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:31:27.892 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:31:27.894 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 20:31:27.918 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 20:31:27.921 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:31:27.922 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:31:27.924 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:31:31.219 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it is currently the most prevalent manzai competition in japan.
+2025-04-17 20:33:04.258 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: to this day, it is the fourth worst railway accident in the united kingdom.
+2025-04-17 20:33:48.178 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: mysteryland is a series of electronic dance music festivals organized by the netherlands - based promoter id & t.
+2025-04-17 20:33:50.962 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: they were led or supported by left - wing groups such as some factions of the socialist revolutionary party, left socialist - revolutionaries, mensheviks, and anarchists.
+2025-04-17 20:34:14.463 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the ilosaarirock festival is organised by joensuu pop musicians ' association, which is a non - profit organisation.
+2025-04-17 20:34:19.047 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the target group for the festival is mainly young adults and adults.
+2025-04-17 20:35:38.242 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the 2015 pan american games ( ), officially the xvii pan american games and commonly known as the toronto 2015 pan - am games ( ), were a major international multi - sport event celebrated in the tradition of the pan american games, as governed by pan american sports organization ( paso ).
+2025-04-17 20:35:43.595 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 're-intensified' not found in text after turning to the northeast, it re - intensified and made landfall on august 31 on the north carolina coast just below hurricane status..
+2025-04-17 20:35:46.022 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 're-intensified' not found in text after turning to the northeast, it re - intensified and made landfall on august 31 on the north carolina coast just below hurricane status..
+2025-04-17 20:35:51.124 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the purpose of the show is to highlight up and coming mma fighters.
+2025-04-17 20:36:08.629 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the 2014 israel – gaza conflict also known as operation protective edge (, ` ` miv ' tza tzuk eitan ' ', lit.
+2025-04-17 20:36:41.622 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:36:41.624 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 20:36:41.641 | INFO     | __main__:run:85 - [FINISHED] Processing 231/240 item, remaning 9/240 in 313.75 seconds
+2025-04-17 20:36:41.644 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 20:36:41.646 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:36:41.646 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:36:41.647 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 20:36:41.810 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 20:36:41.812 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:36:41.813 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:36:41.814 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:36:48.234 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the wars were dominated by land campaigns in hungary, including transylvania ( today in romania ) and vojvodina ( today in serbia ), croatia and central serbia.
+2025-04-17 20:36:51.063 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it was the third of the four french and indian wars.
+2025-04-17 20:36:59.448 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: queen anne ' s war ( 1702 – 1713 ) was the second in a series of french and indian wars fought in england ' s thirteen american colonies, fought during the reign of anne, queen of great britain.
+2025-04-17 20:37:12.802 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the emirate of granada had been the last muslim state in iberia for more than two centuries by the time of the granada war.
+2025-04-17 20:37:54.503 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: in iran the crisis strengthened the prestige of ayatollah ruhollah khomeini and the political power of theocrats who opposed any normalization of relations with the west.
+2025-04-17 20:38:25.818 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: many of the resisters were war veterans who believed that they were fighting for the principles of the american revolution, in particular against taxation without local representation, while the federal government maintained that the taxes were the legal expression of congressional taxation powers.
+2025-04-17 20:38:28.436 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the sheer number of troops involved, as well as the large area of operations, make it one of the most complex battles fought on romanian soil during the war.
+2025-04-17 20:38:44.035 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the infernal columns ( fr., ` ` ' ' colonnes infernales ' ' ) were operations led by the french revolutionary general louis marie turreau in the war in the vendee, after the failure of the royalist viree de galerne.
+2025-04-17 20:39:22.086 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: ` ` unk ' ', under don unk de medina, was a month out of ferrol but had captured little.
+2025-04-17 20:39:50.995 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 're-captured' not found in text the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem..
+2025-04-17 20:39:53.151 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: Trigger word 're-captured' not found in text the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem..
+2025-04-17 20:39:55.092 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: Trigger word 're-captured' not found in text the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem..
+2025-04-17 20:39:55.093 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-17 20:39:55.792 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: no terrorist organisation took credit, and no motive for causing the crash could be established.
+2025-04-17 20:40:00.075 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 'took captive' not found in text capturing the cacique or indigenous ruler was standard operating procedure for spaniards in their expansion in the caribbean, so capturing motecuhzoma had considerable precedent but modern scholars are skeptical that cortes and his countrymen took motecuhzoma captive at this time..
+2025-04-17 20:40:01.765 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 'took captive' not found in text capturing the cacique or indigenous ruler was standard operating procedure for spaniards in their expansion in the caribbean, so capturing motecuhzoma had considerable precedent but modern scholars are skeptical that cortes and his countrymen took motecuhzoma captive at this time..
+2025-04-17 20:40:03.931 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: Trigger word 'took...captive' not found in text capturing the cacique or indigenous ruler was standard operating procedure for spaniards in their expansion in the caribbean, so capturing motecuhzoma had considerable precedent but modern scholars are skeptical that cortes and his countrymen took motecuhzoma captive at this time..
+2025-04-17 20:40:03.933 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: capturing the cacique or indigenous ruler was standard operating procedure for spaniards in their expansion in the caribbean, so capturing motecuhzoma had considerable precedent but modern scholars are skeptical that cortes and his countrymen took motecuhzoma captive at this time.
+2025-04-17 20:40:42.759 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 'counter-attack' not found in text a counter - attack by two australian brigades and a british brigade during the night of 24 april partly surrounded villers - bretonneux and on 25 april the town was recaptured..
+2025-04-17 20:41:05.909 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: all games were played at the fengtai softball field.
+2025-04-17 20:41:38.070 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the 2015 hop farm music festival and future events run by the hop farm are no longer related to john vincent power.
+2025-04-17 20:41:50.728 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the operation itself followed an unsuccessful united nations ( un ) peacekeeping mission and diplomatic efforts to settle the conflict.
+2025-04-17 20:41:53.751 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: slowly intensifying as it moved west - northwest, the system paralleled the greater antilles throughout much of its early existence.
+2025-04-17 20:42:22.657 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:42:22.658 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 20:42:22.668 | INFO     | __main__:run:85 - [FINISHED] Processing 264/280 item, remaning 16/280 in 341.02 seconds
+2025-04-17 20:42:22.669 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 20:42:22.670 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:42:22.671 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:42:22.672 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 20:42:22.692 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 20:42:22.694 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:42:22.696 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:42:22.698 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:42:37.475 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it was the third of the four french and indian wars.
+2025-04-17 20:42:55.579 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the emirate of granada had been the last muslim state in iberia for more than two centuries by the time of the granada war.
+2025-04-17 20:43:38.035 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: in iran the crisis strengthened the prestige of ayatollah ruhollah khomeini and the political power of theocrats who opposed any normalization of relations with the west.
+2025-04-17 20:44:10.031 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: many of the resisters were war veterans who believed that they were fighting for the principles of the american revolution, in particular against taxation without local representation, while the federal government maintained that the taxes were the legal expression of congressional taxation powers.
+2025-04-17 20:44:31.835 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the sheer number of troops involved, as well as the large area of operations, make it one of the most complex battles fought on romanian soil during the war.
+2025-04-17 20:45:16.538 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: ` ` unk ' ', under don unk de medina, was a month out of ferrol but had captured little.
+2025-04-17 20:45:57.612 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 're-captured' not found in text the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem..
+2025-04-17 20:45:59.710 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: Trigger word 're-captured' not found in text the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem..
+2025-04-17 20:46:02.571 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: Trigger word 're-captured' not found in text the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem..
+2025-04-17 20:46:02.573 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the resulting military expedition of primarily frankish nobles, known as the princes ' crusade, not only re - captured much of anatolia but went on to conquer the holy land ( the levant ), which had fallen to islamic expansion as early as the 7th century, and culminated in july 1099 in the re - conquest of jerusalem and the establishment of the kingdom of jerusalem.
+2025-04-17 20:46:04.134 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: no terrorist organisation took credit, and no motive for causing the crash could be established.
+2025-04-17 20:46:39.627 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 'counter-attack' not found in text a counter - attack by two australian brigades and a british brigade during the night of 24 april partly surrounded villers - bretonneux and on 25 april the town was recaptured..
+2025-04-17 20:46:42.027 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 'counter-attack' not found in text a counter - attack by two australian brigades and a british brigade during the night of 24 april partly surrounded villers - bretonneux and on 25 april the town was recaptured..
+2025-04-17 20:46:43.739 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: Trigger word 'counter-attack' not found in text a counter - attack by two australian brigades and a british brigade during the night of 24 april partly surrounded villers - bretonneux and on 25 april the town was recaptured..
+2025-04-17 20:46:43.741 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: a counter - attack by two australian brigades and a british brigade during the night of 24 april partly surrounded villers - bretonneux and on 25 april the town was recaptured.
+2025-04-17 20:47:28.221 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:47:28.222 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 20:47:28.231 | INFO     | __main__:run:85 - [FINISHED] Processing 231/240 item, remaning 9/240 in 305.56 seconds
+2025-04-17 20:47:28.232 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 20:47:28.234 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:47:28.234 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:47:28.235 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm1\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 20:47:28.259 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm1\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 20:47:28.260 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:47:28.262 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:47:28.263 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:47:31.662 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: in a likely reference to north korea ' s demand for a nonaggression treaty with washington , kcna said : ` ` the u . s . should settle the talks from a sincere stand and strive to settle the essential issue . ' '
+2025-04-17 20:47:49.349 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , uh , it would ' ve - - gone an - a little farther to encourage them to , you know , be willing to sit down at the table with us , at least , you know .
+2025-04-17 20:48:04.157 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: ` ` north korea should not leave the meetings having the slightest impression that they might force us to make a concession we would not otherwise make , ' ' he added .
+2025-04-17 20:48:07.822 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: ` ` north korea should not leave the meetings having the slightest impression that they might force us to make a concession we would not otherwise make , ' ' he added .
+2025-04-17 20:48:19.529 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: that some of what the prime minister and president shared with reporters at news conference following their meetings .
+2025-04-17 20:48:47.406 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: this is my last word to you , ' ' he told hordes of journalists who chased him thursday at his new york residence and u . n . headquarters seeking comment on his talks with the secretary - general , his future and the war .
+2025-04-17 20:48:50.124 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: this is my last word to you , ' ' he told hordes of journalists who chased him thursday at his new york residence and u . n . headquarters seeking comment on his talks with the secretary - general , his future and the war .
+2025-04-17 20:49:03.098 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: that some of what the prime minister and president shared with reporters at news conference following their meetings .
+2025-04-17 20:49:24.957 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i wish i could have been at a pub , or wherever these people convene , to see the reactions from all the britons who read the telegraph this morning - lrb - emphasis added - rrb - : britain ' s gun laws are aimed at the wrong target , curbing and criminalising legal ownership while failing to tackle huge rises in shooting offences over the past few years , according to an international firearms legislation expert .
+2025-04-17 20:49:31.686 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: that some of what the prime minister and president shared with reporters at news conference following their meetings .
+2025-04-17 20:49:34.398 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: where do you go and who do you visit ?
+2025-04-17 20:49:50.413 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it was not known whether he was hurt at the time .
+2025-04-17 20:49:55.990 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: if those were n ' t gunshot wounds to cause the broken bones , do they know what caused the fractures ?
+2025-04-17 20:49:57.946 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: well , let ' s look at what the president is actually proposing for people who have been harmed by a bad doctor .
+2025-04-17 20:50:02.999 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: well , let ' s look at what the president is actually proposing for people who have been harmed by a bad doctor .
+2025-04-17 20:50:29.420 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i was definitely blessed that i ' m not paralyzed or dead .
+2025-04-17 20:50:32.274 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: there was no information on the identity of the injured person .
+2025-04-17 20:50:43.762 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the consequence of injuring or hurting someone who is friendly or nonparticipant in combat is very difficult to deal with .
+2025-04-17 20:50:44.574 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the consequence of injuring or hurting someone who is friendly or nonparticipant in combat is very difficult to deal with .
+2025-04-17 20:50:51.066 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i often wondered how he was doing with all the meds because of his illness , which developed before his paralyzing accident .
+2025-04-17 20:51:16.122 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: there were no injuries from the incident .
+2025-04-17 20:51:16.402 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: no injuries reported .
+2025-04-17 20:51:19.207 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: when you get in the severe stage , you know , you get out once a week and do what you have to do - because my husband does n ' t drive , because of coordination problems from a head injury - - - and that puts you out for the rest of the week .
+2025-04-17 20:51:20.250 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no one knows yet whether the new iraq will be the kind of place where these children can grow up free of the fear , the horror of torture .
+2025-04-17 20:51:23.114 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: there was no information on the identity of the injured person .
+2025-04-17 20:51:32.110 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: well , let ' s look at what the president is actually proposing for people who have been harmed by a bad doctor .
+2025-04-17 20:51:48.464 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: well , let ' s look at what the president is actually proposing for people who have been harmed by a bad doctor .
+2025-04-17 20:51:51.622 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: also , the coroner could know right now but is not saying if there was some sort of trauma to either of these skeletons , for example , if they could see the bone compromised in some way they could tell if there had been a stab or a shooting .
+2025-04-17 20:51:54.513 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: also , the coroner could know right now but is not saying if there was some sort of trauma to either of these skeletons , for example , if they could see the bone compromised in some way they could tell if there had been a stab or a shooting .
+2025-04-17 20:51:58.854 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the consequence of injuring or hurting someone who is friendly or nonparticipant in combat is very difficult to deal with .
+2025-04-17 20:52:01.196 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: what other criminal trials have gotten a lot of media attention , and why ?
+2025-04-17 20:52:01.642 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: uh , what do you know about this scott - - peterson trial ?
+2025-04-17 20:52:04.818 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-17 20:52:06.974 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: why do you think this trial has been so publicized ?
+2025-04-17 20:52:08.406 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: but - - - lrb - - lrb - but i ' d love to have his hair - rrb - - rrb - something just came off the ~ tv about the scott trial .
+2025-04-17 20:52:30.855 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: um - lrb - - lrb - - rrb - - rrb - it ' s almost like , uh - - - lrb - - lrb - - rrb - - rrb - diversion but it just seems like they just make it into like , like a soap opera for people to watch , you know ?
+2025-04-17 20:52:35.202 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: schrenko is a scumbag and , although she wo n ' t get any actual jail time , i hope the fine she pleads to is at least as much as what she stole .
+2025-04-17 20:52:39.592 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: if the budget goes through as is , why do n ' t mr . begala and mr . carville just donate the extra tax money they do n ' t want ? ' '
+2025-04-17 20:52:45.063 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: a colorado judge ordered two teen - age girls to pay about $ 900 for the distress a neighbor said they caused by giving her home - made cookies adorned with paper hearts .
+2025-04-17 20:52:45.466 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: he gets rewarded by having to pay an immigration attorney thousands of dollars while getting yanked around by the immigration service . . . not to mention , he ' s paying the government thousands in taxes .
+2025-04-17 20:52:49.805 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: is it doing anything to tighten up security in these places with respect defenseless people are being attacked ?
+2025-04-17 20:53:12.723 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: we ' ll talk with a terror expert about that , and iraqi deserters on the northern front .
+2025-04-17 20:53:13.994 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: for no reason anyone could articulate , japan felt she had to continue the war in china .
+2025-04-17 20:53:15.682 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i want to thank the president for spain ' s diplomatic support before the conflict .
+2025-04-17 20:53:15.825 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: for no reason anyone could articulate , japan felt she had to continue the war in china .
+2025-04-17 20:53:20.993 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: former arkansas governor and u . s .
+2025-04-17 20:53:42.566 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: graham ' s article has the interesting hook of quoting one of peterson ' s rivals , former congresswoman and state sen . leslie byrne , as approving of the measure because it ' s ` ` something that i ' ve been talking about for some time now . ' '
+2025-04-17 20:53:46.134 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you know we ' ve come along way when african americans are n ' t just winning elected office , as former gov .
+2025-04-17 20:53:47.929 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: howard dean , who supports abortion rights , and former indiana rep . tim roemer , an abortion foe who argues that the party can not rebound from its losses in the november election unless it shows more tolerance on one of society ' s most emotional conflicts .
+2025-04-17 20:53:47.938 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: how much of peoplesoft ' s most valuable - - human - - resources will walk out the door the day their options vest ? - rrb -
+2025-04-17 20:53:49.667 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: graham ' s article has the interesting hook of quoting one of peterson ' s rivals , former congresswoman and state sen . leslie byrne , as approving of the measure because it ' s ` ` something that i ' ve been talking about for some time now . ' '
+2025-04-17 20:54:23.442 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: given the american attention span is about 10 minuts the creation of a dictatorship of us puppets against the election would be ignored in the us .
+2025-04-17 20:54:24.629 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: his thumping re - election , however , shows that he represents a large body of conservative american opinion .
+2025-04-17 20:54:26.970 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-17 20:54:28.973 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: uh , do you think there is uh - - some other , uh like - - positions has to be has been - - has to be created , like uh - - for the next election .
+2025-04-17 20:54:36.637 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: we go to my niece ' s house and
+2025-04-17 20:54:45.670 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-17 20:54:46.761 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: you might want to mention that in your letter as well .
+2025-04-17 20:54:48.294 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-17 20:54:49.589 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and i ' m sure we ' ll hear from many of you and we will select some of the responses and share them with you a bit later .
+2025-04-17 20:55:09.795 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you might want to mention that in your letter as well .
+2025-04-17 20:55:11.045 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: this time , they hope the sailors will write back with answers to their questions .
+2025-04-17 20:55:13.693 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and now joining us by phone from liverpool with more on the harry potter heist is caroline forham , press officer with the mercy side police .
+2025-04-17 20:55:13.886 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 20:55:13.887 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 20:55:13.897 | INFO     | __main__:run:85 - [FINISHED] Processing 218/281 item, remaning 63/281 in 465.66 seconds
+2025-04-17 20:55:13.898 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 20:55:13.899 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 20:55:13.900 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 20:55:13.901 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm1\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 20:55:13.922 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm1\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 20:55:13.923 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 20:55:13.925 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 20:55:13.926 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 20:55:17.541 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: in a likely reference to north korea ' s demand for a nonaggression treaty with washington , kcna said : ` ` the u . s . should settle the talks from a sincere stand and strive to settle the essential issue . ' '
+2025-04-17 20:55:29.315 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , uh , it would ' ve - - gone an - a little farther to encourage them to , you know , be willing to sit down at the table with us , at least , you know .
+2025-04-17 20:55:41.706 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: ` ` north korea should not leave the meetings having the slightest impression that they might force us to make a concession we would not otherwise make , ' ' he added .
+2025-04-17 20:55:45.449 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and all the meetings he ' s missing , and just , you know , i think it ' s more of a status quo for him .
+2025-04-17 20:55:45.505 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: ` ` north korea should not leave the meetings having the slightest impression that they might force us to make a concession we would not otherwise make , ' ' he added .
+2025-04-17 20:56:04.862 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: in an interview with the associated press wednesday night , al - douri said he will continue to work at the united nations and had no intention of defecting .
+2025-04-17 20:56:34.602 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: they said reports of a breakdown in the talks were a ` ` misrepresentation . ' '
+2025-04-17 20:56:35.225 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: we have the transcript of the meeting .
+2025-04-17 20:56:41.365 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: this is my last word to you , ' ' he told hordes of journalists who chased him thursday at his new york residence and u . n . headquarters seeking comment on his talks with the secretary - general , his future and the war .
+2025-04-17 20:57:16.634 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i wish i could have been at a pub , or wherever these people convene , to see the reactions from all the britons who read the telegraph this morning - lrb - emphasis added - rrb - : britain ' s gun laws are aimed at the wrong target , curbing and criminalising legal ownership while failing to tackle huge rises in shooting offences over the past few years , according to an international firearms legislation expert .
+2025-04-17 20:57:19.422 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: that some of what the prime minister and president shared with reporters at news conference following their meetings .
+2025-04-17 20:57:42.058 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: his last hope for survival might be that the united states loses its taste for such losses and forces president bush to negotiate a compromise that would allow hussein and his family to keep power in baghdad .
+2025-04-17 20:57:43.125 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: where do you go and who do you visit ?
+2025-04-17 20:57:46.145 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it was not known whether he was hurt at the time .
+2025-04-17 20:57:53.861 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: if those were n ' t gunshot wounds to cause the broken bones , do they know what caused the fractures ?
+2025-04-17 20:57:58.529 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i often wondered how he was doing with all the meds because of his illness , which developed before his paralyzing accident .
+2025-04-17 20:58:17.285 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: well , let ' s look at what the president is actually proposing for people who have been harmed by a bad doctor .
+2025-04-17 20:58:21.518 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: well , let ' s look at what the president is actually proposing for people who have been harmed by a bad doctor .
+2025-04-17 20:58:29.947 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i was definitely blessed that i ' m not paralyzed or dead .
+2025-04-17 20:58:35.249 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i often wondered how he was doing with all the meds because of his illness , which developed before his paralyzing accident .
+2025-04-17 20:58:37.066 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: there was no information on the identity of the injured person .
+2025-04-17 20:58:40.777 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and they say 4 , 000 injured .
+2025-04-17 20:58:51.910 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the consequence of injuring or hurting someone who is friendly or nonparticipant in combat is very difficult to deal with .
+2025-04-17 20:58:54.502 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the consequence of injuring or hurting someone who is friendly or nonparticipant in combat is very difficult to deal with .
+2025-04-17 20:58:58.845 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i often wondered how he was doing with all the meds because of his illness , which developed before his paralyzing accident .
+2025-04-17 20:59:06.910 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: when you get in the severe stage , you know , you get out once a week and do what you have to do - because my husband does n ' t drive , because of coordination problems from a head injury - - - and that puts you out for the rest of the week .
+2025-04-17 20:59:08.633 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no one knows yet whether the new iraq will be the kind of place where these children can grow up free of the fear , the horror of torture .
+2025-04-17 20:59:13.718 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: there was no information on the identity of the injured person .
+2025-04-17 20:59:24.034 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: no injuries reported .
+2025-04-17 20:59:35.957 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: well , let ' s look at what the president is actually proposing for people who have been harmed by a bad doctor .
+2025-04-17 20:59:54.901 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: well , let ' s look at what the president is actually proposing for people who have been harmed by a bad doctor .
+2025-04-17 20:59:58.649 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: also , the coroner could know right now but is not saying if there was some sort of trauma to either of these skeletons , for example , if they could see the bone compromised in some way they could tell if there had been a stab or a shooting .
+2025-04-17 21:00:01.529 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: also , the coroner could know right now but is not saying if there was some sort of trauma to either of these skeletons , for example , if they could see the bone compromised in some way they could tell if there had been a stab or a shooting .
+2025-04-17 21:00:07.353 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: what other criminal trials have gotten a lot of media attention , and why ?
+2025-04-17 21:00:09.229 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: uh , what do you know about this scott - - peterson trial ?
+2025-04-17 21:00:11.257 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-17 21:00:16.323 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: schrenko is a scumbag and , although she wo n ' t get any actual jail time , i hope the fine she pleads to is at least as much as what she stole .
+2025-04-17 21:00:30.901 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: we ' ll talk with a terror expert about that , and iraqi deserters on the northern front .
+2025-04-17 21:00:35.153 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i want to thank the president for spain ' s diplomatic support before the conflict .
+2025-04-17 21:00:37.111 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: former arkansas governor and u . s .
+2025-04-17 21:00:40.601 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: graham ' s article has the interesting hook of quoting one of peterson ' s rivals , former congresswoman and state sen . leslie byrne , as approving of the measure because it ' s ` ` something that i ' ve been talking about for some time now . ' '
+2025-04-17 21:00:41.998 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: if the budget goes through as is , why do n ' t mr . begala and mr . carville just donate the extra tax money they do n ' t want ? ' '
+2025-04-17 21:00:45.476 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: you know we ' ve come along way when african americans are n ' t just winning elected office , as former gov .
+2025-04-17 21:00:47.517 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: at least 70 were injured .
+2025-04-17 21:01:11.695 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: given the american attention span is about 10 minuts the creation of a dictatorship of us puppets against the election would be ignored in the us .
+2025-04-17 21:01:12.273 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: his thumping re - election , however , shows that he represents a large body of conservative american opinion .
+2025-04-17 21:01:14.873 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: uh , do you think there is uh - - some other , uh like - - positions has to be has been - - has to be created , like uh - - for the next election .
+2025-04-17 21:01:15.165 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-17 21:01:24.861 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: you might want to mention that in your letter as well .
+2025-04-17 21:01:27.525 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-17 21:01:29.444 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and i ' m sure we ' ll hear from many of you and we will select some of the responses and share them with you a bit later .
+2025-04-17 21:01:30.000 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:01:30.001 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:01:30.010 | INFO     | __main__:run:85 - [FINISHED] Processing 188/239 item, remaning 51/239 in 376.11 seconds
+2025-04-17 21:01:30.011 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 21:01:30.012 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:01:30.012 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:01:30.013 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm1\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 21:01:30.043 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm1\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 21:01:30.045 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:01:30.046 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:01:30.047 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:01:32.077 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: you might want to mention that in your letter as well .
+2025-04-17 21:01:38.452 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: we go to my niece ' s house and
+2025-04-17 21:01:52.624 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the prosecution of premarital or extramarital sex is not quite as rare as you might think .
+2025-04-17 21:02:18.730 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the other three , two men and one woman , have already been released without charge .
+2025-04-17 21:02:42.569 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the charges against katrina leung are the latest in an alleged case of sex , spies , and international intrigue .
+2025-04-17 21:02:49.265 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: question for the pro - choicers : being that it is n ' t yet the ninth month , can we still charge the killer with kidnapping ?
+2025-04-17 21:03:14.523 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: their more intriguing argument is that one of the charges against malvo is under virginia ' s anti - terrorism statute and they argue that every resident of fairfax county is potentially a member of the victim ' s class .
+2025-04-17 21:03:34.938 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: but the question is she being unfairly singled out for prosecution ?
+2025-04-17 21:03:36.566 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the other three , two men and one woman , have already been released without charge .
+2025-04-17 21:03:42.147 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the charges against katrina leung are the latest in an alleged case of sex , spies , and international intrigue .
+2025-04-17 21:03:47.501 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the way to avoid being charged is to give the keys to someone else to unlock the door and have them hang on to the keys until you ' re below . 05 .
+2025-04-17 21:03:54.605 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the other three , two men and one woman , have already been released without charge .
+2025-04-17 21:03:59.173 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: but i do n ' t think it ' s absolutely critical for the ultimate success of this mission that we apprehend him or find out what happened to him .
+2025-04-17 21:04:04.554 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the company ' s performance was n ' t all that hot even before the ceo went to prison , and until very recently the stock price reflected that .
+2025-04-17 21:04:05.297 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:04:27.777 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no sign of geragos or peterson in court yesterday when a judge was considering whether to unseal warrants obtained before scott peterson ' s arrest .
+2025-04-17 21:04:39.769 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and i ' m curious , how can democrats claim that president bush is ignoring the war on terror if al qaeda ' s second key operative was just caught ?
+2025-04-17 21:04:41.838 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: so you ' re basically free , with the expectation that you will not leave the state - lrb - assuming you ' ve been jailed by the state gov ` t - rrb - and you have to check in with your parole officer on a regular basis - lrb - i think they give you a schedule - rrb - .
+2025-04-17 21:04:49.253 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no , it was a joint effort by pakistan .
+2025-04-17 21:04:52.681 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: across town in a less affluent neighborhood , reactions to aziz ' s arrest are profoundly different .
+2025-04-17 21:04:55.458 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: this runup is based on the inexplicable hope that now that the head of the firm and the embodiment of a much - resented brand is no longer doing time for lying to the federal government , they ' ll be able to really coin some money .
+2025-04-17 21:04:57.113 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the company ' s performance was n ' t all that hot even before the ceo went to prison , and until very recently the stock price reflected that .
+2025-04-17 21:05:00.843 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: can owe tell us exactly the details , the precise details of how you arrested the suspect ?
+2025-04-17 21:05:01.099 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 'broke up' not found in text marines broke it up _ over the protests of iraqis not involved in the robbery _ and the thieves were arrested ..
+2025-04-17 21:05:04.413 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: currently in california , 7000 people serving 25 to year life sentences under the three strikes law .
+2025-04-17 21:05:12.894 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and i ' m curious , how can democrats claim that president bush is ignoring the war on terror if al qaeda ' s second key operative was just caught ?
+2025-04-17 21:05:16.458 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: but i do n ' t think it ' s absolutely critical for the ultimate success of this mission that we apprehend him or find out what happened to him .
+2025-04-17 21:05:34.977 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no , it was a joint effort by pakistan .
+2025-04-17 21:05:49.673 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: we had no part in it .
+2025-04-17 21:05:50.057 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: currently in california , 7000 people serving 25 to year life sentences under the three strikes law .
+2025-04-17 21:05:57.341 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and just to be clear , exactly where - - what kind of facility was it that you arrested him at ?
+2025-04-17 21:06:04.697 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: across town in a less affluent neighborhood , reactions to aziz ' s arrest are profoundly different .
+2025-04-17 21:06:08.292 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:06:13.484 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: across town in a less affluent neighborhood , reactions to aziz ' s arrest are profoundly different .
+2025-04-17 21:06:17.520 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: across town in a less affluent neighborhood , reactions to aziz ' s arrest are profoundly different .
+2025-04-17 21:06:21.809 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:06:23.605 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:06:29.545 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:06:42.289 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:06:44.329 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and i ' m curious , how can democrats claim that president bush is ignoring the war on terror if al qaeda ' s second key operative was just caught ?
+2025-04-17 21:06:53.435 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: oh well , lets cross now to our mob of mindless drones and hear about how good it is that this menace to society is going to be locked up before he kills all our innocent children .
+2025-04-17 21:06:53.465 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:06:58.734 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: so he did n ' t get both first degree murders .
+2025-04-17 21:07:02.405 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the idea is if you have three felony convictions , you ' re out of here .
+2025-04-17 21:07:04.433 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: do you think he is guilty of the crimes he ' s been convicted of ?
+2025-04-17 21:07:37.701 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: do you think he is guilty of the crimes he ' s been convicted of ?
+2025-04-17 21:07:41.005 | ERROR    | extractor.llm:extract_response:78 - [EXTRACT EVENT] Error parsing events: malformed node or string on line 1: <ast.Name object at 0x000001F639AD6710>
+2025-04-17 21:07:58.586 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 'convicted' not found in text and she ' s been convincted of obstruction of justice ..
+2025-04-17 21:07:59.260 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i - it just , i do n ' t know what would happen if he was found guilty , but now i think they said that they wanted to prove that - - you know , okay , we ' re not going to let this guy walk , like , do n ' t let this guy walk either , big high profile case .
+2025-04-17 21:08:47.604 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the idea is if you have three felony convictions , you ' re out of here .
+2025-04-17 21:09:00.516 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: so he did n ' t get both first degree murders .
+2025-04-17 21:09:09.366 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: reporter : iraq ' s former information minister might need a job right now .
+2025-04-17 21:09:11.969 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and i wo n ' t dwell on the irony of an oracle employee being driven out of oracle , starting his own company , and forcing ellison to spend $ 10 . 3 billion to get his company - - but not him - - back - lrb - though it does rather delightfully remind me of coca - cola basically giving away the bottling franchise and then spending billions to buy it back - rrb - .
+2025-04-17 21:09:28.303 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: now , his tenure at the united nations is over , too .
+2025-04-17 21:09:31.093 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: that runs against the fact that so many of them are just leaving their practice because they ca n ' t afford it .
+2025-04-17 21:09:45.329 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: cnn ' s richard roth has more on this once prominent frontman for the iraqi regime .
+2025-04-17 21:09:50.009 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: doctors are leaving practice because of insurance premium , right ?
+2025-04-17 21:09:52.985 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: now , his tenure at the united nations is over , too .
+2025-04-17 21:09:53.415 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it sounds to me like some rats at my former network , nbc , are spreading some lies about me .
+2025-04-17 21:10:15.408 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i ' m retired from full - time teaching ,
+2025-04-17 21:10:19.742 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: reporter : iraq ' s former information minister might need a job right now .
+2025-04-17 21:10:20.137 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: how much of peoplesoft ' s most valuable - - human - - resources will walk out the door the day their options vest ? - rrb -
+2025-04-17 21:10:21.934 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: military analyst and retired army general claudia kennedy joins me with a look at possibilitys .
+2025-04-17 21:10:43.466 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: they are desperate to be rid of him but by the same token , they do n ' t like another country coming into their country to overturn the government and beyond that , i think it ' s probably most important for most iraqis is they ' re deeply suspicious of the united states .
+2025-04-17 21:10:44.513 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: that runs against the fact that so many of them are just leaving their practice because they ca n ' t afford it .
+2025-04-17 21:10:46.494 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: kostelka , 52 , was first deputy defense minister and an ex - general .
+2025-04-17 21:10:49.022 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i think because the - one , you get laid off first pr - you know , first person to get laid off is going to be the arts and
+2025-04-17 21:10:53.361 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and the reason was was that , ah , i ' m retired air force - - and before , ah , because i was in the military - - ah , did n ' t did n ' t really think that my vote , um , counted one way or the other , that ' s that was my thinking .
+2025-04-17 21:10:55.008 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i think because the - one , you get laid off first pr - you know , first person to get laid off is going to be the arts and
+2025-04-17 21:11:16.397 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i do n ' t think dennis hastert plans to step down soon anyway .
+2025-04-17 21:11:20.865 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i do n ' t think dennis hastert plans to step down soon anyway .
+2025-04-17 21:11:47.645 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: graham ' s article has the interesting hook of quoting one of peterson ' s rivals , former congresswoman and state sen . leslie byrne , as approving of the measure because it ' s ` ` something that i ' ve been talking about for some time now . ' '
+2025-04-17 21:11:47.860 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i am most concerned if the fortunes of the prior employer took a sudden turn for the worse after the ceo left .
+2025-04-17 21:11:50.257 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: they are desperate to be rid of him but by the same token , they do n ' t like another country coming into their country to overturn the government and beyond that , i think it ' s probably most important for most iraqis is they ' re deeply suspicious of the united states .
+2025-04-17 21:12:13.234 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i think because the - one , you get laid off first pr - you know , first person to get laid off is going to be the arts and
+2025-04-17 21:12:16.134 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: is there high turnover among senior managers ?
+2025-04-17 21:12:17.469 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i used to work there .
+2025-04-17 21:12:19.242 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i ' m not leaving because of clashes with the administration , in fact , i have n ' t had any .
+2025-04-17 21:12:22.070 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: colonel patrick lang , retired , united states army , thanks for your insights .
+2025-04-17 21:12:23.169 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: stewart and former imclone ceo sam waksal shared a broker who now also faces charges of obstruction of justice and perjury .
+2025-04-17 21:12:44.470 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: doctors are leaving practice because of insurance premium , right ?
+2025-04-17 21:12:53.183 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: is there high turnover among senior managers ?
+2025-04-17 21:13:15.997 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: but on the subject of succession , those two look like role models compared with insurance giant american international group inc . - lrb - aig - rrb - , whose aging ceo has no plans to retire .
+2025-04-17 21:13:20.081 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 'bought out' not found in text and bought our company out from our previous owner ..
+2025-04-17 21:13:21.118 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 'bought out' not found in text and bought our company out from our previous owner ..
+2025-04-17 21:13:21.557 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it was hand delivered to harrod harrod ' s by the new chief executive nick paxton who would n ' t trust its futcher to anyone else .
+2025-04-17 21:13:22.205 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: Trigger word 'bought out' not found in text and bought our company out from our previous owner ..
+2025-04-17 21:13:22.208 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and bought our company out from our previous owner .
+2025-04-17 21:13:24.960 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and how ' d they get them ?
+2025-04-17 21:13:47.024 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and how ' d they get them ?
+2025-04-17 21:13:51.291 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: especially for those of us who still have so many years - lrb - if one year for every 2 married , then i ' ve still got another 7 or so - rrb - to go to get our heads screwed back on and find some sort of life that rivals what we had or what our ex has or what you and your ex have .
+2025-04-17 21:13:53.541 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i ' m sure that it was difficult for her personally , but i think the commuter marriage perhaps would have been less stressful if everyday she did n ' t see herself being undermined and overruledded .
+2025-04-17 21:13:59.417 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: so that is the channel we chose for our own donation .
+2025-04-17 21:14:01.553 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the ceos and execs of companies such as fred smith of fedex , norman waitt of gateway , jeff skoll of ebay , roger marino of emc , marc turtletaub of the money store , marc cuban / todd wagner , and others have all parked their money in film ventures and deals similar to ours ,
+2025-04-17 21:14:07.393 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: what ' s notable in this debate , however , is that according to msn moneycentral , tobacco executives are attacking the tax by noting that ` ` while north carolina ' s excise tax is only 5 cents , the total taxes given to north carolina by smokers adds up to more than 61 cents per pack . ' '
+2025-04-17 21:14:09.389 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: of course , the americans who employ illegal immigrants are happy to pay in cash because it means cheaper labor for them .
+2025-04-17 21:14:18.724 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: unfortunately , those same charitable organizations , those same charity committees that funnel the funds to needier palestinians , also serve to support terrorist attacks .
+2025-04-17 21:14:24.452 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i was definitely blessed that i ' m not paralyzed or dead .
+2025-04-17 21:14:30.741 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: there were no injuries from the incident .
+2025-04-17 21:14:37.533 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: okay , i - - have been following the trial , i do n ' t know why , ever since this whole thing happened .
+2025-04-17 21:14:40.033 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the consequence of injuring or hurting someone who is friendly or nonparticipant in combat is very difficult to deal with .
+2025-04-17 21:14:43.328 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: why do you think this trial has been so publicized ?
+2025-04-17 21:14:45.269 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: we do n ' t have , uh , cable so we purposely did n ' t watch the trial , but i read about it on the internet .
+2025-04-17 21:14:47.609 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: for some reason , i ca n ' t recall if selling drugs to minors qualifies as a jury trial or what .
+2025-04-17 21:14:47.833 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: why do you think this trial has been so publicized ?
+2025-04-17 21:14:49.381 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: why do you think this trial has been so publicized ?
+2025-04-17 21:14:58.245 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and when i started there , in two thousand and two , there were only twenty - three employees , and to date , we have about a hundred and forty .
+2025-04-17 21:15:08.753 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: they ' re not just sitting there hiring people to do their business .
+2025-04-17 21:15:11.946 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: who are they , and why do you think they should be appointed ?
+2025-04-17 21:15:41.928 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: well , you know , in one sense it is but then , i mean - - well , my grandparents came over , ellis island and everything , but when i think about , you know , a foreign person or maybe born in another country and coming here it doe - it does n ' t seem right in one sense for - - for them to be able to be president of this country .
+2025-04-17 21:15:43.836 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: so do n ' t give up on the idea of a natural birth because last time was painful .
+2025-04-17 21:15:47.269 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: if you do n ' t have an institutional water birth available , have you considered just staying home ?
+2025-04-17 21:15:54.357 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: as for how long it lasts , i would say that it lasts for the rest of your sentence , but i ' m not sure about that .
+2025-04-17 21:15:56.181 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and because of the the charge on the baby , they could n ' t automatically give him the death penalty , but - - obviously there ' s enough - - um , complaints or whatever
+2025-04-17 21:15:58.531 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 'sentenced' not found in text it was the same courtroom where a suspected al qaeda militant got a death sentence last week for killing three american missionaries ..
+2025-04-17 21:16:06.301 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the cost of class actions is factored into the cost of everything you buy .
+2025-04-17 21:16:09.289 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the cost of class actions is factored into the cost of everything you buy .
+2025-04-17 21:16:14.877 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it lists multiple claims against one physician when actually it ' s really one claim , different insurers pay on the same physician and it ' s counted as one claim .
+2025-04-17 21:16:18.325 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: anyway , it looks like they ' re denying chinese involvement to avoid a lawsuit , which is funny - - you ' d think they might know someone in the russian judiciary who could help them out .
+2025-04-17 21:16:22.484 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it lists multiple claims against one physician when actually it ' s really one claim , different insurers pay on the same physician and it ' s counted as one claim .
+2025-04-17 21:16:26.010 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i c - but , now , i do n ' t know that i would vote for a death penalty because i ' m not sure that a - - a death cancels out a death .
+2025-04-17 21:16:28.681 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: what do you think us policy should be toward palestine now that arafat has died ?
+2025-04-17 21:16:36.693 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: has somebody from your magazine spent time with him ?
+2025-04-17 21:16:38.548 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and all the meetings he ' s missing , and just , you know , i think it ' s more of a status quo for him .
+2025-04-17 21:17:06.440 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , um , yasser arafat was kind of in a difficult position , because you have these , um , incredibly - - oppressed and in some ways imprisoned , uh , palestinians , and if - - arafat had n ' t , um , tried to stand up - - and help them and - and fight for their rights , then - - m - they would n ' t have respected arafat , but then again , you know , he could n ' t be too friendly with the west , um , and , um , and so he did the best he could , i think .
+2025-04-17 21:17:10.053 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: now let ' s go back to wolf blitzer in kuwait city for more special coverage of the war in iraq .
+2025-04-17 21:17:22.446 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 're-electing' not found in text my focus is on re - electing president bush and dick cheney next year , the convention is going to be here in the city of new york ..
+2025-04-17 21:17:24.234 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: Trigger word 're-electing' not found in text my focus is on re - electing president bush and dick cheney next year , the convention is going to be here in the city of new york ..
+2025-04-17 21:17:25.730 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: Trigger word 're-electing' not found in text my focus is on re - electing president bush and dick cheney next year , the convention is going to be here in the city of new york ..
+2025-04-17 21:17:25.732 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: my focus is on re - electing president bush and dick cheney next year , the convention is going to be here in the city of new york .
+2025-04-17 21:17:29.408 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: oh , so the topic is elections .
+2025-04-17 21:17:33.082 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: future elections who do you think should run for president / vice president in 2008 , and why ?
+2025-04-17 21:17:35.721 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: if anyone has a right to call the elections ` ` illegitimate ' ' it would be the shi ' ites .
+2025-04-17 21:17:40.341 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: even if you , john h , believe the us held impartial elections in iraq , do n ' t you think the rest of the world will find the results invalid , or least suspect ?
+2025-04-17 21:17:42.917 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it ' s not their right to decide the legitimacy of the vote .
+2025-04-17 21:17:46.389 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i think what he wrote me about was the fact that the inter - agency process , where we have all these fbi and department of justice and cia and dia , and what have you , involved in interrogating these detainees , it takes time to find out what intelligence they have .
+2025-04-17 21:17:48.553 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: can you tell us what she said to you on the telephone ?
+2025-04-17 21:17:50.695 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-17 21:18:13.025 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i plan to call her this morning and tell her the total , complete with my rental car for a week .
+2025-04-17 21:18:13.109 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: let ' s see , my first call i got was from russia .
+2025-04-17 21:18:15.253 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: everyone wanted to call .
+2025-04-17 21:18:15.929 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:18:15.930 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:18:15.948 | INFO     | __main__:run:85 - [FINISHED] Processing 430/561 item, remaning 131/561 in 1005.94 seconds
+2025-04-17 21:18:15.949 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 21:18:15.950 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:18:15.950 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:18:15.951 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm1\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 21:18:15.980 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm1\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 21:18:15.981 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:18:15.983 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:18:15.984 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:18:17.724 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: ladouce says e - mails were dispatched to indonesian officials , but he does n ' t know what happened to the information . ' '
+2025-04-17 21:18:38.169 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: all the fl prosecutors have to do is ask , and the az jailers will pack her up in a van or a plane and ship her back to fl for trial on the fta charge and probably to commence her serving time under the suspended sentence that went along with her original probation .
+2025-04-17 21:18:44.872 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the prosecution of premarital or extramarital sex is not quite as rare as you might think .
+2025-04-17 21:19:22.981 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the other three , two men and one woman , have already been released without charge .
+2025-04-17 21:19:47.488 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the charges against katrina leung are the latest in an alleged case of sex , spies , and international intrigue .
+2025-04-17 21:19:50.417 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the official resident of that condo , the man now charged with her murder , michael serious .
+2025-04-17 21:19:54.448 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: question for the pro - choicers : being that it is n ' t yet the ninth month , can we still charge the killer with kidnapping ?
+2025-04-17 21:20:02.489 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: their more intriguing argument is that one of the charges against malvo is under virginia ' s anti - terrorism statute and they argue that every resident of fairfax county is potentially a member of the victim ' s class .
+2025-04-17 21:20:04.355 | ERROR    | extractor.llm:extract_response:78 - [EXTRACT EVENT] Error parsing events: malformed node or string on line 1: <ast.Name object at 0x000001F63A107DC0>
+2025-04-17 21:20:05.599 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it would be , certainly , to know , to apprehend him , to bring him before a court of justice .
+2025-04-17 21:20:08.949 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: they ' re facing misdemeanor charges .
+2025-04-17 21:20:17.048 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the other three , two men and one woman , have already been released without charge .
+2025-04-17 21:20:29.365 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the charges against katrina leung are the latest in an alleged case of sex , spies , and international intrigue .
+2025-04-17 21:20:37.376 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the way to avoid being charged is to give the keys to someone else to unlock the door and have them hang on to the keys until you ' re below . 05 .
+2025-04-17 21:20:45.558 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the other three , two men and one woman , have already been released without charge .
+2025-04-17 21:20:46.080 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:20:49.025 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: but i do n ' t think it ' s absolutely critical for the ultimate success of this mission that we apprehend him or find out what happened to him .
+2025-04-17 21:21:11.471 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the company ' s performance was n ' t all that hot even before the ceo went to prison , and until very recently the stock price reflected that .
+2025-04-17 21:21:11.587 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:21:14.936 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no sign of geragos or peterson in court yesterday when a judge was considering whether to unseal warrants obtained before scott peterson ' s arrest .
+2025-04-17 21:21:23.418 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and i ' m curious , how can democrats claim that president bush is ignoring the war on terror if al qaeda ' s second key operative was just caught ?
+2025-04-17 21:21:25.248 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: so you ' re basically free , with the expectation that you will not leave the state - lrb - assuming you ' ve been jailed by the state gov ` t - rrb - and you have to check in with your parole officer on a regular basis - lrb - i think they give you a schedule - rrb - .
+2025-04-17 21:21:50.098 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: can owe tell us exactly the details , the precise details of how you arrested the suspect ?
+2025-04-17 21:21:51.661 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no , it was a joint effort by pakistan .
+2025-04-17 21:21:53.732 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: across town in a less affluent neighborhood , reactions to aziz ' s arrest are profoundly different .
+2025-04-17 21:21:56.405 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the company ' s performance was n ' t all that hot even before the ceo went to prison , and until very recently the stock price reflected that .
+2025-04-17 21:22:01.837 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: currently in california , 7000 people serving 25 to year life sentences under the three strikes law .
+2025-04-17 21:22:17.070 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and i ' m curious , how can democrats claim that president bush is ignoring the war on terror if al qaeda ' s second key operative was just caught ?
+2025-04-17 21:22:20.684 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no , it was a joint effort by pakistan .
+2025-04-17 21:22:22.214 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:22:40.929 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: we had no part in it .
+2025-04-17 21:22:42.346 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: but i do n ' t think it ' s absolutely critical for the ultimate success of this mission that we apprehend him or find out what happened to him .
+2025-04-17 21:22:43.789 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: currently in california , 7000 people serving 25 to year life sentences under the three strikes law .
+2025-04-17 21:22:48.330 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and just to be clear , exactly where - - what kind of facility was it that you arrested him at ?
+2025-04-17 21:22:50.287 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: it would be , certainly , to know , to apprehend him , to bring him before a court of justice .
+2025-04-17 21:22:53.160 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: across town in a less affluent neighborhood , reactions to aziz ' s arrest are profoundly different .
+2025-04-17 21:23:01.696 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: across town in a less affluent neighborhood , reactions to aziz ' s arrest are profoundly different .
+2025-04-17 21:23:03.253 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: across town in a less affluent neighborhood , reactions to aziz ' s arrest are profoundly different .
+2025-04-17 21:23:21.640 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the company ' s performance was n ' t all that hot even before the ceo went to prison , and until very recently the stock price reflected that .
+2025-04-17 21:23:29.102 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:23:29.493 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and i ' m curious , how can democrats claim that president bush is ignoring the war on terror if al qaeda ' s second key operative was just caught ?
+2025-04-17 21:23:38.617 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: oh well , lets cross now to our mob of mindless drones and hear about how good it is that this menace to society is going to be locked up before he kills all our innocent children .
+2025-04-17 21:23:40.765 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and , again fairly specifically - lrb - and i realise this is state specific , but i ' m kinda looking for a general answer here - rrb - : if an eighteen year old gets caught selling marijuana to 12 - 14 year olds , and gets put away for , say , three years , is this the sort of deal where he ' s likely to get parole , or just do the time and leave again ?
+2025-04-17 21:23:44.909 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: so he did n ' t get both first degree murders .
+2025-04-17 21:23:47.683 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: the idea is if you have three felony convictions , you ' re out of here .
+2025-04-17 21:23:51.418 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: do you think he is guilty of the crimes he ' s been convicted of ?
+2025-04-17 21:23:55.142 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: do you think he is guilty of the crimes he ' s been convicted of ?
+2025-04-17 21:24:13.308 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: do you think he is guilty of the crimes he ' s been convicted of ?
+2025-04-17 21:24:49.078 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i - it just , i do n ' t know what would happen if he was found guilty , but now i think they said that they wanted to prove that - - you know , okay , we ' re not going to let this guy walk , like , do n ' t let this guy walk either , big high profile case .
+2025-04-17 21:25:01.145 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: do you think he is guilty of the crimes he ' s been convicted of ?
+2025-04-17 21:25:57.219 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: a three - judge panel of the court of appeals unanimously upheld a verdict by high court judge arifin jaka nearly three years ago that found anwar guilty of sodomizing his wife ' s former driver .
+2025-04-17 21:25:57.221 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 3 got error 429 more than 3 times. Stoping ...
+2025-04-17 21:25:58.344 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: the idea is if you have three felony convictions , you ' re out of here .
+2025-04-17 21:27:05.049 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: peterson trial scott peterson has been found guilty of murdering his wife laci and their unborn son , and he now faces the death penalty .
+2025-04-17 21:27:05.051 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 0 got error 429 more than 3 times. Stoping ...
+2025-04-17 21:27:05.220 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:05.221 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 196
+2025-04-17 21:27:05.226 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:05.227 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:05.246 | INFO     | __main__:run:85 - [FINISHED] Processing 233/481 item, remaning 248/481 in 529.30 seconds
+2025-04-17 21:27:05.248 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 21:27:05.249 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:05.249 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:05.250 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm2\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 21:27:05.275 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm2\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 21:27:05.276 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:05.278 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:05.279 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:05.280 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:05.281 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 21:27:05.286 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:05.286 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:05.300 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.05 seconds
+2025-04-17 21:27:05.301 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 21:27:05.302 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:05.303 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:05.303 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm2\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 21:27:05.323 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm2\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 21:27:05.325 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:05.326 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:05.327 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:05.328 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:05.329 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 21:27:05.332 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:05.333 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:05.345 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.04 seconds
+2025-04-17 21:27:05.346 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 21:27:05.347 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:05.348 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:05.348 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm2\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 21:27:05.527 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm2\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 21:27:05.528 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:05.529 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:05.530 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:05.531 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:05.532 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 21:27:05.537 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:05.538 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:05.562 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.21 seconds
+2025-04-17 21:27:05.562 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 21:27:05.564 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:05.564 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:05.565 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm2\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 21:27:05.591 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm2\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 21:27:05.592 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:05.593 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:05.594 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:05.595 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:05.596 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 21:27:05.601 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:05.602 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:05.623 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.06 seconds
+2025-04-17 21:27:05.624 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 21:27:05.626 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:05.626 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:05.627 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm3\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 21:27:05.649 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm3\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 21:27:05.650 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:05.651 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:05.652 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:05.653 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:05.654 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 21:27:05.657 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:05.658 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:05.671 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.04 seconds
+2025-04-17 21:27:05.672 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 21:27:05.673 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:05.674 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:05.674 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm3\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 21:27:05.693 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm3\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 21:27:05.694 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:05.695 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:05.696 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:05.697 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:05.698 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 21:27:05.701 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:05.702 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:05.714 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.04 seconds
+2025-04-17 21:27:05.714 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 21:27:05.715 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:05.715 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:05.716 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm3\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 21:27:05.745 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm3\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 21:27:05.746 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:05.747 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:05.748 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:05.749 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:05.750 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 21:27:05.754 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:05.755 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:05.779 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.06 seconds
+2025-04-17 21:27:05.780 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 21:27:05.781 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:05.782 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:05.782 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm3\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 21:27:05.810 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm3\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 21:27:05.811 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:05.812 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:05.813 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:05.814 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:05.815 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 21:27:07.490 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:07.491 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:07.514 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 1.73 seconds
+2025-04-17 21:27:07.517 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 21:27:07.520 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:07.522 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:07.524 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm4\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 21:27:07.546 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm4\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 21:27:07.549 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:07.552 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:07.554 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:07.555 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:07.557 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 21:27:07.561 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:07.563 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:07.578 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.06 seconds
+2025-04-17 21:27:07.580 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 21:27:07.581 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:07.582 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:07.583 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm4\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 21:27:07.603 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm4\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 21:27:07.605 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:07.607 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:07.608 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:07.610 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:07.611 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 21:27:07.617 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:07.617 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:07.633 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.05 seconds
+2025-04-17 21:27:07.640 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 21:27:07.641 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:07.643 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:07.644 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm4\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 21:27:07.828 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm4\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 21:27:07.831 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:07.833 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:07.834 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:07.836 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:07.837 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 21:27:07.843 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:07.844 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:07.871 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.23 seconds
+2025-04-17 21:27:07.873 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 21:27:07.875 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 21:27:07.876 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 21:27:07.877 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des\ACE\perm4\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 21:27:07.908 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing output/des\ACE\perm4\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 21:27:07.912 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 21:27:07.914 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:07.915 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 21:27:07.917 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 21:27:07.919 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 21:27:07.925 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 21:27:07.926 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 21:27:07.950 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.08 seconds
+2025-04-17 21:27:07.951 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 21:27:07.952 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 21:27:07.955 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-17 21:27:07.957 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to output/des

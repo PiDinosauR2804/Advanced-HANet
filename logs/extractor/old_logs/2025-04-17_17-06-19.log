@@ -1,0 +1,417 @@
+2025-04-17 17:06:19.472 | INFO     | __main__:<module>:159 - [INFO] Arguments:
+2025-04-17 17:06:19.473 | INFO     | __main__:<module>:160 - Input root: data/data_text
+2025-04-17 17:06:19.473 | INFO     | __main__:<module>:161 - Output root: output/des
+2025-04-17 17:06:19.474 | INFO     | __main__:<module>:162 - Datasets: ['MAVEN', 'ACE']
+2025-04-17 17:06:19.474 | INFO     | __main__:<module>:163 - Model: gemini-2.0-flash
+2025-04-17 17:06:19.474 | INFO     | __main__:<module>:164 - Candidate: 1
+2025-04-17 17:06:19.475 | INFO     | __main__:<module>:165 - Num try: 3
+2025-04-17 17:06:19.475 | INFO     | __main__:<module>:166 - Max consecutive 429 error: 3
+2025-04-17 17:06:19.476 | INFO     | __main__:<module>:167 - Max num threads: 12
+2025-04-17 17:06:19.476 | INFO     | __main__:<module>:168 - Resume: False
+2025-04-17 17:06:19.477 | INFO     | __main__:<module>:169 - Convert test: False
+2025-04-17 17:06:19.478 | INFO     | __main__:<module>:170 - [INFO] Start processing...
+2025-04-17 17:06:20.677 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition or contest'}
+2025-04-17 17:06:20.677 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition'}
+2025-04-17 17:06:21.893 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory in a competition or contest'}
+2025-04-17 17:06:21.894 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan', 'australia'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition or contest'}
+2025-04-17 17:06:22.929 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition or contest'}
+2025-04-17 17:06:24.989 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition, game, or conflict'}
+2025-04-17 17:06:24.990 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word beating refers to the event of defeating someone in a competition'}
+2025-04-17 17:06:27.025 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'winning', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition, game, or conflict'}
+2025-04-17 17:06:27.026 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'defeat', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan'], 'description': 'the trigger word beating refers to the event of defeating someone in a competition or game'}
+2025-04-17 17:06:29.058 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory in a competition or contest'}
+2025-04-17 17:06:29.059 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan', 'australia'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition'}
+2025-04-17 17:06:31.121 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory in a competition or contest'}
+2025-04-17 17:06:31.122 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word beating refers to the event of defeating someone in a competition'}
+2025-04-17 17:06:33.130 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory in a competition or contest'}
+2025-04-17 17:06:33.130 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition'}
+2025-04-17 17:06:35.235 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition or contest'}
+2025-04-17 17:06:35.236 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word beating refers to the event of defeating someone in a competition'}
+2025-04-17 17:06:36.509 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word won refers to the event of achieving victory in a competition or contest'}
+2025-04-17 17:06:36.510 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition'}
+2025-04-17 17:06:37.833 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'sporting event', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition, game, or conflict'}
+2025-04-17 17:06:37.834 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'defeat', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan'], 'description': 'the trigger word beating refers to the event of defeating or surpassing someone in a competition, game, or conflict'}
+2025-04-17 17:06:40.056 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word won refers to the event of achieving victory in a competition'}
+2025-04-17 17:06:40.057 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word beating refers to the event of defeating in a competition'}
+2025-04-17 17:06:41.601 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'sporting event', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition or contest'}
+2025-04-17 17:06:41.602 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'defeat', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition'}
+2025-04-17 17:06:42.497 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition or contest'}
+2025-04-17 17:06:43.851 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition or contest.'}
+2025-04-17 17:06:43.858 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word beating refers to the event of defeating someone in a competition or contest.'}
+2025-04-17 17:06:45.981 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'sporting event', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event where someone is victorious in a contest or competition'}
+2025-04-17 17:06:45.982 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan'], 'description': 'the trigger word beating refers to the event where someone defeats someone else in a contest or competition'}
+2025-04-17 17:06:47.201 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'sporting event', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory in a competition or contest'}
+2025-04-17 17:06:47.202 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'sporting event', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition or contest'}
+2025-04-17 17:06:48.149 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory in a contest or competition'}
+2025-04-17 17:06:49.405 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory in a competition'}
+2025-04-17 17:06:49.406 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan', 'australia'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition'}
+2025-04-17 17:06:50.633 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory in a competition'}
+2025-04-17 17:06:50.635 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition'}
+2025-04-17 17:06:52.824 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition'}
+2025-04-17 17:06:52.826 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['australia', 'pakistan'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition'}
+2025-04-17 17:06:54.045 | INFO     | extractor.consumer:log:53 - [INFO] Found 10 valid extractors
+2025-04-17 17:06:54.045 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:54.052 | INFO     | extractor.consumer:log:53 - [START] Start 10 threads
+2025-04-17 17:06:54.053 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:54.055 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:54.055 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 17:06:54.076 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:54.081 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:54.087 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:54.112 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:54.977 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'agreement', 'trigger_word': 'deal', 'event_time': None, 'event_location': None, 'event_participants': ['sanzar', 'broadcasters'], 'description': 'the trigger word deal refers to the event of parties reaching an agreement.'}
+2025-04-17 17:06:54.980 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 8 got error: 'text'
+2025-04-17 17:06:54.981 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 8 got error: 'text'
+2025-04-17 17:06:54.984 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 8 got error: 'text'
+2025-04-17 17:06:55.086 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'participation', 'trigger_word': 'participated', 'event_time': None, 'event_location': None, 'event_participants': ['six teams'], 'description': 'the trigger word participated refers to the event where one or more parties were involved in an event'}
+2025-04-17 17:06:55.088 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 7 got error: 'text'
+2025-04-17 17:06:55.089 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 7 got error: 'text'
+2025-04-17 17:06:55.091 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 7 got error: 'text'
+2025-04-17 17:06:55.185 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['australia'], 'description': 'the trigger word won refers to the event of achieving victory in a competition'}
+2025-04-17 17:06:55.187 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'beating', 'event_time': None, 'event_location': None, 'event_participants': ['pakistan'], 'description': 'the trigger word beating refers to the event of defeating an opponent in a competition'}
+2025-04-17 17:06:55.189 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: 'text'
+2025-04-17 17:06:55.190 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: 'text'
+2025-04-17 17:06:55.191 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: 'text'
+2025-04-17 17:06:55.439 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'meeting', 'trigger_word': 'met', 'event_time': 'the last game of the previous season', 'event_location': None, 'event_participants': ['two clubs'], 'description': 'the trigger word met refers to the event where two or more parties encountered each other, marking the occurrence of a meeting or interaction'}
+2025-04-17 17:06:55.440 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'winning', 'trigger_word': 'won', 'event_time': 'the last game of the previous season', 'event_location': 'anfield', 'event_participants': ['arsenal'], 'description': 'the trigger word won refers to the event of achieving victory or success in a competition, game, or conflict'}
+2025-04-17 17:06:55.442 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: 'text'
+2025-04-17 17:06:55.443 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 0 got error: 'text'
+2025-04-17 17:06:55.445 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 0 got error: 'text'
+2025-04-17 17:06:55.461 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'attack', 'trigger_word': 'targeted', 'event_time': None, 'event_location': 'pub', 'event_participants': None, 'description': 'the trigger word targeted refers to the event of deliberately aiming at a specific object or person'}
+2025-04-17 17:06:55.463 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'play', 'event_time': '1994', 'event_location': None, 'event_participants': ['republic of ireland', 'italy'], 'description': 'the trigger word play refers to the event of two parties participating in a competition'}
+2025-04-17 17:06:55.465 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: 'text'
+2025-04-17 17:06:55.466 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: 'text'
+2025-04-17 17:06:55.468 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: 'text'
+2025-04-17 17:06:55.594 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'match', 'event_time': None, 'event_location': None, 'event_participants': ['kurt angle', 'shawn michaels'], 'description': 'the trigger word match refers to the event of two or more parties competing against each other in a contest'}
+2025-04-17 17:06:55.595 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'bout', 'event_time': None, 'event_location': 'wrestlemania 21', 'event_participants': ['kurt angle', 'shawn michaels'], 'description': 'the trigger word bout refers to the event of two or more parties competing against each other in a contest'}
+2025-04-17 17:06:55.597 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 5 got error: 'text'
+2025-04-17 17:06:55.599 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 5 got error: 'text'
+2025-04-17 17:06:55.600 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 5 got error: 'text'
+2025-04-17 17:06:55.849 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'defeat', 'trigger_word': 'knocked out', 'event_time': None, 'event_location': 'group stage', 'event_participants': ['sydney sixers'], 'description': 'the trigger word knocked out refers to the event of being eliminated from a competition or contest'}
+2025-04-17 17:06:55.850 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 4 got error: 'text'
+2025-04-17 17:06:55.852 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 4 got error: 'text'
+2025-04-17 17:06:55.853 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 4 got error: 'text'
+2025-04-17 17:06:56.108 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'tournament', 'event_time': None, 'event_location': None, 'event_participants': ['jersey', 'denmark'], 'description': 'the trigger word tournament refers to the event where multiple participants take part in a competition'}
+2025-04-17 17:06:56.110 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'winning', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['jersey'], 'description': 'the trigger word won refers to the event where someone is victorious in a competition'}
+2025-04-17 17:06:56.112 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 9 got error: 'text'
+2025-04-17 17:06:56.113 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 9 got error: 'text'
+2025-04-17 17:06:56.115 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 9 got error: 'text'
+2025-04-17 17:06:56.137 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'tournament', 'event_time': 'since 1996', 'event_location': None, 'event_participants': ['consejo mundial de lucha libre'], 'description': 'the trigger word tournament refers to the event of a competition involving many contestants in a sport or game'}
+2025-04-17 17:06:56.138 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 1 got error: 'text'
+2025-04-17 17:06:56.140 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: 'text'
+2025-04-17 17:06:56.141 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 1 got error: 'text'
+2025-04-17 17:06:57.133 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'match', 'event_time': None, 'event_location': 'undercard', 'event_participants': ['shane mcmahon', 'the big show'], 'description': 'the trigger word match refers to the event of a contest in which people or teams compete against each other'}
+2025-04-17 17:06:57.135 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'winning', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['mcmahon'], 'description': 'the trigger word won refers to the event of achieving victory in a competition'}
+2025-04-17 17:06:57.137 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'competition', 'trigger_word': 'match', 'event_time': None, 'event_location': None, 'event_participants': ['chris benoit', 'kurt angle'], 'description': 'the trigger word match refers to the event of a contest in which people or teams compete against each other'}
+2025-04-17 17:06:57.138 | INFO     | extractor.llm:validate_event_list:107 - [EXTRACT EVENT] Extracted event: {'event_type': 'winning', 'trigger_word': 'won', 'event_time': None, 'event_location': None, 'event_participants': ['benoit'], 'description': 'the trigger word won refers to the event of achieving victory in a competition'}
+2025-04-17 17:06:57.140 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 6 got error: 'text'
+2025-04-17 17:06:57.141 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 6 got error: 'text'
+2025-04-17 17:06:57.143 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 6 got error: 'text'
+2025-04-17 17:06:57.154 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.156 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 270
+2025-04-17 17:06:57.160 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.161 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.171 | INFO     | __main__:run:85 - [FINISHED] Processing 0/270 item, remaning 270/270 in 3.12 seconds
+2025-04-17 17:06:57.176 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm1\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 17:06:57.176 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.178 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.185 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 17:06:57.203 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.205 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.207 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.209 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.211 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.213 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 17:06:57.220 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.222 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.230 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.05 seconds
+2025-04-17 17:06:57.233 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm1\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 17:06:57.235 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.235 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.237 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 17:06:57.255 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.257 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.258 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.259 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.260 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.262 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 17:06:57.268 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.268 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.276 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.04 seconds
+2025-04-17 17:06:57.277 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm2\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 17:06:57.277 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.278 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.279 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 17:06:57.298 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.301 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.302 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.303 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.304 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.305 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 17:06:57.308 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.309 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.318 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.04 seconds
+2025-04-17 17:06:57.321 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm2\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 17:06:57.323 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.324 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.325 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 17:06:57.343 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.344 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.345 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.350 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.352 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.353 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 17:06:57.357 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.357 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.367 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.04 seconds
+2025-04-17 17:06:57.368 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm3\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 17:06:57.369 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.369 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.370 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 17:06:57.483 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.485 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.486 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.487 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.488 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.488 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 17:06:57.492 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.493 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.502 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.13 seconds
+2025-04-17 17:06:57.503 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm3\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 17:06:57.504 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.505 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.505 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-17 17:06:57.521 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.522 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.523 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.524 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.525 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.525 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 17:06:57.529 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.530 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.539 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.04 seconds
+2025-04-17 17:06:57.539 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm4\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-17 17:06:57.540 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.541 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.541 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-17 17:06:57.558 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.559 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.560 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.561 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.562 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.563 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 17:06:57.568 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.569 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.576 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.04 seconds
+2025-04-17 17:06:57.577 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\MAVEN\perm4\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-17 17:06:57.579 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.581 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.582 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 17:06:57.607 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.608 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.609 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.610 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.611 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.611 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 17:06:57.617 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.618 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.633 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.05 seconds
+2025-04-17 17:06:57.634 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 17:06:57.635 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.636 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.636 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 17:06:57.656 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.658 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.659 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.660 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.661 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.662 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 17:06:57.667 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.668 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.679 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.04 seconds
+2025-04-17 17:06:57.681 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 17:06:57.683 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.684 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.684 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 17:06:57.717 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.718 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.719 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.720 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.721 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.722 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 17:06:57.727 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.728 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.755 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.07 seconds
+2025-04-17 17:06:57.756 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 17:06:57.757 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.757 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.759 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm1\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 17:06:57.787 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm1\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.788 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.789 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.790 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.791 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.792 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 17:06:57.797 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.799 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.819 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.06 seconds
+2025-04-17 17:06:57.820 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm1\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 17:06:57.821 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.822 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.822 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 17:06:57.843 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.844 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.845 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.847 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.849 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.850 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 17:06:57.854 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.855 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.870 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.05 seconds
+2025-04-17 17:06:57.871 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 17:06:57.872 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.873 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.873 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 17:06:57.900 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:57.902 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:57.904 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:57.905 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:57.906 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:57.907 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 17:06:57.911 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:57.911 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:57.927 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.05 seconds
+2025-04-17 17:06:57.928 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 17:06:57.928 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:57.929 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:57.933 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 17:06:58.055 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.057 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.058 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.059 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.060 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.061 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 17:06:58.066 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.067 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.091 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.16 seconds
+2025-04-17 17:06:58.091 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 17:06:58.092 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:58.093 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:58.094 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm2\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 17:06:58.121 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm2\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.122 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.124 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.125 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.126 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.127 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 17:06:58.134 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.135 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.156 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.06 seconds
+2025-04-17 17:06:58.156 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm2\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 17:06:58.158 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:58.158 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:58.159 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 17:06:58.181 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.183 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.184 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.186 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.187 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.188 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 17:06:58.193 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.193 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.208 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.05 seconds
+2025-04-17 17:06:58.209 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 17:06:58.209 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:58.210 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:58.211 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 17:06:58.231 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.232 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.234 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.235 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.236 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.237 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 17:06:58.241 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.242 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.254 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.05 seconds
+2025-04-17 17:06:58.257 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 17:06:58.258 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:58.258 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:58.259 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 17:06:58.290 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.291 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.292 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.293 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.294 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.295 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 17:06:58.303 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.304 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.356 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.10 seconds
+2025-04-17 17:06:58.372 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 17:06:58.376 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:58.377 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:58.378 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm3\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 17:06:58.418 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm3\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.419 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.420 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.421 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.422 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.423 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 17:06:58.427 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.428 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.454 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.08 seconds
+2025-04-17 17:06:58.455 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm3\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 17:06:58.456 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:58.457 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:58.457 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_2way_10shot.train.jsonl...
+2025-04-17 17:06:58.479 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.481 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.482 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.483 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.484 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.485 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 280
+2025-04-17 17:06:58.489 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.489 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.504 | INFO     | __main__:run:85 - [FINISHED] Processing 0/280 item, remaning 280/280 in 0.05 seconds
+2025-04-17 17:06:58.504 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_2way_10shot.train.jsonl
+2025-04-17 17:06:58.505 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:58.506 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:58.506 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_2way_5shot.train.jsonl...
+2025-04-17 17:06:58.526 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.527 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.528 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.530 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.532 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.533 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 240
+2025-04-17 17:06:58.536 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.536 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.549 | INFO     | __main__:run:85 - [FINISHED] Processing 0/240 item, remaning 240/240 in 0.04 seconds
+2025-04-17 17:06:58.550 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_2way_5shot.train.jsonl
+2025-04-17 17:06:58.550 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:58.551 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:58.552 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_4way_10shot.train.jsonl...
+2025-04-17 17:06:58.670 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.671 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.673 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.674 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.676 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.678 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 560
+2025-04-17 17:06:58.692 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.693 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.724 | INFO     | __main__:run:85 - [FINISHED] Processing 0/560 item, remaning 560/560 in 0.17 seconds
+2025-04-17 17:06:58.725 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_4way_10shot.train.jsonl
+2025-04-17 17:06:58.725 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-17 17:06:58.726 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-17 17:06:58.727 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm4\ACE_5task_4way_5shot.train.jsonl...
+2025-04-17 17:06:58.759 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm4\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-17 17:06:58.761 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-17 17:06:58.763 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.765 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-17 17:06:58.766 | ERROR    | extractor.consumer:log:55 - [ERROR] No threads are running. Stopping ...
+2025-04-17 17:06:58.768 | ERROR    | extractor.consumer:log:55 - [ERROR] Task queue is not empty after consuming. Remaining items: 480
+2025-04-17 17:06:58.774 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-17 17:06:58.775 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-17 17:06:58.802 | INFO     | __main__:run:85 - [FINISHED] Processing 0/480 item, remaning 480/480 in 0.08 seconds
+2025-04-17 17:06:58.803 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm4\ACE_5task_4way_5shot.train.jsonl
+2025-04-17 17:06:58.804 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-17 17:06:58.805 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-17 17:06:58.805 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to output/des

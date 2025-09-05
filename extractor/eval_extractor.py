@@ -21,69 +21,63 @@ def bleu_score(prediction:list[int], reference:list[int]):
         bleu += precision / 4.0
     return bleu
 
-def eval(gt_path:str, pr_path:str, datasets:list)->None:
-    for dataset in datasets:
-        # Convert for train data
-        for i in range(5):
-            gt_folder = os.path.join(gt_path, dataset, "perm"+str(i))
-            pr_folder = os.path.join(pr_path, dataset, "perm"+str(i))
+def eval(gt_list:list, pr_list:list):
+    bleu_scores = []
+    precision_scores = []
+    recall_scores = []
+    f1_scores = []
+    
+    # Sort the lists by line_idx, key and idx
+    for gt, pr in zip(gt_list, pr_list):
+        try:
+            # gt is a list of tuples (line_idx, key, idx, item)
+            # pr is a list of tuples (line_idx, key, idx, item)
+            gt_line_idx, gt_key, gt_idx, gt_item = gt
+            pr_line_idx, pr_key, pr_idx, pr_item = pr
+            if gt_line_idx != pr_line_idx or gt_key != pr_key or gt_idx != pr_idx:
+                logger.error(f"[ERROR] Line index or key or idx do not match: {gt}\nvs\n{pr}")
+                continue
+            
+            if pr_item.get('span') is None:
+                # logger.error(f"[ERROR] Span is None in prediction: {pr_item}")
+                continue
+            
+            # Calculate BLEU score for each item
+            bleu = bleu_score(gt_item['text'], pr_item['text'])
+            # get span at the position that corresponding label > 0
+            gt_span = [span for label, span in zip(gt_item['label'], gt_item['span']) if label > 0]
+            pr_span = pr_item['span']
+            gt_set = set([tuple(span) for span in gt_span])
+            pr_set = set([tuple(span) for span in pr_span])#
+            # print false positive samples
+            false_positive = pr_set - gt_set
+            if len(false_positive) > 0:
+                # logger.error(f"[ERROR] False positive samples: {false_positive} | Text: {pr_item['text']}")
+                pass
+            # print false negative samples
+            false_negative = gt_set - pr_set
+            if len(false_negative) > 0:
+                # logger.error(f"[ERROR] False negative samples: {false_negative} | Text: {gt_item['text']}")
+                pass
+            true_positive = len(gt_set & pr_set)
 
-            # Kiểm tra xem thư mục có tồn tại không
-            if not os.path.exists(gt_folder):
-                print(f"Folder {gt_folder} does not exist!")
-                continue
-            
-            if not os.path.exists(pr_folder):
-                print(f"Folder {pr_folder} does not exist!")
-                continue
-            
-            for file_name in os.listdir(pr_folder):
-                if file_name.endswith(".jsonl"):
-                    pr_file = os.path.join(pr_folder, file_name)
-                    gt_file = os.path.join(gt_folder, file_name)
-                    precision = 0.0
-                    recall = 0.0
-                    bleu = 0.0
-                    count = 0
-                    
-                    with open(pr_file, 'r') as f1, open(gt_file, 'r') as f2:
-                        if len(f1.readlines()) != len(f2.readlines()):
-                            print(f"File length mismatch for\n{pr_file}\nand\n{gt_file}\npr len: {len(f1.readlines())}, gt len: {len(f2.readlines())}")
-                            f1.close()
-                            f2.close()
-                            continue
-                        f1.seek(0)  # Reset file pointer to the beginning
-                        f2.seek(0)  # Reset file pointer to the beginning
-                        for line1, line2 in zip(f1, f2):
-                            pr_json_line = json.loads(line1)
-                            gt_json_line = json.loads(line2)
-                            for key in pr_json_line.keys():
-                                if key not in gt_json_line:
-                                    print(f"Key {key} not found in ground truth data")
-                                    continue
-                                pr_value = pr_json_line[key]
-                                gt_value = gt_json_line[key]
-                                
-                                if len(pr_value) != len(gt_value):
-                                    print(f"Length mismatch for key {key} in fil\n{pr_file}\nand\n{gt_file}\npr len: {len(pr_value)}, gt len: {len(gt_value)}")
-                                    continue
-                                for item1, item2 in zip(pr_value, gt_value):
-                                    piece_ids1 = item1['piece_ids']
-                                    piece_ids2 = item2['piece_ids']
-                                    span1 = item1['span']
-                                    span2 = item2['span']
-                                    label = item2['label']
-                                    # Calculate BLEU score for piece_ids
-                                    bleu_piece_ids = bleu_score(piece_ids1, piece_ids2)
-                                    bleu += bleu_piece_ids
-                                    # Calculate precision and recall for spans
-                                    for sp in span1:
-                                        if sp in span2:
-                                            precision += 1 / len(span1)
-                                            recall += 1 / len([i for i in label if i != 0])
-                                
-                                    count += 1               
-                            
-                    # In bảng kết quả
-                    print(f"Dataset: {dataset}, perm: {i}, file: {file_name}")
-                    print(f"Precision: {precision/count:.4f}, Recall: {recall/count:.4f}, BLEU: {bleu/count:.4f}\n")
+            precision = true_positive / len(pr_span) if len(pr_span) > 0 else 0.0
+            recall = true_positive / len(gt_span) if len(gt_span) > 0 else 0.0
+            f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+            bleu_scores.append(bleu)
+            precision_scores.append(precision)
+            recall_scores.append(recall)
+            f1_scores.append(f1)
+        except Exception as e:
+            logger.error(f"[ERROR] Error in calculating scores: {e}")
+            logger.error(f"[ERROR] GT: {gt_item} | PR: {pr_item}")
+            raise e
+        
+    # Calculate average scores
+    avg_bleu = sum(bleu_scores) / len(bleu_scores) if len(bleu_scores) > 0 else 0.0
+    avg_precision = sum(precision_scores) / len(precision_scores) if len(precision_scores) > 0 else 0.0
+    avg_recall = sum(recall_scores) / len(recall_scores) if len(recall_scores) > 0 else 0.0
+    avg_f1 = sum(f1_scores) / len(f1_scores) if len(f1_scores) > 0 else 0.0
+    
+    return avg_bleu, avg_precision, avg_recall, avg_f1
+        

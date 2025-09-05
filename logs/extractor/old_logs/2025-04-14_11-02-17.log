@@ -1,0 +1,39 @@
+2025-04-14 11:02:17.788 | INFO     | __main__:<module>:158 - [INFO] Arguments:
+2025-04-14 11:02:17.788 | INFO     | __main__:<module>:159 - Input root: data/data_text
+2025-04-14 11:02:17.789 | INFO     | __main__:<module>:160 - Output root: output
+2025-04-14 11:02:17.789 | INFO     | __main__:<module>:161 - Datasets: ['MAVEN']
+2025-04-14 11:02:17.790 | INFO     | __main__:<module>:162 - Model: gemini-2.0-flash
+2025-04-14 11:02:17.790 | INFO     | __main__:<module>:163 - Candidate: 1
+2025-04-14 11:02:17.791 | INFO     | __main__:<module>:164 - Num try: 3
+2025-04-14 11:02:17.791 | INFO     | __main__:<module>:165 - Max consecutive 429 error: 3
+2025-04-14 11:02:17.792 | INFO     | __main__:<module>:166 - Max num threads: 10
+2025-04-14 11:02:17.792 | INFO     | __main__:<module>:167 - Resume: False
+2025-04-14 11:02:17.792 | INFO     | __main__:<module>:168 - [INFO] Start processing...
+2025-04-14 11:02:17.793 | INFO     | extractor.consumer:log:53 - [INFO] Found 5 valid extractors
+2025-04-14 11:02:17.794 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-14 11:02:17.796 | INFO     | extractor.consumer:log:53 - [START] Start 5 threads
+2025-04-14 11:02:17.798 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-14 11:02:17.798 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-14 11:02:17.800 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl...
+2025-04-14 11:02:17.808 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-14 11:02:17.810 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-14 11:02:17.812 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-14 11:02:17.827 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-14 11:02:18.857 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-14 11:02:18.858 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-14 11:02:18.865 | INFO     | __main__:run:85 - [FINISHED] Processing 560/280 item, remaning 0/280 in 1.07 seconds
+2025-04-14 11:02:18.866 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output\MAVEN\perm0\MAVEN_5task_2way_10shot.train.jsonl
+2025-04-14 11:02:18.867 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-14 11:02:18.868 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-14 11:02:18.870 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl...
+2025-04-14 11:02:18.877 | INFO     | extractor.producer:produce:34 - [PRODUCING] Finished producing data/data_text\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-14 11:02:18.879 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-14 11:02:18.880 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-14 11:02:18.882 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-14 11:02:19.886 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-14 11:02:19.887 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-14 11:02:19.894 | INFO     | __main__:run:85 - [FINISHED] Processing 480/240 item, remaning 0/240 in 1.03 seconds
+2025-04-14 11:02:19.894 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output\MAVEN\perm0\MAVEN_5task_2way_5shot.train.jsonl
+2025-04-14 11:02:19.896 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-14 11:02:20.483 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-14 11:02:20.484 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to output

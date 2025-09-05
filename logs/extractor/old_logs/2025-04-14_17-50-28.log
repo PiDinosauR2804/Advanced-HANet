@@ -1,0 +1,339 @@
+2025-04-14 17:50:28.524 | INFO     | __main__:<module>:158 - [INFO] Arguments:
+2025-04-14 17:50:28.526 | INFO     | __main__:<module>:159 - Input root: data/data_text
+2025-04-14 17:50:28.527 | INFO     | __main__:<module>:160 - Output root: output/des
+2025-04-14 17:50:28.529 | INFO     | __main__:<module>:161 - Datasets: ['ACE']
+2025-04-14 17:50:28.532 | INFO     | __main__:<module>:162 - Model: gemini-2.0-flash
+2025-04-14 17:50:28.533 | INFO     | __main__:<module>:163 - Candidate: 1
+2025-04-14 17:50:28.533 | INFO     | __main__:<module>:164 - Num try: 3
+2025-04-14 17:50:28.534 | INFO     | __main__:<module>:165 - Max consecutive 429 error: 3
+2025-04-14 17:50:28.535 | INFO     | __main__:<module>:166 - Max num threads: 10
+2025-04-14 17:50:28.535 | INFO     | __main__:<module>:167 - Resume: False
+2025-04-14 17:50:28.538 | INFO     | __main__:<module>:168 - [INFO] Start processing...
+2025-04-14 17:50:45.335 | INFO     | extractor.consumer:log:53 - [INFO] Found 5 valid extractors
+2025-04-14 17:50:45.337 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-14 17:50:45.342 | INFO     | extractor.consumer:log:53 - [START] Start 5 threads
+2025-04-14 17:50:45.343 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-14 17:50:45.345 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-14 17:50:45.345 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_2way_10shot.train.jsonl...
+2025-04-14 17:50:45.357 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_2way_10shot.train.jsonl with 5 lines
+2025-04-14 17:50:45.359 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-14 17:50:45.360 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-14 17:50:45.374 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-14 17:50:48.043 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no phones , no e - mail , letters are the only link to home .
+2025-04-14 17:50:48.857 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-14 17:50:50.900 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it was said to be saddam hussein ' s response to a letter from his niece .
+2025-04-14 17:51:13.797 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-14 17:51:14.339 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: no phones , no e - mail , letters are the only link to home .
+2025-04-14 17:51:14.888 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: reporter : along with the picture , the flight attendant wrote a letter saying she was prague for jack ' s safe return .
+2025-04-14 17:51:17.048 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: reporter : along with the picture , the flight attendant wrote a letter saying she was prague for jack ' s safe return .
+2025-04-14 17:51:36.877 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: letter writing , you know , is sometimes called a lost art in this age of electronic communication .
+2025-04-14 17:51:38.733 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-14 17:51:39.482 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i think we may have talked before .
+2025-04-14 17:52:02.312 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-14 17:52:02.810 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: call carnival wedding dept .
+2025-04-14 17:52:03.625 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i think we may have talked before .
+2025-04-14 17:52:03.651 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: everyone wanted to call .
+2025-04-14 17:52:03.717 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: you can bet they are figuring out who they should have call next time .
+2025-04-14 17:52:06.563 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-14 17:52:26.749 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-14 17:52:27.131 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-14 17:52:27.815 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: they ' ll also be taking your phone calls .
+2025-04-14 17:52:28.184 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: that ' s sort of unusual in these calls , in my experience so far .
+2025-04-14 17:52:29.915 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: those letters important at both ends .
+2025-04-14 17:52:30.015 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-14 17:52:30.873 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you can e - mail us - - this done count , sorry .
+2025-04-14 17:52:31.415 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i have n ' t received mail in two days .
+2025-04-14 17:52:53.286 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-14 17:52:53.475 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: call carnival wedding dept .
+2025-04-14 17:52:54.069 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: everyone wanted to call .
+2025-04-14 17:53:17.292 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-14 17:53:17.943 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-14 17:53:19.452 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: did you know that one of the largest media companies in the country was in the business of bringing you ` ` political public service messages ? ' '
+2025-04-14 17:53:19.991 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-14 17:53:20.843 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: i have n ' t received mail in two days .
+2025-04-14 17:53:21.669 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-14 17:53:44.083 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: no phones , no e - mail , letters are the only link to home .
+2025-04-14 17:53:45.877 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-14 17:54:07.325 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-14 17:54:08.184 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: is that - - is that the one where somebody called a news -
+2025-04-14 17:54:08.604 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: we love hearing from you .
+2025-04-14 17:54:10.863 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: you can bet they are figuring out who they should have call next time .
+2025-04-14 17:54:10.973 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-14 17:54:31.787 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: we ' re going over there , we ' re saying , look , this is how we do it - - and , um , i - - - so we think everybody else should be that way .
+2025-04-14 17:54:48.751 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: so what ' s the difficulty in being able to go to mars ?
+2025-04-14 17:54:56.401 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: well , the homeless people - - i guess , they need their shopping cart , so they kind of went elsewhere , so - - um - - i mean it ' s a small thing , but it was , they just figured out , they were - - you know , uh - - learning from experience on what they need to do in the - - city and - - i think he would be a good - - candidate for the homeland security , running that .
+2025-04-14 17:55:20.219 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i ' ve been to your lovely state once before , down in the hollers .
+2025-04-14 17:55:27.006 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 'dropped off' not found in text a russian soyuz capsule dropped them off this morning after docking perfectly at the orbiting outpost ..
+2025-04-14 17:55:27.127 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: my kids , uh , kids and their kids come , all but one of them .
+2025-04-14 17:55:47.373 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: a russian soyuz capsule dropped them off this morning after docking perfectly at the orbiting outpost .
+2025-04-14 17:55:52.794 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-14 17:56:13.984 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: are you coming here ?
+2025-04-14 17:56:14.674 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: in fact , we just got back from disney world , you know , about an hour ago and they ' re down there and they ' re but they ' re both , uh ,
+2025-04-14 17:56:18.275 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: every wednesday , we go down to the uh river bank park .
+2025-04-14 17:56:19.359 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: they say they ' re looking forward to going home , which relatives of one former p . o . w .
+2025-04-14 17:56:19.652 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: she has no idea where her husband is now , but thanks to a little help from a delta flight attendant , she knew he got where he was going .
+2025-04-14 17:56:42.502 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: every wednesday , we go down to the uh river bank park .
+2025-04-14 17:57:34.338 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: former prosecutor and about the last person on the planet that you would ever call ablying liberal .
+2025-04-14 17:57:37.601 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: they are desperate to be rid of him but by the same token , they do n ' t like another country coming into their country to overturn the government and beyond that , i think it ' s probably most important for most iraqis is they ' re deeply suspicious of the united states .
+2025-04-14 17:57:41.127 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: well , um , i would - i would have to start - - - i would have to start , generally , in stating - - - stating what i think is the problem and - - - with the middle east and what - for me , one of the major problems is the fact that - - the - - united states government gives so much aid to the state of israel .
+2025-04-14 17:57:42.954 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: i i did n ' t actually - - watch the trial very much , uh th - in fact , i did n ' t watch the trial at all .
+2025-04-14 17:58:00.928 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: are we going to say to these and so many others , you ca n ' t have your full day in court ?
+2025-04-14 17:58:05.123 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-14 17:58:22.335 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-14 17:58:22.336 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-14 17:58:22.345 | INFO     | __main__:run:85 - [FINISHED] Processing 216/275 item, remaning 59/275 in 457.00 seconds
+2025-04-14 17:58:22.346 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm0\ACE_5task_2way_10shot.train.jsonl
+2025-04-14 17:58:22.350 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-14 17:58:22.352 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-14 17:58:22.354 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_2way_5shot.train.jsonl...
+2025-04-14 17:58:22.364 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_2way_5shot.train.jsonl with 5 lines
+2025-04-14 17:58:22.369 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-14 17:58:22.370 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-14 17:58:22.371 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-14 17:58:32.192 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-14 17:58:47.107 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: no phones , no e - mail , letters are the only link to home .
+2025-04-14 17:58:52.000 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: no phones , no e - mail , letters are the only link to home .
+2025-04-14 17:58:57.087 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-14 17:59:00.567 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: letter writing , you know , is sometimes called a lost art in this age of electronic communication .
+2025-04-14 17:59:03.759 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: i think we may have talked before .
+2025-04-14 17:59:17.652 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: reporter : along with the picture , the flight attendant wrote a letter saying she was prague for jack ' s safe return .
+2025-04-14 17:59:20.433 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: call carnival wedding dept .
+2025-04-14 17:59:20.439 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: i think we may have talked before .
+2025-04-14 17:59:22.327 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: you can bet they are figuring out who they should have call next time .
+2025-04-14 17:59:23.144 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: everyone wanted to call .
+2025-04-14 17:59:24.939 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-14 17:59:44.857 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-14 17:59:47.412 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-14 17:59:47.531 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-14 17:59:49.143 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-14 17:59:49.280 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: that ' s sort of unusual in these calls , in my experience so far .
+2025-04-14 17:59:49.959 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: they ' ll also be taking your phone calls .
+2025-04-14 17:59:50.263 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-14 18:00:11.588 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: those letters important at both ends .
+2025-04-14 18:00:11.676 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: you can e - mail us - - this done count , sorry .
+2025-04-14 18:00:12.054 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: ok guys , sorry for the long e - mail and the rambling , but i want to make sure that i have everything covered .
+2025-04-14 18:00:12.226 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i have n ' t received mail in two days .
+2025-04-14 18:00:15.261 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: call carnival wedding dept .
+2025-04-14 18:00:35.464 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: everyone wanted to call .
+2025-04-14 18:00:37.691 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: once again , we ' re trying to get ahold of our mike hanna , who was just with us on the phone .
+2025-04-14 18:00:38.090 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: did you know that one of the largest media companies in the country was in the business of bringing you ` ` political public service messages ? ' '
+2025-04-14 18:00:38.103 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-14 18:00:39.774 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-14 18:00:40.735 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i have n ' t received mail in two days .
+2025-04-14 18:01:01.967 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it ' s too bad those noaa people had n ' t used the telephone .
+2025-04-14 18:01:04.100 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: no phones , no e - mail , letters are the only link to home .
+2025-04-14 18:01:26.421 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-14 18:01:27.288 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-14 18:01:27.519 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: is that - - is that the one where somebody called a news -
+2025-04-14 18:01:27.995 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: we love hearing from you .
+2025-04-14 18:01:29.770 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-14 18:01:32.491 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: we ' re going over there , we ' re saying , look , this is how we do it - - and , um , i - - - so we think everybody else should be that way .
+2025-04-14 18:01:37.342 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: well , the homeless people - - i guess , they need their shopping cart , so they kind of went elsewhere , so - - um - - i mean it ' s a small thing , but it was , they just figured out , they were - - you know , uh - - learning from experience on what they need to do in the - - city and - - i think he would be a good - - candidate for the homeland security , running that .
+2025-04-14 18:01:49.974 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: so what ' s the difficulty in being able to go to mars ?
+2025-04-14 18:01:57.339 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: that ' s the only byrd pork project i have ever visited .
+2025-04-14 18:02:24.047 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: i ' ve been to your lovely state once before , down in the hollers .
+2025-04-14 18:02:26.718 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: Trigger word 'dropped off' not found in text a russian soyuz capsule dropped them off this morning after docking perfectly at the orbiting outpost ..
+2025-04-14 18:02:28.008 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: Trigger word 'dropped off' not found in text a russian soyuz capsule dropped them off this morning after docking perfectly at the orbiting outpost ..
+2025-04-14 18:02:29.319 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: in fact , we just got back from disney world , you know , about an hour ago and they ' re down there and they ' re but they ' re both , uh ,
+2025-04-14 18:02:30.157 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: Trigger word 'dropped off' not found in text a russian soyuz capsule dropped them off this morning after docking perfectly at the orbiting outpost ..
+2025-04-14 18:02:30.159 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: a russian soyuz capsule dropped them off this morning after docking perfectly at the orbiting outpost .
+2025-04-14 18:02:45.519 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: my kids , uh , kids and their kids come , all but one of them .
+2025-04-14 18:02:48.021 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-14 18:02:49.438 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: are you coming here ?
+2025-04-14 18:02:57.697 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: every wednesday , we go down to the uh river bank park .
+2025-04-14 18:02:59.559 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: they say they ' re looking forward to going home , which relatives of one former p . o . w .
+2025-04-14 18:03:01.191 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: she has no idea where her husband is now , but thanks to a little help from a delta flight attendant , she knew he got where he was going .
+2025-04-14 18:03:12.225 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: mostly small arms fire , but the sand storm has enabled the iraqis to come very close to the road , and if i sound a little nervous , it ' s because we ' re in the soft skin vehicle and everybody else is in armor .
+2025-04-14 18:03:50.000 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: every wednesday , we go down to the uh river bank park .
+2025-04-14 18:03:57.037 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i i did n ' t actually - - watch the trial very much , uh th - in fact , i did n ' t watch the trial at all .
+2025-04-14 18:03:59.045 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-14 18:04:08.759 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: former prosecutor and about the last person on the planet that you would ever call ablying liberal .
+2025-04-14 18:04:11.436 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-14 18:04:11.437 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-14 18:04:11.445 | INFO     | __main__:run:85 - [FINISHED] Processing 187/242 item, remaning 55/242 in 349.10 seconds
+2025-04-14 18:04:11.446 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm0\ACE_5task_2way_5shot.train.jsonl
+2025-04-14 18:04:11.448 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-14 18:04:11.448 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-14 18:04:11.449 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_4way_10shot.train.jsonl...
+2025-04-14 18:04:11.573 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_4way_10shot.train.jsonl with 5 lines
+2025-04-14 18:04:11.574 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-14 18:04:11.576 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-14 18:04:11.577 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-14 18:04:14.127 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: call carnival wedding dept .
+2025-04-14 18:04:24.827 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: you can bet they are figuring out who they should have call next time .
+2025-04-14 18:04:35.919 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: those letters important at both ends .
+2025-04-14 18:04:36.143 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: you can e - mail us - - this done count , sorry .
+2025-04-14 18:04:37.594 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-14 18:04:38.756 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: we get thousands of e - mail from our viewers every day .
+2025-04-14 18:04:40.678 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-14 18:04:56.840 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:05:00.136 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: everyone wanted to call .
+2025-04-14 18:05:01.268 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: a political public service message brought to you by clear channel . ' '
+2025-04-14 18:05:04.936 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:05:05.944 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: and thank you very much to your students for all the support and the letters that they sent out to us .
+2025-04-14 18:05:06.880 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: that ' s sort of unusual in these calls , in my experience so far .
+2025-04-14 18:05:09.512 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-14 18:05:11.864 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: please take a few moments to drop her a note - lrb - i do not have an email address for her .
+2025-04-14 18:05:24.292 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: i think we may have talked before .
+2025-04-14 18:05:31.969 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:05:32.044 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you might want to mention that in your letter as well .
+2025-04-14 18:05:33.105 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: i tell you all this not to worry you , but to give you comfort knowing what you hear and see is true and that , despite that , i am safe and will continue to be .
+2025-04-14 18:05:56.464 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-14 18:05:58.274 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:06:21.349 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: call carnival wedding dept .
+2025-04-14 18:06:22.122 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i have n ' t received mail in two days .
+2025-04-14 18:06:25.309 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: it was said to be saddam hussein ' s response to a letter from his niece .
+2025-04-14 18:06:25.345 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: there will be more letters on the way .
+2025-04-14 18:06:25.361 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 4 failed to process item: i did get an email back from the bbc saying that they understood what i was saying and would try to be more inclusive .
+2025-04-14 18:06:25.363 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 4 got error 429 more than 3 times. Stoping ...
+2025-04-14 18:06:26.209 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: you can bet they are figuring out who they should have call next time .
+2025-04-14 18:06:49.500 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:06:49.664 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-14 18:06:50.452 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: there will be more letters on the way .
+2025-04-14 18:06:51.475 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you can e - mail us - - this done count , sorry .
+2025-04-14 18:07:12.003 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: we love hearing from you .
+2025-04-14 18:07:13.775 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: perhaps i can do better when i get home . ' '
+2025-04-14 18:07:14.492 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: perhaps i can do better when i get home . ' '
+2025-04-14 18:07:37.912 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: every wednesday , we go down to the uh river bank park .
+2025-04-14 18:07:38.525 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-14 18:07:39.921 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: my son goes to his in - laws , but my two girls will come and
+2025-04-14 18:08:04.332 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: or what if i were in a bar with the car outside , keys in my pocket , but i ' ve decided i ' ll take the train home later ?
+2025-04-14 18:08:29.736 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: when i get home , i do n ' t want to see a camera .
+2025-04-14 18:08:30.813 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: your gran - you go to your grandma ' s house .
+2025-04-14 18:08:56.201 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: - i went to a place ca - - i want to say it was called stump town ,
+2025-04-14 18:09:45.595 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: a lot of them are n ' t living in the green zone , they ' ve got to travel in from outside .
+2025-04-14 18:10:06.326 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: or what if i were in a bar with the car outside , keys in my pocket , but i ' ve decided i ' ll take the train home later ?
+2025-04-14 18:10:09.049 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and i said , that guy could be president .
+2025-04-14 18:10:10.125 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-14 18:10:33.795 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-14 18:11:24.382 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: and i said , that guy could be president .
+2025-04-14 18:11:57.596 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: um , yeah , i think - - you know i think they should have continued to go through with it , and you know um - - if - if there is - - if there ' s problems , you know , just - - still - - do n ' t , you know - - just ignore it , keep going , you know you ca n ' t - - stop , you know , if you already started something , you know , you should complete it , i think .
+2025-04-14 18:11:58.899 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: and i said , that guy could be president .
+2025-04-14 18:12:21.900 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: other topics - - you know , usually about the election that - - - that , um , i did have - - a lot of things , um , to say .
+2025-04-14 18:12:28.035 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: and i said , that guy could be president .
+2025-04-14 18:12:51.678 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: this was not one of the staged stiff - armed clotheslines you see in professional wrestling broadcasts .
+2025-04-14 18:12:57.822 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it ' s so soon - - since nine eleven , and he has been creating his own job , i - in essence , because it ' s such a new position .
+2025-04-14 18:13:22.297 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: Trigger word 'holds responsible' not found in text israel holds the palestinian leader responsible for the latest violence , even though the recent attacks were carried out by islamic militants ..
+2025-04-14 18:13:23.501 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 2 got error: Trigger word 'holds responsible' not found in text israel holds the palestinian leader responsible for the latest violence , even though the recent attacks were carried out by islamic militants ..
+2025-04-14 18:13:23.503 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: israel holds the palestinian leader responsible for the latest violence , even though the recent attacks were carried out by islamic militants .
+2025-04-14 18:13:27.168 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: all one of the many young faces that bear the heavy mark of war .
+2025-04-14 18:13:50.600 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: so what is it like for them to face combat far from home ?
+2025-04-14 18:13:52.063 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: would you support the use of military force to block iran from developing nuclear weapons ?
+2025-04-14 18:13:55.619 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: we do n ' t need war .
+2025-04-14 18:14:19.514 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: this was not one of the staged stiff - armed clotheslines you see in professional wrestling broadcasts .
+2025-04-14 18:14:50.346 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: you treat it with the gravity and the seriousness that it deserves .
+2025-04-14 18:15:21.492 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and it still does .
+2025-04-14 18:15:51.319 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: did the - - are they still going to try to get him with , uh , the death penalty or are they - - - - or are they going to be content with just , uh , just , you know , giving him life , uh , have heard about that ?
+2025-04-14 18:15:51.687 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: did the - - are they still going to try to get him with , uh , the death penalty or are they - - - - or are they going to be content with just , uh , just , you know , giving him life , uh , have heard about that ?
+2025-04-14 18:15:59.607 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 0 got error: Trigger word 'broke up' not found in text marines broke it up _ over the protests of iraqis not involved in the robbery _ and the thieves were arrested ..
+2025-04-14 18:16:21.968 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-14 18:16:24.978 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-14 18:16:26.130 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: yeah , because i was really - - i was n ' t really following it that much because i was -
+2025-04-14 18:16:47.482 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-14 18:16:50.844 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: i know they ' re also - - i ' ve been reading some articles lately about they ' re - - thinking about , uh , uh , why should only a native born person be allowed to , uh , be president .
+2025-04-14 18:16:52.464 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: yeah we got about - - we got about - - i ' d say - - girl , when i started , it was like four counselors .
+2025-04-14 18:16:55.286 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: is that where he ' s headed ?
+2025-04-14 18:17:18.573 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: i was one of the first digital camera users , and i have too many photos from my first marriage .
+2025-04-14 18:17:24.717 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: they are n ' t paying lawyers , and they pay nothing into the system .
+2025-04-14 18:17:33.883 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: ` ` that ' s not the sort of thing you pick up at a military surplus store . ' '
+2025-04-14 18:17:35.095 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: ` ` that ' s not the sort of thing you pick up at a military surplus store . ' '
+2025-04-14 18:18:04.792 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 'handed over' not found in text one is the capture of number 24 as it ' s described , samir who is responsible for the baghdad district , indications are the kurds in the north handed this man over so this is number 4 out of that playing card deck of 55 that the u . s . is after ..
+2025-04-14 18:18:06.913 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 3 got error: Trigger word 'handed over' not found in text one is the capture of number 24 as it ' s described , samir who is responsible for the baghdad district , indications are the kurds in the north handed this man over so this is number 4 out of that playing card deck of 55 that the u . s . is after ..
+2025-04-14 18:18:08.277 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 3/3] Worker 3 got error: Trigger word 'handed over' not found in text one is the capture of number 24 as it ' s described , samir who is responsible for the baghdad district , indications are the kurds in the north handed this man over so this is number 4 out of that playing card deck of 55 that the u . s . is after ..
+2025-04-14 18:18:08.280 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: one is the capture of number 24 as it ' s described , samir who is responsible for the baghdad district , indications are the kurds in the north handed this man over so this is number 4 out of that playing card deck of 55 that the u . s . is after .
+2025-04-14 18:18:18.098 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 3 got error: Trigger word 'cover up' not found in text she is charged with using insider information to bail out of a biotech stock the day before its price tanked , and then trying to cover it up ..
+2025-04-14 18:18:28.245 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 1 got error: Trigger word 'broke up' not found in text marines broke it up _ over the protests of iraqis not involved in the robbery _ and the thieves were arrested ..
+2025-04-14 18:18:29.743 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: it would be , certainly , to know , to apprehend him , to bring him before a court of justice .
+2025-04-14 18:18:33.312 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: cnn ' s richard roth has more on this once prominent frontman for the iraqi regime .
+2025-04-14 18:18:35.988 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-14 18:18:35.989 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-14 18:18:36.012 | INFO     | __main__:run:85 - [FINISHED] Processing 482/559 item, remaning 77/559 in 864.56 seconds
+2025-04-14 18:18:36.013 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm0\ACE_5task_4way_10shot.train.jsonl
+2025-04-14 18:18:36.014 | INFO     | __main__:run:63 - ====================================================================================================
+2025-04-14 18:18:36.014 | INFO     | __main__:run:64 - ====================================================================================================
+2025-04-14 18:18:36.017 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing data/data_text\ACE\perm0\ACE_5task_4way_5shot.train.jsonl...
+2025-04-14 18:18:36.037 | INFO     | extractor.producer:produce:36 - [PRODUCING] Finished producing data/data_text\ACE\perm0\ACE_5task_4way_5shot.train.jsonl with 5 lines
+2025-04-14 18:18:36.039 | INFO     | extractor.consumer:log:53 - [CLEAR] All results cleared
+2025-04-14 18:18:36.040 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-14 18:18:36.042 | INFO     | extractor.consumer:log:53 - [CONSUMING] Start consuming.
+2025-04-14 18:18:37.968 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: colonel patrick lang , retired , united states army , thanks for your insights .
+2025-04-14 18:18:41.860 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: call carnival wedding dept .
+2025-04-14 18:19:01.580 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: those letters important at both ends .
+2025-04-14 18:19:04.364 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:19:04.367 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: you can e - mail us - - this done count , sorry .
+2025-04-14 18:19:07.280 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: time now for ` ` fireback , ' ' where our wacky and kooky fans and friends and critics right in .
+2025-04-14 18:19:28.507 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i do n ' t think that ' s quite accurate as to what he wrote me about .
+2025-04-14 18:19:28.535 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: we get thousands of e - mail from our viewers every day .
+2025-04-14 18:19:29.903 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: everyone wanted to call .
+2025-04-14 18:19:32.949 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:19:38.017 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: that ' s sort of unusual in these calls , in my experience so far .
+2025-04-14 18:19:55.000 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: a political public service message brought to you by clear channel . ' '
+2025-04-14 18:19:58.913 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: please take a few moments to drop her a note - lrb - i do not have an email address for her .
+2025-04-14 18:19:59.263 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-14 18:20:02.187 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: i tell you all this not to worry you , but to give you comfort knowing what you hear and see is true and that , despite that , i am safe and will continue to be .
+2025-04-14 18:20:05.993 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i think we may have talked before .
+2025-04-14 18:20:18.023 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you might want to mention that in your letter as well .
+2025-04-14 18:20:22.632 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:20:30.194 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: i ' m chewing gum and talking on the phone while writing this note . ' '
+2025-04-14 18:20:51.881 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:20:51.981 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i have n ' t received mail in two days .
+2025-04-14 18:20:55.364 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: call carnival wedding dept .
+2025-04-14 18:20:56.523 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: you can bet they are figuring out who they should have call next time .
+2025-04-14 18:20:57.175 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: there will be more letters on the way .
+2025-04-14 18:21:19.863 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: you can e - mail us at am @ cnn . com .
+2025-04-14 18:21:20.795 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: for these kids to takes time to read letters to us and stuff like that in their class , what more can you ask ?
+2025-04-14 18:21:21.612 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: there will be more letters on the way .
+2025-04-14 18:21:24.973 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: we love hearing from you .
+2025-04-14 18:21:32.497 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: perhaps i can do better when i get home . ' '
+2025-04-14 18:21:36.257 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: perhaps i can do better when i get home . ' '
+2025-04-14 18:21:45.012 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: you can e - mail us - - this done count , sorry .
+2025-04-14 18:21:49.594 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: every wednesday , we go down to the uh river bank park .
+2025-04-14 18:22:11.622 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: my son goes to his in - laws , but my two girls will come and
+2025-04-14 18:22:11.914 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: barnie , have you ever been to the national conservation and training center near shepherdstown , wva ?
+2025-04-14 18:22:19.635 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: or what if i were in a bar with the car outside , keys in my pocket , but i ' ve decided i ' ll take the train home later ?
+2025-04-14 18:22:41.824 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 0 failed to process item: an 8 - day visit to egypt and turkey , for instance , has increased to 12 , 500 yuan - lrb - 1 , 506 us dollars - rrb - .
+2025-04-14 18:22:41.827 | CRITICAL | extractor.consumer:log:61 - [FATAL] Worker 0 got error 429 more than 3 times. Stoping ...
+2025-04-14 18:22:53.459 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: your gran - you go to your grandma ' s house .
+2025-04-14 18:22:54.616 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: when i get home , i do n ' t want to see a camera .
+2025-04-14 18:23:03.537 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: - lrb - on camera - rrb - : they ' re well within striking distance of the mortars and rockets of the fedayeen militia , but they ' re prepared to take that risk to try and persuade the people of basra that they wo n ' t desert them , that they ' ll stick with this however messy it gets .
+2025-04-14 18:23:25.719 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: - i went to a place ca - - i want to say it was called stump town ,
+2025-04-14 18:24:05.300 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: a lot of them are n ' t living in the green zone , they ' ve got to travel in from outside .
+2025-04-14 18:24:11.519 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i just want to come home . ' '
+2025-04-14 18:24:17.019 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: or what if i were in a bar with the car outside , keys in my pocket , but i ' ve decided i ' ll take the train home later ?
+2025-04-14 18:24:35.827 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: and i said , that guy could be president .
+2025-04-14 18:24:38.683 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-14 18:24:50.687 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: um , man i thought i , uh , put this whole election stuff behind me .
+2025-04-14 18:25:38.404 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: and i said , that guy could be president .
+2025-04-14 18:26:15.264 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: um , yeah , i think - - you know i think they should have continued to go through with it , and you know um - - if - if there is - - if there ' s problems , you know , just - - still - - do n ' t , you know - - just ignore it , keep going , you know you ca n ' t - - stop , you know , if you already started something , you know , you should complete it , i think .
+2025-04-14 18:26:22.666 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: other topics - - you know , usually about the election that - - - that , um , i did have - - a lot of things , um , to say .
+2025-04-14 18:26:43.128 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: and i said , that guy could be president .
+2025-04-14 18:26:54.642 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: this was not one of the staged stiff - armed clotheslines you see in professional wrestling broadcasts .
+2025-04-14 18:26:58.354 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and i said , that guy could be president .
+2025-04-14 18:27:18.832 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it ' s so soon - - since nine eleven , and he has been creating his own job , i - in essence , because it ' s such a new position .
+2025-04-14 18:27:28.204 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 1/3] Worker 2 got error: Trigger word 'holds responsible' not found in text israel holds the palestinian leader responsible for the latest violence , even though the recent attacks were carried out by islamic militants ..
+2025-04-14 18:27:30.612 | ERROR    | extractor.consumer:log:55 - [ERROR at ATTEMPT 2/3] Worker 2 got error: Trigger word 'holds responsible' not found in text israel holds the palestinian leader responsible for the latest violence , even though the recent attacks were carried out by islamic militants ..
+2025-04-14 18:27:55.475 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: so what is it like for them to face combat far from home ?
+2025-04-14 18:28:03.619 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: all one of the many young faces that bear the heavy mark of war .
+2025-04-14 18:28:05.032 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: we do n ' t need war .
+2025-04-14 18:28:10.921 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: would you support the use of military force to block iran from developing nuclear weapons ?
+2025-04-14 18:28:16.271 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: this was not one of the staged stiff - armed clotheslines you see in professional wrestling broadcasts .
+2025-04-14 18:28:28.364 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: it was a painful and bloody mistake .
+2025-04-14 18:29:21.627 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: you treat it with the gravity and the seriousness that it deserves .
+2025-04-14 18:29:46.575 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-14 18:29:53.819 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: how closely did you follow the trial and what do you think of all of the media coverage of the trial ?
+2025-04-14 18:30:01.729 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: and it still does .
+2025-04-14 18:30:09.544 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: i know they ' re also - - i ' ve been reading some articles lately about they ' re - - thinking about , uh , uh , why should only a native born person be allowed to , uh , be president .
+2025-04-14 18:30:13.645 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: yeah we got about - - we got about - - i ' d say - - girl , when i started , it was like four counselors .
+2025-04-14 18:30:16.386 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: yeah , because i was really - - i was n ' t really following it that much because i was -
+2025-04-14 18:30:32.320 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: when you get in the severe stage , you know , you get out once a week and do what you have to do - because my husband does n ' t drive , because of coordination problems from a head injury - - - and that puts you out for the rest of the week .
+2025-04-14 18:30:35.865 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 2 failed to process item: ` ` that ' s not the sort of thing you pick up at a military surplus store . ' '
+2025-04-14 18:30:36.551 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 1 failed to process item: ` ` that ' s not the sort of thing you pick up at a military surplus store . ' '
+2025-04-14 18:30:42.161 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: - lrb - - lrb - - rrb - - rrb - finish , things were getting him down , uh you know , you know how it is , day after day though - - m - marriage is n ' t all that wonderful .
+2025-04-14 18:31:19.790 | ERROR    | extractor.consumer:log:55 - [ERROR] Worker 3 failed to process item: cnn ' s richard roth has more on this once prominent frontman for the iraqi regime .
+2025-04-14 18:31:22.755 | INFO     | extractor.consumer:log:53 - [PAUSE] All threads paused
+2025-04-14 18:31:22.755 | INFO     | extractor.consumer:log:53 - [CONSUMING] Finished consuming.
+2025-04-14 18:31:22.774 | INFO     | __main__:run:85 - [FINISHED] Processing 411/482 item, remaning 71/482 in 766.76 seconds
+2025-04-14 18:31:22.775 | INFO     | __main__:run:86 - [SAVE FILE] All item saved to output/des\ACE\perm0\ACE_5task_4way_5shot.train.jsonl
+2025-04-14 18:31:22.777 | INFO     | extractor.consumer:log:53 - [RESUME] All threads resumed
+2025-04-14 18:31:32.320 | INFO     | extractor.consumer:log:53 - [STOP] All threads stopped
+2025-04-14 18:31:32.320 | INFO     | __main__:run:125 - [FINISHED] All items processed and saved to output/des

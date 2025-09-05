@@ -1,0 +1,18 @@
+2025-04-20 23:01:23.166 | INFO     | __main__:<module>:163 - [INFO] Arguments:
+2025-04-20 23:01:23.167 | INFO     | __main__:<module>:164 - Input root: data/data_text
+2025-04-20 23:01:23.167 | INFO     | __main__:<module>:165 - Output root: output/des2
+2025-04-20 23:01:23.168 | INFO     | __main__:<module>:166 - Datasets: ['ACE']
+2025-04-20 23:01:23.168 | INFO     | __main__:<module>:167 - Model: gemini-2.0-flash-lite
+2025-04-20 23:01:23.168 | INFO     | __main__:<module>:168 - Candidate: 1
+2025-04-20 23:01:23.169 | INFO     | __main__:<module>:169 - Num try: 3
+2025-04-20 23:01:23.169 | INFO     | __main__:<module>:170 - Max consecutive 429 error: 4
+2025-04-20 23:01:23.170 | INFO     | __main__:<module>:171 - Max num threads: 12
+2025-04-20 23:01:23.170 | INFO     | __main__:<module>:172 - Resume: True
+2025-04-20 23:01:23.170 | INFO     | __main__:<module>:173 - Convert test: False
+2025-04-20 23:01:23.171 | INFO     | __main__:<module>:174 - [INFO] Start processing...
+2025-04-20 23:01:46.106 | INFO     | extractor.consumer:__init__:41 - [INFO] Found 6 valid extractors
+2025-04-20 23:01:48.117 | INFO     | extractor.consumer:pause_threads:62 - [PAUSE] All threads paused
+2025-04-20 23:01:48.120 | INFO     | extractor.consumer:__init__:48 - [START] Start 6 threads
+2025-04-20 23:01:48.122 | INFO     | __main__:run:66 - ====================================================================================================
+2025-04-20 23:01:48.122 | INFO     | __main__:run:67 - ====================================================================================================
+2025-04-20 23:01:48.124 | INFO     | extractor.producer:produce:19 - [PRODUCING] Start producing output/des2\ACE\perm0\ACE_5task_2way_10shot.train.jsonl...
